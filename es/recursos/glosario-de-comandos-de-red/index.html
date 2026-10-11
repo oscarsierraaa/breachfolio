@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="resources">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Glosario de comandos de red: ip, ss, netstat, tcpdump</title>
+  <meta name="description" content="ip, ss, netstat, tcpdump – qué hace cada comando hoy, cuando media docena de comandos de red clásicos ya están obsoletos y se siguen usando igual." />
+  <meta name="keywords" content="glosario de comandos de red en Linux, ip vs ifconfig cuál usar, ss vs netstat diferencias, comandos de red modernos en Linux, cómo capturar tráfico con tcpdump, ip route show explicado, comandos de red obsoletos en Linux, ejemplo de ip addr show, filtrar tráfico con tcpdump por puerto, ip neigh frente a arp, herramientas iproute2 vs net-tools, cómo ver la tabla de rutas en Linux" />
+  <link rel="canonical" href="https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/network-commands-glossary/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/network-commands-glossary/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Glosario de comandos de red: ip, ss, netstat, tcpdump | Breachfolio" />
+  <meta property="og:description" content="ip, ss, netstat, tcpdump – qué hace cada comando hoy, cuando media docena de comandos de red clásicos ya están obsoletos y se siguen usando igual." />
+  <meta property="og:url" content="https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-res-netcmd.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Glosario de comandos de red: ip, ss, netstat, tcpdump | Breachfolio" />
+  <meta name="twitter:description" content="ip, ss, netstat, tcpdump – qué hace cada comando hoy, cuando media docena de comandos de red clásicos ya están obsoletos y se siguen usando igual." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-res-netcmd.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Glosario de comandos de red: ip, ss, netstat, tcpdump – cuál usar y cuándo",
+      "description": "ip, ss, netstat, tcpdump – qué hace cada comando hoy, cuando media docena de comandos de red clásicos ya están obsoletos y se siguen usando igual.",
+      "image": "https://breachfolio.com/assets/img/thumb-res-netcmd.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/"
+      },
+      "inLanguage": "es",
+      "keywords": "glosario de comandos de red en Linux, ip vs ifconfig cuál usar, ss vs netstat diferencias, comandos de red modernos en Linux, cómo capturar tráfico con tcpdump, ip route show explicado, comandos de red obsoletos en Linux, ejemplo de ip addr show, filtrar tráfico con tcpdump por puerto, ip neigh frente a arp, herramientas iproute2 vs net-tools, cómo ver la tabla de rutas en Linux"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Recursos", "item": "https://breachfolio.com/es/recursos/" },
+        { "@type": "ListItem", "position": 3, "name": "Glosario de comandos de red", "item": "https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Por qué se consideran obsoletos ifconfig y netstat?", "acceptedAnswer": { "@type": "Answer", "text": "Porque forman parte del antiguo paquete net-tools, sin desarrollo activo aguas arriba, y la mayoría de distribuciones actuales ya no lo instalan por defecto o lo conservan solo como capa de compatibilidad heredada." } },
+        { "@type": "Question", "name": "¿Qué comando sustituye a ifconfig?", "acceptedAnswer": { "@type": "Answer", "text": "ip addr, o su forma abreviada ip a, que forma parte de la suite iproute2 y viene preinstalado y actualizado en las distribuciones modernas." } },
+        { "@type": "Question", "name": "¿Qué diferencia a ss de netstat?", "acceptedAnswer": { "@type": "Answer", "text": "ss lee la información de sockets directamente del kernel en lugar de parsear /proc como hace netstat, lo que la hace muchísimo más rápida en una máquina con miles de conexiones abiertas." } },
+        { "@type": "Question", "name": "¿Para qué sirve la opción -w de tcpdump?", "acceptedAnswer": { "@type": "Answer", "text": "tcpdump captura e inspecciona el tráfico real que cruza una interfaz de red; la opción -w guarda la captura en un archivo .pcap para analizarla después con calma, por ejemplo en Wireshark." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Recursos</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Glosario de comandos de red</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-res-netcmd.webp" alt="Glosario de comandos de red: ip, ss, netstat, tcpdump – cuál usar y cuándo." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">RECURSOS · GLOSARIO</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Glosario de comandos de red: ip, ss, netstat, tcpdump – cuál usar y cuándo.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">La mitad de los comandos de red que aparecen en cualquier tutorial antiguo están obsoletos, y la gente los sigue usando porque técnicamente aún funcionan. Esto es lo que conviene utilizar de verdad hoy.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>8 de julio de 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Abre casi cualquier tutorial de redes de los últimos quince años y encontrarás <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ifconfig</code> y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">netstat</code> presentados como la forma estándar de mirar el estado de red de una máquina Linux. Ambos forman parte del antiguo paquete <strong>net-tools</strong>, y ambos llevan años formalmente obsoletos – net-tools no ha tenido desarrollo activo aguas arriba, y la mayoría de las distribuciones actuales (Debian, Ubuntu, Fedora, Arch, RHEL) o bien ya no lo instalan por defecto o bien lo conservan solo como capa de compatibilidad heredada. Los comandos que realmente los reemplazaron – <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ip</code> y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ss</code>, ambos parte de la suite <strong>iproute2:</strong> son los que vienen preinstalados y actualizados, y sin embargo se enseñan mucho menos, así que un montón de administradores por lo demás competentes nunca los han tecleado.</p>
+
+      <p>Nada de esto va realmente de "viejo" frente a "nuevo" por sí mismo. Va de qué se mantiene, qué lee el estado del kernel de forma más directa y rápida, y qué seguirá ahí el año que viene. Este glosario está organizado por la tarea que intentas hacer, no alfabéticamente, para que puedas ir directo a lo que necesitas.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Ver tus interfaces y direcciones: ip addr (no ifconfig)</h2>
+
+      <p>Para listar cada interfaz de red y las direcciones asignadas a ella, ejecuta:</p>
+
+<pre class="mt-6 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13px] leading-[1.7] text-foreground">$ ip addr show
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP
+    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.5/24 brd 172.20.0.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:acff:fe11:2/64 scope link
+       valid_lft forever preferred_lft forever</code></pre>
+
+      <p>La forma abreviada <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ip a</code> hace exactamente lo mismo: las herramientas de iproute2 aceptan subcomandos abreviados. Leyendo la salida: <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">state UP</code> significa que la interfaz está administrativamente activa y tiene enlace físico; <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">inet 172.20.0.5/24</code> es la dirección IPv4 y su máscara de subred en notación CIDR; y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">scope global</code> significa que la dirección es enrutable fuera de la máquina local, a diferencia de <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">scope link</code> (como la línea IPv6), que solo es válida en el segmento de red local.</p>
+
+      <p><code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ifconfig</code> aún funciona en muchos sistemas porque las distribuciones lo incluyen como paquete opcional de compatibilidad, y mostrará información similar con una disposición ligeramente distinta. Pero no se mantiene aguas arriba, no puede ver con claridad los tipos de interfaz más nuevos, y no hay garantía de que siga instalado en el próximo servidor que toques. Si vas a aprender una sola herramienta para esta tarea, aprende <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ip addr</code>.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Ver y cambiar rutas: ip route (no route)</h2>
+
+      <p>Para ver cómo la máquina decide adónde enviar el tráfico:</p>
+
+<pre class="mt-6 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13px] leading-[1.7] text-foreground">$ ip route show
+default via 172.20.0.1 dev eth0 proto dhcp metric 100
+172.20.0.0/24 dev eth0 proto kernel scope link src 172.20.0.5 metric 100
+169.254.0.0/16 dev eth0 scope link metric 1000</code></pre>
+
+      <p>La línea que hay que leer primero es la ruta <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">default</code>: dice que cualquier tráfico que no coincida con una ruta más específica de las de abajo se envía <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">via 172.20.0.1</code> – la puerta de enlace predeterminada – a través de <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">eth0</code>. La segunda línea describe la subred local directamente conectada: cualquier cosa dentro de <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">172.20.0.0/24</code> es alcanzable directamente por esa interfaz, sin puerta de enlace. Si un host no puede llegar a internet pero sí a otras máquinas de su propia subred, la ruta predeterminada es lo primero que hay que comprobar. El equivalente antiguo, <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">route -n</code>, es del mismo paquete net-tools que <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ifconfig</code> y arrastra la misma salvedad.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Ver conexiones activas y puertos en escucha: ss (no netstat)</h2>
+
+      <p>Para ver qué está escuchando y qué está conectado:</p>
+
+<pre class="mt-6 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13px] leading-[1.7] text-foreground">$ ss -tulpn
+Netid  State   Recv-Q  Send-Q   Local Address:Port   Peer Address:Port  Process
+tcp    LISTEN  0       128      0.0.0.0:22            0.0.0.0:*          users:(("sshd",pid=712,fd=3))
+tcp    LISTEN  0       511      127.0.0.1:5432         0.0.0.0:*          users:(("postgres",pid=1188,fd=6))
+tcp    ESTAB   0       0        172.20.0.5:22          172.20.0.1:51422   users:(("sshd",pid=2043,fd=4))
+udp    UNCONN  0       0        0.0.0.0:68             0.0.0.0:*          users:(("dhclient",pid=590,fd=5))</code></pre>
+
+      <p>Los flags hacen un trabajo concreto: <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-t</code> muestra sockets TCP, <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-u</code> muestra UDP, <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-l</code> lo restringe a sockets en escucha, <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-p</code> resuelve el proceso propietario, y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-n</code> se salta las búsquedas de DNS/nombre de servicio para que devuelva al instante en lugar de quedarse colgado en resoluciones inversas. En las columnas: <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">State</code> te dice si un socket está esperando pasivamente (<code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">LISTEN</code>) o forma parte de una conversación activa (<code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ESTAB</code>); <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">Local Address:Port</code> es lo que está vinculado en esta máquina – fíjate en que <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">127.0.0.1:5432</code> solo acepta conexiones locales, mientras que <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">0.0.0.0:22</code> acepta desde cualquier sitio; <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">Peer Address:Port</code> es el lado remoto de una conexión establecida; y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">Process</code> nombra exactamente qué programa es el dueño del socket.</p>
+
+      <p><code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">netstat</code> todavía existe en muchos sistemas y su salida parece superficialmente similar, pero <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ss</code> <strong>lee la información de sockets directamente del kernel</strong> en lugar de parsear <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">/proc</code> como hace netstat, y por eso es muchísimo más rápido en una máquina con miles de conexiones abiertas. Es la herramienta que se mantiene de cara al futuro, y es la que encontrarás preinstalada en un contenedor o una VM recién creados cuando netstat no esté.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Capturar e inspeccionar tráfico: tcpdump</h2>
+
+      <p>Este es el único comando de este glosario que no tiene un equivalente obsoleto del que preocuparse – <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">tcpdump</code> ha sido la herramienta estándar de captura de paquetes durante décadas y lo sigue siendo. Donde <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ip</code> y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ss</code> te informan sobre la configuración y el estado de los sockets, <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">tcpdump</code> te muestra los paquetes reales que cruzan el cable. Un filtro útil y habitual:</p>
+
+<pre class="mt-6 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13px] leading-[1.7] text-foreground">$ sudo tcpdump -i eth0 port 443 -n
+tcpdump: verbose output suppressed, use -v for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+14:32:07.184213 IP 172.20.0.5.51422 &gt; 93.184.216.34.443: Flags [S], seq 812301, win 64240
+14:32:07.201880 IP 93.184.216.34.443 &gt; 172.20.0.5.51422: Flags [S.], seq 40213, ack 812302, win 65160
+14:32:07.202015 IP 172.20.0.5.51422 &gt; 93.184.216.34.443: Flags [.], ack 40214, win 502</code></pre>
+
+      <p>Esto filtra el tráfico del puerto 443 (HTTPS) en la interfaz <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">eth0</code>, y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-n</code> desactiva la resolución de nombres para que imprima IPs en crudo en lugar de quedarse colgado en el DNS. Las tres líneas de arriba son un clásico saludo TCP de tres vías: <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">[S]</code> es el SYN, <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">[S.]</code> es el SYN-ACK, y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">[.]</code> es el ACK final – útil para confirmar si una conexión siquiera se está completando antes de indagar más a fondo.</p>
+
+      <p>Para cualquier cosa que quieras analizar con calma, captura a un archivo en lugar de leer el desplazamiento en directo:</p>
+
+<pre class="mt-6 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13px] leading-[1.7] text-foreground">$ sudo tcpdump -i eth0 -w capture.pcap</code></pre>
+
+      <p>El archivo <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">.pcap</code> resultante se abre en Wireshark para el análisis gráfico de seguir-el-flujo que un desplazamiento en terminal vuelve tedioso. Para un desglose completo de cuándo recurrir a la línea de comandos frente a la GUI, consulta <a href="../../comparativas/wireshark-vs-tcpdump/" class="text-accent ul-link">Wireshark vs tcpdump</a>.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Tabla de referencia rápida</h2>
+
+      <div class="mt-6 overflow-x-auto"><table class="w-full border-collapse">
+        <thead><tr><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Tarea</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Comando moderno</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Equivalente obsoleto</th></tr></thead>
+        <tbody>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Ver interfaces</td><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium"><code>ip addr</code></td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground"><code>ifconfig</code></td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Ver rutas</td><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium"><code>ip route</code></td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground"><code>route</code></td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Ver conexiones / puertos en escucha</td><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium"><code>ss</code></td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground"><code>netstat</code></td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Capturar tráfico</td><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium"><code>tcpdump</code></td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">no hace falta reemplazo</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Ver la tabla ARP</td><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium"><code>ip neigh</code></td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground"><code>arp</code></td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Ninguno de los cinco comandos de la izquierda es una herramienta oscura ni especializada – son los que de verdad <strong>vienen instalados por defecto</strong> en las distribuciones que la mayoría de la gente usa hoy. Reaprenderlos merece los diez minutos que cuesta aunque tus dedos ya conozcan <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ifconfig</code> y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">netstat</code> de memoria, porque el día que te sientes ante una imagen de contenedor mínima o un servidor fortificado y ninguno de los dos esté ahí, querrás que las herramientas actuales ya sean segunda naturaleza en lugar de algo que estás buscando a mitad de tarea.</p>
+
+      <figure class="my-8">
+        <img src="../../../assets/articles/art-inline-network-commands-glossary.svg" alt="Diagrama que asocia los comandos obsoletos de net-tools con sus reemplazos modernos de iproute2: ifconfig con ip addr, route con ip route, netstat con ss, arp con ip neigh, y tcpdump como la única herramienta de captura de paquetes que no ha cambiado." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">net-tools (obsoleto) a la izquierda, iproute2 (actual) a la derecha.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué se consideran obsoletos ifconfig y netstat?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque forman parte del antiguo paquete net-tools, sin desarrollo activo aguas arriba, y la mayoría de distribuciones actuales ya no lo instalan por defecto o lo conservan solo como capa de compatibilidad heredada.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué comando sustituye a ifconfig?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ip addr</code>, o su forma abreviada <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ip a</code>, que forma parte de la suite iproute2 y viene preinstalado y actualizado en las distribuciones modernas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué diferencia a ss de netstat?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ss</code> lee la información de sockets directamente del kernel en lugar de parsear /proc como hace netstat, lo que la hace muchísimo más rápida en una máquina con miles de conexiones abiertas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Para qué sirve la opción -w de tcpdump?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          tcpdump captura e inspecciona el tráfico real que cruza una interfaz de red; la opción -w guarda la captura en un archivo .pcap para analizarla después con calma, por ejemplo en Wireshark.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../comandos-linux-para-revision-de-seguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Comandos de Linux para una revisión de seguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../comparativas/wireshark-vs-tcpdump/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Wireshark vs tcpdump</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ciberseguridad/como-funcionan-las-redes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funcionan las redes en realidad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Recursos</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

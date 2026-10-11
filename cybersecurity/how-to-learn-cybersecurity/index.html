@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to actually learn cybersecurity | Breachfolio</title>
+  <meta name="description" content="Why tutorial-hell happens, what active learning looks like in this field, and a realistic weekly study rhythm that doesn't burn you out in month two." />
+  <meta name="keywords" content="how to learn cybersecurity, cybersecurity study method, what is tutorial hell, active learning vs passive learning cybersecurity, spaced repetition for cybersecurity, how to avoid burnout learning cybersecurity, TryHackMe vs HackTheBox, best way to study for CTFs, weekly study schedule cybersecurity, why watching walkthroughs doesn't work, self-study cybersecurity tips, how to practice cybersecurity skills" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-aprender-ciberseguridad/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="How to actually learn cybersecurity | Breachfolio" />
+  <meta property="og:description" content="Why tutorial-hell happens, what active learning looks like in this field, and a realistic weekly study rhythm that doesn't burn you out in month two." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-learn.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to actually learn cybersecurity | Breachfolio" />
+  <meta name="twitter:description" content="Why tutorial-hell happens, what active learning looks like in this field, and a realistic weekly study rhythm that doesn't burn you out in month two." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-learn.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to actually learn cybersecurity, without burning out on tutorials",
+      "description": "Why tutorial-hell happens, what active learning looks like in this field, and a realistic weekly study rhythm that doesn't burn you out in month two.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-learn.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/"
+      },
+      "inLanguage": "en",
+      "keywords": "how to learn cybersecurity, cybersecurity study method, what is tutorial hell, active learning vs passive learning cybersecurity, spaced repetition for cybersecurity, how to avoid burnout learning cybersecurity, TryHackMe vs HackTheBox, best way to study for CTFs, weekly study schedule cybersecurity, why watching walkthroughs doesn't work, self-study cybersecurity tips, how to practice cybersecurity skills"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "How to actually learn cybersecurity", "item": "https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is tutorial hell and how do you avoid it?", "acceptedAnswer": { "@type": "Answer", "text": "Tutorial hell is watching walkthrough after walkthrough, feeling like you're learning, but freezing when faced with a machine nobody has recorded a video for – because you memorized someone else's keystrokes instead of building your own diagnostic reasoning. The fix is committing a fixed block of time, twenty-five to forty-five minutes, actually stuck on a challenge before you ever open a walkthrough." } },
+        { "@type": "Question", "name": "How does active learning differ from watching walkthroughs in cybersecurity?", "acceptedAnswer": { "@type": "Answer", "text": "Watching a walkthrough exercises your ability to follow someone else's explanation, not your ability to produce one from nothing, which is what real diagnosis under uncertainty actually requires. Active learning means forming your own hypotheses, testing them, and failing before you look at the answer – that struggle is the training stimulus, not a failure state to skip past." } },
+        { "@type": "Question", "name": "What is spaced repetition and why does it help in cybersecurity?", "acceptedAnswer": { "@type": "Answer", "text": "Spaced repetition is flashcard-style review scheduled at increasing intervals, and it's well suited to recall-type knowledge like port numbers, CVE classes, and Linux command syntax – facts you need to know instantly rather than reason your way to. It should be used only for that recall layer, not for diagnostic reasoning skills, which need the stuck-first method instead." } },
+        { "@type": "Question", "name": "How many hours a week should you study cybersecurity?", "acceptedAnswer": { "@type": "Answer", "text": "A structure that tends to survive past the first couple of months is four to five focused sessions of sixty to ninety minutes across the week, each with a specific target, rather than one long weekend binge. Consistency compounding over months matters far more than intensity compressed into a single week, which is the most common cause of burning out around month three." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">How to actually learn cybersecurity</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/thumb-cyber-learn.webp" alt="How to actually learn cybersecurity (without burning out on tutorials)." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · METHOD</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">How to actually learn cybersecurity (without burning out on tutorials).</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Watching a hundred hours of walkthroughs feels like progress. It mostly isn't. Here's what active learning looks like in this field, and a weekly rhythm that survives past month two.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 8, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>There's a specific failure mode that shows up so often it has a name: <strong>tutorial hell</strong>. You find a walkthrough for a machine or a challenge, you watch it, it makes sense, you feel like you learned something, and then you queue up the next one. After a hundred hours of this, you sit down in front of a slightly different box, one nobody has recorded a video for, and you freeze. Not because you didn't pay attention. Because you never actually built the thing that was supposed to be built. You memorized someone else's keystrokes on someone else's problem, and keystrokes don't transfer. The underlying model – the reasoning that produced those keystrokes – was theirs, not yours, and it stayed theirs.</p>
+
+      <p>This isn't a discipline problem or a laziness problem. It's a <strong>mismatch between the activity (watching) and the skill you're actually trying to build (diagnosing)</strong>. The two feel similar from the inside – both involve information entering your head about security topics – but only one of them trains the thing that gets tested later.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Why passive learning fails here specifically</h2>
+      <p>Compare this to learning history. If you watch a documentary about the fall of the Roman Empire, you come away knowing more history – passive absorption of facts and narrative is close enough to the actual skill being built (knowing history) that the method roughly matches the goal. Cybersecurity doesn't work that way. The skill being tested – in a CTF, in an interview, during a real incident at 2am – is <strong>diagnosis under uncertainty</strong>: here is a system behaving strangely, here is a partial set of clues, figure out what's actually happening and what to do about it. Nobody hands you the answer key during an incident. Watching someone else perform that diagnosis, however clearly they narrate it, exercises your ability to follow an explanation. It does not exercise your ability to produce one from nothing, which is the actual job.</p>
+      <p>This gap is invisible while you're watching, which is exactly what makes it dangerous. A well-made walkthrough produces the same subjective feeling as genuine understanding – nodding along, "oh that makes sense" – right up until you're the one holding the shell with no narrator.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What active learning actually looks like</h2>
+      <p>The fix is uncomfortable and it's the whole point: before you watch a walkthrough for any challenge, get genuinely stuck on it yourself, with nothing to guide you but your own reasoning. In practice that means following the same sequence every time:</p>
+      <ol>
+        <li>Before opening any walkthrough, commit to a fixed block of time – <strong>twenty-five to forty-five minutes</strong> is a reasonable range – with nothing to guide you but your own reasoning.</li>
+        <li>Stay actively stuck: form a hypothesis, test it, watch it fail, and form the next one. That process, including and especially the wrong hypotheses, is <strong>the training stimulus:</strong> not a failure state to minimize, but the workout itself.</li>
+        <li>Only once the timer runs out, open the walkthrough, and resist the urge to copy commands straight into a terminal.</li>
+        <li>Read the reasoning, then close the writeup and re-derive the commands yourself from the logic it described.</li>
+        <li>Check what you actually absorbed: if you can reproduce the technique from the explanation without looking back, you absorbed the reasoning. If you can only reproduce it by looking at the exact syntax again, you absorbed a string, and strings don't generalize to the next box.</li>
+      </ol>
+      <p>The muscle being built here is exactly the one that has no writeup available in a live incident.</p>
+
+      <figure class="my-8">
+        <img src="../../assets/articles/art-inline-how-to-learn-cybersecurity.svg" alt="Diagram showing a weekly study rhythm split into four to five sessions, each divided into stuck-first practice, spaced-repetition recall, and a short notes block, repeating week after week." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">A sustainable week isn't one big binge – it's four or five sessions, each mixing stuck-first practice with recall and notes.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Spaced repetition for the boring-but-load-bearing stuff</h2>
+      <p>Not everything in this field is a reasoning skill, and it's worth separating the two categories cleanly.</p>
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Category</th><th class="px-4 py-2.5 font-display font-semibold">Examples</th><th class="px-4 py-2.5 font-display font-semibold">Best method</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Recall knowledge</strong></td><td class="px-4 py-2.5">Port numbers, CVE/vulnerability classes, Linux command syntax, OSI layers</td><td class="px-4 py-2.5">Spaced repetition (flashcards)</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Diagnostic reasoning</strong></td><td class="px-4 py-2.5">Enumeration strategy, privilege escalation paths, incident triage</td><td class="px-4 py-2.5">Get-stuck-first practice</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>You don't reason your way to "port 445 is SMB," you just need to know it, instantly, the way you know a phone number. This is exactly the kind of material that <strong>spaced repetition:</strong> flashcard-style review scheduled at increasing intervals, the same general technique language learners use for vocabulary – is genuinely good at, and there's no need to endorse a specific app to benefit from the idea. Build a deck, review it in short daily sessions, and let the scheduling algorithm handle what most self-taught people handle badly: re-exposure timed just before you'd otherwise forget. Trying to build this recall layer through the same "get stuck and reason it out" method as diagnosis skills is a waste of the technique in both directions – you can't reason your way to a memorized fact, and drilling flashcards won't teach you to diagnose an odd process tree.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">CTFs and guided platforms</h2>
+      <p>Guided, gamified hands-on platforms – TryHackMe- and HackTheBox-style environments – and CTF competitions are a genuinely good place to do the "get stuck yourself" work described above. Their real value is that they're a <strong>safe, legal, bounded environment</strong> to practice enumeration and exploitation against machines built specifically to teach a technique, with no risk of touching a system you don't own. That's not a small thing; it's most of why these platforms exist and why they're worth your time.</p>
+      <p>Their real limit is equally important to understand going in: these environments train you to solve a designed puzzle. Someone built the box with a specific path in mind, seeded specific clues, and calibrated the difficulty. That's adjacent to real-world investigation, but it isn't identical to it: a real incident, or a real pentest engagement, wasn't constructed to have a findable solution at all. This is exactly why <a href="../../lab/build-a-home-lab-on-one-laptop/" class="text-accent ul-link">building and breaking your own <strong>home lab</strong></a> is a valuable complement rather than a redundant one: a lab you set up yourself, with services you configured, has no designed solution and no author who knows the intended path. When something breaks in your own lab, you're doing the messier, less scaffolded version of the same diagnostic work – closer to what the job actually asks for.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">A realistic weekly rhythm</h2>
+      <p>The structure that tends to survive past the first couple of months is a fixed number of focused sessions spread across the week, rather than a single marathon weekend binge – something like <strong>four to five sessions of sixty to ninety minutes</strong>, each with one specific target:</p>
+      <ul>
+        <li>One challenge worked through properly, using the stuck-first method above.</li>
+        <li>One flashcard review, covering the recall-only material described above.</li>
+        <li>One short block of reading or notes.</li>
+      </ul>
+      <p>That beats a Saturday spent watching six hours of videos back to back. The marathon session feels more productive in the moment because more time was visibly spent, but very little of it involved the actual training stimulus; most of it was passive intake.</p>
+      <p>This matters more than it sounds like it should, because of what actually causes people to quit. The field rewards <strong>consistency compounding over months</strong> far more than it rewards intensity compressed into a single week. Treating the first month like a sprint – long sessions, high intensity, little recovery – is the single most common reason people burn out and disappear around month three, right around when the initial novelty wears off and the actual grind of recall-building and slow diagnostic practice sets in. A sustainable weekly rhythm is not the "less serious" option. It's the one that's still running in month six, which is the only version that produces a real skill.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Writeups and communities without becoming dependent on them</h2>
+      <p>Other people's writeups and community discussion are useful for exactly one thing: checking your own reasoning after you've already done the work, not shortcutting past doing it. There are two forcing functions worth using deliberately here, and neither is a shortcut around doing the work yourself:</p>
+      <ul>
+        <li>Read a writeup as a second opinion on a conclusion you already reached yourself, not as a substitute for reaching one. If your reasoning diverged from theirs, that divergence is more informative than the writeup's content – it tells you precisely where your mental model is wrong, which is exactly the information you need and exactly the thing you can't get by reading a solution before attempting the problem.</li>
+        <li>Try to explain what you just learned to someone else – a study partner, a forum post, or even a private notes file you never show anyone – in your own words, without referring back to the source. Teaching, or writing something down as though you were about to teach it, exposes gaps that passive review hides completely. It's uncomfortable in the same way being stuck on a challenge is uncomfortable, and for the same reason: it's the part where you find out what you actually know versus what you merely recognize.</li>
+      </ul>
+
+      <p class="mt-10">All of this assumes you already know roughly what order to learn things in – networking before web exploitation, Linux before privilege escalation techniques, and so on. If that "what order" question is still open for you, our <a href="../cybersecurity-roadmap-and-careers/" class="text-accent ul-link">real cybersecurity roadmap</a> covers it directly; this piece is the "how" companion to that "what order" one, and the two are meant to be read together rather than in isolation.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is tutorial hell and how do you avoid it?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Tutorial hell is watching walkthrough after walkthrough, feeling like you're learning, but freezing when faced with a machine nobody has recorded a video for – because you memorized someone else's keystrokes instead of building your own diagnostic reasoning. The fix is committing a fixed block of time, twenty-five to forty-five minutes, actually stuck on a challenge before you ever open a walkthrough.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How does active learning differ from watching walkthroughs in cybersecurity?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Watching a walkthrough exercises your ability to follow someone else's explanation, not your ability to produce one from nothing, which is what real diagnosis under uncertainty actually requires. Active learning means forming your own hypotheses, testing them, and failing before you look at the answer: that struggle is the training stimulus, not a failure state to skip past.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is spaced repetition and why does it help in cybersecurity?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Spaced repetition is flashcard-style review scheduled at increasing intervals, and it's well suited to recall-type knowledge like port numbers, CVE classes, and Linux command syntax – facts you need to know instantly rather than reason your way to. It should be used only for that recall layer, not for diagnostic reasoning skills, which need the stuck-first method instead.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How many hours a week should you study cybersecurity?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A structure that tends to survive past the first couple of months is four to five focused sessions of sixty to ninety minutes across the week, each with a specific target, rather than one long weekend binge. Consistency compounding over months matters far more than intensity compressed into a single week, which is the most common cause of burning out around month three.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../cybersecurity-roadmap-and-careers/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The real cybersecurity roadmap</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../lab/build-a-home-lab-on-one-laptop/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Build a home lab on one laptop</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ai/prompts-for-self-study/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">5 prompts for self-study that actually work</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

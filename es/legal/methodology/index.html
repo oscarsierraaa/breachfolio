@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metodología – cómo prueba y puntúa Breachfolio | Breachfolio</title>
+  <meta name="description" content="Cómo Breachfolio prueba herramientas, puntúa comparativas y versiona sus planes de prueba. Reproducible, auditable y re-ejecutado cuando cambia la metodología." />
+  <link rel="canonical" href="https://breachfolio.com/es/legal/methodology/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/methodology/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/methodology/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/methodology/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Metodología – cómo prueba y puntúa Breachfolio | Breachfolio" />
+  <meta property="og:description" content="Cómo Breachfolio prueba herramientas, puntúa comparativas y versiona sus planes de prueba. Reproducible, auditable y re-ejecutado cuando cambia la metodología." />
+  <meta property="og:url" content="https://breachfolio.com/es/legal/methodology/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/og-default.png" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Metodología – cómo prueba y puntúa Breachfolio | Breachfolio" />
+  <meta name="twitter:description" content="Cómo Breachfolio prueba herramientas, puntúa comparativas y versiona sus planes de prueba. Reproducible, auditable y re-ejecutado cuando cambia la metodología." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/og-default.png" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script src="../../../assets/hack-terminal.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+"@context": "https://schema.org",
+"@graph": [
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://breachfolio.com/es/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Legal",
+        "item": "https://breachfolio.com/es/legal/methodology/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Metodología",
+        "item": "https://breachfolio.com/es/legal/methodology/"
+      }
+    ]
+  }
+]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Legal</span></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Metodología</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">Legal</div>
+      <h1 class="font-display mt-4 text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Metodología</h1>
+      <div class="prose-sec mt-8">
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">La versión corta</h2>
+<p>Breachfolio es un sitio pequeño e independiente. Los artículos se redactan con asistencia de IA y una persona los revisa antes de publicarlos. Escribimos a partir de documentación, fuentes de los fabricantes e investigación pública, no de pruebas de laboratorio propias, y lo decimos en cada página donde hace falta. Cuando no hemos probado algo nosotros, no afirmamos que lo hayamos hecho.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">De dónde sale la información</h2>
+<p>Casi todo lo que publicamos es explicativo: cómo funciona una técnica, cómo se estructura una estafa, para qué sirve una herramienta, qué separa a dos que suelen confundirse. Ese material se construye a partir de:</p>
+<ul>
+  <li>Documentación oficial de fabricantes y proyectos.</li>
+  <li>Fuentes primarias de organismos públicos y del sector, enlazadas donde nos apoyamos en ellas.</li>
+  <li>Investigación y avisos de seguridad publicados.</li>
+  <li>Familiaridad práctica con las herramientas, donde la tenemos.</li>
+</ul>
+<p>Cuando una afirmación viene de una fuente concreta, enlazamos esa fuente en la propia frase que la sostiene, para que puedas comprobarla en vez de creernos.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Qué son nuestras comparativas, y qué no</h2>
+<p>Nuestras comparativas ponen herramientas una al lado de otra en lo que de verdad decide cuál te conviene: para qué está diseñada cada una, licencia y coste real, dónde falla cada una y a quién le encaja. Son comparativas documentadas, no resultados de benchmark.</p>
+<p><strong>No son pruebas de laboratorio.</strong> No publicamos tiempos, cifras de rendimiento ni puntuaciones salidas de un banco de pruebas controlado, porque no tenemos ninguno. Si necesitas números reproducibles para una decisión de compra, mide tú las herramientas en tu propio hardware y con tu carga real. Quien da cifras exactas sin publicar el equipo, las versiones y el método te está pidiendo que te fíes de un número que no puedes comprobar.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Los laboratorios</h2>
+<p>La sección de Laboratorio es distinta. Son guías paso a paso para montar un entorno de práctica aislado en tu propia máquina, con objetivos deliberadamente vulnerables hechos para entrenar. Todo lo de ahí está pensado para ejecutarse en hardware tuyo, en un segmento de red que no toca nada más. Nunca escaneamos ni sondeamos un sistema que no sea nuestro, y tú tampoco deberías.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Uso de herramientas de IA</h2>
+<p>Esto importa lo suficiente como para decirlo claro y no enterrarlo. <strong>Los artículos de Breachfolio se redactan con asistencia de IA.</strong> La redacción, la edición, la traducción entre español e inglés y algunas ilustraciones se producen así. Una persona elige cada tema, revisa el borrador y aprueba la publicación; nada se publica solo.</p>
+<p>Lo que la asistencia de IA no hace es convertir documentación en pruebas. Acelera escribir una explicación; no nos da números que no hemos medido. Por eso esta página ya no afirma tener un banco de pruebas que no existe.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Independencia</h2>
+<p>No aceptamos pagos de fabricantes por cobertura, valoraciones, menciones ni posicionamiento, y aquí no hay nada patrocinado. El sitio muestra publicidad gráfica de terceros, servida por una red publicitaria, que no influye en lo que escribimos ni en cómo valoramos una herramienta. El detalle está en la <a href="../disclosures/" class="text-accent ul-link">página de divulgaciones</a>.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cuando nos equivocamos</h2>
+<p>Si un fabricante o un lector señala un error factual, corregimos el artículo, anotamos la corrección al principio y mantenemos visible la redacción original. No reescribimos la historia en silencio. Las correcciones y las dudas van a la <a href="../contact/" class="text-accent ul-link">página de contacto</a>.</p>
+
+      </div>
+    </div>
+</article>
+</main>
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

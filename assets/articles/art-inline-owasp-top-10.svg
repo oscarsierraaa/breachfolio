@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" font-family="'JetBrains Mono', ui-monospace, monospace">
+<defs>
+  <pattern id="owaspGrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="owaspGlow" cx="0.32" cy="0.4" r="0.65"><stop offset="0%" stop-color="hsl(168 78% 46%)" stop-opacity="0.32"/><stop offset="55%" stop-color="hsl(190 85% 52%)" stop-opacity="0.08"/><stop offset="100%" stop-color="hsl(190 85% 52%)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="owaspBar" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="hsl(168 78% 46%)"/><stop offset="100%" stop-color="hsl(190 85% 52%)"/></linearGradient>
+</defs>
+
+<rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+<rect width="800" height="400" fill="hsl(240 9% 7%)" opacity="0.55"/>
+<rect width="800" height="400" fill="url(#owaspGrid)"/>
+<ellipse cx="256" cy="160" rx="420" ry="260" fill="url(#owaspGlow)"/>
+
+<text x="40" y="40" font-family="Sora, sans-serif" font-size="15" font-weight="600" fill="hsl(168 78% 46%)" letter-spacing="2" opacity="0.95">OWASP TOP 10:2025 — RANKED BY SEVERITY</text>
+
+<g font-size="12.5" letter-spacing="0.5">
+  <!-- rows: rank, code, bar (width scaled by rank), opacity scaled by rank -->
+  <!-- row 1 / A01 -->
+  <text x="95" y="70" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.95">A01</text>
+  <rect x="110" y="60" width="620" height="16" rx="3" fill="url(#owaspBar)" opacity="0.95"/>
+  <text x="740" y="72" fill="hsl(190 85% 52%)" opacity="0.85" font-size="11">40 CWEs</text>
+
+  <!-- row 2 / A02 -->
+  <text x="95" y="102" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.89">A02</text>
+  <rect x="110" y="92" width="558" height="16" rx="3" fill="url(#owaspBar)" opacity="0.89"/>
+
+  <!-- row 3 / A03 -->
+  <text x="95" y="134" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.83">A03</text>
+  <rect x="110" y="124" width="496" height="16" rx="3" fill="url(#owaspBar)" opacity="0.83"/>
+
+  <!-- row 4 / A04 -->
+  <text x="95" y="166" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.77">A04</text>
+  <rect x="110" y="156" width="434" height="16" rx="3" fill="url(#owaspBar)" opacity="0.77"/>
+
+  <!-- row 5 / A05 -->
+  <text x="95" y="198" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.71">A05</text>
+  <rect x="110" y="188" width="372" height="16" rx="3" fill="url(#owaspBar)" opacity="0.71"/>
+
+  <!-- row 6 / A06 -->
+  <text x="95" y="230" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.65">A06</text>
+  <rect x="110" y="220" width="310" height="16" rx="3" fill="url(#owaspBar)" opacity="0.65"/>
+
+  <!-- row 7 / A07 -->
+  <text x="95" y="262" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.59">A07</text>
+  <rect x="110" y="252" width="248" height="16" rx="3" fill="url(#owaspBar)" opacity="0.59"/>
+
+  <!-- row 8 / A08 -->
+  <text x="95" y="294" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.53">A08</text>
+  <rect x="110" y="284" width="186" height="16" rx="3" fill="url(#owaspBar)" opacity="0.53"/>
+
+  <!-- row 9 / A09 -->
+  <text x="95" y="326" text-anchor="end" fill="hsl(168 78% 46%)" opacity="0.47">A09</text>
+  <rect x="110" y="316" width="124" height="16" rx="3" fill="url(#owaspBar)" opacity="0.47"/>
+
+  <!-- row 10 / A10 -->
+  <text x="95" y="358" text-anchor="end" fill="hsl(190 85% 52%)" opacity="0.9">A10</text>
+  <rect x="110" y="348" width="62" height="16" rx="3" fill="url(#owaspBar)" opacity="0.9"/>
+  <text x="182" y="360" fill="hsl(190 85% 52%)" opacity="0.9" font-size="11">NEW · 24 CWEs</text>
+</g>
+
+<g font-size="12" letter-spacing="2.5" font-weight="500">
+  <text x="40" y="380" fill="hsl(240 5% 65%)" opacity="0.6">10 CATEGORIES · A01 MOST CRITICAL</text>
+  <text x="760" y="380" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="762" cy="34" r="4" fill="hsl(168 78% 46%)"/>
+<circle cx="762" cy="34" r="9" fill="hsl(168 78% 46%)" opacity="0.25"/>
+</svg>

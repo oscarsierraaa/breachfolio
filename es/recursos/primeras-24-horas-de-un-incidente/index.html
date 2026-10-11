@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="resources">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Las primeras 24 horas de un incidente | Breachfolio</title>
+  <meta name="description" content="Checklist serena y práctica para las primeras 24 horas de un incidente, sobre las fases del NIST: detectar, contener, erradicar, recuperar, aprender." />
+  <meta name="keywords" content="respuesta a incidentes primeras 24 horas, checklist de respuesta a incidentes de seguridad, fases NIST de gestión de incidentes, qué hacer ante un incidente de seguridad, cómo contener un incidente sin borrar pruebas, plan de respuesta a incidentes para equipos pequeños, errores comunes en la respuesta a incidentes, cómo preservar evidencia digital, NIST SP 800-61, rotar credenciales tras un incidente, revisión sin culpas post-incidente, cómo aislar una máquina comprometida" />
+  <link rel="canonical" href="https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/incident-response-first-24h-checklist/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/incident-response-first-24h-checklist/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Las primeras 24 horas de un incidente | Breachfolio" />
+  <meta property="og:description" content="Checklist serena y práctica para las primeras 24 horas de un incidente, sobre las fases del NIST: detectar, contener, erradicar, recuperar, aprender." />
+  <meta property="og:url" content="https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-res-incident.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Las primeras 24 horas de un incidente | Breachfolio" />
+  <meta name="twitter:description" content="Checklist serena y práctica para las primeras 24 horas de un incidente, sobre las fases del NIST: detectar, contener, erradicar, recuperar, aprender." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-res-incident.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Respuesta a incidentes: una checklist práctica para las primeras 24 horas",
+      "description": "Checklist serena y práctica para las primeras 24 horas de un incidente, sobre las fases del NIST: detectar, contener, erradicar, recuperar, aprender.",
+      "image": "https://breachfolio.com/assets/img/thumb-res-incident.webp",
+      "datePublished": "2026-07-15",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/"
+      },
+      "inLanguage": "es",
+      "keywords": "respuesta a incidentes primeras 24 horas, checklist de respuesta a incidentes de seguridad, fases NIST de gestión de incidentes, qué hacer ante un incidente de seguridad, cómo contener un incidente sin borrar pruebas, plan de respuesta a incidentes para equipos pequeños, errores comunes en la respuesta a incidentes, cómo preservar evidencia digital, NIST SP 800-61, rotar credenciales tras un incidente, revisión sin culpas post-incidente, cómo aislar una máquina comprometida"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Recursos", "item": "https://breachfolio.com/es/recursos/" },
+        { "@type": "ListItem", "position": 3, "name": "Checklist de respuesta a incidentes", "item": "https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuáles son las fases de la respuesta a un incidente según el NIST?", "acceptedAnswer": { "@type": "Answer", "text": "Confirmar y registrar, contener, erradicar y recuperar, y aprender: las mismas fases de la guía NIST SP 800-61 comprimidas en lo que hay que hacer realmente en las primeras 24 horas." } },
+        { "@type": "Question", "name": "¿Por qué no se debe apagar o borrar una máquina comprometida de inmediato?", "acceptedAnswer": { "@type": "Answer", "text": "Porque destruye la evidencia volátil que permite entender el alcance del incidente; lo correcto es aislar la máquina de la red desconectando el cable o la interfaz, pero mantenerla encendida siempre que sea posible." } },
+        { "@type": "Question", "name": "¿Qué error cometen con más frecuencia al recuperar sistemas tras un incidente?", "acceptedAnswer": { "@type": "Answer", "text": "Restaurar el sistema antes de haber encontrado la causa raíz, lo que reinicia el reloj para el atacante porque el punto de entrada original sigue abierto." } },
+        { "@type": "Question", "name": "¿Por qué es importante llevar una cronología escrita durante un incidente?", "acceptedAnswer": { "@type": "Answer", "text": "Porque bajo presión la memoria es poco fiable e indefendible; un registro con marcas de tiempo desde el primer minuto es el artefacto más valioso para la investigación y para cualquier informe posterior." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Recursos</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Checklist de respuesta a incidentes</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-res-incident.webp" alt="Las primeras 24 horas de un incidente." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">RECURSO · CHECKLIST</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Las primeras 24 horas de un incidente.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Cuando algo parece comprometido, el peor movimiento es uno hecho con pánico. Esta es una checklist serena y ordenada para el primer día, construida sobre las fases estándar del NIST.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>15 de julio de 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>La mayor parte del daño en un incidente de seguridad <strong>no proviene del atacante, sino de la respuesta</strong>: máquinas borradas antes de que nadie capturara evidencias, sistemas restaurados directamente sobre el mismo agujero, responsables a los que no se dijo nada hasta que fue una crisis. Una checklist existe para evitar eso. Esta sigue las fases de la <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">guía de gestión de incidentes NIST SP 800-61</a>, comprimidas en lo que hay que hacer realmente en las primeras 24 horas.</p>
+
+      <p>Está escrita para un equipo pequeño o una única persona responsable, la situación en la que de verdad se encuentra la mayoría de la gente cuando algo sale mal. Léela antes de necesitarla.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Fase 1 – Confirmar y registrar</h2>
+
+      <p>Antes de actuar, establece lo que sabes. El pánico actúa; la disciplina registra primero.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Confirma que es real.</strong> ¿Es un incidente genuino o una falsa alarma? Una sola línea de log extraña todavía no es un incidente. Corrobora antes de escalar.</li>
+        <li><strong>Empieza una cronología.</strong> Abre un documento y anota la hora, lo que viste y lo que hiciste, desde el primer minuto. Este registro vale más de lo que esperas, tanto para la investigación como para cualquier informe posterior.</li>
+        <li><strong>Anota a quién se ha informado.</strong> Decide pronto quién necesita saberlo (un responsable, un encargado de protección de datos) y registra cuándo le informaste.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Fase 2 – Contener</h2>
+
+      <p>La contención limita el daño sin destruir las evidencias que vas a necesitar. El orden importa:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Aísla, no borres.</strong> Desconecta la máquina afectada de la red (quita el cable, desactiva la interfaz), pero déjala encendida siempre que sea posible. Borrar destruye evidencias; aislar detiene la propagación mientras las preserva.</li>
+        <li><strong>Preserva la evidencia volátil.</strong> Si tienes los conocimientos, captura la memoria y el estado de los procesos en ejecución antes de que algo se reinicie. Si no, con solo no apagar el equipo ya preservas muchísimo.</li>
+        <li><strong>Rota las credenciales expuestas.</strong> Si hay cuentas o claves que puedan estar comprometidas, cámbialas desde una máquina de confianza y limpia, no desde la sospechosa.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Fase 3 – Erradicar y recuperar</h2>
+
+      <p>Solo una vez que se entiende el alcance eliminas el problema y restauras el servicio:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Encuentra primero la causa raíz.</strong> Restaurar antes de saber cómo entraron solo los invita a volver por la misma puerta. Entiende el punto de entrada.</li>
+        <li><strong>Reconstruye desde limpio.</strong> Cuando sea viable, restaura desde una copia de seguridad de confianza o reconstruye desde cero, en lugar de fiarte de una máquina que crees haber limpiado. "Probablemente limpia" no es un estado de seguridad.</li>
+        <li><strong>Verifica antes de reconectar.</strong> Confirma que el agujero está cerrado y que hay monitorización en marcha, y entonces vuelve a poner el sistema en servicio, vigilándolo de cerca.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Fase 4 – Aprender</h2>
+
+      <p>La fase que todo el mundo se salta y que todo el mundo lamenta haberse saltado:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Haz una revisión sin culpas.</strong> Qué pasó, qué funcionó, qué no, qué lo habría detectado antes. Sin culpas, porque la culpa a toro pasado solo enseña a la gente a ocultar los incidentes.</li>
+        <li><strong>Convierte los hallazgos en cambios.</strong> Cada incidente debería producir al menos una mejora concreta: una nueva regla de detección en tu <a href="../../laboratorio/lab-03-wazuh-siem-en-casa/" class="text-accent ul-link">SIEM</a>, una brecha parcheada, un proceso corregido.</li>
+        <li><strong>Actualiza esta checklist.</strong> La mejor versión de este documento es la que has revisado después de usarlo.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Los errores que esta checklist evita</h2>
+
+      <p>Es más fácil recordar el orden cuando sabes contra qué protege cada paso. Los cuatro errores del primer día más comunes, y más caros:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Apagar o borrar demasiado rápido.</strong> El instinto de "limpiarlo y seguir adelante" destruye las evidencias que te dicen el alcance. Aísla en su lugar; siempre puedes reconstruir más tarde, pero no puedes deshacer el borrado de una imagen de memoria.</li>
+        <li><strong>Restaurar sobre el mismo agujero.</strong> Volver a poner un sistema en marcha antes de entender el punto de entrada solo reinicia el reloj para el atacante. La causa raíz va antes que la recuperación, siempre.</li>
+        <li><strong>El silencio.</strong> No avisar a quienes necesitan saberlo (un responsable, un encargado de protección de datos, a veces un regulador) convierte un incidente gestionado en un fallo de confianza y cumplimiento. Decide pronto la vía de notificación y regístrala.</li>
+        <li><strong>No dejar registro.</strong> Fiarte de la memoria en lugar de una cronología escrita. Bajo presión, la memoria es poco fiable e indefendible; un registro con marcas de tiempo es el artefacto más valioso que produces.</li>
+      </ul>
+
+      <p>Fíjate en que tres de los cuatro tratan de <strong>contención, no de acción</strong>. Ese es el corazón contraintuitivo de la respuesta a incidentes: en las primeras 24 horas, el <strong>movimiento lento y disciplinado</strong> suele ganar al reflejo rápido. La checklist existe para que el movimiento disciplinado sea el predeterminado, de modo que no estés improvisando el criterio mientras la adrenalina está alta.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Adaptarla a tu situación</h2>
+
+      <p>Es deliberadamente mínima para que encaje con un respondedor en solitario o un equipo pequeño. Una organización más grande añade más por encima (roles definidos, participación legal y de comunicación, forense formal), pero las fases no cambian, y la <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">guía del NIST</a> escala el mismo esqueleto hacia arriba. Empieza con esto y añade estructura a medida que crezcan tus responsabilidades, en lugar de intentar adoptar un manual de empresa que todavía no necesitas.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Cómo usarla.</strong> Guarda una copia de esto en algún sitio al que puedas llegar cuando los sistemas estén caídos: impresa, o en el móvil. Ensáyala una vez contra un escenario imaginado en tu <a href="../../laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" class="text-accent ul-link">laboratorio</a>; una checklist que has recorrido una vez es mucho más útil que una que lees por primera vez en mitad de un incidente.</div>
+
+      <p>La idea más importante aquí es la secuencia: <strong>confirmar, contener, entender y luego restaurar</strong>, con una cronología escrita corriendo durante todo el proceso. Un incidente gestionado en ese orden es recuperable y defendible. Uno gestionado por reflejo normalmente no lo es.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuáles son las fases de la respuesta a un incidente según el NIST?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Confirmar y registrar, contener, erradicar y recuperar, y aprender: las mismas fases de la guía NIST SP 800-61 comprimidas en lo que hay que hacer realmente en las primeras 24 horas.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué no se debe apagar o borrar una máquina comprometida de inmediato?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque destruye la evidencia volátil que permite entender el alcance del incidente; lo correcto es aislar la máquina de la red desconectando el cable o la interfaz, pero mantenerla encendida siempre que sea posible.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué error cometen con más frecuencia al recuperar sistemas tras un incidente?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Restaurar el sistema antes de haber encontrado la causa raíz, lo que reinicia el reloj para el atacante porque el punto de entrada original sigue abierto.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué es importante llevar una cronología escrita durante un incidente?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque bajo presión la memoria es poco fiable e indefendible; un registro con marcas de tiempo desde el primer minuto es el artefacto más valioso para la investigación y para cualquier informe posterior.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../comandos-linux-para-revision-de-seguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Comandos de seguridad en Linux</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ciberseguridad/modelado-de-amenazas-con-stride/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Modelado de amenazas: STRIDE</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../owasp-top-10-referencia-rapida/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">OWASP Top 10: referencia rápida</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los recursos</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

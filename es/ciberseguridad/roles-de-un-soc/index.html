@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roles y niveles de un equipo SOC | Breachfolio</title>
+  <meta name="description" content="Dentro de un SOC: el modelo de niveles, cada rol del analista N1 al SOC manager, cómo escalan las alertas, los turnos y la carrera real." />
+  <meta name="keywords" content="roles de equipo SOC" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Roles y niveles de un equipo SOC | Breachfolio" />
+  <meta property="og:description" content="Dentro de un SOC: el modelo de niveles, cada rol del analista N1 al SOC manager, cómo escalan las alertas, los turnos y la carrera real." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-soc-roles.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Roles y niveles de un equipo SOC | Breachfolio" />
+  <meta name="twitter:description" content="Dentro de un SOC: el modelo de niveles, cada rol del analista N1 al SOC manager, cómo escalan las alertas, los turnos y la carrera real." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-soc-roles.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Roles y niveles de un equipo SOC",
+      "description": "Dentro de un SOC: el modelo de niveles, cada rol del analista N1 al SOC manager, cómo escalan las alertas, los turnos y la carrera real.",
+      "image": "https://breachfolio.com/assets/img/hero-soc-roles.webp",
+      "datePublished": "2026-07-17",
+      "dateModified": "2026-07-17",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" },
+      "inLanguage": "es",
+      "keywords": "roles de equipo SOC"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Roles y niveles de un equipo SOC", "item": "https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un analista de SOC de Nivel 1 y uno de Nivel 2?", "acceptedAnswer": { "@type": "Answer", "text": "El Nivel 1 tría: trabaja la cola de alertas contra playbooks, decide qué es un falso positivo, hace el primer enriquecimiento y escala las de verdad; trabajo de primera línea, rápido y de mucho volumen. El Nivel 2 investiga de principio a fin lo que el N1 escala, pivotando entre fuentes de datos para confirmar si es un incidente genuino, y toma las primeras acciones de contención como aislar un host o deshabilitar una cuenta. En resumen: el N1 decide si algo merece una mirada más de cerca; el N2 hace esa mirada de cerca y empieza a responder." } },
+        { "@type": "Question", "name": "¿Hace falta un título para trabajar en un SOC?", "acceptedAnswer": { "@type": "Answer", "text": "No. Un título puede ayudarte a pasar algunos filtros de RR. HH., pero no es un requisito imprescindible, y muchos analistas de SOC vienen del soporte de IT, del autoaprendizaje o de cambios de carrera. Lo que importa de forma consistente es la capacidad demostrable: fundamentos sólidos de redes y Linux, un home lab documentado, práctica manos a la obra en labs de blue team, familiaridad con un lenguaje de consulta de SIEM y con MITRE ATT&CK, y la capacidad de explicar tu razonamiento con claridad. Razona bien sobre un escenario y le ganarás a un título sin destreza aplicada." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un analista de SOC y un respondedor de incidentes?", "acceptedAnswer": { "@type": "Answer", "text": "Un analista de SOC trabaja sobre todo el flujo continuo: monitorizar, triar e investigar alertas según llegan, día tras día. Un respondedor de incidentes entra en escena (o da un paso al frente) una vez que se confirma que algo es un incidente real, y su trabajo es tomar el mando: coordinar la contención, la erradicación y la recuperación, mantener la línea temporal e informar a los interesados. Los analistas suelen escalar a los respondedores. Mucha gente pasa a ser respondedora de incidentes tras un tiempo como analista de Nivel 2 o Nivel 3, así que los roles se solapan en destrezas pero difieren en enfoque y momento." } },
+        { "@type": "Question", "name": "¿Qué hace en realidad un threat hunter?", "acceptedAnswer": { "@type": "Answer", "text": "Un threat hunter busca de forma proactiva a los atacantes que las detecciones automáticas se perdieron, en vez de esperar a las alertas. Parte de una hipótesis –a menudo basada en una técnica de MITRE ATT&CK– como \"si alguien estuviera robando credenciales aquí, ¿qué aspecto tendría en nuestra telemetría?\", la traduce a consultas sobre los datos del SOC y criba los resultados. Un hunt acaba de una de dos formas útiles: saca a la luz una intrusión real que pasar a respuesta a incidentes, o produce una idea de detección nueva para el equipo de ingeniería. Es un rol sénior, movido por la curiosidad y construido sobre un conocimiento profundo tanto del tradecraft del atacante como de los propios datos de la organización." } },
+        { "@type": "Question", "name": "¿Es analista de SOC un buen primer empleo?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, con los ojos abiertos. El Nivel 1 es uno de los puntos de entrada genuinos más accesibles a la seguridad, te expone rápido a ataques reales y a todo el stack defensivo, y abre caminos claros hacia el hunting, la ingeniería de detección, la respuesta a incidentes y más. Las contrapartidas también son reales: puede ser de mucho volumen y repetitivo, y los SOC 24x7 implican turnos y rotaciones de noche que disparan el burnout y la rotación. Los buenos automatizan la parte pesada, sacan a la gente del triaje puro y tratan la progresión al Nivel 2 como un camino real; busca esos." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un ingeniero de detección y un analista de SOC?", "acceptedAnswer": { "@type": "Answer", "text": "Un analista de SOC consume detecciones: responde a las alertas que generan las reglas. Un ingeniero de detección construye y mantiene esas reglas: decide qué debería convertirse en alerta en primer lugar, escribe y afina la lógica de detección (cada vez más como \"detection-as-code\", versionada y probada como software), mapea la cobertura a MITRE ATT&CK y retira las reglas que se han convertido en ruido. Los analistas viven en la cola de alertas; los ingenieros de detección viven en las reglas y los pipelines que la crean. Muchos ingenieros de detección empezaron como analistas, que es justo por lo que saben qué alertas eran útiles y cuáles eran solo ruido." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Roles y niveles de un equipo SOC</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-soc-roles.webp" alt="Roles y niveles de un equipo SOC." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · SOC</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Roles y niveles de un equipo SOC.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Dentro de un SOC: el modelo de niveles, cada rol del analista N1 al SOC manager, cómo escalan las alertas, los turnos y la carrera real.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>17 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Un Security Operations Center parece una sola cosa desde fuera: una sala llena de pantallas y de gente vigilando alertas. Desde dentro es una máquina por capas, y cada capa es un trabajo distinto con un conjunto de destrezas distinto, un día distinto y un siguiente paso distinto. "Analista de SOC" no es un rol: es la puerta de entrada a por lo menos seis o siete de ellos. Esto es un mapa de quién hace qué, qué se escala entre unos y otros, y cómo se mueve de verdad una carrera por el edificio.</p>
+
+<p>Si aún estás decidiendo si el lado defensivo es lo tuyo, nuestro <a href="../equipo-rojo-azul-y-morado-explicado/">desglose de equipos red, blue y purple</a> y la guía de <a href="../como-empezar-en-ciberseguridad/">hoja de ruta y carreras en ciberseguridad</a> cubren la bifurcación anterior a esta. Este artículo da por hecho que ya has apuntado a "blue team, SOC" y quieres saber qué hay dentro.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 240" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="26" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Nivel 1 – Triaje</text><text x="36" y="46" fill="hsl(var(--muted))" font-size="12">Monitorización y 1.ª respuesta</text><path d="M 192 65 L 192 84" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 80 L 192 85 L 196 80" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="90" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="90" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="114" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Nivel 2 – Investigación</text><text x="36" y="134" fill="hsl(var(--muted))" font-size="12">Análisis y respuesta</text><path d="M 192 153 L 192 172" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 168 L 192 173 L 196 168" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="178" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="178" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="202" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Nivel 3 – Hunting</text><text x="36" y="222" fill="hsl(var(--muted))" font-size="12">Threat hunting avanzado</text></svg>
+        <figcaption>Cómo escala el trabajo por los niveles del SOC.</figcaption>
+      </figure>
+      <h2>El modelo de niveles: cómo se estructura un SOC por capas</h2>
+<p>La mayoría de los SOC organizan a los analistas en niveles, normalmente tres. Los niveles existen para proteger los dos recursos más escasos del edificio: la atención y la experiencia. No quieres a tu mejor respondedor de incidentes leyendo alertas de fallo de login todo el día, ni a un analista de su primera semana decidiendo desconectar de la red un servidor de producción. Los niveles enrutan cada pieza de trabajo al nivel más barato que puede gestionarla con seguridad, y solo escalan lo que necesita un cerebro más caro.</p>
+
+<h3>Nivel 1: triaje y monitorización</h3>
+<p>La puerta de entrada. El Nivel 1 trabaja la cola de alertas: cada detección que arrojan el SIEM, el EDR y las demás herramientas aterriza aquí primero. El trabajo es triaje rápido y disciplinado: ¿esto es un falso positivo, un verdadero positivo benigno o algo real? El N1 sigue playbooks, hace el primer enriquecimiento (quién es este usuario, es esta IP conocida como maliciosa, es esta una hora de login normal) y o bien cierra la alerta o la escala con notas. El volumen es alto y el reloj corre siempre.</p>
+
+<h3>Nivel 2: investigación y respuesta</h3>
+<p>El Nivel 2 coge lo que el N1 escala y lo investiga de verdad. Eso significa pivotar entre fuentes de datos, reconstruir qué pasó en un host, decidir si un incidente es real y tomar las primeras acciones de contención: aislar una máquina, deshabilitar una cuenta, bloquear un dominio. El N2 es donde "una alerta" se convierte en "un incidente con una línea temporal". También alimenta el bucle de mejora del SOC, señalando reglas ruidosas y lagunas de vuelta a los ingenieros.</p>
+
+<h3>Nivel 3: threat hunting y análisis avanzado</h3>
+<p>El Nivel 3 es la capa técnica sénior: threat hunting, análisis profundo de los casos difíciles, ingeniería inversa de binarios sospechosos y gestión de los incidentes que el N2 no puede cerrar solo. Y lo crucial: el N3 no se limita a esperar escalaciones, sino que sale a buscar lo que las alertas se perdieron, formulando hipótesis ("si un atacante estuviera aquí usando las herramientas del propio sistema –living off the land–, ¿qué aspecto tendría?") y cazando en los datos para probarlas o descartarlas.</p>
+
+<h3>Qué se escala, y cuándo</h3>
+<p>La regla general: el trabajo sube de nivel cuando supera la autoridad, el conocimiento o el presupuesto de tiempo del nivel actual. El N1 escala cuando una alerta no se puede cerrar desde el playbook, cuando el enriquecimiento apunta a una amenaza real o cuando hace falta una contención que el N1 no está autorizado a ejecutar. El N2 escala al N3 o a un respondedor dedicado cuando el alcance es desconocido, hay varios hosts implicados, el atacante sigue activo o el caso necesita forense o análisis de malware. Los buenos SOC también vigilan lo que <em>no</em> se escala: una regla que genera 500 alertas a la semana que se cierran todas como falsos positivos es un problema de ingeniería de detección, no de plantilla.</p>
+
+<h2>Los roles, un puesto cada vez</h2>
+
+<h3>Analista de SOC – Nivel 1</h3>
+<p><strong>Qué hacen:</strong> monitorizar y triar alertas contra playbooks, escalar las de verdad. <strong>Un día:</strong> reclamar la siguiente alerta de la cola, revisar el árbol de procesos o el contexto de login, confirmar que es una tarea programada que todo el mundo había olvidado, cerrarla, repetir; salpicado por la ocasional que pone los pelos de punta y se documenta para el N2. <strong>Destrezas clave:</strong> fundamentos de redes y de sistemas operativos, reconocimiento de patrones con calma, notas escritas claras, resistencia a la fatiga de alertas. <strong>Herramientas:</strong> el SIEM, la consola del EDR, un sistema de ticketing, búsquedas de inteligencia de amenazas como <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer">VirusTotal</a>. <strong>Progresión:</strong> volverse rápido y preciso, aprender a fondo un lenguaje de consulta y luego pasar al N2.</p>
+
+<h3>Analista de SOC – Nivel 2</h3>
+<p><strong>Qué hacen:</strong> investigar las escalaciones de principio a fin y ejecutar la respuesta de primera línea. <strong>Un día:</strong> coger una escalación del N1 sobre PowerShell sospechoso, sacar el árbol de procesos completo y las conexiones de red, correlacionar contra otros hosts, confirmar un beacon activo, aislar el endpoint y abrir un incidente en condiciones. <strong>Destrezas clave:</strong> correlación de logs entre fuentes, tradecraft del atacante (el marco <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> pasa a ser una referencia diaria), scripting para acelerar lo aburrido. <strong>Herramientas:</strong> SIEM + EDR en profundidad, playbooks de SOAR, análisis de paquetes y de logs. <strong>Progresión:</strong> especializarse hacia hunting, ingeniería de detección o respuesta a incidentes dedicada.</p>
+
+<h3>Analista de SOC – Nivel 3 / Analista sénior</h3>
+<p><strong>Qué hacen:</strong> hacerse cargo de las investigaciones más difíciles, mentorizar a los niveles inferiores y cazar de forma proactiva. <strong>Un día:</strong> la mitad cerrando un caso feo de varios hosts, la otra mitad ejecutando un hunt guiado por hipótesis de robo de credenciales que ninguna regla pilla ahora mismo. <strong>Destrezas clave:</strong> conocimiento profundo de las tripas de los sistemas, triaje de malware, capacidad de trabajar sin playbook. <strong>Herramientas:</strong> todo el stack más sandboxes y herramientas de análisis. <strong>Progresión:</strong> hacia threat hunting, DFIR, ingeniería de detección o liderazgo del SOC.</p>
+
+<h3>Respondedor de incidentes (IR)</h3>
+<p><strong>Qué hacen:</strong> tomar el mando cuando algo se confirma como malo y coordinar la contención, erradicación y recuperación. <strong>Un día:</strong> durante un incidente, dirigir la respuesta –asignar tareas, mantener la línea temporal, decidir cuándo aislar y cuándo observar, informar a dirección–; entre incidentes, escribir y ensayar playbooks. <strong>Destrezas clave:</strong> cabeza fría bajo presión, metodología estructurada, comunicación con interlocutores no técnicos. <strong>Herramientas:</strong> EDR para la contención, marcos forenses y de IR; la guía de gestión de incidentes <a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61</a> es la referencia estándar. Nuestra <a href="../../recursos/primeras-24-horas-de-un-incidente/">checklist de las primeras 24 horas de un incidente</a> es este rol en la práctica. <strong>Progresión:</strong> IR lead, consultor DFIR o SOC manager.</p>
+
+<h3>Threat Hunter</h3>
+<p><strong>Qué hacen:</strong> asumir una brecha que las herramientas se perdieron y salir a encontrarla. El hunting es proactivo y guiado por hipótesis, no por alertas. <strong>Un día:</strong> elegir una técnica de ATT&amp;CK, traducir "¿qué aspecto tendría esto en nuestra telemetría?" a consultas, cribar los resultados y, o bien pasar un hallazgo a IR, o bien pasar una idea de detección nueva a los ingenieros. <strong>Destrezas clave:</strong> mentalidad de atacante, fluidez en el lenguaje de consulta del SIEM, estadística y baselining. <strong>Herramientas:</strong> el data lake, la telemetría del EDR, notebooks, ATT&amp;CK. <strong>Progresión:</strong> hunter sénior, ingeniería de detección o investigación.</p>
+
+<h3>Ingeniero de detección / de contenido (detection-as-code)</h3>
+<p><strong>Qué hacen:</strong> construir y mantener las detecciones que hacen funcionar todo el SOC: las reglas que deciden qué se convierte en alerta. Los equipos modernos las tratan como <em>detection-as-code</em>: las reglas viven en control de versiones, se revisan y prueban como software y se despliegan por un pipeline. <strong>Un día:</strong> escribir una regla nueva en un formato como <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a>, probarla contra datos reales y simulados, medir su tasa de falsos positivos y retirar una regla que se ha vuelto ruido. <strong>Destrezas clave:</strong> lógica de detección profunda, mapeo a ATT&amp;CK, Git y CI, y suficiente disciplina de software para mantener cientos de reglas manejables. <strong>Herramientas:</strong> Sigma, el motor de reglas del SIEM, Git, herramientas de emulación de adversarios como <a href="https://github.com/redcanaryco/atomic-red-team" target="_blank" rel="noopener noreferrer">Atomic Red Team</a>. <strong>Progresión:</strong> detection lead o roles de ingeniería de seguridad.</p>
+
+<h3>Ingeniero de SIEM / Ingeniero de plataforma de SOC</h3>
+<p><strong>Qué hacen:</strong> mantener la plataforma viva y alimentada. Si el ingeniero de detección escribe las reglas, el ingeniero de SIEM se asegura de que los datos que esas reglas necesitan estén realmente fluyendo, parseados y normalizados. <strong>Un día:</strong> incorporar una fuente de logs nueva, arreglar un parser roto que descartaba en silencio un campo, afinar la ingesta para que la factura de licencia no se dispare, mantener funcionando cuadros de mando e integraciones. <strong>Destrezas clave:</strong> la plataforma SIEM en profundidad, pipelines de datos, regex y parsing, infraestructura y automatización. <strong>Herramientas:</strong> el SIEM, log shippers y colectores, SOAR, infraestructura como código. <strong>Progresión:</strong> arquitectura de seguridad o ingeniería de seguridad con enfoque de plataforma/DevOps. Mira nuestra <a href="../herramientas-de-un-soc/">guía del stack SIEM, SOAR y EDR</a> para ver cómo encajan estas piezas.</p>
+
+<h3>Analista de inteligencia de amenazas (CTI)</h3>
+<p><strong>Qué hacen:</strong> responder a "quién podría atacarnos, cómo, y qué deberíamos hacer al respecto antes de que lo hagan". La CTI convierte el reporte en bruto en decisiones: alimentar indicadores a las detecciones, priorizar el parcheo según lo que de verdad se está explotando e informar a dirección. <strong>Un día:</strong> seguir el cambio de herramientas de un grupo de amenaza, mapear sus TTP a ATT&amp;CK, empujar indicadores nuevos al SIEM y escribir una valoración breve que sirva tanto al SOC como a los ejecutivos. <strong>Destrezas clave:</strong> escritura analítica, evaluación de fuentes, amplitud a caballo entre geopolítica y malware, evitar la sobrecarga de indicadores. <strong>Herramientas:</strong> plataformas de inteligencia de amenazas, <a href="https://otx.alienvault.com/" target="_blank" rel="noopener noreferrer">feeds de código abierto</a>, ATT&amp;CK, marcos estructurados. <strong>Progresión:</strong> CTI sénior, investigación de amenazas o asesoramiento de estrategia.</p>
+
+<h3>Analista DFIR / forense</h3>
+<p><strong>Qué hacen:</strong> la parte forense profunda de la respuesta: adquirir y analizar imágenes de disco y de memoria, reconstruir exactamente qué hizo un atacante y producir hallazgos que aguanten el escrutinio (a veces en un juicio). <strong>Un día:</strong> sacar imagen de un portátil comprometido, tallar el volcado de memoria en busca de código inyectado, construir una línea temporal minuto a minuto a partir de los artefactos y documentar la cadena de custodia. <strong>Destrezas clave:</strong> tripas del sistema de archivos y del SO, manejo de evidencias, documentación meticulosa. <strong>Herramientas:</strong> suites forenses, marcos de análisis de memoria como <a href="https://www.volatilityfoundation.org/" target="_blank" rel="noopener noreferrer">Volatility</a>, herramientas de imagen de disco. <strong>Progresión:</strong> DFIR sénior, consultoría o trabajo como perito.</p>
+
+<h3>SOC Manager / Lead</h3>
+<p><strong>Qué hacen:</strong> dirigir la operación: personas, procesos y métricas. Son dueños de la dotación y la cobertura de turnos, de las métricas que demuestran que el SOC funciona (tiempo medio de detección y de respuesta), de las rutas de escalación y de la relación con el resto del negocio. <strong>Un día:</strong> menos manos en el teclado y más planificación de turnos, post-mortems de incidentes, contratación, llamadas con proveedores y defensa del presupuesto. <strong>Destrezas clave:</strong> liderazgo, calma durante los incidentes grandes, traducir el riesgo técnico a lenguaje de negocio y proteger al equipo del burnout. <strong>Progresión:</strong> responsable de operaciones de seguridad y, después, roles en la vía CISO.</p>
+
+<h2>Donde el SOC se encuentra con el red team: purple teaming</h2>
+<p>El SOC es el hogar del blue team. Su contraparte es el red team, que simula ataques reales bajo autorización firmada. Los dos solo mejoran juntos cuando cierran el bucle, y ese bucle es lo que nombra el "purple team". En un ejercicio de purple team, el red team ejecuta una técnica concreta y lo dice en tiempo real; el SOC comprueba si la detección saltó y, si no lo hizo, el ingeniero de detección escribe una en el acto. Es la forma más rápida en que mejora un SOC: en vez de esperar semanas a un informe del red team, los defensores descubren de inmediato cuáles de sus detecciones tienen agujeros. El purple team suele ser una práctica, no un puesto permanente, pero es donde los ingenieros de detección, los hunters y la CTI se ganan el sueldo.</p>
+
+<h2>Trabajo por turnos, guardias y el coste humano</h2>
+<p>Las amenazas no tienen horario de oficina, así que la mayoría de los SOC maduros funcionan 24x7. Hay dos formas habituales de cubrir el reloj. La primera son los turnos rotativos: los analistas van rotando por mañanas, tardes y noches, lo que significa que siempre hay alguien despierto pero también siempre trabajando contra su ritmo circadiano. La segunda es <strong>follow-the-sun</strong>: equipos en husos horarios distintos trabajan cada uno su propio horario diurno y se pasan el testigo en las fronteras, de modo que nadie trabaja de noche, pero requiere varios equipos regionales y traspasos impecables.</p>
+
+<p>Sé honesto sobre el coste. El Nivel 1 en particular acarrea un riesgo real de burnout: mucho volumen, triaje repetitivo, turnos de noche y el peso de "si se me escapa una, es una brecha". La rotación en los SOC es notoriamente alta justo por estas razones. Los equipos que retienen a la gente la sacan del triaje puro, automatizan para que las personas se ocupen del criterio y no del volumen, limitan los turnos de noche consecutivos y tratan la progresión al N2 como un camino real y visible. Una oferta que es todo turnos de noche sin historia de crecimiento es una señal.</p>
+
+<h2>Cómo entrar, y un camino realista hacia arriba</h2>
+<p>El Nivel 1 es uno de los puntos de entrada genuinos más accesibles de la seguridad, que es justo por lo que es competitivo. Lo que hace que contraten a alguien refleja el campo en general: fundamentos sólidos de redes y Linux, un home lab documentado, práctica manos a la obra en <a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe</a> o <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a> (sobre todo labs de blue team) y la capacidad de explicar tu razonamiento en voz alta. Un primer lenguaje de consulta de SIEM y familiaridad con ATT&amp;CK te ponen por delante de la mayoría de los candidatos. Nuestra guía de <a href="../como-aprender-ciberseguridad/">cómo aprender ciberseguridad</a> cubre los cimientos.</p>
+
+<p>Una trayectoria realista: de 6 a 18 meses en Nivel 1 para volverte rápido y de fiar, luego Nivel 2 a medida que empiezas a ser dueño de investigaciones, y después una bifurcación –hunting, ingeniería de detección, IR, DFIR, CTI o ingeniería de plataforma– según hacia dónde no dejaste de gravitar. El liderazgo es una rama aparte, no el único "hacia arriba". Es una secuencia, no un reloj fijo.</p>
+
+<p><strong>Sobre el salario, una nota honesta:</strong> la retribución de estos roles varía enormemente según país, coste de vida, sector, tamaño de la empresa y antigüedad; un salario de Nivel 1 en un mercado puede superar a uno de Nivel 3 en otro. Cualquiera que dé una única cifra global está adivinando. Consulta fuentes reales y actuales de tu región: agregadores públicos como Glassdoor y Levels.fyi, guías salariales de reclutadores como la de Robert Half y estudios del sector como el anual <a href="https://www.isc2.org/research" target="_blank" rel="noopener noreferrer">ISC2 Cybersecurity Workforce Study</a>. Mira tu ciudad y tu antigüedad, no una cifra de titular.</p>
+
+<h2>Los roles de un vistazo</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Rol</th>
+      <th>Nivel o capa</th>
+      <th>Enfoque</th>
+      <th>Herramientas típicas</th>
+      <th>Siguiente paso habitual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Analista SOC N1</strong></td>
+      <td>Nivel 1</td>
+      <td>Triaje de alertas y monitorización</td>
+      <td>SIEM, consola EDR, ticketing, búsquedas de intel</td>
+      <td>Analista de Nivel 2</td>
+    </tr>
+    <tr>
+      <td><strong>Analista SOC N2</strong></td>
+      <td>Nivel 2</td>
+      <td>Investigación y respuesta de primera línea</td>
+      <td>SIEM + EDR en profundidad, SOAR, ATT&amp;CK</td>
+      <td>Hunting / detección / IR</td>
+    </tr>
+    <tr>
+      <td><strong>Analista SOC N3</strong></td>
+      <td>Nivel 3</td>
+      <td>Casos difíciles, hunting, mentoría</td>
+      <td>Stack completo, sandboxes, herramientas de análisis</td>
+      <td>DFIR / detection lead / liderazgo</td>
+    </tr>
+    <tr>
+      <td><strong>Respondedor de incidentes</strong></td>
+      <td>Respuesta</td>
+      <td>Mandar, contener, erradicar, recuperar</td>
+      <td>EDR, marcos de IR, NIST 800-61</td>
+      <td>IR lead / SOC manager</td>
+    </tr>
+    <tr>
+      <td><strong>Threat Hunter</strong></td>
+      <td>Nivel 3 / hunt</td>
+      <td>Búsqueda proactiva guiada por hipótesis</td>
+      <td>Data lake, telemetría EDR, ATT&amp;CK</td>
+      <td>Hunter sénior / investigación</td>
+    </tr>
+    <tr>
+      <td><strong>Ingeniero de detección</strong></td>
+      <td>Ingeniería</td>
+      <td>Detection-as-code: crear/afinar reglas</td>
+      <td>Sigma, reglas de SIEM, Git/CI, emulación</td>
+      <td>Detection lead / ing. de seguridad</td>
+    </tr>
+    <tr>
+      <td><strong>Ingeniero de SIEM</strong></td>
+      <td>Plataforma</td>
+      <td>Pipelines de datos, parsing, disponibilidad</td>
+      <td>SIEM, log shippers, SOAR, IaC</td>
+      <td>Arquitecto de seguridad / plataforma</td>
+    </tr>
+    <tr>
+      <td><strong>Analista CTI</strong></td>
+      <td>Inteligencia</td>
+      <td>Quién nos ataca, cómo y qué hacer</td>
+      <td>Plataformas de TI, feeds, ATT&amp;CK</td>
+      <td>CTI sénior / investigación de amenazas</td>
+    </tr>
+    <tr>
+      <td><strong>DFIR / forense</strong></td>
+      <td>Respuesta</td>
+      <td>Reconstrucción forense profunda</td>
+      <td>Suites forenses, Volatility, imaging</td>
+      <td>DFIR sénior / consultoría</td>
+    </tr>
+    <tr>
+      <td><strong>SOC Manager</strong></td>
+      <td>Liderazgo</td>
+      <td>Personas, procesos, métricas</td>
+      <td>Cuadros de mando de métricas, herramientas de planificación</td>
+      <td>Head of SecOps / vía CISO</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Una alerta, tres puestos: un ejemplo trabajado</h2>
+<p>Así viaja una sola detección por el edificio. A las 02:14 salta el EDR: Microsoft Word ha lanzado <code>powershell.exe</code> con un comando codificado. Aterriza en la cola del Nivel 1.</p>
+
+<pre tabindex="0"><code>[ALERT] EDR-1188  severity: medium  host: FIN-WKS-042  user: j.doe
+parent: WINWORD.EXE  ->  child: powershell.exe
+cmdline: powershell -nop -w hidden -enc SQBFAFgAKABOAGUAdwAt...
+</code></pre>
+
+<p><strong>El Nivel 1</strong> la reclama. Que Office lance PowerShell oculto y codificado es un patrón clásico de malware por macros, no una tarea programada benigna. El N1 hace el primer enriquecimiento –el usuario es de Finanzas, es plena madrugada y este host no tiene historial de scripting–, decodifica el comando lo justo para ver que está contactando con una URL y escala en minutos con notas limpias. El N1 <em>no</em> toca la máquina; esa no es su decisión.</p>
+
+<p><strong>El Nivel 2</strong> la coge e investiga. Saca el árbol de procesos completo y ve que PowerShell lanza un proceso hijo que hace una conexión saliente repetida a un dominio desconocido: un beacon de command-and-control. Es un verdadero positivo confirmado. El N2 tiene autoridad para actuar: aísla <code>FIN-WKS-042</code> a través del EDR (contenido en red pero aún accesible para el análisis), deshabilita las sesiones del usuario, bloquea el dominio y abre un incidente formal. Luego comprueba si algún otro host ha hablado con ese dominio, y dos lo han hecho. El alcance es ahora desconocido, puede haber un atacante activo, así que el N2 escala al Nivel 3 / IR.</p>
+
+<p><strong>El Nivel 3, IR y los especialistas</strong> lo toman a partir de aquí en paralelo. El <strong>respondedor de incidentes</strong> asume el mando y coordina la contención en los tres hosts. Un <strong>threat hunter</strong> barre el entorno en busca de los mismos TTP para asegurarse de que han encontrado todas las máquinas afectadas, no solo las que hicieron beacon. <strong>DFIR</strong> saca imagen de la memoria de la primera estación de trabajo para recuperar exactamente qué hizo la carga inicial y si se robaron credenciales. El <strong>analista de CTI</strong> asocia el dominio y las herramientas a una campaña de phishing conocida y aporta más indicadores que buscar. Por último, el <strong>ingeniero de detección</strong> escribe una regla Sigma nueva y más ajustada para este patrón exacto de Office a PowerShell codificado, la prueba y la despliega, para que la próxima vez salte más fuerte y más pronto. Una alerta, y casi todos los roles del SOC la tocaron.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un analista de SOC de Nivel 1 y uno de Nivel 2?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El Nivel 1 tría: trabaja la cola de alertas contra playbooks, decide qué es un falso positivo, hace el primer enriquecimiento y escala las de verdad; trabajo de primera línea, rápido y de mucho volumen. El Nivel 2 investiga de principio a fin lo que el N1 escala, pivotando entre fuentes de datos para confirmar si es un incidente genuino, y toma las primeras acciones de contención como aislar un host o deshabilitar una cuenta. En resumen: el N1 decide si algo merece una mirada más de cerca; el N2 hace esa mirada de cerca y empieza a responder.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Hace falta un título para trabajar en un SOC?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. Un título puede ayudarte a pasar algunos filtros de RR. HH., pero no es un requisito imprescindible, y muchos analistas de SOC vienen del soporte de IT, del autoaprendizaje o de cambios de carrera. Lo que importa de forma consistente es la capacidad demostrable: fundamentos sólidos de redes y Linux, un home lab documentado, práctica manos a la obra en labs de blue team, familiaridad con un lenguaje de consulta de SIEM y con MITRE ATT&amp;CK, y la capacidad de explicar tu razonamiento con claridad. Razona bien sobre un escenario y le ganarás a un título sin destreza aplicada.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un analista de SOC y un respondedor de incidentes?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un analista de SOC trabaja sobre todo el flujo continuo: monitorizar, triar e investigar alertas según llegan, día tras día. Un respondedor de incidentes entra en escena (o da un paso al frente) una vez que se confirma que algo es un incidente real, y su trabajo es tomar el mando: coordinar la contención, la erradicación y la recuperación, mantener la línea temporal e informar a los interesados. Los analistas suelen escalar a los respondedores. Mucha gente pasa a ser respondedora de incidentes tras un tiempo como analista de Nivel 2 o Nivel 3, así que los roles se solapan en destrezas pero difieren en enfoque y momento.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué hace en realidad un threat hunter?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un threat hunter busca de forma proactiva a los atacantes que las detecciones automáticas se perdieron, en vez de esperar a las alertas. Parte de una hipótesis –a menudo basada en una técnica de MITRE ATT&amp;CK– como "si alguien estuviera robando credenciales aquí, ¿qué aspecto tendría en nuestra telemetría?", la traduce a consultas sobre los datos del SOC y criba los resultados. Un hunt acaba de una de dos formas útiles: saca a la luz una intrusión real que pasar a respuesta a incidentes, o produce una idea de detección nueva para el equipo de ingeniería. Es un rol sénior, movido por la curiosidad y construido sobre un conocimiento profundo tanto del tradecraft del atacante como de los propios datos de la organización.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es analista de SOC un buen primer empleo?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sí, con los ojos abiertos. El Nivel 1 es uno de los puntos de entrada genuinos más accesibles a la seguridad, te expone rápido a ataques reales y a todo el stack defensivo, y abre caminos claros hacia el hunting, la ingeniería de detección, la respuesta a incidentes y más. Las contrapartidas también son reales: puede ser de mucho volumen y repetitivo, y los SOC 24x7 implican turnos y rotaciones de noche que disparan el burnout y la rotación. Los buenos automatizan la parte pesada, sacan a la gente del triaje puro y tratan la progresión al Nivel 2 como un camino real; busca esos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un ingeniero de detección y un analista de SOC?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un analista de SOC consume detecciones: responde a las alertas que generan las reglas. Un ingeniero de detección construye y mantiene esas reglas: decide qué debería convertirse en alerta en primer lugar, escribe y afina la lógica de detección (cada vez más como "detection-as-code", versionada y probada como software), mapea la cobertura a MITRE ATT&amp;CK y retira las reglas que se han convertido en ruido. Los analistas viven en la cola de alertas; los ingenieros de detección viven en las reglas y los pipelines que la crean. Muchos ingenieros de detección empezaron como analistas, que es justo por lo que saben qué alertas eran útiles y cuáles eran solo ruido.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-es-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es un SOC (Security Operations Center)</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../herramientas-de-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">El stack del SOC: SIEM, SOAR y EDR</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-empezar-en-ciberseguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Hoja de ruta y carreras en ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-aprender-ciberseguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo aprender ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

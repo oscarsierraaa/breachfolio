@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-labelledby="lab-hyp-title lab-hyp-desc">
+  <title id="lab-hyp-title">Hypervisor decision tree</title>
+  <desc id="lab-hyp-desc">A decision tree to pick a hypervisor for a beginner home lab: VirtualBox for most cases, VMware Workstation Player for Windows-only labs, UTM for Apple Silicon Macs, and Proxmox only when you have dedicated hardware.</desc>
+
+  <style>
+    .q  { font: 500 14px 'Sora', system-ui, sans-serif; fill: #fafafa; }
+    .h  { font: 600 15px 'Sora', system-ui, sans-serif; fill: #fafafa; }
+    .b  { font: 400 12px 'Sora', system-ui, sans-serif; fill: #a8a8a3; }
+    .m  { font: 500 11px 'JetBrains Mono', ui-monospace, monospace; fill: #4ade80; letter-spacing: 0.06em; }
+    .branch-line { stroke: #3a3a3e; stroke-width: 1.4; fill: none; }
+    .yes-line { stroke: #4ade80; stroke-width: 1.4; fill: none; opacity: 0.7; }
+    .no-line  { stroke: #ef4444; stroke-width: 1.4; fill: none; opacity: 0.5; }
+    .node-q   { fill: #161618; stroke: #3a3a3e; stroke-width: 1.4; rx: 8; }
+    .node-rec { fill: rgba(74, 222, 128, 0.08); stroke: #4ade80; stroke-width: 1.5; rx: 8; }
+    .node-alt { fill: #16161a; stroke: #525258; stroke-width: 1.3; rx: 8; }
+  </style>
+
+  <defs>
+    <pattern id="lab-grid-2" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#fafafa" stroke-opacity="0.025" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="480" fill="url(#lab-grid-2)" />
+
+  <!-- Header -->
+  <text x="450" y="34" class="h" text-anchor="middle">Which hypervisor should you install?</text>
+  <text x="450" y="54" class="b" text-anchor="middle">Pick once. Switching later costs an afternoon of re-importing VMs.</text>
+
+  <!-- Q1 -->
+  <g transform="translate(345, 80)">
+    <rect x="0" y="0" width="210" height="50" class="node-q" />
+    <text x="105" y="20" class="q" text-anchor="middle">Apple Silicon Mac?</text>
+    <text x="105" y="38" class="b" text-anchor="middle">(M1, M2, M3, M4…)</text>
+  </g>
+
+  <!-- Q1 yes → UTM -->
+  <line x1="345" y1="105" x2="225" y2="180" class="yes-line" />
+  <text x="240" y="145" class="m" text-anchor="end">YES</text>
+  <g transform="translate(90, 180)">
+    <rect x="0" y="0" width="180" height="80" class="node-rec" />
+    <text x="90" y="24" class="h" text-anchor="middle">UTM</text>
+    <text x="90" y="44" class="b" text-anchor="middle">Free · ARM64 VMs</text>
+    <text x="90" y="62" class="b" text-anchor="middle">Best for M-series Macs</text>
+  </g>
+
+  <!-- Q1 no → Q2 -->
+  <line x1="555" y1="105" x2="555" y2="155" class="no-line" />
+  <text x="565" y="135" class="m" fill="#ef4444">NO</text>
+  <g transform="translate(450, 155)">
+    <rect x="0" y="0" width="210" height="50" class="node-q" />
+    <text x="105" y="20" class="q" text-anchor="middle">Dedicated 24/7 machine?</text>
+    <text x="105" y="38" class="b" text-anchor="middle">(separate box, ≥32 GB RAM)</text>
+  </g>
+
+  <!-- Q2 yes → Proxmox -->
+  <line x1="660" y1="180" x2="780" y2="240" class="yes-line" />
+  <text x="755" y="218" class="m" text-anchor="end">YES</text>
+  <g transform="translate(700, 240)">
+    <rect x="0" y="0" width="180" height="80" class="node-rec" />
+    <text x="90" y="24" class="h" text-anchor="middle">Proxmox VE</text>
+    <text x="90" y="44" class="b" text-anchor="middle">Free · type-1 hypervisor</text>
+    <text x="90" y="62" class="b" text-anchor="middle">Bare-metal install</text>
+  </g>
+
+  <!-- Q2 no → Q3 -->
+  <line x1="555" y1="205" x2="555" y2="255" class="no-line" />
+  <text x="565" y="235" class="m" fill="#ef4444">NO</text>
+  <g transform="translate(450, 255)">
+    <rect x="0" y="0" width="210" height="50" class="node-q" />
+    <text x="105" y="20" class="q" text-anchor="middle">Only need Windows guests?</text>
+    <text x="105" y="38" class="b" text-anchor="middle">(skipping Linux for now)</text>
+  </g>
+
+  <!-- Q3 yes → VMware -->
+  <line x1="660" y1="280" x2="780" y2="340" class="yes-line" />
+  <text x="755" y="318" class="m" text-anchor="end">YES</text>
+  <g transform="translate(700, 340)">
+    <rect x="0" y="0" width="180" height="80" class="node-alt" />
+    <text x="90" y="24" class="h" text-anchor="middle">VMware Workstation</text>
+    <text x="90" y="44" class="b" text-anchor="middle">Free for personal use</text>
+    <text x="90" y="62" class="b" text-anchor="middle">Smoother Windows guests</text>
+  </g>
+
+  <!-- Q3 no → VirtualBox (default best) -->
+  <line x1="555" y1="305" x2="555" y2="365" class="yes-line" />
+  <text x="565" y="345" class="m">DEFAULT</text>
+  <g transform="translate(450, 365)">
+    <rect x="0" y="0" width="210" height="85" class="node-rec" />
+    <text x="105" y="24" class="h" text-anchor="middle">VirtualBox</text>
+    <text x="105" y="44" class="b" text-anchor="middle">Free · open source</text>
+    <text x="105" y="62" class="b" text-anchor="middle">Best beginner choice</text>
+    <text x="105" y="78" class="b" text-anchor="middle" fill="#4ade80">★ Recommended for this guide</text>
+  </g>
+
+  <!-- Annotation under UTM -->
+  <text x="180" y="295" class="b" text-anchor="middle">Some images need</text>
+  <text x="180" y="312" class="b" text-anchor="middle">ARM rebuilds.</text>
+  <text x="180" y="329" class="b" text-anchor="middle">See section 4.</text>
+</svg>

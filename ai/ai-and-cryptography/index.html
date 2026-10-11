@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI and cryptography: what's real, what's hype | Breachfolio</title>
+  <meta name="description" content="AI can't break AES-256 or RSA-2048. What it can do: attack weak implementations and side channels. Plus the real entropy risk, and the 2024 post-quantum shift." />
+  <meta name="keywords" content="AI and cryptography, can AI break encryption, AI cryptanalysis, side channel attack machine learning, weak randomness key generation, post quantum cryptography, ML-KEM CRYSTALS-Kyber, ML-DSA CRYSTALS-Dilithium, NIST post quantum standards, harvest now decrypt later" />
+  <link rel="canonical" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-y-criptografia/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="AI and cryptography: what's real, what's hype | Breachfolio" />
+  <meta property="og:description" content="AI can't break AES-256 or RSA-2048. What it can do: attack weak implementations and side channels. Plus the real entropy risk, and the 2024 post-quantum shift." />
+  <meta property="og:url" content="https://breachfolio.com/ai/ai-and-cryptography/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-ai-crypto.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI and cryptography: what's real, what's hype | Breachfolio" />
+  <meta name="twitter:description" content="AI can't break AES-256 or RSA-2048. What it can do: attack weak implementations and side channels. Plus the real entropy risk, and the 2024 post-quantum shift." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-ai-crypto.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI and cryptography: what's real, what's hype",
+      "description": "AI can't break AES-256 or RSA-2048. What it can do: attack weak implementations and side channels. Plus the real entropy risk, and the 2024 post-quantum shift.",
+      "image": "https://breachfolio.com/assets/img/hero-ai-crypto.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "keywords": "AI and cryptography, can AI break encryption, AI cryptanalysis, side channel attack machine learning, weak randomness key generation, post quantum cryptography, ML-KEM CRYSTALS-Kyber, ML-DSA CRYSTALS-Dilithium, NIST post quantum standards, harvest now decrypt later",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/ai/ai-and-cryptography/"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Security", "item": "https://breachfolio.com/ai/" },
+        { "@type": "ListItem", "position": 3, "name": "AI and cryptography", "item": "https://breachfolio.com/ai/ai-and-cryptography/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/ai/ai-and-cryptography/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Can AI break AES-256 or RSA encryption?", "acceptedAnswer": { "@type": "Answer", "text": "No, not by attacking the underlying math directly. There is no credible published research showing machine learning breaking full-strength AES-256 or RSA-2048 by solving the hard problems they rely on. Where AI genuinely helps attackers is against flawed implementations, weak configurations, and side channels, which is a very different and much narrower claim than \"AI can break encryption.\"" } },
+        { "@type": "Question", "name": "What is AI-assisted cryptanalysis, if not breaking encryption?", "acceptedAnswer": { "@type": "Answer", "text": "It's an active research area applying machine learning to find patterns that assist attacks against specific implementations, not the algorithm itself. Neural networks have been shown effective at automating and improving classical side-channel analysis, such as recovering key material from power-consumption or timing traces leaked by a physical device, and at finding weaknesses in reduced-round or non-standard lightweight cipher designs. That is meaningfully different from, and far narrower than, breaking a standard algorithm at full strength." } },
+        { "@type": "Question", "name": "Why does weak randomness matter if the encryption algorithm itself is strong?", "acceptedAnswer": { "@type": "Answer", "text": "Because key generation depends on a cryptographically secure random number generator seeded with enough real entropy, and a strong algorithm fed a predictable key is not a strong system. A well-documented real-world example is a 2008 flaw in Debian's OpenSSL package, where a code change reduced the entropy used to generate SSH and TLS keys so severely that every key an affected system generated during that window had to be treated as guessable and regenerated, regardless of how strong the underlying algorithm was." } },
+        { "@type": "Question", "name": "What did NIST just standardize for post-quantum cryptography?", "acceptedAnswer": { "@type": "Answer", "text": "In August 2024, NIST finalized its first post-quantum cryptography standards: FIPS 203 (ML-KEM, based on CRYSTALS-Kyber) for key encapsulation, FIPS 204 (ML-DSA, based on CRYSTALS-Dilithium) for digital signatures, and FIPS 205 (SLH-DSA, based on SPHINCS+) as a hash-based signature alternative. These are designed to resist attacks from a sufficiently capable quantum computer running Shor's algorithm, a quantum-computing threat, not an AI/machine-learning one." } },
+        { "@type": "Question", "name": "What does \"harvest now, decrypt later\" mean and who should care?", "acceptedAnswer": { "@type": "Answer", "text": "It describes an adversary capturing and storing encrypted traffic today with the plan to decrypt it once a sufficiently powerful quantum computer exists to break the classical algorithms that protected it. It matters most to organizations with long confidentiality horizons, such as government, healthcare, and critical infrastructure, which is why many of them are already beginning migration planning toward post-quantum algorithms rather than waiting until quantum computers are actually capable of the attack." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">AI Security</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">AI and cryptography</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-ai-crypto.webp" alt="Neural network patterns overlaid on a cryptographic key lattice – AI and cryptography, explained" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">AI · SECURITY</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">AI and cryptography, explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">AI is not quietly breaking AES-256. Here's what it actually threatens, what a much older problem – bad randomness – still threatens, and why quantum computers, not AI, are driving cryptography's next generation.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 22, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>"AI is breaking encryption" is one of the most durable pieces of security folklore going, and it's worth being precise about exactly how wrong it is. Modern encryption – AES-256, RSA-2048 and larger, elliptic-curve schemes – rests on mathematical problems that remain computationally infeasible to solve directly, and there is no credible published research showing machine learning changing that. Nothing about training a neural network gives it a shortcut through the underlying math.</p>
+
+      <p>What's actually true is narrower, and more interesting: <strong>AI genuinely helps attackers against weak implementations and side channels</strong>, a well-documented random-number problem has broken far more real systems than any AI ever has, and a wholly different technology – quantum computing, not AI – is what's actually driving the biggest change happening in cryptography right now. Keeping those three threads separate is the entire point of this article, and conflating them is exactly how hype crowds out the real risk.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What AI-assisted cryptanalysis actually is</h2>
+      <p><strong class="text-foreground">Cryptanalysis</strong> is the study of finding weaknesses in cryptographic systems, and it's a decades-old academic field with plenty of purely mathematical successes long before machine learning entered the picture. Applying AI to it is a genuinely active area of current research – the important part is understanding precisely what it's aimed at.</p>
+      <p>The strongest, best-established results are in <strong>side-channel analysis</strong>: attacks that don't touch the mathematical algorithm at all, but instead extract information a physical device leaks while it computes – variations in power consumption, electromagnetic emissions, or execution timing that correlate with the secret key material being processed. Classical side-channel analysis already worked without AI, most notably against smart cards and embedded devices, but it required a skilled analyst to hand-pick the statistical features to look for. Neural networks have been shown, in published academic research, to automate and often improve on that process – learning which patterns in a power trace correlate with key bits directly from data, without a human specifying the features in advance. This is a real, meaningful capability. It is also, specifically, an attack on an <strong>implementation:</strong> a chip, a device, a piece of code that leaks information it shouldn't, not an attack on the strength of the algorithm's underlying math.</p>
+      <p>A second, smaller body of research applies machine learning to <strong>reduced-round or non-standard, often lightweight, cipher constructions:</strong> deliberately weakened or simplified versions of ciphers used to study how attacks might scale, or genuinely under-designed algorithms found in some low-power or proprietary systems. Results here are real but narrow: they tend to apply to specific, already-weakened, or non-standard constructions, not to full-strength, well-vetted standards like AES-256 run at full rounds.</p>
+      <p>Put together, the accurate framing is that <strong>AI is a force multiplier against flawed implementations and leaky hardware, not a shortcut through hard mathematical problems.</strong> An organization using well-implemented AES-256 or RSA-2048 correctly is not meaningfully more at risk today because of AI cryptanalysis research. An organization running cryptography on a device that leaks power-consumption data to anyone nearby, or that implemented its own custom cipher instead of a vetted standard, has real reason for concern, and had that reason before AI made the attack easier to automate.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The much older, much bigger risk: weak randomness</h2>
+      <p>Long before AI cryptanalysis was a research topic, the single most common way real cryptographic systems actually failed had nothing to do with the algorithm at all: <strong>predictable or insufficient randomness during key generation.</strong> Every standard encryption algorithm assumes its keys were drawn from a source indistinguishable from true randomness. Feed a cryptographically secure algorithm a predictable key, and the algorithm's theoretical strength becomes irrelevant: an attacker doesn't need to break AES-256 if they can simply guess or reproduce the key that was generated.</p>
+      <p>This is not a hypothetical concern. A well-documented real-world example: in 2008, a code change made two years earlier to Debian's OpenSSL package was found to have severely reduced the entropy used by its pseudorandom number generator when creating SSH and TLS keys. The flaw was serious enough that essentially every key generated by an affected system during that window had to be treated as guessable and regenerated – a strong, standard algorithm, undermined entirely by the randomness feeding it, affecting a huge number of real keys in production use.</p>
+      <p>The practical lesson holds regardless of AI: entropy sources – hardware random number generators, OS-level entropy pools, proper seeding on embedded and IoT devices at first boot – are foundational, unglamorous infrastructure, and a poorly implemented one is a far easier, far more common route to compromising a system than any cryptanalytic breakthrough, AI-assisted or otherwise. When evaluating cryptographic risk, "how is randomness generated here" deserves at least as much scrutiny as "which algorithm was chosen."</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The real "break the math" threat: quantum computers, not AI</h2>
+      <p>If there's a technology that genuinely threatens to break the mathematical assumptions behind widely deployed public-key cryptography, it's quantum computing, and it's worth being explicit that this is a separate threat model from AI entirely. A sufficiently large, sufficiently error-corrected quantum computer running <strong>Shor's algorithm</strong> could, in principle, efficiently solve the integer-factorization and discrete-logarithm problems that RSA and elliptic-curve cryptography depend on – something no classical computer, and no AI model running on classical hardware, can currently do. No quantum computer built to date has anywhere near the scale or error correction needed to run that attack against real-world key sizes, but the field has been moving fast enough, and the stakes are large enough, that standards bodies have already acted.</p>
+      <p>In August 2024, <strong>NIST finalized its first post-quantum cryptography standards</strong>, the culmination of a multi-year public evaluation process:</p>
+      <div class="overflow-x-auto mt-6 mb-6">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Standard</th><th class="px-4 py-2.5 font-display font-semibold">Purpose</th><th class="px-4 py-2.5 font-display font-semibold">Based on</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>FIPS 203 – ML-KEM</strong></td><td class="px-4 py-2.5">Key encapsulation (establishing a shared secret, the post-quantum analogue of what RSA or Diffie-Hellman key exchange do today)</td><td class="px-4 py-2.5">CRYSTALS-Kyber</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>FIPS 204 – ML-DSA</strong></td><td class="px-4 py-2.5">Digital signatures</td><td class="px-4 py-2.5">CRYSTALS-Dilithium</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>FIPS 205 – SLH-DSA</strong></td><td class="px-4 py-2.5">Digital signatures, hash-based alternative with a different security foundation than ML-DSA</td><td class="px-4 py-2.5">SPHINCS+</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>These schemes rely on different underlying mathematical problems – largely lattice-based for ML-KEM and ML-DSA, hash-based for SLH-DSA – believed to resist both classical and quantum attacks, in place of the factoring and discrete-log problems Shor's algorithm targets.</p>
+      <p>The reason organizations are moving on this now, rather than waiting until a cryptographically relevant quantum computer actually exists, is a pattern known as <strong>"harvest now, decrypt later."</strong> An adversary can capture and store encrypted traffic today – intercepted communications, stolen backups of encrypted archives – with no ability to read it yet, and simply wait. If a sufficiently powerful quantum computer arrives in ten or fifteen years, that stored traffic becomes readable retroactively. For data with a short shelf life, this barely matters. For data that needs to stay confidential for decades – government secrets, long-term health records, infrastructure design details – it means the migration to post-quantum algorithms has to start well before the quantum threat is imminent, which is exactly why government agencies, financial institutions, and critical-infrastructure operators are the ones currently leading early post-quantum migration planning.</p>
+
+      <p>For the underlying mechanics of how key exchange and digital signatures work today – the systems ML-KEM and ML-DSA are ultimately standing in for – see our companion pieces on <a href="../../cybersecurity/cryptography-basics/" class="text-accent ul-link">cryptography basics</a> and <a href="../../cybersecurity/tls-certificate-transparency/" class="text-accent ul-link">TLS certificates and Certificate Transparency</a>, which cover the hashing, encryption, and signature primitives, and the certificate infrastructure built on top of them, that any future post-quantum transition still has to interoperate with.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What this means in practice</h2>
+      <p>Translated into concrete priorities, the picture above suggests a fairly clear order of operations for anyone responsible for cryptographic risk in a real system, rather than a research lab:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Audit entropy sources first.</strong> Confirm keys are generated using a proper CSPRNG with sufficient seeded entropy, especially on embedded devices, IoT hardware, and anything that generates keys immediately at first boot, when entropy pools are often thinnest.</li>
+        <li><strong class="text-foreground">Use vetted, standard algorithms at full parameters.</strong> AES-256, RSA-2048 or larger, and standard elliptic-curve schemes remain the right default. Custom or reduced-round ciphers are exactly the category where both classical and AI-assisted cryptanalysis have shown real results.</li>
+        <li><strong class="text-foreground">Treat physical and embedded devices as a side-channel surface.</strong> If a device performing cryptographic operations is physically reachable by an adversary, power-consumption and timing leakage are a real concern, and AI-assisted analysis has made that class of attack more accessible, not less.</li>
+        <li><strong class="text-foreground">Start post-quantum planning by inventory, not panic.</strong> Identify which systems protect data with a long confidentiality horizon and which cryptographic libraries they depend on, so a future migration to ML-KEM and ML-DSA is a planned upgrade rather than an emergency response.</li>
+      </ul>
+      <p>None of this requires assuming AI has already changed what's achievable against well-implemented modern cryptography – because for the algorithms themselves, it hasn't. It requires the same discipline cryptographic engineering has always demanded: get the randomness right, use the standard algorithm correctly, and plan the next transition before you're forced into it.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Keeping the three threats straight</h2>
+      <p>The single most useful thing a reader can take from this topic is a habit of separating three distinct claims that get blurred together constantly in casual coverage:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">AI cryptanalysis</strong> is real, active research – and it targets implementations and side channels, not the strength of well-vetted algorithms at full parameters.</li>
+        <li><strong class="text-foreground">Weak randomness</strong> is an older, better-documented, and in practice far more common way real cryptographic systems actually fail, entirely independent of AI.</li>
+        <li><strong class="text-foreground">Quantum computing</strong> is the one technology that could genuinely break the math behind RSA and elliptic-curve cryptography – which is precisely why the transition to post-quantum standards is already underway, years before the quantum threat is expected to be practical.</li>
+      </ul>
+      <p>Confusing these three does real harm: it either produces unwarranted panic about AI capabilities that don't exist yet, or it produces complacency about the far more mundane risks – a bad entropy source, an unvetted custom cipher, a leaky hardware implementation – that are quietly breaking real systems today.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">A note on scope.</strong> This is defensive security education about where AI genuinely intersects with cryptographic risk today. It is not a claim that any current AI system can break standard, well-implemented encryption, and readers should be skeptical of anyone claiming otherwise without published, peer-reviewed evidence.
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Can AI break AES-256 or RSA encryption?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No, not by attacking the underlying math directly. There is no credible published research showing machine learning breaking full-strength AES-256 or RSA-2048 by solving the hard problems they rely on. Where AI genuinely helps attackers is against flawed implementations, weak configurations, and side channels, which is a very different and much narrower claim than "AI can break encryption."
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is AI-assisted cryptanalysis, if not breaking encryption?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It's an active research area applying machine learning to find patterns that assist attacks against specific implementations, not the algorithm itself. Neural networks have been shown effective at automating and improving classical side-channel analysis, such as recovering key material from power-consumption or timing traces leaked by a physical device, and at finding weaknesses in reduced-round or non-standard lightweight cipher designs. That is meaningfully different from, and far narrower than, breaking a standard algorithm at full strength.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why does weak randomness matter if the encryption algorithm itself is strong?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Because key generation depends on a cryptographically secure random number generator seeded with enough real entropy, and a strong algorithm fed a predictable key is not a strong system. A well-documented real-world example is a 2008 flaw in Debian's OpenSSL package, where a code change reduced the entropy used to generate SSH and TLS keys so severely that every key an affected system generated during that window had to be treated as guessable and regenerated, regardless of how strong the underlying algorithm was.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What did NIST just standardize for post-quantum cryptography?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          In August 2024, NIST finalized its first post-quantum cryptography standards: FIPS 203 (ML-KEM, based on CRYSTALS-Kyber) for key encapsulation, FIPS 204 (ML-DSA, based on CRYSTALS-Dilithium) for digital signatures, and FIPS 205 (SLH-DSA, based on SPHINCS+) as a hash-based signature alternative. These are designed to resist attacks from a sufficiently capable quantum computer running Shor's algorithm, a quantum-computing threat, not an AI/machine-learning one.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does "harvest now, decrypt later" mean and who should care?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It describes an adversary capturing and storing encrypted traffic today with the plan to decrypt it once a sufficiently powerful quantum computer exists to break the classical algorithms that protected it. It matters most to organizations with long confidentiality horizons, such as government, healthcare, and critical infrastructure, which is why many of them are already beginning migration planning toward post-quantum algorithms rather than waiting until quantum computers are actually capable of the attack.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../../cybersecurity/cryptography-basics/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cryptography basics: hashing, encryption, signatures</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../cybersecurity/tls-certificate-transparency/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">TLS certificates and Certificate Transparency</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../ai-red-teaming-basics/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">AI red teaming basics</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All AI Security articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal &amp; info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

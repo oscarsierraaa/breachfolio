@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¿Es seguro guardar las contraseñas en el navegador?</title>
+  <meta name="description" content="Sí las cifra, y quien diga lo contrario va desfasado. Lo que decide el riesgo es otra cosa: si algo puede ejecutarse en tu ordenador con tu sesión." />
+  <meta name="keywords" content="guardar contraseñas navegador, es seguro guardar contraseñas en chrome, contraseñas guardadas chrome seguridad, gestor de contraseñas o navegador, voidstealer, robo de contraseñas navegador" />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/contrasenas-en-el-navegador/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/contrasenas-en-el-navegador/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="¿Es seguro guardar las contraseñas en el navegador? | Breachfolio" />
+  <meta property="og:description" content="Sí las cifra, y quien diga lo contrario va desfasado. Lo que decide el riesgo es otra cosa: si algo puede ejecutarse en tu ordenador con tu sesión." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/contrasenas-en-el-navegador/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="¿Es seguro guardar las contraseñas en el navegador? | Breachfolio" />
+  <meta name="twitter:description" content="Sí las cifra, y quien diga lo contrario va desfasado. Lo que decide el riesgo es otra cosa: si algo puede ejecutarse en tu ordenador con tu sesión." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "¿Es seguro guardar las contraseñas en el navegador?",
+      "description": "Sí las cifra, y quien diga lo contrario va desfasado. Lo que decide el riesgo es otra cosa: si algo puede ejecutarse en tu ordenador con tu sesión.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp",
+      "datePublished": "2026-08-29",
+      "dateModified": "2026-08-29",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Daniel A.",
+          "url": "https://breachfolio.com/es/legal/about/"
+        },
+        {
+          "@type": "Person",
+          "name": "Óscar S.",
+          "url": "https://breachfolio.com/es/legal/about/"
+        }
+      ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/guias/contrasenas-en-el-navegador/"
+      },
+      "inLanguage": "es",
+      "keywords": "guardar contraseñas navegador, es seguro guardar contraseñas en chrome, contraseñas guardadas chrome seguridad, gestor de contraseñas o navegador, voidstealer, robo de contraseñas navegador"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://breachfolio.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías",
+          "item": "https://breachfolio.com/es/guias/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Contraseñas en el navegador",
+          "item": "https://breachfolio.com/es/guias/contrasenas-en-el-navegador/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/guias/contrasenas-en-el-navegador/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Chrome cifra mis contraseñas o no?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. En Windows las cifra con una clave ligada a tu cuenta de usuario, y desde Chrome 127, de julio de 2024, añade además el cifrado ligado a la aplicación. Los artículos que dicen que se guardan «en texto plano» están desfasados. Lo que sigue siendo cierto es que ese cifrado no protege de un programa que se ejecute dentro de tu propia sesión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Si tengo antivirus, ¿estoy cubierto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ayuda, pero no lo des por hecho. Los ladrones de credenciales que se venden como servicio se actualizan precisamente para no ser detectados, y cambian de versión más rápido de lo que se publican las firmas. Un antivirus reduce la probabilidad; no la elimina. Por eso el segundo factor importa más: protege incluso cuando la detección falla."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve la frase de contraseña de sincronización de Google?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sirve para una cosa concreta y conviene no confundirla: hace que ni Google pueda leer tus contraseñas sincronizadas, y que quien entre en tu cuenta de Google no se las lleve. Eso es real y merece la pena. Lo que no hace es protegerte del malware en tu propio ordenador, porque ahí las contraseñas tienen que estar descifradas para poder usarse."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Firefox con contraseña maestra es más seguro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es mejor que el almacén siempre abierto, sí, y por la misma razón que un gestor: introduce una cerradura que hay que abrir. Se acerca al comportamiento de un gestor sin serlo. Pero mientras la tengas desbloqueada en esa sesión, el riesgo vuelve a ser el mismo, así que no lo trates como una solución completa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Me han entrado en el ordenador. ¿Qué cambio primero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El correo principal, desde otro dispositivo, y cerrando todas las sesiones abiertas. Después el banco. Cerrar sesiones es el paso que casi nadie da y el que más importa: si se llevaron cookies de sesión, pueden seguir dentro sin necesitar la contraseña nueva que acabas de poner."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Entonces, ¿me cambio a un gestor o no?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si hoy repites contraseñas porque no te acuerdas de ellas, sí, y ése es el motivo de peso: resuelve un riesgo que ya tienes. Si no repites ninguna y tu ordenador es solo tuyo, el cambio te aporta menos de lo que sugiere el ruido. En los dos casos, activar el segundo factor en el correo y el banco te protege más que cualquier decisión sobre dónde guardarlas."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guías</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Correo hackeado</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-guide-browser-passwords.webp" alt="Tres cámaras acorazadas con las puertas abiertas y su contenido fluyendo de una a otra hasta vaciarse" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUÍAS · CONTRASEÑAS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">¿Es seguro guardar las contraseñas en el navegador?</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">La respuesta corta</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Sí las cifra, y quien te diga lo contrario va desfasado. Lo que decide el riesgo no es el cifrado: es si algo puede ejecutarse en tu ordenador con tu propia sesión.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Lo hace medio mundo y medio mundo tiene la duda. Y la mayoría de artículos que la responden dicen lo mismo, un «no» rotundo, con un argumento que dejó de ser cierto hace años.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-29">29 de agosto de 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-2xl text-[16.5px] leading-[1.8] text-muted-foreground space-y-5">
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Sí, el navegador cifra tus contraseñas</h2>
+      <p>Es lo primero que hay que aclarar, porque es donde falla casi toda la información que vas a encontrar en español.</p>
+      <p>Es fácil encontrar artículos, algunos en medios grandes, que afirman que Chrome guarda las contraseñas «sin cifrar» o «visibles para cualquiera». <strong class="text-foreground">Eso no es cierto.</strong> En Windows, el navegador las cifra con una clave ligada a tu cuenta de usuario del sistema. Y desde julio de 2024, con Chrome 127, Google añadió además el <em>cifrado ligado a la aplicación</em>, que ata esa clave al propio navegador para que otro programa no pueda pedirla sin más.</p>
+      <p>Así que la pregunta «¿están cifradas?» tiene una respuesta aburrida: sí. <strong class="text-foreground">El problema es que ésa no es la pregunta correcta.</strong></p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">¿De qué protege ese cifrado, exactamente?</h2>
+      <p>Aquí está el matiz que lo cambia todo, y casi nadie lo explica:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Protege de otra persona.</strong> Alguien que se lleva tu portátil apagado, o que arranca desde un USB y copia los ficheros, se encuentra datos ilegibles.</li>
+        <li><strong class="text-foreground">Protege de otra cuenta del mismo equipo.</strong> Si tu pareja o tu hermano tienen su propio usuario de Windows, no pueden leer las tuyas.</li>
+        <li><strong class="text-foreground">No protege de un programa que se ejecuta como tú.</strong> Y esto es lo importante: el cifrado está atado a tu sesión, así que <em>cualquier cosa que corra dentro de tu sesión tiene, por definición, la llave</em>.</li>
+      </ul>
+      <p>Dicho de otra forma: <strong class="text-foreground">no es una caja fuerte, es un cajón con cerradura cuya llave llevas puesta todo el rato que estás usando el ordenador.</strong> Contra un ladrón que entra en casa, sirve. Contra alguien que ya está dentro disfrazado de ti, no.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Por qué esto ha cambiado en 2026</h2>
+      <p>Durante un tiempo pareció que el cifrado ligado a la aplicación cerraba la puerta. No la cerró: la encareció.</p>
+      <p>En <strong class="text-foreground">marzo de 2026</strong> apareció <strong class="text-foreground">VoidStealer</strong>, un ladrón de credenciales que se vende como servicio y que <strong class="text-foreground">se salta esa protección sin necesitar permisos de administrador</strong>. Su técnica es tan elegante como incómoda de leer:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. Deja que Chrome haga su trabajo.</strong> No intenta romper el cifrado. Arranca una instancia oculta del navegador y espera.</li>
+        <li><strong class="text-foreground">2. Se engancha al proceso como depurador.</strong> Igual que haría una herramienta de desarrollo.</li>
+        <li><strong class="text-foreground">3. Espera al instante exacto</strong> en que Chrome descifra su propia clave para poder usarla, porque en algún momento tiene que hacerlo.</li>
+        <li><strong class="text-foreground">4. La captura en memoria</strong> mientras está en claro, y a partir de ahí lee contraseñas y cookies de sesión.</li>
+      </ul>
+      <p>La lección de fondo no es «Chrome es inseguro». Es que <strong class="text-foreground">un dato que tu ordenador tiene que poder descifrar para usarlo, otro programa en ese mismo ordenador también puede descifrarlo.</strong> Eso no lo arregla ninguna versión futura.</p>
+      <p>Y conviene decir lo que <em>no</em> dice este caso: no significa que te vayan a robar las contraseñas por usar Chrome, ni que Firefox o Edge estén a salvo por no salir en la noticia. Significa que <strong class="text-foreground">el listón para robarlas es más bajo de lo que era</strong>, y que hay malware vendiéndose ya con esa capacidad de serie.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">La pregunta que sí decide el riesgo</h2>
+      <p>No es «¿el navegador cifra?». Es ésta:</p>
+      <p><strong class="text-foreground">¿Qué probabilidad hay de que se ejecute algo en mi ordenador con mi sesión?</strong></p>
+      <p>Y ahí sí puedes responder tú, porque depende de cosas concretas:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">¿Instalas programas de sitios raros?</strong> Cracks, activadores, «versiones gratis» de software de pago. Es la vía número uno, con diferencia.</li>
+        <li><strong class="text-foreground">¿Tu sesión de Windows tiene contraseña?</strong> Si no la tiene, todo el cifrado del navegador se apoya en una puerta abierta.</li>
+        <li><strong class="text-foreground">¿Compartes el ordenador con un mismo usuario?</strong> Un perfil de Windows compartido anula la separación entre personas.</li>
+        <li><strong class="text-foreground">¿Instalas extensiones sin mirar?</strong> Una extensión con permisos amplios ya está dentro del navegador.</li>
+        <li><strong class="text-foreground">¿Es un ordenador del trabajo o de un tercero?</strong> Ahí no controlas qué hay instalado ni quién administra la máquina.</li>
+      </ul>
+      <p>Si tu respuesta a todas es tranquilizadora, guardar contraseñas en el navegador es un riesgo perfectamente razonable. Si a dos o tres no lo es, tienes un problema que <em>no</em> se arregla cambiando de navegador.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Lo incómodo: un gestor tiene el mismo problema</h2>
+      <p>Aquí es donde casi todos los artículos hacen trampa. Te cuentan el riesgo del navegador, te recomiendan un gestor y se van, dando a entender que el problema desaparece. <strong class="text-foreground">No desaparece.</strong></p>
+      <p>Si hay malware ejecutándose como tú y tu gestor está <em>abierto</em> en ese momento, puede leerse igual. El malware no rompe la criptografía de nadie: espera a que la abras tú.</p>
+      <p><strong class="text-foreground">La diferencia real es una sola, y es importante: el gestor se cierra.</strong></p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">El almacén del navegador está disponible siempre</strong> que tu sesión esté iniciada. Que son, para la mayoría, todas las horas que el ordenador está encendido.</li>
+        <li><strong class="text-foreground">El gestor está bloqueado por defecto</strong> y se vuelve a bloquear solo tras unos minutos. Fuera de esa ventana, lo que se roben son datos cifrados con una clave que no está en la máquina.</li>
+        <li><strong class="text-foreground">Y son cosas distintas de robar.</strong> Del navegador se llevan un fichero. Del gestor bloqueado, ruido.</li>
+      </ul>
+      <p>No es una diferencia de marketing: es la diferencia entre una puerta cerrada y una entornada. Si te interesa el detalle de cuál elegir, está en la <a href="../../comparativas/gestores-de-contrasenas-comparados/" class="text-accent ul-link">comparativa de gestores de contraseñas</a>.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Cuándo el navegador te vale de sobra</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Cuentas que no te duelen.</strong> El periódico, el foro, la tienda donde compraste una vez.</li>
+        <li><strong class="text-foreground">Ordenador tuyo, con sesión propia y contraseña</strong>, y sin costumbre de instalar cosas de cualquier sitio.</li>
+        <li><strong class="text-foreground">Frente a la alternativa real.</strong> Y esto importa mucho más de lo que parece: si la opción no es «gestor», sino <strong class="text-foreground">repetir la misma contraseña en todas partes</strong> porque no te acuerdas, el navegador es claramente mejor que eso.</li>
+      </ul>
+      <p>Ese último punto es el que se pierde en los artículos que dan un «no» rotundo. <strong class="text-foreground">La contraseña reutilizada es un riesgo seguro y presente; el robo de credenciales es un riesgo probable pero no garantizado.</strong> Cambiar lo segundo por lo primero es un mal negocio.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Cuándo no, sin discusión</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Tu correo principal.</strong> Es la llave maestra: con él se recuperan todas las demás cuentas. No debería estar guardado en ningún sitio.</li>
+        <li><strong class="text-foreground">Banco y cualquier cosa con dinero.</strong></li>
+        <li><strong class="text-foreground">El ordenador del trabajo</strong>, o cualquiera que administre otro.</li>
+        <li><strong class="text-foreground">Un equipo compartido con un solo usuario de Windows.</strong></li>
+        <li><strong class="text-foreground">Cuentas con datos de otras personas</strong>: clientes, pacientes, menores.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Qué hacer hoy, en diez minutos</h2>
+      <p>Por orden de lo que más reduce el riesgo por minuto invertido:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. Activa la verificación en dos pasos</strong> en el correo y el banco. Es <em>lo único de esta lista que sigue protegiéndote aunque te roben la contraseña</em>, porque la contraseña sola deja de valer. Si hoy solo haces una cosa, que sea ésta.</li>
+        <li><strong class="text-foreground">2. Saca del navegador el correo y el banco.</strong> No hace falta migrarlo todo: bórralas de ahí y apréndetelas o guárdalas en otro sitio.</li>
+        <li><strong class="text-foreground">3. Ponle contraseña a la sesión de Windows</strong> si no la tiene. Es el suelo sobre el que se apoya todo lo demás.</li>
+        <li><strong class="text-foreground">4. Revisa las extensiones</strong> y quita las que no uses. Cada una es un programa con acceso a lo que haces en el navegador.</li>
+        <li><strong class="text-foreground">5. Mira si alguna ya está filtrada</strong>, porque el navegador no te protege de una filtración del otro lado. Cómo se comprueba, en <a href="../comprobar-datos-filtrados/" class="text-accent ul-link">esta guía</a>.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Si sospechas que ya te han entrado</h2>
+      <p>Cambia de orden las prioridades, y hazlo <strong class="text-foreground">desde otro dispositivo</strong>, no desde el ordenador sospechoso:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Primero el correo principal</strong>, siempre. Todo lo demás cuelga de él.</li>
+        <li><strong class="text-foreground">Cierra todas las sesiones abiertas</strong> en cada cuenta. Es un paso que casi nadie da y es crítico: <em>quien roba cookies de sesión entra sin necesitar tu contraseña nueva</em>.</li>
+        <li><strong class="text-foreground">Después el banco</strong> y lo que tenga dinero o datos de terceros.</li>
+        <li><strong class="text-foreground">Y solo entonces</strong> el resto, con calma.</li>
+      </ul>
+      <p>Cambiar la contraseña sin cerrar las sesiones abiertas es el error más común, y deja la puerta exactamente igual de abierta.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Lo que hay que llevarse</h2>
+      <p>Que la pregunta estaba mal hecha. El navegador cifra; el cifrado no es el punto débil. <strong class="text-foreground">El punto débil es que tu sesión abierta es la llave, y el malware moderno lo que hace es esperar a que la uses tú.</strong></p>
+      <p>Así que no es «navegador sí o navegador no». Es <strong class="text-foreground">qué cuentas te puedes permitir perder</strong>. Las que no te duelen, déjalas donde están. El correo y el banco, fuera, con segundo factor. Y si algún día te entran, ya sabes por dónde empezar y por qué cerrar sesiones va antes que casi todo.</p>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Preguntas frecuentes</div>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Chrome cifra mis contraseñas o no?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Sí. En Windows las cifra con una clave ligada a tu cuenta de usuario, y desde Chrome 127, de julio de 2024, añade además el cifrado ligado a la aplicación. Los artículos que dicen que se guardan «en texto plano» están desfasados. Lo que sigue siendo cierto es que ese cifrado no protege de un programa que se ejecute dentro de tu propia sesión.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Si tengo antivirus, ¿estoy cubierto?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Ayuda, pero no lo des por hecho. Los ladrones de credenciales que se venden como servicio se actualizan precisamente para no ser detectados, y cambian de versión más rápido de lo que se publican las firmas. Un antivirus reduce la probabilidad; no la elimina. Por eso el segundo factor importa más: protege incluso cuando la detección falla.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Sirve la frase de contraseña de sincronización de Google?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Sirve para una cosa concreta y conviene no confundirla: hace que ni Google pueda leer tus contraseñas sincronizadas, y que quien entre en tu cuenta de Google no se las lleve. Eso es real y merece la pena. Lo que no hace es protegerte del malware en tu propio ordenador, porque ahí las contraseñas tienen que estar descifradas para poder usarse.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Firefox con contraseña maestra es más seguro?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Es mejor que el almacén siempre abierto, sí, y por la misma razón que un gestor: introduce una cerradura que hay que abrir. Se acerca al comportamiento de un gestor sin serlo. Pero mientras la tengas desbloqueada en esa sesión, el riesgo vuelve a ser el mismo, así que no lo trates como una solución completa.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Me han entrado en el ordenador. ¿Qué cambio primero?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            El correo principal, desde otro dispositivo, y cerrando todas las sesiones abiertas. Después el banco. Cerrar sesiones es el paso que casi nadie da y el que más importa: si se llevaron cookies de sesión, pueden seguir dentro sin necesitar la contraseña nueva que acabas de poner.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Entonces, ¿me cambio a un gestor o no?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Si hoy repites contraseñas porque no te acuerdas de ellas, sí, y ése es el motivo de peso: resuelve un riesgo que ya tienes. Si no repites ninguna y tu ordenador es solo tuyo, el cambio te aporta menos de lo que sugiere el ruido. En los dos casos, activar el segundo factor en el correo y el banco te protege más que cualquier decisión sobre dónde guardarlas.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Seguir leyendo</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../../comparativas/gestores-de-contrasenas-comparados/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Comparativa de gestores</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../comprobar-datos-filtrados/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Tus datos ya están filtrados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

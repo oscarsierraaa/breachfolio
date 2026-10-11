@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Domains vs subdomains: how to enumerate them | Breachfolio</title>
+  <meta name="description" content="What a domain is made of, why subdomains are an attack surface, and how to enumerate them – passive and active – with crt.sh, Amass, subfinder and more." />
+  <meta name="keywords" content="domains vs subdomains" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Domains vs subdomains: how to enumerate them | Breachfolio" />
+  <meta property="og:description" content="What a domain is made of, why subdomains are an attack surface, and how to enumerate them – passive and active – with crt.sh, Amass, subfinder and more." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-subdomains.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Domains vs subdomains: how to enumerate them | Breachfolio" />
+  <meta name="twitter:description" content="What a domain is made of, why subdomains are an attack surface, and how to enumerate them – passive and active – with crt.sh, Amass, subfinder and more." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-subdomains.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Domains vs subdomains: how to enumerate them",
+      "description": "What a domain is made of, why subdomains are an attack surface, and how to enumerate them – passive and active – with crt.sh, Amass, subfinder and more.",
+      "image": "https://breachfolio.com/assets/img/hero-subdomains.webp",
+      "datePublished": "2026-07-18",
+      "dateModified": "2026-07-18",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/domains-vs-subdomains/" },
+      "inLanguage": "en",
+      "keywords": "domains vs subdomains"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Domains vs subdomains", "item": "https://breachfolio.com/cybersecurity/domains-vs-subdomains/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/domains-vs-subdomains/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between a domain and a subdomain?", "acceptedAnswer": { "@type": "Answer", "text": "A domain (more precisely, a registrable domain like example.com) is the name you register with a registrar, pay for, and that WHOIS knows about – it is your second-level domain plus its top-level domain. A subdomain is any label added to the left of that registrable domain, such as api.example.com or dev.example.com. The crucial practical difference is control and cost: registering a domain involves a registrar and a fee, while the domain owner can create unlimited subdomains for free, instantly, just by adding DNS records to the zone they already control. That is exactly why subdomains proliferate and why they so often become forgotten, unmonitored attack surface." } },
+        { "@type": "Question", "name": "How do I find all the subdomains of a domain?", "acceptedAnswer": { "@type": "Answer", "text": "Start passively, because it is fast, quiet, and legal against any target. Search Certificate Transparency logs with crt.sh, then run aggregators like subfinder, assetfinder, and Amass in passive mode to pull from dozens of datasets at once, and check passive-DNS services such as SecurityTrails, VirusTotal, and Netcraft for historical names. Merge and de-duplicate the results, then resolve them with dnsx to see which are actually live. To find names that appear in no public dataset you can brute-force candidate names with gobuster or ffuf using a good wordlist, but only against domains you own or are explicitly authorised to test. No single method is complete, so real enumeration combines several." } },
+        { "@type": "Question", "name": "What is a subdomain takeover?", "acceptedAnswer": { "@type": "Answer", "text": "It happens when a subdomain has a DNS record – usually a CNAME – pointing at a third-party service (a cloud bucket, a Heroku or GitHub Pages app, a SaaS host) that has since been deleted, while the DNS record was left behind. That \"dangling\" record now points at a service name anyone can register. An attacker who claims it gains control of content served on the victim's own hostname, which enables convincing phishing, theft of cookies scoped to the parent domain, and abuse of same-site trust. You detect it by looking for CNAMEs to known providers that return a \"no such app / not found\" error, and you automate the check with tools like subjack or nuclei's takeover templates. The fix is simple: delete the stale DNS record." } },
+        { "@type": "Question", "name": "What is the difference between passive and active subdomain enumeration?", "acceptedAnswer": { "@type": "Answer", "text": "Passive enumeration collects subdomain data from third parties – certificate logs, search indexes, passive-DNS databases – and never sends a single packet to the target, so the target cannot tell you looked. Active enumeration interacts with the target's own infrastructure: resolving names against their DNS, connecting to their servers, or brute-forcing candidate hostnames, all of which can be logged. Passive is the safe default you can run against anyone; active carries operational and sometimes legal weight and should be reserved for assets you own or are authorised to test. The usual workflow is passive first to build a list, then a controlled active pass to validate and extend it." } },
+        { "@type": "Question", "name": "Is subdomain enumeration legal?", "acceptedAnswer": { "@type": "Answer", "text": "Passive enumeration – reading Certificate Transparency logs, querying passive-DNS services, using aggregators that pull from third-party datasets – is reading already-public information and is legal in most jurisdictions, because you never touch the target's systems. Active techniques are different: brute-forcing subdomains, resolving names directly against a target's DNS, or probing discovered hosts sends traffic to infrastructure you may have no right to test, and at volume it can look like reconnaissance for an attack. Do active enumeration only against domains you own or have explicit, written authorization to test, such as a signed penetration-test scope or a bug-bounty program's in-scope list. Finding a subdomain is not permission to attack what runs on it." } },
+        { "@type": "Question", "name": "Why do dev and staging subdomains matter so much in security?", "acceptedAnswer": { "@type": "Answer", "text": "Because they concentrate risk. Non-production environments named dev, staging, uat, test, or similar are built for developer convenience, not for hostile internet exposure: they often run outdated software, ship with default or weak credentials, return verbose error messages, and sit behind little or no WAF or monitoring. Yet they frequently connect to the same databases or internal services as production. An attacker who cannot breach the hardened main site will look for exactly these forgotten hostnames, which is why enumerating them and getting them off the public internet (or properly locked down) is one of the highest-value outcomes of a subdomain assessment." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Domains vs subdomains</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-subdomains.webp" alt="Domains vs subdomains: how to enumerate them." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Domains vs subdomains: how to enumerate them.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">What a domain is made of, why subdomains are an attack surface, and how to enumerate them – passive and active – with crt.sh, Amass, subfinder and more.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 18, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Every investigation, every bug-bounty engagement, and every attacker's reconnaissance phase starts in the same place: a name. Before anyone touches a service, they want to know how big the target actually is, and the honest answer is almost always "bigger than the marketing site suggests." That gap between <code>example.com</code> and the dozens of forgotten hostnames hanging off it is where a huge amount of real-world risk lives. This article takes the name apart, explains where subdomains come from, and walks through how to <strong>enumerate</strong> them properly – the passive way, the active way, and the responsible way.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 480 176" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="150" y="20" width="180" height="40" rx="10" fill="hsl(var(--accent) / 0.14)" stroke="hsl(var(--accent) / 0.5)"/><text x="240" y="45" text-anchor="middle" fill="hsl(var(--foreground))" font-size="14" font-weight="700">example.com</text><path d="M 240 60 C 240 100, 57.6 80, 57.6 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="16" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="57.6" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">www</text><path d="M 240 60 C 240 100, 148.8 80, 148.8 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="107.20000000000002" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="148.8" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">mail</text><path d="M 240 60 C 240 100, 240 80, 240 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="198.4" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="240" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">dev</text><path d="M 240 60 C 240 100, 331.20000000000005 80, 331.20000000000005 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="289.6" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="331.20000000000005" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">api</text><path d="M 240 60 C 240 100, 422.40000000000003 80, 422.40000000000003 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="380.8" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="422.40000000000003" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">shop</text></svg>
+        <figcaption>One domain, many subdomains – each a separate attack surface.</figcaption>
+      </figure>
+      <h2>Anatomy of a domain name</h2>
+
+<p>A domain name looks like one thing but is really a stack of labels read <strong>right to left</strong>, each one a level of delegation in a global hierarchy. Take a fully-qualified name like <code>api.staging.example.com</code> and pull it apart:</p>
+
+<table>
+  <thead>
+    <tr><th>Part</th><th>Example</th><th>What it is</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Root</td><td><code>.</code> (implicit)</td><td>The unnamed top of the tree. It is really there – <code>example.com.</code> with a trailing dot is the true FQDN.</td></tr>
+    <tr><td>TLD</td><td><code>com</code></td><td>Top-Level Domain. Managed by a registry (Verisign for <code>.com</code>) under ICANN. Could be a gTLD (<code>.com</code>, <code>.io</code>) or ccTLD (<code>.uk</code>, <code>.es</code>).</td></tr>
+    <tr><td>Second-level domain</td><td><code>example</code></td><td>The label you register and pay for. <code>example</code> + <code>.com</code> is the <em>registrable domain</em>: the unit WHOIS knows about.</td></tr>
+    <tr><td>Subdomain</td><td><code>staging</code>, <code>api</code></td><td>Any label to the left of the registrable domain. You create these yourself, for free, as many as you like.</td></tr>
+    <tr><td>FQDN</td><td><code>api.staging.example.com</code></td><td>The Fully-Qualified Domain Name: the complete, unambiguous path from host to root.</td></tr>
+  </tbody>
+</table>
+
+<p>Two subtleties trip people up. First, "www" is not special – <code>www.example.com</code> is just a subdomain named <code>www</code>, no different in kind from <code>api</code> or <code>vpn</code>. Second, the boundary between "registrable domain" and "subdomain" is not always two labels from the right. Under <code>example.co.uk</code>, the registrable domain is three labels deep because <code>co.uk</code> is an effective TLD. The <a href="https://publicsuffix.org" target="_blank" rel="noopener noreferrer">Public Suffix List</a> is the authoritative map of where that line falls, and every serious enumeration tool consults it so it does not mistake <code>co.uk</code> for someone's subdomain.</p>
+
+<h2>What a subdomain is, and why security cares</h2>
+
+<p>A subdomain is simply a DNS entry the domain owner created under a name they control. There is no registrar, no fee, and no approval step: whoever controls the DNS zone for <code>example.com</code> can conjure <code>internal.example.com</code> into existence in seconds. That convenience is exactly why subdomains matter so much to a defender or an investigator.</p>
+
+<ul>
+  <li><strong>They are the attack surface.</strong> The registrable domain is a brand; the subdomains are the actual machines, apps, and APIs. Mapping them is mapping the target. Ten subdomains you did not know about are ten services nobody is patching, monitoring, or thinking about.</li>
+  <li><strong>They leak environments.</strong> Names like <code>dev.</code>, <code>staging.</code>, <code>uat.</code>, <code>test.</code>, <code>jenkins.</code>, or <code>vpn.</code> advertise non-production systems that are often built for convenience, not hardening – default credentials, verbose errors, no WAF, stale software. An attacker who cannot get through the front door will happily walk in through staging.</li>
+  <li><strong>They enable subdomain takeover.</strong> A subdomain that points (via <code>CNAME</code>) at a cloud service that no longer exists can be silently claimed by an attacker – more on this below.</li>
+</ul>
+
+<p>This is why subdomain enumeration is a foundational OSINT and reconnaissance skill. If you are new to the broader discipline, our guide to <a href="../what-is-osint/">what OSINT is and the workflow around it</a> puts this step in context: enumeration is the "pivot outward" phase, where one artefact (a domain) is used to discover the next (its hosts).</p>
+
+<h2>The DNS records that make subdomains real</h2>
+
+<p>A subdomain only "exists" on the internet because a DNS record answers for it. Understanding the record types is what separates a list of names from an understanding of the infrastructure behind them. We cover the resolution process itself in <a href="../how-networks-work/">how networks work</a>; here is the working subset that matters for enumeration:</p>
+
+<table>
+  <thead>
+    <tr><th>Record</th><th>Answers the question</th><th>Why it matters in enumeration</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>A</code></td><td>What IPv4 address is this host at?</td><td>Confirms a name is live and points somewhere. Reverse the IP to find neighbours.</td></tr>
+    <tr><td><code>AAAA</code></td><td>What IPv6 address is this host at?</td><td>Increasingly common; hosts sometimes expose IPv6 without the same firewalling as IPv4.</td></tr>
+    <tr><td><code>CNAME</code></td><td>This name is an alias for which other name?</td><td>The key record for takeover hunting – a CNAME pointing at an unclaimed service is the vulnerability.</td></tr>
+    <tr><td><code>MX</code></td><td>Which servers handle mail for this domain?</td><td>Reveals the mail provider and often internal gateway naming.</td></tr>
+    <tr><td><code>TXT</code></td><td>Arbitrary text – SPF, DKIM, verification tokens.</td><td>SPF records list sending IPs and third-party services; verification tokens fingerprint the SaaS a company uses.</td></tr>
+    <tr><td><code>NS</code></td><td>Which nameservers are authoritative for this zone?</td><td>Identifies the DNS provider and can reveal delegated sub-zones run by other teams.</td></tr>
+  </tbody>
+</table>
+
+<p>You can pull any of these with <code>dig</code>. A quick look at the records for a name you are investigating tells you whether it is a real host, an alias, or a mail endpoint:</p>
+
+<pre tabindex="0"><code>$ dig +short A api.example.com
+203.0.113.42
+
+$ dig +short CNAME assets.example.com
+example-cdn.s3.amazonaws.com.
+
+$ dig +short TXT example.com
+"v=spf1 include:_spf.google.com include:mailgun.org ~all"</code></pre>
+
+<p>That single SPF line already tells you the organisation uses Google Workspace and Mailgun – infrastructure intelligence, straight from a public record, without touching the target once.</p>
+
+<h2>Passive vs active enumeration</h2>
+
+<p>There are two fundamentally different ways to discover subdomains, and knowing which mode you are in at every step is both an operational-security decision and, sometimes, a legal one.</p>
+
+<p><strong>Passive</strong> enumeration reads subdomain data from <em>third parties</em> – certificate logs, search-engine indexes, passive-DNS databases – and never sends a packet to the target. The target has no way to know you looked. <strong>Active</strong> enumeration resolves or requests names <em>against the target's own infrastructure</em>: it queries their DNS resolvers, connects to their servers, and can be logged. Brute-forcing subdomains is active by definition. As a rule, start passive, and only go active inside an authorised scope.</p>
+
+<table>
+  <thead>
+    <tr><th>Technique</th><th>Mode</th><th>Tool</th><th>When to use it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Certificate Transparency search</td><td>Passive</td><td>crt.sh</td><td>Always: the fastest, quietest first pass. CT logs leak names nobody meant to publish.</td></tr>
+    <tr><td>Aggregated passive sources</td><td>Passive</td><td>subfinder, Amass (passive), assetfinder</td><td>Broad first sweep pulling from dozens of datasets at once.</td></tr>
+    <tr><td>Passive-DNS / historical DNS</td><td>Passive</td><td>SecurityTrails, VirusTotal, Netcraft</td><td>When you want history – names that resolved in the past but were removed.</td></tr>
+    <tr><td>DNS resolution / validation</td><td>Active</td><td>dnsx</td><td>To confirm which discovered names are actually live before you act on them.</td></tr>
+    <tr><td>DNS brute-force</td><td>Active</td><td>gobuster, ffuf, Amass (active)</td><td>Only on authorised targets – to find names that appear in no public dataset.</td></tr>
+    <tr><td>Takeover detection</td><td>Active</td><td>subjack, nuclei</td><td>After enumeration, to test dangling CNAMEs for claimability.</td></tr>
+  </tbody>
+</table>
+
+<h2>Passive enumeration, with commands</h2>
+
+<h3>Certificate Transparency (crt.sh)</h3>
+
+<p>Every publicly-trusted TLS certificate is logged in append-only <strong>Certificate Transparency</strong> logs – the mechanism we explain in <a href="../tls-certificate-transparency/">TLS certificates and Certificate Transparency</a>. Because a certificate names the hosts it covers, those logs are an accidental, authoritative list of an organisation's subdomains. The easiest way in is <a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a>, which is queryable from the browser or the command line:</p>
+
+<pre tabindex="0"><code># Every name ever certified under example.com, de-duplicated
+$ curl -s "https://crt.sh/?q=%25.example.com&output=json" \
+    | jq -r '.[].name_value' \
+    | sed 's/\*\.//g' \
+    | sort -u
+api.example.com
+dev.example.com
+mail.example.com
+vpn.example.com
+...</code></pre>
+
+<p>The <code>%25</code> is a URL-encoded <code>%</code>, the SQL wildcard crt.sh understands. This one request, sent to a third party and never to the target, often returns more real hostnames than any other single technique.</p>
+
+<h3>Aggregators: subfinder, Amass, assetfinder</h3>
+
+<p><a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener noreferrer">subfinder</a> (from <a href="https://projectdiscovery.io" target="_blank" rel="noopener noreferrer">ProjectDiscovery</a>) queries dozens of passive sources at once and is the fast default:</p>
+
+<pre tabindex="0"><code>$ subfinder -d example.com -silent
+api.example.com
+blog.example.com
+cdn.example.com
+staging.example.com</code></pre>
+
+<p><a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener noreferrer">Amass</a>, the OWASP project, is the most thorough. Run it in passive mode to stay entirely off the target while pulling from its large source list:</p>
+
+<pre tabindex="0"><code>$ amass enum -passive -d example.com</code></pre>
+
+<p><a href="https://github.com/tomnomnom/assetfinder" target="_blank" rel="noopener noreferrer">assetfinder</a> is a tiny, fast tool that scrapes a handful of the highest-value sources – perfect for piping into other tools:</p>
+
+<pre tabindex="0"><code>$ assetfinder --subs-only example.com | sort -u</code></pre>
+
+<p>In practice you run several and merge the results, because no single source is complete:</p>
+
+<pre tabindex="0"><code>$ { subfinder -d example.com -silent; assetfinder --subs-only example.com; } \
+    | sort -u > subs-passive.txt</code></pre>
+
+<h2>Active enumeration, with commands</h2>
+
+<div class="callout">
+  <div class="label">Authorization first</div>
+  <p>Everything in this section sends traffic to infrastructure you are enumerating. Only run it against domains you own or have <strong>explicit, written authorization</strong> to test (your own assets, a signed pentest scope, or a bug-bounty program's in-scope list). Brute-forcing and resolving names against a target you have no permission to test can constitute unauthorised activity. Observe, do not intrude.</p>
+</div>
+
+<h3>Validating what you found (dnsx)</h3>
+
+<p>A passive list is full of dead names – hosts that were decommissioned or never went live. <a href="https://github.com/projectdiscovery/dnsx" target="_blank" rel="noopener noreferrer">dnsx</a> resolves the list against DNS and keeps only the ones that answer, optionally showing the record data:</p>
+
+<pre tabindex="0"><code>$ cat subs-passive.txt | dnsx -silent -a -resp
+api.example.com    [203.0.113.42]
+cdn.example.com    [198.51.100.10]
+vpn.example.com    [203.0.113.77]</code></pre>
+
+<h3>DNS brute-force (gobuster, ffuf, Amass active)</h3>
+
+<p>Some subdomains appear in no public dataset. The only way to find them is to guess candidate names from a wordlist and check which resolve. <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreferrer">gobuster</a> in <code>dns</code> mode is the classic:</p>
+
+<pre tabindex="0"><code>$ gobuster dns -d example.com \
+    -w subdomains-top1million-5000.txt
+Found: grafana.example.com
+Found: git.example.com
+Found: backup.example.com</code></pre>
+
+<p>Good wordlists come from <a href="https://github.com/danielmiessler/SecLists" target="_blank" rel="noopener noreferrer">SecLists</a> (the <code>Discovery/DNS</code> folder). To find <em>virtual hosts</em> – different sites served from the same IP by the <code>Host</code> header – <a href="https://github.com/ffuf/ffuf" target="_blank" rel="noopener noreferrer">ffuf</a> fuzzes that header and filters out the default-response size:</p>
+
+<pre tabindex="0"><code>$ ffuf -w subdomains.txt \
+    -u https://example.com \
+    -H "Host: FUZZ.example.com" \
+    -fs 4242</code></pre>
+
+<p>Amass can also do active resolution and brute-forcing when you drop the <code>-passive</code> flag and add <code>-brute</code> – powerful, and firmly in "authorised targets only" territory.</p>
+
+<h2>Wildcard DNS and false positives</h2>
+
+<p>Before you trust a brute-force result, check for a <strong>wildcard</strong> record. A <code>*.example.com</code> entry makes <em>every</em> possible subdomain resolve to the same address, so a naive brute-forcer will report thousands of "found" hosts that do not really exist. The test is one query for a name no sane admin would create:</p>
+
+<pre tabindex="0"><code>$ dig +short definitely-not-real-8f3a9.example.com
+198.51.100.200   &lt;- an answer means a wildcard is in play</code></pre>
+
+<p>If a random garbage name resolves, the zone has a wildcard, and you must filter accordingly: note the wildcard IP and discard any brute-forced name that resolves to it, or use a tool that does this automatically. Amass, subfinder's resolver, and dnsx all include wildcard-filtering logic precisely because this is such a common source of noise. The general lesson holds across all of OSINT: a result you have not corroborated is a lead, not a finding.</p>
+
+<h2>Subdomain takeover</h2>
+
+<p>A <strong>subdomain takeover</strong> is one of the highest-impact issues enumeration turns up. The setup: a company creates <code>promo.example.com</code> as a <code>CNAME</code> pointing at a third-party service: a cloud bucket, a Heroku app, a GitHub Pages site, a SaaS landing page. Later, they delete the resource on the provider but forget to remove the DNS record. The <code>CNAME</code> is now <em>dangling</em>: it points at a service name that is available for anyone to register.</p>
+
+<p>If an attacker registers that service name, the victim's own DNS now sends visitors to attacker-controlled content on a legitimate-looking hostname. That enables convincing phishing, cookie theft scoped to the parent domain, and bypasses of same-site trust. The tell-tale sign is a <code>CNAME</code> to a known provider combined with that provider's "no such app / bucket not found" error page:</p>
+
+<pre tabindex="0"><code>$ dig +short CNAME promo.example.com
+example-promo.herokuapp.com.
+
+$ curl -s https://promo.example.com | grep -i "no such app"
+&lt;title&gt;No such app&lt;/title&gt;   &lt;- dangling CNAME, likely claimable</code></pre>
+
+<p>At scale you automate the detection. <a href="https://github.com/haccer/subjack" target="_blank" rel="noopener noreferrer">subjack</a> checks a list of subdomains against a fingerprint database of vulnerable services:</p>
+
+<pre tabindex="0"><code>$ subjack -w subs-live.txt -t 100 -ssl \
+    -c fingerprints.json -v</code></pre>
+
+<p><a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener noreferrer">nuclei</a> ships a maintained set of takeover templates and is the more modern choice:</p>
+
+<pre tabindex="0"><code>$ nuclei -l subs-live.txt -t http/takeovers/</code></pre>
+
+<p>Finding a takeover is not the same as exploiting one. On an authorised engagement, the responsible move is usually to prove claimability with a harmless marker file and report it – not to serve real content from the hostname.</p>
+
+<h2>Tools and websites worth bookmarking</h2>
+
+<p>Beyond the command-line tools above, several web services do subdomain and infrastructure discovery from the browser, which is ideal for a quick, entirely passive first look:</p>
+
+<ul>
+  <li><a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a> – Certificate Transparency log search. The single best passive source of subdomains.</li>
+  <li><a href="https://dnsdumpster.com" target="_blank" rel="noopener noreferrer">DNSDumpster</a> – free DNS recon that maps a domain's hosts, records, and network relationships in one visual view.</li>
+  <li><a href="https://securitytrails.com" target="_blank" rel="noopener noreferrer">SecurityTrails</a> – historical DNS and subdomain data; see what a name used to point to, invaluable for tracking infrastructure over time.</li>
+  <li><a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a> – the "Relations" tab on a domain lists observed subdomains it has seen in the wild.</li>
+  <li><a href="https://www.netcraft.com" target="_blank" rel="noopener noreferrer">Netcraft</a> – long-running site reports and a searchable database of hosts and hosting history.</li>
+  <li><a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener noreferrer">Amass (OWASP)</a> and the <a href="https://projectdiscovery.io" target="_blank" rel="noopener noreferrer">ProjectDiscovery</a> suite – <a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener noreferrer">subfinder</a> and <a href="https://github.com/projectdiscovery/dnsx" target="_blank" rel="noopener noreferrer">dnsx</a> – for scripted, repeatable enumeration.</li>
+</ul>
+
+<p>A registration lookup rounds out the picture: pairing enumeration with <a href="../what-is-whois/">WHOIS</a> tells you not just what hosts exist but who registered the parent domain and when. Together they turn a single name into a map.</p>
+
+<h2>The takeaway</h2>
+
+<p>A domain name is a hierarchy, and the subdomains hanging off it are the real, sprawling attack surface most organisations under-count. Enumerating them well means starting passive – Certificate Transparency and aggregators that never touch the target – validating with resolution, and only brute-forcing or testing for takeover where you have explicit authorization. Do it in that order and you will consistently see more of a target than it meant to show, without ever crossing the line from observation into intrusion.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between a domain and a subdomain?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A domain (more precisely, a registrable domain like example.com) is the name you register with a registrar, pay for, and that WHOIS knows about: it is your second-level domain plus its top-level domain. A subdomain is any label added to the left of that registrable domain, such as api.example.com or dev.example.com. The crucial practical difference is control and cost: registering a domain involves a registrar and a fee, while the domain owner can create unlimited subdomains for free, instantly, just by adding DNS records to the zone they already control. That is exactly why subdomains proliferate and why they so often become forgotten, unmonitored attack surface.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do I find all the subdomains of a domain?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Start passively, because it is fast, quiet, and legal against any target. Search Certificate Transparency logs with crt.sh, then run aggregators like subfinder, assetfinder, and Amass in passive mode to pull from dozens of datasets at once, and check passive-DNS services such as SecurityTrails, VirusTotal, and Netcraft for historical names. Merge and de-duplicate the results, then resolve them with dnsx to see which are actually live. To find names that appear in no public dataset you can brute-force candidate names with gobuster or ffuf using a good wordlist, but only against domains you own or are explicitly authorised to test. No single method is complete, so real enumeration combines several.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is a subdomain takeover?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It happens when a subdomain has a DNS record – usually a CNAME – pointing at a third-party service (a cloud bucket, a Heroku or GitHub Pages app, a SaaS host) that has since been deleted, while the DNS record was left behind. That "dangling" record now points at a service name anyone can register. An attacker who claims it gains control of content served on the victim's own hostname, which enables convincing phishing, theft of cookies scoped to the parent domain, and abuse of same-site trust. You detect it by looking for CNAMEs to known providers that return a "no such app / not found" error, and you automate the check with tools like subjack or nuclei's takeover templates. The fix is simple: delete the stale DNS record.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between passive and active subdomain enumeration?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Passive enumeration collects subdomain data from third parties – certificate logs, search indexes, passive-DNS databases – and never sends a single packet to the target, so the target cannot tell you looked. Active enumeration interacts with the target's own infrastructure: resolving names against their DNS, connecting to their servers, or brute-forcing candidate hostnames, all of which can be logged. Passive is the safe default you can run against anyone; active carries operational and sometimes legal weight and should be reserved for assets you own or are authorised to test. The usual workflow is passive first to build a list, then a controlled active pass to validate and extend it.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is subdomain enumeration legal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Passive enumeration – reading Certificate Transparency logs, querying passive-DNS services, using aggregators that pull from third-party datasets – is reading already-public information and is legal in most jurisdictions, because you never touch the target's systems. Active techniques are different: brute-forcing subdomains, resolving names directly against a target's DNS, or probing discovered hosts sends traffic to infrastructure you may have no right to test, and at volume it can look like reconnaissance for an attack. Do active enumeration only against domains you own or have explicit, written authorization to test, such as a signed penetration-test scope or a bug-bounty program's in-scope list. Finding a subdomain is not permission to attack what runs on it.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why do dev and staging subdomains matter so much in security?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Because they concentrate risk. Non-production environments named dev, staging, uat, test, or similar are built for developer convenience, not for hostile internet exposure: they often run outdated software, ship with default or weak credentials, return verbose error messages, and sit behind little or no WAF or monitoring. Yet they frequently connect to the same databases or internal services as production. An attacker who cannot breach the hardened main site will look for exactly these forgotten hostnames, which is why enumerating them and getting them off the public internet (or properly locked down) is one of the highest-value outcomes of a subdomain assessment.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../what-is-osint/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is OSINT? Tools and workflow</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../tls-certificate-transparency/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">TLS certificates and Certificate Transparency</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../what-is-whois/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is WHOIS</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../how-networks-work/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How networks work</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../resources/linux-hardening-checklist/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Linux server hardening checklist</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Public Key Infrastructure (PKI), explained | Breachfolio</title>
+  <meta name="description" content="How PKI actually works: key pairs, digital signatures, certificate authorities and the chain of trust, and where TLS, code signing, and S/MIME really use it." />
+  <meta name="keywords" content="public key infrastructure, PKI explained, public private key pairs, digital signatures, certificate authority, chain of trust, TLS certificates, code signing, S/MIME, client certificates" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Public Key Infrastructure (PKI), explained | Breachfolio" />
+  <meta property="og:description" content="How PKI actually works: key pairs, digital signatures, certificate authorities and the chain of trust, and where TLS, code signing, and S/MIME really use it." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-pki.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Public Key Infrastructure (PKI), explained | Breachfolio" />
+  <meta name="twitter:description" content="How PKI actually works: key pairs, digital signatures, certificate authorities and the chain of trust, and where TLS, code signing, and S/MIME really use it." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-pki.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Public Key Infrastructure (PKI), explained",
+      "description": "How PKI actually works: key pairs, digital signatures, certificate authorities and the chain of trust, and where TLS, code signing, and S/MIME really use it.",
+      "image": "https://breachfolio.com/assets/img/hero-pki.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" },
+      "inLanguage": "en",
+      "keywords": "public key infrastructure, PKI explained, public private key pairs, digital signatures, certificate authority, chain of trust, TLS certificates, code signing, S/MIME, client certificates"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Public Key Infrastructure (PKI), explained", "item": "https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between a public key and a private key?", "acceptedAnswer": { "@type": "Answer", "text": "A public and private key are mathematically linked but serve opposite roles, and the security of the whole system rests on the private key never leaving its owner's control. The public key can be shared with anyone – it's used to encrypt messages meant only for the key pair's owner, or to verify a signature that owner produced. The private key must stay secret, because it's used to decrypt those messages or to create signatures in the first place. Anyone who obtains your private key can impersonate you cryptographically, which is why PKI's practical security depends more on private-key protection than on the strength of the algorithm itself." } },
+        { "@type": "Question", "name": "What does a digital signature actually prove?", "acceptedAnswer": { "@type": "Answer", "text": "A valid digital signature proves three things at once: authenticity (the signature could only have been produced by whoever holds the corresponding private key), integrity (the signed content has not been altered since it was signed, because changing even one byte breaks the signature), and non-repudiation (the signer cannot credibly deny having signed it, assuming their private key was not compromised). It does not, by itself, prove the signer's real-world identity: that link between a public key and a verified identity is exactly what a certificate authority is for." } },
+        { "@type": "Question", "name": "What is a certificate authority and why do we need one?", "acceptedAnswer": { "@type": "Answer", "text": "A certificate authority (CA) is a trusted organization that verifies a public key genuinely belongs to whoever is claiming it, then issues a signed certificate binding that key to a verified identity or domain. Without a CA, a public key is just a number with no proven owner – anyone could generate a key pair and claim to be your bank. Browsers, operating systems, and mail clients ship with a built-in list of root CAs they trust by default, and every certificate they accept must trace back to one of those roots through an unbroken chain of signatures." } },
+        { "@type": "Question", "name": "Is PKI only used for websites (TLS)?", "acceptedAnswer": { "@type": "Answer", "text": "No – TLS is PKI's most visible use, but far from its only one. Code signing uses the same public/private key model to let an operating system verify that a downloaded application really came from the developer it claims to and hasn't been tampered with since. S/MIME applies it to email, letting recipients verify a message's sender and detect tampering. Client certificates let a server verify the identity of the connecting device or user, rather than the other way around, which is common in corporate VPNs, smart-card logins, and machine-to-machine authentication." } },
+        { "@type": "Question", "name": "What happens if a private key is compromised?", "acceptedAnswer": { "@type": "Answer", "text": "Everything that key was trusted to protect is at risk: an attacker with the private key behind a TLS certificate could impersonate that website, one behind a code-signing key could publish malware that appears legitimately signed by a trusted developer, and one behind a personal certificate could forge signed emails or authenticate as the victim. The response is to revoke the compromised certificate immediately, which publishes it to a Certificate Revocation List (CRL) or makes it return \"revoked\" via OCSP, so relying parties stop trusting it, and then issue a new certificate from a freshly generated key pair. Revocation only protects people going forward, though – it does not undo anything already signed with the compromised key before the compromise was discovered." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Public Key Infrastructure (PKI), explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-pki.webp" alt="A chain of linked cryptographic keys and certificates – Public Key Infrastructure explained" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · CRYPTOGRAPHY</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Public Key Infrastructure, explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Key pairs, digital signatures, certificate authorities, and the chain of trust – the machinery underneath TLS, code signing, S/MIME email, and client certificates, explained from the ground up.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 22, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p><strong>Public Key Infrastructure (PKI)</strong> is the machinery that answers a deceptively hard question: how do two parties who have never met establish trust over a network where anyone can claim to be anyone? It's the system underneath the padlock in your browser, the checkmark that says a piece of software really came from its publisher, and the signature that proves an email wasn't tampered with in transit. Strip away the acronym and PKI is really three ideas working together: a mathematical relationship between two keys, a way to prove authorship without revealing a secret, and a network of trusted parties who vouch for who owns what key. This article builds that picture from the ground up, and pairs directly with our companion piece on <a href="../tls-certificate-transparency/">TLS certificates and Certificate Transparency</a>, which covers the web-specific chain of trust in more depth.</p>
+
+<h2>The key pair at the center of everything</h2>
+
+<p>PKI is built on <strong>asymmetric cryptography:</strong> a pair of mathematically related keys, one public and one private, where an operation done with one key can only be reversed or verified with the other. We cover the deeper mechanics of symmetric versus asymmetric cryptography in <a href="../cryptography-basics/">cryptography basics</a>; the short version here is enough to build on: generate a key pair once, keep the private key secret and never let it leave your control, and hand the public key out freely to literally anyone.</p>
+
+<p>The relationship between the two keys unlocks two distinct capabilities, and it's easy to get them backwards:</p>
+
+<table>
+  <thead>
+    <tr><th>Goal</th><th>Who uses which key</th><th>What it achieves</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Confidentiality (encryption)</td><td>Sender encrypts with the recipient's <strong>public</strong> key; only the recipient's <strong>private</strong> key can decrypt it</td><td>Only the intended recipient can read the message</td></tr>
+    <tr><td>Authenticity (signing)</td><td>Signer signs with their own <strong>private</strong> key; anyone can verify with the signer's <strong>public</strong> key</td><td>Anyone can confirm who produced the message and that it wasn't altered</td></tr>
+  </tbody>
+</table>
+
+<p>In practice, real-world algorithms are RSA or elliptic-curve schemes like ECDSA and Ed25519: the math differs, but the roles of "public key encrypts or verifies" and "private key decrypts or signs" hold across all of them.</p>
+
+<h2>Digital signatures: proving authorship without a shared secret</h2>
+
+<p>A <strong>digital signature</strong> is what lets PKI prove authenticity and integrity at the same time, and it works in three steps. First, the signer runs the message through a cryptographic hash function, producing a short, fixed-length fingerprint of the content. Second, the signer encrypts that hash with their own private key: this encrypted hash is the signature. Third, anyone with the signer's public key can decrypt the signature back into the original hash, independently re-hash the message they received, and compare the two. If they match, two things are simultaneously true: the message came from someone holding that private key, and the message hasn't been altered by so much as a single byte since it was signed – changing anything in the content changes its hash completely, breaking the match.</p>
+
+<p>This gives PKI three properties that plain passwords or shared secrets can't provide on their own:</p>
+
+<ul>
+  <li><strong>Authenticity:</strong> the signature could only have been produced by the private key's holder.</li>
+  <li><strong>Integrity:</strong> any tampering with the signed content, however small, invalidates the signature.</li>
+  <li><strong>Non-repudiation:</strong> assuming the private key wasn't compromised, the signer can't credibly deny having signed it, because no one else could have produced a valid signature.</li>
+</ul>
+
+<p>Notice what a signature does <em>not</em> prove on its own: it says nothing about who the key's owner actually is in the real world. A key pair generated five minutes ago by anyone, anywhere, can produce perfectly valid signatures. Binding a public key to a verified real-world identity is exactly the job of the next piece: the certificate.</p>
+
+<h2>Certificates: binding a key to an identity</h2>
+
+<p>A <strong>digital certificate</strong> is a small, signed data structure that says, in effect, "this public key belongs to this identity, and I – a trusted party – vouch for that." The dominant format is <strong>X.509</strong>, and every certificate you'll encounter, whether for a website, a piece of signed software, or an email address, carries roughly the same core fields:</p>
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>What it contains</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Subject</td><td>The identity the certificate is issued to – a domain name, an organization, or a person</td></tr>
+    <tr><td>Public key</td><td>The subject's public key, the actual thing being certified</td></tr>
+    <tr><td>Issuer</td><td>The certificate authority that verified the subject and issued the certificate</td></tr>
+    <tr><td>Validity period</td><td>A "not before" and "not after" date – certificates expire by design, limiting how long a compromised key stays trusted</td></tr>
+    <tr><td>Serial number</td><td>A unique identifier used for tracking and revocation</td></tr>
+    <tr><td>Signature</td><td>The issuer's digital signature over the whole certificate, which is what lets anyone verify it hasn't been forged or altered</td></tr>
+  </tbody>
+</table>
+
+<p>That last field is the whole trick: the certificate authority doesn't just assert the binding between key and identity, it cryptographically signs that assertion using its own private key – which means verifying a certificate is itself just another signature check, chained one level up.</p>
+
+<h2>Certificate authorities and the chain of trust</h2>
+
+<p>A <strong>certificate authority (CA)</strong> is an organization whose job is verifying that whoever requests a certificate actually controls the identity – a domain, an email address, an organization – they're claiming, and then issuing a signed certificate attesting to that. Your browser, operating system, and email client each ship with a curated list of <strong>root CAs</strong> they trust by default. Every certificate they'll accept has to trace back to one of those roots through an unbroken chain of signatures: a root CA signs an intermediate CA's certificate, and that intermediate signs the actual certificate you're presented with day to day. Root keys are kept offline and used as rarely as possible, precisely because a compromised root would be catastrophic – if an intermediate is ever compromised instead, it can be revoked and replaced without touching the root at all.</p>
+
+<p>This chain-of-trust model, and the specific mechanics of how it plays out for web certificates – including Domain, Organization, and Extended Validation levels, and the Certificate Transparency logs that keep certificate authorities honest – is covered in full in <a href="../tls-certificate-transparency/">TLS certificates and Certificate Transparency</a>. What matters here is the general pattern: trust doesn't come from any single certificate being self-evidently correct, it comes from a verifiable chain of signatures rooted in a small set of parties that a huge number of independent systems have agreed, in advance, to trust.</p>
+
+<h2>Where PKI actually gets used</h2>
+
+<p>TLS is PKI's most visible application, but the same public-key-plus-certificate model quietly runs several other systems most people interact with daily:</p>
+
+<table>
+  <thead>
+    <tr><th>Use case</th><th>What the certificate proves</th><th>What it protects against</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>TLS / HTTPS</strong></td><td>The server your browser connected to controls the domain named in the certificate</td><td>Eavesdropping and impersonation of a website by an attacker without the matching private key</td></tr>
+    <tr><td><strong>Code signing</strong></td><td>A piece of software was published by the developer or vendor named in the signing certificate, and hasn't been modified since</td><td>Tampered or trojanized software being installed as if it were the genuine, unmodified release</td></tr>
+    <tr><td><strong>S/MIME (email)</strong></td><td>An email genuinely came from the sender's address and its content hasn't been altered in transit</td><td>Email spoofing and undetected tampering of message content</td></tr>
+    <tr><td><strong>Client certificates</strong></td><td>The connecting device or user is who they claim to be, verified by the server rather than the other way around</td><td>Unauthorized devices or users connecting to VPNs, internal services, or machine-to-machine APIs</td></tr>
+  </tbody>
+</table>
+
+<p>Client certificates are worth calling out because they flip the usual direction: in ordinary TLS browsing, the server proves its identity to you. In <strong>mutual TLS (mTLS)</strong>, both sides present certificates, so the server can also verify exactly which device or user is connecting – the model behind smart-card logins, many corporate VPNs, and service-to-service authentication inside a company's own infrastructure.</p>
+
+<h2>Generating and inspecting a certificate yourself</h2>
+
+<p>None of this requires special access to observe – the entire lifecycle of a key pair and a certificate is a few OpenSSL commands away, and walking through it once turns the abstract diagram above into something concrete. Generate a private key, request a certificate for it, and then look at exactly what fields end up inside:</p>
+
+<pre tabindex="0"><code># Generate an elliptic-curve private key (the public key is derivable from it)
+$ openssl ecparam -name prime256v1 -genkey -noout -out private.key
+
+# Create a Certificate Signing Request (CSR) - what you'd hand to a real CA
+$ openssl req -new -key private.key -out request.csr -subj "/CN=example.com"
+
+# For local testing, self-sign it instead of sending it to a CA
+$ openssl x509 -req -in request.csr -signkey private.key \
+    -out selfsigned.crt -days 365
+
+# Inspect any certificate's actual fields
+$ openssl x509 -in selfsigned.crt -noout -text | head -12
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4a:1f:...
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN=example.com
+        Validity
+            Not Before: Jul 22 00:00:00 2026 GMT
+            Not After : Jul 22 00:00:00 2027 GMT
+        Subject: CN=example.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey</code></pre>
+
+<p>A self-signed certificate like this one carries all the same fields as one issued by a real CA – subject, issuer, validity window, public key, signature – except its Issuer and Subject are identical, and no browser or operating system will trust it, because it wasn't signed by anything already in their trust store. That's the entire practical difference between "a certificate" and "a trusted certificate": the signature, and whether the party that produced it is one your software already agreed, in advance, to believe.</p>
+
+<h2>Revocation: what happens when a private key leaks</h2>
+
+<p>A certificate's validity period limits the blast radius of a compromise by design, but expiration dates alone are often too slow: a leaked private key needs to stop being trusted immediately, not whenever it happens to expire. Two mechanisms exist to make that possible:</p>
+
+<ul>
+  <li><strong>Certificate Revocation Lists (CRLs):</strong> a signed, published list of certificate serial numbers a CA has revoked before their natural expiry. Clients can download and check against it, though CRLs can grow large and aren't always checked in real time.</li>
+  <li><strong>Online Certificate Status Protocol (OCSP):</strong> a live, per-certificate query: a client asks "is this specific certificate still valid?" and gets a real-time signed answer back, avoiding the need to download an entire list.</li>
+</ul>
+
+<p>Revocation only protects what happens next, though. It doesn't undo anything already signed with a compromised key before the compromise was discovered, which is exactly why key management (keeping private keys offline, hardware-protected, and access-controlled) matters as much as the cryptography itself. The strongest algorithm in the world doesn't help if the private key behind it sits in a world-readable file.</p>
+
+<h2>The takeaway</h2>
+
+<p>PKI is not one technology but a layered system: asymmetric key pairs make signing and encryption possible, digital signatures let anyone verify authorship and integrity without a shared secret, certificates bind a public key to a real identity, and certificate authorities extend that binding into a chain of trust that browsers, operating systems, and mail clients agree to honor in advance. The same pattern shows up whether you're loading a website, installing signed software, reading a verified email, or connecting to a corporate VPN with a smart card – different certificates, same underlying machinery. Understanding that machinery is what turns "the padlock means it's secure" into an actual, verifiable claim about who controls which key.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between a public key and a private key?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A public and private key are mathematically linked but serve opposite roles, and the security of the whole system rests on the private key never leaving its owner's control. The public key can be shared with anyone – it's used to encrypt messages meant only for the key pair's owner, or to verify a signature that owner produced. The private key must stay secret, because it's used to decrypt those messages or to create signatures in the first place. Anyone who obtains your private key can impersonate you cryptographically, which is why PKI's practical security depends more on private-key protection than on the strength of the algorithm itself.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does a digital signature actually prove?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A valid digital signature proves three things at once: authenticity (the signature could only have been produced by whoever holds the corresponding private key), integrity (the signed content has not been altered since it was signed, because changing even one byte breaks the signature), and non-repudiation (the signer cannot credibly deny having signed it, assuming their private key was not compromised). It does not, by itself, prove the signer's real-world identity: that link between a public key and a verified identity is exactly what a certificate authority is for.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is a certificate authority and why do we need one?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A certificate authority (CA) is a trusted organization that verifies a public key genuinely belongs to whoever is claiming it, then issues a signed certificate binding that key to a verified identity or domain. Without a CA, a public key is just a number with no proven owner – anyone could generate a key pair and claim to be your bank. Browsers, operating systems, and mail clients ship with a built-in list of root CAs they trust by default, and every certificate they accept must trace back to one of those roots through an unbroken chain of signatures.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is PKI only used for websites (TLS)?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No – TLS is PKI's most visible use, but far from its only one. Code signing uses the same public/private key model to let an operating system verify that a downloaded application really came from the developer it claims to and hasn't been tampered with since. S/MIME applies it to email, letting recipients verify a message's sender and detect tampering. Client certificates let a server verify the identity of the connecting device or user, rather than the other way around, which is common in corporate VPNs, smart-card logins, and machine-to-machine authentication.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What happens if a private key is compromised?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Everything that key was trusted to protect is at risk: an attacker with the private key behind a TLS certificate could impersonate that website, one behind a code-signing key could publish malware that appears legitimately signed by a trusted developer, and one behind a personal certificate could forge signed emails or authenticate as the victim. The response is to revoke the compromised certificate immediately, which publishes it to a Certificate Revocation List (CRL) or makes it return "revoked" via OCSP, so relying parties stop trusting it, and then issue a new certificate from a freshly generated key pair. Revocation only protects people going forward, though: it does not undo anything already signed with the compromised key before the compromise was discovered.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../tls-certificate-transparency/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">TLS certificates and Certificate Transparency, explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../cryptography-basics/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cryptography basics: hashing, encryption, signatures</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../how-networks-work/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How networks work</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal &amp; info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

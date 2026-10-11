@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Is it safe to save passwords in your browser?</title>
+  <meta name="description" content="It does encrypt them, and anyone saying otherwise is out of date. What decides the risk is different: whether something can run on your computer as you." />
+  <meta name="keywords" content="save passwords in browser, is it safe to save passwords in chrome, browser password manager safety, password manager vs browser, voidstealer, infostealer browser passwords" />
+  <link rel="canonical" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/contrasenas-en-el-navegador/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Is it safe to save passwords in your browser? | Breachfolio" />
+  <meta property="og:description" content="It does encrypt them, and anyone saying otherwise is out of date. What decides the risk is different: whether something can run on your computer as you." />
+  <meta property="og:url" content="https://breachfolio.com/guides/browser-saved-passwords/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Is it safe to save passwords in your browser? | Breachfolio" />
+  <meta name="twitter:description" content="It does encrypt them, and anyone saying otherwise is out of date. What decides the risk is different: whether something can run on your computer as you." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Is it safe to save passwords in your browser?",
+      "description": "It does encrypt them, and anyone saying otherwise is out of date. What decides the risk is different: whether something can run on your computer as you.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp",
+      "datePublished": "2026-08-29",
+      "dateModified": "2026-08-29",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Daniel A.",
+          "url": "https://breachfolio.com/legal/about/"
+        },
+        {
+          "@type": "Person",
+          "name": "Óscar S.",
+          "url": "https://breachfolio.com/legal/about/"
+        }
+      ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/guides/browser-saved-passwords/"
+      },
+      "inLanguage": "en",
+      "keywords": "save passwords in browser, is it safe to save passwords in chrome, browser password manager safety, password manager vs browser, voidstealer, infostealer browser passwords"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://breachfolio.com/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Passwords saved in the browser",
+          "item": "https://breachfolio.com/guides/browser-saved-passwords/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/guides/browser-saved-passwords/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Chrome encrypt my passwords or not?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It does. On Windows it encrypts them with a key tied to your user account, and since Chrome 127 in July 2024 it adds app-bound encryption on top. Articles claiming they are stored \"in plain text\" are out of date. What remains true is that this encryption does not protect against a program running inside your own session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "If I have antivirus, am I covered?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It helps, but do not treat it as settled. Credential stealers sold as a service are updated specifically to avoid detection, and they turn over versions faster than signatures are published. Antivirus lowers the probability; it does not remove it. That is why the second factor matters more: it protects you even when detection fails."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Google's sync passphrase worth using?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is worth using for one specific thing, and it is worth not confusing it: it means not even Google can read your synced passwords, and that someone breaking into your Google account does not walk off with them. That is real. What it does not do is protect you from malware on your own machine, because there the passwords have to be decrypted to be usable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Firefox with a primary password safer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Better than an always-open store, yes, and for the same reason a manager is: it introduces a lock that has to be opened. It moves towards a manager's behaviour without being one. But while it stays unlocked in that session the risk is the same again, so do not treat it as a complete answer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Someone got into my computer. What do I change first?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your main email, from another device, ending every open session. Then banking. Signing out of sessions is the step almost nobody takes and the one that matters most: if session cookies were stolen, whoever has them can stay inside without ever needing the new password you just set."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "So should I switch to a manager or not?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you currently reuse passwords because you cannot remember them, yes, and that is the compelling reason: it fixes a risk you already have. If you reuse none and the computer is only yours, switching buys you less than the noise suggests. Either way, turning on a second factor for email and banking protects you more than any decision about where they are stored."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guides</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Hacked email account</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-guide-browser-passwords.webp" alt="Three vault doors standing open, their contents streaming from one to the next until the last is empty" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUIDES · PASSWORDS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Is it safe to save passwords in your browser?</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">The short answer</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">It does encrypt them, and anyone telling you otherwise is working from outdated information. What decides the risk is not the encryption: it is whether something can run on your computer as you.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Half the world does it and half the world wonders. Most articles answering the question give a flat no, resting on an argument that stopped being true years ago.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-29">August 29, 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min read</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-2xl text-[16.5px] leading-[1.8] text-muted-foreground space-y-5">
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Yes, your browser encrypts them</h2>
+      <p>That has to come first, because it is where most of the writing on this subject goes wrong.</p>
+      <p>It is easy to find articles, some in large outlets, claiming that Chrome stores passwords "unencrypted" or "visible to anyone". <strong class="text-foreground">That is not true.</strong> On Windows it encrypts them with a key tied to your operating system user account. And since July 2024, with Chrome 127, Google added <em>app-bound encryption</em>, which ties that key to the browser itself so another program cannot simply ask for it.</p>
+      <p>So "are they encrypted?" has a dull answer: yes. <strong class="text-foreground">The problem is that this is not the right question.</strong></p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">What does that encryption actually protect against?</h2>
+      <p>Here is the distinction that changes everything, and almost nobody spells it out:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">It protects against another person.</strong> Someone who walks off with your powered-down laptop, or boots from a USB stick and copies the files, finds unreadable data.</li>
+        <li><strong class="text-foreground">It protects against another account on the same machine.</strong> If your partner or your brother has their own Windows user, they cannot read yours.</li>
+        <li><strong class="text-foreground">It does not protect against a program running as you.</strong> And that is the point: the encryption is bound to your session, so <em>anything running inside your session holds the key by definition</em>.</li>
+      </ul>
+      <p>Put differently: <strong class="text-foreground">it is not a safe, it is a locked drawer whose key you carry the entire time you are using the computer.</strong> Against a burglar breaking in, useful. Against someone already inside wearing your face, not.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Why this changed in 2026</h2>
+      <p>For a while it looked as though app-bound encryption had closed the door. It did not close it: it raised the price.</p>
+      <p>In <strong class="text-foreground">March 2026</strong> came <strong class="text-foreground">VoidStealer</strong>, a credential stealer sold as a service that <strong class="text-foreground">defeats that protection without needing administrator rights</strong>. Its technique is as elegant as it is uncomfortable to read:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. It lets Chrome do the work.</strong> It does not try to break the encryption. It starts a hidden instance of the browser and waits.</li>
+        <li><strong class="text-foreground">2. It attaches to the process as a debugger.</strong> Exactly as a development tool would.</li>
+        <li><strong class="text-foreground">3. It waits for the precise moment</strong> Chrome decrypts its own key in order to use it, because at some point it has to.</li>
+        <li><strong class="text-foreground">4. It grabs the key from memory</strong> while it sits there in the clear, and from there reads passwords and session cookies.</li>
+      </ul>
+      <p>The underlying lesson is not "Chrome is insecure". It is that <strong class="text-foreground">data your computer must be able to decrypt in order to use it can also be decrypted by another program on that same computer.</strong> No future version fixes that.</p>
+      <p>And it is worth saying what this case does <em>not</em> say: it does not mean your passwords will be stolen because you use Chrome, nor that Firefox and Edge are safe by virtue of not being named. It means <strong class="text-foreground">the bar for stealing them is lower than it was</strong>, and that malware is already being sold with the capability built in.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">The question that does decide the risk</h2>
+      <p>It is not "does the browser encrypt?". It is this:</p>
+      <p><strong class="text-foreground">How likely is it that something runs on my computer, as me?</strong></p>
+      <p>And you can answer that yourself, because it turns on concrete things:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Do you install software from odd places?</strong> Cracks, activators, "free" versions of paid software. This is route number one by a distance.</li>
+        <li><strong class="text-foreground">Does your Windows session have a password?</strong> If not, all that browser encryption rests on an open door.</li>
+        <li><strong class="text-foreground">Do you share the computer under one user account?</strong> A shared Windows profile removes the separation between people entirely.</li>
+        <li><strong class="text-foreground">Do you install extensions without looking?</strong> An extension with broad permissions is already inside the browser.</li>
+        <li><strong class="text-foreground">Is it a work machine, or someone else's?</strong> There you control neither what is installed nor who administers it.</li>
+      </ul>
+      <p>If your answers are all reassuring, saving passwords in the browser is a perfectly reasonable risk. If two or three are not, you have a problem that changing browser does <em>not</em> solve.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">The uncomfortable part: a manager has the same problem</h2>
+      <p>This is where most articles cheat. They describe the browser's risk, recommend a password manager and leave, implying the problem goes away. <strong class="text-foreground">It does not go away.</strong></p>
+      <p>If malware is running as you and your manager is <em>open</em> at that moment, it can be read just the same. The malware breaks nobody's cryptography: it waits for you to open it.</p>
+      <p><strong class="text-foreground">The real difference is one thing, and it matters: the manager closes.</strong></p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">The browser's store is available whenever</strong> your session is signed in. Which is, for most people, every hour the machine is switched on.</li>
+        <li><strong class="text-foreground">The manager is locked by default</strong> and re-locks itself after a few minutes. Outside that window, what gets stolen is data encrypted with a key that is not on the machine.</li>
+        <li><strong class="text-foreground">They are different things to steal.</strong> From the browser they take a file. From a locked manager, noise.</li>
+      </ul>
+      <p>That is not a marketing distinction: it is the difference between a closed door and one left ajar. If you want the detail on which to pick, it is in the <a href="../../compare/password-managers-compared/" class="text-accent ul-link">password manager comparison</a>.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">When the browser is perfectly fine</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Accounts that would not hurt.</strong> The newspaper, the forum, the shop you bought from once.</li>
+        <li><strong class="text-foreground">Your own machine, with your own password-protected session</strong>, and no habit of installing things from anywhere.</li>
+        <li><strong class="text-foreground">Measured against the real alternative.</strong> This matters far more than it sounds: if the choice is not "manager" but <strong class="text-foreground">reusing the same password everywhere</strong> because you cannot remember them, the browser is clearly better than that.</li>
+      </ul>
+      <p>That last point is what gets lost in the articles that give a flat no. <strong class="text-foreground">A reused password is a certain, present risk; credential theft is a probable but not guaranteed one.</strong> Trading the second for the first is a bad deal.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">When not to, no argument</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Your main email.</strong> It is the master key: every other account is recovered through it. It should not be saved anywhere.</li>
+        <li><strong class="text-foreground">Banking and anything holding money.</strong></li>
+        <li><strong class="text-foreground">A work computer</strong>, or any machine someone else administers.</li>
+        <li><strong class="text-foreground">A shared machine running on a single Windows user.</strong></li>
+        <li><strong class="text-foreground">Accounts holding other people's data</strong>: clients, patients, children.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">What to do today, in ten minutes</h2>
+      <p>In order of risk reduced per minute spent:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. Turn on two-factor authentication</strong> for your email and your bank. It is <em>the only item here that still protects you after the password is stolen</em>, because the password alone stops being enough. If you do one thing today, this is it.</li>
+        <li><strong class="text-foreground">2. Take email and banking out of the browser.</strong> You do not need to migrate everything: delete those two and learn them or keep them elsewhere.</li>
+        <li><strong class="text-foreground">3. Put a password on your Windows session</strong> if it has none. It is the floor everything else stands on.</li>
+        <li><strong class="text-foreground">4. Review your extensions</strong> and remove the ones you do not use. Each is a program with access to what you do in the browser.</li>
+        <li><strong class="text-foreground">5. Check whether any have already leaked</strong>, because the browser does not protect you from a breach at the other end. How to check is in <a href="../check-if-your-data-was-breached/" class="text-accent ul-link">this guide</a>.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">If you think they are already in</h2>
+      <p>The priorities change, and do it <strong class="text-foreground">from another device</strong>, not the suspect computer:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Main email first</strong>, always. Everything else hangs off it.</li>
+        <li><strong class="text-foreground">Sign out of every open session</strong> on each account. Almost nobody does this and it is critical: <em>whoever steals session cookies gets in without ever needing your new password</em>.</li>
+        <li><strong class="text-foreground">Then banking</strong> and anything holding money or other people's data.</li>
+        <li><strong class="text-foreground">And only then</strong> the rest, calmly.</li>
+      </ul>
+      <p>Changing the password without ending the open sessions is the most common mistake, and it leaves the door exactly as open as it was.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">What to take away</h2>
+      <p>That the question was badly framed. The browser encrypts; the encryption is not the weak point. <strong class="text-foreground">The weak point is that your signed-in session is the key, and what modern malware does is wait for you to use it.</strong></p>
+      <p>So it is not "browser yes or browser no". It is <strong class="text-foreground">which accounts you can afford to lose</strong>. The ones that would not hurt, leave where they are. Email and banking, out, with a second factor. And if someone ever does get in, you know where to start and why ending sessions comes before almost everything else.</p>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Frequently asked questions</div>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Does Chrome encrypt my passwords or not?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            It does. On Windows it encrypts them with a key tied to your user account, and since Chrome 127 in July 2024 it adds app-bound encryption on top. Articles claiming they are stored "in plain text" are out of date. What remains true is that this encryption does not protect against a program running inside your own session.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>If I have antivirus, am I covered?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            It helps, but do not treat it as settled. Credential stealers sold as a service are updated specifically to avoid detection, and they turn over versions faster than signatures are published. Antivirus lowers the probability; it does not remove it. That is why the second factor matters more: it protects you even when detection fails.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Is Google's sync passphrase worth using?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            It is worth using for one specific thing, and it is worth not confusing it: it means not even Google can read your synced passwords, and that someone breaking into your Google account does not walk off with them. That is real. What it does not do is protect you from malware on your own machine, because there the passwords have to be decrypted to be usable.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Is Firefox with a primary password safer?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Better than an always-open store, yes, and for the same reason a manager is: it introduces a lock that has to be opened. It moves towards a manager's behaviour without being one. But while it stays unlocked in that session the risk is the same again, so do not treat it as a complete answer.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Someone got into my computer. What do I change first?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Your main email, from another device, ending every open session. Then banking. Signing out of sessions is the step almost nobody takes and the one that matters most: if session cookies were stolen, whoever has them can stay inside without ever needing the new password you just set.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>So should I switch to a manager or not?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            If you currently reuse passwords because you cannot remember them, yes, and that is the compelling reason: it fixes a risk you already have. If you reuse none and the computer is only yours, switching buys you less than the noise suggests. Either way, turning on a second factor for email and banking protects you more than any decision about where they are stored.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../../compare/password-managers-compared/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Password managers compared</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../check-if-your-data-was-breached/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Your data has already leaked</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

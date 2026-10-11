@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, &#39;JetBrains Mono&#39;, SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"></path>
+  </pattern>
+  <radialGradient id="rad" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="hsl(340 78% 60%)" stop-opacity="0.4"></stop>
+    <stop offset="60%" stop-color="hsl(340 78% 60%)" stop-opacity="0.06"></stop>
+    <stop offset="100%" stop-color="hsl(340 78% 60%)" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="hsl(340 18% 8%)" stop-opacity="0"></stop>
+    <stop offset="100%" stop-color="hsl(340 18% 8%)" stop-opacity="0.92"></stop>
+  </linearGradient>
+  <linearGradient id="hue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="hsl(0 70% 65%)"></stop>
+    <stop offset="100%" stop-color="hsl(340 78% 60%)"></stop>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(340 22% 5%)"></rect>
+<rect width="1200" height="675" fill="hsl(340 18% 8%)" opacity="0.6"></rect>
+<rect width="1200" height="675" fill="url(#grid)"></rect>
+<line x1="600" y1="340" x2="220" y2="200" stroke="hsl(340 78% 60%)" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 5"></line><line x1="600" y1="340" x2="380" y2="480" stroke="hsl(340 78% 60%)" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 5"></line><line x1="600" y1="340" x2="870" y2="240" stroke="hsl(340 78% 60%)" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 5"></line><line x1="600" y1="340" x2="950" y2="460" stroke="hsl(340 78% 60%)" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 5"></line><line x1="600" y1="340" x2="180" y2="420" stroke="hsl(340 78% 60%)" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 5"></line><line x1="600" y1="340" x2="720" y2="540" stroke="hsl(340 78% 60%)" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="3 5"></line>
+    <g>
+      <circle cx="600" cy="340" r="80" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="600" cy="340" r="52" fill="hsl(340 78% 60%)" opacity="0.14"></circle>
+      <rect x="556" y="296" width="88" height="88" rx="14" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="2"></rect>
+      <text x="600" y="332" text-anchor="middle" font-size="14" font-family="ui-monospace" fill="hsl(340 78% 60%)" letter-spacing="3">C2</text>
+      <text x="600" y="352" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(0 70% 65%)" letter-spacing="2">SERVER</text>
+      <text x="600" y="370" text-anchor="middle" font-size="10" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.7">10.0.0.1:8443</text>
+    </g><g>
+      <circle cx="220" cy="200" r="22" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="220" cy="200" r="11" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="1.6"></circle>
+      <circle cx="220" cy="200" r="4" fill="hsl(340 78% 60%)" opacity="0.4"></circle>
+      <text x="220" y="230" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(240 5% 65%)" letter-spacing="2">host-7B</text>
+    </g><g>
+      <circle cx="380" cy="480" r="22" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="380" cy="480" r="11" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="1.6"></circle>
+      <circle cx="380" cy="480" r="4" fill="hsl(340 78% 60%)" opacity="0.95"></circle>
+      <text x="380" y="510" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(240 5% 65%)" letter-spacing="2">sccm-01</text>
+    </g><g>
+      <circle cx="870" cy="240" r="22" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="870" cy="240" r="11" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="1.6"></circle>
+      <circle cx="870" cy="240" r="4" fill="hsl(340 78% 60%)" opacity="0.4"></circle>
+      <text x="870" y="270" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(240 5% 65%)" letter-spacing="2">win-svc</text>
+    </g><g>
+      <circle cx="950" cy="460" r="22" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="950" cy="460" r="11" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="1.6"></circle>
+      <circle cx="950" cy="460" r="4" fill="hsl(340 78% 60%)" opacity="0.95"></circle>
+      <text x="950" y="490" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(240 5% 65%)" letter-spacing="2">jump-3</text>
+    </g><g>
+      <circle cx="180" cy="420" r="22" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="180" cy="420" r="11" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="1.6"></circle>
+      <circle cx="180" cy="420" r="4" fill="hsl(340 78% 60%)" opacity="0.4"></circle>
+      <text x="180" y="450" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(240 5% 65%)" letter-spacing="2">srv-04</text>
+    </g><g>
+      <circle cx="720" cy="540" r="22" fill="hsl(340 78% 60%)" opacity="0.08"></circle>
+      <circle cx="720" cy="540" r="11" fill="hsl(340 22% 5%)" stroke="hsl(340 78% 60%)" stroke-width="1.6"></circle>
+      <circle cx="720" cy="540" r="4" fill="hsl(340 78% 60%)" opacity="0.95"></circle>
+      <text x="720" y="570" text-anchor="middle" font-size="11" font-family="ui-monospace" fill="hsl(240 5% 65%)" letter-spacing="2">dev-laptop</text>
+    </g>
+    <g transform="translate(60 100)" font-size="12" font-family="ui-monospace" letter-spacing="2">
+      <text fill="hsl(340 78% 60%)">SESSIONS</text>
+      <text y="22" fill="hsl(240 5% 65%)">6 ACTIVE · mTLS</text>
+      <text y="42" fill="hsl(0 70% 65%)">PROTOCOL</text>
+      <text y="62" fill="hsl(240 5% 65%)">https · wireguard</text>
+    </g>
+<rect width="1200" height="675" fill="url(#vfade)"></rect>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(340 78% 60%)" opacity="0.95">TOOLS / 05</text>
+  <text x="40" y="615" fill="hsl(240 5% 65%)" opacity="0.55">METASPLOIT  VS  SLIVER</text>
+  <text x="1160" y="615" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO.COM</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(340 78% 60%)"></circle>
+<circle cx="1160" cy="50" r="9" fill="hsl(340 78% 60%)" opacity="0.25"></circle>
+</svg>

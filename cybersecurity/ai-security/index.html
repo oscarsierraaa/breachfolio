@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cyber">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI in cybersecurity: attack and defense | Breachfolio</title>
+  <meta name="description" content="How artificial intelligence is reshaping cybersecurity – for attackers and defenders. What&#x27;s real, what&#x27;s marketing, and what you should care about now." />
+  <meta name="keywords" content="AI in cybersecurity, artificial intelligence cybersecurity, AI cyber defense, offensive AI, AI-powered threat detection, machine learning intrusion detection, how AI is changing cybersecurity, AI SOC automation, AI security tools, adversarial AI attacks, AI vs AI cybersecurity, is AI a threat to cybersecurity, autonomous incident response, AI threat detection and response" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/ai-security/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/ai-security/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ia-y-ciberseguridad/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/ai-security/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="AI in cybersecurity: attack and defense | Breachfolio" />
+  <meta property="og:description" content="How artificial intelligence is reshaping cybersecurity – for attackers and defenders. What&#x27;s real, what&#x27;s marketing, and what you should care about now." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/ai-security/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-aisec.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI in cybersecurity: attack and defense | Breachfolio" />
+  <meta name="twitter:description" content="How artificial intelligence is reshaping cybersecurity – for attackers and defenders. What&#x27;s real, what&#x27;s marketing, and what you should care about now." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-aisec.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "AI in cybersecurity: how attack and defense are changing",
+      "description": "How artificial intelligence is reshaping cybersecurity – for attackers and defenders. What's real, what's marketing, and what you should care about now.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-aisec.webp",
+      "datePublished": "2026-07-10", "dateModified": "2026-07-18",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/cybersecurity/ai-security/"
+      },
+      "inLanguage": "en",
+      "keywords": "AI in cybersecurity, artificial intelligence cybersecurity, AI cyber defense, offensive AI, AI-powered threat detection, machine learning intrusion detection, how AI is changing cybersecurity, AI SOC automation, AI security tools, adversarial AI attacks, AI vs AI cybersecurity, is AI a threat to cybersecurity, autonomous incident response, AI threat detection and response"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cybersecurity",
+          "item": "https://breachfolio.com/cybersecurity/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI & Cybersecurity",
+          "item": "https://breachfolio.com/cybersecurity/ai-security/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/ai-security/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is AI actually being used by cybercriminals?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes – AI is already used to write more convincing phishing content, automate reconnaissance, and speed up parts of an attack chain, though most offensive use so far augments existing techniques rather than inventing entirely new ones." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI replace human security analysts?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No, not currently. AI is best used to triage and summarize alerts and speed up investigation, but judgment calls on real incidents still require a human analyst in the loop." }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between AI-powered threat detection and traditional detection?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Traditional detection relies on known signatures and fixed rules, while AI-powered detection looks for anomalous patterns in behavior – which can catch novel attacks but also produces different kinds of false positives." }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">AI &amp; Cybersecurity</span></li>
+  </ol>
+</nav><main id="main">
+  <!-- Hero -->
+  <section data-theme-section="dark" class="ai-hero relative overflow-hidden border-b border-border">
+    <div class="absolute inset-0 grid-pattern opacity-50" aria-hidden="true"></div>
+    <div class="relative max-w-container mx-auto px-6 md:px-12 pt-20 md:pt-28 pb-20 md:pb-28 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ai-pill text-[11px] font-mono tracking-[0.2em] uppercase">
+        <span class="w-1.5 h-1.5 rounded-full pulse-dot"></span>
+        <span data-i18n="ai.eyebrow">UPDATED · JULY 2026</span>
+      </div>
+      <h1 class="font-display mt-7 text-[clamp(2.8rem,8vw,5.2rem)] leading-[1.02] tracking-[-0.02em] font-semibold">
+        <span data-i18n="ai.title.l1">AI &amp;</span>
+        <span class="ai-gradient-text" data-i18n="ai.title.l2">Cybersecurity.</span>
+      </h1>
+      <p class="mt-6 max-w-2xl mx-auto text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] text-balance" data-i18n="ai.sub">
+        How artificial intelligence is reshaping both attack and defense – and what you need to know right now.
+      </p>
+
+      <!-- Defense / Offense segmented switch -->
+      <div class="mt-10 inline-flex items-center rounded-full border border-border bg-surface/50 backdrop-blur p-1" role="tablist" aria-label="View">
+        <button id="tab-defense" data-mode-target="defense" role="tab" aria-selected="true"
+          class="ai-tab-on inline-flex items-center gap-2 h-11 px-5 rounded-full text-[14px] font-medium">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 5.5v6c0 4.5 3 8.3 7.5 9.5 4.5-1.2 7.5-5 7.5-9.5v-6L12 3z"/></svg>
+          <span data-i18n="ai.tab.defense">Defense Tools</span>
+        </button>
+        <button id="tab-offense" data-mode-target="offense" role="tab" aria-selected="false"
+          class="inline-flex items-center gap-2 h-11 px-5 rounded-full text-muted-foreground hover:text-foreground text-[14px] font-medium transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+          <span data-i18n="ai.tab.offense">Offensive AI</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-20 md:py-28 border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12">
+      <div class="text-center max-w-2xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full ai-pill text-[11px] font-mono tracking-[0.2em] uppercase" data-i18n="ai.how.eyebrow">HOW IT WORKS</div>
+        <h2 class="font-display mt-5 text-[clamp(2rem,4.6vw,3rem)] leading-[1.1] tracking-tight font-semibold" data-i18n="ai.how.title">From signal to response – in under a second</h2>
+        <p class="mt-5 text-muted-foreground text-[16.5px] leading-[1.7]" data-i18n="ai.how.sub">What an AI-native defense platform does between the first packet of an attack and the moment it’s contained.</p>
+      </div>
+
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-4 gap-5 relative">
+        <div class="hidden md:block absolute top-9 left-[12.5%] right-[12.5%] h-px" style="background: linear-gradient(to right, transparent, hsl(var(--ai-tint) / 0.4), transparent)"></div>
+        
+          <article class="bg-surface border border-border rounded-card p-6 hover:border-accent/40 transition-colors ai-side-shadow">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-lg grid place-items-center ai-pill">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h7m4 0h7M12 5l3 7-3 7"/></svg>
+              </div>
+              <span class="font-mono text-[11px] text-muted tracking-widest">01</span>
+            </div>
+            <h3 class="font-display mt-5 text-[18px] font-semibold tracking-tight" data-i18n="ai.how.s1.t">Ingest</h3>
+            <p class="mt-2 text-muted-foreground text-[14px] leading-[1.7]" data-i18n="ai.how.s1.b">Logs, packets, endpoint telemetry, identity events. Normalised to a common schema. Time-aligned across every source.</p>
+          </article>
+        
+          <article class="bg-surface border border-border rounded-card p-6 hover:border-accent/40 transition-colors ai-side-shadow">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-lg grid place-items-center ai-pill">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6H4zM4 14h16v6H4z"/></svg>
+              </div>
+              <span class="font-mono text-[11px] text-muted tracking-widest">02</span>
+            </div>
+            <h3 class="font-display mt-5 text-[18px] font-semibold tracking-tight" data-i18n="ai.how.s2.t">Score</h3>
+            <p class="mt-2 text-muted-foreground text-[14px] leading-[1.7]" data-i18n="ai.how.s2.b">A model trained on labelled incidents assigns a confidence score to each chain of events. False-positive rates are calibrated weekly.</p>
+          </article>
+        
+          <article class="bg-surface border border-border rounded-card p-6 hover:border-accent/40 transition-colors ai-side-shadow">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-lg grid place-items-center ai-pill">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+              </div>
+              <span class="font-mono text-[11px] text-muted tracking-widest">03</span>
+            </div>
+            <h3 class="font-display mt-5 text-[18px] font-semibold tracking-tight" data-i18n="ai.how.s3.t">Decide</h3>
+            <p class="mt-2 text-muted-foreground text-[14px] leading-[1.7]" data-i18n="ai.how.s3.b">Above the threshold, contain. Below it, alert. The boundary is auditable, versioned, and explainable to a regulator.</p>
+          </article>
+        
+          <article class="bg-surface border border-border rounded-card p-6 hover:border-accent/40 transition-colors ai-side-shadow">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-lg grid place-items-center ai-pill">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="font-mono text-[11px] text-muted tracking-widest">04</span>
+            </div>
+            <h3 class="font-display mt-5 text-[18px] font-semibold tracking-tight" data-i18n="ai.how.s4.t">Respond</h3>
+            <p class="mt-2 text-muted-foreground text-[14px] leading-[1.7]" data-i18n="ai.how.s4.b">Isolate the host. Revoke the token. Quarantine the inbox. The response playbook runs autonomously inside a documented blast radius.</p>
+          </article>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep dive -->
+  <section class="py-20 md:py-28 border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12">
+      <div class="max-w-prose mx-auto text-[15.5px] leading-[1.75] text-muted-foreground">
+        <h2 class="font-display text-[24px] md:text-[28px] font-semibold tracking-tight text-foreground">Where AI is actually changing the fight</h2>
+        <p class="mt-5">Most vendor claims about "AI-powered security" collapse into one of two categories: statistical anomaly detection that has existed since the 2000s rebranded with a new label, or a genuine large-language-model layer that reads, summarizes, and drafts. The second category is what changed in 2024-2026, and it changed both sides of the fight at the same time, which is why the honest answer to "is AI winning for attackers or defenders" is <strong>neither, yet</strong>.</p>
+
+        <h3 class="font-display mt-9 text-[19px] font-semibold text-foreground">How attackers are actually using it</h3>
+        <p class="mt-3">The offensive use cases that show up in real incident reports are unglamorous. Phishing emails no longer have the broken grammar that used to be a reliable tell: a model can localize a lure into fluent Spanish, French, or German in seconds. Reconnaissance that used to take an analyst a day of manual OSINT (organization charts, vendor relationships, employee LinkedIn profiles) can be scraped and summarized in minutes. Voice cloning from a 30-second sample has made "urgent call from the CEO" scams cheap to run at scale. None of this is a new attack technique: it is the same social engineering and phishing playbook that has worked for twenty years, just cheaper and more convincing to produce.</p>
+        <p class="mt-3">What has <em>not</em> materialized yet, despite the headlines, is autonomous AI malware that discovers and exploits zero-days on its own without a human operator in the loop. Every documented "AI-assisted" intrusion still has a human deciding what to do with the model's output.</p>
+
+        <h3 class="font-display mt-9 text-[19px] font-semibold text-foreground">How defenders are actually using it</h3>
+        <p class="mt-3">On the blue-team side, the highest-value use case is not detection: it is <strong>triage</strong>. A mid-size SOC can generate thousands of alerts a day; the median analyst spends most of a shift closing false positives rather than investigating real ones. A model that reads an alert, pulls the relevant logs, and drafts a one-paragraph summary of what probably happened cuts that triage time meaningfully, even when a human still makes the final call. Detection engines that flag behavioral anomalies (a service account authenticating from a new country at 3 a.m.) are a genuine improvement over static signature matching, but they trade false negatives for a different kind of false positive, and tuning that trade-off is still a manual, ongoing job.</p>
+
+        <h3 class="font-display mt-9 text-[19px] font-semibold text-foreground">Attack vs. defense, side by side</h3>
+        <table class="mt-5 w-full text-left text-[13.5px] border border-border rounded-card overflow-hidden">
+          <thead class="bg-surface-2 text-foreground">
+            <tr><th class="p-3 font-medium">Use case</th><th class="p-3 font-medium">Offensive value</th><th class="p-3 font-medium">Defensive value</th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border"><td class="p-3">Content generation</td><td class="p-3">Fluent phishing lures, deepfake voice/video</td><td class="p-3">Auto-drafted incident summaries and reports</td></tr>
+            <tr class="border-t border-border"><td class="p-3">Pattern recognition</td><td class="p-3">Faster target reconnaissance from public data</td><td class="p-3">Behavioral anomaly detection over static rules</td></tr>
+            <tr class="border-t border-border"><td class="p-3">Automation</td><td class="p-3">Scaling personalized scams cheaply</td><td class="p-3">Alert triage and first-pass log correlation</td></tr>
+            <tr class="border-t border-border"><td class="p-3">Current ceiling</td><td class="p-3">Still needs a human to weaponize output</td><td class="p-3">Still needs a human to approve containment</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="font-display mt-9 text-[19px] font-semibold text-foreground">What this means if you are not running a SOC</h3>
+        <p class="mt-3">For most people outside a security team, the practical takeaway is narrower than the marketing suggests: assume that any unsolicited message – email, text, or voice call – asking you to move money, click a link, or "verify" a login can no longer be screened by tone or grammar. Verify through a second channel you already trust (call the person back on a known number, not one they just gave you) rather than trusting how polished the request sounds.</p>
+        <ul class="mt-4 space-y-2 list-disc pl-5">
+          <li>Treat urgency plus a request for money or credentials as the actual red flag – not typos, which AI has mostly erased.</li>
+          <li>If a "familiar" voice or video asks for something unusual, hang up and call back on a number you already had, not one just given to you.</li>
+          <li>For teams: log every AI-assisted detection decision the same way you would a human one – the audit trail matters more, not less, once a model is in the loop.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 md:py-28 border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12">
+      <div class="max-w-prose mx-auto">
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Is AI actually being used by cybercriminals?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Yes – AI is already used to write more convincing phishing content, automate reconnaissance, and speed up parts of an attack chain, though most offensive use so far augments existing techniques rather than inventing entirely new ones.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Can AI replace human security analysts?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No, not currently. AI is best used to triage and summarize alerts and speed up investigation, but judgment calls on real incidents still require a human analyst in the loop.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What's the difference between AI-powered threat detection and traditional detection?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Traditional detection relies on known signatures and fixed rules, while AI-powered detection looks for anomalous patterns in behavior, which can catch novel attacks but also produces different kinds of false positives.
+  </div>
+</details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who writes this -->
+
+  <section class="pb-2">
+
+    <div class="max-w-container mx-auto px-6 md:px-12">
+
+      <div data-authorship class="max-w-prose pt-7 border-t border-border">
+
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This page was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+          <a class="ul-link" href="../../legal/about/">About us</a>
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Newsletter CTA -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-container mx-auto px-6 md:px-12">
+      <div class="bg-surface border border-border rounded-card p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-8 items-center ai-side-shadow">
+        <div>
+          <div class="font-mono text-[11px] tracking-[0.22em] uppercase ai-gradient-text">STAY IN TOUCH</div>
+          <h3 class="font-display mt-3 text-[24px] md:text-[28px] leading-tight font-semibold">Found something we got wrong, or want to say hello?</h3>
+          <p class="mt-2 text-muted-foreground text-[15px] leading-[1.7] max-w-xl">We read every message – corrections, tips for a future comparison, or just feedback on this page.</p>
+        </div>
+        <a href="../../legal/contact/" class="h-12 px-6 rounded-full bg-accent text-accent-foreground text-[15px] font-medium inline-flex items-center gap-2 self-start md:self-center">
+          <span>Get in touch</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

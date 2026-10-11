@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="compare">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burp Suite vs Caido: is the Rust proxy ready? | Breachfolio</title>
+  <meta name="description" content="Burp Suite vs Caido compared: architecture, workflow, scanning depth, and real 2026 pricing. Where the Rust-based newcomer keeps up, and where it doesn&#x27;t yet." />
+  <meta name="keywords" content="burp suite vs caido, caido vs burp suite 2026, is caido a good burp suite alternative, caido pricing, caido review, burp suite alternative free, caido workflows, caido multi project, burp suite bapp store vs caido, web proxy for penetration testing 2026, caido vs burp suite pro" />
+  <link rel="canonical" href="https://breachfolio.com/compare/burp-vs-caido/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/burp-vs-caido/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/burp-vs-caido/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/burp-vs-caido/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Burp Suite vs Caido: is the Rust proxy ready? | Breachfolio" />
+  <meta property="og:description" content="Burp Suite vs Caido compared: architecture, workflow, scanning depth, and real 2026 pricing. Where the Rust-based newcomer keeps up, and where it doesn&#x27;t yet." />
+  <meta property="og:url" content="https://breachfolio.com/compare/burp-vs-caido/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/006-general-green-glowing-world-network-map.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Burp Suite vs Caido: is the Rust proxy ready? | Breachfolio" />
+  <meta name="twitter:description" content="Burp Suite vs Caido compared: architecture, workflow, scanning depth, and real 2026 pricing. Where the Rust-based newcomer keeps up, and where it doesn&#x27;t yet." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/006-general-green-glowing-world-network-map.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Burp Suite vs Caido: the new proxy that's actually fast.",
+      "description": "Burp Suite vs Caido compared: architecture, workflow, scanning depth, and real 2026 pricing. Where the Rust-based newcomer keeps up, and where it doesn't yet.",
+      "image": "https://breachfolio.com/assets/img/006-general-green-glowing-world-network-map.webp",
+      "datePublished": "2026-07-15", "dateModified": "2026-07-15",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/compare/burp-vs-caido/"
+      },
+      "inLanguage": "en",
+      "keywords": "burp suite vs caido, caido vs burp suite 2026, caido pricing, caido review, burp suite alternative free, caido workflows, caido multi project, burp suite bapp store vs caido"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compare",
+          "item": "https://breachfolio.com/compare/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Burp Suite vs Caido: the new proxy that's actually fast.",
+          "item": "https://breachfolio.com/compare/burp-vs-caido/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/compare/burp-vs-caido/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Caido a good replacement for Burp Suite?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For the core manual workflow – intercept, inspect, replay, tamper – yes, and it's noticeably lighter and faster doing it. It is not yet a full replacement for consultancies that lean on Burp's automated scanner or its BApp Store extensions, which Caido doesn't match."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Caido cost compared to Burp Suite Professional?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Caido has a free Basic tier and an Individual plan at $200/year for full functionality, plus a Team plan at $30/month per user. Burp Suite Professional is $475/user/year following PortSwigger's January 2026 price adjustment – more than double Caido's paid tier."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is Caido faster than Burp Suite?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Caido is built in Rust with a web-based interface, which keeps memory use low even in long sessions. Burp Suite is a Java desktop application, and its heavier automated-scanning modes and BApp Store extension model add overhead Caido's leaner core doesn't carry."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Caido support multiple projects on the free plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes – Caido's free tier includes multi-project support, keeping history, scope, and findings separate per target. Burp Suite Community Edition, by contrast, limits you to a single project, which is one of the more practical reasons testers running several engagements try Caido first."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Compare</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Burp Suite vs Caido: the new proxy that's actually fast.</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../assets/img/006-general-green-glowing-world-network-map.webp" alt="Hero illustration for: Burp Suite vs Caido: the new proxy that's actually fast." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">WEB</span>
+          <span class="text-muted">COMPARE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Burp Suite vs Caido: the new proxy that's actually fast.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">A Rust-based challenger built for speed and a browser-native UI. Where Caido keeps up with the incumbent, and where its scanner still can't.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-15">July 15, 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>9 min read</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p><strong>Burp Suite</strong> has been the default web-proxy for over a decade. <strong>Caido</strong> is the newest serious challenger to that default: a from-scratch rebuild in Rust that trades Burp's twenty years of extension ecosystem for a lighter, faster core. The question isn't whether Caido is impressive. It is. The question is what it still can't do.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The short answer</h2>
+
+<ul>
+  <li><strong>Speed and memory</strong>: Caido wins clearly. The Rust backend stays light through long sessions where Burp's Java heap grows.</li>
+  <li><strong>Manual proxy workflow</strong>: close to a tie. Intercept, replay, and tamper are all there in Caido, with a cleaner interface.</li>
+  <li><strong>Automated scanning and extensions</strong>: Burp still wins by a wide margin – this is the real gap.</li>
+  <li><strong>Price</strong>: Caido wins decisively, whether you compare free tiers or paid ones.</li>
+</ul>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Architecture: Rust versus Java</h2>
+
+<p>Caido is built from the ground up in Rust and exposes a web-based interface that runs in the browser – either locally or hosted on a server for remote access. Burp Suite is a Java desktop application, tied to whatever machine you installed it on. In practice this shows up most on long engagements: Caido's memory footprint stays low across a multi-hour session, while Burp's – especially with the automated scanner running – tends to climb.</p>
+
+<p>The browser-based delivery also means Caido runs the same way on Linux, macOS, and Windows without the usual Java-runtime quirks, and it's genuinely easier to run headless on a remote box and connect to it from a laptop.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Interface and workflow</h2>
+
+<p>The core loop – intercept a request, inspect it, replay it with modifications, watch the response – is the same muscle memory in both tools. Caido covers it with a faster, cleaner interface than Burp's, and testers who've used both consistently describe it as lighter and more intuitive during long sessions, particularly in the request/response viewer and replay panel.</p>
+
+<p>Where Caido adds something genuinely new is <strong>Workflows</strong>: a node-based automation editor for chaining processing steps – transform a request, match a pattern, react to a response – without writing a Burp-style Java extension. It's a lower floor for building custom automation than Burp's extension API, even if it doesn't yet reach the same ceiling.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Project management: the free-tier surprise</h2>
+
+<p>This is a smaller feature with an outsized practical effect. Caido's free tier includes <strong>multi-project</strong> support – separate history, scope, and findings per target, at no cost. <strong>Burp Suite Community Edition</strong> limits you to a single project. For anyone juggling more than one engagement at a time on the free tier, that alone is a reason to open Caido first.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Where Burp still wins</h2>
+
+<p>Two gaps keep Burp Suite Professional the default for full-time consultancies:</p>
+
+<ul>
+  <li><strong>Automated scanning.</strong> Burp's scanner runs in three modes – Crawl and Audit, Crawl only, and API-only (scanning against a supplied API definition) – and the crawler-plus-audit combination remains more mature than anything Caido ships today.</li>
+  <li><strong>Extensions.</strong> Burp's BApp Store carries roughly 250 extensions built over more than a decade. Caido's Workflows system is a genuinely useful answer to some of that, but it doesn't yet match the BApp Store's depth or its established ecosystem of purpose-built tools (Autorize, JWT Editor, Param Miner, and similar).</li>
+</ul>
+
+<p>If your work leans heavily on either – deep automated crawls across large attack surfaces, or a specific Burp-only extension your workflow depends on – that gap is still the deciding factor.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Pricing (2026)</h2>
+
+<table>
+  <thead><tr><th></th><th>Caido</th><th>Burp Suite</th></tr></thead>
+  <tbody>
+    <tr><td>Free tier</td><td>Basic – full core proxy workflow, multi-project</td><td>Community Edition – throttled, single project, no extensions</td></tr>
+    <tr><td>Paid (individual)</td><td>$200/year (Individual plan)</td><td>$475/user/year (Professional, since PortSwigger's Jan 2026 price rise)</td></tr>
+    <tr><td>Team pricing</td><td>$30/month per user</td><td>Quote-only (Enterprise / DAST)</td></tr>
+    <tr><td>Students/educators</td><td>Free 1-year education plan</td><td>No dedicated free student tier</td></tr>
+  </tbody>
+</table>
+
+<p>Even at its paid tier, Caido costs less than half of a single Burp Suite Professional seat per year. That gap is real and worth factoring in, but it isn't the whole decision – see the scanning and extension gap above before treating price alone as the deciding factor.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The recommendation</h2>
+
+<p>If you're a bug bounty hunter or independent pentester doing mostly manual testing, want a fast, modern tool that doesn't fight your laptop's fan, and don't lean on Burp-only extensions – <strong>Caido is the better default in 2026</strong>, and the price difference makes the choice easier.</p>
+
+<p>If you're at a consultancy running deep automated scans across large scopes, or your workflow depends on a specific BApp Store extension, <strong>Burp Suite Professional remains the safer choice:</strong> the extension and scanner gap is real, not marketing.</p>
+
+<p>If you're new to web testing, either is a reasonable place to start; Caido's lower cost and lighter learning curve make it an easier first tool, and the core workflow – intercept, replay, tamper – transfers cleanly if you move to Burp later.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Is Caido a good replacement for Burp Suite?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    For the core manual workflow – intercept, inspect, replay, tamper – yes, and it's noticeably lighter and faster doing it. It is not yet a full replacement for consultancies that lean on Burp's automated scanner or its BApp Store extensions, which Caido doesn't match.
+  </div>
+</details>
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>How much does Caido cost compared to Burp Suite Professional?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Caido has a free Basic tier and an Individual plan at $200/year for full functionality, plus a Team plan at $30/month per user. Burp Suite Professional is $475/user/year following PortSwigger's January 2026 price adjustment – more than double Caido's paid tier.
+  </div>
+</details>
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Why is Caido faster than Burp Suite?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Caido is built in Rust with a web-based interface, which keeps memory use low even in long sessions. Burp Suite is a Java desktop application, and its heavier automated-scanning modes and BApp Store extension model add overhead Caido's leaner core doesn't carry.
+  </div>
+</details>
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Does Caido support multiple projects on the free plan?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Yes – Caido's free tier includes multi-project support, keeping history, scope, and findings separate per target. Burp Suite Community Edition, by contrast, limits you to a single project, which is one of the more practical reasons testers running several engagements try Caido first.
+  </div>
+</details>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+            <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+            <a class="ul-link" href="../../legal/about/">About us</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../nessus-vs-openvas/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Previous</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Tenable Nessus vs OpenVAS: vulnerability scanners head to head.</div>
+        </a>
+        <a href="../burp-vs-zap/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Related</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Burp Suite vs OWASP ZAP: the proxy that pays its rent.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">On this page</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Related</div>
+        <ul class="space-y-3">
+          <li><a href="../burp-vs-zap/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Burp Suite vs OWASP ZAP: the proxy that pays its rent.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">WEB · 10</div>
+          </a></li>
+          <li><a href="../nessus-vs-openvas/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Tenable Nessus vs OpenVAS: scanners head to head.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">SCANNERS · 9</div>
+          </a></li>
+          <li><a href="../kali-vs-parrot/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Kali Linux vs Parrot OS: the pentest distro you actually live in.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">DISTRO · 9</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

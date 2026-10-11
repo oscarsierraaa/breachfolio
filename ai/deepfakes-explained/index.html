@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deepfakes explained: how they're made and caught | Breachfolio</title>
+  <meta name="description" content="How deepfake video and voice cloning are generated, why blink-and-lighting detection is losing ground, and what the C2PA standard proposes." />
+  <meta name="keywords" content="deepfakes explained, how are deepfakes made, GAN vs diffusion deepfake, voice cloning vs video deepfake, deepfake detection artifacts, C2PA content credentials, content provenance standard, deepfake video call fraud, AI impersonation fraud, synthetic media security" />
+  <link rel="canonical" href="https://breachfolio.com/ai/deepfakes-explained/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/deepfakes-explained/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/deepfakes-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/deepfakes-explicado/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Deepfakes explained: how they're made and caught | Breachfolio" />
+  <meta property="og:description" content="How deepfake video and voice cloning are generated, why blink-and-lighting detection is losing ground, and what the C2PA standard proposes." />
+  <meta property="og:url" content="https://breachfolio.com/ai/deepfakes-explained/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-deepfake.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deepfakes explained: how they're made and caught | Breachfolio" />
+  <meta name="twitter:description" content="How deepfake video and voice cloning are generated, why blink-and-lighting detection is losing ground, and what the C2PA standard proposes." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-deepfake.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Deepfakes, explained: how synthetic media is made, and how detection is changing",
+      "description": "How deepfake video and voice cloning are actually generated, why blink-and-lighting detection is losing ground, and how content provenance standards like C2PA aim to fix it.",
+      "image": "https://breachfolio.com/assets/img/hero-deepfake.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "keywords": "deepfakes explained, how are deepfakes made, GAN vs diffusion deepfake, voice cloning vs video deepfake, deepfake detection artifacts, C2PA content credentials, content provenance standard, deepfake video call fraud, AI impersonation fraud, synthetic media security",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/ai/deepfakes-explained/"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Security", "item": "https://breachfolio.com/ai/" },
+        { "@type": "ListItem", "position": 3, "name": "Deepfakes, explained", "item": "https://breachfolio.com/ai/deepfakes-explained/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/ai/deepfakes-explained/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is a deepfake, exactly?", "acceptedAnswer": { "@type": "Answer", "text": "A deepfake is synthetic or manipulated audio or video, generated with machine learning, that depicts a real person doing or saying something they never actually did, convincingly enough to be mistaken for genuine footage. The term covers several distinct techniques, including face swapping, face reenactment, and voice cloning, unified by the fact that a model, not a person, produced the illusion." } },
+        { "@type": "Question", "name": "How are deepfake videos actually generated: GANs or diffusion models?", "acceptedAnswer": { "@type": "Answer", "text": "Both, depending on the tool and its age. Early deepfakes were mostly built with generative adversarial networks (GANs), where a generator network and a discriminator network are trained against each other until the generator produces convincing fakes. Most current state-of-the-art image, video, and audio generators instead use diffusion models, which start from random noise and iteratively refine it toward a coherent output, guided by conditioning input like a source face or reference voice." } },
+        { "@type": "Question", "name": "What's the technical difference between a video deepfake and a voice clone?", "acceptedAnswer": { "@type": "Answer", "text": "They are different pipelines solving different problems. Video deepfakes manipulate or generate visual frames, typically need meaningful source footage of the target, and are harder to produce convincingly in real time on a live call. Voice cloning uses text-to-speech or voice-conversion models that can produce a convincing likeness from a much smaller amount of reference audio, and modern systems can run close to real time, which is why voice cloning is currently the more mature vector for live phone-based fraud." } },
+        { "@type": "Question", "name": "Can you still spot a deepfake by watching for blinking or lighting errors?", "acceptedAnswer": { "@type": "Answer", "text": "Less reliably than a few years ago. Early GAN-based deepfakes did tend to show unnatural blinking, inconsistent lighting and shadows, and blurred edges around hair or jewelry, because early training datasets and architectures struggled with those details. Newer diffusion-based generators, trained on far larger and more diverse data, produce noticeably fewer of these tells, so treating artifact-spotting as a dependable personal defense is becoming less realistic over time." } },
+        { "@type": "Question", "name": "What is C2PA / Content Credentials, and how is it different from deepfake detection?", "acceptedAnswer": { "@type": "Answer", "text": "C2PA (the Coalition for Content Provenance and Authenticity) is a technical standard for attaching cryptographically signed, tamper-evident metadata to media at the point of capture or edit, recording things like the capturing device and the edit history. Content Credentials is the consumer-facing label for that data. Unlike artifact-based detection, which analyzes a file after the fact and guesses whether it looks synthetic, provenance metadata is attached at creation time and proves a positive chain of custody, which is why it's considered a more durable long-term approach even though adoption across cameras, phones, and platforms is still partial." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">AI Security</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Deepfakes, explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-deepfake.webp" alt="A face mid-transformation between real and synthetic – deepfake video and voice generation, explained" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">AI · SECURITY</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Deepfakes, explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">How synthetic video and cloned voices actually get made, why "watch for the blinking" is a fading defense, and what a more durable answer looks like.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 22, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>"Deepfake" gets used loosely for almost anything AI-generated, but the term has a specific lineage: synthetic or manipulated audio or video, produced with machine learning, that depicts a real person doing or saying something they never did – convincingly enough to be mistaken for genuine footage. What used to require a visual-effects studio and weeks of manual compositing now runs on a consumer GPU in minutes. That collapse in cost and skill is the entire reason deepfakes moved from an academic curiosity to a mainstream security concern in under a decade.</p>
+
+      <p>This piece covers, at a conceptual level and without the underlying math, how the two dominant generation techniques actually work, why classic detection advice like "look for unnatural blinking" is losing ground as models improve, and the more durable direction the field is moving toward instead: proving where content came from, rather than trying to spot fakes after the fact.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What "deepfake" actually covers</h2>
+      <p>The word is an umbrella term for several distinct techniques, unified only by the fact that a model, not a person, produced the illusion:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Face swap</strong> – replacing one person's face with another's inside existing footage, frame by frame.</li>
+        <li><strong class="text-foreground">Face reenactment (puppetry)</strong> – driving a target face's expressions, mouth movements, and head pose from a separate source performance, without changing whose identity is shown.</li>
+        <li><strong class="text-foreground">Fully synthetic generation</strong> – a face or a person that doesn't correspond to any specific real individual, often used to manufacture a fake persona or a fabricated "witness."</li>
+        <li><strong class="text-foreground">Voice cloning</strong> – synthesizing audio in a specific person's voice, which is a separate technical problem from anything involving video and is covered in its own section below.</li>
+      </ul>
+      <p>Video and voice deepfakes get lumped together constantly in coverage of the topic, but they're solved with related – not identical – model families, and they have meaningfully different practical implications, which is why this article treats them separately.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">How synthetic video actually gets made</h2>
+      <p>Two model families account for nearly all deepfake video in circulation today, and understanding the shift between them is the key to understanding why detection has gotten harder.</p>
+
+      <h3 class="font-display mt-8 text-[19px] font-semibold">Generative adversarial networks (GANs)</h3>
+      <p>A GAN trains two neural networks against each other. A <strong>generator</strong> produces synthetic images; a <strong>discriminator</strong> tries to tell those synthetic images apart from real ones. Every training round, the generator gets a little better at fooling the discriminator, and the discriminator gets a little better at catching it: an adversarial back-and-forth that, over enough iterations, converges on a generator capable of producing faces a human struggles to distinguish from photographs. Most of the deepfake tools that first drew public attention in the late 2010s – autoencoder-based face-swap software, the StyleGAN family of face generators – were built this way.</p>
+
+      <h3 class="font-display mt-8 text-[19px] font-semibold">Diffusion models</h3>
+      <p>Diffusion is the approach behind most of today's leading image, video, and audio generation systems, and it works on a different principle entirely. The model is trained to reverse a noise process: given an image that's been progressively corrupted with random noise until it's pure static, learn to predict, step by step, how to remove that noise and recover something coherent. At generation time, you start from actual random noise and run that learned denoising process forward, guided by conditioning input – a source face, a reference performance, a text description – until a finished frame emerges from what began as static.</p>
+      <p>The practical consequence matters more than the mechanism: diffusion models are typically trained on far larger and more varied datasets than earlier GAN pipelines, and they tend to leave behind fewer of the tell-tale visual artifacts – blurred hairlines, inconsistent backgrounds, waxy skin texture – that older detection heuristics were built around. That single shift is a major reason artifact-based detection, covered below, is getting less reliable over time rather than more.</p>
+
+      <div class="overflow-x-auto mt-6 mb-6">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Approach</th><th class="px-4 py-2.5 font-display font-semibold">Conceptual mechanism</th><th class="px-4 py-2.5 font-display font-semibold">Typical era / artifacts</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>GAN</strong></td><td class="px-4 py-2.5">Generator and discriminator trained against each other until the generator's output fools the discriminator</td><td class="px-4 py-2.5">First wave of public deepfake tools; more prone to visible blending seams and texture artifacts</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Diffusion</strong></td><td class="px-4 py-2.5">Model learns to reverse a noise process, denoising step by step toward a coherent output guided by conditioning input</td><td class="px-4 py-2.5">Most current state-of-the-art generators; fewer of the classic tells, harder to catch by eye</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Video deepfakes vs. voice cloning: two different pipelines</h2>
+      <p>Voice cloning doesn't touch a video model at all. It relies on neural text-to-speech or voice-conversion systems trained to reproduce a target's timbre, pitch, and speech patterns. The practical difference that matters most for security purposes is <strong>how little source material each pipeline needs</strong>, and how close each can get to real time:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Voice cloning</strong> can produce a convincing likeness from a small amount of reference audio – in some published research and commercial demos, well under a minute – and modern systems can run close to real time, which is exactly what makes live, phone-based voice-cloning fraud practical during an actual call rather than only in pre-rendered clips.</li>
+        <li><strong class="text-foreground">Video deepfakes</strong> generally need more source footage of the target and meaningfully more compute to produce convincingly, especially live, during a video call, where the model has to track head movement, lighting changes, and occlusion in real time. Real-time face-swap tools for video calls exist and have improved quickly, but pulling one off convincingly in a live, improvised conversation remains technically harder than producing a pre-rendered or semi-scripted video clip in advance.</li>
+      </ul>
+      <p>That asymmetry is one reason voice cloning shows up disproportionately in scams targeting individuals – a distressed-sounding phone call is cheap and fast to fake – while it's why deepfake video-call fraud tends to have a slightly more spectacle. We cover the individual-victim version of this in detail, including how to verify a suspicious call before acting, in <a href="../../guides/ai-voice-cloning-scam/" class="text-accent ul-link">AI voice cloning scam: is the call real?</a> – the practical, victim-facing companion to this article.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Detection: the fading value of visual artifacts</h2>
+      <p>For years, "how to spot a deepfake" guidance centered on a fairly consistent set of visual tells, and they were genuinely useful against the first generation of GAN-based tools:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Unnatural or absent blinking</strong> – early face-generation datasets underrepresented closed eyes, so generated subjects sometimes blinked too rarely, or not at all.</li>
+        <li><strong class="text-foreground">Lighting and shadow inconsistencies</strong> – a synthesized face lit differently than the background or the rest of the body.</li>
+        <li><strong class="text-foreground">Blurred or warped edges</strong> – especially around hair, ears, glasses, and jewelry, where GAN-based blending tended to struggle.</li>
+        <li><strong class="text-foreground">Temporal flicker</strong> – subtle frame-to-frame inconsistency in skin texture or facial geometry, visible mostly in slow motion.</li>
+        <li><strong class="text-foreground">Audio-lip sync drift</strong> – mouth movements that don't quite line up with the audio, most noticeable on plosive sounds.</li>
+      </ul>
+      <p><strong>These heuristics are becoming less reliable, not more, as generation quality improves:</strong> and that trend line matters more than any individual tell. Diffusion-based generators, trained on larger and more diverse datasets and iterated on constantly by a large open community, have progressively closed the gaps that made earlier tells visible. Detection research has responded in kind, with its own machine-learning classifiers trained to spot statistical fingerprints – patterns invisible to the eye – left behind by specific generation pipelines. But that turns detection into an arms race: every improvement in generators erodes the detectors trained against the previous generation, and there is no guarantee detection keeps pace, or even stays close. Treating "I can usually tell" as a durable personal defense is a bet against a trend that has been moving in one direction for years.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The more durable approach: content provenance</h2>
+      <p>Because after-the-fact pixel analysis is structurally on the losing side of an arms race, a different strategy has gained real traction: instead of asking "does this look fake," attach verifiable information about where a piece of media actually came from, at the moment it's created. That's the goal of <strong>C2PA:</strong> the Coalition for Content Provenance and Authenticity: a technical standard, backed by a broad coalition that includes Adobe, Microsoft, and the BBC among others through the Content Authenticity Initiative, for attaching cryptographically signed, tamper-evident metadata to media at the point of capture or edit. <strong>Content Credentials</strong> is the consumer-facing label and icon meant to surface that data to an ordinary viewer.</p>
+      <p>The metadata a C2PA-compliant file can carry includes which device or software captured or modified it, what edits were applied and when, and a signed chain of custody linking those events together. Tampering with the file after the fact – cropping it, re-encoding it, or splicing in generated content – either breaks the cryptographic signature or is recorded as a new entry in the edit history, rather than silently disappearing.</p>
+      <p>The important conceptual distinction is that <strong>this is not a deepfake detector</strong>. It doesn't analyze pixels or waveforms and output a probability that something was generated. Instead, it lets a viewer verify a positive claim – "this file was captured by this camera at this time" or "this specific software made this edit" – rather than relying on a negative, after-the-fact guess. That's precisely why it's considered the more durable direction: an arms race between generators and artifact-detectors favors whoever has more compute at a given moment, while a cryptographically signed provenance record doesn't degrade just because generation models get better.</p>
+      <p>It is not a complete fix, and it's worth being honest about the gap. Adoption is still partial – most cameras, phones, and social platforms don't yet universally attach or preserve C2PA metadata end to end. Credentials can be stripped by a screenshot or a naive re-encode. And provenance does nothing for the enormous volume of content, real and fake alike, that was never signed with credentials in the first place. It's infrastructure being built for the next decade of the problem, not a switch that solves the current one.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Why this matters for security</h2>
+      <p><strong class="text-foreground">Fraud.</strong> Synthetic voice and video are now genuinely useful tools for social engineering, because they attack exactly the channel people have historically trusted as hard to fake: hearing or seeing someone they know. A well-documented, widely reported category of incidents since 2024 involves attackers using synthetic video and voice to impersonate a senior executive on a video call, or a series of calls and messages, instructing finance staff to authorize an urgent wire transfer – exploiting authority and urgency the same way a classic business-email-compromise scam does, but with a visual and vocal channel added that used to make people more confident a request was real, not less. The technique, not any single incident, is the durable lesson: the extra confidence a video call used to provide is exactly the channel now also being spoofed.</p>
+      <p><strong class="text-foreground">Disinformation.</strong> Fabricated statements attributed to public figures – ahead of elections, during breaking news events, or targeting a company's stock price – are the most discussed use case, but there's a subtler second-order effect known as the "liar's dividend": once deepfakes are widely known to exist, genuine, unaltered footage can be dismissed as "probably fake" by anyone motivated to deny it. That erosion of trust in real evidence is a security and information-integrity problem independent of whether any deepfake was actually used in a given case.</p>
+      <p><strong class="text-foreground">Impersonation.</strong> At the individual level, the same techniques enable nonconsensual synthetic imagery, targeted harassment, and fraud against ordinary people, not just corporations – including the "distressed relative" phone scam covered in our companion guide on <a href="../../guides/ai-voice-cloning-scam/" class="text-accent ul-link">AI voice cloning scams</a>, where a cloned voice is used to simulate a family member in an emergency and pressure a quick, panicked payment.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What actually helps</h2>
+      <p>Given that visual detection is getting harder and provenance infrastructure is still maturing, the defenses that hold up best right now are procedural, not perceptual:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Out-of-band verification.</strong> For any request involving money movement, credential changes, or access, verify through a separate, previously known channel – a callback to a number you already had on file, not one provided in the suspicious message or call – regardless of how convincing the video or voice sounded.</li>
+        <li><strong class="text-foreground">Pre-agreed verification phrases.</strong> A simple shared code word, agreed on in advance between family members or between finance staff and executives, is cheap to set up and defeats impersonation regardless of how good the synthetic media gets.</li>
+        <li><strong class="text-foreground">Multi-person approval for high-stakes actions.</strong> Requiring a second, independent approver for large transfers or sensitive changes removes the single point of failure that a convincing impersonation is designed to exploit.</li>
+        <li><strong class="text-foreground">Treat urgency and secrecy as the actual red flag.</strong> Almost every reported deepfake fraud pattern leans on pressure to act immediately and quietly. That combination is a far more reliable signal than trying to personally spot generation artifacts in real time on a call.</li>
+      </ul>
+      <p>None of this requires becoming a personal deepfake detector, which is good, because that's an increasingly losing bet. It requires building verification steps into the moments that actually matter – money, credentials, access – so that even a flawless fake runs into a process it can't talk its way around.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">A note on scope.</strong> This is defensive security education about how synthetic media is generated and detected. It is not a guide to producing deepfakes of real people, and doing so without their consent carries serious ethical and, in many jurisdictions, legal consequences.
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is a deepfake, exactly?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A deepfake is synthetic or manipulated audio or video, generated with machine learning, that depicts a real person doing or saying something they never actually did, convincingly enough to be mistaken for genuine footage. The term covers several distinct techniques, including face swapping, face reenactment, and voice cloning, unified by the fact that a model, not a person, produced the illusion.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How are deepfake videos actually generated: GANs or diffusion models?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Both, depending on the tool and its age. Early deepfakes were mostly built with generative adversarial networks (GANs), where a generator network and a discriminator network are trained against each other until the generator produces convincing fakes. Most current state-of-the-art image, video, and audio generators instead use diffusion models, which start from random noise and iteratively refine it toward a coherent output, guided by conditioning input like a source face or reference voice.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What's the technical difference between a video deepfake and a voice clone?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          They are different pipelines solving different problems. Video deepfakes manipulate or generate visual frames, typically need meaningful source footage of the target, and are harder to produce convincingly in real time on a live call. Voice cloning uses text-to-speech or voice-conversion models that can produce a convincing likeness from a much smaller amount of reference audio, and modern systems can run close to real time, which is why voice cloning is currently the more mature vector for live phone-based fraud.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Can you still spot a deepfake by watching for blinking or lighting errors?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Less reliably than a few years ago. Early GAN-based deepfakes did tend to show unnatural blinking, inconsistent lighting and shadows, and blurred edges around hair or jewelry, because early training datasets and architectures struggled with those details. Newer diffusion-based generators, trained on far larger and more diverse data, produce noticeably fewer of these tells, so treating artifact-spotting as a dependable personal defense is becoming less realistic over time.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is C2PA / Content Credentials, and how is it different from deepfake detection?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          C2PA (the Coalition for Content Provenance and Authenticity) is a technical standard for attaching cryptographically signed, tamper-evident metadata to media at the point of capture or edit, recording things like the capturing device and the edit history. Content Credentials is the consumer-facing label for that data. Unlike artifact-based detection, which analyzes a file after the fact and guesses whether it looks synthetic, provenance metadata is attached at creation time and proves a positive chain of custody, which is why it's considered a more durable long-term approach even though adoption across cameras, phones, and platforms is still partial.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../../guides/ai-voice-cloning-scam/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">AI voice cloning scam: is the call real?</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../ai-red-teaming-basics/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">AI red teaming basics</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../prompt-injection-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Prompt injection, explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All AI Security articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../guides/fake-job-offer-scam/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Fake job offer scams: fake checks, gift cards, reshipping</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal &amp; info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital forensics and DFIR explained | Breachfolio</title>
+  <meta name="description" content="Digital forensics and DFIR explained: the incident-response lifecycle, chain of custody, order of volatility, the core tools, and a host-triage walkthrough." />
+  <meta name="keywords" content="digital forensics" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/forense-digital-y-dfir/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Digital forensics and DFIR explained | Breachfolio" />
+  <meta property="og:description" content="Digital forensics and DFIR explained: the incident-response lifecycle, chain of custody, order of volatility, the core tools, and a host-triage walkthrough." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-dfir.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Digital forensics and DFIR explained | Breachfolio" />
+  <meta name="twitter:description" content="Digital forensics and DFIR explained: the incident-response lifecycle, chain of custody, order of volatility, the core tools, and a host-triage walkthrough." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-dfir.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Digital forensics and DFIR explained",
+      "description": "Digital forensics and DFIR explained: the incident-response lifecycle, chain of custody, order of volatility, the core tools, and a host-triage walkthrough.",
+      "image": "https://breachfolio.com/assets/img/hero-dfir.webp",
+      "datePublished": "2026-07-21",
+      "dateModified": "2026-07-21",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/digital-forensics-dfir/" },
+      "inLanguage": "en",
+      "keywords": "digital forensics"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Digital forensics and DFIR expla…", "item": "https://breachfolio.com/cybersecurity/digital-forensics-dfir/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/digital-forensics-dfir/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is DFIR?", "acceptedAnswer": { "@type": "Answer", "text": "DFIR stands for Digital Forensics and Incident Response: the combined discipline of investigating a security incident (forensics: recovering and analyzing evidence from disks, memory, networks, and logs) while simultaneously responding to it (containing the attacker, eradicating the foothold, and recovering). The two fused because modern intrusions demand forensic rigor at incident speed: you need evidence sound enough for a court or regulator, produced fast enough to stop an attack that is still in progress." } },
+        { "@type": "Question", "name": "What is the order of volatility?", "acceptedAnswer": { "@type": "Answer", "text": "It's the principle that you collect evidence starting with the most fragile, because different data survives for very different lengths of time. The canonical ordering (from RFC 3227) runs: CPU registers and cache, then RAM, then running processes and network state, then disk, then remote logs, then archival media. The practical rule that matters most is \"memory before disk\" – a reboot or shutdown erases RAM permanently, taking running malware, injected code, encryption keys, and open connections with it." } },
+        { "@type": "Question", "name": "What is the difference between disk and memory forensics?", "acceptedAnswer": { "@type": "Answer", "text": "Disk forensics analyzes non-volatile storage – files, deleted files, filesystem metadata, and OS artifacts like the registry and event logs – which persists across reboots and is the mature, classic discipline. Memory forensics analyzes a snapshot of live RAM, where you find things that never touch disk: fileless malware, injected code, decrypted secrets, credentials, and active network connections. Memory evidence is far higher value in a modern intrusion but far more fragile, since it vanishes the moment the machine powers off, which is why you image RAM before you shut anything down." } },
+        { "@type": "Question", "name": "What tools do forensic analysts use?", "acceptedAnswer": { "@type": "Answer", "text": "The core open-source stack is Autopsy and The Sleuth Kit for disk analysis, the Volatility Framework for memory, Wireshark for network captures, plaso/log2timeline for building timelines, and YARA for pattern-based triage. For fast collection there's KAPE (single host) and Velociraptor (whole fleet), and on the commercial side EnCase and FTK dominate enterprise and law-enforcement labs. SANS packages most of the free tools into the ready-to-run SIFT Workstation." } },
+        { "@type": "Question", "name": "What is chain of custody?", "acceptedAnswer": { "@type": "Answer", "text": "A documented, unbroken record of every piece of evidence – who collected it, when, from where, and everyone who has handled or stored it since, with each transfer logged. Its purpose is to prove the evidence wasn't tampered with or swapped between collection and analysis. Combined with cryptographic hashing (which proves the data itself is bit-for-bit unchanged), it's what makes forensic findings defensible in court or an audit. A gap in the chain – evidence unaccounted for even briefly – can invalidate the entire item." } },
+        { "@type": "Question", "name": "How do I get into DFIR?", "acceptedAnswer": { "@type": "Answer", "text": "Build the fundamentals first – operating-system internals (especially Windows artifacts), networking, and log analysis – then get hands-on with the free tools: install the SIFT Workstation, work through public memory and disk images from DFIR challenges and CTFs, and practice building timelines with plaso. Many people enter through a SOC analyst role and grow into forensics at the senior tier. On the credential side, GIAC's GCFE (forensic examiner) and GCFA (forensic analyst), usually paired with the SANS FOR508/FOR500 courses, are the recognized industry standard." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Digital forensics and DFIR expla…</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-dfir.webp" alt="Digital forensics and DFIR explained." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · FORENSICS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Digital forensics and DFIR explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Digital forensics and DFIR explained: the incident-response lifecycle, chain of custody, order of volatility, the core tools, and a host-triage walkthrough.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 21, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>14 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>When a system is breached, two questions land at the same time and pull in opposite directions. The first is operational: <em>make it stop</em> – get the attacker out, restore service, limit the damage. The second is investigative: <em>what actually happened</em> – how did they get in, what did they touch, what did they take, and can we prove it well enough to tell a regulator, a court, or the board? <strong>Digital forensics</strong> answers the second question. <strong>DFIR:</strong> Digital Forensics and Incident Response – is the discipline that learned to answer both at once, because in a real incident you rarely have the luxury of doing them one after the other.</p>
+
+<p>This article walks the whole field: what forensics is, how it fused with incident response, the lifecycle every response follows, the principles that make evidence hold up, the types of forensics grouped by evidence source, the tools practitioners reach for, and a start-to-finish triage of one compromised host. If you've read our <a href="../what-is-a-soc/" target="_blank" rel="noopener noreferrer">what is a SOC</a> primer, think of DFIR as the sharp end the SOC escalates into when an alert turns out to be real.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 432" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Preparation</text><path d="M 192 53 L 192 72" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 68 L 192 73 L 196 68" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="78" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="78" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="107" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Detection &amp; analysis</text><path d="M 192 129 L 192 148" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 144 L 192 149 L 196 144" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="154" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="154" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="183" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Containment</text><path d="M 192 205 L 192 224" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 220 L 192 225 L 196 220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="230" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="230" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="259" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Eradication</text><path d="M 192 281 L 192 300" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 296 L 192 301 L 196 296" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="306" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="306" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="335" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Recovery</text><path d="M 192 357 L 192 376" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 372 L 192 377 L 196 372" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="382" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="382" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="411" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Lessons learned</text></svg>
+        <figcaption>The incident-response lifecycle (NIST SP 800-61).</figcaption>
+      </figure>
+      <h2>Forensics and DFIR: two words that merged</h2>
+<p><strong>Digital forensics</strong> is the older, broader term: the scientifically defensible recovery, preservation, and analysis of data from digital devices. Its roots are in law enforcement and litigation, where the output is evidence that has to survive cross-examination: a stolen-IP case, fraud, child-exploitation material, an insider leak. The emphasis is on rigor and admissibility: prove that the data you are showing is exactly what was on the device, unchanged by your handling of it.</p>
+
+<p><strong>Incident response</strong> grew up alongside it in the corporate world, where the priority is speed: an intrusion is in progress and the business needs it contained now. For years these were separate crafts. They merged into <strong>DFIR</strong> because modern intrusions demand both mindsets at once – forensic discipline (so your evidence is sound and your root cause is correct) applied at incident speed (because the attacker is still moving). A DFIR analyst is equally comfortable pulling a memory image at 2 a.m. to catch a running implant and writing the hash-verified report that goes to legal three weeks later.</p>
+
+<h2>The incident response lifecycle (NIST SP 800-61)</h2>
+<p>Almost every response process in the industry is built on the same backbone: the lifecycle in <a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61</a>, the Computer Security Incident Handling Guide. It defines four phases, and forensics threads through all of them rather than living in just one.</p>
+
+<ul>
+  <li><strong>Preparation.</strong> Everything you do before the incident: response plans, an on-call rotation, pre-deployed logging and EDR, a jump kit of tools, write blockers on the shelf, and – critically – knowing what "normal" looks like so you can spot abnormal. Most of a response's success is decided here, long before anything is on fire.</li>
+  <li><strong>Detection and analysis.</strong> Recognizing that something is wrong (an alert, a report, an anomaly), then scoping it: which hosts, which accounts, what technique. This is where the bulk of forensic analysis happens – turning raw telemetry into a confident answer.</li>
+  <li><strong>Containment, eradication, and recovery.</strong> Stop the spread (isolate the host, disable the account, block the C2), remove the foothold (delete the implant, close the vulnerability), and restore to known-good. Containment decisions are forensically loaded: pulling the network cable preserves disk but a hard shutdown destroys memory, so you sequence acquisition around it.</li>
+  <li><strong>Post-incident activity.</strong> The lessons-learned review – what worked, what didn't, what detection or control should change so the same class of intrusion doesn't recur. Weak teams skip this; it is where the response actually pays for itself.</li>
+</ul>
+
+<p>NIST also publishes a dedicated forensics companion, <a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener noreferrer">SP 800-86, Guide to Integrating Forensic Techniques into Incident Response</a>, which is the document to read when you want the process itself – collection, examination, analysis, reporting – laid out formally.</p>
+
+<h2>The principles that make evidence hold up</h2>
+<p>Forensics is less about clever tools than about disciplined handling. A brilliant finding is worthless if a defense lawyer – or an internal auditor – can argue you altered the evidence while collecting it. Five principles do most of that defensive work.</p>
+
+<p><strong>Chain of custody.</strong> A documented, unbroken record of who collected each piece of evidence, when, from where, and everyone who has touched it since. Every transfer is logged; every storage location is accounted for. If there is a gap – a drive that sat unlogged in someone's desk for a weekend – the whole item can be thrown out. Chain of custody is bookkeeping, and it is the single most common place amateur investigations fall apart.</p>
+
+<p><strong>Order of volatility.</strong> Evidence decays at wildly different speeds, so you collect the most fragile first. The canonical ordering comes from <a href="https://www.rfc-editor.org/rfc/rfc3227" target="_blank" rel="noopener noreferrer">RFC 3227</a>: CPU registers and cache, then RAM, then network state and running processes, then the disk, then remote logs, then physical media and backups. In practice the line that matters most is <em>memory before disk</em>: a reboot or a clean shutdown wipes RAM forever, taking running malware, injected code, decryption keys, and open network connections with it.</p>
+
+<p><strong>Integrity and hashing.</strong> The moment you acquire evidence, you compute a cryptographic hash of it (SHA-256, historically MD5). You record that hash, and anyone can recompute it later to prove the data hasn't changed by a single bit. This is what makes a copy as good as the original in evidentiary terms.</p>
+
+<pre tabindex="0"><code>$ sha256sum disk.E01
+9f2c...e7ab  disk.E01     # recorded at acquisition
+$ sha256sum disk.E01
+9f2c...e7ab  disk.E01     # recomputed before analysis - identical, evidence intact</code></pre>
+
+<p><strong>Write blockers.</strong> When you read a suspect drive, you must not write to it – even mounting a filesystem can update access timestamps. A <strong>write blocker</strong> (a hardware device like the Tableau line, or a software equivalent) sits between the drive and your workstation and physically permits reads while rejecting every write, guaranteeing the source is untouched.</p>
+
+<p><strong>Imaging.</strong> You almost never analyze the original. You take a bit-for-bit <strong>forensic image:</strong> every sector, including deleted files and slack space, and work on that copy. Images are stored raw (a <code>dd</code>-style <code>.raw</code>) or in the compressed, metadata-rich Expert Witness Format (<code>.E01</code>). The original goes into evidence storage, hash recorded, and you never touch it again.</p>
+
+<h2>Types of forensics, by where the evidence lives</h2>
+<p>The field splits naturally by evidence source, and each source has its own tools, artifacts, and volatility profile.</p>
+
+<ul>
+  <li><strong>Disk forensics.</strong> The classic discipline: filesystems, files, deleted-file recovery, timestamps, and OS artifacts like the Windows registry, prefetch, and event logs. Non-volatile, so it survives a shutdown, which is why it is the most mature area.</li>
+  <li><strong>Memory (RAM) forensics.</strong> Analyzing a snapshot of live memory. This is where fileless malware, injected code, decrypted secrets, credentials, and active network connections live – none of which ever touch disk. Increasingly the highest-value evidence in a modern intrusion, and the most fragile.</li>
+  <li><strong>Network forensics.</strong> Reconstructing what crossed the wire from packet captures or flow records – C2 beacons, data exfiltration, lateral movement. If you didn't capture it while it happened, it's gone; see our comparison of <a href="../../compare/wireshark-vs-tcpdump/" target="_blank" rel="noopener noreferrer">Wireshark vs tcpdump</a> for the two workhorse capture tools.</li>
+  <li><strong>Mobile forensics.</strong> Phones and tablets – messages, app data, location history, call logs. Complicated by strong encryption, locked bootloaders, and proprietary storage, so it leans heavily on specialist commercial tooling.</li>
+  <li><strong>Cloud forensics.</strong> The hardest new frontier. You often can't image the underlying host at all, so you rely on provider audit logs (AWS CloudTrail, Azure/Entra sign-in logs, Google Workspace audit), API snapshots, and control-plane records. Evidence is bounded by whatever retention you configured before the incident.</li>
+  <li><strong>Log forensics.</strong> Authentication logs, process-creation events, web-server and application logs, and everything centralized into a SIEM. Cheap to keep, easy to correlate, and often the thread that ties every other source together.</li>
+</ul>
+
+<h2>The toolkit, by area</h2>
+<p>You could spend a career learning these, but a working DFIR analyst reaches for a fairly small, stable set. Grouped by job:</p>
+
+<ul>
+  <li><strong>Disk analysis:</strong> <a href="https://www.sleuthkit.org/" target="_blank" rel="noopener noreferrer">The Sleuth Kit</a> and its GUI, <a href="https://www.autopsy.com/" target="_blank" rel="noopener noreferrer">Autopsy</a>: the free, open-source foundation of file and filesystem forensics. On the commercial side, <a href="https://www.opentext.com/products/encase-forensic" target="_blank" rel="noopener noreferrer">EnCase</a> and <a href="https://www.exterro.com/" target="_blank" rel="noopener noreferrer">FTK</a> dominate law-enforcement and enterprise labs.</li>
+  <li><strong>Memory analysis:</strong> the <a href="https://www.volatilityfoundation.org/" target="_blank" rel="noopener noreferrer">Volatility Framework</a> is the standard for pulling processes, injected code, network sockets, and credentials out of a RAM image. Acquisition itself uses tools like WinPmem or Microsoft's Linux collector <a href="https://github.com/microsoft/avml" target="_blank" rel="noopener noreferrer">AVML</a>.</li>
+  <li><strong>Network analysis:</strong> <a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer">Wireshark</a> for deep packet inspection, and <a href="https://zeek.org/" target="_blank" rel="noopener noreferrer">Zeek</a> for turning traffic into high-level connection logs.</li>
+  <li><strong>Triage and collection at scale:</strong> <a href="https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape" target="_blank" rel="noopener noreferrer">KAPE</a> (Kroll Artifact Parser and Extractor) grabs and parses the high-value artifacts from a live host in minutes, and <a href="https://docs.velociraptor.app/" target="_blank" rel="noopener noreferrer">Velociraptor</a> does the same across a whole fleet of endpoints from one console.</li>
+  <li><strong>Timeline building:</strong> <a href="https://github.com/log2timeline/plaso" target="_blank" rel="noopener noreferrer">plaso / log2timeline</a> is the engine that fuses artifacts from every source into one chronological "super timeline."</li>
+  <li><strong>Triage and hunting:</strong> <a href="https://virustotal.github.io/yara/" target="_blank" rel="noopener noreferrer">YARA</a> lets you write pattern rules to scan files and memory for known-bad indicators – indispensable for quickly finding "is this specific malware anywhere in the estate?"</li>
+</ul>
+
+<p>Two things worth grabbing whole: SANS ships a free analysis VM, the <a href="https://www.sans.org/tools/sift-workstation/" target="_blank" rel="noopener noreferrer">SIFT Workstation</a>, with most of the open-source stack installed, and Eric Zimmerman's <a href="https://ericzimmerman.github.io/" target="_blank" rel="noopener noreferrer">suite of Windows forensic tools</a> is the de-facto standard for parsing individual Windows artifacts.</p>
+
+<h2>Evidence, tools, and volatility at a glance</h2>
+<p>Here is the whole landscape in one table – the mental model to keep. Read it top to bottom and you are also reading the order of volatility: collect the top rows first.</p>
+
+<table>
+  <thead>
+    <tr><th>Evidence type</th><th>Typical tool</th><th>What you get</th><th>Volatility</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Memory (RAM)</strong></td><td>WinPmem / AVML → Volatility</td><td>Running processes, injected/fileless code, network sockets, decryption keys, credentials</td><td>Very high – lost on shutdown</td></tr>
+    <tr><td><strong>Network traffic</strong></td><td>Wireshark, tcpdump, Zeek</td><td>Live connections, C2 beacons, exfiltration, lateral movement</td><td>High – gone unless captured live</td></tr>
+    <tr><td><strong>Live host triage</strong></td><td>KAPE, Velociraptor</td><td>Event logs, registry, prefetch, browser history, scheduled tasks</td><td>Medium – some artifacts overwrite over time</td></tr>
+    <tr><td><strong>Disk (non-volatile)</strong></td><td>FTK Imager, dd → Autopsy / EnCase</td><td>Files, deleted files, filesystem metadata, slack space</td><td>Low – persists across reboots</td></tr>
+    <tr><td><strong>Logs</strong></td><td>SIEM, plaso</td><td>Authentication, process creation, cloud/audit trails</td><td>Low–medium – bounded by retention</td></tr>
+    <tr><td><strong>Mobile</strong></td><td>Cellebrite, Magnet, ALEAPP</td><td>Messages, app data, location, call logs</td><td>Low – persists, but often encrypted/locked</td></tr>
+    <tr><td><strong>Cloud</strong></td><td>CloudTrail, provider APIs</td><td>API calls, IAM changes, storage access</td><td>Medium – retention-bound, no host to image</td></tr>
+  </tbody>
+</table>
+
+<h2>Timeline analysis: the super timeline</h2>
+<p>Individual artifacts are puzzle pieces; the picture only appears when you order them in time. <strong>Timeline analysis</strong> merges timestamps from dozens of sources – filesystem MACB times, registry keys, event logs, browser history, prefetch – into a single chronological record so you can watch the intrusion unfold minute by minute.</p>
+
+<p>The industry name for the fused version is a <strong>super timeline</strong>, and plaso is the tool that builds it. You point <code>log2timeline</code> at an image, then use <code>psort</code> to filter and export the result:</p>
+
+<pre tabindex="0"><code>$ log2timeline.py timeline.plaso /mnt/evidence_image
+$ psort.py -o l2tcsv -w super_timeline.csv timeline.plaso \
+    "date &gt; '2026-07-14 00:00:00' AND date &lt; '2026-07-15 00:00:00'"</code></pre>
+
+<p>The payoff: instead of "this file is malicious," you get a narrative – <em>a phishing attachment executes, writes a payload to disk, registers a scheduled task for persistence, then beacons out to an unfamiliar IP.</em> That sequence is what turns a pile of evidence into a root-cause story.</p>
+
+<h2>Anti-forensics: how attackers try to disappear</h2>
+<p>Competent adversaries know exactly what an investigator will look for and actively work to defeat it. Recognizing anti-forensics is half the job.</p>
+
+<ul>
+  <li><strong>Log clearing.</strong> Wiping Windows event logs (<code>wevtutil cl</code>) or truncating Linux logs in <code>/var/log</code>. Ironically, the clearing itself is often logged (Event ID 1102), so the gap becomes evidence.</li>
+  <li><strong>Timestomping.</strong> Altering a file's MACB timestamps to blend malware in with old system files. Defenders counter this by comparing the filesystem's <code>$STANDARD_INFORMATION</code> timestamps against the harder-to-forge <code>$FILE_NAME</code> attribute in the MFT.</li>
+  <li><strong>Secure deletion and wiping.</strong> Overwriting files or free space so deleted-file recovery returns nothing.</li>
+  <li><strong>Encryption and packing.</strong> Encrypting payloads and staged data, or packing binaries so static analysis and YARA signatures don't match on disk.</li>
+  <li><strong>Living off the land and fileless execution.</strong> Using legitimate built-in tools (PowerShell, WMI, <code>certutil</code>) and running entirely in memory so nothing incriminating is ever written to disk. This is precisely why memory forensics has become so important: the evidence exists only in RAM, and only until the next reboot.</li>
+</ul>
+
+<h2>A walkthrough: triaging one compromised host</h2>
+<p>Theory sticks better attached to a scenario. A SOC analyst escalates an EDR alert: a finance workstation, <code>WIN-FIN-07</code>, spawned PowerShell from a Word document and made an outbound connection to an unfamiliar IP. You are the DFIR responder. Here is the sequence.</p>
+
+<p><strong>1. Preserve, most volatile first.</strong> You do <em>not</em> shut the machine down: that would destroy the memory-resident evidence the alert implies. You isolate it at the network level (EDR host-isolation, keeping the management channel), then acquire RAM before anything else, hashing the output immediately:</p>
+
+<pre tabindex="0"><code>$ winpmem.exe WIN-FIN-07.mem
+$ sha256sum WIN-FIN-07.mem &gt; WIN-FIN-07.mem.sha256   # integrity baseline</code></pre>
+
+<p><strong>2. Acquire the disk.</strong> With memory captured, you take a forensic image of the disk through a write blocker (or via the EDR's remote-acquisition feature), again recording the hash. Original preserved, chain-of-custody form filled in. From here you work only on copies.</p>
+
+<p><strong>3. Analyze memory for the live threat.</strong> You run Volatility against the RAM image to see what was actually executing:</p>
+
+<pre tabindex="0"><code>$ vol -f WIN-FIN-07.mem windows.pslist        # a powershell.exe child of winword.exe
+$ vol -f WIN-FIN-07.mem windows.malfind       # injected, unbacked executable memory
+$ vol -f WIN-FIN-07.mem windows.netscan       # established connection to 203.0.113.77:443</code></pre>
+
+<p>That confirms the alert: a macro spawned PowerShell, code was injected into a process, and a live C2 channel was open – none of which is obvious from disk alone.</p>
+
+<p><strong>4. Build the timeline.</strong> You run plaso over the disk image to place events in order, and the story falls out: the document opened at 09:26, dropped a payload to <code>%APPDATA%</code> at 09:27, registered a scheduled task for persistence at 09:28, and beaconed out at 09:31.</p>
+
+<p><strong>5. Extract IOCs.</strong> From memory and timeline you now have concrete <strong>indicators of compromise</strong>: the payload's SHA-256 hash, the C2 IP and domain, the scheduled-task name, the dropped filename. You write a YARA rule for the payload and sweep the rest of the fleet with Velociraptor to find every other infected host. (For the full taxonomy of what makes a good indicator, see <a href="../indicators-of-compromise/" target="_blank" rel="noopener noreferrer">what are IOCs</a>.)</p>
+
+<p><strong>6. Report.</strong> The deliverable is a clear narrative – timeline, root cause (macro-enabled phishing), scope (which hosts, which data), the IOCs, and remediation – backed by hash-verified evidence and an intact chain of custody. That report is what feeds the eradication plan and the post-incident review, closing the NIST loop you opened at detection.</p>
+
+<h2>Careers and certifications</h2>
+<p>DFIR is one of the most respected specializations in security, and it sits at the senior end of the defensive path – often the Tier 3 tier of a SOC (see how the tiers are structured in <a href="../soc-team-roles/" target="_blank" rel="noopener noreferrer">inside a SOC: team roles</a>). The work suits people who like methodical investigation, deep technical detail, and building a defensible narrative out of fragments.</p>
+
+<p>On certifications, the <a href="https://www.giac.org/" target="_blank" rel="noopener noreferrer">GIAC</a> family is the recognized standard: <strong>GCFE</strong> (GIAC Certified Forensic Examiner) for Windows disk forensics fundamentals, and <strong>GCFA</strong> (GIAC Certified Forensic Analyst) for advanced incident-response forensics. They pair with the <a href="https://www.sans.org/cyber-security-courses/?focus-area=digital-forensics-incident-response" target="_blank" rel="noopener noreferrer">SANS DFIR courses</a> (FOR500, FOR508, FOR572, and others) that many people take alongside them. For hands-on practice without spending a cent, the free SIFT Workstation plus public memory and disk images from CTFs and DFIR challenges will teach you more than any slide deck.</p>
+
+<p>Strip it back and DFIR is a promise about the past: that after the worst has happened, someone can reconstruct exactly what occurred, prove it, and make sure the organization learns from it. The tools change every year; the discipline – preserve first, handle carefully, follow the evidence – does not.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is DFIR?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          DFIR stands for Digital Forensics and Incident Response – the combined discipline of investigating a security incident (forensics: recovering and analyzing evidence from disks, memory, networks, and logs) while simultaneously responding to it (containing the attacker, eradicating the foothold, and recovering). The two fused because modern intrusions demand forensic rigor at incident speed: you need evidence sound enough for a court or regulator, produced fast enough to stop an attack that is still in progress.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the order of volatility?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It's the principle that you collect evidence starting with the most fragile, because different data survives for very different lengths of time. The canonical ordering (from RFC 3227) runs: CPU registers and cache, then RAM, then running processes and network state, then disk, then remote logs, then archival media. The practical rule that matters most is "memory before disk": a reboot or shutdown erases RAM permanently, taking running malware, injected code, encryption keys, and open connections with it.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between disk and memory forensics?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Disk forensics analyzes non-volatile storage – files, deleted files, filesystem metadata, and OS artifacts like the registry and event logs – which persists across reboots and is the mature, classic discipline. Memory forensics analyzes a snapshot of live RAM, where you find things that never touch disk: fileless malware, injected code, decrypted secrets, credentials, and active network connections. Memory evidence is far higher value in a modern intrusion but far more fragile, since it vanishes the moment the machine powers off, which is why you image RAM before you shut anything down.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What tools do forensic analysts use?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          The core open-source stack is Autopsy and The Sleuth Kit for disk analysis, the Volatility Framework for memory, Wireshark for network captures, plaso/log2timeline for building timelines, and YARA for pattern-based triage. For fast collection there's KAPE (single host) and Velociraptor (whole fleet), and on the commercial side EnCase and FTK dominate enterprise and law-enforcement labs. SANS packages most of the free tools into the ready-to-run SIFT Workstation.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is chain of custody?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A documented, unbroken record of every piece of evidence – who collected it, when, from where, and everyone who has handled or stored it since, with each transfer logged. Its purpose is to prove the evidence wasn't tampered with or swapped between collection and analysis. Combined with cryptographic hashing (which proves the data itself is bit-for-bit unchanged), it's what makes forensic findings defensible in court or an audit. A gap in the chain – evidence unaccounted for even briefly – can invalidate the entire item.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do I get into DFIR?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Build the fundamentals first – operating-system internals (especially Windows artifacts), networking, and log analysis – then get hands-on with the free tools: install the SIFT Workstation, work through public memory and disk images from DFIR challenges and CTFs, and practice building timelines with plaso. Many people enter through a SOC analyst role and grow into forensics at the senior tier. On the credential side, GIAC's GCFE (forensic examiner) and GCFA (forensic analyst), usually paired with the SANS FOR508/FOR500 courses, are the recognized industry standard.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../what-is-a-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is a SOC</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../soc-team-roles/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Inside a SOC: team roles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../indicators-of-compromise/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What are IOCs</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/wireshark-vs-tcpdump/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Wireshark vs tcpdump</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../resources/cybersecurity-certifications-compared/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The most recognized cybersecurity certifications</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

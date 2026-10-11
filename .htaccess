@@ -1,0 +1,280 @@
+# Breachfolio — Apache .htaccess
+# Redirecciones 301, cabeceras de seguridad reforzadas y caché.
+
+RewriteEngine On
+
+# ── WWW → NO-WWW (canonical host) ────────────────────────────────────────
+# Confirmado en auditoría SEO (Search Console): www.breachfolio.com y
+# breachfolio.com servían el mismo contenido con 200 directo, sin 301 entre
+# ellos — Google los indexaba como URLs separadas, repartiendo impresiones y
+# posición media entre ambas variantes de al menos 12 páginas reales.
+RewriteCond %{HTTP_HOST} ^www\.breachfolio\.com$ [NC]
+RewriteRule ^(.*)$ https://breachfolio.com/$1 [R=301,L]
+
+# ── REDIRECCIONES 301 ────────────────────────────────────────────────────
+Redirect 301 /Breachfolio.html                            /
+Redirect 301 /learn/index.html                         /cybersecurity/
+Redirect 301 /learn/cybersecurity-101.html             /cybersecurity/cybersecurity-101/
+Redirect 301 /learn/how-networks-work.html             /cybersecurity/how-networks-work/
+Redirect 301 /learn/linux-fundamentals.html            /cybersecurity/linux-fundamentals/
+Redirect 301 /learn/cryptography-basics.html           /cybersecurity/cryptography-basics/
+Redirect 301 /learn/threat-modeling-stride.html        /cybersecurity/threat-modeling-stride/
+Redirect 301 /ai-security.html                         /cybersecurity/ai-security/
+Redirect 301 /prompts/prompts-for-self-study.html      /ai/prompts-for-self-study/
+RedirectMatch 301 ^/prompts/?.*$                       /ai/
+RedirectMatch 301 ^/es/prompts/?.*$                    /es/ia/
+RedirectMatch 410 ^/uploads/.*$
+
+# ── CATEGORÍAS ES TRADUCIDAS (auditoría SEO: slugs en inglés bajo /es/) ──
+# /es/guias/ ya estaba en español; estas 6 secciones no lo estaban.
+RedirectMatch 301 ^/es/cybersecurity/?(.*)$            /es/ciberseguridad/$1
+RedirectMatch 301 ^/es/ai/?(.*)$                       /es/ia/$1
+RedirectMatch 301 ^/es/lab$|^/es/lab/(.*)$             /es/laboratorio/$1
+RedirectMatch 301 ^/es/compare/?(.*)$                  /es/comparativas/$1
+RedirectMatch 301 ^/es/resources/?(.*)$                /es/recursos/$1
+RedirectMatch 301 ^/es/news/?(.*)$                     /es/noticias/$1
+
+# ── SLUGS DE ARTÍCULO ES TRADUCIDOS (auditoría Fase 4: quedaban en inglés) ──
+# es/guias/ y es/comparativas/ excluidos: guias ya estaba en español;
+# comparativas son nombres de herramienta (nmap-vs-masscan) que no se traducen.
+RedirectMatch 301 ^/es/ciberseguridad/ai-security/?(.*)$    /es/ciberseguridad/ia-y-ciberseguridad/$1
+RedirectMatch 301 ^/es/ciberseguridad/cryptography-basics/?(.*)$    /es/ciberseguridad/criptografia-basica-que-puedes-usar/$1
+RedirectMatch 301 ^/es/ciberseguridad/cybersecurity-101/?(.*)$    /es/ciberseguridad/ciberseguridad-101/$1
+RedirectMatch 301 ^/es/ciberseguridad/cybersecurity-roadmap-and-careers/?(.*)$    /es/ciberseguridad/como-empezar-en-ciberseguridad/$1
+RedirectMatch 301 ^/es/ciberseguridad/how-networks-work/?(.*)$    /es/ciberseguridad/como-funcionan-las-redes/$1
+RedirectMatch 301 ^/es/ciberseguridad/how-to-learn-cybersecurity/?(.*)$    /es/ciberseguridad/como-aprender-ciberseguridad/$1
+RedirectMatch 301 ^/es/ciberseguridad/linux-fundamentals/?(.*)$    /es/ciberseguridad/fundamentos-de-linux-para-seguridad/$1
+RedirectMatch 301 ^/es/ciberseguridad/red-blue-purple-team-explained/?(.*)$    /es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/$1
+RedirectMatch 301 ^/es/ciberseguridad/threat-modeling-stride/?(.*)$    /es/ciberseguridad/modelado-de-amenazas-con-stride/$1
+RedirectMatch 301 ^/es/ia/agentic-ai-security-basics/?(.*)$    /es/ia/seguridad-de-ia-agentica/$1
+RedirectMatch 301 ^/es/ia/ai-red-teaming-basics/?(.*)$    /es/ia/red-teaming-de-ia-desde-cero/$1
+# BUCLE INFINITO, corregido el 27-07. El patrón general `…-agent/?(.*)$` que
+# usan el resto de reglas aquí volvía a casar con su PROPIO destino, porque el
+# slug nuevo (`…-agente`) contiene al viejo (`…-agent`) como prefijo: al pedir
+# /es/ia/llm-vs-chatbot-vs-agente/ el `/?` casaba vacío, `(.*)` capturaba "e/"
+# y redirigía a …-agente/e/, luego /e/e/, y así sin fin. El artículo real
+# estaba INACCESIBLE (error de bucle en el navegador) pese a estar en el
+# sitemap y enlazado desde el hub de IA; es el «Error de redirección» que
+# reportaba Search Console.
+# Se ancla con `$` para que solo case la ruta exacta y nunca su destino. Ojo
+# al añadir reglas nuevas: si el slug destino empieza por el de origen, el
+# patrón con cola `(.*)` SIEMPRE creará un bucle.
+RedirectMatch 301 ^/es/ia/llm-vs-chatbot-vs-agent/?$    /es/ia/llm-vs-chatbot-vs-agente/
+RedirectMatch 301 ^/es/ia/llms-for-phishing-detection/?(.*)$    /es/ia/llms-para-detectar-phishing/$1
+RedirectMatch 301 ^/es/ia/mcp-attack-surface-explained/?(.*)$    /es/ia/mcp-superficie-de-ataque-explicada/$1
+RedirectMatch 301 ^/es/ia/prompt-injection-explained/?(.*)$    /es/ia/prompt-injection-explicado/$1
+RedirectMatch 301 ^/es/ia/prompts-for-self-study/?(.*)$    /es/ia/prompts-para-autoaprendizaje/$1
+RedirectMatch 301 ^/es/ia/run-a-local-llm-for-security-notes/?(.*)$    /es/ia/ejecuta-un-llm-local/$1
+RedirectMatch 301 ^/es/laboratorio/build-a-home-lab-on-one-laptop/?(.*)$    /es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/$1
+RedirectMatch 301 ^/es/laboratorio/lab-03-wazuh-siem-home-lab/?(.*)$    /es/laboratorio/lab-03-wazuh-siem-en-casa/$1
+RedirectMatch 301 ^/es/laboratorio/lab-04-network-segmentation-pfsense/?(.*)$    /es/laboratorio/lab-04-segmentacion-de-red-con-pfsense/$1
+RedirectMatch 301 ^/es/laboratorio/lab-05-ids-suricata/?(.*)$    /es/laboratorio/lab-05-ids-con-suricata/$1
+RedirectMatch 301 ^/es/laboratorio/metasploitable-2-lab-walkthrough/?(.*)$    /es/laboratorio/metasploitable-2-paso-a-paso/$1
+RedirectMatch 301 ^/es/laboratorio/vulnerable-target-dvwa-docker/?(.*)$    /es/laboratorio/objetivo-vulnerable-dvwa-en-docker/$1
+RedirectMatch 301 ^/es/laboratorio/what-is-metasploitable-2/?(.*)$    /es/laboratorio/que-es-metasploitable-2/$1
+RedirectMatch 301 ^/es/noticias/claude-sonnet-5-release/?(.*)$    /es/noticias/lanzamiento-claude-sonnet-5/$1
+RedirectMatch 301 ^/es/noticias/jetbrains-ide-vulnerabilities/?(.*)$    /es/noticias/vulnerabilidades-ide-jetbrains/$1
+RedirectMatch 301 ^/es/noticias/sharefile-zero-day-disruption/?(.*)$    /es/noticias/zero-day-sharefile/$1
+RedirectMatch 301 ^/es/noticias/sharepoint-cve-2026-45659/?(.*)$    /es/noticias/rce-sharepoint-cve-2026-45659/$1
+RedirectMatch 301 ^/es/noticias/simplehelp-cve-2026-48558/?(.*)$    /es/noticias/vulnerabilidad-simplehelp-cve-2026-48558/$1
+RedirectMatch 301 ^/es/recursos/common-ports-cheat-sheet/?(.*)$    /es/recursos/puertos-comunes-chuleta/$1
+RedirectMatch 301 ^/es/recursos/cybersecurity-certifications-compared/?(.*)$    /es/recursos/certificaciones-de-ciberseguridad-comparadas/$1
+RedirectMatch 301 ^/es/recursos/incident-response-first-24h-checklist/?(.*)$    /es/recursos/primeras-24-horas-de-un-incidente/$1
+RedirectMatch 301 ^/es/recursos/linux-hardening-checklist/?(.*)$    /es/recursos/checklist-de-hardening-linux/$1
+RedirectMatch 301 ^/es/recursos/linux-security-commands-cheat-sheet/?(.*)$    /es/recursos/comandos-linux-para-revision-de-seguridad/$1
+RedirectMatch 301 ^/es/recursos/network-commands-glossary/?(.*)$    /es/recursos/glosario-de-comandos-de-red/$1
+RedirectMatch 301 ^/es/recursos/owasp-top-10-quick-reference/?(.*)$    /es/recursos/owasp-top-10-referencia-rapida/$1
+RedirectMatch 301 ^/es/recursos/security-cheat-sheet/?(.*)$    /es/recursos/acronimos-de-ciberseguridad/$1
+
+# Clean URLs: every article/section moved from slug.html to slug/ (real
+# folder + index.html on disk, served natively by DirectoryIndex — no
+# internal rewrite needed). This catches anyone or anything still requesting
+# the old *.html path (old bookmarks, cached search results, stray internal
+# links we missed) and 301s them to the clean equivalent. Excludes 404.html,
+# the one literal .html file left on purpose, and anything that still
+# physically exists as a file (so this never fights a real, current page).
+RewriteCond %{REQUEST_URI} !^/404\.html$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)\.html$ /$1/ [R=301,L]
+
+# La regla de arriba excluye a propósito los ficheros que existen (!-f), y los
+# index.html existen todos, así que /guides/index.html devolvía 200 con un
+# canonical a /guides/. Google lo estaba tratando como "página alternativa con
+# etiqueta canónica adecuada": no es un error, pero duplica la superficie de
+# URLs que hay que rastrear, y en Search Console conviven 42 de esas con 43
+# páginas en "descubierta, actualmente sin indexar". En un dominio nuevo el
+# presupuesto de rastreo es el recurso escaso, así que se colapsa la copia.
+#
+# La condición usa %{THE_REQUEST}, que es la línea de petición original, no la
+# ruta ya reescrita. Es lo que impide el bucle: cuando Apache sirve /guides/
+# internamente vía DirectoryIndex, THE_REQUEST sigue diciendo "GET /guides/",
+# la condición no casa y la regla no se dispara. Comprobado que ningún enlace
+# interno, ni el sitemap, ni llms.txt apuntan nunca a index.html.
+RewriteCond %{THE_REQUEST} \s/+(?:[^\s?]*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+# ── CARPETA INTERNA (docs de la skill_google, no es contenido del sitio) ──
+# 404 en vez de 403: un 403 confirma a quien sondee la URL que algo existe
+# ahí; un 404 no revela nada (hallazgo de la auditoría SEO/técnica).
+RedirectMatch 404 ^/skill_google/.*$
+
+# ── PÁGINA 404 PERSONALIZADA ─────────────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── CACHÉ ────────────────────────────────────────────────────────────────
+# text/html deliberadamente SIN caché de larga duración: el CDN de Hostinger
+# no purga de forma fiable en cada despliegue (visto en vivo: páginas
+# sirviendo contenido de horas antes con "access plus 1 hour" + purga
+# manual sin efecto en todos los nodos edge). Con no-cache, el navegador/CDN
+# puede seguir guardando la respuesta pero SIEMPRE revalida contra el origen
+# antes de usarla (petición condicional barata, 304 si no cambió) — así un
+# despliegue nuevo se ve en la siguiente visita, no "cuando el CDN quiera".
+# JS/CSS/imágenes siguen cacheados agresivamente porque ya llevan
+# ?v=<version> en la URL (ver <script>/<link> en las páginas): cambiar el
+# contenido cambia la URL, así que el caché largo nunca sirve algo viejo.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType video/mp4                 "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # Los .xml (rss.xml, es/rss.xml, sitemap.xml) van con el HTML y no con los
+  # assets: cambian de contenido en la MISMA URL y no llevan ?v=<version>, así
+  # que con caché larga un lector de feeds o un rastreador podría quedarse
+  # semanas con la versión vieja sin enterarse de un artículo nuevo.
+  <FilesMatch "\.xml$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # PageSpeed marcaba "usar tiempos de vida de caché eficientes" con el mes que
+  # había aquí antes. Un año con immutable es lo correcto para estos ficheros y
+  # no puede servir nada viejo: la URL lleva ?v=<version> y bump-asset-version.mjs
+  # la cambia en cada build, así que un contenido nuevo es siempre una URL nueva.
+  # El HTML queda fuera a propósito, con no-cache, para que un despliegue se vea
+  # en la siguiente visita.
+  <FilesMatch "\.(css|js|webp|png|jpe?g|svg|mp4|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# ── CABECERAS DE SEGURIDAD (REFORZADAS) ──────────────────────────────────
+<IfModule mod_headers.c>
+  # HSTS — fuerza HTTPS durante 2 años, incluye subdominios
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+  # CSP — sólo permite orígenes que usamos (script-src estricto: JS en archivos, sin inline
+  # salvo dos snippets fijos permitidos por hash exacto, no por 'unsafe-inline':
+  #   sha256-SYdy… = snippet sf-consent-default (Consent Mode v2, tools/inject-consent.mjs)
+  #   sha256-ZLcY… = bloque de config de gtag.js (G-EGX7M6BMBR, tools/replace-gtm-with-gtag.mjs)
+  # Si cualquiera de los dos snippets cambia un solo byte hay que recalcular su hash aquí
+  # (y en _headers, que debe ir siempre sincronizado con esta línea).
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-SYdyKsa7frBTauY387OmRS9559c8p85HPXLMSVr8PEY=' 'sha256-ZLcYcZFfs1bfSINgv8lCU0I923vWDWb3zQd3nQpNN1Q=' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagservices.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.ipify.org https://ipapi.co https://aarzgpypqqeptwophtbe.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; frame-src https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.safeframe.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+  # Prevenir MIME-sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Clickjacking protection
+  Header always set X-Frame-Options "DENY"
+
+  # XSS filter (legacy pero aún respetado)
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Referrer policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions — deniega todo lo que no usamos
+  Header always set Permissions-Policy "accelerometer=(), autoplay=(self), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self), usb=(), xr-spatial-tracking=()"
+
+  # Cross-origin isolation (anti-Spectre)
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always set Cross-Origin-Embedder-Policy "credentialless"
+
+  # Eliminar cabeceras que revelan información del servidor
+  Header unset X-Powered-By
+  Header unset Server
+</IfModule>
+
+# ── COMPRESIÓN ───────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml text/xml application/rss+xml
+</IfModule>
+
+# ── PROTEGER ARCHIVOS SENSIBLES ──────────────────────────────────────────
+<FilesMatch "\.(env|git|gitignore|htaccess|htpasswd|ini|log|sh|sql|bak|config|md)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# docs/ es documentación interna: specs, informes de auditoría, planes. El bloque
+# de arriba solo cubre extensiones concretas, así que un .json que se dejara ahí
+# se servía con 200 (pasó con docs/seo-audit-2026-07-30/audit-data.json el
+# 2026-08-01). Se bloquea el directorio entero, sea cual sea la extensión, para
+# que añadir un fichero ahí no vuelva a publicarlo sin querer.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^docs/ - [F,L]
+</IfModule>
+
+# imagenes/ es el banco de originales en PNG (189 MB, 100 ficheros). Se sube al
+# repositorio desde el 2026-08-26 para poder trabajar desde otro equipo, pero
+# NO debe servirse: son los originales sin comprimir de las mismas imagenes que
+# ya estan en assets/img en webp. Servirlos seria ancho de banda tirado y
+# contenido duplicado que ademas se puede rastrear.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^imagenes/ - [F,L]
+</IfModule>
+
+# Contenido retirado a propósito. 410 Gone, no 404: le dice a Google que la
+# retirada es deliberada y la saca del índice bastante más rápido que un 404,
+# que Google reintenta durante semanas por si fue un fallo temporal.
+#
+# antivirus-vs-edr (EN+ES), retirado el 2026-08-17. Se publicó el 13-08
+# rescatándolo de un borrador del 22-07; al revisarlo, el contenido estaba
+# desactualizado y apuntaba a terminología de empresa ("EDR") en vez de a lo que
+# busca un consumidor, en contra de la regla 5 de CONTENT-QUEUE.md. Solo estuvo
+# 4 días en vivo y no llegó a aparecer en ninguna tabla de Search Console.
+#
+# No se redirige al hub: un 301 de una comparativa concreta a un índice es un
+# soft-404 y Google lo trata como tal. Si algún día se escribe una comparativa
+# de antivirus de consumo, irá a otra URL (bitdefender-vs-norton-vs-kaspersky),
+# así que estas dos no hacen falta para nada.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^compare/antivirus-vs-edr(/.*)?$ - [G,L]
+  RewriteRule ^es/comparativas/antivirus-vs-edr-comparados(/.*)?$ - [G,L]
+</IfModule>
+
+# Notas internas de proyecto (no .md) que tampoco deben servirse en producción
+<FilesMatch "^(telegram-seleccion-plantilla)\.txt$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# ── BLOQUEAR ACCESO A DIRECTORIOS OCULTOS ────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteRule (^|/)\. - [F]
+</IfModule>
+
+# ── DESACTIVAR LISTADO DE DIRECTORIOS ────────────────────────────────────
+Options -Indexes

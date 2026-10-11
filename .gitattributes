@@ -1,0 +1,24 @@
+# Normalize line endings for text so the repo is consistent across OSes.
+* text=auto eol=lf
+
+# Treat binary assets as binary: never apply text/EOL normalization to them
+# (that would corrupt the file and degrade images). This is why heroes/thumbs
+# must never be touched by git's text filters.
+*.webp binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.mp4  binary
+*.webm binary
+*.woff  binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.pf_meta binary
+*.pf_fragment binary
+*.pagefind binary
+
+# SVGs are text (XML) but keep LF to avoid noisy diffs
+*.svg text eol=lf

@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fundamentos de la inteligencia de amenazas (CTI), explicados</title>
+  <meta name="description" content="Los cuatro niveles de la inteligencia de amenazas, el ciclo de inteligencia, los estándares STIX/TAXII y cómo la CTI se mapea a MITRE ATT&CK." />
+  <meta name="keywords" content="inteligencia de amenazas, niveles de CTI, inteligencia estratégica operacional táctica técnica, STIX TAXII, MITRE ATT&CK, feeds de inteligencia de amenazas" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Fundamentos de la inteligencia de amenazas (CTI), explicados | Breachfolio" />
+  <meta property="og:description" content="Los cuatro niveles de la inteligencia de amenazas, el ciclo de inteligencia, los estándares STIX/TAXII y cómo la CTI se mapea a MITRE ATT&CK." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-cti.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fundamentos de la inteligencia de amenazas (CTI), explicados | Breachfolio" />
+  <meta name="twitter:description" content="Los cuatro niveles de la inteligencia de amenazas, el ciclo de inteligencia, los estándares STIX/TAXII y cómo la CTI se mapea a MITRE ATT&CK." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-cti.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Fundamentos de la inteligencia de amenazas (CTI), explicados",
+      "description": "Los cuatro niveles de la inteligencia de amenazas, el ciclo de inteligencia, los estándares de intercambio STIX/TAXII, y cómo la CTI impulsa la ingeniería de detección mapeada a MITRE ATT&CK.",
+      "image": "https://breachfolio.com/assets/img/hero-cti.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" },
+      "inLanguage": "es",
+      "keywords": "inteligencia de amenazas, niveles de CTI, inteligencia estratégica operacional táctica técnica, STIX TAXII, MITRE ATT&CK, feeds de inteligencia de amenazas"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Fundamentos de la inteligencia de amenazas (CTI)", "item": "https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué es la inteligencia de amenazas cibernéticas (CTI)?", "acceptedAnswer": { "@type": "Answer", "text": "La inteligencia de amenazas cibernéticas es la disciplina de recolectar, evaluar y analizar información sobre adversarios y sus capacidades para que una organización pueda tomar mejores decisiones de seguridad. Se diferencia de un indicador de compromiso en bruto o de un titular de noticias al azar porque ha pasado por un análisis: está contextualizada, evaluada por la fiabilidad de la fuente, y atada a una decisión que alguien necesita tomar. Un dominio en una lista de bloqueo es un dato; «este dominio pertenece a un afiliado de ransomware que ya ha atacado a nuestro sector antes, y esta es la razón por la que lo creemos» es inteligencia." } },
+        { "@type": "Question", "name": "¿Cuáles son los cuatro niveles de la CTI?", "acceptedAnswer": { "@type": "Answer", "text": "La inteligencia estratégica informa a ejecutivos y consejos de administración sobre tendencias de riesgo de alto nivel a lo largo de meses o años, en informes de lenguaje llano. La inteligencia operacional apoya a los respondedores de incidentes y líderes de SOC describiendo la intención probable y los próximos movimientos de una campaña o adversario concreto a lo largo de días o semanas. La inteligencia táctica le da a los ingenieros de detección y analistas los TTP del adversario, normalmente mapeados a MITRE ATT&CK, para construir detecciones a lo largo de horas o días. La inteligencia técnica es el nivel de movimiento más rápido: IOC legibles por máquina como hashes, IP y dominios que alimentan el bloqueo y la correlación automatizados en minutos u horas." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un IOC y un TTP?", "acceptedAnswer": { "@type": "Answer", "text": "Un IOC (indicador de compromiso) es un artefacto específico y desechable de una instancia de ataque, como un hash de fichero o una dirección IP –barato de cambiar para un atacante. Un TTP (táctica, técnica y procedimiento) describe cómo opera realmente un adversario, como su método de robo de credenciales o de movimiento lateral, algo mucho más caro de abandonar para ellos. Los programas de CTI usan ambos: los IOC para un bloqueo rápido y preciso de amenazas conocidas, y los TTP para detecciones duraderas que sobreviven a los cambios de infraestructura. Nuestro artículo dedicado a los indicadores de compromiso cubre en detalle los tipos de IOC y la Pirámide del Dolor." } },
+        { "@type": "Question", "name": "¿Qué son STIX y TAXII?", "acceptedAnswer": { "@type": "Answer", "text": "STIX (Structured Threat Information eXpression) es el lenguaje estandarizado, basado en JSON, para describir objetos de inteligencia de amenazas –indicadores, actores de amenaza, malware, campañas y las relaciones entre ellos– en un formato legible por máquina. TAXII (Trusted Automated eXchange of Intelligence Information) es el protocolo de transporte que mueve contenido STIX entre servidores y clientes por HTTPS. STIX define cómo es la inteligencia; TAXII define cómo viaja entre organizaciones, comunidades de intercambio y plataformas como MISP y OpenCTI. Ambos se mantienen bajo OASIS." } },
+        { "@type": "Question", "name": "¿Cómo alimenta la CTI la ingeniería de detección mapeada a MITRE ATT&CK?", "acceptedAnswer": { "@type": "Answer", "text": "Los informes de CTI táctica normalmente describen el comportamiento de un adversario en términos de técnicas de MITRE ATT&CK –por ejemplo, T1059.001 para la ejecución de PowerShell o T1003.001 para el volcado de credenciales de LSASS. Un ingeniero de detección toma esa técnica, averigua qué evidencia deja en la telemetría disponible, y escribe una regla Sigma para detectar el patrón de log o una regla YARA para capturar el fichero malicioso o el artefacto de memoria. Esto convierte un párrafo de inteligencia en una detección en funcionamiento que se dispara la próxima vez que ocurra ese comportamiento, sin importar qué IOC concretos use el adversario ese día." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Fundamentos de la inteligencia de amenazas (CTI)</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-cti.webp" alt="Flujos de señales en bruto convergiendo en un único informe analizado – inteligencia de amenazas" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · DETECCIÓN</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">La inteligencia de amenazas (CTI), explicada.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Los cuatro niveles de la CTI, el ciclo de inteligencia aplicado a las amenazas, cómo STIX y TAXII mueven indicadores entre organizaciones, y cómo todo ello alimenta la ingeniería de detección mapeada a MITRE ATT&amp;CK.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Una lista de bloqueo de mil IP maliciosas no es inteligencia de amenazas. Tampoco lo es un artículo de noticias sobre una banda de ransomware, ni una hoja de cálculo con hashes de ficheros que alguien descargó de un feed. Todo eso son <em>entradas</em>. La <strong>inteligencia de amenazas cibernéticas (CTI)</strong> es lo que obtienes después de que alguien haya evaluado esas entradas, determinado cuáles son relevantes para tu organización, las haya corroborado contra otras fuentes, y haya convertido el resultado en algo sobre lo que una persona concreta puede actuar: un CISO decidiendo dónde invertir el presupuesto, un respondedor de incidentes decidiendo si una alerta es la misma campaña de la semana pasada, o un ingeniero de detección decidiendo qué regla escribir a continuación. Este artículo cubre qué es realmente la CTI, los cuatro niveles que la estructuran, cómo se relacionan los IOC con la disciplina más amplia, el ciclo de inteligencia que ejecutan los equipos de CTI, cómo se comparte la inteligencia entre organizaciones, y cómo todo ello acaba convirtiéndose en detecciones mapeadas a MITRE ATT&amp;CK.</p>
+
+<h2>Inteligencia frente a información</h2>
+
+<p>La palabra «inteligencia» no es decoración. La información en bruto –una dirección IP, una publicación filtrada de un foro, el blog de un proveedor sobre una nueva familia de malware– se convierte en inteligencia solo después de pasar por un proceso: recolección desde una fuente conocida, evaluación de la fiabilidad de esa fuente, correlación con lo que ya sabes, y análisis que responde a una pregunta que alguien realmente hizo. Un montón de IOC sin verificar en una hoja de cálculo no es inteligencia; es una reserva de inteligencia potencial, esperando a ser procesada. Esta distinción importa porque también es la diferencia entre un indicador y la disciplina que produce, cura y contextualiza indicadores. Si quieres profundizar en los tipos de indicadores en sí –hashes de ficheros, IP, dominios, mutex, huellas JA3– y en la Pirámide del Dolor, que clasifica cuán caro le resulta a un atacante cambiar cada uno, consulta nuestro artículo dedicado a los <a href="../indicadores-de-compromiso/">indicadores de compromiso</a>. Este artículo se queda un nivel por encima: la CTI como el programa y el proceso que le da sentido a esos indicadores.</p>
+
+<h2>Los cuatro niveles de la CTI</h2>
+
+<p>La forma más útil de organizar la inteligencia de amenazas es según <em>quién la consume y con qué rapidez necesita moverse</em>. El sector generalmente divide la CTI en cuatro niveles, cada uno con una audiencia, un marco temporal y un formato de salida distintos:</p>
+
+<table>
+  <thead>
+    <tr><th>Nivel</th><th>Audiencia</th><th>Marco temporal</th><th>Salida típica</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Estratégico</strong></td><td>Ejecutivos, consejo de administración, responsables de riesgo</td><td>Meses a años</td><td>Informes de tendencias en lenguaje llano: qué sectores y regiones enfrentan un riesgo creciente, y por qué le importa al negocio</td></tr>
+    <tr><td><strong>Operacional</strong></td><td>Respondedores de incidentes, líderes de SOC, threat hunters</td><td>Días a semanas</td><td>Contexto a nivel de campaña: el objetivo probable de un adversario, la selección de objetivos y su probable próximo movimiento</td></tr>
+    <tr><td><strong>Táctico</strong></td><td>Ingenieros de detección, analistas de SOC</td><td>Horas a días</td><td>TTP del adversario mapeadas a MITRE ATT&amp;CK, usadas directamente para construir lógica de detección</td></tr>
+    <tr><td><strong>Técnico</strong></td><td>Sistemas automatizados, analistas que triajan alertas</td><td>Minutos a horas</td><td>IOC legibles por máquina –hashes, IP, dominios, URL– que alimentan directamente listas de bloqueo y correlación en el SIEM</td></tr>
+  </tbody>
+</table>
+
+<p>La <strong>inteligencia estratégica</strong> responde a «¿deberíamos preocuparnos, y por qué?». Raras veces nombra una dirección IP concreta; describe tendencias –un grupo de ransomware como servicio expandiéndose hacia un nuevo sector, un actor de estado-nación virando hacia el compromiso de la cadena de suministro– en un lenguaje que un consejo de administración puede usar para justificar decisiones de presupuesto o de apetito de riesgo. La <strong>inteligencia operacional</strong> está un nivel más abajo: sigue una campaña o un actor concreto lo bastante de cerca como para informar decisiones durante un incidente activo, como si la intrusión que estás gestionando esta semana coincide con las herramientas y objetivos de un grupo ya perfilado en otro sitio. La <strong>inteligencia táctica</strong> es donde la CTI empieza a parecer una entrada de ingeniería: describe exactamente cómo se comporta un adversario, en términos sobre los que los equipos de detección pueden construir, normalmente referenciando IDs específicos de técnicas de MITRE ATT&amp;CK. La <strong>inteligencia técnica</strong> es el nivel más rápido y más perecedero: los IOC atómicos que se envían a firewalls, EDR y SIEM en el momento en que se validan, y que se degradan más rápido a medida que los atacantes rotan su infraestructura.</p>
+
+<p>Una función de CTI madura produce los cuatro niveles, porque sirven a decisiones completamente distintas. Un CISO no necesita un hash; a un firewall no le importan las tendencias sectoriales. Los niveles no son una jerarquía de importancia: son una jerarquía de velocidad y audiencia, y confundirlos es una de las formas más comunes en que los programas de CTI fallan a la hora de llegar a la gente que los necesita.</p>
+
+<h2>IOC vs TTP: dos monedas distintas</h2>
+
+<p>La inteligencia técnica y la táctica manejan dos tipos de evidencia fundamentalmente distintos. Un <strong>IOC</strong> es un artefacto específico y desechable de una instancia concreta de ataque: este hash exacto, esta IP exacta, este dominio exacto. Es preciso e inequívoco, pero barato de invalidar para un atacante: recompila el binario y el hash cambia, alquila un nuevo VPS y la IP cambia. Un <strong>TTP</strong> (tactic, technique, and procedure, o táctica, técnica y procedimiento) describe <em>cómo</em> opera un adversario –su método para conseguir acceso inicial, escalar privilegios o moverse lateralmente– independientemente de qué herramientas o infraestructura concretas esté usando hoy. Cambiar un TTP significa rediseñar toda una operación, razón por la cual la detección basada en TTP es mucho más duradera que el bloqueo basado en IOC.</p>
+
+<p>Esta es la misma lógica detrás de la Pirámide del Dolor de David Bianco, que clasifica los tipos de indicador según cuánto dolor le causas a un adversario cuando se los niegas –hashes e IP en la base, TTP en la cima. Cubrimos ese modelo, junto con un catálogo completo de tipos de IOC y ejemplos, en <a href="../indicadores-de-compromiso/">indicadores de compromiso explicados</a>. La versión corta a efectos de CTI: la inteligencia técnica (IOC) te da coincidencias rápidas y precisas contra amenazas conocidas; la inteligencia táctica (TTP) te da resiliencia frente a variantes de la misma amenaza que aún no has visto. Un programa de CTI que solo produce feeds de IOC se queda permanentemente un paso por detrás; uno que también produce análisis a nivel de TTP le da a la ingeniería de detección algo duradero sobre lo que construir.</p>
+
+<h2>El ciclo de inteligencia, aplicado a las amenazas</h2>
+
+<p>Los equipos de CTI no recolectan de forma indiscriminada: ejecutan un bucle estructurado, adaptado del oficio clásico de la inteligencia, que mantiene el trabajo atado a decisiones reales en lugar de convertirse en un ejercicio de acumulación sin fin:</p>
+
+<ol>
+  <li><strong>Planificación y dirección.</strong> Define el requisito de inteligencia: ¿qué decisión necesita tomar alguien, y qué necesitaría saber para tomarla? «¿Somos un objetivo plausible para este nuevo afiliado de ransomware?» tiene respuesta. «Cuéntanos sobre el ransomware» no la tiene.</li>
+  <li><strong>Recolección.</strong> Reúne material en bruto en función de ese requisito –telemetría interna del SOC, informes de fuentes abiertas, feeds de pago, boletines de ISAC (Information Sharing and Analysis Center), monitorización de la dark web, y feeds estructurados vía STIX/TAXII.</li>
+  <li><strong>Procesamiento.</strong> Normaliza formatos, elimina duplicados, traduce y extrae entidades para que la recolección en bruto se convierta en algo con lo que los analistas puedan trabajar de verdad, en lugar de un montón de informes desconectados.</li>
+  <li><strong>Análisis y producción.</strong> Correlaciona fuentes, pondera la fiabilidad, separa el hecho confirmado de la inferencia, y redacta el producto real –un informe estratégico, una evaluación operacional, un análisis táctico de TTP, o un paquete técnico de IOC.</li>
+  <li><strong>Difusión.</strong> Entrega cada producto al nivel que lo necesita, en el formato que ese nivel puede usar –una presentación para el consejo no es un feed para el SIEM, y ninguno debería intentar ser el otro.</li>
+  <li><strong>Retroalimentación.</strong> Los consumidores le dicen al equipo de CTI si el producto realmente respondió a su pregunta, lo cual remodela los requisitos del siguiente ciclo. Este paso de bucle de retorno es lo que mantiene un programa de CTI relevante, en lugar de producir informes que nadie lee.</li>
+</ol>
+
+<h2>Confianza y fiabilidad de la fuente</h2>
+
+<p>No toda la información recolectada merece la misma confianza, y los buenos productos de CTI lo dicen explícitamente. Muchos programas toman prestado el Código Almirantazgo (Admiralty Code, también llamado Admiralty System), derivado de la OTAN, que puntúa un informe en dos ejes independientes: fiabilidad de la fuente (A, completamente fiable, hasta F, la fiabilidad no se puede juzgar) y credibilidad de la información (1, confirmada por otras fuentes, hasta 6, la veracidad no se puede juzgar). Un informe puede llevar una calificación como «B2»: una fuente normalmente fiable, probablemente cierta pero aún no confirmada de forma independiente. Use o no un equipo esa notación exacta, la disciplina subyacente es universal: declara tu nivel de confianza, muestra tus fuentes, y nunca dejes que un solo informe sin verificar impulse una decisión de alto riesgo. Esta es también la razón por la que el análisis separa explícitamente lo que se <em>sabe</em> de lo que se <em>evalúa</em> –un hábito que mantiene honestos a los productos estratégicos y operacionales bajo escrutinio.</p>
+
+<h2>Feeds de inteligencia de amenazas y estándares de intercambio</h2>
+
+<p>Un indicador o una técnica descubierta por una organización es mucho más valiosa una vez que otras también pueden actuar sobre ella, razón por la cual el intercambio de inteligencia de amenazas es todo un ecosistema construido sobre estándares comunes en lugar de adjuntos de correo ad hoc.</p>
+
+<p><strong>STIX y TAXII.</strong> <a href="https://oasis-open.github.io/cti-documentation/stix/intro" target="_blank" rel="noopener noreferrer">STIX</a> (Structured Threat Information eXpression) es el lenguaje estandarizado, basado en JSON, para describir objetos de inteligencia de amenazas –indicadores, actores de amenaza, malware, campañas, patrones de ataque y las relaciones entre ellos– de modo que la inteligencia de una organización signifique exactamente lo mismo cuando la herramienta de otra organización la lea. <a href="https://oasis-open.github.io/cti-documentation/taxii/intro" target="_blank" rel="noopener noreferrer">TAXII</a> (Trusted Automated eXchange of Intelligence Information) es el protocolo de transporte que mueve contenido STIX entre servidores y clientes por HTTPS. La forma abreviada de verlo: STIX es el <em>qué</em> y TAXII es el <em>cómo</em>; ambos viven bajo la gobernanza de <a href="https://oasis-open.github.io/cti-documentation/" target="_blank" rel="noopener noreferrer">OASIS</a>, lo que mantiene el formato neutral respecto a proveedores.</p>
+
+<p><strong>Traffic Light Protocol (TLP).</strong> Compartir inteligencia sensible también requiere acordar quién tiene permiso para verla y reenviarla. <a href="https://www.first.org/tlp/" target="_blank" rel="noopener noreferrer">TLP</a>, mantenido por FIRST, marca cada elemento compartido con un color sencillo: TLP:RED significa solo para los destinatarios nombrados, TLP:AMBER (y el más estricto TLP:AMBER+STRICT) significa limitado a la organización del destinatario, TLP:GREEN significa que se puede compartir dentro de la comunidad más amplia, y TLP:CLEAR significa sin restricciones. Es una etiqueta ligera, no un control técnico, pero permite a los analistas pasar detalles sensibles de una campaña entre organizaciones sin ambigüedad sobre su redistribución.</p>
+
+<p><strong>Plataformas.</strong> <a href="https://www.misp-project.org/" target="_blank" rel="noopener noreferrer">MISP</a> (Malware Information Sharing Platform) es el hub de código abierto ampliamente usado para almacenar, correlacionar y compartir inteligencia entre comunidades de confianza, importando y exportando vía STIX/TAXII. <a href="https://www.opencti.io/" target="_blank" rel="noopener noreferrer">OpenCTI</a> es una plataforma de código abierto más reciente, construida nativamente en torno al modelo de datos STIX, que estructura la inteligencia como un grafo conectado de indicadores, actores, campañas y técnicas en lugar de una lista plana.</p>
+
+<p><strong>ISAC y feeds.</strong> Muchos sectores gestionan un <strong>Information Sharing and Analysis Center (ISAC):</strong> comunidades específicas de sector (servicios financieros, sanidad, energía y otros tienen cada uno el suyo) donde los miembros comparten inteligencia relevante para su panorama de amenazas compartido, bajo reglas de confianza acordadas. Por debajo de eso, los feeds técnicos gratuitos completan el cuadro: <a href="https://urlhaus.abuse.ch/" target="_blank" rel="noopener noreferrer">URLhaus</a>, <a href="https://threatfox.abuse.ch/" target="_blank" rel="noopener noreferrer">ThreatFox</a> y <a href="https://bazaar.abuse.ch/" target="_blank" rel="noopener noreferrer">MalwareBazaar</a>, del proyecto <a href="https://abuse.ch/" target="_blank" rel="noopener noreferrer">abuse.ch</a>, junto con <a href="https://otx.alienvault.com/" target="_blank" rel="noopener noreferrer">AlienVault OTX</a> y <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer">VirusTotal</a>, alimentan al nivel técnico con un flujo constante de indicadores validados.</p>
+
+<h2>De la CTI a la detección mapeada a MITRE ATT&amp;CK</h2>
+
+<p><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> es el vocabulario común que permite que la CTI táctica se convierta directamente en trabajo de ingeniería. En lugar de un párrafo narrativo como «el actor usó una tarea programada para mantener el acceso», un producto de CTI táctica etiqueta ese comportamiento con un ID de técnica específico –en este ejemplo, <code>T1053.005</code> (Scheduled Task). Ese ID significa lo mismo para todos los equipos que consumen ATT&amp;CK, lo que hace posible entregarle un informe directamente a un ingeniero de detección en lugar de un largo ejercicio de traducción.</p>
+
+<p>El traspaso normalmente funciona así:</p>
+
+<ol>
+  <li><strong>La CTI identifica la técnica.</strong> Un informe táctico describe el comportamiento de un adversario y lo mapea a uno o más IDs de técnica de ATT&amp;CK.</li>
+  <li><strong>La ingeniería de detección se pregunta «¿qué evidencia deja esto?».</strong> Para una técnica de persistencia mediante tarea programada, eso podría ser el Windows Event ID 4698, o una nueva entrada bajo las claves de registro del Task Scheduler.</li>
+  <li><strong>El ingeniero escribe la regla.</strong> Una <a href="../reglas-sigma-y-yara/">regla Sigma</a> expresa ese patrón de log en un formato agnóstico de plataforma que se convierte al lenguaje de consulta de un SIEM específico; una regla YARA puede, por separado, capturar el payload soltado o un artefacto de memoria ligado a la misma técnica.</li>
+  <li><strong>La regla se prueba y se ajusta</strong> contra telemetría real para controlar los falsos positivos, y luego se despliega en el contenido de detección de producción.</li>
+  <li><strong>La cobertura se rastrea contra la propia matriz de ATT&amp;CK</strong>, de modo que el equipo puede ver de un vistazo qué técnicas puede detectar realmente y cuáles siguen siendo puntos ciegos –una práctica a menudo llamada mapeo de cobertura de detección basado en ATT&amp;CK.</li>
+</ol>
+
+<p>Este es todo el sentido de separar la inteligencia táctica de la técnica: un IOC te da una detección para una instancia de ataque, pero una técnica mapeada a ATT&amp;CK y convertida en una regla conductual te da una detección para cada variante futura del mismo comportamiento, incluso después de que el atacante haya quemado todos los hashes e IP que conocías. Para la mecánica de escribir y probar esas reglas una vez que la CTI ha identificado la técnica, consulta nuestro artículo complementario sobre <a href="../reglas-sigma-y-yara/">reglas Sigma y YARA explicadas</a>.</p>
+
+<h2>Construir una capacidad de CTI</h2>
+
+<p>Una función de CTI no necesita un equipo grande para aportar valor real. La mayoría de los programas empiezan pequeños y van añadiendo fuentes con el tiempo: la telemetría interna (lo que realmente está golpeando tu propio SOC) suele ser la fuente de mayor señal que tienes, porque tiene garantizada su relevancia para ti; los informes de fuentes abiertas y los blogs de proveedores añaden amplitud; los feeds de pago y la membresía en un ISAC añaden profundidad y aviso más temprano; y una plataforma como MISP u OpenCTI le da al equipo un sitio donde almacenar, correlacionar y difundir todo de forma consistente, en lugar de dispersar hallazgos entre hojas de cálculo e hilos de chat. La disciplina que importa más que cualquier herramienta es el propio ciclo de inteligencia: atar cada esfuerzo de recolección a un requisito concreto, y cerrar el bucle de retroalimentación para que el programa siga produciendo lo que sus consumidores realmente necesitan.</p>
+
+<h2>En resumen</h2>
+
+<p>La CTI no es un feed al que te suscribes: es un proceso que convierte información recolectada en decisiones, a cuatro velocidades distintas para cuatro audiencias distintas. La inteligencia estratégica moldea el presupuesto y el apetito de riesgo; la inteligencia operacional moldea la respuesta a incidentes; la inteligencia táctica, mapeada a MITRE ATT&amp;CK, moldea lo que construyen los ingenieros de detección; y la inteligencia técnica, el mundo de movimiento rápido de los IOC, moldea qué se bloquea hoy. STIX y TAXII hacen posible mover esa inteligencia entre organizaciones en un lenguaje común, y toda la disciplina existe para responder bien a una pregunta: dado todo lo que ahora sabemos sobre cómo operan los adversarios, ¿qué deberíamos hacer realmente al respecto?</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es la inteligencia de amenazas cibernéticas (CTI)?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La inteligencia de amenazas cibernéticas es la disciplina de recolectar, evaluar y analizar información sobre adversarios y sus capacidades para que una organización pueda tomar mejores decisiones de seguridad. Se diferencia de un indicador de compromiso en bruto o de un titular de noticias al azar porque ha pasado por un análisis: está contextualizada, evaluada por la fiabilidad de la fuente, y atada a una decisión que alguien necesita tomar. Un dominio en una lista de bloqueo es un dato; «este dominio pertenece a un afiliado de ransomware que ya ha atacado a nuestro sector antes, y esta es la razón por la que lo creemos» es inteligencia.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuáles son los cuatro niveles de la CTI?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La inteligencia estratégica informa a ejecutivos y consejos de administración sobre tendencias de riesgo de alto nivel a lo largo de meses o años, en informes de lenguaje llano. La inteligencia operacional apoya a los respondedores de incidentes y líderes de SOC describiendo la intención probable y los próximos movimientos de una campaña o adversario concreto a lo largo de días o semanas. La inteligencia táctica le da a los ingenieros de detección y analistas los TTP del adversario, normalmente mapeados a MITRE ATT&CK, para construir detecciones a lo largo de horas o días. La inteligencia técnica es el nivel de movimiento más rápido: IOC legibles por máquina como hashes, IP y dominios que alimentan el bloqueo y la correlación automatizados en minutos u horas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un IOC y un TTP?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un IOC (indicador de compromiso) es un artefacto específico y desechable de una instancia de ataque, como un hash de fichero o una dirección IP –barato de cambiar para un atacante. Un TTP (táctica, técnica y procedimiento) describe cómo opera realmente un adversario, como su método de robo de credenciales o de movimiento lateral, algo mucho más caro de abandonar para ellos. Los programas de CTI usan ambos: los IOC para un bloqueo rápido y preciso de amenazas conocidas, y los TTP para detecciones duraderas que sobreviven a los cambios de infraestructura. Nuestro artículo dedicado a los indicadores de compromiso cubre en detalle los tipos de IOC y la Pirámide del Dolor.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué son STIX y TAXII?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          STIX (Structured Threat Information eXpression) es el lenguaje estandarizado, basado en JSON, para describir objetos de inteligencia de amenazas –indicadores, actores de amenaza, malware, campañas y las relaciones entre ellos– en un formato legible por máquina. TAXII (Trusted Automated eXchange of Intelligence Information) es el protocolo de transporte que mueve contenido STIX entre servidores y clientes por HTTPS. STIX define cómo es la inteligencia; TAXII define cómo viaja entre organizaciones, comunidades de intercambio y plataformas como MISP y OpenCTI. Ambos se mantienen bajo OASIS.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo alimenta la CTI la ingeniería de detección mapeada a MITRE ATT&CK?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los informes de CTI táctica normalmente describen el comportamiento de un adversario en términos de técnicas de MITRE ATT&CK –por ejemplo, T1059.001 para la ejecución de PowerShell o T1003.001 para el volcado de credenciales de LSASS. Un ingeniero de detección toma esa técnica, averigua qué evidencia deja en la telemetría disponible, y escribe una regla Sigma para detectar el patrón de log o una regla YARA para capturar el fichero malicioso o el artefacto de memoria. Esto convierte un párrafo de inteligencia en una detección en funcionamiento que se dispara la próxima vez que ocurra ese comportamiento, sin importar qué IOC concretos use el adversario ese día.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../indicadores-de-compromiso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Indicadores de Compromiso (IOC) explicados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../reglas-sigma-y-yara/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Reglas Sigma y YARA explicadas</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../herramientas-de-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Herramientas SOC: SIEM, SOAR, EDR y más</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

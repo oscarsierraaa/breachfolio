@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My email was hacked: what to do right now</title>
+  <meta name="description" content="Someone got into your email. Lock them out, undo the forwarding rule they left behind, and secure the accounts that reset through it, in that order." />
+  <meta name="keywords" content="my email was hacked, email account hacked what to do, gmail hacked recovery, someone accessed my email, email forwarding rule attacker, remove app passwords gmail, sign out all sessions email, outlook account compromised, email recovery address changed, hacked email contacts spam, check email filters deleting messages, oauth apps with mailbox access, secure email after breach, email account takeover" />
+  <link rel="canonical" href="https://breachfolio.com/guides/hacked-email-account/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/hacked-email-account/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/correo-hackeado/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/hacked-email-account/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="My email was hacked: what to do right now | Breachfolio" />
+  <meta property="og:description" content="Someone got into your email. Lock them out, undo the forwarding rule they left behind, and secure the accounts that reset through it, in that order." />
+  <meta property="og:url" content="https://breachfolio.com/guides/hacked-email-account/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/035-guide-closet-rearranged-by-stranger.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="My email was hacked: what to do right now | Breachfolio" />
+  <meta name="twitter:description" content="Someone got into your email. Lock them out, undo the forwarding rule they left behind, and secure the accounts that reset through it, in that order." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/035-guide-closet-rearranged-by-stranger.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "My email was hacked: what to do right now",
+      "description": "Someone got into your email. Lock them out, undo the forwarding rule they left behind, and secure the accounts that reset through it, in that order.",
+      "image": "https://breachfolio.com/assets/img/035-guide-closet-rearranged-by-stranger.webp",
+      "datePublished": "2026-08-10",
+      "dateModified": "2026-08-10",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/guides/hacked-email-account/"
+      },
+      "inLanguage": "en",
+      "keywords": "my email was hacked, email account hacked what to do, gmail hacked recovery, someone accessed my email, email forwarding rule attacker, remove app passwords gmail, sign out all sessions email, outlook account compromised, email recovery address changed, hacked email contacts spam, check email filters deleting messages, oauth apps with mailbox access, secure email after breach, email account takeover"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://breachfolio.com/guides/" },
+        { "@type": "ListItem", "position": 3, "name": "Hacked email account", "item": "https://breachfolio.com/guides/hacked-email-account/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/guides/hacked-email-account/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "I changed my password. Is my email safe now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not on its own. A password change does not always end sessions that are already signed in, and it does nothing to a forwarding rule, a filter, an app password or a connected app that was added while they had access. Any of those keeps a copy of your mail flowing to them after the password is gone. Change the password, then sign out all sessions, then go through the settings one by one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the guide say to fix email before my bank?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the reset link for the bank arrives in the email. If someone still controls the mailbox, they can request a password reset on any account tied to that address, receive the link and lock you out again minutes after you have finished. Email is the account that grants the others, so it goes first even when it feels less urgent than money."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I cannot get back in at all. What now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the provider's account recovery form rather than the normal login, and fill it in from a device and network you have used with that account before, which is a signal the provider weighs. Answer from memory rather than guessing neatly: approximate dates and old passwords help more than blanks. If the recovery address or phone was changed, say so explicitly, and expect the process to take days rather than minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I tell my contacts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and through a channel other than the compromised mailbox. Whoever had access may have written to your contacts as you, most often asking for money or sending a link, and the people most likely to fall for it are the ones who trust you. A short message saying that anything unusual from your address in the last few days was not you is enough."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guides</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Hacked email account</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/035-guide-closet-rearranged-by-stranger.webp" alt="Someone has been in your email and left things slightly out of place." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUIDES · ACCOUNT RECOVERY</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Someone is in your email. This is the order to fix it.</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">Do this first</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Change the password, then use your provider's "sign out of all sessions" option. The password alone does not throw out someone who is already signed in.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Your email is the account that can reset all the others. Getting it back is only half the job: the other half is undoing what they set up while they were inside.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-10">August 10, 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Most advice about a hacked email account stops at "change your password", and that is the part that fails people. A password change does not always end a session that is already open, and it does nothing at all to the <strong>forwarding rule, filter or connected app</strong> someone may have added while they were inside. Those keep working afterwards, quietly, which is why people get compromised a second time a week later and assume they were simply unlucky.</p>
+
+<p>Work through this in order. The order matters more than the speed.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Why email comes before your bank</h2>
+
+      <p>When your money is involved the instinct is to go straight to the bank, and that instinct costs people their accounts twice. Every one of those accounts has a "forgot my password" link, and that link sends a reset to your email address. If someone still holds the mailbox, they can request a reset on anything tied to it, receive the link, and lock you out again minutes after you finish.</p>
+
+      <p>Email is the master key. Secure it first, even though it feels less urgent, and then the rest of the work stays done.</p>
+
+      <p>The one exception: if you can see money actively moving, call the bank's fraud line while you work through the rest. Reporting a fraudulent transfer is time-sensitive in a way that account cleanup is not.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Step 1: get back in, and throw everyone out</h2>
+
+      <p>Change the password from a device you trust, and make the new one unique to this account. Reusing the password from another site is how a lot of these start, because a breach somewhere else becomes a working key here. If you keep passwords in your head, this is the account to make the exception for: a <a href="../../compare/password-managers-compared/" class="text-accent ul-link">password manager</a> means the email password can be long and impossible to guess without you having to remember it.</p>
+
+      <p>Then find the option that ends every other session. Providers name it differently: <em>Sign out of all sessions</em>, <em>Sign out of all devices</em>, or a device list where you revoke them one by one. Do this <strong>after</strong> the password change, so the person is not signed straight back in.</p>
+
+      <p>If you cannot get in at all, stop and use the provider's account recovery form rather than the login page. Fill it in from a device and network you have used with that account before, because that consistency is one of the signals a provider weighs. Answer from memory even when the answers are approximate: a roughly right creation date helps more than a blank field.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Step 2: the settings nobody checks</h2>
+
+      <p>This is the part that separates a clean recovery from a repeat. Someone with a few minutes in your mailbox will often leave a way back in, and none of it is undone by a password change. Go through all of it:</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Setting</th><th class="px-4 py-2.5 font-display font-semibold">What to look for</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Forwarding</strong></td><td class="px-4 py-2.5">Any address that is not yours. A copy of everything keeps arriving to them, and you never see a trace of it in your inbox.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Filters and rules</strong></td><td class="px-4 py-2.5">Rules that delete or archive on a keyword like "bank", "invoice" or "password". These hide the alerts that would have warned you.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Recovery address and phone</strong></td><td class="px-4 py-2.5">If either was changed, the recovery route now points at them. Change it back before anything else, because it undoes your work otherwise.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>App passwords</strong></td><td class="px-4 py-2.5">Long generated strings that bypass two-factor entirely. Revoke every one you do not recognise, and expect to re-add a mail client afterwards.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Connected apps</strong></td><td class="px-4 py-2.5">Third-party services with mailbox access granted through a consent screen. Access survives a password change by design.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Aliases and send-as</strong></td><td class="px-4 py-2.5">An added address lets someone keep writing as you even after losing access to the account itself.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Check the sent folder and the trash while you are there. What was sent from your address tells you what your contacts received, and the trash often holds the alerts that were deleted to keep you unaware.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Step 3: turn on two-factor properly</h2>
+
+      <p>With the mailbox yours again, add a second factor so a stolen password is not enough next time. If you have the choice, prefer an authenticator app or a security key over SMS codes. SMS is far better than nothing, and it is also the weakest of the options, because a <a href="../../cybersecurity/sim-swap-attack-explained/" class="text-accent ul-link">SIM swap</a> moves your number to someone else's phone and the codes follow it.</p>
+
+      <p>Save the recovery codes somewhere that is not the mailbox they protect. Printed and in a drawer is perfectly reasonable.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Step 4: work outward</h2>
+
+      <p>Now the accounts that reset through that address, most exposed first:</p>
+
+      <ol>
+        <li><strong>Banking and payment</strong> apps, plus anything holding a saved card.</li>
+        <li><strong>The other big account</strong> you sign into things with, usually a Google or Apple ID.</li>
+        <li><strong>Shopping accounts</strong> with an address and a card on file.</li>
+        <li><strong>Social and messaging</strong>, where impersonation does the damage rather than theft.</li>
+      </ol>
+
+      <p>For each one: new unique password, sign out all sessions, check that the email and phone on file are still yours. That last check catches the quiet version of this attack, where nothing was stolen yet and the account was simply pointed somewhere else for later.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Step 5: tell your contacts, briefly</h2>
+
+      <p>Send a short message from a different channel: anything unusual from your address in the last few days was not you, and they should not act on it. Whoever had access may have written to the people who trust you most, which is precisely why it works. There is no need for detail or apology, only the warning.</p>
+
+      <p>If a contact already paid someone or clicked something, point them at <a href="../report-scam-website/" class="text-accent ul-link">where to report it</a> and tell them to move quickly. The window for stopping a transfer is short.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">How they got in, so it does not repeat</h2>
+
+      <p>Almost always one of four:</p>
+
+      <ul>
+        <li><strong>A reused password</strong> exposed in someone else's breach. The single most common route, and the one a password manager closes.</li>
+        <li><strong>A phishing page</strong> that looked like the login screen. If a "security alert" led you there, compare it against <a href="../fake-google-unusual-activity-alert/" class="text-accent ul-link">what a real one looks like</a>.</li>
+        <li><strong>An approved prompt</strong>. Two-factor pushes that arrive repeatedly until someone taps accept to make them stop. If you did not start it, deny it.</li>
+        <li><strong>An old device or app</strong> still signed in and no longer under your control.</li>
+      </ul>
+
+      <p>Knowing which one it was decides what you fix. If the answer is a reused password, changing this one and leaving the others is a temporary repair.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Where to report it.</strong> In the United States, account takeover with a financial loss goes to the FBI's <a href="https://www.ic3.gov" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">IC3</a>, and identity theft to the FTC at <a href="https://www.identitytheft.gov" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">IdentityTheft.gov</a>, which also generates a recovery plan. Report it to your email provider too, through the account security page: it is what gets a compromised account flagged rather than silently reopened later.</div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>I changed my password. Is my email safe now?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Not on its own. A password change does not always end sessions that are already signed in, and it does nothing to a forwarding rule, a filter, an app password or a connected app that was added while they had access. Any of those keeps a copy of your mail flowing to them after the password is gone. Change the password, then sign out all sessions, then go through the settings one by one.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why does the guide say to fix email before my bank?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Because the reset link for the bank arrives in the email. If someone still controls the mailbox, they can request a password reset on any account tied to that address, receive the link and lock you out again minutes after you have finished. Email is the account that grants the others, so it goes first even when it feels less urgent than money.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>I cannot get back in at all. What now?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Use the provider's account recovery form rather than the normal login, and fill it in from a device and network you have used with that account before, which is a signal the provider weighs. Answer from memory rather than guessing neatly: approximate dates and old passwords help more than blanks. If the recovery address or phone was changed, say so explicitly, and expect the process to take days rather than minutes.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Should I tell my contacts?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes, and through a channel other than the compromised mailbox. Whoever had access may have written to your contacts as you, most often asking for money or sending a link, and the people most likely to fall for it are the ones who trust you. A short message saying that anything unusual from your address in the last few days was not you is enough.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../hacked-messaging-account/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">If your messaging account was hacked</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../fake-google-unusual-activity-alert/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Is that Google security alert real?</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/password-managers-compared/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Bitwarden vs 1Password vs KeePassXC</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Guides</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

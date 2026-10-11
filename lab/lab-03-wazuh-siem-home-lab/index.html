@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab 03: add a Wazuh SIEM to your home lab | Breachfolio</title>
+  <meta name="description" content="Install Wazuh single-node on the home lab from Lab 01, connect your first agent, and read three real detections – a beginner-friendly SIEM walkthrough." />
+  <meta name="keywords" content="wazuh siem home lab, install wazuh siem, wazuh siem tutorial, siem for beginners, home lab siem tutorial, wazuh agent setup, wazuh file integrity monitoring, wazuh single-node install, security event monitoring home lab, open source siem tutorial, detect ssh brute force with wazuh, wazuh dashboard walkthrough, blue team home lab, host based intrusion detection, wazuh agent never connected" />
+  <link rel="canonical" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-03-wazuh-siem-en-casa/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Lab 03: add a Wazuh SIEM to your home lab | Breachfolio" />
+  <meta property="og:description" content="Install Wazuh single-node on the home lab from Lab 01, connect your first agent, and read three real detections – a beginner-friendly SIEM walkthrough." />
+  <meta property="og:url" content="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/lab2-siem.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lab 03: add a Wazuh SIEM to your home lab | Breachfolio" />
+  <meta name="twitter:description" content="Install Wazuh single-node on the home lab from Lab 01, connect your first agent, and read three real detections – a beginner-friendly SIEM walkthrough." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/lab2-siem.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Lab 03: add a Wazuh SIEM to your home lab and read real detections",
+      "description": "Install Wazuh single-node on the home lab from Lab 01, connect your first agent, and read three real detections – a beginner-friendly SIEM walkthrough.",
+      "image": "https://breachfolio.com/assets/img/lab2-siem.webp",
+      "datePublished": "2026-07-10",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/"
+      },
+      "inLanguage": "en",
+      "keywords": "wazuh siem home lab, install wazuh siem, wazuh siem tutorial, siem for beginners, home lab siem tutorial, wazuh agent setup, wazuh file integrity monitoring, wazuh single-node install, security event monitoring home lab, open source siem tutorial, detect ssh brute force with wazuh, wazuh dashboard walkthrough, blue team home lab, host based intrusion detection, wazuh agent never connected"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Lab", "item": "https://breachfolio.com/lab/" },
+        { "@type": "ListItem", "position": 3, "name": "Lab 03: Wazuh SIEM", "item": "https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Wazuh and why add it to a home lab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wazuh is a free and open-source SIEM (Security Information and Event Management) platform. It collects logs from monitored machines, correlates them against rules, and raises alerts when something matches. Added to a home lab, it turns an attacker's toolkit and a vulnerable target into a full attack-and-detect loop by giving you the defender's view of what your own activity looks like."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much RAM does the Wazuh server need in a home lab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "4 GB RAM is the practical minimum for the Wazuh server VM, and 6-8 GB is comfortable. Wazuh bundles a search back-end (the indexer) alongside the server and dashboard, which makes it the heaviest single box in the lab."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my Wazuh agent show \"Never connected\"?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is almost always a network reachability issue: the agent VM cannot reach the server on the required ports (1514/1515). Confirm both VMs are on the same host-only or internal network and that the server's firewall is not blocking the agent ports."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What detections does this Wazuh lab walk through?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three: repeated failed SSH logins (the brute-force signature), a new sudo command (privilege escalation logging), and a file integrity monitoring alert triggered by creating or editing a file under a monitored path such as /etc."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Lab 03: Wazuh SIEM</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/lab2-siem.webp" alt="Lab 03: a SIEM you can actually read." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">LAB · SERIES</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Lab 03: a SIEM you can actually read.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">You have a lab and a target. Now add the thing that watches: a Wazuh SIEM, single-node, on the same hardware, and three detections to prove it works.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>This is the third lab in the series. In <a href="../build-a-home-lab-on-one-laptop/" class="text-accent ul-link">Lab 01</a> you built a home lab on one laptop; in <a href="../vulnerable-target-dvwa-docker/" class="text-accent ul-link">Lab 02</a> you added a deliberately vulnerable target. So far you can attack, but you cannot <em>see</em>. A <strong>SIEM</strong> (Security Information and Event Management) is the missing half: it collects logs from your machines, correlates them, and raises alerts when something matches a rule. Here you will stand up <a href="https://wazuh.com" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Wazuh</a>, a free and open-source SIEM, and watch it light up.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What you need before you start</h2>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li>The home lab from Lab 01 – a hypervisor with at least one Linux VM you can reach over the host-only network.</li>
+        <li>A second VM (or a reasonably sized one) for the Wazuh server: 4 GB RAM is the practical minimum, 6–8 GB is comfortable. Wazuh bundles a search back-end, so it is the heaviest box in the lab.</li>
+        <li>A working host-only or internal network so the agent and server can talk without touching your real LAN.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Install Wazuh, single-node</h2>
+
+      <p>Wazuh ships an <strong>assisted installer</strong> that stands up the server, the indexer and the dashboard on one machine. On the VM you have chosen as the server, run the official quickstart:</p>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code><span class="term-cmt"># on the Wazuh SERVER vm (Ubuntu/Debian)</span>
+<span class="term-cmt">$</span> curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh
+<span class="term-cmt">$</span> sudo bash ./wazuh-install.sh -a</code></pre>
+
+      <p>The <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">-a</code> flag means "all-in-one". When it finishes it prints the dashboard URL and the generated admin password – save both. Browse to <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">https://SERVER-IP</code> from your host, accept the self-signed certificate (this is a lab), and log in. You now have an empty SIEM waiting for data.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Connect your first agent</h2>
+
+      <p>An <strong>agent</strong> is a small piece of software on each monitored machine that ships logs to the server. Install it on the Linux VM you want to watch – for example your DVWA host from Lab 02:</p>
+
+      <ol class="mt-4 space-y-3 list-decimal pl-5 marker:text-accent">
+        <li>In the Wazuh dashboard, open <strong>Agents → Deploy new agent</strong>. Pick the OS, enter the server IP, and it generates the exact install command for you.</li>
+        <li>Run that command on the target VM. It registers the agent and starts it.</li>
+        <li>Back in the dashboard, the agent appears as <strong>Active</strong> within a minute. If it stays "Never connected", the usual cause is the two VMs not being on the same reachable network – revisit the Lab 01 networking.</li>
+      </ol>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Three detections to prove it works</h2>
+
+      <p>An idle SIEM teaches you nothing. Generate activity on the agent VM and watch it appear under <strong>Security events</strong>:</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Detection</th><th class="px-4 py-2.5 font-display font-semibold">How to trigger it</th><th class="px-4 py-2.5 font-display font-semibold">What it shows</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Failed logins</strong></td><td class="px-4 py-2.5">SSH into the agent VM with a wrong password a few times</td><td class="px-4 py-2.5">The classic brute-force signature – flagged within seconds</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>New sudo command</strong></td><td class="px-4 py-2.5">Run something with <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">sudo</code></td><td class="px-4 py-2.5">Privilege escalation logging – spots an account doing something unusual</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>File integrity change</strong></td><td class="px-4 py-2.5">Create or edit a file under a monitored path (such as <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">/etc</code>)</td><td class="px-4 py-2.5">An FIM integrity alert – the mechanism that catches tampering</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Each alert carries a rule ID and a severity level. Click one and read the raw log underneath it: the point of a home SIEM is to build the habit of going from "an alert fired" to "here is exactly what happened and why the rule matched".</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Where this fits</h2>
+
+      <p>A SIEM is not a replacement for the <strong>firewall</strong> you will add in <a href="../lab-04-network-segmentation-pfsense/" class="text-accent ul-link">Lab 04</a> or the <strong>IDS</strong> in <a href="../lab-05-ids-suricata/" class="text-accent ul-link">Lab 05</a>: it is the layer that reads what those layers saw and turns scattered logs into one investigable timeline. Once Wazuh is running here, every later lab in the series feeds it: segmentation changes show up as new agent groups, IDS alerts correlate against the same host events. Get comfortable with this dashboard now, because it is where you will keep coming back.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">When it does not work the first time</h2>
+
+      <p>Two problems account for most first-run trouble, and both are quick to fix:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>The agent shows "Never connected".</strong> Almost always a network reachability issue: the agent VM cannot reach the server on the required ports (1514/1515). Confirm both VMs are on the same host-only or internal network, and that the server's firewall is not blocking the agent ports.</li>
+        <li><strong>The dashboard is slow or the server runs out of memory.</strong> Wazuh bundles an indexer that is genuinely memory-hungry. If the box has only 4 GB, close everything else on it; if you can spare more RAM to the VM, give it 6–8 GB and the sluggishness disappears.</li>
+      </ul>
+
+      <p>With Lab 03 done, your lab has all three sides of practical security: an attacker's toolkit, a target to practise on, and a defender's view of what that activity looks like from the blue-team seat. That last part is what makes the difference between memorising tool commands and understanding detection. The next labs add network segmentation and an IDS so you can watch traffic, not just host logs.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Legal & scope.</strong> Everything here runs inside your own isolated lab, on machines you own, on a host-only network. Generate failed logins and file changes only against your own VMs. Monitoring systems or networks you do not own – or that you lack written authorization to monitor – is a different activity with legal consequences, and nothing in this walkthrough covers it.</div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is Wazuh and why add it to a home lab?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Wazuh is a free and open-source SIEM (Security Information and Event Management) platform. It collects logs from monitored machines, correlates them against rules, and raises alerts when something matches. Added to a home lab, it turns an attacker's toolkit and a vulnerable target into a full attack-and-detect loop by giving you the defender's view of what your own activity looks like.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How much RAM does the Wazuh server need in a home lab?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          4 GB RAM is the practical minimum for the Wazuh server VM, and 6-8 GB is comfortable. Wazuh bundles a search back-end (the indexer) alongside the server and dashboard, which makes it the heaviest single box in the lab.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why does my Wazuh agent show "Never connected"?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          This is almost always a network reachability issue: the agent VM cannot reach the server on the required ports (1514/1515). Confirm both VMs are on the same host-only or internal network and that the server's firewall is not blocking the agent ports.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What detections does this Wazuh lab walk through?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Three: repeated failed SSH logins (the brute-force signature), a new sudo command (privilege escalation logging), and a file integrity monitoring alert triggered by creating or editing a file under a monitored path such as /etc.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../build-a-home-lab-on-one-laptop/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 01: build a home lab</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../vulnerable-target-dvwa-docker/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 02: a vulnerable target</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../lab-04-network-segmentation-pfsense/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 04: segment the network</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All lab walkthroughs</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

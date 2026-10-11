@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What a red team actually does | Breachfolio</title>
+  <meta name="description" content="What a red team really does: goal-based engagements, authorization and Rules of Engagement, the attack lifecycle mapped to MITRE, C2 tooling, and how to start." />
+  <meta name="keywords" content="what a red team does" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-hace-un-red-team/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="What a red team actually does | Breachfolio" />
+  <meta property="og:description" content="What a red team really does: goal-based engagements, authorization and Rules of Engagement, the attack lifecycle mapped to MITRE, C2 tooling, and how to start." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-red-team.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What a red team actually does | Breachfolio" />
+  <meta name="twitter:description" content="What a red team really does: goal-based engagements, authorization and Rules of Engagement, the attack lifecycle mapped to MITRE, C2 tooling, and how to start." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-red-team.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What a red team actually does",
+      "description": "What a red team really does: goal-based engagements, authorization and Rules of Engagement, the attack lifecycle mapped to MITRE, C2 tooling, and how to start.",
+      "image": "https://breachfolio.com/assets/img/hero-red-team.webp",
+      "datePublished": "2026-07-21",
+      "dateModified": "2026-07-21",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/what-a-red-team-does/" },
+      "inLanguage": "en",
+      "keywords": "what a red team does"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "What a red team actually does", "item": "https://breachfolio.com/cybersecurity/what-a-red-team-does/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/what-a-red-team-does/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between a red team and a penetration test?", "acceptedAnswer": { "@type": "Answer", "text": "A penetration test aims for breadth: find and document as many vulnerabilities as possible across a defined set of targets in a fixed window, usually overtly, and hand over a prioritized list. A red team engagement aims for realism and depth: pick a concrete objective (reach the domain controller, exfiltrate a specific dataset) and try to get there quietly, the way a real adversary would, while actively evading detection, and the blue team usually isn't told it's happening. A pentest asks \"how many doors are unlocked?\" A red team asks \"if someone really wanted in, would we even notice?\"" } },
+        { "@type": "Question", "name": "What is an assumed breach engagement?", "acceptedAnswer": { "@type": "Answer", "text": "Assumed breach is a red team model where the client deliberately gives the team a starting foothold – a corporate laptop, a low-privilege account, or a planted implant – as if a phishing email had already succeeded. Getting that first foothold can consume the whole budget and might never land against a mature target, so assumed breach skips to the more valuable question: once an attacker is inside (assume they eventually will be), how far can they get, and will you detect them, before they reach the objective? It guarantees the internal defenses – privilege escalation, lateral movement, exfiltration – actually get tested." } },
+        { "@type": "Question", "name": "What tools do red teams use?", "acceptedAnswer": { "@type": "Answer", "text": "They cluster around the attack lifecycle. Reconnaissance uses OSINT gatherers and scanners like Nmap and OWASP Amass. Post-exploitation in Windows environments leans on BloodHound for attack-path mapping, Mimikatz for credentials, and Impacket for remote execution. The centerpiece is the command-and-control (C2) framework that manages implants: Cobalt Strike is the commercial standard, with modern open-source options like Sliver, Mythic, and Havoc. For emulating specific techniques, Atomic Red Team and MITRE CALDERA are widely used by both attackers and defenders. Everything sits under an OPSEC and evasion discipline aimed at not getting caught – within the limits set by the Rules of Engagement." } },
+        { "@type": "Question", "name": "Is red teaming legal?", "acceptedAnswer": { "@type": "Answer", "text": "Yes – when, and only when, it is authorized. Unauthorized access to a computer system is a crime under laws like the US Computer Fraud and Abuse Act and the UK Computer Misuse Act 1990. What makes red teaming lawful is explicit, written, informed authorization from someone with the authority to grant it, captured in a signed scope and Rules of Engagement that define what's in bounds, which techniques are allowed, timing, and how to stop. Operators carry an authorization letter for exactly this reason. Run the same commands without that written permission and you are committing a crime, regardless of intent." } },
+        { "@type": "Question", "name": "How do I become a red teamer?", "acceptedAnswer": { "@type": "Answer", "text": "Build foundations first – red teaming is not entry-level. Get solid networking, operating system, and especially Windows/Active Directory knowledge, ideally with some defensive or sysadmin time, since you can't attack what you don't understand. Practice the full lifecycle legally on Hack The Box and TryHackMe, and build a home Active Directory lab to break. On certifications, a common progression is OSCP (OffSec PEN-200) for hands-on offensive fundamentals, then red-team-focused certs like CRTO (heavy on C2 and Active Directory) and the PNPT (which ends in a real report and debrief). Above all, learn to write clearly: the report is the product." } },
+        { "@type": "Question", "name": "What's the difference between red teaming and adversary emulation?", "acceptedAnswer": { "@type": "Answer", "text": "Adversary emulation is a specific style of red teaming that reproduces the documented tradecraft of a named, real-world threat actor – replicating, say, APT29's or FIN7's exact techniques and order, so you test whether you'd detect the adversary you're actually likely to face. Broader red teaming (sometimes called adversary simulation) exercises realistic attacker behavior in general without impersonating one particular group. Emulation answers \"would we catch this specific threat actor?\"; general red teaming answers \"would we catch a competent attacker pursuing this objective?\" MITRE's Adversary Emulation Library and tools like CALDERA and Atomic Red Team support the emulation approach." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">What a red team actually does</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-red-team.webp" alt="What a red team actually does." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · RED TEAM</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">What a red team actually does.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">What a red team really does: goal-based engagements, authorization and Rules of Engagement, the attack lifecycle mapped to MITRE, C2 tooling, and how to start.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 21, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Most people picture a red teamer as someone in a hoodie typing fast until a screen flashes "ACCESS GRANTED." The reality is closer to a long, patient, heavily documented project that starts with a signed contract and ends with a written report full of recommendations. A red team's job is not to "hack in" – it's to answer one uncomfortable business question honestly: <em>if a real, determined adversary decided to come after us, would we detect them and stop them before they reached the thing that matters?</em></p>
+
+<p>This is a deep dive into how that question gets answered. If you want the wider map of who attacks, who defends, and how the colors fit together first, our <a href="../red-blue-purple-team-explained/">red, blue and purple team breakdown</a> covers that fork; this article assumes you already know red teams are the offensive side and want to see inside an actual engagement: the authorization that makes it legal, the lifecycle it follows, the tools it runs, and what lands on the client's desk at the end.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 508" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Recon</text><path d="M 192 53 L 192 72" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 68 L 192 73 L 196 68" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="78" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="78" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="107" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Initial access</text><path d="M 192 129 L 192 148" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 144 L 192 149 L 196 144" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="154" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="154" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="183" fill="hsl(var(--foreground))" font-size="15" font-weight="600">C2 (command &amp; control)</text><path d="M 192 205 L 192 224" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 220 L 192 225 L 196 220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="230" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="230" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="259" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Privilege escalation</text><path d="M 192 281 L 192 300" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 296 L 192 301 L 196 296" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="306" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="306" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="335" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Lateral movement</text><path d="M 192 357 L 192 376" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 372 L 192 377 L 196 372" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="382" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="382" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="411" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Actions on objective</text><path d="M 192 433 L 192 452" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 448 L 192 453 L 196 448" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="458" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="458" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="487" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Exfiltration</text></svg>
+        <figcaption>A red team's attack path, mapped to the kill chain / MITRE ATT&CK.</figcaption>
+      </figure>
+      <h2>Objective-based, not vulnerability-based</h2>
+<p>The defining trait of a red team engagement is that it's built around a <strong>goal</strong>, not a checklist. Instead of "find every vulnerability," the mandate is something like "prove an attacker could reach the domain controller," "demonstrate the customer database could be exfiltrated," or "show a business email compromise leading to a fraudulent wire transfer is possible." Everything else – which host to compromise, which path to take – is a means to that end.</p>
+
+<p>That single choice changes the whole character of the work. A red team will ignore a hundred real vulnerabilities if none advance the objective, then chain three low-severity misconfigurations a scanner rates "informational" into a full compromise, because that chain is the realistic path. The output isn't a list of findings sorted by CVSS score – it's a story: <em>here is exactly how someone gets from the public internet to your crown jewels, and every place along the way you could have stopped them and didn't.</em></p>
+
+<h2>The word that makes it legal: authorization</h2>
+<p>Before a single packet is sent, the engagement lives entirely on paper. This is what separates a red teamer from a criminal running identical commands, and it deserves more than a footnote. Unauthorized access to a computer system is a crime almost everywhere: the Computer Fraud and Abuse Act in the US, the <a href="https://www.legislation.gov.uk/ukpga/1990/18/contents" target="_blank" rel="noopener noreferrer">Computer Misuse Act 1990</a> in the UK, and equivalents nearly everywhere. The tools a red team uses are, stripped of context, the same ones a ransomware crew uses. The <strong>only</strong> difference is explicit, written, informed authorization from someone with the authority to grant it.</p>
+
+<p>That authorization is captured in a <strong>scope</strong> and a set of <strong>Rules of Engagement (RoE)</strong>, negotiated and signed before anything starts. A serious RoE document typically pins down:</p>
+
+<ul>
+  <li><strong>What is in and out of scope:</strong> specific IP ranges, domains, applications, physical sites, and people. Anything not named is off-limits by default, not by omission.</li>
+  <li><strong>Which techniques are permitted:</strong> is phishing allowed? Physical intrusion? Attacks against third-party or cloud infrastructure the client doesn't own (which the provider must also authorize)? Denial-of-service is almost always excluded.</li>
+  <li><strong>Timing and windows:</strong> start and end dates, permitted hours, and blackout periods around business-critical events.</li>
+  <li><strong>Data handling:</strong> what happens to any sensitive data the team touches, how it's stored, and how "proof" is captured without actually stealing real customer records.</li>
+  <li><strong>Escalation and abort:</strong> a named point of contact, and clear "stop the exercise" conditions if something breaks or a genuine incident is discovered.</li>
+  <li><strong>Deconfliction:</strong> a way for the blue team or authorities to tell "is this the red team, or a real attacker?" during the engagement.</li>
+</ul>
+
+<p>Operators carry an <strong>authorization letter:</strong> a "get out of jail free" card – to produce if a guard or a panicking sysadmin catches them mid-exercise. Regulator-driven frameworks standardize all this: the European Central Bank's <a href="https://www.ecb.europa.eu/paym/cyber-resilience/tiber-eu/html/index.en.html" target="_blank" rel="noopener noreferrer">TIBER-EU</a> framework for threat-intelligence-based red teaming, and testing standards such as <a href="https://csrc.nist.gov/pubs/sp/800/115/final" target="_blank" rel="noopener noreferrer">NIST SP 800-115</a>. Staying precisely inside the signed boundary – not "close enough" – is a core professional skill, not paperwork to rush.</p>
+
+<h2>The shape of an engagement: the attack lifecycle</h2>
+<p>Once authorized, a red team works through a recognizable lifecycle. Two models describe it. Lockheed Martin's <a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" target="_blank" rel="noopener noreferrer">Cyber Kill Chain</a> gives a seven-stage narrative (reconnaissance, weaponization, delivery, exploitation, installation, command-and-control, actions on objectives). <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> is the more granular and now-dominant model: a living matrix of tactics (the "why": the attacker's goal at each step) and techniques (the "how"), catalogued from real-world intrusions. Red teams plan and report against ATT&amp;CK because it gives them and the defenders a shared vocabulary. Here's the lifecycle, phase by phase.</p>
+
+<h3>Reconnaissance</h3>
+<p><strong>What happens:</strong> the team learns everything it can about the target without touching it – corporate structure, employee names and email formats, exposed infrastructure, technologies in use, leaked credentials. Much of this is pure OSINT. <strong>Example:</strong> harvesting employee emails and titles from LinkedIn and search engines to build a phishing list, then fingerprinting internet-facing services with a scanner like <a href="https://nmap.org/" target="_blank" rel="noopener noreferrer">Nmap</a> or an attack-surface mapper like <a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener noreferrer">OWASP Amass</a> (T1589, T1590).</p>
+
+<h3>Initial access</h3>
+<p><strong>What happens:</strong> the first authorized foothold inside the perimeter. <strong>Example:</strong> a spearphishing email carrying a malicious document or link to a consenting user population (T1566), exploiting a vulnerable public-facing web application (T1190), or simply logging in with valid credentials found in a breach dump (T1078). Realistic engagements often prove that the boring option – a reused password – works better than any exploit.</p>
+
+<h3>Execution</h3>
+<p><strong>What happens:</strong> the payload runs code on the compromised host. <strong>Example:</strong> a macro or script launching PowerShell to load the team's implant into memory (T1059.001). This is the moment a well-tuned endpoint detection product should scream, and where the red team learns whether it does.</p>
+
+<h3>Command and control (C2)</h3>
+<p><strong>What happens:</strong> the implant "phones home," opening a covert, resilient channel the operator uses to control the host remotely. <strong>Example:</strong> a beacon that blends into normal traffic by tunneling over HTTPS to a domain that looks legitimate, checking in on a slow, jittered schedule to avoid standing out (T1071.001). C2 is the backbone of the "stay quiet, stay persistent" phase, and choice of C2 framework is one of the most consequential decisions a team makes (more on that below).</p>
+
+<h3>Privilege escalation</h3>
+<p><strong>What happens:</strong> turning a normal user's access into administrator or SYSTEM. <strong>Example:</strong> exploiting an unpatched local vulnerability (T1068), abusing a misconfigured service, or dumping credentials from memory to find a more privileged account (T1003). In Windows/Active Directory environments – where most enterprise red teaming happens – mapping attack paths with <a href="https://github.com/SpecterOps/BloodHound" target="_blank" rel="noopener noreferrer">BloodHound</a> often reveals a chain of misconfigurations that leads straight to domain admin.</p>
+
+<h3>Lateral movement</h3>
+<p><strong>What happens:</strong> hopping from the first host toward the systems that actually hold the objective. <strong>Example:</strong> reusing a stolen password hash to authenticate to another machine without ever cracking it – a pass-the-hash attack (T1550.002) – or using remote-execution tooling like <a href="https://github.com/fortra/impacket" target="_blank" rel="noopener noreferrer">Impacket</a> across SMB. Persistence (surviving reboots, e.g. via scheduled tasks, T1053) and defense evasion (obfuscation, disabling logging, T1027/T1562) run in parallel throughout every phase, not as a single step.</p>
+
+<h3>Actions on the objective, and exfiltration</h3>
+<p><strong>What happens:</strong> the team reaches the agreed goal and proves it, then demonstrates that data could leave. <strong>Example:</strong> pulling a sample of records from a sensitive repository (T1213) and exfiltrating a marked, non-real "canary" file over the existing C2 channel to prove the path works end to end (T1041) – without ever removing genuine customer data, per the RoE. The proof is the point; the theft never actually happens.</p>
+
+<h2>The lifecycle at a glance</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ATT&amp;CK phase (tactic)</th>
+      <th>What the red team is trying to do</th>
+      <th>Example technique (ATT&amp;CK ID)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Reconnaissance</strong> (TA0043)</td>
+      <td>Map the target's people, tech and exposure without touching it</td>
+      <td>Gather victim identities and emails from public sources (T1589)</td>
+    </tr>
+    <tr>
+      <td><strong>Initial Access</strong> (TA0001)</td>
+      <td>Get the first authorized foothold inside scope</td>
+      <td>Spearphishing to a consenting user population (T1566)</td>
+    </tr>
+    <tr>
+      <td><strong>Execution</strong> (TA0002)</td>
+      <td>Run the agreed test code on the host</td>
+      <td>Command &amp; scripting interpreter: PowerShell (T1059.001)</td>
+    </tr>
+    <tr>
+      <td><strong>Command &amp; Control</strong> (TA0011)</td>
+      <td>Open a covert, resilient channel back to the operator</td>
+      <td>Application-layer protocol / web (HTTPS beacon) (T1071.001)</td>
+    </tr>
+    <tr>
+      <td><strong>Privilege Escalation</strong> (TA0004)</td>
+      <td>Turn normal access into administrator / SYSTEM</td>
+      <td>Exploitation for privilege escalation (T1068)</td>
+    </tr>
+    <tr>
+      <td><strong>Lateral Movement</strong> (TA0008)</td>
+      <td>Reach other systems on the path to the goal</td>
+      <td>Pass-the-hash with valid credentials (T1550.002)</td>
+    </tr>
+    <tr>
+      <td><strong>Collection / Actions on Objective</strong> (TA0009)</td>
+      <td>Prove the agreed objective is reachable</td>
+      <td>Data from information repositories (T1213)</td>
+    </tr>
+    <tr>
+      <td><strong>Exfiltration</strong> (TA0010)</td>
+      <td>Demonstrate data could leave – safely, per RoE</td>
+      <td>Exfiltration over the C2 channel (T1041)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>"Assumed breach": skipping to the interesting part</h2>
+<p>Getting that very first foothold can eat weeks and, in a mature target, might never succeed within the engagement window. That's a realistic outcome, but it's an expensive way to discover that the rest of your internal defenses were never tested. So many modern engagements use an <strong>assumed breach</strong> model: the client deliberately hands the red team a starting position – a standard corporate laptop, a low-privilege domain account, or a planted implant – as if a phishing email had already succeeded.</p>
+
+<p>This isn't cheating; it's economics and realism. Determined attackers eventually get <em>a</em> foothold: the interesting question is what happens next. Assumed breach guarantees the budget tests detection and response across privilege escalation, lateral movement, and exfiltration, rather than burning it all on the front door. It mirrors the threat model most organizations actually face: not "can someone get in?" but "how far can they get before we notice?"</p>
+
+<h2>Adversary emulation vs adversary simulation</h2>
+<p>Not all offensive testing tries to be a specific villain. Two related but distinct approaches sit under the red team umbrella:</p>
+
+<ul>
+  <li><strong>Adversary emulation</strong> reproduces the specific tradecraft of a named, real-world threat actor. If your organization is realistically targeted by a group like FIN7 or APT29, the team replicates <em>that group's</em> documented TTPs, in their order, to test whether you'd catch the adversary you're actually likely to face. MITRE's <a href="https://github.com/center-for-threat-informed-defense/adversary_emulation_library" target="_blank" rel="noopener noreferrer">Adversary Emulation Library</a> publishes ready-made plans for exactly this.</li>
+  <li><strong>Adversary simulation</strong> is broader – exercising realistic attacker behavior in general to test people, process, and technology, without necessarily impersonating one specific group.</li>
+</ul>
+
+<p>Two open-source tools anchor this space. <a href="https://github.com/redcanaryco/atomic-red-team" target="_blank" rel="noopener noreferrer">Atomic Red Team</a> is a library of small, self-contained tests mapped to ATT&amp;CK techniques – run one "atomic," check whether your detection fired, move on. <a href="https://github.com/mitre/caldera" target="_blank" rel="noopener noreferrer">MITRE CALDERA</a> automates whole chains of techniques so a full emulation runs largely hands-off. Both are also heavily used by <em>defenders</em> to validate detections – exactly the point where red work turns purple, a loop our <a href="../soc-team-roles/">SOC roles breakdown</a> shows from the blue side.</p>
+
+<h2>The toolbox</h2>
+<p>Red team tooling clusters around the lifecycle. For <strong>reconnaissance</strong>: OSINT gatherers, Nmap, Amass, and cloud/attack-surface mappers. For <strong>post-exploitation</strong> inside a Windows estate: BloodHound for attack-path analysis, credential tooling such as <a href="https://github.com/gentilkiwi/mimikatz" target="_blank" rel="noopener noreferrer">Mimikatz</a>, and Impacket for remote execution.</p>
+
+<p>The centerpiece is the <strong>command-and-control (C2) framework:</strong> the platform that manages implants, tasks them, and moves data. The commercial standard is <a href="https://www.cobaltstrike.com/" target="_blank" rel="noopener noreferrer">Cobalt Strike</a>, so widely used (and pirated by criminals) that detecting its defaults is a defensive cottage industry. That has driven teams toward modern, often open-source alternatives: <a href="https://github.com/BishopFox/sliver" target="_blank" rel="noopener noreferrer">Sliver</a> (Go-based, cross-platform, free), <a href="https://github.com/its-a-feature/Mythic" target="_blank" rel="noopener noreferrer">Mythic</a> (modular, with pluggable agents), and <a href="https://github.com/HavocFramework/Havoc" target="_blank" rel="noopener noreferrer">Havoc</a>. The distinction between a classic exploitation framework and a purpose-built C2 matters – our <a href="../../compare/metasploit-vs-sliver/">Metasploit vs Sliver comparison</a> walks through how two of them actually differ.</p>
+
+<p>Cutting across all of it is <strong>evasion and OPSEC</strong>: the discipline of not getting caught. Conceptually that means shaping traffic to look normal, controlling how and when implants call home, minimizing on-disk footprint, and being deliberate about the noise each action generates. Good operators think like the blue team watching them: a red teamer who understands what a <a href="../soc-team-roles/">SOC analyst</a> sees in their SIEM beats one who just runs tools. Which techniques are acceptable is bounded by the RoE.</p>
+
+<h2>Red team vs pentest vs purple team</h2>
+<p>These three get used interchangeably in job posts, but they're genuinely different activities with different goals.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dimension</th>
+      <th>Penetration test</th>
+      <th>Red team engagement</th>
+      <th>Purple team exercise</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Primary goal</strong></td>
+      <td>Find and document as many vulnerabilities as possible</td>
+      <td>Prove whether a realistic objective can be reached, and if it's detected</td>
+      <td>Improve detection by testing techniques collaboratively</td>
+    </tr>
+    <tr>
+      <td><strong>Breadth vs depth</strong></td>
+      <td>Broad coverage of defined targets</td>
+      <td>Narrow, goal-driven path through the org</td>
+      <td>Focused on specific techniques and their detections</td>
+    </tr>
+    <tr>
+      <td><strong>Duration</strong></td>
+      <td>Days to weeks, time-boxed</td>
+      <td>Weeks to months</td>
+      <td>Hours to days per session</td>
+    </tr>
+    <tr>
+      <td><strong>Stealth</strong></td>
+      <td>Usually overt – noise is fine</td>
+      <td>Covert – evasion is a core objective</td>
+      <td>Fully transparent by design</td>
+    </tr>
+    <tr>
+      <td><strong>Blue team awareness</strong></td>
+      <td>Often aware</td>
+      <td>Usually not told (tests real detection)</td>
+      <td>In the room, in real time</td>
+    </tr>
+    <tr>
+      <td><strong>Main output</strong></td>
+      <td>Vulnerability list with severities</td>
+      <td>Attack narrative + detection gaps</td>
+      <td>New and tuned detections</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>What you actually get: the deliverables</h2>
+<p>An engagement is only as valuable as what the client can act on afterward. A strong report has distinct parts. The <strong>executive summary</strong> answers the business question in plain language for leadership: was the objective achieved, what's the risk, what should change. The <strong>attack narrative</strong> is the heart of it: a chronological, readable story of the whole intrusion, mapped to ATT&amp;CK with timestamps and evidence, so a defender can replay every step. Crucially, it pairs each attacker action with the corresponding <strong>detection opportunity</strong>: what the blue team should have seen, and why they didn't.</p>
+
+<p>Then come <strong>prioritized recommendations:</strong> not just "patch this box," but systemic fixes: tighten this Active Directory misconfiguration, add this detection rule, segment this network, retire this legacy protocol. The best reports feed directly into how the organization decides what to protect and where its weak points are: the same thinking that structured approaches like <a href="../threat-modeling-stride/">threat modeling with STRIDE</a> bring to the design phase. Many engagements end with a <strong>purple-team debrief</strong> and a retest, so the lesson lands on the defensive side instead of gathering dust in a PDF.</p>
+
+<h2>How to become a red teamer</h2>
+<p>Red teaming is not an entry-level job, and treating it as one is the most common beginner mistake. You can't credibly attack systems you don't first understand how to build and defend. The strongest red teamers have real grounding in networking, operating systems (especially Windows and Active Directory), and often some blue-team or sysadmin time. Start with fundamentals, then layer offense on top.</p>
+
+<p>For hands-on practice, hosted labs are the standard on-ramp: <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a> and <a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe</a> let you exercise the full lifecycle legally, against machines built to be attacked. Build a home lab with a small Windows domain and break it repeatedly.</p>
+
+<p>On certifications, three form a realistic progression. The <a href="https://www.offsec.com/courses/pen-200/" target="_blank" rel="noopener noreferrer">OSCP</a> (OffSec's PEN-200) is the well-known, hands-on benchmark for offensive fundamentals. From there, red-team-specific certs go deeper into engagement tradecraft: <a href="https://training.zeropointsecurity.co.uk/courses/red-team-ops" target="_blank" rel="noopener noreferrer">CRTO</a> (Zero-Point Security's Red Team Ops, heavy on C2 and Active Directory) and the <a href="https://certifications.tcm-sec.com/pnpt/" target="_blank" rel="noopener noreferrer">PNPT</a> (TCM Security), whose five-day exam ends in a real report and debrief – closer to the actual job than a pure capture-the-flag. Certs open doors; the ability to think through an attack path and write it up clearly keeps them open.</p>
+
+<p><strong>A note on authorization and ethics.</strong> Everything in this article describes work done <em>with explicit, signed permission</em> against systems the client owns or is authorized to test. The same tools and techniques used against a system you don't have written authorization for are crimes – full stop, regardless of intent or curiosity. There is no gray area and no "I was just testing" defense. Practice exclusively on systems you own, on deliberately vulnerable labs, or on platforms like Hack The Box and TryHackMe that grant you that permission. The written authorization is not a formality around the job: it <em>is</em> the job.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between a red team and a penetration test?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A penetration test aims for breadth: find and document as many vulnerabilities as possible across a defined set of targets in a fixed window, usually overtly, and hand over a prioritized list. A red team engagement aims for realism and depth: pick a concrete objective (reach the domain controller, exfiltrate a specific dataset) and try to get there quietly, the way a real adversary would, while actively evading detection, and the blue team usually isn't told it's happening. A pentest asks "how many doors are unlocked?" A red team asks "if someone really wanted in, would we even notice?"
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is an assumed breach engagement?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Assumed breach is a red team model where the client deliberately gives the team a starting foothold – a corporate laptop, a low-privilege account, or a planted implant – as if a phishing email had already succeeded. Getting that first foothold can consume the whole budget and might never land against a mature target, so assumed breach skips to the more valuable question: once an attacker is inside (assume they eventually will be), how far can they get, and will you detect them, before they reach the objective? It guarantees the internal defenses – privilege escalation, lateral movement, exfiltration – actually get tested.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What tools do red teams use?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          They cluster around the attack lifecycle. Reconnaissance uses OSINT gatherers and scanners like Nmap and OWASP Amass. Post-exploitation in Windows environments leans on BloodHound for attack-path mapping, Mimikatz for credentials, and Impacket for remote execution. The centerpiece is the command-and-control (C2) framework that manages implants: Cobalt Strike is the commercial standard, with modern open-source options like Sliver, Mythic, and Havoc. For emulating specific techniques, Atomic Red Team and MITRE CALDERA are widely used by both attackers and defenders. Everything sits under an OPSEC and evasion discipline aimed at not getting caught – within the limits set by the Rules of Engagement.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is red teaming legal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes – when, and only when, it is authorized. Unauthorized access to a computer system is a crime under laws like the US Computer Fraud and Abuse Act and the UK Computer Misuse Act 1990. What makes red teaming lawful is explicit, written, informed authorization from someone with the authority to grant it, captured in a signed scope and Rules of Engagement that define what's in bounds, which techniques are allowed, timing, and how to stop. Operators carry an authorization letter for exactly this reason. Run the same commands without that written permission and you are committing a crime, regardless of intent.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do I become a red teamer?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Build foundations first – red teaming is not entry-level. Get solid networking, operating system, and especially Windows/Active Directory knowledge, ideally with some defensive or sysadmin time, since you can't attack what you don't understand. Practice the full lifecycle legally on Hack The Box and TryHackMe, and build a home Active Directory lab to break. On certifications, a common progression is OSCP (OffSec PEN-200) for hands-on offensive fundamentals, then red-team-focused certs like CRTO (heavy on C2 and Active Directory) and the PNPT (which ends in a real report and debrief). Above all, learn to write clearly: the report is the product.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What's the difference between red teaming and adversary emulation?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Adversary emulation is a specific style of red teaming that reproduces the documented tradecraft of a named, real-world threat actor – replicating, say, APT29's or FIN7's exact techniques and order, so you test whether you'd detect the adversary you're actually likely to face. Broader red teaming (sometimes called adversary simulation) exercises realistic attacker behavior in general without impersonating one particular group. Emulation answers "would we catch this specific threat actor?"; general red teaming answers "would we catch a competent attacker pursuing this objective?" MITRE's Adversary Emulation Library and tools like CALDERA and Atomic Red Team support the emulation approach.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../red-blue-purple-team-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Red, blue and purple teams explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/metasploit-vs-sliver/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Metasploit vs Sliver</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../threat-modeling-stride/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Threat modeling with STRIDE</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../soc-team-roles/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Inside a SOC: team roles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../lab/lab-06-test-detections-atomic-red-team/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 06: test your detections with Atomic Red Team</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

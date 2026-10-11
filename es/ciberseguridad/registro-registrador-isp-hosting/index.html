@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro vs registrar vs ISP vs hosting | Breachfolio</title>
+  <meta name="description" content="Registro, registrar, ISP y hosting: cuatro capas que la gente confunde sin parar. Quién controla qué, cómo encontrar cada una y a quién reportar abusos." />
+  <meta name="keywords" content="registro vs registrar" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Registro vs registrar vs ISP vs hosting | Breachfolio" />
+  <meta property="og:description" content="Registro, registrar, ISP y hosting: cuatro capas que la gente confunde sin parar. Quién controla qué, cómo encontrar cada una y a quién reportar abusos." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-domain-layers.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Registro vs registrar vs ISP vs hosting | Breachfolio" />
+  <meta name="twitter:description" content="Registro, registrar, ISP y hosting: cuatro capas que la gente confunde sin parar. Quién controla qué, cómo encontrar cada una y a quién reportar abusos." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-domain-layers.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Registro vs registrar vs ISP vs hosting",
+      "description": "Registro, registrar, ISP y hosting: cuatro capas que la gente confunde sin parar. Quién controla qué, cómo encontrar cada una y a quién reportar abusos.",
+      "image": "https://breachfolio.com/assets/img/hero-domain-layers.webp",
+      "datePublished": "2026-07-20",
+      "dateModified": "2026-07-20",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" },
+      "inLanguage": "es",
+      "keywords": "registro vs registrar"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Registro vs registrar vs ISP vs…", "item": "https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un registrar y un registro?", "acceptedAnswer": { "@type": "Answer", "text": "Un registro opera todo un dominio de primer nivel y guarda la única base de datos autoritativa de todos los nombres que hay bajo él: Verisign gestiona el registro .com, Public Interest Registry gestiona .org y Red.es gestiona .es. Un registrar es una empresa acreditada por ese registro para vender y gestionar dominios individuales para el público, como GoDaddy, Namecheap o Cloudflare Registrar. Nunca tratas directamente con el registro; compras a través de un registrar, y el registrar escribe tu registro en la base de datos del registro en tu nombre. Un registro por TLD; muchos registrars compitiendo por vender nombres bajo él." } },
+        { "@type": "Question", "name": "¿Es mi hosting lo mismo que el registrar de mi dominio?", "acceptedAnswer": { "@type": "Answer", "text": "Normalmente no, aunque a menudo una misma empresa te venda ambos. Tu registrar controla el nombre de dominio: los datos de registro, los servidores de nombres a los que apunta, las renovaciones y las transferencias. Tu hosting controla el servidor donde viven y se sirven realmente los archivos de tu web. Son servicios independientes: puedes mover tu hosting a otro proveedor conservando el mismo registrar, o transferir tu dominio a otro registrar sin tocar el servidor. La confusión viene de paquetes como los de GoDaddy u OVH, que venden dominio y hosting juntos, pero siguen siendo dos cuentas separadas con dos equipos de abuso separados." } },
+        { "@type": "Question", "name": "¿A quién reporto una web abusiva?", "acceptedAnswer": { "@type": "Answer", "text": "Reporta el contenido al equipo de abuso del proveedor de hosting, porque controla físicamente el servidor y puede retirar los archivos. En paralelo, reporta el dominio a su registrar, que puede suspender el nombre por abuso de DNS (el phishing y el malware son motivos habituales). Encuentra el hosting resolviendo el dominio a una IP y consultando el dueño de la IP y su ASN; encuentra el registrar en el registro WHOIS/RDAP. Envía pruebas –la URL, marcas de tiempo y capturas– a ambos. Para estafas en concreto, reporta también a los organismos de consumo y antifraude, que cubre nuestra guía para reportar una web fraudulenta." } },
+        { "@type": "Question", "name": "¿Cómo encuentro el proveedor de hosting de una web?", "acceptedAnswer": { "@type": "Answer", "text": "Resuelve el dominio a una dirección IP con dig +short A example.com y luego averigua de quién es esa IP. Una forma rápida es ipinfo.io/<IP>, que devuelve la organización y su número de sistema autónomo (ASN); por ejemplo, «AS16509 Amazon» significa que está alojada en AWS y «AS24940» significa Hetzner. Puedes confirmar la red en el BGP toolkit de Hurricane Electric en bgp.he.net, o usar ViewDNS para una vista de IP inversa y WHOIS en una sola página. El dueño del ASN es tu proveedor de hosting; si la IP se corresponde con la red de un ISP residencial, el sitio se sirve desde una conexión doméstica." } },
+        { "@type": "Question", "name": "¿Qué es un ASN?", "acceptedAnswer": { "@type": "Answer", "text": "Un número de sistema autónomo es un identificador único de un operador de red en internet: una empresa u organización que controla un bloque de direcciones IP y anuncia rutas hacia ellas por BGP. Todo proveedor de hosting, ISP y red grande tiene al menos uno: AS15169 es Google, AS16509 es Amazon, AS13335 es Cloudflare, AS7922 es Comcast, AS3352 es Telefónica. Cuando consultas una IP y ves su ASN, has encontrado la organización que gestiona la red en la que vive esa dirección, que es como distingues un hosting en la nube de un ISP doméstico y como diriges una denuncia de abuso de red al operador correcto." } },
+        { "@type": "Question", "name": "¿Puede mi registrar tirar mi web?", "acceptedAnswer": { "@type": "Answer", "text": "El contenido no, pero sí puede dejar el sitio inaccesible. Un registrar controla el nombre de dominio, así que puede poner el dominio en hold y deja de resolver a cualquier dirección; los visitantes reciben un error, aunque tus archivos siguen intactos en el servidor. Para retirar realmente el contenido, ese es trabajo del proveedor de hosting, ya que el hosting controla la máquina. Esta división es la razón por la que las retiradas serias golpean ambas capas: el registrar suspende el nombre para que la dirección muera, y el hosting borra los archivos para que el contenido desaparezca aunque alguien apunte un nombre nuevo al mismo servidor." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Registro vs registrar vs ISP vs…</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-domain-layers.webp" alt="Registro vs registrar vs ISP vs hosting." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Registro vs registrar vs ISP vs hosting.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Registro, registrar, ISP y hosting: cuatro capas que la gente confunde sin parar. Quién controla qué, cómo encontrar cada una y a quién reportar abusos.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>20 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>«GoDaddy es mi hosting». «Mi ISP es Bluehost». «El registrar tiró la web». Cada una de esas frases mezcla dos cosas distintas, y la confusión no es inofensiva: es la razón por la que las denuncias de abuso llegan al buzón equivocado, los dominios robados tardan semanas en recuperarse y la gente paga por una retirada que nadie puede ejecutar. Detrás de una sola web suele haber cuatro organizaciones distintas, cada una controlando una capa diferente y accesible por una puerta distinta. Este artículo traza las cuatro líneas con claridad: <strong>registro</strong>, <strong>registrar</strong>, <strong>ISP</strong> y <strong>hosting</strong>: qué controla cada una realmente, cómo encontrarlas para cualquier dominio y a quién reclamar cuando algo va mal.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 280" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="26" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Registro</text><text x="36" y="46" fill="hsl(var(--muted))" font-size="12">Opera el TLD (p.ej. Verisign .com)</text><rect x="12" y="74" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="74" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="98" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Registrador</text><text x="36" y="118" fill="hsl(var(--muted))" font-size="12">Donde compras el dominio</text><rect x="12" y="146" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="146" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="170" fill="hsl(var(--foreground))" font-size="15" font-weight="600">ISP</text><text x="36" y="190" fill="hsl(var(--muted))" font-size="12">Tu conexión a internet</text><rect x="12" y="218" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="218" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="242" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Hosting</text><text x="36" y="262" fill="hsl(var(--muted))" font-size="12">Donde vive el sitio</text></svg>
+        <figcaption>Las cuatro capas que se confunden, y quién controla qué.</figcaption>
+      </figure>
+      <h2>Las cuatro capas, de un vistazo</h2>
+
+<p>Antes de entrar en detalles, quédate con esta analogía. Un nombre de dominio es como un número de teléfono, y:</p>
+
+<ul>
+  <li>El <strong>registro</strong> es la compañía telefónica dueña de todo el plan de numeración –todos los números bajo un mismo prefijo– y del directorio maestro que dice qué números existen.</li>
+  <li>El <strong>registrar</strong> es la tienda donde compraste <em>tu</em> número y adonde acudes para cambiar tus datos o llevártelo a otro sitio.</li>
+  <li>El <strong>ISP</strong> es la línea que entra en tu casa y que te permite hacer llamadas.</li>
+  <li>El <strong>hosting</strong> es el edificio al que llega realmente la llamada: donde vive físicamente aquello con lo que intentas hablar.</li>
+</ul>
+
+<p>Empresas distintas, trabajos distintos. Puedes comprar tu número en una tienda, pasar tu línea por otra y hacer que suene en un edificio que pertenece a una tercera. Así funciona exactamente la web, y desenredarlo es una habilidad OSINT básica que cubrimos en nuestras <a href="../investigar-un-dominio-sospechoso/">guías sobre dominios sospechosos</a>.</p>
+
+<h2>Registro: quién opera el TLD</h2>
+
+<p>Un <strong>registro</strong> es la organización que opera un dominio de primer nivel (TLD) –el <code>.com</code>, <code>.org</code> o <code>.es</code> del final– y mantiene la única base de datos autoritativa de todos los dominios registrados bajo él. El registro gestiona los propios servidores DNS del TLD y guarda la <em>delegación</em> de cada dominio: la entrada que dice «para encontrar <code>example.com</code>, pregunta a estos servidores de nombres». Hay exactamente un registro por TLD, y ningún dominio bajo ese TLD existe salvo que lo diga la base de datos del registro.</p>
+
+<p>Por encima de los registros está <a href="https://www.icann.org" target="_blank" rel="noopener noreferrer">ICANN</a>, la organización sin ánimo de lucro que coordina el sistema global de nombres y fija la política de los TLD genéricos. Su <a href="https://www.iana.org/domains/root/db" target="_blank" rel="noopener noreferrer">función IANA</a> mantiene la zona raíz –la lista maestra que indica al mundo qué organización opera cada TLD–. Si alguna vez quieres saber quién opera <em>de verdad</em> un TLD, la base de datos raíz de IANA es la fuente autoritativa. Unos cuantos ejemplos reales:</p>
+
+<table>
+  <thead>
+    <tr><th>TLD</th><th>Operador del registro</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>.com / .net</td><td>Verisign</td></tr>
+    <tr><td>.org</td><td>Public Interest Registry (PIR)</td></tr>
+    <tr><td>.es</td><td>Red.es (vía Dominios.es)</td></tr>
+    <tr><td>.uk</td><td>Nominet</td></tr>
+    <tr><td>.de</td><td>DENIC</td></tr>
+    <tr><td>.fr</td><td>Afnic</td></tr>
+  </tbody>
+</table>
+
+<p>Fíjate en la trampa habitual: <strong>Red.es opera <code>.es</code></strong>, el organismo público español que gestiona el registro. Una empresa como Nominalia <em>no</em> es el registro: es un registrar, una de las tiendas que vende nombres <code>.es</code> en nombre de Red.es. Los TLD de código de país (<code>.es</code>, <code>.uk</code>, <code>.de</code>) siguen normas nacionales en lugar de las de ICANN, pero la estructura es la misma: un operador, una base de datos autoritativa.</p>
+
+<h2>Registrar: dónde compras y gestionas el dominio</h2>
+
+<p>Un <strong>registrar</strong> es la empresa a la que le compras un dominio y a través de la cual lo gestionas. Está acreditada por el registro (y, para los gTLD, por ICANN) para vender nombres y para trasladar cambios a la base de datos del registro usando un protocolo llamado EPP. Cuando registras <code>my-shop.com</code>, el registrar toma tu pedido y escribe la entrada en el registro <code>.com</code> de Verisign. Nunca hablas con Verisign; hablas con tu registrar. Nombres conocidos:</p>
+
+<ul>
+  <li><a href="https://www.godaddy.com" target="_blank" rel="noopener noreferrer">GoDaddy</a> y <a href="https://www.namecheap.com" target="_blank" rel="noopener noreferrer">Namecheap</a>: registrars de gran consumo.</li>
+  <li><a href="https://www.cloudflare.com/products/registrar/" target="_blank" rel="noopener noreferrer">Cloudflare Registrar</a>: vende nombres a precio de coste, sin margen.</li>
+  <li><a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer">OVH</a>: un registrar que además es una gran empresa de hosting (una combinación que alimenta la confusión de más abajo).</li>
+</ul>
+
+<p>Aquí está el punto crítico: el registrar controla tu <strong>registro</strong> (registration), no tu <strong>contenido</strong>. A través del registrar defines los datos de contacto del registrante (lo que aparece en <a href="../que-es-whois/">WHOIS</a>), eliges a qué <strong>servidores de nombres</strong> delega el dominio, renuevas o transfieres el nombre y activas los bloqueos que impiden que te lo roben. El registrar también puede <em>suspender</em> un dominio –ponerlo en <code>clientHold</code> para que no resuelva a ningún sitio–, que es justo la palanca que se usa contra los dominios de phishing y malware. Lo que el registrar no puede hacer es editar las páginas de tu web. Esas viven en un sitio completamente distinto.</p>
+
+<h2>ISP: quién te da conectividad</h2>
+
+<p>Tu <strong>proveedor de acceso a internet (ISP)</strong> es la empresa que <em>te</em> conecta a internet: la fibra o el cable que entra en tu casa u oficina. Movistar (Telefónica) en España, Vodafone por toda Europa, Comcast en EE. UU.: eso son ISP. Un ISP controla lo que hay entre tu dispositivo y el resto de la red:</p>
+
+<ul>
+  <li>Tu <strong>enlace de acceso</strong> y la dirección IP pública desde la que navegas.</li>
+  <li>Por defecto, el <strong>resolvedor DNS</strong> al que preguntan tus dispositivos, salvo que cambies a uno público como <code>1.1.1.1</code> o <code>8.8.8.8</code>.</li>
+  <li>A veces, <strong>bloqueos a nivel de red</strong>: varios países obligan a los ISP a bloquear por DNS webs de piratería o fraude incluidas en listas judiciales.</li>
+</ul>
+
+<p>Un ISP <em>no</em> aloja webs para el público y casi nunca es lo mismo que una empresa de hosting. Cuando alguien dice «mi ISP es Bluehost», quiere decir que su <em>hosting</em> es Bluehost: Bluehost vende alojamiento, no conexiones domésticas a internet. El ISP solo importa en una investigación en dos casos: es la red desde la que sale el tráfico de un atacante residencial, y es el resolvedor al que se puede mentir (el <a href="../como-funcionan-las-redes/">riesgo de DNS spoofing que seguimos en Cómo funcionan las redes</a>).</p>
+
+<h2>Hosting: dónde vive realmente el sitio</h2>
+
+<p>El <strong>proveedor de hosting</strong> es donde viven físicamente los archivos y el servidor de la web: la máquina que responde cuando un navegador se conecta a la IP del sitio y pide una página. Esta es la capa que <em>sirve el contenido</em>. Los ejemplos abarcan todo el mercado:</p>
+
+<ul>
+  <li><a href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer">AWS</a>, <a href="https://www.hetzner.com" target="_blank" rel="noopener noreferrer">Hetzner</a> y <a href="https://www.digitalocean.com" target="_blank" rel="noopener noreferrer">DigitalOcean</a>: proveedores de cloud y de servidores dedicados donde alquilas capacidad.</li>
+  <li>Empresas de hosting compartido (muchas de las cuales también te venden un dominio en el mismo carrito).</li>
+  <li>El propio centro de datos de una organización: Wikipedia, por ejemplo, se aloja a sí misma.</li>
+</ul>
+
+<h3>Hosting vs registrar: la confusión que te sale cara</h3>
+
+<p>Estos dos se mezclan constantemente porque a menudo una misma empresa vende ambos en el mismo paquete. GoDaddy registrará encantada tu dominio <em>y</em> alojará tu web. Pero siguen siendo dos servicios separados, con dos paneles de control separados y dos equipos de abuso separados. La forma limpia de mantenerlos separados:</p>
+
+<blockquote>El registrar controla el <em>nombre</em>. El hosting controla la <em>máquina a la que apunta el nombre</em>. Puedes mover tu hosting a otra empresa mañana y conservar el mismo registrar, o llevar tu dominio a otro registrar sin tocar el servidor. Son independientes.</blockquote>
+
+<p>Esta independencia es la razón por la que «el registrar tiró la web» suele ser incorrecto. Un registrar suspende el <em>nombre</em>, así que la dirección deja de resolver; el hosting elimina el <em>contenido</em>, así que los archivos desaparecen. Acción distinta, empresa distinta, denuncia distinta.</p>
+
+<h2>Cómo el DNS los une a todos</h2>
+
+<p>El DNS es el tejido conectivo entre las cuatro capas, y seguir la cadena es todo el juego. Cuando un navegador busca <code>my-shop.com</code>:</p>
+
+<ol>
+  <li>Tu dispositivo pregunta al <strong>resolvedor de tu ISP</strong> (o a uno público).</li>
+  <li>El resolvedor pregunta al <strong>registro</strong> de <code>.com</code>, que devuelve los <strong>servidores de nombres</strong> que configuraste en tu <strong>registrar</strong>.</li>
+  <li>Esos servidores de nombres –gestionados por tu registrar, por Cloudflare o por tu hosting– devuelven el <strong>registro A/AAAA</strong>: la dirección IP del servidor de <strong>hosting</strong>.</li>
+  <li>El navegador se conecta a esa IP y el <strong>hosting</strong> sirve la página.</li>
+</ol>
+
+<p>Léelo al revés y tienes tu mapa de investigación. Los servidores de nombres te dicen quién gestiona el DNS; la IP te dice quién aloja; el registro WHOIS te dice el registrar; el TLD te dice cuál es el registro. Cuatro preguntas, cuatro respuestas.</p>
+
+<h2>La tabla maestra: quién controla qué</h2>
+
+<table>
+  <thead>
+    <tr><th>Capa</th><th>Qué controla</th><th>Cómo lo encuentras</th><th>A quién reportas</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Registro</td><td>La base de datos autoritativa de todo el TLD y la delegación de cada dominio bajo él; puede aplicar un bloqueo a nivel de registro</td><td>El TLD te lo dice; confirma el operador en la base de datos raíz de IANA; la línea «Registry» en RDAP/WHOIS</td><td>Escala aquí solo cuando un registrar no actúe, o para política de todo el TLD</td></tr>
+    <tr><td>Registrar</td><td>Tu registro: contactos, delegación de servidores de nombres, bloqueos, renovaciones, transferencias; puede suspender el dominio</td><td>El campo «Registrar» en WHOIS/RDAP (lookup.icann.org)</td><td>Dominios robados o secuestrados; abuso de DNS (phishing/malware) para suspender el nombre</td></tr>
+    <tr><td>ISP</td><td>Tu conectividad, la IP desde la que navegas, tu resolvedor DNS por defecto, a veces bloqueos de red</td><td>El tuyo ya lo conoces; para un objetivo, el RDAP de una IP residencial revela la red del ISP</td><td>Abuso de red desde una línea residencial; tus propios problemas de conexión</td></tr>
+    <tr><td>Hosting</td><td>El servidor y los archivos; el contenido real que se sirve en la IP</td><td>Resuelve el dominio a una IP y luego consulta el dueño de la IP y su ASN</td><td>Contenido abusivo, malware, phishing, derechos de autor (DMCA)</td></tr>
+  </tbody>
+</table>
+
+<h2>Cómo encontrar cada una para cualquier dominio</h2>
+
+<p>Cuatro artefactos, cuatro consultas. Ninguna toca el servidor del objetivo de forma agresiva, así que es OSINT pasivo y seguro.</p>
+
+<h3>1. Registrar y registro: WHOIS / RDAP</h3>
+
+<p>WHOIS (y su sucesor moderno en JSON, RDAP) devuelve el registrar patrocinador y la fecha de creación. Usa el <a href="https://lookup.icann.org" target="_blank" rel="noopener noreferrer">ICANN Lookup</a> oficial en el navegador, o <a href="https://rdap.org" target="_blank" rel="noopener noreferrer">rdap.org</a> desde la línea de comandos, que te redirige automáticamente al servidor RDAP del registro correcto:</p>
+
+<pre tabindex="0"><code>$ curl -s https://rdap.org/domain/wikipedia.org | jq '.entities[].roles, .events'
+["registrar"]              # registrar patrocinador (p. ej., MarkMonitor Inc.)
+registration 2001-01-13</code></pre>
+
+<p>El propio TLD (<code>.org</code>) te dice el registro –Public Interest Registry– sin necesidad de ninguna consulta. Desglosamos cada campo en <a href="../que-es-whois/">Qué es WHOIS y cómo leerlo</a>.</p>
+
+<h3>2. DNS: servidores de nombres</h3>
+
+<p><code>dig NS</code> muestra quién responde al DNS del dominio, que suele ser tu primera pista sobre el registrar o el hosting de DNS:</p>
+
+<pre tabindex="0"><code>$ dig +short NS wikipedia.org
+ns0.wikimedia.org
+ns1.wikimedia.org
+ns2.wikimedia.org</code></pre>
+
+<p>Wikimedia gestiona sus propios servidores de nombres. Un dominio fraudulento mostrará más a menudo <code>*.cloudflare.com</code>, los servidores de nombres de un registrar masivo o un hosting de DNS de usar y tirar, lo cual ya es una señal en sí misma.</p>
+
+<h3>3. Hosting e ISP: la IP y luego el ASN</h3>
+
+<p>Resuelve el dominio a una IP y luego averigua de quién es esa IP. Toda red en internet tiene un <strong>número de sistema autónomo (ASN)</strong>: un identificador único del operador que anuncia el bloque de direcciones. Búscalo con <a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">ipinfo.io</a> o con un WHOIS de la IP, y confirma la red en el <a href="https://bgp.he.net" target="_blank" rel="noopener noreferrer">BGP toolkit de Hurricane Electric</a>:</p>
+
+<pre tabindex="0"><code>$ dig +short A wikipedia.org
+208.80.154.224             # la dirección exacta varía según la región
+$ curl -s https://ipinfo.io/208.80.154.224 | jq '.org'
+"AS14907 Wikimedia Foundation, Inc."</code></pre>
+
+<p>Esa única línea responde a «¿quién aloja esto?». El ASN es el operador de red: una IP en <strong>AS16509</strong> significa Amazon (AWS), <strong>AS24940</strong> es Hetzner, <strong>AS14061</strong> es DigitalOcean, <strong>AS13335</strong> es Cloudflare. En cambio, una IP residencial se corresponde con la red de un ISP –<strong>AS7922</strong> es Comcast, <strong>AS3352</strong> es Telefónica (Movistar)–, lo que te indica que la dirección pertenece a una conexión doméstica y no a un proveedor de hosting. <a href="https://viewdns.info" target="_blank" rel="noopener noreferrer">ViewDNS</a> agrupa muchas de estas consultas (IP inversa, registros DNS, WHOIS) en una sola página web si prefieres clicar a teclear.</p>
+
+<h2>Un ejemplo resuelto, de principio a fin</h2>
+
+<p>Toma <code>wikipedia.org</code> y recorre las cuatro capas en orden:</p>
+
+<pre tabindex="0"><code>1) El TLD es .org     -> Registro:  Public Interest Registry (PIR)
+2) rdap.org           -> Registrar: MarkMonitor Inc.
+3) dig NS             -> DNS:       ns0/ns1/ns2.wikimedia.org (propios)
+4) dig A -> ipinfo.io -> Hosting:   AS14907 Wikimedia Foundation (autoalojado)</code></pre>
+
+<p>Cómo se lee: PIR opera el registro <code>.org</code>; MarkMonitor es el registrar a través del cual Wikimedia compra el nombre; Wikimedia gestiona su propio DNS <em>y</em> sus propios servidores, así que aquí hosting y DNS son la misma organización: no hay un tercero que aloje. Y, lo más importante, tu ISP (pongamos Comcast o Movistar) no aparece <em>por ninguna parte</em> en esta cadena: es solo la red que transporta <em>tu</em> petición para llegar a Wikipedia, no forma parte en absoluto de la infraestructura de Wikipedia.</p>
+
+<p>Ahora contrasta con un sitio fraudulento. Los mismos cuatro pasos podrían dar: registro Verisign (<code>.com</code>), un registrar revendedor masivo con el nombre registrado hace tres días, servidores de nombres en un hosting de DNS gratuito y un registro A que cae en <strong>AS16509 (Amazon)</strong> o en un hosting a prueba de balas. De repente sabes exactamente a qué tres puertas llamar y, según la tabla de arriba, cuál puede retirar realmente el contenido. Ese es el método completo en <a href="../investigar-un-dominio-sospechoso/">Cómo investigar un dominio sospechoso</a>.</p>
+
+<h2>A quién reportar: cómo dirigir una denuncia de abuso</h2>
+
+<p>Haz coincidir el problema con la capa que puede resolverlo, o tu denuncia morirá en la cola equivocada:</p>
+
+<ul>
+  <li><strong>Te han robado o secuestrado el dominio</strong> (transferencia no autorizada, cambio de registrante): acude primero a tu <strong>registrar</strong>; puede bloquearlo y revertirlo. Si el registrar no responde, escala al <strong>registro</strong> y al proceso de disputa de transferencias de ICANN.</li>
+  <li><strong>Una web abusiva</strong> (phishing, malware, una tienda fraudulenta): repórtala al equipo de abuso del <strong>proveedor de hosting</strong>, porque puede eliminar el contenido o el servidor. En paralelo, repórtala al <strong>registrar</strong>, que puede suspender el dominio por abuso de DNS. Nuestra <a href="../../guias/denunciar-web-fraudulenta/">guía para reportar una web fraudulenta</a> recorre ambos.</li>
+  <li><strong>Abuso de red</strong> (ataques, escaneos o spam procedentes <em>de</em> una IP): encuentra el <strong>ASN</strong> de la IP y repórtalo al contacto de abuso de esa red. Si es una dirección residencial, ese es el <strong>ISP</strong>.</li>
+  <li><strong>Derechos de autor</strong>: envía un aviso DMCA al <strong>hosting</strong>, que controla los archivos.</li>
+</ul>
+
+<p>Para encontrar la dirección correcta, los registros RDAP listan un contacto de abuso tanto para dominios como para bloques de IP, y <a href="https://www.abuse.net" target="_blank" rel="noopener noreferrer">abuse.net</a> asigna a un dominio su buzón de abuso registrado (<code>whois -h whois.abuse.net example.com</code>). Envía pruebas –URL, marcas de tiempo, capturas– a la capa que tiene la palanca, y tu denuncia se atenderá en lugar de ignorarse.</p>
+
+<h2>El resumen en una línea</h2>
+
+<p>El registro gestiona el TLD; el registrar te vende el nombre; el ISP te conecta a internet; el hosting gestiona la máquina a la que apunta el nombre. Cuatro empresas, cuatro paneles de control, cuatro buzones de abuso. Aprende a leer WHOIS, <code>dig</code> y una consulta de ASN, y podrás situar las cuatro capas de cualquier web en aproximadamente un minuto, que es la diferencia entre una retirada que funciona y un correo que nadie puede atender.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un registrar y un registro?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un registro opera todo un dominio de primer nivel y guarda la única base de datos autoritativa de todos los nombres que hay bajo él: Verisign gestiona el registro .com, Public Interest Registry gestiona .org y Red.es gestiona .es. Un registrar es una empresa acreditada por ese registro para vender y gestionar dominios individuales para el público, como GoDaddy, Namecheap o Cloudflare Registrar. Nunca tratas directamente con el registro; compras a través de un registrar, y el registrar escribe tu registro en la base de datos del registro en tu nombre. Un registro por TLD; muchos registrars compitiendo por vender nombres bajo él.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es mi hosting lo mismo que el registrar de mi dominio?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Normalmente no, aunque a menudo una misma empresa te venda ambos. Tu registrar controla el nombre de dominio: los datos de registro, los servidores de nombres a los que apunta, las renovaciones y las transferencias. Tu hosting controla el servidor donde viven y se sirven realmente los archivos de tu web. Son servicios independientes: puedes mover tu hosting a otro proveedor conservando el mismo registrar, o transferir tu dominio a otro registrar sin tocar el servidor. La confusión viene de paquetes como los de GoDaddy u OVH, que venden dominio y hosting juntos, pero siguen siendo dos cuentas separadas con dos equipos de abuso separados.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿A quién reporto una web abusiva?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Reporta el contenido al equipo de abuso del proveedor de hosting, porque controla físicamente el servidor y puede retirar los archivos. En paralelo, reporta el dominio a su registrar, que puede suspender el nombre por abuso de DNS (el phishing y el malware son motivos habituales). Encuentra el hosting resolviendo el dominio a una IP y consultando el dueño de la IP y su ASN; encuentra el registrar en el registro WHOIS/RDAP. Envía pruebas –la URL, marcas de tiempo y capturas– a ambos. Para estafas en concreto, reporta también a los organismos de consumo y antifraude, que cubre nuestra guía para reportar una web fraudulenta.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo encuentro el proveedor de hosting de una web?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Resuelve el dominio a una dirección IP con dig +short A example.com y luego averigua de quién es esa IP. Una forma rápida es ipinfo.io/&lt;IP&gt;, que devuelve la organización y su número de sistema autónomo (ASN); por ejemplo, «AS16509 Amazon» significa que está alojada en AWS y «AS24940» significa Hetzner. Puedes confirmar la red en el BGP toolkit de Hurricane Electric en bgp.he.net, o usar ViewDNS para una vista de IP inversa y WHOIS en una sola página. El dueño del ASN es tu proveedor de hosting; si la IP se corresponde con la red de un ISP residencial, el sitio se sirve desde una conexión doméstica.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es un ASN?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un número de sistema autónomo es un identificador único de un operador de red en internet: una empresa u organización que controla un bloque de direcciones IP y anuncia rutas hacia ellas por BGP. Todo proveedor de hosting, ISP y red grande tiene al menos uno: AS15169 es Google, AS16509 es Amazon, AS13335 es Cloudflare, AS7922 es Comcast, AS3352 es Telefónica. Cuando consultas una IP y ves su ASN, has encontrado la organización que gestiona la red en la que vive esa dirección, que es como distingues un hosting en la nube de un ISP doméstico y como diriges una denuncia de abuso de red al operador correcto.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Puede mi registrar tirar mi web?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El contenido no, pero sí puede dejar el sitio inaccesible. Un registrar controla el nombre de dominio, así que puede poner el dominio en hold y deja de resolver a cualquier dirección; los visitantes reciben un error, aunque tus archivos siguen intactos en el servidor. Para retirar realmente el contenido, ese es trabajo del proveedor de hosting, ya que el hosting controla la máquina. Esta división es la razón por la que las retiradas serias golpean ambas capas: el registrar suspende el nombre para que la dirección muera, y el hosting borra los archivos para que el contenido desaparezca aunque alguien apunte un nombre nuevo al mismo servidor.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-es-whois/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es WHOIS y cómo leerlo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-funcionan-las-redes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funcionan las redes</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../investigar-un-dominio-sospechoso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo investigar un dominio sospechoso</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guias/denunciar-web-fraudulenta/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo reportar una web fraudulenta</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

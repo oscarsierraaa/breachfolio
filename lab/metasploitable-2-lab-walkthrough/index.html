@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metasploitable 2 walkthrough: step-by-step lab | Breachfolio</title>
+  <meta name="description" content="Discover the target, enumerate its services, exploit a real backdoored FTP daemon, and get root – a full, safe, step-by-step lab on your own isolated network." />
+  <meta name="keywords" content="metasploitable 2 walkthrough, metasploit lab tutorial, vsftpd 2.3.4 backdoor exploit, metasploitable 2 nmap enumeration, exploit metasploitable 2 step by step, vsftpd_234_backdoor tutorial, unrealircd backdoor exploit, distcc remote code execution lab, metasploitable 2 root shell, is it legal to exploit metasploitable 2, metasploitable 2 kali linux lab, nmap service enumeration tutorial, msfconsole tutorial for beginners, ethical hacking practice lab, vulnerable vm exploitation walkthrough" />
+  <link rel="canonical" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/metasploitable-2-paso-a-paso/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Metasploitable 2 walkthrough: step-by-step lab | Breachfolio" />
+  <meta property="og:description" content="Discover the target, enumerate its services, exploit a real backdoored FTP daemon, and get root – a full, safe, step-by-step lab on your own isolated network." />
+  <meta property="og:url" content="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-lab-walkthrough.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Metasploitable 2 walkthrough: step-by-step lab | Breachfolio" />
+  <meta name="twitter:description" content="Discover the target, enumerate its services, exploit a real backdoored FTP daemon, and get root – a full, safe, step-by-step lab on your own isolated network." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-lab-walkthrough.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Metasploitable 2 walkthrough: a step-by-step exploitation lab",
+      "description": "Discover the target, enumerate its services, exploit a real backdoored FTP daemon, and get root – a full, safe, step-by-step lab on your own isolated network.",
+      "image": "https://breachfolio.com/assets/img/thumb-lab-walkthrough.webp",
+      "datePublished": "2026-07-08", "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+      },
+      "inLanguage": "en",
+      "keywords": "Metasploitable 2 walkthrough, Metasploit lab tutorial, vsftpd 2.3.4 backdoor exploit, metasploitable 2 nmap enumeration, exploit metasploitable 2 step by step, vsftpd_234_backdoor tutorial, unrealircd backdoor exploit, distcc remote code execution lab, metasploitable 2 root shell, is it legal to exploit metasploitable 2, metasploitable 2 kali linux lab, nmap service enumeration tutorial, msfconsole tutorial for beginners, ethical hacking practice lab, vulnerable vm exploitation walkthrough"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lab",
+          "item": "https://breachfolio.com/lab/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Metasploitable 2 walkthrough",
+          "item": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Metasploitable 2 walkthrough: a step-by-step exploitation lab",
+      "description": "Discover the target, enumerate its services, exploit a real backdoored FTP daemon, and get root, entirely on your own isolated virtual network.",
+      "totalTime": "PT1H30M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "0"
+      },
+      "supply": [
+        { "@type": "HowToSupply", "name": "Kali Linux VM" },
+        { "@type": "HowToSupply", "name": "Metasploitable 2 VM" },
+        { "@type": "HowToSupply", "name": "Host-only (or NAT) isolated virtual network" }
+      ],
+      "tool": [
+        { "@type": "HowToTool", "name": "nmap" },
+        { "@type": "HowToTool", "name": "Metasploit Framework (msfconsole)" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Before you start",
+          "text": "Confirm you have a Metasploitable 2 VM and a Kali Linux VM on the same isolated host-only or NAT virtual network, with the target never exposed beyond that network.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Step 1 – Find the target on the network",
+          "text": "From Kali, run nmap -sn 192.168.56.0/24 to sweep the host-only subnet and identify the Metasploitable 2 IP address.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Step 2 – Enumerate open services",
+          "text": "Run nmap -sV -p- against the target IP to fingerprint every open port and service version, and identify the notable ones: vsftpd 2.3.4, Samba, distccd, Java RMI, UnrealIRCd, and Tomcat.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Step 3 – Exploit the vsftpd 2.3.4 backdoor",
+          "text": "In msfconsole, use exploit/unix/ftp/vsftpd_234_backdoor, set RHOSTS to the target IP, and run it to obtain a root shell through the maliciously backdoored vsftpd 2.3.4 source tarball.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Step 4 – Confirm what you actually have",
+          "text": "Run whoami and id in the new shell to confirm root access, and note that this is unusually generous compared to real engagements that require separate privilege escalation.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Step 5 – Try a second path",
+          "text": "Practise the UnrealIRCd backdoor on port 6667 and the distcc remote code execution as two more well-known entry points on the same target.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "Cleanup",
+          "text": "Revert the Metasploitable 2 VM to a clean snapshot after practising, and never let the target VM touch a real network.",
+          "url": "https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it legal to exploit Metasploitable 2?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on your own isolated VM. That's the entire point of the box: Rapid7 built and published Metasploitable 2 specifically to be attacked in a controlled lab environment. As long as it stays on a network you own and control, with no route to the internet or anyone else's systems, exploiting it is exactly what it's for."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use these exact techniques against other systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. These are specific to this training box's intentionally broken, deliberately outdated software: a backdoored vsftpd binary, an ancient Samba build, an exposed distcc daemon. This lab is about learning methodology (recon, enumeration, matching a service to an exploit, verifying access), not a universal toolkit you can point at unauthorised systems. Real targets require authorisation, and almost none of them ship with these specific flaws."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need Metasploit specifically?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Several of these vulnerabilities, including the vsftpd backdoor, can be exploited manually with nothing more than netcat, once you understand the mechanism. But msfconsole is the standard teaching tool for this box because it packages the discovery, exploit, and payload delivery into a consistent, reproducible workflow, which is why this walkthrough uses it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I do after finishing this lab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Read what-is-metasploitable-2.html for background on the box's design and history, and build-a-home-lab-on-one-laptop.html if you don't yet have the surrounding lab set up. Then come back and work through Step 5 above: the UnrealIRCd backdoor on port 6667 and the distcc remote code execution are two more well-documented entry points on this same target worth practising next."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the vsftpd 2.3.4 backdoor exploited in this walkthrough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In 2011 the official vsftpd 2.3.4 source tarball was maliciously replaced with a version containing a backdoor: an FTP login attempt using a username containing a smiley face (:)) in a specific pattern causes the binary to open a root command shell on TCP port 6200, no valid credentials required. Metasploitable 2 deliberately ships this exact compromised build, and the Metasploit module exploit/unix/ftp/vsftpd_234_backdoor automates sending the trigger string and connecting to the resulting shell."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What other vulnerable services does Metasploitable 2 expose besides vsftpd?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The full-port enumeration in Step 2 also surfaces Samba (command injection via the \"username map script\" option), distccd on port 3632 (unauthenticated remote code execution), an exposed Java RMI registry on port 1099, a separately backdoored UnrealIRCd build on port 6667, and Apache Tomcat on port 8180 with weak manager credentials – each a distinct, well-documented entry point on the same box."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did this exploit land a root shell instead of a low-privileged one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Landing directly at uid=0 with no separate privilege-escalation step is unusually generous and specific to this particular backdoor – the injected shell runs at whatever privilege level the vsftpd daemon itself had when it was tampered with. On real engagements initial access almost never arrives as root; privilege escalation is normally its own, often harder, phase."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Metasploitable 2 walkthrough</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../assets/img/thumb-lab-walkthrough.webp" alt="Hero illustration for: Metasploitable 2 walkthrough." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">LAB · WALKTHROUGH</span>
+          <span class="text-muted">LAB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Metasploitable 2 walkthrough: a step-by-step exploitation lab.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">Discover it, enumerate it, exploit a real backdoor, and get root – entirely on your own isolated network. No CTF flag, just the actual mechanics.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-08">July 8, 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>14 min read</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+
+<p>Every offensive-security curriculum eventually points you at the same box: Metasploitable 2. It's a deliberately broken <strong>Ubuntu 8.04</strong> server, published by <strong>Rapid7</strong> for exactly one purpose – to be discovered, enumerated, and exploited by people learning how real vulnerabilities actually work. This walkthrough takes you through one complete, real exploitation path against it: not a CTF flag hunt, but the actual mechanics an attacker follows against a genuinely vulnerable service. By the end you'll have a root shell, an understanding of why the vulnerability exists, and two more leads to chase on your own.</p>
+
+<div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+  <strong class="text-foreground">Scope note.</strong> Everything below assumes Metasploitable 2 and Kali Linux are running as VMs on a network that touches nothing else, no bridged adapter, no port forwarding, no route to the internet or your home LAN. Metasploitable 2 ships with a root backdoor and several remote-code-execution flaws by design; it must never be reachable from outside your isolated lab segment. If you haven't built that environment yet, do it first – see <a href="../build-a-home-lab-on-one-laptop/">Build a home lab on one laptop</a>.
+</div>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">1. Before you start</h2>
+
+<p>You need two virtual machines on the same isolated virtual network: a <strong>Kali Linux</strong> VM to attack from, and a <strong>Metasploitable 2</strong> VM to attack. If you don't already have a Metasploitable 2 VM or don't know what it is and why it exists, read <a href="../what-is-metasploitable-2/">What is Metasploitable 2</a> first: it covers the box's history and design in more depth than we will here. If you don't yet have the surrounding lab environment (hypervisor, host-only network, Kali appliance), <a href="../build-a-home-lab-on-one-laptop/">Build a home lab on one laptop</a> walks through that setup in about 20 minutes.</p>
+
+<p>Both VMs must sit on the same host-only or internal NAT network – commonly <code>192.168.56.0/24</code> if you followed the VirtualBox defaults – with no bridged adapter and no route out to your home network or the internet. This is not a suggestion. Metasploitable 2 is intentionally riddled with <strong>remote-code-execution vulnerabilities</strong> and at least one deliberate <strong>root backdoor</strong>; on an open network it would be compromised by automated scanners within minutes. Confirm isolation before you do anything else: from Kali, you should be able to reach the target's IP, and you should not be able to reach your router or the public internet.</p>
+
+<p>Nothing in this walkthrough targets anyone else's infrastructure. Every command below is run against a machine you own, on a network you control, that was built and published specifically to be attacked this way. That distinction – authorised, isolated, self-owned – is what separates a lab exercise from a crime.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">2. Step 1 – Find the target on the network</h2>
+
+<p>Before you can attack anything, you need its IP address. If you assigned a static IP during setup you already know it, but it's worth practising discovery anyway, because on a real engagement you rarely start with a known address. From Kali, sweep the subnet:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> nmap -sn 192.168.56.0/24</code></pre>
+
+<p><code>-sn</code> tells <strong>nmap</strong> to skip port scanning and just perform <strong>host discovery:</strong> a ping-style sweep across every address in the range. On a lab network this small, the output is short: your Kali box, your Metasploitable 2 box, and possibly a gateway address if your hypervisor injects one. Look for a line like:</p>
+
+<pre tabindex="0"><code><span class="term-out">Nmap scan report for 192.168.56.20
+Host is up (0.00042s latency).
+MAC Address: 08:00:27:XX:XX:XX (Oracle VirtualBox virtual NIC)</span></code></pre>
+
+<p>The MAC address vendor prefix is a useful tell in a VirtualBox lab – every VM's virtual NIC reports as an Oracle/VirtualBox device, so it won't help you distinguish Kali from Metasploitable by itself. What will help is process of elimination: you already know your own Kali IP, so whatever else responds on the subnet is your target. Note that IP down – you'll use it in every command from here on.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">3. Step 2 – Enumerate open services</h2>
+
+<p>Now that you have an address, find out what's running on it. A full-port service-and-version scan is slower than a default nmap run but far more informative, and on a single lab host the time cost is trivial:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> nmap -sV -p- 192.168.56.20</code></pre>
+
+<p><code>-p-</code> scans all <strong>65,535 TCP ports</strong> instead of nmap's default top-1000, and <code>-sV</code> probes each open port to identify the <strong>service and version banner</strong>. Expect a long list – Metasploitable 2 is deliberately configured with dozens of listening services. A handful are worth stopping on, because each one represents a distinct, well-documented attack surface:</p>
+
+<table>
+  <thead><tr><th>Port</th><th>Service</th><th>Why it stands out</th></tr></thead>
+  <tbody>
+    <tr><td>21</td><td>vsftpd 2.3.4</td><td>A specific build of this FTP daemon contains a maliciously inserted backdoor – the subject of this walkthrough.</td></tr>
+    <tr><td>139 / 445</td><td>Samba</td><td>An old Samba build vulnerable to a remote command-injection flaw via the "username map script" option.</td></tr>
+    <tr><td>3632</td><td>distccd</td><td>A distributed-compilation daemon that, left unauthenticated and internet-facing, will run arbitrary commands it's handed – a classic misconfiguration RCE.</td></tr>
+    <tr><td>1099</td><td>Java RMI registry</td><td>An exposed Java RMI registry can be abused to load and execute an attacker-supplied class remotely.</td></tr>
+    <tr><td>6667</td><td>UnrealIRCd</td><td>This exact IRC daemon build shipped, at one point, with a backdoored download – functionally similar in spirit to the vsftpd incident, on a different service.</td></tr>
+    <tr><td>8180</td><td>Apache Tomcat</td><td>Runs with default/weak manager credentials, letting an attacker deploy a malicious WAR file for remote code execution.</td></tr>
+  </tbody>
+</table>
+
+<p>To an attacker doing recon, this list is a menu. Each row is a service, a version, and (with five minutes of searching) a known vulnerability class. Reading version banners and matching them to public advisories is most of what "enumeration" means in practice – it's unglamorous, and it's the step that actually finds the way in. We're going to walk through the first one, because it's the cleanest, best-documented, and most reliable entry point on this box.</p>
+
+<figure class="my-8">
+  <img src="../../assets/articles/art-inline-metasploitable-2-walkthrough.svg" alt="Diagram of the attack path from the Kali Linux attacker VM across the isolated host-only network to the Metasploitable 2 target, showing port 21 (vsftpd 2.3.4) leading to a root shell on port 6200." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+  <figcaption class="mt-2 text-[12.5px] text-muted text-center">Kali attacks Metasploitable 2 over the isolated host-only network: the vsftpd 2.3.4 backdoor on port 21 opens a root shell on port 6200.</figcaption>
+</figure>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">4. Step 3 – Exploit the vsftpd 2.3.4 backdoor</h2>
+
+<ol>
+  <li>Launch <strong>Metasploit</strong>'s console on Kali:
+  <pre tabindex="0"><code><span class="term-cmt">$</span> msfconsole</code></pre></li>
+  <li>Search for and load the matching module, point it at the target, and run it:
+  <pre tabindex="0"><code>msf6 &gt; use exploit/unix/ftp/vsftpd_234_backdoor
+msf6 exploit(unix/ftp/vsftpd_234_backdoor) &gt; set RHOSTS 192.168.56.20
+msf6 exploit(unix/ftp/vsftpd_234_backdoor) &gt; run</code></pre></li>
+</ol>
+
+<p>If the target and network are configured correctly, this returns a command shell running as <strong>root</strong> on the Metasploitable 2 box – no credentials, no password guessing, no chained exploits. One module, one target, one shell.</p>
+
+<p>It's worth understanding <em>why</em> this works, because the mechanism is unusual and instructive. This is not a classic buffer overflow or logic flaw in the vsftpd code itself. In 2011, the official <strong>vsftpd 2.3.4</strong> source tarball hosted on its distribution site was maliciously replaced by an unauthorized third party with a modified version containing a backdoor: any FTP login attempt using a username containing a smiley face (<code>:)</code>) in a specific pattern causes the backdoored binary to open a command shell on <strong>TCP port 6200</strong>, bound and waiting for a connection, no valid credentials required. The vsftpd maintainer discovered the tampering and pulled the compromised file within days, but Metasploitable 2 deliberately ships that exact compromised build, because it's such a clean, well-documented illustration of a supply-chain compromise: the vulnerability isn't in flawed code logic, it's in a trusted distribution channel being silently subverted. The Metasploit module simply automates sending that trigger string and connecting to the resulting shell on port 6200.</p>
+
+<p>This is also why the port-21 finding from Step 2 mattered more than the others at a glance: a backdoor triggered by an authentication attempt is a fundamentally different, and often far more reliable, class of bug than a service crash or a misconfiguration. It doesn't depend on race conditions, memory layout, or ASLR – it's a deterministic trapdoor left by whoever tampered with the source.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">5. Step 4 – Confirm what you actually have</h2>
+
+<p>Once your shell lands, verify what you've actually got before doing anything else:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> whoami
+<span class="term-cmt">$</span> id</code></pre>
+
+<pre tabindex="0"><code><span class="term-out">root
+uid=0(root) gid=0(root)</span></code></pre>
+
+<p>Landing directly at <code>uid=0</code> from a single exploit, with no separate <strong>privilege-escalation</strong> step, is unusually generous – and it's worth being explicit about that, because it can set the wrong expectation if this is your first exploitation lab. On a real engagement, initial access almost never arrives as root. You typically land as a low-privileged service account (a web server user, an FTP daemon user, a database service account) and privilege escalation – kernel exploits, misconfigured sudo rules, writable cron jobs, credential reuse – is its own separate phase, often the harder half of the exercise. Metasploitable 2's vsftpd backdoor happens to run the injected shell as root because of how the daemon itself was privileged when it was tampered with; that's a property of this specific backdoor, not something to expect elsewhere.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">6. Step 5 – Try a second path</h2>
+
+<p>The vsftpd backdoor is the cleanest entry point on this box, but it's not the only one, and part of the value of Metasploitable 2 is that it hands you several independent ways in to compare. Two are worth practising next, without walking through them in full here so this lab stays focused:</p>
+
+<table>
+  <thead><tr><th>Path</th><th>Port</th><th>Metasploit module</th><th>Root cause</th></tr></thead>
+  <tbody>
+    <tr><td>UnrealIRCd backdoor</td><td>6667</td><td><code>exploit/unix/irc/unreal_ircd_3281_backdoor</code></td><td>A specific, historically real build of the UnrealIRCd daemon was distributed with a backdoor allowing arbitrary command execution triggered over the IRC protocol itself – conceptually a close cousin of the vsftpd backdoor you just used. Enumerate the service first, then look at what triggers the backdoor before reaching for the module.</td></tr>
+    <tr><td>distcc remote code execution</td><td>3632</td><td><code>exploit/unix/misc/distcc_exec</code></td><td>A completely different vulnerability class: distcc is a legitimate distributed-compilation tool that, left listening without authentication, will execute any compilation command it's handed, which an attacker can abuse to run arbitrary shell commands instead. Unlike vsftpd, this is a <strong>misconfiguration/design flaw</strong>, not a tampered binary, a good contrast case for understanding that "vulnerable service" covers more than one root cause.</td></tr>
+  </tbody>
+</table>
+
+<p>Working both of these after this walkthrough gives you three distinct mental models for the same box: a supply-chain backdoor, a protocol-triggered backdoor, and an authentication-free RCE in a legitimate tool. That range is exactly why this box is still assigned in training programs years after its release.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">7. Cleanup</h2>
+
+<p>Before you close the lab session, revert the Metasploitable 2 VM to a clean snapshot. You've just planted a root shell and, depending on what you did inside it, possibly left files, stopped services, or otherwise modified state. Snapshots make this free – restore to <strong>clean-base</strong> (or whatever you named it) and the box is exactly as broken, and exactly as ready for next time, as the day you built it.</p>
+
+<p>And to say it one more time, plainly: this target VM must never touch a real network. It has a working root backdoor and multiple unauthenticated remote-code-execution paths by design. Keep it on the isolated host-only or internal network for its entire lifetime, and don't be tempted to port-forward it "just to test something quickly." That single decision is the difference between a training exercise and an incident.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Is it legal to exploit Metasploitable 2?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Yes, on your own isolated VM. That's the entire point of the box: Rapid7 built and published Metasploitable 2 specifically to be attacked in a controlled lab environment. As long as it stays on a network you own and control, with no route to the internet or anyone else's systems, exploiting it is exactly what it's for.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Can I use these exact techniques against other systems?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No. These are specific to this training box's intentionally broken, deliberately outdated software: a backdoored vsftpd binary, an ancient Samba build, an exposed distcc daemon. This lab is about learning methodology (recon, enumeration, matching a service to an exploit, verifying access), not a universal toolkit you can point at unauthorised systems. Real targets require authorisation, and almost none of them ship with these specific flaws.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Do I need Metasploit specifically?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No. Several of these vulnerabilities, including the vsftpd backdoor, can be exploited manually with nothing more than netcat, once you understand the mechanism. But msfconsole is the standard teaching tool for this box because it packages the discovery, exploit, and payload delivery into a consistent, reproducible workflow, which is why this walkthrough uses it.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What should I do after finishing this lab?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Read what-is-metasploitable-2.html for background on the box's design and history, and build-a-home-lab-on-one-laptop.html if you don't yet have the surrounding lab set up. Then come back and work through Step 5 above: the UnrealIRCd backdoor on port 6667 and the distcc remote code execution are two more well-documented entry points on this same target worth practising next.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What is the vsftpd 2.3.4 backdoor exploited in this walkthrough?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    In 2011 the official vsftpd 2.3.4 source tarball was maliciously replaced with a version containing a backdoor: an FTP login attempt using a username containing a smiley face (:)) in a specific pattern causes the binary to open a root command shell on TCP port 6200, no valid credentials required. Metasploitable 2 deliberately ships this exact compromised build, and the Metasploit module exploit/unix/ftp/vsftpd_234_backdoor automates sending the trigger string and connecting to the resulting shell.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What other vulnerable services does Metasploitable 2 expose besides vsftpd?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    The full-port enumeration in Step 2 also surfaces Samba (command injection via the "username map script" option), distccd on port 3632 (unauthenticated remote code execution), an exposed Java RMI registry on port 1099, a separately backdoored UnrealIRCd build on port 6667, and Apache Tomcat on port 8180 with weak manager credentials – each a distinct, well-documented entry point on the same box.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Why did this exploit land a root shell instead of a low-privileged one?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Landing directly at uid=0 with no separate privilege-escalation step is unusually generous and specific to this particular backdoor: the injected shell runs at whatever privilege level the vsftpd daemon itself had when it was tampered with. On real engagements initial access almost never arrives as root; privilege escalation is normally its own, often harder, phase.
+  </div>
+</details>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+            <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+            <a class="ul-link" href="../../legal/about/">About us</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-border">
+        <a href="../" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors inline-flex flex-col">
+          <span class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">More from Lab</span>
+          <span class="mt-2 text-[15px] font-medium leading-snug">Back to all articles →</span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">On this page</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Related</div>
+        <ul class="space-y-3">
+          <li><a href="../what-is-metasploitable-2/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">What is Metasploitable 2</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LAB</div>
+          </a></li>
+          <li><a href="../build-a-home-lab-on-one-laptop/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Build a home lab on one laptop</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LAB · May 18, 2026</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

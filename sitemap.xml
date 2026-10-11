@@ -1,0 +1,2355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://breachfolio.com/ai/agentic-ai-security-basics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/agentic-ai-security-basics/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/agentic-ai-security-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/seguridad-de-ia-agentica/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/ai-and-cryptography/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-y-criptografia/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/ai-red-teaming-basics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/ai-red-teaming-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/red-teaming-de-ia-desde-cero/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/ai-red-teaming-basics/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/deepfakes-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/deepfakes-explained/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/deepfakes-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/deepfakes-explicado/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/llm-vs-chatbot-vs-agent/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/llm-vs-chatbot-vs-agent/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/llm-vs-chatbot-vs-agente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/llm-vs-chatbot-vs-agent/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/llms-for-phishing-detection/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/llms-para-detectar-phishing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/mcp-attack-surface-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/mcp-attack-surface-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/mcp-attack-surface-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/prompt-injection-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/prompt-injection-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/prompt-injection-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/prompt-injection-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/prompts-for-self-study/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/prompts-for-self-study/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/prompts-para-autoaprendizaje/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/prompts-for-self-study/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/run-a-local-llm-for-security-notes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/run-a-local-llm-for-security-notes/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ejecuta-un-llm-local/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/run-a-local-llm-for-security-notes/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/ai/shadow-ai-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/burp-vs-caido/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/burp-vs-caido/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/burp-vs-caido/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/burp-vs-caido/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/burp-vs-zap/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/burp-vs-zap/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/burp-vs-zap/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/burp-vs-zap/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/kali-vs-parrot/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/kali-vs-parrot/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/kali-vs-parrot/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/kali-vs-parrot/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/metasploit-vs-sliver/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/metasploit-vs-sliver/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/metasploit-vs-sliver/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/metasploit-vs-sliver/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/nessus-vs-openvas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/nessus-vs-openvas/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/nessus-vs-openvas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/nessus-vs-openvas/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/nmap-vs-masscan/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/nmap-vs-masscan/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/nmap-vs-masscan/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/nmap-vs-masscan/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/nordvpn-vs-surfshark-vs-proton-vpn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/password-managers-compared/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/password-managers-compared/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/gestores-de-contrasenas-comparados/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/password-managers-compared/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/signal-vs-whatsapp-vs-telegram/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/signal-vs-whatsapp-vs-telegram/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/signal-vs-whatsapp-vs-telegram/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/signal-vs-whatsapp-vs-telegram/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/snort-vs-suricata/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/snort-vs-suricata/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/snort-vs-suricata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/snort-vs-suricata/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/splunk-vs-wazuh-vs-elk/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/compare/wireshark-vs-tcpdump/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/wireshark-vs-tcpdump/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/wireshark-vs-tcpdump/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/ai-security/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/ai-security/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ia-y-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/ai-security/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/cryptography-basics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cryptography-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/criptografia-basica-que-puedes-usar/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cryptography-basics/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/cve-vs-cvss-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cve-vs-cvss-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/cve-vs-cvss-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cve-vs-cvss-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/cybersecurity-101/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ciberseguridad-101/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/cybersecurity-roadmap-and-careers/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cybersecurity-roadmap-and-careers/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-empezar-en-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cybersecurity-roadmap-and-careers/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/digital-forensics-dfir/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/forense-digital-y-dfir/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/domains-vs-subdomains/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/how-a-vpn-works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-a-vpn-works/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-funciona-una-vpn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-a-vpn-works/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/how-networks-work/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-funcionan-las-redes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-aprender-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/indicators-of-compromise/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/indicadores-de-compromiso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/linux-fundamentals/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-linux-para-seguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/page-3/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-3/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-3/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/page-4/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-4/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-4/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-4/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/page-5/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-5/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-5/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/page-6/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-6/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-6/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-6/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/shodan-and-censys/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/shodan-y-censys/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/sigma-and-yara-rules/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/sigma-and-yara-rules/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/sigma-and-yara-rules/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/sim-swap-attack-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/sim-swap-attack-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/sim-swap-attack-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/soc-team-roles/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/social-engineering-explained/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/social-engineering-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/social-engineering-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/threat-modeling-stride/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/threat-modeling-stride/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/modelado-de-amenazas-con-stride/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/threat-modeling-stride/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/tls-certificate-transparency/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/tls-certificate-transparency/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/tls-certificate-transparency/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/what-a-red-team-does/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-hace-un-red-team/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/what-is-a-soc/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-a-soc/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-a-soc/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/what-is-osint/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-osint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/cybersecurity/what-is-whois/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-whois/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/sim-swap-attack-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/sim-swap-attack-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/tls-certificate-transparency/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/tls-certificate-transparency/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/ciberseguridad-101/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ciberseguridad-101/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/como-aprender-ciberseguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-aprender-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-to-learn-cybersecurity/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/como-empezar-en-ciberseguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cybersecurity-roadmap-and-careers/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-empezar-en-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cybersecurity-roadmap-and-careers/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/como-funciona-una-vpn/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-a-vpn-works/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-funciona-una-vpn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-a-vpn-works/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/como-funcionan-las-redes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-funcionan-las-redes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/criptografia-basica-que-puedes-usar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cryptography-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/criptografia-basica-que-puedes-usar/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cryptography-basics/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/cve-vs-cvss-explicado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cve-vs-cvss-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/cve-vs-cvss-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cve-vs-cvss-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/forense-digital-y-dfir/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/forense-digital-y-dfir/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/digital-forensics-dfir/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cyber-threat-intelligence-basics/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/fundamentos-de-linux-para-seguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-linux-para-seguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/ia-y-ciberseguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/ai-security/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ia-y-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/ai-security/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/indicadores-de-compromiso/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/indicadores-de-compromiso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/social-engineering-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/social-engineering-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/modelado-de-amenazas-con-stride/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/threat-modeling-stride/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/modelado-de-amenazas-con-stride/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/threat-modeling-stride/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/page-3/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-3/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-3/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/page-4/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-4/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-4/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-4/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/page-5/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-5/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-5/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/page-6/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/page-6/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/page-6/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/page-6/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/que-es-osint/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-osint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/que-es-un-soc/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-a-soc/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-a-soc/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/que-es-whois/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-whois/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/que-hace-un-red-team/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-hace-un-red-team/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-a-red-team-does/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/registry-registrar-isp-hosting/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/sigma-and-yara-rules/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/sigma-and-yara-rules/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ciberseguridad/shodan-y-censys/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/shodan-y-censys/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/burp-vs-caido/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/burp-vs-caido/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/burp-vs-caido/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/burp-vs-caido/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/burp-vs-zap/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/burp-vs-zap/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/burp-vs-zap/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/burp-vs-zap/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/gestores-de-contrasenas-comparados/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/password-managers-compared/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/gestores-de-contrasenas-comparados/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/password-managers-compared/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/kali-vs-parrot/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/kali-vs-parrot/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/kali-vs-parrot/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/kali-vs-parrot/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/metasploit-vs-sliver/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/metasploit-vs-sliver/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/metasploit-vs-sliver/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/metasploit-vs-sliver/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/nessus-vs-openvas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/nessus-vs-openvas/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/nessus-vs-openvas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/nessus-vs-openvas/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/nmap-vs-masscan/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/nmap-vs-masscan/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/nmap-vs-masscan/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/nmap-vs-masscan/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/nordvpn-vs-surfshark-vs-proton-vpn/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/nordvpn-vs-surfshark-vs-proton-vpn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/signal-vs-whatsapp-vs-telegram/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/signal-vs-whatsapp-vs-telegram/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/signal-vs-whatsapp-vs-telegram/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/signal-vs-whatsapp-vs-telegram/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/snort-vs-suricata/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/snort-vs-suricata/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/snort-vs-suricata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/snort-vs-suricata/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/splunk-vs-wazuh-vs-elk/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/splunk-vs-wazuh-vs-elk/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/wireshark-vs-tcpdump/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/wireshark-vs-tcpdump/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/alerta-google-actividad-inusual/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-google-unusual-activity-alert/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/alerta-google-actividad-inusual/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-google-unusual-activity-alert/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/apple-id-bloqueado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/apple-id-icloud-locked-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/apple-id-bloqueado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/apple-id-icloud-locked-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/clic-enlace-phishing/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/clicked-phishing-link/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/clic-enlace-phishing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/clicked-phishing-link/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/comprobar-datos-filtrados/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/comprobar-datos-filtrados/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/contrasenas-en-el-navegador/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/contrasenas-en-el-navegador/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/correo-hackeado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/hacked-email-account/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/correo-hackeado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/hacked-email-account/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/denunciar-web-fraudulenta/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/report-scam-website/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/denunciar-web-fraudulenta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/report-scam-website/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/dominio-falso/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/check-suspicious-domain/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/dominio-falso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/check-suspicious-domain/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/donacion-falsa-catastrofe/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-disaster-donation-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/donacion-falsa-catastrofe/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-disaster-donation-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/estafa-bizum/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-bizum/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/es/guias/estafa-bizum/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/estafa-cuenta-segura-banco-proteccion/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/bank-fraud-department-safe-account-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-cuenta-segura-banco-proteccion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/bank-fraud-department-safe-account-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/estafa-entrega-paquetes-proteccion/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/package-delivery-text-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-entrega-paquetes-proteccion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/package-delivery-text-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/estafa-oferta-empleo-falsa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-job-offer-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-oferta-empleo-falsa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-job-offer-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/estafa-soporte-tecnico-falso/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-tech-support-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-soporte-tecnico-falso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-tech-support-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/estafa-voz-clonada-ia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/ai-voice-cloning-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-voz-clonada-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/ai-voice-cloning-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/falsa-renovacion-antivirus/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-antivirus-renewal-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/falsa-renovacion-antivirus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-antivirus-renewal-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/falso-pedido-amazon/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-amazon-order-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/falso-pedido-amazon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-amazon-order-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/foto-dni-riesgos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/photo-of-your-id-risks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/foto-dni-riesgos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/photo-of-your-id-risks/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/netflix-pago-fallido/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/netflix-payment-failed-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/netflix-pago-fallido/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/netflix-payment-failed-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/page-3/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-3/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-3/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/page-4/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-4/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-4/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-4/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/page-5/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-5/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-5/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/pago-fuera-airbnb-booking/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/airbnb-booking-off-platform-payment/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/pago-fuera-airbnb-booking/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/airbnb-booking-off-platform-payment/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/phishing-paypal/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/paypal-phishing-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/phishing-paypal/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/paypal-phishing-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/pig-butchering-cripto/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/pig-butchering-crypto-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/pig-butchering-cripto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/pig-butchering-crypto-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/sextorsion-chantaje/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/sextortion-blackmail-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/sextorsion-chantaje/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/sextortion-blackmail-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/sms-aeat-falso/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-irs-text-message/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/sms-aeat-falso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-irs-text-message/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/suplantacion-instagram/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/instagram-impersonation/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/suplantacion-instagram/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/instagram-impersonation/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/suplantan-tu-web/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/cloned-website-what-to-do/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/suplantan-tu-web/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/cloned-website-what-to-do/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/tarjeta-web-falsa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-credit-card-website/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/tarjeta-web-falsa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-credit-card-website/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/guias/whatsapp-hackeado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/hacked-messaging-account/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/whatsapp-hackeado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/hacked-messaging-account/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/deepfakes-explicado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/deepfakes-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/deepfakes-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/deepfakes-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/ejecuta-un-llm-local/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/run-a-local-llm-for-security-notes/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ejecuta-un-llm-local/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/run-a-local-llm-for-security-notes/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/ia-y-criptografia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-y-criptografia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/ai-and-cryptography/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/llm-vs-chatbot-vs-agente/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/llm-vs-chatbot-vs-agent/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/llm-vs-chatbot-vs-agente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/llm-vs-chatbot-vs-agent/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/llms-para-detectar-phishing/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/llms-para-detectar-phishing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/mcp-attack-surface-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/mcp-attack-surface-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/prompt-injection-explicado/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/prompt-injection-explained/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/prompt-injection-explicado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/prompt-injection-explained/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/prompts-para-autoaprendizaje/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/prompts-for-self-study/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/prompts-para-autoaprendizaje/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/prompts-for-self-study/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/red-teaming-de-ia-desde-cero/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/ai-red-teaming-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/red-teaming-de-ia-desde-cero/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/ai-red-teaming-basics/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/ia/seguridad-de-ia-agentica/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/agentic-ai-security-basics/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/agentic-ai-security-basics/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/seguridad-de-ia-agentica/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/lab-03-wazuh-siem-en-casa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-03-wazuh-siem-en-casa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/lab-04-segmentacion-de-red-con-pfsense/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-04-segmentacion-de-red-con-pfsense/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/lab-05-ids-con-suricata/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-05-ids-con-suricata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/lab-06-probar-detecciones-atomic-red-team/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-06-probar-detecciones-atomic-red-team/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/metasploitable-2-paso-a-paso/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/metasploitable-2-paso-a-paso/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/objetivo-vulnerable-dvwa-en-docker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/vulnerable-target-dvwa-docker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/objetivo-vulnerable-dvwa-en-docker/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/vulnerable-target-dvwa-docker/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/what-is-metasploitable-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/what-is-metasploitable-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/about/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/contact/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/cookies/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/cookies/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/cookies/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/cookies/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/disclosures/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/disclosures/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/disclosures/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/disclosures/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/methodology/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/methodology/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/methodology/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/methodology/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/privacy/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/privacy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/privacy/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/legal/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/terms/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/alerta-microsoft-acr-stealer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/microsoft-warns-acr-stealer-surge/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/alerta-microsoft-acr-stealer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/microsoft-warns-acr-stealer-surge/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/ataques-de-identidad-causa-ransomware/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/identity-attacks-top-ransomware-cause/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ataques-de-identidad-causa-ransomware/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/identity-attacks-top-ransomware-cause/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/ciberataque-kfc-japon/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/kfc-japan-logistics-cyberattack/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ciberataque-kfc-japon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/kfc-japan-logistics-cyberattack/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/gold-eagle-central-de-vulnerabilidades/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/gold-eagle-vulnerability-clearinghouse/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/gold-eagle-central-de-vulnerabilidades/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/gold-eagle-vulnerability-clearinghouse/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/inc-ransomware-sonicwall-sma-explotacion/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/inc-ransomware-sonicwall-zero-day-exploit/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/inc-ransomware-sonicwall-sma-explotacion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/inc-ransomware-sonicwall-zero-day-exploit/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>daily</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/lanzamiento-claude-sonnet-5/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/claude-sonnet-5-release/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/lanzamiento-claude-sonnet-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/claude-sonnet-5-release/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/malware-pantallas-coche-android-actualizacion/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/android-car-head-unit-malware-update-channel/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/malware-pantallas-coche-android-actualizacion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/android-car-head-unit-malware-update-channel/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/panorama-ciberseguridad-mundial-incidentes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/global-cyber-roundup-security-updates/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/panorama-ciberseguridad-mundial-incidentes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/global-cyber-roundup-security-updates/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/paquetes-npm-vite-maliciosos-blockchain/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/vite-npm-blockchain-rat-attack/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/paquetes-npm-vite-maliciosos-blockchain/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/vite-npm-blockchain-rat-attack/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/ransomware-agencias-gubernamentales-diario/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/government-ransomware-daily-threat/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ransomware-agencias-gubernamentales-diario/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/government-ransomware-daily-threat/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/rce-sharepoint-cve-2026-45659/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/sharepoint-cve-2026-45659/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/rce-sharepoint-cve-2026-45659/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/sharepoint-cve-2026-45659/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/riesgo-ia-confianza-ciega/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/ai-threat-blind-trust/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/riesgo-ia-confianza-ciega/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/ai-threat-blind-trust/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/robo-de-cuentas-adobe-commerce-cve-2026-71362/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/robo-de-cuentas-adobe-commerce-cve-2026-71362/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/ucrania-nombra-ministro-defensa-inteligencia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/ukraine-appoints-intelligence-expert-acting-defense-minister/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ucrania-nombra-ministro-defensa-inteligencia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/ukraine-appoints-intelligence-expert-acting-defense-minister/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/vmware-vcenter-cve-2026-59310-explotada/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/vmware-vcenter-cve-2026-59310-explotada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/vulnerabilidad-simplehelp-cve-2026-48558/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/simplehelp-cve-2026-48558/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/vulnerabilidad-simplehelp-cve-2026-48558/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/simplehelp-cve-2026-48558/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/vulnerabilidades-ide-jetbrains/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/jetbrains-ide-vulnerabilities/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/vulnerabilidades-ide-jetbrains/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/jetbrains-ide-vulnerabilities/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/noticias/zero-day-sharefile/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/sharefile-zero-day-disruption/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/zero-day-sharefile/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/sharefile-zero-day-disruption/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/acronimos-de-ciberseguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/security-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/acronimos-de-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/security-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/certificaciones-de-ciberseguridad-comparadas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/cybersecurity-certifications-compared/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/certificaciones-de-ciberseguridad-comparadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/cybersecurity-certifications-compared/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/checklist-de-hardening-linux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/checklist-de-hardening-linux/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/comandos-linux-para-revision-de-seguridad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/linux-security-commands-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/comandos-linux-para-revision-de-seguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/linux-security-commands-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/network-commands-glossary/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/network-commands-glossary/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/owasp-top-10-referencia-rapida/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/owasp-top-10-referencia-rapida/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/preguntas-frecuentes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/frequently-asked-questions/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/preguntas-frecuentes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/frequently-asked-questions/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/incident-response-first-24h-checklist/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/incident-response-first-24h-checklist/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/es/recursos/puertos-comunes-chuleta/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/common-ports-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/puertos-comunes-chuleta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/common-ports-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/ai-voice-cloning-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/ai-voice-cloning-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-voz-clonada-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/ai-voice-cloning-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/airbnb-booking-off-platform-payment/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/airbnb-booking-off-platform-payment/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/pago-fuera-airbnb-booking/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/airbnb-booking-off-platform-payment/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/apple-id-icloud-locked-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/apple-id-icloud-locked-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/apple-id-bloqueado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/apple-id-icloud-locked-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/bank-fraud-department-safe-account-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/bank-fraud-department-safe-account-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-cuenta-segura-banco-proteccion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/bank-fraud-department-safe-account-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/browser-saved-passwords/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/contrasenas-en-el-navegador/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/browser-saved-passwords/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/check-if-your-data-was-breached/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/comprobar-datos-filtrados/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/check-suspicious-domain/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/check-suspicious-domain/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/dominio-falso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/check-suspicious-domain/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/clicked-phishing-link/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/clicked-phishing-link/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/clic-enlace-phishing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/clicked-phishing-link/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/cloned-website-what-to-do/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/cloned-website-what-to-do/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/suplantan-tu-web/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/cloned-website-what-to-do/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-amazon-order-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-amazon-order-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/falso-pedido-amazon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-amazon-order-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-antivirus-renewal-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-antivirus-renewal-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/falsa-renovacion-antivirus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-antivirus-renewal-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-credit-card-website/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-credit-card-website/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/tarjeta-web-falsa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-credit-card-website/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-disaster-donation-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-disaster-donation-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/donacion-falsa-catastrofe/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-disaster-donation-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-google-unusual-activity-alert/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-google-unusual-activity-alert/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/alerta-google-actividad-inusual/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-google-unusual-activity-alert/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-irs-text-message/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-irs-text-message/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/sms-aeat-falso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-irs-text-message/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-job-offer-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-job-offer-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-oferta-empleo-falsa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-job-offer-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/fake-tech-support-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-tech-support-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-soporte-tecnico-falso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-tech-support-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/hacked-email-account/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/hacked-email-account/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/correo-hackeado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/hacked-email-account/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/hacked-messaging-account/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/hacked-messaging-account/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/whatsapp-hackeado/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/hacked-messaging-account/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/instagram-impersonation/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/instagram-impersonation/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/suplantacion-instagram/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/instagram-impersonation/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/netflix-payment-failed-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/netflix-payment-failed-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/netflix-pago-fallido/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/netflix-payment-failed-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/package-delivery-text-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/package-delivery-text-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/estafa-entrega-paquetes-proteccion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/package-delivery-text-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/page-3/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-3/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-3/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/page-4/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-4/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-4/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-4/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/page-5/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/page-5/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/page-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/page-5/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/paypal-phishing-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/paypal-phishing-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/phishing-paypal/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/paypal-phishing-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/photo-of-your-id-risks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/photo-of-your-id-risks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/foto-dni-riesgos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/photo-of-your-id-risks/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/pig-butchering-crypto-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/pig-butchering-crypto-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/pig-butchering-cripto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/pig-butchering-crypto-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/report-scam-website/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/report-scam-website/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/denunciar-web-fraudulenta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/report-scam-website/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/guides/sextortion-blackmail-scam/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/sextortion-blackmail-scam/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/sextorsion-chantaje/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/sextortion-blackmail-scam/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-03-wazuh-siem-en-casa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-03-wazuh-siem-home-lab/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-04-segmentacion-de-red-con-pfsense/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/lab-05-ids-suricata/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-05-ids-con-suricata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-06-probar-detecciones-atomic-red-team/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/metasploitable-2-lab-walkthrough/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/metasploitable-2-paso-a-paso/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/vulnerable-target-dvwa-docker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/vulnerable-target-dvwa-docker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/objetivo-vulnerable-dvwa-en-docker/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/vulnerable-target-dvwa-docker/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/lab/what-is-metasploitable-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/what-is-metasploitable-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/what-is-metasploitable-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/about/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/contact/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/cookies/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/cookies/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/cookies/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/cookies/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/disclosures/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/disclosures/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/disclosures/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/disclosures/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/methodology/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/methodology/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/methodology/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/methodology/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/privacy/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/privacy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/privacy/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/legal/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/legal/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/legal/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/legal/terms/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>yearly</changefreq><priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/robo-de-cuentas-adobe-commerce-cve-2026-71362/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/ai-threat-blind-trust/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/ai-threat-blind-trust/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/riesgo-ia-confianza-ciega/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/ai-threat-blind-trust/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/android-car-head-unit-malware-update-channel/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/android-car-head-unit-malware-update-channel/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/malware-pantallas-coche-android-actualizacion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/android-car-head-unit-malware-update-channel/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/claude-sonnet-5-release/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/claude-sonnet-5-release/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/lanzamiento-claude-sonnet-5/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/claude-sonnet-5-release/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/global-cyber-roundup-security-updates/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/global-cyber-roundup-security-updates/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/panorama-ciberseguridad-mundial-incidentes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/global-cyber-roundup-security-updates/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/gold-eagle-vulnerability-clearinghouse/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/gold-eagle-vulnerability-clearinghouse/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/gold-eagle-central-de-vulnerabilidades/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/gold-eagle-vulnerability-clearinghouse/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/government-ransomware-daily-threat/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/government-ransomware-daily-threat/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ransomware-agencias-gubernamentales-diario/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/government-ransomware-daily-threat/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/identity-attacks-top-ransomware-cause/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/identity-attacks-top-ransomware-cause/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ataques-de-identidad-causa-ransomware/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/identity-attacks-top-ransomware-cause/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/inc-ransomware-sonicwall-zero-day-exploit/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/inc-ransomware-sonicwall-zero-day-exploit/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/inc-ransomware-sonicwall-sma-explotacion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/inc-ransomware-sonicwall-zero-day-exploit/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>daily</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/jetbrains-ide-vulnerabilities/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/jetbrains-ide-vulnerabilities/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/vulnerabilidades-ide-jetbrains/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/jetbrains-ide-vulnerabilities/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/kfc-japan-logistics-cyberattack/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/kfc-japan-logistics-cyberattack/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ciberataque-kfc-japon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/kfc-japan-logistics-cyberattack/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/microsoft-warns-acr-stealer-surge/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/microsoft-warns-acr-stealer-surge/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/alerta-microsoft-acr-stealer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/microsoft-warns-acr-stealer-surge/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/sharefile-zero-day-disruption/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/sharefile-zero-day-disruption/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/zero-day-sharefile/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/sharefile-zero-day-disruption/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/sharepoint-cve-2026-45659/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/sharepoint-cve-2026-45659/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/rce-sharepoint-cve-2026-45659/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/sharepoint-cve-2026-45659/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/simplehelp-cve-2026-48558/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/simplehelp-cve-2026-48558/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/vulnerabilidad-simplehelp-cve-2026-48558/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/simplehelp-cve-2026-48558/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/ukraine-appoints-intelligence-expert-acting-defense-minister/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/ukraine-appoints-intelligence-expert-acting-defense-minister/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/ucrania-nombra-ministro-defensa-inteligencia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/ukraine-appoints-intelligence-expert-acting-defense-minister/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/vite-npm-blockchain-rat-attack/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/vite-npm-blockchain-rat-attack/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/paquetes-npm-vite-maliciosos-blockchain/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/vite-npm-blockchain-rat-attack/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/vmware-vcenter-cve-2026-59310-explotada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/common-ports-cheat-sheet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/common-ports-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/puertos-comunes-chuleta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/common-ports-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/cybersecurity-certifications-compared/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/cybersecurity-certifications-compared/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/certificaciones-de-ciberseguridad-comparadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/cybersecurity-certifications-compared/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/frequently-asked-questions/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/frequently-asked-questions/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/preguntas-frecuentes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/frequently-asked-questions/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/incident-response-first-24h-checklist/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/incident-response-first-24h-checklist/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/primeras-24-horas-de-un-incidente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/incident-response-first-24h-checklist/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/linux-hardening-checklist/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/checklist-de-hardening-linux/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/linux-security-commands-cheat-sheet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/linux-security-commands-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/comandos-linux-para-revision-de-seguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/linux-security-commands-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/network-commands-glossary/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/network-commands-glossary/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/glosario-de-comandos-de-red/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/network-commands-glossary/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/owasp-top-10-quick-reference/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/owasp-top-10-referencia-rapida/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/page-2/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/page-2/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/page-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/page-2/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/security-cheat-sheet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/security-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/acronimos-de-ciberseguridad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/security-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breachfolio.com/sitemap/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://breachfolio.com/sitemap/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://breachfolio.com/sitemap/" />
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq><priority>0.8</priority>
+  </url>
+</urlset>

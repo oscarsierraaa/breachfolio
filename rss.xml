@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Breachfolio</title>
+    <link>https://breachfolio.com/</link>
+    <description>Practical cybersecurity guides, explained for people who need an answer tonight, not a glossary.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 29 Aug 2026 12:00:00 +0000</lastBuildDate>
+    <atom:link href="https://breachfolio.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I clicked a phishing link: what actually happens now</title>
+      <link>https://breachfolio.com/guides/clicked-phishing-link/</link>
+      <guid isPermaLink="true">https://breachfolio.com/guides/clicked-phishing-link/</guid>
+      <pubDate>Sat, 29 Aug 2026 12:00:00 +0000</pubDate>
+      <description>If you only opened it and closed it, almost certainly nothing happened. What decides is what you did next: typed something, downloaded, or approved a prompt.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-guide-phishing-link-clicked.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Is it safe to save passwords in your browser?</title>
+      <link>https://breachfolio.com/guides/browser-saved-passwords/</link>
+      <guid isPermaLink="true">https://breachfolio.com/guides/browser-saved-passwords/</guid>
+      <pubDate>Sat, 29 Aug 2026 12:00:00 +0000</pubDate>
+      <description>It does encrypt them, and anyone saying otherwise is out of date. What decides the risk is different: whether something can run on your computer as you.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-guide-browser-passwords.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>A photo of your ID: what can really be done with it</title>
+      <link>https://breachfolio.com/guides/photo-of-your-id-risks/</link>
+      <guid isPermaLink="true">https://breachfolio.com/guides/photo-of-your-id-risks/</guid>
+      <pubDate>Wed, 26 Aug 2026 12:00:00 +0000</pubDate>
+      <description>The photo alone is rarely enough: what decides the risk is what else they hold about you. Plus the free credit check almost no article mentions.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-guide-id-document.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Your data already leaked: how to check and what to do</title>
+      <link>https://breachfolio.com/guides/check-if-your-data-was-breached/</link>
+      <guid isPermaLink="true">https://breachfolio.com/guides/check-if-your-data-was-breached/</guid>
+      <pubDate>Wed, 26 Aug 2026 12:00:00 +0000</pubDate>
+      <description>How to check whether your email is in a breach, what appearing on the list actually means, and the order of actions that genuinely reduces your risk.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-guide-data-leak.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Android car screens infected through their own updater</title>
+      <link>https://breachfolio.com/news/android-car-head-unit-malware-update-channel/</link>
+      <guid isPermaLink="true">https://breachfolio.com/news/android-car-head-unit-malware-update-channel/</guid>
+      <pubDate>Sun, 23 Aug 2026 12:00:00 +0000</pubDate>
+      <description>Kaspersky documents the first malware built for Android car head units. It did not arrive through a dodgy app: it came through the unit’s own update channel.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-news-car-botnet.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>vCenter flaw exploited five days after the patch</title>
+      <link>https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/</link>
+      <guid isPermaLink="true">https://breachfolio.com/news/vmware-vcenter-cve-2026-59310-exploited/</guid>
+      <pubDate>Thu, 20 Aug 2026 12:00:00 +0000</pubDate>
+      <description>CVE-2026-59310 allows unauthenticated code execution on VMware vCenter. Broadcom patched on 29 July; exploitation began five days later. 361 victims in 47 countries.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-news-global-campaign.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Your website has been cloned: what to do</title>
+      <link>https://breachfolio.com/guides/cloned-website-what-to-do/</link>
+      <guid isPermaLink="true">https://breachfolio.com/guides/cloned-website-what-to-do/</guid>
+      <pubDate>Mon, 17 Aug 2026 12:00:00 +0000</pubDate>
+      <description>Someone copied your website to deceive your customers. How to gather evidence, which registrar and host to contact, and how to get it flagged in browsers.</description>
+      <enclosure url="https://breachfolio.com/assets/img/hero-guide-cloned-website.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Best VPN 2026: NordVPN vs Surfshark vs Proton VPN</title>
+      <link>https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/</link>
+      <guid isPermaLink="true">https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/</guid>
+      <pubDate>Sun, 16 Aug 2026 12:00:00 +0000</pubDate>
+      <description>NordVPN, Surfshark and Proton VPN compared on jurisdiction, audits, open source and what they actually protect. Two of the three are the same company.</description>
+      <enclosure url="https://breachfolio.com/assets/img/thumb-cmp-vpn.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Adobe patches a Magento flaw that hands over accounts</title>
+      <link>https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/</link>
+      <guid isPermaLink="true">https://breachfolio.com/news/adobe-commerce-account-takeover-cve-2026-71362/</guid>
+      <pubDate>Thu, 13 Aug 2026 12:00:00 +0000</pubDate>
+      <description>CVE-2026-71362 lets an attacker switch into another customer&apos;s session on Adobe Commerce, with no account and no clicking. Patch is out; Sansec reports attempts.</description>
+      <enclosure url="https://breachfolio.com/assets/img/030-guide-identical-luxury-storefronts-night-street.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>My email was hacked: what to do right now</title>
+      <link>https://breachfolio.com/guides/hacked-email-account/</link>
+      <guid isPermaLink="true">https://breachfolio.com/guides/hacked-email-account/</guid>
+      <pubDate>Mon, 10 Aug 2026 12:00:00 +0000</pubDate>
+      <description>Someone got into your email. Lock them out, undo the forwarding rule they left behind, and secure the accounts that reset through it, in that order.</description>
+      <enclosure url="https://breachfolio.com/assets/img/035-guide-closet-rearranged-by-stranger.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Windows security event IDs: a triage cheat sheet</title>
+      <link>https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/</link>
+      <guid isPermaLink="true">https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/</guid>
+      <pubDate>Mon, 03 Aug 2026 12:00:00 +0000</pubDate>
+      <description>The Windows event IDs worth checking first when something looks wrong: sign-ins, privilege, new services, scheduled tasks and cleared logs.</description>
+      <enclosure url="https://breachfolio.com/assets/img/047-guide-forensic-table-envelope-layers-analysis.webp" type="image/webp" length="0" />
+    </item>
+    <item>
+      <title>Lab 06: test your detections with Atomic Red Team</title>
+      <link>https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/</link>
+      <guid isPermaLink="true">https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/</guid>
+      <pubDate>Sat, 01 Aug 2026 12:00:00 +0000</pubDate>
+      <description>Your home lab SIEM and IDS have never proved they detect anything. Run small, documented ATT&amp;amp;CK techniques with Atomic Red Team and find out which alerts fire.</description>
+      <enclosure url="https://breachfolio.com/assets/img/thumb-lab-siem.webp" type="image/webp" length="0" />
+    </item>
+  </channel>
+</rss>

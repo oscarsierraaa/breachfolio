@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab 05: watch lab traffic with a Suricata IDS | Breachfolio</title>
+  <meta name="description" content="Install Suricata as an IDS in your segmented home lab, enable the ET Open ruleset, generate test traffic against your own DVWA, and read the alerts it produces." />
+  <meta name="keywords" content="suricata ids home lab, install suricata ids, suricata tutorial, intrusion detection system tutorial, et open ruleset suricata, ids vs ips explained, network intrusion detection home lab, suricata fast log eve json, detect port scan with suricata, suricata dvwa lab, home lab network detection, suricata false positives, network security monitoring lab, blue team ids tutorial, suricata emerging threats rules" />
+  <link rel="canonical" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-05-ids-con-suricata/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Lab 05: watch lab traffic with a Suricata IDS | Breachfolio" />
+  <meta property="og:description" content="Install Suricata as an IDS in your segmented home lab, enable the ET Open ruleset, generate test traffic against your own DVWA, and read the alerts it produces." />
+  <meta property="og:url" content="https://breachfolio.com/lab/lab-05-ids-suricata/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/lab2-ids.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lab 05: watch lab traffic with a Suricata IDS | Breachfolio" />
+  <meta name="twitter:description" content="Install Suricata as an IDS in your segmented home lab, enable the ET Open ruleset, generate test traffic against your own DVWA, and read the alerts it produces." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/lab2-ids.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Lab 05: watch lab traffic with a Suricata IDS",
+      "description": "Install Suricata as an IDS in your segmented home lab, enable the ET Open ruleset, generate test traffic against your own DVWA, and read the alerts it produces.",
+      "image": "https://breachfolio.com/assets/img/lab2-ids.webp",
+      "datePublished": "2026-07-10",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/lab/lab-05-ids-suricata/"
+      },
+      "inLanguage": "en",
+      "keywords": "suricata ids home lab, install suricata ids, suricata tutorial, intrusion detection system tutorial, et open ruleset suricata, ids vs ips explained, network intrusion detection home lab, suricata fast log eve json, detect port scan with suricata, suricata dvwa lab, home lab network detection, suricata false positives, network security monitoring lab, blue team ids tutorial, suricata emerging threats rules"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Lab", "item": "https://breachfolio.com/lab/" },
+        { "@type": "ListItem", "position": 3, "name": "Lab 05: Suricata IDS", "item": "https://breachfolio.com/lab/lab-05-ids-suricata/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/lab/lab-05-ids-suricata/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does an IDS like Suricata add that a SIEM doesn't?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A SIEM such as Wazuh gives host-based visibility: what happened on a machine. An IDS like Suricata inspects packets as they cross the wire and matches them against signatures of known-bad traffic, giving network-based visibility. Running both lets you correlate the same event from two vantage points, which is the core idea of defence in depth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should Suricata run in a segmented home lab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The simplest useful placement is a monitoring VM that can see traffic to your targets - either the pfSense box from Lab 04 or a dedicated VM whose interface watches the targets segment. A network tap is not required for learning purposes; running Suricata directly on the path the traffic takes is enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between an IDS and an IPS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An IDS (Intrusion Detection System) watches traffic and reports matches without acting on them. Its close cousin, the IPS (Intrusion Prevention System), sits inline and can actively block traffic that matches a rule. Suricata can run in either mode; a learning lab typically starts in IDS mode so you see everything before deciding what to block."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I tell a real Suricata alert from a false positive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Read the rule that triggered the alert and look at the packet it matched, then judge whether the traffic is genuinely malicious or just noise from the broad ET Open ruleset. This judgement call is one of the most valuable skills an IDS teaches, and it helps to note down why a benign rule fired so the reasoning is documented for later tuning."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Lab 05: Suricata IDS</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/lab2-ids.webp" alt="Lab 05 – see the packets, not just the logs." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">LAB · SERIES</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Lab 05 – see the packets, not just the logs.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Host logs tell you what happened on a machine. An IDS tells you what crossed the wire. Add Suricata, point it at your own traffic, and read the alerts.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Lab 03 gave you host-based visibility with a SIEM; Lab 04 segmented the network. This lab adds the third kind of sight: network detection. An <strong>IDS</strong> (Intrusion Detection System) inspects packets as they pass and matches them against signatures of known-bad traffic. You will install <a href="https://suricata.io" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Suricata</a>, a free open-source IDS, and watch it flag activity you generate against your own <a href="../vulnerable-target-dvwa-docker/" class="text-accent ul-link">DVWA target from Lab 02</a>.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Where to run it</h2>
+
+      <p>In a lab, the simplest useful placement is to run Suricata on a monitoring VM that can see the traffic to your targets – either on the pfSense box from Lab 04, or on a dedicated VM whose interface is watching the targets segment. You do not need a network tap; for learning, running Suricata directly on the path the traffic takes is enough.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Install Suricata and its rules</h2>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code><span class="term-cmt"># on the monitoring vm (Ubuntu/Debian)</span>
+<span class="term-cmt">$</span> sudo apt update && sudo apt install -y suricata
+
+<span class="term-cmt"># fetch and enable the ET Open ruleset</span>
+<span class="term-cmt">$</span> sudo suricata-update
+<span class="term-cmt">$</span> sudo systemctl restart suricata</code></pre>
+
+      <p><code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">suricata-update</code> pulls the <strong>Emerging Threats (ET) Open</strong> ruleset: a large, free set of community signatures for known attacks and suspicious patterns. Confirm Suricata is watching the right interface by checking <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">/etc/suricata/suricata.yaml</code> for your targets-segment adapter, then restart.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Generate traffic worth detecting</h2>
+
+      <p>Now make some noise – all of it against your own DVWA host from Lab 02:</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Technique</th><th class="px-4 py-2.5 font-display font-semibold">How</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>A port scan</strong></td><td class="px-4 py-2.5">From your analyst VM, run <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">nmap</code> against the DVWA box. Scans are one of the most reliable things an IDS flags.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>A known web attack pattern</strong></td><td class="px-4 py-2.5">Use DVWA's own SQL-injection or XSS exercises. Many ET Open rules match the request signatures these produce.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>A suspicious user-agent</strong></td><td class="px-4 py-2.5">Fetch a page from DVWA with a tool whose default user-agent is on the ET blocklist (some scanners announce themselves). It is a gentle way to trigger a rule on demand.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Read the alerts</h2>
+
+      <p>Suricata writes alerts to <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">/var/log/suricata/fast.log</code> (one line per alert) and richer JSON to <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">eve.json</code>. Tail the simple one while you generate traffic:</p>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code><span class="term-cmt">$</span> sudo tail -f /var/log/suricata/fast.log</code></pre>
+
+      <p>Each line names the rule that matched, a classification, and the source and destination. Correlate what you see there with what your <a href="../lab-03-wazuh-siem-home-lab/" class="text-accent ul-link">Wazuh SIEM from Lab 03</a> recorded on the host side: the same event, seen from two vantage points. That is the whole idea of defence in depth made concrete on hardware you control.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">IDS vs IPS, and false positives</h2>
+
+      <p>Two things are worth understanding once the alerts are flowing. First, an IDS <em>detects</em>: it watches and reports. Its close cousin the IPS (Intrusion Prevention System) sits inline and can <em>block</em> traffic that matches a rule. Suricata can run in either mode; you started in IDS mode because in a learning lab you want to see everything, not silently drop it. Switching to inline prevention is a deliberate later step, once you trust your rules.</p>
+
+      <p>Second, you will see alerts you did not cause, and that is the real lesson. The ET Open ruleset is broad, so ordinary lab traffic sometimes matches a signature. Learning to tell a genuine detection from a false positive is the single most valuable skill an IDS teaches. Read the triggering rule, look at the packet it matched, and decide: real, or noise? Analysts spend a large fraction of their time on exactly that judgement, and your lab is the safest possible place to start building it.</p>
+
+      <p>A practical habit: when a rule fires that you know is benign in your lab, do not just ignore it – note <em>why</em> it is benign. That reasoning is what you would document when tuning a rule set in a real environment, and practising it here makes the production version routine.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">You have built a real lab</h2>
+
+      <p>Five labs in, you have an attacker box, a segmented network, a vulnerable target, host-based detection and network-based detection: a miniature but genuine security environment. Every future technique you want to learn now has a safe place to run. Whether you go deeper into blue-team detection engineering or red-team tradecraft from here, the environment is ready and the rule never changes: everything stays inside the lab you own. That is the payoff of building it up one layer at a time.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Legal & scope.</strong> Every scan, injection and probe in this series is aimed at machines you built, inside a private lab you control. Running these techniques against systems, sites or networks you do not own – or lack explicit written authorization to test – is unlawful in most jurisdictions. The lab exists precisely so you never have to.</div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does an IDS like Suricata add that a SIEM doesn't?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A SIEM such as Wazuh gives host-based visibility: what happened on a machine. An IDS like Suricata inspects packets as they cross the wire and matches them against signatures of known-bad traffic, giving network-based visibility. Running both lets you correlate the same event from two vantage points, which is the core idea of defence in depth.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Where should Suricata run in a segmented home lab?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          The simplest useful placement is a monitoring VM that can see traffic to your targets - either the pfSense box from Lab 04 or a dedicated VM whose interface watches the targets segment. A network tap is not required for learning purposes; running Suricata directly on the path the traffic takes is enough.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between an IDS and an IPS?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          An IDS (Intrusion Detection System) watches traffic and reports matches without acting on them. Its close cousin, the IPS (Intrusion Prevention System), sits inline and can actively block traffic that matches a rule. Suricata can run in either mode; a learning lab typically starts in IDS mode so you see everything before deciding what to block.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do I tell a real Suricata alert from a false positive?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Read the rule that triggered the alert and look at the packet it matched, then judge whether the traffic is genuinely malicious or just noise from the broad ET Open ruleset. This judgement call is one of the most valuable skills an IDS teaches, and it helps to note down why a benign rule fired so the reasoning is documented for later tuning.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../lab-04-network-segmentation-pfsense/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 04: segment the network</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../lab-03-wazuh-siem-home-lab/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 03: add a SIEM</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../cybersecurity/cybersecurity-101/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cybersecurity 101</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All lab walkthroughs</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cyber">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cybersecurity 101: the words that mean what | Breachfolio</title>
+  <meta name="description" content="Threat, vulnerability, exploit, risk: the four words misused everywhere, and the mental model that finally separates them. A vocabulary article that actually works." />
+  <meta name="keywords" content="cybersecurity 101, what is a threat vulnerability exploit risk, CIA triad explained, difference between threat and vulnerability, how to calculate cyber risk, cybersecurity vocabulary for beginners, confidentiality integrity availability explained, threat vs exploit vs vulnerability, what does CIA stand for in security, risk equation likelihood times impact, cybersecurity glossary for beginners, basic cybersecurity terms explained" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ciberseguridad-101/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Cybersecurity 101: the words that mean what | Breachfolio" />
+  <meta property="og:description" content="Threat, vulnerability, exploit, risk: the four words misused everywhere, and the mental model that finally separates them. A vocabulary article that actually works." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/cybersecurity-101/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-101.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cybersecurity 101: the words that mean what | Breachfolio" />
+  <meta name="twitter:description" content="Threat, vulnerability, exploit, risk: the four words misused everywhere, and the mental model that finally separates them. A vocabulary article that actually works." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-101.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Cybersecurity 101: the words that mean what.",
+      "description": "Threat, vulnerability, exploit, risk: the four words misused everywhere, and the mental model that finally separates them. A vocabulary article that actually works.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-101.webp",
+      "datePublished": "2026-07-10", "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/cybersecurity/cybersecurity-101/"
+      },
+      "inLanguage": "en",
+      "keywords": "cybersecurity 101, what is a threat vulnerability exploit risk, CIA triad explained, difference between threat and vulnerability, how to calculate cyber risk, cybersecurity vocabulary for beginners, confidentiality integrity availability explained, threat vs exploit vs vulnerability, what does CIA stand for in security, risk equation likelihood times impact, cybersecurity glossary for beginners, basic cybersecurity terms explained"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cybersecurity",
+          "item": "https://breachfolio.com/cybersecurity/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cybersecurity 101: the words that mean what.",
+          "item": "https://breachfolio.com/cybersecurity/cybersecurity-101/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/cybersecurity-101/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between a threat, a vulnerability, an exploit, and a risk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A threat is someone or something that wants to cause harm, like a thief who steals laptops. A vulnerability is a weakness that could be used to cause harm, like an unencrypted disk. An exploit is the specific way a vulnerability is used, like booting from USB to copy files. Risk is the chance and impact of harm actually happening: a vulnerability is harmless on its own until a threat can reach it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the CIA triad in cybersecurity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The CIA triad is Confidentiality (only the right people can read data), Integrity (only the right people can change data, and changes can be detected), and Availability (the right people can use the system when they need to). Nearly every security control exists to protect one of these three properties."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you calculate risk in cybersecurity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The simplest useful version is risk approximately equals likelihood times impact. Likelihood is the chance a threat actually meets a vulnerability; impact is what happens if it does. Both are usually estimated in buckets like low, medium, high, and critical rather than exact numbers: the point is to force two separate judgments instead of one vague feeling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is an unencrypted disk not automatically a high risk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A vulnerability is only risky when a threat can actually reach it. An unencrypted disk locked in a vault nobody can access is a vulnerability without a realistic threat, so the risk is near zero. The same disk in a laptop left in an airport lounge has a real threat (an opportunistic thief) able to exploit it, which is why context changes the risk score, not just the technical weakness itself."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Cybersecurity 101: the words that mean what.</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../assets/img/thumb-cyber-101.webp" alt="Hero illustration for: Cybersecurity 101: the words that mean what." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">LEVEL 1</span>
+          <span class="text-muted">CYBERSECURITY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Cybersecurity 101: the words that mean what.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">Threat, vulnerability, exploit, risk – four words that get used interchangeably, and the one mental model that finally separates them.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-10">July 10, 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>10 min read</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p>Walk into any security meeting and you will hear four words used as if they meant the same thing: <strong>threat</strong>, <strong>vulnerability</strong>, <strong>exploit</strong>, and <strong>risk</strong>. They do not. Getting them straight is the first thing that separates someone who can read a CVE from someone who can decide what to do about it.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The four words, with examples</h2>
+
+<p>The cleanest definitions, with the example we will use for the rest of this article: an employee laptop sitting in an airport lounge.</p>
+
+<table>
+  <thead><tr><th>Word</th><th>Definition</th><th>Laptop example</th></tr></thead>
+  <tbody>
+    <tr><td>Threat</td><td>Someone or something that <em>wants</em> to cause harm</td><td>A thief who steals laptops in lounges</td></tr>
+    <tr><td>Vulnerability</td><td>A weakness that <em>could</em> be used to cause harm</td><td>Disk is not encrypted</td></tr>
+    <tr><td>Exploit</td><td>The specific way a vulnerability is used</td><td>Boot from USB and copy <code>/home</code></td></tr>
+    <tr><td>Risk</td><td>The chance and impact of harm actually happening</td><td>Likely + sensitive data + bad press = high</td></tr>
+  </tbody>
+</table>
+
+<p>Notice that a vulnerability is harmless on its own. An unencrypted disk in a vault that nobody can reach is a vulnerability without a threat. The risk is near zero. The same disk in an airport is a different story.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Term pairs that get mixed up in the wild</h2>
+
+<p>Even once the four core words are straight, some closely related pairs still get flattened into each other in everyday conversation. The confusion is usually harmless over coffee and expensive in a postmortem, because it hides which control actually failed.</p>
+
+<table>
+  <thead><tr><th>Pair</th><th>What people say</th><th>What is actually different</th></tr></thead>
+  <tbody>
+    <tr><td>Vulnerability vs. exploit</td><td>"We found the exploit in the login form."</td><td>Weak input validation on the login form is the vulnerability. The specific malicious string that abuses it is the exploit. A vulnerability can sit unexploited for years; an exploit is one concrete way of using it.</td></tr>
+    <tr><td>Threat vs. risk</td><td>"Ransomware is our biggest risk."</td><td>Ransomware operators are a threat: an actor with intent and capability. Risk is what happens when that threat meets your specific vulnerabilities and impact potential. Two companies facing the same threat can have very different risk if one patches and backs up and the other doesn't.</td></tr>
+    <tr><td>Asset vs. attack surface</td><td>"We need to protect our assets."</td><td>An asset is anything of value – data, a server, a brand. The attack surface is every point where a threat could try to reach an asset: open ports, forms, APIs, employees. You protect assets by shrinking and hardening the attack surface around them.</td></tr>
+    <tr><td>Likelihood vs. impact</td><td>"That's a high risk."</td><td>Both are separate axes multiplied together, not one feeling. A vulnerability with high impact but near-zero likelihood – a flaw that needs physical console access inside a locked data center – is not automatically a high risk, and one with high likelihood but low impact – a typo on an internal wiki page – isn't either.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The CIA triad – what we are actually protecting</h2>
+
+<p>Every control you will ever read about exists to protect one of three properties. Memorise this; the rest of your career hangs off it.</p>
+
+<ul>
+  <li><strong>Confidentiality:</strong> only the right people can read it. <em>Lost laptop</em>: confidentiality is the first thing to go.</li>
+  <li><strong>Integrity:</strong> only the right people can change it, and you can detect when someone tries. <em>Lost laptop</em>: if it is returned, can you trust the binaries on it?</li>
+  <li><strong>Availability:</strong> the right people can use it when they need to. <em>Lost laptop</em>: the employee cannot do their job until you replace it.</li>
+</ul>
+
+<div class="callout">
+  <div class="label">Mental model</div>
+  <p>A control is good when it raises the cost of attacking one of the three CIA properties more than it raises the cost of using the system normally. That is the whole game.</p>
+</div>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The risk equation – informal but useful</h2>
+
+<p>You will see a hundred variants of the risk equation. The one that survives contact with reality is the simplest:</p>
+
+<blockquote>Risk ≈ likelihood × impact</blockquote>
+
+<p>Likelihood is the chance the threat actually meets the vulnerability. Impact is what happens if it does. Both are usually guessed in three to five buckets ("low / medium / high / critical"), not in numbers. That is fine. The point of the equation is not to compute a number: it is to make you write down two separate guesses instead of one fuzzy feeling.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Worked examples: three scenarios, one model</h2>
+
+<p>The model is only useful once you've run it a few times on situations that don't look alike. Below are three, spanning a lost device, a web application, and a piece of network infrastructure – deliberately different enough that you can see the same four questions produce different answers.</p>
+
+<h3>Scenario 1: a laptop at a café</h3>
+
+<p>An employee leaves their laptop at a café table for 90 seconds while paying. We score:</p>
+
+<ol>
+  <li><strong>Threats</strong> in this setting: opportunistic thief (high), targeted attacker (low for a marketing intern, high for an exec).</li>
+  <li><strong>Vulnerabilities</strong>: no full-disk encryption, screen unlocked, password manager unlocked, work email cached.</li>
+  <li><strong>Exploits</strong>: walk off with it; or 60 seconds at the keyboard to grab a session token.</li>
+  <li><strong>Impact</strong>: depending on role, anywhere from "annoying" to "company-ending".</li>
+</ol>
+
+<p>The interesting move is the one most teams skip: write down which control reduces which leg of the risk. Full-disk encryption raises the cost of the <em>walk-off</em> exploit. A 60-second screen lock raises the cost of the <em>at-keyboard</em> exploit. They are not interchangeable.</p>
+
+<h3>Scenario 2: a SQL injection flaw in a customer portal</h3>
+
+<p>A mid-size retailer's product search box concatenates user input straight into a SQL query instead of using parameterized queries.</p>
+
+<ol>
+  <li><strong>Threats</strong>: mostly automated – bots and financially motivated crime groups running SQL-injection scanners against every retailer they can find, plus a low-probability targeted actor if the retailer is newsworthy.</li>
+  <li><strong>Vulnerabilities</strong>: unsanitized, unparameterized input in the search query; an application database account with far more privileges than a search feature needs.</li>
+  <li><strong>Exploits</strong>: a hand-crafted string like <code>' OR '1'='1' --</code>, or a tool such as sqlmap automating the same idea across every parameter on the site.</li>
+  <li><strong>Impact</strong>: if the query only ever touches the public product catalog, this is embarrassing. If the same flaw sits near a table with customer records or payment tokens, it's a breach-notification event.</li>
+</ol>
+
+<p>Here the highest-leverage control is parameterized queries: it removes the exploit path entirely rather than raising its cost. A least-privilege database account is the fallback: it can't stop the exploit, but it limits how much a successful one can reach.</p>
+
+<h3>Scenario 3: an unpatched VPN appliance</h3>
+
+<p>A hospital runs a remote-access VPN appliance with a publicly known CVE, unpatched ninety days after the vendor's advisory.</p>
+
+<ol>
+  <li><strong>Threats</strong>: ransomware affiliate groups that scan the internet for known-vulnerable appliances at scale, often buying initial access from brokers rather than finding it themselves.</li>
+  <li><strong>Vulnerabilities</strong>: the unpatched CVE itself, plus flat internal network segmentation that lets anything reachable from the VPN also reach clinical systems.</li>
+  <li><strong>Exploits</strong>: a public proof-of-concept or a ready-made framework module, run against every IP address known to expose that appliance.</li>
+  <li><strong>Impact</strong>: for a hospital specifically, ransomware doesn't just cost money: it can delay patient care, which is exactly why healthcare risk registers weight availability so heavily alongside confidentiality.</li>
+</ol>
+
+<p>Patch management tied to a clear SLA closes the vulnerability outright. Network segmentation and offline backups don't stop the exploit, but they cap the impact if patching lags – which, in practice, it sometimes will.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Threat actor archetypes: who you're actually modeling against</h2>
+
+<p>"Threat" is deliberately generic, but a real model has to get specific about who. Security teams generally sort real-world adversaries into four archetypes, and which one you're facing changes what "likelihood" and "impact" mean in practice.</p>
+
+<table>
+  <thead><tr><th>Actor type</th><th>Primary motivation</th><th>Typical targets</th><th>Usual playbook</th></tr></thead>
+  <tbody>
+    <tr><td>Nation-state</td><td>Espionage, strategic advantage, sometimes disruption</td><td>Government, critical infrastructure, defense contractors, IP-heavy companies</td><td>Patient, well-resourced, custom tooling, willing to sit undetected for months</td></tr>
+    <tr><td>Organized crime</td><td>Money – ransomware, fraud, data theft for resale</td><td>Anyone with money or data to monetize, opportunistic at scale</td><td>Ransomware-as-a-service, phishing kits, initial-access brokers; fast and loud once they've monetized</td></tr>
+    <tr><td>Hacktivist</td><td>Ideology, publicity, protest</td><td>Organizations tied to a cause they oppose</td><td>Website defacement, DDoS, leaking internal documents for embarrassment rather than profit</td></tr>
+    <tr><td>Insider</td><td>Grievance, financial gain, coercion, or plain negligence</td><td>Their own employer</td><td>Abuse of legitimate access – no exploit needed if you already hold the keys</td></tr>
+  </tbody>
+</table>
+
+<p>Notice the insider row doesn't need an exploit in the traditional sense – legitimate access is itself the vulnerability. That's part of why insider risk is consistently rated among the hardest categories to defend, and why it leans on monitoring and least-privilege rather than technical hardening alone.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">How this vocabulary turns into a job title</h2>
+
+<p>Once threat, vulnerability, exploit, and risk stop being abstractions, you can see them mapped almost directly onto entire job functions. This is usually the point where "I understand the vocabulary" turns into "I know which of these I want to do for a living":</p>
+
+<ul>
+  <li><strong>Vulnerability management / vulnerability analyst:</strong> spends the day finding and prioritizing vulnerabilities before anyone can exploit them: scanning, patch coordination, CVSS and KEV triage.</li>
+  <li><strong>Threat intelligence analyst:</strong> tracks specific threat actors, their tooling, targeting patterns, and infrastructure, so defenders know which threats are realistically likely against their organization.</li>
+  <li><strong>Penetration tester / red teamer:</strong> is paid to find exploits for known and unknown vulnerabilities, under authorization, before a real threat actor does.</li>
+  <li><strong>Risk analyst / GRC (governance, risk, and compliance):</strong> owns the likelihood-times-impact calculation across the whole organization and decides which risks get accepted, transferred, or funded down.</li>
+  <li><strong>Incident responder:</strong> shows up after a threat has already exploited a vulnerability, working backward from impact to reconstruct what happened.</li>
+</ul>
+
+<p>If any of those sound like a direction worth exploring, the <a href="../cybersecurity-roadmap-and-careers/">cybersecurity roadmap and careers guide</a> walks through the learning order that actually works and where each path leads.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What to take to your next meeting</h2>
+
+<ul>
+  <li>Stop saying "this is a security risk". Say "the risk is X, because the threat of Y could exploit the vulnerability of Z".</li>
+  <li>For any new control someone proposes, ask: <em>which CIA property does this protect, and from which threat?</em></li>
+  <li>If neither question has an answer, the control is decoration.</li>
+</ul>
+
+<p>That is the whole foundation. The rest of this Learn series is just specific cases of these four words, applied to networks, to operating systems, to code, and eventually to the prompts you will hand an LLM to do this work at scale.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What is the difference between a threat, a vulnerability, an exploit, and a risk?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    A threat is someone or something that wants to cause harm, like a thief who steals laptops. A vulnerability is a weakness that could be used to cause harm, like an unencrypted disk. An exploit is the specific way a vulnerability is used, like booting from USB to copy files. Risk is the chance and impact of harm actually happening: a vulnerability is harmless on its own until a threat can reach it.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What is the CIA triad in cybersecurity?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    The CIA triad is Confidentiality (only the right people can read data), Integrity (only the right people can change data, and changes can be detected), and Availability (the right people can use the system when they need to). Nearly every security control exists to protect one of these three properties.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>How do you calculate risk in cybersecurity?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    The simplest useful version is risk approximately equals likelihood times impact. Likelihood is the chance a threat actually meets a vulnerability; impact is what happens if it does. Both are usually estimated in buckets like low, medium, high, and critical rather than exact numbers: the point is to force two separate judgments instead of one vague feeling.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Why is an unencrypted disk not automatically a high risk?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    A vulnerability is only risky when a threat can actually reach it. An unencrypted disk locked in a vault nobody can access is a vulnerability without a realistic threat, so the risk is near zero. The same disk in a laptop left in an airport lounge has a real threat (an opportunistic thief) able to exploit it, which is why context changes the risk score, not just the technical weakness itself.
+  </div>
+</details>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+            <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+            <a class="ul-link" href="../../legal/about/">About us</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Previous</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">All articles</div>
+        </a>
+        <a href="../how-networks-work/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Next</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">How networks actually work (without the OSI poster).</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">On this page</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Related</div>
+        <ul class="space-y-3">
+          <li><a href="../how-networks-work/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">How networks actually work (without the OSI poster).</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 1 · 11</div>
+          </a></li>
+          <li><a href="../linux-fundamentals/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Linux fundamentals for security, the working subset.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 2 · 13</div>
+          </a></li>
+          <li><a href="../cryptography-basics/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Cryptography you can actually use.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 2 · 9</div>
+          </a></li>
+          <li><a href="../cybersecurity-roadmap-and-careers/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">How to start in cybersecurity: the real roadmap, and where it leads.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">FOUNDATIONS · 11</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shadow AI explained: the ungoverned AI tool risk | Breachfolio</title>
+  <meta name="description" content="Employees pasting company data into consumer AI tools is the new shadow IT. How shadow AI creates real data-leak risk, and what governed AI use looks like." />
+  <meta name="keywords" content="shadow AI, shadow AI explained, what is shadow AI, shadow AI vs shadow IT, AI data leakage risk, consumer ChatGPT company data, AI coding assistant credential leak, AI usage policy, DLP for AI tools, unsanctioned AI tools workplace" />
+  <link rel="canonical" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Shadow AI explained: the ungoverned AI tool risk | Breachfolio" />
+  <meta property="og:description" content="Employees pasting company data into consumer AI tools is the new shadow IT. How shadow AI creates real data-leak risk, and what governed AI use looks like." />
+  <meta property="og:url" content="https://breachfolio.com/ai/shadow-ai-explained/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-shadow-ai.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shadow AI explained: the ungoverned AI tool risk | Breachfolio" />
+  <meta name="twitter:description" content="Employees pasting company data into consumer AI tools is the new shadow IT. How shadow AI creates real data-leak risk, and what governed AI use looks like." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-shadow-ai.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Shadow AI, explained: the risk of ungoverned AI tool use at work",
+      "description": "Employees pasting company data into consumer AI tools is the new shadow IT. How shadow AI creates real data-leak risk, and what governed AI use looks like.",
+      "image": "https://breachfolio.com/assets/img/hero-shadow-ai.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "keywords": "shadow AI, shadow AI explained, what is shadow AI, shadow AI vs shadow IT, AI data leakage risk, consumer ChatGPT company data, AI coding assistant credential leak, AI usage policy, DLP for AI tools, unsanctioned AI tools workplace",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/ai/shadow-ai-explained/"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Security", "item": "https://breachfolio.com/ai/" },
+        { "@type": "ListItem", "position": 3, "name": "Shadow AI, explained", "item": "https://breachfolio.com/ai/shadow-ai-explained/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/ai/shadow-ai-explained/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is shadow AI?", "acceptedAnswer": { "@type": "Answer", "text": "Shadow AI is the use of AI tools, models, or AI-powered browser extensions inside a workplace without the knowledge, review, or approval of IT or security teams. It's the direct descendant of shadow IT, which described the same pattern with unapproved cloud apps and software, applied to the current wave of consumer AI products." } },
+        { "@type": "Question", "name": "How is shadow AI different from shadow IT?", "acceptedAnswer": { "@type": "Answer", "text": "The underlying dynamic is the same: employees adopt a convenient unapproved tool because it solves a problem faster than the sanctioned option. Shadow AI is a distinct concern because the primary risk isn't just an unmonitored app, it's that the data typed or pasted into that app becomes an input the provider's systems process, log, and in some cases use to improve their models, in ways a spreadsheet on an unapproved cloud drive never did." } },
+        { "@type": "Question", "name": "What actually happens to data pasted into a free consumer AI chatbot?", "acceptedAnswer": { "@type": "Answer", "text": "It depends entirely on the provider's terms for that specific product and tier. Free, consumer-facing tiers of many AI chatbots have historically permitted using submitted conversations to improve or train models unless a user opts out, and inputs are typically logged for abuse monitoring regardless. Once sensitive text leaves the organization's control this way, there is generally no reliable way to delete it or prove it was never retained, which is why enterprise agreements exist as a contractually different arrangement." } },
+        { "@type": "Question", "name": "Can AI coding assistants leak credentials or proprietary code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, in two main ways. First, if a developer pastes code, config files, or debug output containing API keys or internal hostnames into an unmanaged assistant, that data leaves the organization the same way any other shadow AI input does. Second, some assistants and IDE plugins request broad permissions and can read more of a workspace than intended, including files that were never meant to be part of the prompt." } },
+        { "@type": "Question", "name": "What does a governed, sanctioned AI program actually look like?", "acceptedAnswer": { "@type": "Answer", "text": "In practice it combines an enterprise agreement whose terms explicitly exclude training on submitted data, admin controls and SSO so usage is tied to identity, DLP tooling that can inspect or block sensitive data before it reaches an AI endpoint, a written internal AI usage policy defining what data classifications may and may not be entered, and a genuinely usable sanctioned tool so employees have no reason to reach for an unapproved one." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">AI Security</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Shadow AI, explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-shadow-ai.webp" alt="An unofficial AI tool operating outside company visibility – shadow AI, explained" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">AI · SECURITY</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Shadow AI, explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Every unapproved AI tool an employee reaches for is a door out of your data perimeter that security never got to review. Here's how that risk actually works.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 22, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>"Shadow IT" described a familiar pattern long before AI entered the picture: employees quietly adopting cloud apps, file-sharing tools, or software that IT never approved, reviewed, or even knew existed, because the sanctioned option was slower or worse. <strong class="text-foreground">Shadow AI</strong> is that same pattern, applied to the current wave of AI products – and it's spreading faster than shadow IT ever did, because the barrier to entry is a free account and a browser tab, not an IT ticket or a procurement cycle.</p>
+
+      <p>The distinction matters because the risk isn't just "an unmonitored app is running somewhere." With shadow AI, the thing being exposed is usually the data itself – pasted directly into a text box, sent to a third party's servers, and in some cases used as training or logging input, with no contract, no audit trail, and no way to claw it back once it's gone.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What shadow AI actually looks like</h2>
+      <p>It rarely announces itself as a security incident. In practice, shadow AI is usually one of a small number of everyday habits:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">A free, personal account on a consumer chatbot</strong> used to summarize a client contract, rewrite an internal email, or draft a proposal containing business-sensitive details.</li>
+        <li><strong class="text-foreground">Browser extensions promising "AI superpowers"</strong> – summarize this page, rewrite this text, transcribe this meeting – installed without review, often requesting broad permissions to read everything the browser sees.</li>
+        <li><strong class="text-foreground">Unmanaged AI coding assistants and IDE plugins</strong>, pointed at a real codebase, that read and sometimes transmit source files, configuration, and commit history to a third-party service the security team never evaluated.</li>
+        <li><strong class="text-foreground">SaaS tools that quietly added AI features</strong> to an already-approved product, sometimes routing data to a different backend model provider than the one the original vendor assessment covered.</li>
+      </ul>
+      <p>None of these require malicious intent. Almost all of them are someone trying to get their job done faster, with a tool that happens to work well. That's exactly what made shadow IT hard to stamp out too, and it's the same dynamic driving adoption here.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Why it happens, even at security-conscious companies</h2>
+      <p>Shadow AI thrives specifically where there's a gap between what employees need and what's officially available. A procurement and security-review cycle for a new enterprise AI tool can take months; a competitor's product demo, a colleague's recommendation, or a viral post about a new assistant takes thirty seconds to act on. If the sanctioned option is clunky, restricted, or simply doesn't exist yet for a given use case, people don't stop trying to use AI: they just stop asking permission first.</p>
+      <p>There's also a perception gap that makes this worse: a browser tab and a login screen look identical whether the tool behind them is a fully vetted enterprise product or a two-person startup's free beta. Nothing in the interface signals "this one logs and trains on your input" versus "this one contractually doesn't." Employees aren't being reckless so much as they're making a judgment call with no visible information to base it on, which is exactly the kind of gap a written policy and a short approved-tools list are meant to close.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The real risk mechanisms</h2>
+      <p>It's worth being specific about how shadow AI actually causes harm, rather than treating it as a vague governance worry:</p>
+
+      <div class="overflow-x-auto mt-6 mb-6">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Mechanism</th><th class="px-4 py-2.5 font-display font-semibold">How it actually plays out</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Training and logging pipelines</strong></td><td class="px-4 py-2.5">Free consumer tiers of many AI products have historically permitted using submitted conversations to improve the underlying model unless a user opts out, and inputs are typically logged for abuse monitoring regardless of tier. Once client data, source code, or internal strategy has been pasted in, there's usually no reliable way to verify it was deleted or never retained.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Coding assistants and credential leakage</strong></td><td class="px-4 py-2.5">A developer debugging an issue pastes a config file, an error log, or a code snippet into an unmanaged assistant to get a faster answer, and API keys, internal hostnames, or proprietary logic go with it. Some assistants and plugins also request workspace-wide read access, which can pull in far more context than the developer intended to share.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Overreaching browser extensions</strong></td><td class="px-4 py-2.5">An extension that reads "the current page" to summarize it can, depending on the permissions it was granted, also read anything else rendered in the browser – internal dashboards, ticketing systems, email – turning a convenience tool into a broad data-exfiltration surface.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>No audit trail</strong></td><td class="px-4 py-2.5">Sanctioned enterprise tools log who submitted what, when, through systems security can query. Shadow AI usage typically leaves no such record anywhere the organization controls, which becomes a serious gap during a breach investigation, a compliance audit, or e-discovery in litigation.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>That last row is easy to underweight until an audit or a regulator asks for it directly. Frameworks like GDPR, HIPAA, and SOC 2 all require an organization to know where regulated data went and who had access to it. "An employee may have pasted a customer's personal data into a consumer chatbot at some point, but we have no record of it" is not an answerable statement in that kind of review – it's a finding. Shadow AI doesn't just create a technical leak risk; it creates a gap in exactly the record-keeping compliance programs are built to require.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Sanctioned AI use looks structurally different</h2>
+      <p>None of this is an argument against using AI tools at work – it's an argument for the difference between using them <em>governed</em> and using them <em>invisible to governance</em>. A properly sanctioned AI program is built around a few concrete, verifiable elements rather than a general instruction to "be careful":</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Enterprise API terms that explicitly exclude training on input.</strong> Serious enterprise agreements with major AI providers contractually commit that submitted data won't be used to train models, a materially different arrangement than a free consumer tier's default terms.</li>
+        <li><strong class="text-foreground">Identity-tied access.</strong> SSO integration and admin consoles mean usage is tied to a real employee identity, can be provisioned and deprovisioned like any other company system, and produces logs the organization actually controls.</li>
+        <li><strong class="text-foreground">DLP tooling aimed at AI traffic.</strong> Data-loss-prevention systems that can inspect, flag, or block sensitive data – credentials, regulated personal data, source code – before it reaches an AI endpoint at all, sanctioned or not.</li>
+        <li><strong class="text-foreground">A written internal AI usage policy.</strong> A concrete, specific document stating which tools are approved, what data classifications may or may not be entered into them, and what the escalation path is for a new tool someone wants to adopt – not a vague "use AI responsibly" memo.</li>
+      </ul>
+      <p>The last point does the most practical work. A policy that only says no, with no fast path to get a genuinely useful new tool evaluated and approved, guarantees more shadow AI, not less – employees route around slow gates rather than waiting for them.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Building toward governed AI use</h2>
+      <p>Reducing shadow AI isn't primarily a technology problem – it's an inventory and incentive problem, and it tends to follow a predictable sequence:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Find out what's already in use.</strong> A short, non-punitive survey plus network and SaaS-discovery data usually reveals far more shadow AI adoption than security teams expect – you can't govern what you haven't inventoried.</li>
+        <li><strong class="text-foreground">Stand up a sanctioned alternative that's actually competitive.</strong> If the approved tool is meaningfully worse than the free consumer option people already like, adoption of the sanctioned version stays low regardless of policy.</li>
+        <li><strong class="text-foreground">Write the policy in specifics, not platitudes.</strong> Name the approved tools, name the data classifications that may never leave the perimeter, and give a real point of contact for requesting a new tool be evaluated.</li>
+        <li><strong class="text-foreground">Put technical controls behind the policy.</strong> DLP rules and network-level visibility catch what training and good intentions miss, and they catch it consistently rather than depending on everyone remembering the rules.</li>
+        <li><strong class="text-foreground">Train for the specific failure modes, not AI in the abstract.</strong> "Don't paste client contracts into a free chatbot" and "don't grant a browser extension access to your email tab" are concrete, memorable rules; "use AI responsibly" is not.</li>
+      </ul>
+
+      <p>This is also why shadow AI belongs alongside the more attack-focused AI security topics we cover elsewhere, rather than off to the side as a pure compliance issue. <a href="../ai-red-teaming-basics/" class="text-accent ul-link">AI red teaming</a> is about finding weaknesses in AI systems you've chosen to build or deploy. <a href="../prompt-injection-explained/" class="text-accent ul-link">Prompt injection</a> is about how those systems get attacked once they're live. Shadow AI is the governance question underneath both: none of that testing or defense means much if data is also leaving through AI tools nobody on the security team even knows are in use.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">A note on scope.</strong> This is written as governance guidance for organizations building an AI usage policy, not as an accusation aimed at individual employees. Most shadow AI adoption comes from people trying to work faster, not from anyone trying to cause harm, which is exactly why a workable sanctioned alternative matters more than a stricter ban.
+      </div>
+
+      <p class="mt-10">Shadow AI isn't a hypothetical future risk – it's the direct, predictable consequence of AI tools becoming free, fast, and genuinely useful faster than most organizations could build a governance program around them. The fix isn't to try to ban AI use, which rarely works for long against a tool people find genuinely helpful. It's to make the sanctioned path fast enough, and the policy specific enough, that going around it stops being the easier choice.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is shadow AI?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Shadow AI is the use of AI tools, models, or AI-powered browser extensions inside a workplace without the knowledge, review, or approval of IT or security teams. It's the direct descendant of shadow IT, which described the same pattern with unapproved cloud apps and software, applied to the current wave of consumer AI products.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How is shadow AI different from shadow IT?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          The underlying dynamic is the same: employees adopt a convenient unapproved tool because it solves a problem faster than the sanctioned option. Shadow AI is a distinct concern because the primary risk isn't just an unmonitored app, it's that the data typed or pasted into that app becomes an input the provider's systems process, log, and in some cases use to improve their models, in ways a spreadsheet on an unapproved cloud drive never did.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What actually happens to data pasted into a free consumer AI chatbot?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It depends entirely on the provider's terms for that specific product and tier. Free, consumer-facing tiers of many AI chatbots have historically permitted using submitted conversations to improve or train models unless a user opts out, and inputs are typically logged for abuse monitoring regardless. Once sensitive text leaves the organization's control this way, there is generally no reliable way to delete it or prove it was never retained, which is why enterprise agreements exist as a contractually different arrangement.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Can AI coding assistants leak credentials or proprietary code?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes, in two main ways. First, if a developer pastes code, config files, or debug output containing API keys or internal hostnames into an unmanaged assistant, that data leaves the organization the same way any other shadow AI input does. Second, some assistants and IDE plugins request broad permissions and can read more of a workspace than intended, including files that were never meant to be part of the prompt.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does a governed, sanctioned AI program actually look like?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          In practice it combines an enterprise agreement whose terms explicitly exclude training on submitted data, admin controls and SSO so usage is tied to identity, DLP tooling that can inspect or block sensitive data before it reaches an AI endpoint, a written internal AI usage policy defining what data classifications may and may not be entered, and a genuinely usable sanctioned tool so employees have no reason to reach for an unapproved one.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../ai-red-teaming-basics/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">AI red teaming basics</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../prompt-injection-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Prompt injection, explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../run-a-local-llm-for-security-notes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Run a local LLM safely</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All AI Security articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal &amp; info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

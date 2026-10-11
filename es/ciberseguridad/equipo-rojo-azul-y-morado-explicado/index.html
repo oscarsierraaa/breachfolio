@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Equipo rojo, azul y morado: qué hace cada uno | Breachfolio</title>
+  <meta name="description" content="El equipo rojo ataca, el azul defiende y el morado cierra el círculo entre ambos. Qué hace cada uno en el día a día y cómo encajan en puestos reales." />
+  <meta name="keywords" content="equipo rojo equipo azul equipo morado, equipos de seguridad explicados, qué hace el red team en ciberseguridad, qué hace el blue team en ciberseguridad, qué es el purple team y en qué se diferencia, diferencia entre red team y pentest, qué son las reglas de enfrentamiento RoE, qué es un equipo blanco en ciberseguridad, qué es el equipo amarillo en seguridad, Metasploit vs Cobalt Strike para red team, qué hace un analista SOC en el blue team, cómo elegir entre red team y blue team, qué es un ejercicio de purple teaming, carreras en red team blue team y purple team, diferencia entre respuesta a incidentes y red teaming" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Equipo rojo, azul y morado: qué hace cada uno | Breachfolio" />
+  <meta property="og:description" content="El equipo rojo ataca, el azul defiende y el morado cierra el círculo entre ambos. Qué hace cada uno en el día a día y cómo encajan en puestos reales." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-teams.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Equipo rojo, azul y morado: qué hace cada uno | Breachfolio" />
+  <meta name="twitter:description" content="El equipo rojo ataca, el azul defiende y el morado cierra el círculo entre ambos. Qué hace cada uno en el día a día y cómo encajan en puestos reales." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-teams.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Equipo rojo, azul y morado: qué hace cada uno en realidad",
+      "description": "El equipo rojo ataca, el azul defiende y el morado cierra el círculo entre ambos. Qué hace cada uno en el día a día y cómo encajan en puestos reales.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-teams.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/"
+      },
+      "inLanguage": "es",
+      "keywords": "equipo rojo equipo azul equipo morado, equipos de seguridad explicados, qué hace el red team en ciberseguridad, qué hace el blue team en ciberseguridad, qué es el purple team y en qué se diferencia, diferencia entre red team y pentest, qué son las reglas de enfrentamiento RoE, qué es un equipo blanco en ciberseguridad, qué es el equipo amarillo en seguridad, Metasploit vs Cobalt Strike para red team, qué hace un analista SOC en el blue team, cómo elegir entre red team y blue team, qué es un ejercicio de purple teaming, carreras en red team blue team y purple team, diferencia entre respuesta a incidentes y red teaming"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Equipo rojo, azul y morado", "item": "https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre red team, blue team y purple team?", "acceptedAnswer": { "@type": "Answer", "text": "El equipo rojo simula a un atacante real contra los propios sistemas de la organización bajo un alcance firmado. El equipo azul es el trabajo continuo de vigilar, detectar y responder que nunca se detiene del todo. El equipo morado no es un tercer departamento, sino la práctica de hacer que rojo y azul colaboren en tiempo real para cerrar el bucle de retroalimentación." } },
+        { "@type": "Question", "name": "¿En qué se diferencia un ejercicio de red team de un pentest?", "acceptedAnswer": { "@type": "Answer", "text": "Un pentest suele ser más amplio y más corto: busca y documenta tantas vulnerabilidades como sea posible en una ventana fija. Un ejercicio de red team suele tener un alcance más reducido pero mayor duración, y busca realismo: alcanzar un objetivo concreto de forma sigilosa y persistente, evadiendo activamente la detección." } },
+        { "@type": "Question", "name": "¿Qué son las Reglas de Enfrentamiento (RoE)?", "acceptedAnswer": { "@type": "Answer", "text": "Son el documento que detalla qué sistemas se pueden tocar, qué técnicas quedan vetadas, a quién llamar si algo se rompe y qué significa \"parar\" en un ejercicio de red team. La autorización explícita definida en las RoE es lo único que separa a un miembro del equipo rojo de un atacante que usa las mismas herramientas." } },
+        { "@type": "Question", "name": "¿Qué son el equipo blanco y el equipo amarillo?", "acceptedAnswer": { "@type": "Answer", "text": "El equipo blanco actúa como árbitro y dueño del alcance en ejercicios más grandes: custodia las RoE, resuelve disputas y puede dar el alto. El equipo amarillo se refiere a los desarrolladores y arquitectos que integran la seguridad desde el origen, en lugar de probarla o defenderla después de los hechos." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Equipo rojo, azul y morado</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-cyber-teams.webp" alt="Equipo rojo, azul y morado: qué hace cada uno en realidad." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · EQUIPOS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Equipo rojo, azul y morado: qué hace cada uno en realidad.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Tres nombres que verás en cualquier oferta de empleo y que casi ninguna guía para principiantes explica con claridad. Esto es lo que hace de verdad cada equipo en su día a día, y cuál podría ser tu camino profesional.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>8 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>Abre casi cualquier oferta de empleo de seguridad y verás una de estas tres palabras en el título, o escondida en el apartado de responsabilidades: <strong>rojo, azul o morado</strong>. Los portales de empleo dan por hecho que ya sabes lo que significan. La mayoría de guías para principiantes pasan de largo directamente a listas de herramientas y rutas de certificación. El resultado es que mucha gente se pasa meses estudiando antes de que alguien les siente de verdad y les explique, en términos sencillos, qué hace un miembro del equipo rojo un martes cualquiera frente a lo que hace uno del equipo azul, y por qué el "equipo morado" no es en realidad un equipo como tal.</p>
+
+      <p>El modelo de colores está tomado de los juegos de guerra militares –la fuerza atacante es la roja, la defensora es la azul– y encaja sorprendentemente bien en el trabajo de seguridad. Pero esa metáfora tan limpia esconde matices importantes, sobre todo en torno a la <strong>autorización</strong>, que es la parte que separa estos empleos de los delitos que se cometen con las mismas habilidades.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Equipo rojo (red team): simular a un adversario real, primero sobre el papel</h2>
+      <p>El trabajo de un equipo rojo consiste en pensar y actuar como un atacante real contra los propios sistemas de la organización, usando las mismas tácticas de reconocimiento, explotación y postexplotación que emplearía un grupo criminal o un actor estatal. Esa es la parte que todo el mundo ya asocia con el nombre. Lo que la mayoría de explicaciones para principiantes se dejan es la parte que de verdad define el trabajo: nada de esto ocurre sin un alcance explícito y firmado y unas <strong>Reglas de Enfrentamiento (Rules of Engagement, RoE)</strong> acordadas de antemano con el cliente o con la dirección de la organización.</p>
+
+      <p>Las RoE detallan con exactitud qué está dentro de los límites y qué no: qué sistemas se pueden tocar, qué técnicas quedan vetadas, a quién llamar si algo se rompe y qué significa "parar". Un ejercicio de equipo rojo no es una barra libre en la que todo vale mientras funcione. Es una simulación controlada con una frontera legal y contractual a su alrededor, y mantenerse dentro de esa frontera, con precisión, es una competencia profesional central, no una ocurrencia de última hora.</p>
+
+      <p>Aquí es también donde el red teaming se separa de un test de penetración sin alcance definido, una distinción que hace tropezar a muchos recién llegados porque ambos implican "colarse en cosas en las que tienes permiso para colarte". Un test de penetración suele ser más amplio y más corto: encontrar y documentar tantas vulnerabilidades como sea posible en un conjunto definido de objetivos dentro de una ventana fija, y luego entregar un informe. Un ejercicio de equipo rojo suele tener un alcance más reducido pero una duración mayor, y el objetivo no es la cobertura: es el realismo. El equipo elige un objetivo plausible (llegar al controlador de dominio, exfiltrar un conjunto de datos concreto, demostrar que un fraude del correo corporativo es posible) e intenta alcanzarlo como lo haría un adversario real: de forma sigilosa, persistente y evadiendo activamente la detección. Un pentest pregunta "¿cuántas puertas están abiertas?". Un ejercicio de equipo rojo pregunta "si alguien quisiera entrar de verdad, ¿nos daríamos siquiera cuenta?".</p>
+
+      <p>Las herramientas reflejan ese objetivo. Los miembros del equipo rojo trabajan con frameworks de explotación como Metasploit para probar vulnerabilidades conocidas, y con frameworks de <strong>mando y control (C2):</strong> Cobalt Strike y sus alternativas más modernas, a menudo más evasivas– construidos específicamente para la fase de "mantente sigiloso, mantente persistente" de un ejercicio, más que para la irrupción inicial. Si quieres hacerte una idea concreta de en qué se diferencian de verdad dos de estos frameworks en la práctica, consulta nuestra comparativa <a href="../../comparativas/metasploit-vs-sliver/" class="text-accent ul-link">Metasploit vs Sliver</a>.</p>
+
+      <p>Nada de esto es un tecnicismo. La autorización –el alcance firmado, las RoE, el punto de contacto designado– es la diferencia completa entre un miembro del equipo rojo y un criminal que ejecuta exactamente los mismos comandos. Las mismas herramientas, las mismas técnicas, a veces la misma mentalidad. El permiso es el trabajo.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Equipo azul (blue team): el trabajo diario de no sufrir una brecha</h2>
+      <p>Si el trabajo del equipo rojo es episódico –ejercicios que empiezan, se ejecutan durante una ventana definida y terminan con un informe–, el del equipo azul es lo contrario: es el trabajo cotidiano y continuo de vigilar, detectar y responder que nunca se detiene del todo. Los miembros del equipo azul viven dentro de un <strong>SIEM (plataforma de gestión de información y eventos de seguridad)</strong> la mayor parte de la jornada, observando alertas, ajustando reglas de detección y averiguando cuáles de los cientos de avisos son ruido y cuál es real.</p>
+
+      <p>El rol se descompone en unas cuantas actividades concretas y recurrentes, más que en una única descripción de puesto:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Vigilancia y triaje.</strong> Observar paneles y colas de alertas, decidiendo qué es un falso positivo y qué necesita escalarse: el grueso de la jornada de un analista de SOC.</li>
+        <li><strong class="text-foreground">Ingeniería de detección.</strong> Escribir y afinar las reglas y consultas que convierten registros en bruto en alertas con sentido, para que el siguiente ataque real no se cuele como ruido.</li>
+        <li><strong class="text-foreground">Respuesta a incidentes.</strong> Cuando algo se confirma, contenerlo, determinar el alcance y la causa raíz y ayudar a la organización a recuperarse; nuestra <a href="../../recursos/primeras-24-horas-de-un-incidente/" class="text-accent ul-link">checklist de las primeras 24 horas de un incidente</a> es una mirada real a esta parte del trabajo.</li>
+        <li><strong class="text-foreground">Fortalecimiento (hardening).</strong> Cerrar las brechas detectadas mediante la vigilancia o incidentes anteriores antes de que vuelvan a usarse: parchear, endurecer configuraciones, reducir la superficie de ataque.</li>
+      </ul>
+
+      <p>La plataforma que sostiene todo esto varía mucho según la organización y el presupuesto, y merece la pena entender bien las concesiones reales antes de especializarte; consulta nuestra comparativa <a href="../../comparativas/splunk-vs-wazuh-vs-elk/" class="text-accent ul-link">Splunk vs Wazuh vs ELK</a> para ver en qué se diferencian de verdad las principales opciones de SIEM en la práctica, y no solo sobre el papel.</p>
+
+      <figure class="my-8">
+        <img src="../../../assets/articles/art-inline-red-blue-purple-team.svg" alt="Diagrama de dos círculos superpuestos, etiquetados equipo rojo (ataque) y equipo azul (defensa), con el equipo morado representado como el bucle de retroalimentación en la zona de solape donde se intercambian técnicas y resultados de detección." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">El equipo morado no es un tercer círculo en el organigrama: es el solape donde las técnicas del rojo y las detecciones del azul se encuentran.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Equipo morado (purple team): no es un tercer equipo, es un bucle de retroalimentación</h2>
+      <p>Aquí está la parte que hace tropezar a casi todo el que es nuevo en este vocabulario: el equipo morado normalmente no es un tercer departamento fijo con su propia plantilla, situado entre el rojo y el azul en un organigrama. En la mayoría de organizaciones es un ejercicio o una metodología de colaboración: la práctica deliberada de hacer que el rojo y el azul trabajen juntos en tiempo real, en lugar de la forma secuencial y distante en que suele desarrollarse un ejercicio tradicional.</p>
+
+      <p>En un ejercicio clásico de rojo contra azul, el equipo rojo ataca, el azul defiende (o no lo consigue), y todos se enteran de lo que pasó cuando el informe final aterriza semanas después. En un ejercicio de equipo morado, ambos lados están en la misma sala, o en la misma llamada, a medida que ocurre. El equipo rojo ejecuta una técnica concreta y lo dice de inmediato; el azul comprueba si sus detecciones saltaron y, si no, por qué no; ambos lados se ajustan y prueban la siguiente técnica. La idea no es el secretismo ni "ganar": es comprimir el bucle de retroalimentación de semanas a minutos, para que las brechas defensivas se identifiquen y se corrijan mientras todos recuerdan todavía exactamente qué las provocó.</p>
+
+      <p>Por eso mismo, las organizaciones que solo ejecutan ejercicios de equipo rojo aislados, sin un verdadero debriefing de equipo morado, a menudo no mejoran gran cosa sus defensas con el tiempo. Un informe de equipo rojo que dice "entramos por aquí" es valioso, pero si el equipo azul nunca recibe un recorrido estructurado, técnica por técnica, de lo que debería haberse detectado y no se detectó, la misma clase de brecha tiende a reaparecer en el siguiente ejercicio con otro nombre. El <strong>purple teaming</strong> existe precisamente para cerrar ese bucle: es una metodología orientada a asegurar que la lección cale de verdad en el lado defensivo, no una simple etiqueta para quienes hacen "un poco de las dos cosas".</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Los tres, uno al lado del otro</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Equipo</th>
+            <th>Objetivo</th>
+            <th>Día típico</th>
+            <th>Habilidad clave</th>
+            <th>Modelo de autorización</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong class="text-foreground">Equipo rojo</strong></td>
+            <td>Demostrar que existe una vía de ataque realista y ver si se detecta.</td>
+            <td>Reconocimiento, explotación, persistencia sigilosa, respeto escrupuloso del alcance.</td>
+            <td>Técnica ofensiva más disciplina bajo unas RoE firmadas.</td>
+            <td>Explícito, acotado en el tiempo, contractual; un inicio, un fin y una frontera definidos.</td>
+          </tr>
+          <tr>
+            <td><strong class="text-foreground">Equipo azul</strong></td>
+            <td>Detectar, contener y reducir la exposición de la organización de forma continua.</td>
+            <td>Vigilancia del SIEM, triaje de alertas, ajuste de detecciones, gestión de incidentes.</td>
+            <td>Reconocimiento de patrones en datos ruidosos y calma ante un incidente real.</td>
+            <td>Permanente, ligado al propio empleo; no hace falta un alcance de ejercicio especial porque la defensa es el trabajo por defecto.</td>
+          </tr>
+          <tr>
+            <td><strong class="text-foreground">Equipo morado</strong></td>
+            <td>Cerrar la brecha entre lo que encontró el rojo y lo que el azul detectó de verdad.</td>
+            <td>(Como ejercicio) recorridos conjuntos, técnica por técnica, con ambos lados presentes.</td>
+            <td>Comunicación y facilitación tanto como profundidad técnica.</td>
+            <td>Hereda el alcance del ejercicio de equipo rojo, ya que se construye sobre él.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Dos términos relacionados aparecen a medida que este modelo de colores se amplía en organizaciones más grandes, y conviene conocerlos aunque sea en una frase cada uno: un <strong>"equipo blanco" (white team)</strong> actúa como árbitro y dueño del alcance en los ejercicios de mayor envergadura –las personas que custodian las RoE, resuelven disputas y pueden dar el alto–, y un <strong>"equipo amarillo" (yellow team)</strong> se refiere a los desarrolladores y arquitectos que integran la seguridad desde el origen, en lugar de probarla o defenderla después de los hechos.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">¿Cuál es tu camino?</h2>
+      <p>Ninguno de estos es mejor ni más "de élite" que los demás: recompensan temperamentos genuinamente distintos. El trabajo de equipo rojo le va a quien disfruta resolviendo problemas abiertos y aguanta largos tramos sin una señal clara de que algo esté funcionando. El de equipo azul le va a quien le gusta el reconocimiento de patrones, la estructura y la satisfacción de cazar algo real en un mar de ruido. El de equipo morado, como suele añadirse sobre una base de rojo o azul en lugar de ser una puerta de entrada aparte, le va a quien además disfruta traduciendo hallazgos en algo sobre lo que el otro lado pueda actuar de verdad. Si todavía estás situando dónde encaja todo esto dentro de un plan de estudio más amplio, nuestra guía <a href="../como-empezar-en-ciberseguridad/" class="text-accent ul-link">hoja de ruta y carreras en ciberseguridad</a> cubre el recorrido completo desde los fundamentos hasta un puesto concreto.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">Una nota sobre el alcance.</strong> Este artículo explica cómo operan los equipos rojo, azul y morado para que entiendas los roles y el vocabulario; no es una invitación a ejecutar técnicas ofensivas contra sistemas que no te pertenecen o que no tienes autorización explícita y firmada para probar. Lo único que separa a un miembro del equipo rojo de un atacante que usa las mismas herramientas es esa autorización por escrito. Trátala como algo innegociable, siempre.
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre red team, blue team y purple team?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El equipo rojo simula a un atacante real contra los propios sistemas de la organización bajo un alcance firmado. El equipo azul es el trabajo continuo de vigilar, detectar y responder que nunca se detiene del todo. El equipo morado no es un tercer departamento, sino la práctica de hacer que rojo y azul colaboren en tiempo real para cerrar el bucle de retroalimentación.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿En qué se diferencia un ejercicio de red team de un pentest?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un pentest suele ser más amplio y más corto: busca y documenta tantas vulnerabilidades como sea posible en una ventana fija. Un ejercicio de red team suele tener un alcance más reducido pero mayor duración, y busca realismo: alcanzar un objetivo concreto de forma sigilosa y persistente, evadiendo activamente la detección.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué son las Reglas de Enfrentamiento (RoE)?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Son el documento que detalla qué sistemas se pueden tocar, qué técnicas quedan vetadas, a quién llamar si algo se rompe y qué significa "parar" en un ejercicio de red team. La autorización explícita definida en las RoE es lo único que separa a un miembro del equipo rojo de un atacante que usa las mismas herramientas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué son el equipo blanco y el equipo amarillo?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El equipo blanco actúa como árbitro y dueño del alcance en ejercicios más grandes: custodia las RoE, resuelve disputas y puede dar el alto. El equipo amarillo se refiere a los desarrolladores y arquitectos que integran la seguridad desde el origen, en lugar de probarla o defenderla después de los hechos.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../como-empezar-en-ciberseguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">La verdadera hoja de ruta de la ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-aprender-ciberseguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo aprender ciberseguridad de verdad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../comparativas/metasploit-vs-sliver/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Metasploit vs Sliver</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

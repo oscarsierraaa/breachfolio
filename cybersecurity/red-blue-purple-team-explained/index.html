@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Red team, blue team, purple team: what each one does</title>
+  <meta name="description" content="Red team attacks, blue team defends, purple team closes the loop between them. What each one actually does day to day, and how they map to real job roles." />
+  <meta name="keywords" content="red team blue team purple team, security teams explained, what does a red team do, what does a blue team do, is purple team a real team, difference between red team and penetration testing, rules of engagement red team, SOC analyst vs red teamer, what is a white team in cybersecurity, what is a yellow team in cybersecurity, red team vs blue team career, purple teaming explained" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Red team, blue team, purple team: what each one does | Breachfolio" />
+  <meta property="og:description" content="Red team attacks, blue team defends, purple team closes the loop between them. What each one actually does day to day, and how they map to real job roles." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-teams.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Red team, blue team, purple team: what each one does | Breachfolio" />
+  <meta name="twitter:description" content="Red team attacks, blue team defends, purple team closes the loop between them. What each one actually does day to day, and how they map to real job roles." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-teams.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Red team, blue team, purple team: what each one actually does",
+      "description": "Red team attacks, blue team defends, purple team closes the loop between them. What each one actually does day to day, and how they map to real job roles.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-teams.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/"
+      },
+      "inLanguage": "en",
+      "keywords": "red team blue team purple team, security teams explained, what does a red team do, what does a blue team do, is purple team a real team, difference between red team and penetration testing, rules of engagement red team, SOC analyst vs red teamer, what is a white team in cybersecurity, what is a yellow team in cybersecurity, red team vs blue team career, purple teaming explained"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Red, blue, purple team", "item": "https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/red-blue-purple-team-explained/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between red team and blue team?", "acceptedAnswer": { "@type": "Answer", "text": "A red team simulates a real adversary against the organization's own systems under an explicit, signed scope and Rules of Engagement, using reconnaissance, exploitation, and post-exploitation tactics. A blue team does the ongoing, everyday work of monitoring, detecting, and responding – living inside a SIEM, triaging alerts, tuning detections, and handling incidents. Red team work is episodic and time-boxed; blue team work never really stops." } },
+        { "@type": "Question", "name": "Is purple team a separate job or a third team?", "acceptedAnswer": { "@type": "Answer", "text": "Usually not a standing team with its own headcount. Purple teaming is a collaborative exercise or methodology where red and blue work together in real time: the red team runs a technique and immediately says so, the blue team checks whether their detections fired, and both sides adjust. The goal is compressing the feedback loop from weeks down to minutes." } },
+        { "@type": "Question", "name": "How is a red team engagement different from a penetration test?", "acceptedAnswer": { "@type": "Answer", "text": "A penetration test is usually broader and shorter: find and document as many vulnerabilities as possible across defined targets in a fixed window. A red team engagement is usually narrower but longer, aimed at realism rather than coverage – the team picks a plausible objective, like reaching the domain controller, and tries to get there quietly and persistently the way a real adversary would, while evading detection." } },
+        { "@type": "Question", "name": "What are white team and yellow team in cybersecurity?", "acceptedAnswer": { "@type": "Answer", "text": "A white team acts as referee and scope owner in larger exercises – holding the Rules of Engagement, settling disputes, and able to call a halt. A yellow team refers to developers and architects who build security in at the source, rather than testing or defending it after the fact. Both terms extend the classic red/blue color model used in larger organizations." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Red, blue, purple team</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/thumb-cyber-teams.webp" alt="Red team, blue team, purple team: what each one actually does." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · TEAMS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Red team, blue team, purple team: what each one actually does.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Three names you'll see in every job posting and almost no beginner guide explains cleanly. Here's what each team actually does day to day, and which one might be your career lane.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 8, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>Open almost any security job posting and you'll see one of these three words in the title, or buried in the responsibilities section: <strong>red, blue, or purple</strong>. Job boards assume you already know what they mean. Most beginner guides skip straight past them into tool lists and certification paths. The result is that a lot of people spend months studying before anyone actually sits them down and explains, in plain terms, what a red teamer does on a Tuesday versus what a blue teamer does, and why "purple team" isn't really a team at all.</p>
+
+      <p>The color model is borrowed from military war-gaming – the attacking force is red, the defending force is blue – and it maps surprisingly cleanly onto security work. But the clean metaphor hides some important nuance, especially around <strong>authorization</strong>, which is the part that separates these jobs from crimes with the same skill set.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Red team: simulating a real adversary, on paper first</h2>
+      <p>A red team's job is to think and act like a real attacker against the organization's own systems – using the same reconnaissance, exploitation, and post-exploitation tactics a criminal group or nation-state actor would use. That's the part everyone already associates with the name. What most beginner explanations leave out is the part that actually defines the job: none of it happens without an explicit, signed scope and <strong>Rules of Engagement (RoE)</strong> agreed in advance with the client or the organization's leadership.</p>
+
+      <p>The RoE spells out exactly what's in bounds and what isn't: which systems can be touched, which techniques are off-limits, who to call if something breaks, and what "stop" looks like. A red team engagement is not a free-for-all where anything goes as long as it works. It's a controlled simulation with a legal and contractual boundary around it, and staying inside that boundary, precisely, is a core professional skill, not an afterthought.</p>
+
+      <p>This is also where red teaming diverges from an unscoped penetration test, a distinction that trips up a lot of newcomers because both involve "hacking into things you're allowed to hack into." A penetration test is usually broader and shorter: find and document as many vulnerabilities as possible across a defined set of targets in a fixed window, then hand over a report. A red team engagement is usually narrower in scope but longer in duration, and the goal isn't coverage – it's realism. The team picks a plausible objective (reach the domain controller, exfiltrate a specific dataset, prove business email compromise is possible) and tries to get there the way a real adversary would: quietly, persistently, and while actively evading detection. A pentest asks "how many doors are unlocked?" A red team engagement asks "if someone really wanted in, would we even notice?"</p>
+
+      <p>Tooling reflects that goal. Red teamers work with exploitation frameworks like Metasploit for known-vulnerability testing, and with <strong>command-and-control (C2)</strong> frameworks – Cobalt Strike and its more modern, often more evasive alternatives – built specifically for the "stay quiet, stay persistent" phase of an engagement rather than the initial break-in. If you want a concrete sense of how two of these frameworks actually differ in practice, see our <a href="../../compare/metasploit-vs-sliver/" class="text-accent ul-link">Metasploit vs Sliver</a> comparison.</p>
+
+      <p>None of this is a technicality. <strong>Authorization – the signed scope, the RoE, the named point of contact – is the entire difference between a red teamer and a criminal</strong> running the exact same commands. Same tools, same techniques, sometimes the same mindset. The permission is the job.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Blue team: the day-to-day work of not getting breached</h2>
+      <p>If red team work is episodic – engagements that start, run for a defined window, and end with a report – blue team work is the opposite: it's the everyday, ongoing job of monitoring, detecting, and responding that never really stops. Blue teamers live inside a <strong>SIEM (Security Information and Event Management platform)</strong> for most of the working day, watching alerts, tuning detection rules, and figuring out which of the hundreds of pings are noise and which one is real.</p>
+
+      <p>The role breaks down into a few concrete, recurring activities rather than one job description:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Monitoring and triage.</strong> Watching dashboards and alert queues, deciding what's a false positive and what needs escalation – the bulk of a SOC analyst's day.</li>
+        <li><strong class="text-foreground">Detection engineering.</strong> Writing and refining the rules and queries that turn raw logs into meaningful alerts, so the next real attack doesn't slip through as noise.</li>
+        <li><strong class="text-foreground">Incident response.</strong> When something is confirmed, containing it, figuring out scope and root cause, and helping the organization recover – our <a href="../../resources/incident-response-first-24h-checklist/" class="text-accent ul-link">first 24 hours of an incident checklist</a> is a real look at this part of the job.</li>
+        <li><strong class="text-foreground">Hardening.</strong> Closing the gaps found through monitoring or previous incidents before they get used again – patching, tightening configurations, reducing attack surface.</li>
+      </ul>
+
+      <p>The platform underneath all of this varies a lot by organization and budget, and it's worth understanding the real tradeoffs before you specialize – see our <a href="../../compare/splunk-vs-wazuh-vs-elk/" class="text-accent ul-link">Splunk vs Wazuh vs ELK</a> comparison for how the major SIEM options actually differ in practice, not just on paper.</p>
+
+      <figure class="my-8">
+        <img src="../../assets/articles/art-inline-red-blue-purple-team.svg" alt="Diagram of two overlapping circles labeled red team (attack) and blue team (defend), with purple team shown as the overlapping feedback loop between them where techniques and detection results are exchanged." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">Purple team isn't a third circle on the org chart – it's the overlap where red's techniques and blue's detections meet.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Purple team: not a third team, a feedback loop</h2>
+      <p>Here's the part that trips up almost everyone new to this vocabulary: purple team is usually not a third standing department with its own headcount, sitting between red and blue on an org chart. In most organizations, it's a collaborative exercise or methodology: a deliberate practice of having red and blue work together in real time, rather than in the sequential, arm's-length way a traditional engagement usually runs.</p>
+
+      <p>In a classic red-vs-blue engagement, the red team attacks, the blue team defends (or fails to), and everyone finds out what happened when the final report lands weeks later. In a purple team exercise, the two sides are in the same room, or the same call, as it happens. The red team runs a specific technique and immediately says so; the blue team checks whether their detections fired, and if not, why not; both sides adjust and try the next technique. The point isn't secrecy or "winning" – it's compressing the feedback loop from weeks down to minutes, so the defensive gaps get identified and fixed while everyone still remembers exactly what caused them.</p>
+
+      <p>This is also why organizations that only ever run isolated red team exercises, without a real purple-team debrief, often don't actually improve their defenses much over time. A red team report that says "we got in this way" is valuable, but if the blue team never gets a structured, technique-by-technique walkthrough of what should have been detected and wasn't, the same class of gap tends to resurface in the next engagement with a different name. <strong>Purple teaming</strong> exists specifically to close that loop – it's a methodology aimed at making sure the lesson actually lands on the defensive side, not just a label for people who do "some of both."</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The three, side by side</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Goal</th>
+            <th>Typical day</th>
+            <th>Key skill</th>
+            <th>Authorization model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong class="text-foreground">Red team</strong></td>
+            <td>Prove a realistic attack path exists and see if it's detected.</td>
+            <td>Reconnaissance, exploitation, quiet persistence, careful adherence to scope.</td>
+            <td>Offensive technique plus discipline under a signed RoE.</td>
+            <td>Explicit, time-boxed, contractual – a defined start, end, and boundary.</td>
+          </tr>
+          <tr>
+            <td><strong class="text-foreground">Blue team</strong></td>
+            <td>Detect, contain, and reduce the organization's exposure continuously.</td>
+            <td>SIEM monitoring, alert triage, detection tuning, incident handling.</td>
+            <td>Pattern recognition across noisy data, and calm under a real incident.</td>
+            <td>Standing, ongoing employment – no special engagement scope needed because defense is the default job.</td>
+          </tr>
+          <tr>
+            <td><strong class="text-foreground">Purple team</strong></td>
+            <td>Close the gap between what red found and what blue actually detected.</td>
+            <td>(As an exercise) joint, technique-by-technique walkthroughs with both sides present.</td>
+            <td>Communication and facilitation as much as technical depth.</td>
+            <td>Inherits the red team engagement's scope, since it's built on top of one.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Two related terms show up as this color model gets extended in larger organizations, worth knowing even in one sentence each: a <strong>"white team"</strong> acts as referee and scope owner in bigger exercises – the people who hold the RoE, settle disputes, and can call a halt – and a <strong>"yellow team"</strong> refers to developers and architects building security in at the source, rather than testing or defending it after the fact.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Which one is your lane?</h2>
+      <p>None of these are better or more "elite" than the others – they reward genuinely different temperaments. Red team work suits people who enjoy open-ended problem-solving and can handle long stretches without a clear signal that something is working. Blue team work suits people who like pattern recognition, structure, and the satisfaction of catching something real in a sea of noise. Purple team work, since it's usually layered on top of a red or blue background rather than a separate entry point, suits people who also enjoy translating findings into something the other side can actually act on. If you're still mapping out where any of this fits into a broader study plan, our <a href="../cybersecurity-roadmap-and-careers/" class="text-accent ul-link">cybersecurity roadmap and careers</a> guide covers the fuller path from fundamentals to a specific job title.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">A note on scope.</strong> This article explains how red, blue, and purple teams operate so you understand the roles and vocabulary: it is not an invitation to run offensive techniques against systems you don't own or don't have explicit, signed authorization to test. The single thing that separates a red teamer from an attacker using the same tools is that written authorization. Treat it as non-negotiable, always.
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between red team and blue team?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A red team simulates a real adversary against the organization's own systems under an explicit, signed scope and Rules of Engagement, using reconnaissance, exploitation, and post-exploitation tactics. A blue team does the ongoing, everyday work of monitoring, detecting, and responding – living inside a SIEM, triaging alerts, tuning detections, and handling incidents. Red team work is episodic and time-boxed; blue team work never really stops.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is purple team a separate job or a third team?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Usually not a standing team with its own headcount. Purple teaming is a collaborative exercise or methodology where red and blue work together in real time: the red team runs a technique and immediately says so, the blue team checks whether their detections fired, and both sides adjust. The goal is compressing the feedback loop from weeks down to minutes.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How is a red team engagement different from a penetration test?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A penetration test is usually broader and shorter: find and document as many vulnerabilities as possible across defined targets in a fixed window. A red team engagement is usually narrower but longer, aimed at realism rather than coverage: the team picks a plausible objective, like reaching the domain controller, and tries to get there quietly and persistently the way a real adversary would, while evading detection.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What are white team and yellow team in cybersecurity?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A white team acts as referee and scope owner in larger exercises – holding the Rules of Engagement, settling disputes, and able to call a halt. A yellow team refers to developers and architects who build security in at the source, rather than testing or defending it after the fact. Both terms extend the classic red/blue color model used in larger organizations.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../cybersecurity-roadmap-and-careers/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The real cybersecurity roadmap</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../how-to-learn-cybersecurity/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to actually learn cybersecurity</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/metasploit-vs-sliver/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Metasploit vs Sliver</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

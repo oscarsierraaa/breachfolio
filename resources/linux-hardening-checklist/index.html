@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="resources">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux server hardening checklist | Breachfolio</title>
+  <meta name="description" content="From a fresh install to production-ready: the real hardening steps for user access, network exposure, patching, services, and logging on a new Linux server." />
+  <meta name="keywords" content="linux server hardening checklist, how to harden a linux server, disable root ssh login, ssh key authentication vs password, ufw firewall default deny, fail2ban setup, automatic security updates linux, systemd sandboxing directives, linux server security best practices, least privilege sudo configuration, auditd linux logging, secure a new linux server before production, linux permissions hardening umask, harden ssh configuration, disable unused services linux" />
+  <link rel="canonical" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/checklist-de-hardening-linux/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/linux-hardening-checklist/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Linux server hardening checklist | Breachfolio" />
+  <meta property="og:description" content="From a fresh install to production-ready: the real hardening steps for user access, network exposure, patching, services, and logging on a new Linux server." />
+  <meta property="og:url" content="https://breachfolio.com/resources/linux-hardening-checklist/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-res-hardening.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Linux server hardening checklist | Breachfolio" />
+  <meta name="twitter:description" content="From a fresh install to production-ready: the real hardening steps for user access, network exposure, patching, services, and logging on a new Linux server." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-res-hardening.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Linux server hardening checklist: from zero to production",
+      "description": "From a fresh install to production-ready: the real hardening steps for user access, network exposure, patching, services, and logging on a new Linux server.",
+      "image": "https://breachfolio.com/assets/img/thumb-res-hardening.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/resources/linux-hardening-checklist/"
+      },
+      "inLanguage": "en",
+      "keywords": "linux server hardening checklist, how to harden a linux server, disable root ssh login, ssh key authentication vs password, ufw firewall default deny, fail2ban setup, automatic security updates linux, systemd sandboxing directives, linux server security best practices, least privilege sudo configuration, auditd linux logging, secure a new linux server before production, linux permissions hardening umask, harden ssh configuration, disable unused services linux"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://breachfolio.com/resources/" },
+        { "@type": "ListItem", "position": 3, "name": "Linux hardening checklist", "item": "https://breachfolio.com/resources/linux-hardening-checklist/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/resources/linux-hardening-checklist/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "How do you disable root SSH login on Linux?", "acceptedAnswer": { "@type": "Answer", "text": "Set PermitRootLogin no in /etc/ssh/sshd_config so root is never a valid remote login target – every session authenticates as a named user and elevates with sudo when needed, keeping actions attributable." } },
+        { "@type": "Question", "name": "What does a default-deny firewall policy mean?", "acceptedAnswer": { "@type": "Answer", "text": "It means nothing is reachable unless explicitly allowed. A realistic ufw baseline denies all incoming traffic by default, allows outgoing traffic, and then opens only the specific ports the box actually needs, such as 22/tcp for SSH and 443/tcp for HTTPS." } },
+        { "@type": "Question", "name": "What does fail2ban do?", "acceptedAnswer": { "@type": "Answer", "text": "fail2ban watches authentication logs and temporarily bans source IPs after a threshold of failed login attempts, turning an unlimited brute-force guessing game against services like SSH into a throttled one." } },
+        { "@type": "Question", "name": "Why enable automatic security updates on a Linux server?", "acceptedAnswer": { "@type": "Answer", "text": "Most exploited vulnerabilities are already public and already patched: the box just hasn't received the fix yet. Tools like unattended-upgrades on Debian/Ubuntu-family systems (or dnf-automatic on Fedora/RHEL) apply security patches on a schedule so patching doesn't depend on someone remembering to run it manually." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Resources</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Linux hardening checklist</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/thumb-res-hardening.webp" alt="Linux server hardening checklist: from zero to production." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">RESOURCES · CHECKLIST</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Linux server hardening checklist: from zero to production.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">A fresh Linux install is not a secure one. The real steps – access, network, patching, services, logging – before that box touches production traffic.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 8, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>A default Linux install optimizes for <strong>compatibility, not security</strong>. The installer's job is to get you to a working, bootable system that talks to as much hardware and as many networks as possible with the least friction: it is not trying to guess what you will run on that box or who might come looking for it once it has a public IP address. Hardening is the deliberate, repeatable process of closing that gap: pulling permissions in, shrinking the attack surface, and making sure the box tells someone when something goes wrong – before it goes anywhere near production or the internet.</p>
+
+      <p>None of the steps below are exotic. Most take a few minutes each. What matters is doing all of them, every time, on every box, which is exactly what a checklist is for.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">User and access hardening</h2>
+
+      <p>Access control is the first layer, because almost every real-world compromise starts with <strong>a credential, not an exploit</strong>. Start here.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Disable direct root SSH login.</strong> Root should never be a valid remote login target – every session should authenticate as a named user and elevate with <code>sudo</code> when needed, so actions stay attributable. In <code>/etc/ssh/sshd_config</code>:</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">PermitRootLogin no</code></pre>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Enforce key-based authentication over passwords.</strong> Passwords are guessable, phishable, and reusable across sites; a properly generated SSH key pair is none of those things. Once your key is installed and confirmed working, turn passwords off entirely:</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">PasswordAuthentication no
+PubkeyAuthentication yes</code></pre>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Apply least-privilege sudo rules, not blanket sudo access.</strong> Adding every admin to a <code>wheel</code> or <code>sudo</code> group with unrestricted <code>ALL=(ALL) ALL</code> access means one compromised account is a compromised root. Scope sudoers entries in <code>/etc/sudoers.d/</code> to the specific commands a user or service actually needs, and prefer several narrow rules over one wide one.</li>
+        <li><strong>Change the default SSH port, but be honest about what it does.</strong> Moving off port 22 is not a real security control; it does nothing against a targeted attacker who simply scans all 65535 ports in seconds. Its only real benefit is cutting down the constant background noise from automated bots crawling the internet for port 22, which makes your logs easier to read. Treat it as housekeeping, not defense.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Network hardening</h2>
+
+      <p>If access hardening controls who can knock on the door, network hardening decides how many doors exist in the first place. The goal is <strong>default-deny</strong>: nothing is reachable unless you explicitly allowed it.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Set a default-deny firewall baseline.</strong> Both <code>ufw</code> (Debian/Ubuntu-family) and <code>nftables</code> (the modern successor to iptables, available broadly) can express the same policy: deny everything incoming by default, then allow only the specific ports the box actually needs to serve. A realistic <code>ufw</code> baseline for a web server that is also administered over SSH:</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">ufw default deny incoming
+ufw default allow outgoing
+ufw allow 22/tcp
+ufw allow 443/tcp
+ufw enable</code></pre>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Install and enable fail2ban.</strong> A default-deny firewall stops unsolicited traffic, but it still has to let SSH and your web ports through, and those become the target of repeated brute-force login attempts. <code>fail2ban</code> watches auth logs and temporarily bans source IPs after a threshold of failed attempts, turning an unlimited guessing game into a throttled one:</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">apt install fail2ban
+systemctl enable --now fail2ban</code></pre>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Patch and package hygiene</h2>
+
+      <p>Most exploited vulnerabilities are <strong>already public and already patched:</strong> the box just hasn't received the fix yet. Patch hygiene closes that window, and package hygiene shrinks the number of things that could ever need patching.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Enable automatic security updates.</strong> On Debian/Ubuntu-family systems, the <code>unattended-upgrades</code> package applies security patches on a schedule without requiring a human to remember to run <code>apt upgrade</code>. Equivalent mechanisms exist for other distribution families (<code>dnf-automatic</code> on Fedora/RHEL, for example): the concept matters more than the exact tool: patching should happen on a schedule, not on someone's memory.</li>
+        <li><strong>Remove unused packages and services.</strong> Every installed package is a potential future vulnerability, even one you never touch. A default server image often ships with compilers, mail utilities, or sample services nobody asked for. Audit what's installed and remove what the box doesn't actually need – "installed but unused" is still attack surface, it just doesn't feel like it until it's the thing that gets exploited.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Service hardening</h2>
+
+      <p>Every running service is a <strong>listening process</strong> with its own code, its own bugs, and its own privileges. Fewer running services, and less-privileged ones, mean less that can go wrong.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Disable and mask anything not actually needed.</strong> A stopped service can still be started by another process or a reboot; masking prevents that entirely.</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">systemctl disable --now cups
+systemctl mask cups</code></pre>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Run services as a dedicated non-root user.</strong> If a web server or application process is compromised, the attacker inherits whatever privileges that process was running with. A service running as its own unprivileged user limits the blast radius; a service running as root hands over the whole machine.</li>
+        <li><strong>Use systemd sandboxing directives for custom services.</strong> This is an underused but genuinely powerful lever: directives like <code>NoNewPrivileges=true</code> (blocks privilege escalation via setuid binaries) and <code>ProtectSystem=strict</code> (mounts most of the filesystem read-only for the service) constrain what a compromised process can do, even before you think about the application's own code. Add them to a service's unit file:</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">[Service]
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true</code></pre>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Logging and monitoring</h2>
+
+      <p>Hardening reduces the odds of a bad day; <strong>logging is what tells you whether one is actually happening</strong>. A server with no logging can be hardened perfectly and still fail silently.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Enable auditd.</strong> The Linux Audit daemon records security-relevant events – file access, privilege escalation, authentication attempts – at a level of detail that default syslogging doesn't capture. It's the difference between knowing a breach happened and knowing exactly what the attacker touched.</li>
+        <li><strong>Ship logs off the box, not just onto local disk.</strong> Logs that live only on the server they describe are the first thing an attacker with root access deletes. Forwarding logs to a centralized location – ideally one the compromised box itself cannot write over – means the record survives even if the server doesn't. A home-lab-scale example of exactly this kind of centralized log and detection setup is covered in <a href="../../lab/lab-03-wazuh-siem-home-lab/" class="text-accent ul-link">a SIEM you can actually read</a>.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">File system and permissions</h2>
+
+      <p>The last layer is the file system itself: the quiet defaults that determine who can read what, long after the network and service layers have done their job.</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Set a sane default umask.</strong> A umask of <code>027</code> or <code>077</code> (rather than the looser <code>022</code> some distributions ship with) ensures new files aren't group- or world-readable by default, which matters most on multi-user boxes.</li>
+        <li><strong>Tighten permissions on genuinely sensitive files.</strong> <code>/etc/shadow</code> should never be world-readable, and private keys should be locked down to their owner only:</li>
+      </ul>
+
+      <pre class="mt-4 rounded-card border border-border bg-surface p-4 overflow-x-auto"><code class="font-mono text-[13.5px] leading-[1.7]">chmod 640 /etc/shadow
+chmod 600 ~/.ssh/id_ed25519</code></pre>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Disable unused kernel filesystem modules.</strong> A lower-priority step, but a real one for security-conscious deployments: filesystems like <code>cramfs</code> or <code>freevxfs</code> that the box will never mount are still loadable kernel modules, and an unused module is still code that could contain a bug. Blacklisting them removes a rarely-checked but real corner of the attack surface.</li>
+      </ul>
+
+      <p>Taken together, these steps are <strong>a baseline, not a finish line</strong>. A server hardened once and never revisited drifts: a new service gets installed, a firewall rule gets loosened for a one-off test and never reverted, a package update reintroduces a default you'd already turned off. Revisit this checklist whenever the server's role changes, and pair it with the logging and monitoring from above: hardening decides what shouldn't happen, monitoring is what actually notices when it drifts anyway.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do you disable root SSH login on Linux?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Set PermitRootLogin no in /etc/ssh/sshd_config so root is never a valid remote login target – every session authenticates as a named user and elevates with sudo when needed, keeping actions attributable.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does a default-deny firewall policy mean?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It means nothing is reachable unless explicitly allowed. A realistic ufw baseline denies all incoming traffic by default, allows outgoing traffic, and then opens only the specific ports the box actually needs, such as 22/tcp for SSH and 443/tcp for HTTPS.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does fail2ban do?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          fail2ban watches authentication logs and temporarily bans source IPs after a threshold of failed login attempts, turning an unlimited brute-force guessing game against services like SSH into a throttled one.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why enable automatic security updates on a Linux server?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Most exploited vulnerabilities are already public and already patched: the box just hasn't received the fix yet. Tools like unattended-upgrades on Debian/Ubuntu-family systems (or dnf-automatic on Fedora/RHEL) apply security patches on a schedule so patching doesn't depend on someone remembering to run it manually.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../linux-security-commands-cheat-sheet/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Linux commands for a security check</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../cybersecurity/linux-fundamentals/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Linux fundamentals for security</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../lab/lab-03-wazuh-siem-home-lab/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">A SIEM you can actually read (lab)</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Resources articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

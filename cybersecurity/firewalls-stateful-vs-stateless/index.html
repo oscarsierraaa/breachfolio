@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stateful vs stateless firewalls, and NGFW explained | Breachfolio</title>
+  <meta name="description" content="Stateless packet filters judge each packet alone; stateful firewalls track connections in a state table; NGFWs add deep packet inspection – with a worked example." />
+  <meta name="keywords" content="stateful vs stateless firewall, what is a stateless firewall, packet filtering firewall, NGFW explained, next-generation firewall, firewall state table, TCP handshake firewall example" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Stateful vs stateless firewalls, and NGFW explained | Breachfolio" />
+  <meta property="og:description" content="Stateless packet filters judge each packet alone; stateful firewalls track connections in a state table; NGFWs add deep packet inspection – with a worked example." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-firewalls.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stateful vs stateless firewalls, and NGFW explained | Breachfolio" />
+  <meta name="twitter:description" content="Stateless packet filters judge each packet alone; stateful firewalls track connections in a state table; NGFWs add deep packet inspection – with a worked example." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-firewalls.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Stateful vs stateless firewalls, and NGFW explained",
+      "description": "Stateless packet filters judge each packet alone; stateful firewalls track connections in a state table; NGFWs add deep packet inspection – with a worked example.",
+      "image": "https://breachfolio.com/assets/img/hero-firewalls.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" },
+      "inLanguage": "en",
+      "keywords": "stateful vs stateless firewall, what is a stateless firewall, packet filtering firewall, NGFW explained, next-generation firewall, firewall state table, TCP handshake firewall example"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Stateful vs stateless firewalls, and NGFW explained", "item": "https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What's the main difference between a stateful and a stateless firewall?", "acceptedAnswer": { "@type": "Answer", "text": "A stateless firewall evaluates every packet in isolation against a static rule list, with no memory of what came before it. A stateful firewall keeps a state table recording every connection it has already permitted, and automatically allows return traffic that matches an existing entry without needing a separate rule for it. In practice this means stateful firewalls need far fewer, simpler rules and offer better protection against spoofed or unsolicited packets, which is why they became the default for nearly all modern firewalls, from home routers to enterprise gateways." } },
+        { "@type": "Question", "name": "Why do stateless firewalls need more open rules than stateful ones?", "acceptedAnswer": { "@type": "Answer", "text": "Because a stateless firewall has no concept of an ongoing connection, it cannot recognize a reply packet as belonging to a request you already sent. To let return traffic in at all, an administrator has to write a separate inbound rule permitting it – typically opening the entire ephemeral port range (roughly 1024 to 65535) for traffic claiming to originate from common outbound ports like 443. That broad opening is exactly the ambiguity a stateful firewall closes, since it can instead track the specific connection and allow only genuine replies to it." } },
+        { "@type": "Question", "name": "What does NGFW add beyond a stateful firewall?", "acceptedAnswer": { "@type": "Answer", "text": "A next-generation firewall keeps stateful tracking as its foundation and adds visibility into the traffic itself: deep packet inspection of payloads, identification of the actual application in use regardless of port (so it can tell a video call from a file transfer even if both use similar ports), an integrated intrusion prevention system that matches traffic against known attack signatures, and often user-identity awareness and TLS inspection. Where a stateful firewall decides based on addresses, ports, and connection state, an NGFW also decides based on what the traffic actually is and contains." } },
+        { "@type": "Question", "name": "Can a stateful firewall be attacked or exhausted?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Because a stateful firewall must allocate memory for every connection it tracks, an attacker can attempt to exhaust its state table by opening a very large number of connections or half-open TCP handshakes faster than they expire: a SYN flood is the classic example. Once the table fills, the firewall may be forced to drop new legitimate connections or, in worse implementations, fail open. Modern stateful firewalls defend against this with SYN cookies, connection rate limiting, and aggressive timeouts on incomplete handshakes." } },
+        { "@type": "Question", "name": "Which type of firewall does my home router use?", "acceptedAnswer": { "@type": "Answer", "text": "Almost every consumer router sold in the last two decades runs a stateful firewall by default, usually implemented through Network Address Translation (NAT) combined with connection tracking. This is why, out of the box, devices on your home network can reach the internet freely while unsolicited inbound connections from the internet are blocked automatically – NAT and the state table work together so only traffic matching a connection your device initiated is allowed back in." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Stateful vs stateless firewalls, and NGFW explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-firewalls.webp" alt="A firewall inspecting packets between an internal network and the internet – stateful vs stateless firewalls, explained" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · NETWORKING</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Stateful vs stateless firewalls, and NGFW explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Stateless packet filters judge each packet alone. Stateful firewalls remember the conversation. NGFWs read the payload too. Here's what actually changes at each layer, with a worked example.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 22, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>"Firewall" is a word that has meant several genuinely different technologies over the last three decades, and most explanations gloss over which one they're actually describing. That matters, because a rule that works perfectly on one type of firewall can be either a security hole or an unnecessary headache on another. The real dividing line isn't "firewall vs no firewall" – it's whether the device evaluating your traffic <strong>remembers anything about the connection it's part of</strong>. That single distinction is what separates stateless packet filtering from the stateful firewalls almost everyone actually runs today, and it's the foundation everything a next-generation firewall (NGFW) adds sits on top of.</p>
+
+<h2>What a firewall actually enforces</h2>
+
+<p>At its core, a firewall is a policy engine sitting between two networks (or two zones of the same network) that decides, packet by packet or connection by connection, what may pass and what gets dropped. Every firewall does this by inspecting some combination of: source and destination IP address, source and destination port, and protocol (TCP, UDP, ICMP, and so on). What differs between firewall generations is <em>how much context</em> gets applied to that decision – none, some, or a great deal.</p>
+
+<h2>Stateless firewalls – packet filtering with no memory</h2>
+
+<p>A stateless firewall, also called a packet-filtering firewall, evaluates every single packet against a static list of rules with zero awareness of what packets came before it or after it. Each packet is a fresh, isolated question: does this source IP, destination IP, port, and protocol combination match an "allow" rule? If yes, it passes; if no, it's dropped. The firewall has no concept of a "connection" at all – only individual packets matching or not matching rules.</p>
+
+<p>This has a real, structural consequence: because the firewall can't recognize a reply packet as belonging to a request that was just sent out, an administrator has to write <strong>explicit rules for both directions</strong> of every kind of traffic they want to allow. Outbound web browsing needs an outbound rule permitting traffic to port 443, and a <em>separate</em> inbound rule permitting the replies back in – which, since replies arrive on whatever high-numbered port the client happened to pick, usually means opening the entire ephemeral port range rather than one specific port.</p>
+
+<ul>
+  <li><strong>Strengths:</strong> extremely fast, low memory and CPU overhead, simple to implement in hardware – this is why they still show up as access control lists (ACLs) on routers and switches.</li>
+  <li><strong>Weaknesses:</strong> rule sets grow large and error-prone; broad inbound ranges opened to permit "return traffic" can be abused by unsolicited packets that simply claim to come from an allowed port; no ability to distinguish a legitimate reply from a forged one.</li>
+</ul>
+
+<h2>Stateful firewalls – tracking the conversation</h2>
+
+<p>A stateful firewall solves this by maintaining a <strong>state table</strong> (sometimes called a connection table): a running record of every connection it has already approved, keyed by the 5-tuple of source IP, source port, destination IP, destination port, and protocol, along with the connection's current state (new, established, or related to an existing one – the terminology Linux's netfilter/conntrack popularized).</p>
+
+<p>When a new outbound connection is initiated and matches an allow rule, the firewall creates an entry in the state table for it. Every subsequent packet – in either direction – that matches an existing entry is automatically permitted, without needing its own explicit rule. A packet claiming to be a reply that <em>doesn't</em> match any table entry gets dropped, no matter what port it claims to be from. This is why a single outbound rule ("allow this network to reach the internet") is usually all that's needed; the firewall handles every return packet itself.</p>
+
+<ul>
+  <li><strong>Strengths:</strong> dramatically simpler rule sets, much stronger default posture (nothing gets in that wasn't specifically initiated from inside, or explicitly allowed), the default behind virtually every home router's NAT and every enterprise firewall today.</li>
+  <li><strong>Weaknesses:</strong> the state table consumes memory and must be maintained per connection, which creates a resource that can be targeted – flooding a firewall with new connection attempts can exhaust its table. It also still only reasons about addresses, ports, and connection state; it has no idea what's actually inside the payload.</li>
+</ul>
+
+<h2>Next-generation firewalls (NGFW) – inspecting the payload</h2>
+
+<p>An NGFW keeps everything a stateful firewall does and adds visibility into the traffic's content and identity, not just its addressing:</p>
+
+<ul>
+  <li><strong>Deep packet inspection (DPI):</strong> looking into the packet payload itself, not just its headers, to identify the actual protocol and content being carried – catching, for example, traffic that's disguised to look like something else on the wire.</li>
+  <li><strong>Application awareness:</strong> identifying the specific application generating traffic (a video call, a file-sync client, a particular SaaS product) regardless of which port it happens to use, since modern applications increasingly tunnel everything over 443.</li>
+  <li><strong>Integrated intrusion prevention (IPS):</strong> matching traffic against a database of known attack signatures and behavioral patterns in real time, and blocking matches inline rather than just logging them.</li>
+  <li><strong>User and identity awareness:</strong> tying rules to authenticated users or groups rather than just IP addresses, which matters enormously once DHCP and mobile devices make IP-to-person mapping unreliable.</li>
+  <li><strong>TLS inspection:</strong> in enterprise deployments, terminating and re-establishing encrypted connections at the firewall so DPI and IPS can actually see inside traffic that would otherwise be opaque – a capability that carries its own privacy and trust trade-offs.</li>
+</ul>
+
+<p>Commercial NGFW products – Palo Alto Networks' PA-series, Fortinet's FortiGate line, and Cisco Firepower among them – all build on exactly this stack: stateful connection tracking as the base layer, with DPI, application identification, and intrusion prevention layered on top. The same layering shows up in open-source form when a stateful firewall like pfSense is paired with an IPS engine such as Suricata or Snort.</p>
+
+<p>Where a stateful firewall answers "is this connection allowed to exist?", an NGFW additionally answers "what is this connection actually carrying, and does it match something we've decided to block?"</p>
+
+<h2>Worked example: one TCP handshake, two firewalls</h2>
+
+<p>Suppose an internal client at <code>10.0.0.15</code> opens an HTTPS connection to a web server at <code>203.0.113.50</code>, using ephemeral source port <code>51823</code>. Here's how the same three-packet handshake gets handled under each model.</p>
+
+<h3>Stateless firewall</h3>
+
+<pre tabindex="0"><code>Rule 1 (outbound, required):
+  allow  src=10.0.0.0/24  dst=any        dport=443
+
+Rule 2 (inbound, required to let the reply back in):
+  allow  src=any:443      dst=10.0.0.0/24  dport=1024-65535
+
+Packet 1: 10.0.0.15:51823 -> 203.0.113.50:443   SYN       matches Rule 1, passes
+Packet 2: 203.0.113.50:443 -> 10.0.0.15:51823   SYN-ACK   matches Rule 2, passes
+Packet 3: 10.0.0.15:51823 -> 203.0.113.50:443   ACK       matches Rule 1, passes</code></pre>
+
+<p>Notice Rule 2: because the firewall has no idea a connection to <code>203.0.113.50</code> is actually pending, it has to permit <em>any</em> packet claiming to come from port 443 to <em>any</em> internal host on <em>any</em> ephemeral port. A malicious host anywhere could craft a packet with source port 443 and slip it past Rule 2 even without a real connection ever being requested: the firewall simply can't tell the difference.</p>
+
+<h3>Stateful firewall</h3>
+
+<pre tabindex="0"><code>Rule (outbound, only rule needed):
+  allow  src=10.0.0.0/24  dst=any  dport=443
+
+Packet 1: 10.0.0.15:51823 -> 203.0.113.50:443   SYN
+  -> matches outbound rule, passes, state table gets a new entry:
+     [10.0.0.15:51823 <-> 203.0.113.50:443, TCP, state=NEW]
+
+Packet 2: 203.0.113.50:443 -> 10.0.0.15:51823   SYN-ACK
+  -> no matching allow rule needed; matches existing state-table entry, passes
+     state updated to ESTABLISHED
+
+Packet 3: 10.0.0.15:51823 -> 203.0.113.50:443   ACK
+  -> matches state-table entry, passes
+
+Unsolicited packet from an unrelated host claiming src port 443,
+dst 10.0.0.15:51823, with no prior SYN on record:
+  -> no matching state-table entry -> dropped, regardless of claimed source port</code></pre>
+
+<p>The stateful firewall needed exactly one rule, and the forged packet gets dropped automatically because it doesn't correspond to any connection the firewall actually saw get initiated. That's the whole advantage in one comparison: the stateless firewall has to trust claimed metadata on every packet; the stateful firewall trusts its own memory of what it already approved.</p>
+
+<h2>Comparison at a glance</h2>
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Stateless</th><th>Stateful</th><th>NGFW</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>What it inspects</td><td>Headers, per packet</td><td>Headers, per connection</td><td>Headers + payload, per connection</td></tr>
+    <tr><td>Memory of past traffic</td><td>None</td><td>State table per connection</td><td>State table + application/signature context</td></tr>
+    <tr><td>Rule complexity</td><td>High – explicit rules both directions</td><td>Low – mostly outbound rules, replies automatic</td><td>Low, plus application/user policies</td></tr>
+    <tr><td>Performance overhead</td><td>Very low</td><td>Low to moderate</td><td>Moderate to high (DPI, IPS, TLS inspection)</td></tr>
+    <tr><td>Vulnerable to</td><td>Spoofed packets matching broad inbound rules</td><td>State-table exhaustion (SYN floods)</td><td>Same as stateful, plus DPI-evasion techniques</td></tr>
+    <tr><td>Typical deployment</td><td>Router/switch ACLs, edge filtering</td><td>Home routers (NAT), most enterprise firewalls, host firewalls</td><td>Enterprise network perimeter, data center edge</td></tr>
+  </tbody>
+</table>
+
+<p>These three layers aren't mutually exclusive alternatives – most real networks run more than one simultaneously. A router's ACLs (stateless) might filter obviously malformed traffic at the very edge before it ever reaches a stateful firewall doing the real connection tracking, which in turn might sit behind or alongside an NGFW doing deep inspection on traffic crossing into a more sensitive zone. Layering them plays to each one's strengths: stateless filtering is cheap and fast for coarse rejection, stateful filtering handles the bulk of legitimate traffic efficiently, and NGFW inspection is reserved for the traffic and zones where its extra cost is actually justified.</p>
+
+<h2>Host-based firewalls: the same model on your own machine</h2>
+
+<p>Everything above describes network firewalls sitting between networks, but the identical stateful model runs locally on almost every modern operating system, protecting a single host rather than a whole network. Linux uses <code>netfilter</code>, configured through <code>iptables</code> or the newer <code>nftables</code>, both of which maintain their own connection-tracking table (<code>conntrack</code>) exactly analogous to the state table described above. Windows ships with Windows Defender Firewall, and macOS has its Application Firewall plus the underlying <code>pf</code> packet filter inherited from BSD.</p>
+
+<pre tabindex="0"><code># A minimal stateful host firewall in nftables:
+# allow established/related traffic back in, drop everything else unsolicited
+$ sudo nft add rule inet filter input ct state established,related accept
+$ sudo nft add rule inet filter input ct state invalid drop
+$ sudo nft add rule inet filter input drop</code></pre>
+
+<p>That first line does precisely what the state table in the worked example above does: <code>ct state established,related</code> tells the kernel to automatically permit any packet matching a connection this host already initiated, without a separate rule needed for the reply direction. Host-based firewalls matter even inside a network that already has a perimeter firewall, because they contain the blast radius if another device on the same network gets compromised – a network firewall alone does nothing to stop lateral movement between two machines already inside it.</p>
+
+<h2>Testing your own firewall rules from the outside</h2>
+
+<p>The only way to know whether a firewall rule actually does what you intended is to test it from a vantage point outside your own assumptions – ideally from a separate network entirely. A basic port scan against your own public IP shows what's genuinely reachable, regardless of what the rule file says:</p>
+
+<pre tabindex="0"><code># From an external host, scan the most common TCP ports
+$ nmap -Pn your.public.ip.address
+
+PORT     STATE    SERVICE
+22/tcp   filtered ssh
+443/tcp  open     https
+8080/tcp closed   http-proxy</code></pre>
+
+<p><code>open</code> means a service answered the connection – expected for anything you deliberately exposed, like a web server on 443. <code>closed</code> means the host is reachable but nothing is listening on that port, so it was actively rejected. <code>filtered</code> means no response came back at all, which is what a well-configured stateful firewall produces for a port with no matching allow rule: the SYN packet is simply dropped, giving an external attacker no confirmation the host even exists on that port. Seeing "filtered" rather than "closed" on ports you didn't intend to expose is a quick, practical way to confirm your rules are actually doing their job rather than just looking correct on paper.</p>
+
+<h2>Where each type still shows up today</h2>
+
+<p>Stateless filtering hasn't disappeared: it lives on as fast, cheap ACLs on routers and switches, often used as a coarse first filter before traffic ever reaches a stateful device, precisely because it's so lightweight. Stateful inspection is the default assumption almost everywhere else: your home router's NAT, <code>iptables</code>/<code>nftables</code> with conntrack on Linux, Windows Defender Firewall, and the base layer of essentially every commercial firewall appliance sold today. NGFW capability sits on top of that stateful base at the network perimeter and inside data centers, wherever an organization needs to see what traffic actually is rather than just where it claims to be going – see our hands-on <a href="../../lab/lab-04-network-segmentation-pfsense/">pfSense network segmentation lab</a> for a working example of stateful firewall rules segmenting a real network.</p>
+
+<h2>The takeaway</h2>
+
+<p>Stateless firewalls filter packets in isolation and need explicit rules for every direction of traffic, which forces broad inbound openings that weaken the model they're supposed to enforce. Stateful firewalls fix that by remembering connections in a state table, letting a single outbound rule implicitly authorize its own return traffic, which is why they became the default almost everywhere. NGFWs build on that stateful foundation and add the ability to actually read what's inside the traffic: application identity, intrusion signatures, and in enterprise settings, the decrypted content itself. None of these layers replaces the others; understanding which one is actually protecting a given network is the first step to configuring it correctly.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What's the main difference between a stateful and a stateless firewall?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A stateless firewall evaluates every packet in isolation against a static rule list, with no memory of what came before it. A stateful firewall keeps a state table recording every connection it has already permitted, and automatically allows return traffic that matches an existing entry without needing a separate rule for it. In practice this means stateful firewalls need far fewer, simpler rules and offer better protection against spoofed or unsolicited packets, which is why they became the default for nearly all modern firewalls, from home routers to enterprise gateways.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why do stateless firewalls need more open rules than stateful ones?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Because a stateless firewall has no concept of an ongoing connection, it cannot recognize a reply packet as belonging to a request you already sent. To let return traffic in at all, an administrator has to write a separate inbound rule permitting it – typically opening the entire ephemeral port range (roughly 1024 to 65535) for traffic claiming to originate from common outbound ports like 443. That broad opening is exactly the ambiguity a stateful firewall closes, since it can instead track the specific connection and allow only genuine replies to it.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does NGFW add beyond a stateful firewall?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A next-generation firewall keeps stateful tracking as its foundation and adds visibility into the traffic itself: deep packet inspection of payloads, identification of the actual application in use regardless of port (so it can tell a video call from a file transfer even if both use similar ports), an integrated intrusion prevention system that matches traffic against known attack signatures, and often user-identity awareness and TLS inspection. Where a stateful firewall decides based on addresses, ports, and connection state, an NGFW also decides based on what the traffic actually is and contains.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Can a stateful firewall be attacked or exhausted?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes. Because a stateful firewall must allocate memory for every connection it tracks, an attacker can attempt to exhaust its state table by opening a very large number of connections or half-open TCP handshakes faster than they expire: a SYN flood is the classic example. Once the table fills, the firewall may be forced to drop new legitimate connections or, in worse implementations, fail open. Modern stateful firewalls defend against this with SYN cookies, connection rate limiting, and aggressive timeouts on incomplete handshakes.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Which type of firewall does my home router use?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Almost every consumer router sold in the last two decades runs a stateful firewall by default, usually implemented through Network Address Translation (NAT) combined with connection tracking. This is why, out of the box, devices on your home network can reach the internet freely while unsolicited inbound connections from the internet are blocked automatically – NAT and the state table work together so only traffic matching a connection your device initiated is allowed back in.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../how-networks-work/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How networks actually work (without the OSI poster)</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../lab/lab-04-network-segmentation-pfsense/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 04 – segment your home lab network with pfSense</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../how-a-vpn-works/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How a VPN actually works, and what it doesn't hide</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal &amp; info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

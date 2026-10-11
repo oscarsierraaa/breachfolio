@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Infraestructura de clave pública (PKI), explicada | Breachfolio</title>
+  <meta name="description" content="Cómo funciona la PKI: pares de claves, firmas digitales, autoridades de certificación y la cadena de confianza, y dónde se usa de verdad." />
+  <meta name="keywords" content="infraestructura de clave pública, PKI explicada, pares de clave pública y privada, firmas digitales, autoridad de certificación, cadena de confianza, certificados TLS, firma de código, S/MIME, certificados de cliente" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/public-key-infrastructure-pki-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Infraestructura de clave pública (PKI), explicada | Breachfolio" />
+  <meta property="og:description" content="Cómo funciona la PKI: pares de claves, firmas digitales, autoridades de certificación y la cadena de confianza, y dónde se usa de verdad." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-pki.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Infraestructura de clave pública (PKI), explicada | Breachfolio" />
+  <meta name="twitter:description" content="Cómo funciona la PKI: pares de claves, firmas digitales, autoridades de certificación y la cadena de confianza, y dónde se usa de verdad." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-pki.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Infraestructura de clave pública (PKI), explicada",
+      "description": "Cómo funciona en realidad la PKI: pares de claves, firmas digitales, autoridades de certificación y la cadena de confianza, y dónde la usan de verdad TLS, la firma de código y S/MIME.",
+      "image": "https://breachfolio.com/assets/img/hero-pki.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" },
+      "inLanguage": "es",
+      "keywords": "infraestructura de clave pública, PKI explicada, pares de clave pública y privada, firmas digitales, autoridad de certificación, cadena de confianza, certificados TLS, firma de código, S/MIME, certificados de cliente"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Infraestructura de clave pública (PKI), explicada", "item": "https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre una clave pública y una clave privada?", "acceptedAnswer": { "@type": "Answer", "text": "Una clave pública y una privada están relacionadas matemáticamente pero cumplen funciones opuestas, y la seguridad de todo el sistema descansa en que la clave privada nunca salga del control de su propietario. La clave pública puede compartirse con cualquiera – se usa para cifrar mensajes destinados solo al propietario del par de claves, o para verificar una firma que ese propietario produjo. La clave privada debe permanecer secreta, porque se usa para descifrar esos mensajes o para crear las firmas en primer lugar. Cualquiera que consiga tu clave privada puede suplantarte criptográficamente, razón por la cual la seguridad práctica de la PKI depende más de la protección de la clave privada que de la fortaleza del propio algoritmo." } },
+        { "@type": "Question", "name": "¿Qué demuestra en realidad una firma digital?", "acceptedAnswer": { "@type": "Answer", "text": "Una firma digital válida demuestra tres cosas a la vez: autenticidad (la firma solo podría haberla producido quien posee la clave privada correspondiente), integridad (el contenido firmado no se ha alterado desde que se firmó, porque cambiar aunque sea un solo byte rompe la firma) y no repudio (el firmante no puede negar de forma creíble haberlo firmado, suponiendo que su clave privada no estuviera comprometida). No demuestra, por sí sola, la identidad real del firmante: ese vínculo entre una clave pública y una identidad verificada es precisamente para lo que sirve una autoridad de certificación." } },
+        { "@type": "Question", "name": "¿Qué es una autoridad de certificación y por qué la necesitamos?", "acceptedAnswer": { "@type": "Answer", "text": "Una autoridad de certificación (CA) es una organización de confianza que verifica que una clave pública pertenece de verdad a quien dice poseerla, y después emite un certificado firmado que vincula esa clave a una identidad o dominio verificados. Sin una CA, una clave pública no es más que un número sin propietario demostrado – cualquiera podría generar un par de claves y decir que es tu banco. Los navegadores, sistemas operativos y clientes de correo vienen con una lista integrada de CA raíz en las que confían por defecto, y todo certificado que aceptan debe remontarse hasta una de esas raíces a través de una cadena ininterrumpida de firmas." } },
+        { "@type": "Question", "name": "¿La PKI solo se usa en sitios web (TLS)?", "acceptedAnswer": { "@type": "Answer", "text": "No: TLS es el uso más visible de la PKI, pero ni de lejos el único. La firma de código usa el mismo modelo de clave pública/privada para que un sistema operativo pueda verificar que una aplicación descargada procede de verdad del desarrollador que dice y que no se ha manipulado desde entonces. S/MIME la aplica al correo electrónico, permitiendo que los destinatarios verifiquen el remitente de un mensaje y detecten manipulaciones. Los certificados de cliente permiten que un servidor verifique la identidad del dispositivo o usuario que se conecta, en lugar de al revés, algo habitual en las VPN corporativas, los inicios de sesión con tarjeta inteligente y la autenticación máquina a máquina." } },
+        { "@type": "Question", "name": "¿Qué pasa si se compromete una clave privada?", "acceptedAnswer": { "@type": "Answer", "text": "Todo lo que esa clave estaba encargada de proteger queda en riesgo: un atacante con la clave privada detrás de un certificado TLS podría suplantar ese sitio web, uno con la clave de firma de código podría publicar malware que parece firmado legítimamente por un desarrollador de confianza, y uno con un certificado personal podría falsificar correos firmados o autenticarse como la víctima. La respuesta es revocar el certificado comprometido de inmediato, lo que lo publica en una Lista de Revocación de Certificados (CRL) o hace que devuelva «revocado» mediante OCSP, de modo que las partes que confían en él dejen de hacerlo, y después emitir un certificado nuevo a partir de un par de claves recién generado. Sin embargo, la revocación solo protege de cara al futuro – no deshace nada que ya se hubiera firmado con la clave comprometida antes de que se descubriera el compromiso." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Infraestructura de clave pública (PKI), explicada</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-pki.webp" alt="Una cadena de claves criptográficas y certificados enlazados – infraestructura de clave pública explicada" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · CRIPTOGRAFÍA</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Infraestructura de clave pública, explicada.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Pares de claves, firmas digitales, autoridades de certificación y la cadena de confianza – la maquinaria que hay debajo de TLS, la firma de código, el correo S/MIME y los certificados de cliente, explicada desde cero.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>La <strong>Infraestructura de clave pública (PKI)</strong> es la maquinaria que responde a una pregunta engañosamente difícil: ¿cómo establecen confianza dos partes que nunca se han visto, sobre una red en la que cualquiera puede hacerse pasar por cualquiera? Es el sistema que hay debajo del candado de tu navegador, el visto bueno que dice que un programa procede de verdad de su editor, y la firma que demuestra que un correo no se manipuló en tránsito. Quítale las siglas y la PKI son en realidad tres ideas trabajando juntas: una relación matemática entre dos claves, una forma de demostrar autoría sin revelar un secreto, y una red de partes de confianza que avalan quién es dueño de qué clave. Este artículo construye esa imagen desde cero, y va de la mano con nuestro artículo hermano sobre <a href="../certificados-tls-transparencia/">certificados TLS y Certificate Transparency</a>, que cubre con más profundidad la cadena de confianza específica de la web.</p>
+
+<h2>El par de claves en el centro de todo</h2>
+
+<p>La PKI se construye sobre <strong>criptografía asimétrica:</strong> un par de claves relacionadas matemáticamente, una pública y una privada, donde una operación hecha con una clave solo puede revertirse o verificarse con la otra. Cubrimos la mecánica más profunda de la criptografía simétrica frente a la asimétrica en <a href="../criptografia-basica-que-puedes-usar/">criptografía que sí puedes usar</a>; la versión corta basta aquí para construir sobre ella: genera un par de claves una vez, mantén la clave privada en secreto y no dejes que salga jamás de tu control, y entrega la clave pública libremente a absolutamente cualquiera.</p>
+
+<p>La relación entre las dos claves desbloquea dos capacidades distintas, y es fácil confundirlas:</p>
+
+<table>
+  <thead>
+    <tr><th>Objetivo</th><th>Quién usa qué clave</th><th>Qué consigue</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Confidencialidad (cifrado)</td><td>El emisor cifra con la clave <strong>pública</strong> del destinatario; solo la clave <strong>privada</strong> del destinatario puede descifrarlo</td><td>Solo el destinatario previsto puede leer el mensaje</td></tr>
+    <tr><td>Autenticidad (firma)</td><td>El firmante firma con su propia clave <strong>privada</strong>; cualquiera puede verificarlo con la clave <strong>pública</strong> del firmante</td><td>Cualquiera puede confirmar quién produjo el mensaje y que no se alteró</td></tr>
+  </tbody>
+</table>
+
+<p>En la práctica, los algoritmos del mundo real son RSA o esquemas de curva elíptica como ECDSA y Ed25519 –las matemáticas difieren, pero los papeles de «la clave pública cifra o verifica» y «la clave privada descifra o firma» se mantienen en todos ellos.</p>
+
+<h2>Firmas digitales: demostrar autoría sin un secreto compartido</h2>
+
+<p>Una <strong>firma digital</strong> es lo que permite a la PKI demostrar autenticidad e integridad al mismo tiempo, y funciona en tres pasos. Primero, el firmante pasa el mensaje por una función hash criptográfica, produciendo una huella corta y de longitud fija del contenido. Segundo, el firmante cifra ese hash con su propia clave privada: ese hash cifrado es la firma. Tercero, cualquiera que tenga la clave pública del firmante puede descifrar la firma para recuperar el hash original, volver a calcular por su cuenta el hash del mensaje que recibió, y comparar ambos. Si coinciden, dos cosas son ciertas a la vez: el mensaje vino de alguien que posee esa clave privada, y el mensaje no se ha alterado ni en un solo byte desde que se firmó –cambiar cualquier cosa del contenido cambia por completo su hash, rompiendo la coincidencia.</p>
+
+<p>Esto le da a la PKI tres propiedades que las simples contraseñas o secretos compartidos no pueden ofrecer por sí solos:</p>
+
+<ul>
+  <li><strong>Autenticidad:</strong> la firma solo podría haberla producido quien posee la clave privada.</li>
+  <li><strong>Integridad:</strong> cualquier manipulación del contenido firmado, por pequeña que sea, invalida la firma.</li>
+  <li><strong>No repudio:</strong> suponiendo que la clave privada no estuviera comprometida, el firmante no puede negar de forma creíble haberlo firmado, porque nadie más podría haber producido una firma válida.</li>
+</ul>
+
+<p>Fíjate en lo que una firma <em>no</em> demuestra por sí sola: no dice nada sobre quién es en realidad, en el mundo real, el propietario de la clave. Un par de claves generado hace cinco minutos por cualquiera, en cualquier lugar, puede producir firmas perfectamente válidas. Vincular una clave pública a una identidad real verificada es precisamente el trabajo de la siguiente pieza: el certificado.</p>
+
+<h2>Certificados: vincular una clave a una identidad</h2>
+
+<p>Un <strong>certificado digital</strong> es una estructura de datos pequeña y firmada que dice, en esencia, «esta clave pública pertenece a esta identidad, y yo –una parte de confianza– lo avalo». El formato dominante es <strong>X.509</strong>, y todo certificado con el que te vayas a encontrar, ya sea de un sitio web, de un programa firmado o de una dirección de correo, lleva aproximadamente los mismos campos básicos:</p>
+
+<table>
+  <thead>
+    <tr><th>Campo</th><th>Qué contiene</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Subject (sujeto)</td><td>La identidad para la que se emite el certificado – un nombre de dominio, una organización o una persona</td></tr>
+    <tr><td>Clave pública</td><td>La clave pública del sujeto, lo que en realidad se certifica</td></tr>
+    <tr><td>Issuer (emisor)</td><td>La autoridad de certificación que verificó al sujeto y emitió el certificado</td></tr>
+    <tr><td>Periodo de validez</td><td>Una fecha «no antes de» y «no después de» – los certificados caducan por diseño, limitando cuánto tiempo se sigue confiando en una clave comprometida</td></tr>
+    <tr><td>Número de serie</td><td>Un identificador único usado para el seguimiento y la revocación</td></tr>
+    <tr><td>Firma</td><td>La firma digital del emisor sobre todo el certificado, que es lo que permite a cualquiera verificar que no se ha falsificado ni alterado</td></tr>
+  </tbody>
+</table>
+
+<p>Ese último campo es todo el truco: la autoridad de certificación no se limita a afirmar el vínculo entre clave e identidad, sino que firma criptográficamente esa afirmación usando su propia clave privada –lo que significa que verificar un certificado es, en sí mismo, solo otra comprobación de firma, encadenada un nivel más arriba.</p>
+
+<h2>Autoridades de certificación y la cadena de confianza</h2>
+
+<p>Una <strong>autoridad de certificación (CA)</strong> es una organización cuyo trabajo es verificar que quien solicita un certificado controla de verdad la identidad –un dominio, una dirección de correo, una organización– que dice poseer, y después emitir un certificado firmado que lo atestigüe. Tu navegador, sistema operativo y cliente de correo vienen cada uno con una lista seleccionada de <strong>CA raíz</strong> en las que confían por defecto. Todo certificado que vayan a aceptar tiene que remontarse hasta una de esas raíces a través de una cadena ininterrumpida de firmas: una CA raíz firma el certificado de una CA intermedia, y esa intermedia firma el certificado real que se te presenta día a día. Las claves raíz se mantienen fuera de línea y se usan lo menos posible, precisamente porque una raíz comprometida sería catastrófica –si en cambio se compromete una intermedia, puede revocarse y sustituirse sin tocar la raíz en absoluto.</p>
+
+<p>Este modelo de cadena de confianza, y la mecánica concreta de cómo se aplica a los certificados web –incluidos los niveles de validación de dominio, de organización y extendida, y los registros de Certificate Transparency que mantienen honestas a las autoridades de certificación– se cubre en detalle en <a href="../certificados-tls-transparencia/">certificados TLS y Certificate Transparency</a>. Lo que importa aquí es el patrón general: la confianza no viene de que un certificado concreto sea evidentemente correcto por sí mismo, viene de una cadena verificable de firmas enraizada en un pequeño conjunto de partes que un enorme número de sistemas independientes han acordado, de antemano, confiar.</p>
+
+<h2>Dónde se usa realmente la PKI</h2>
+
+<p>TLS es la aplicación más visible de la PKI, pero el mismo modelo de clave pública más certificado hace funcionar en silencio varios otros sistemas con los que la mayoría de la gente interactúa a diario:</p>
+
+<table>
+  <thead>
+    <tr><th>Caso de uso</th><th>Qué demuestra el certificado</th><th>De qué protege</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>TLS / HTTPS</strong></td><td>El servidor al que se conectó tu navegador controla el dominio nombrado en el certificado</td><td>La escucha y la suplantación de un sitio web por un atacante sin la clave privada correspondiente</td></tr>
+    <tr><td><strong>Firma de código</strong></td><td>Un programa lo publicó el desarrollador o proveedor nombrado en el certificado de firma, y no se ha modificado desde entonces</td><td>Que se instale software manipulado o troyanizado como si fuera la versión genuina y sin modificar</td></tr>
+    <tr><td><strong>S/MIME (correo)</strong></td><td>Un correo procede de verdad de la dirección del remitente y su contenido no se ha alterado en tránsito</td><td>La suplantación de correo y la manipulación no detectada del contenido de un mensaje</td></tr>
+    <tr><td><strong>Certificados de cliente</strong></td><td>El dispositivo o usuario que se conecta es quien dice ser, verificado por el servidor en lugar de al revés</td><td>Que dispositivos o usuarios no autorizados se conecten a VPN, servicios internos o API máquina a máquina</td></tr>
+  </tbody>
+</table>
+
+<p>Los certificados de cliente merecen mención aparte porque invierten la dirección habitual: en la navegación TLS normal, el servidor te demuestra su identidad a ti. En <strong>TLS mutuo (mTLS)</strong>, ambas partes presentan certificados, de modo que el servidor también puede verificar exactamente qué dispositivo o usuario se está conectando –el modelo detrás de los inicios de sesión con tarjeta inteligente, muchas VPN corporativas y la autenticación servicio a servicio dentro de la propia infraestructura de una empresa.</p>
+
+<h2>Generar e inspeccionar un certificado tú mismo</h2>
+
+<p>Nada de esto requiere un acceso especial para observarlo: todo el ciclo de vida de un par de claves y un certificado está a un puñado de comandos de OpenSSL de distancia, y recorrerlo una vez convierte el diagrama abstracto de más arriba en algo concreto. Genera una clave privada, solicita un certificado para ella, y después mira exactamente qué campos acaban dentro:</p>
+
+<pre tabindex="0"><code># Genera una clave privada de curva elíptica (la clave pública se puede derivar de ella)
+$ openssl ecparam -name prime256v1 -genkey -noout -out private.key
+
+# Crea una Certificate Signing Request (CSR) - lo que le entregarías a una CA real
+$ openssl req -new -key private.key -out request.csr -subj "/CN=example.com"
+
+# Para pruebas locales, autofírmalo en vez de enviarlo a una CA
+$ openssl x509 -req -in request.csr -signkey private.key \
+    -out selfsigned.crt -days 365
+
+# Inspecciona los campos reales de cualquier certificado
+$ openssl x509 -in selfsigned.crt -noout -text | head -12
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4a:1f:...
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN=example.com
+        Validity
+            Not Before: Jul 22 00:00:00 2026 GMT
+            Not After : Jul 22 00:00:00 2027 GMT
+        Subject: CN=example.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey</code></pre>
+
+<p>Un certificado autofirmado como este lleva exactamente los mismos campos que uno emitido por una CA real –sujeto, emisor, ventana de validez, clave pública, firma– salvo que su Issuer y su Subject son idénticos, y ningún navegador ni sistema operativo confiará en él, porque no lo firmó nada que ya estuviera en su almacén de confianza. Esa es toda la diferencia práctica entre «un certificado» y «un certificado de confianza»: la firma, y si la parte que la produjo es una en la que tu software ya había aceptado creer de antemano.</p>
+
+<h2>Revocación: qué pasa cuando se filtra una clave privada</h2>
+
+<p>El periodo de validez de un certificado limita por diseño el radio de impacto de un compromiso, pero las fechas de caducidad por sí solas suelen ser demasiado lentas –una clave privada filtrada necesita dejar de ser de confianza de inmediato, no cuando le toque caducar. Existen dos mecanismos para hacerlo posible:</p>
+
+<ul>
+  <li><strong>Certificate Revocation Lists (CRL):</strong> una lista firmada y publicada de números de serie de certificados que una CA ha revocado antes de su caducidad natural. Los clientes pueden descargarla y comprobarla, aunque las CRL pueden crecer mucho y no siempre se consultan en tiempo real.</li>
+  <li><strong>Online Certificate Status Protocol (OCSP):</strong> una consulta en vivo, certificado por certificado: un cliente pregunta «¿sigue siendo válido este certificado en concreto?» y recibe una respuesta firmada en tiempo real, evitando tener que descargar una lista entera.</li>
+</ul>
+
+<p>Sin embargo, la revocación solo protege lo que pasa a partir de ese momento. No deshace nada que ya se hubiera firmado con una clave comprometida antes de que se descubriera el compromiso –razón por la cual la gestión de claves (mantener las claves privadas fuera de línea, protegidas por hardware y con acceso controlado) importa tanto como la propia criptografía. El algoritmo más fuerte del mundo no sirve de nada si la clave privada que hay detrás está en un archivo legible por cualquiera.</p>
+
+<h2>La conclusión</h2>
+
+<p>La PKI no es una sola tecnología sino un sistema por capas: los pares de claves asimétricas hacen posibles la firma y el cifrado, las firmas digitales permiten que cualquiera verifique autoría e integridad sin un secreto compartido, los certificados vinculan una clave pública a una identidad real, y las autoridades de certificación extienden ese vínculo en una cadena de confianza que navegadores, sistemas operativos y clientes de correo aceptan respetar de antemano. El mismo patrón aparece tanto si estás cargando un sitio web, instalando software firmado, leyendo un correo verificado o conectándote a una VPN corporativa con una tarjeta inteligente: certificados distintos, la misma maquinaria de fondo. Entender esa maquinaria es lo que convierte «el candado significa que es seguro» en una afirmación real y verificable sobre quién controla qué clave.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre una clave pública y una clave privada?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Una clave pública y una privada están relacionadas matemáticamente pero cumplen funciones opuestas, y la seguridad de todo el sistema descansa en que la clave privada nunca salga del control de su propietario. La clave pública puede compartirse con cualquiera – se usa para cifrar mensajes destinados solo al propietario del par de claves, o para verificar una firma que ese propietario produjo. La clave privada debe permanecer secreta, porque se usa para descifrar esos mensajes o para crear las firmas en primer lugar. Cualquiera que consiga tu clave privada puede suplantarte criptográficamente, razón por la cual la seguridad práctica de la PKI depende más de la protección de la clave privada que de la fortaleza del propio algoritmo.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué demuestra en realidad una firma digital?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Una firma digital válida demuestra tres cosas a la vez: autenticidad (la firma solo podría haberla producido quien posee la clave privada correspondiente), integridad (el contenido firmado no se ha alterado desde que se firmó, porque cambiar aunque sea un solo byte rompe la firma) y no repudio (el firmante no puede negar de forma creíble haberlo firmado, suponiendo que su clave privada no estuviera comprometida). No demuestra, por sí sola, la identidad real del firmante: ese vínculo entre una clave pública y una identidad verificada es precisamente para lo que sirve una autoridad de certificación.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es una autoridad de certificación y por qué la necesitamos?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Una autoridad de certificación (CA) es una organización de confianza que verifica que una clave pública pertenece de verdad a quien dice poseerla, y después emite un certificado firmado que vincula esa clave a una identidad o dominio verificados. Sin una CA, una clave pública no es más que un número sin propietario demostrado – cualquiera podría generar un par de claves y decir que es tu banco. Los navegadores, sistemas operativos y clientes de correo vienen con una lista integrada de CA raíz en las que confían por defecto, y todo certificado que aceptan debe remontarse hasta una de esas raíces a través de una cadena ininterrumpida de firmas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿La PKI solo se usa en sitios web (TLS)?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No: TLS es el uso más visible de la PKI, pero ni de lejos el único. La firma de código usa el mismo modelo de clave pública/privada para que un sistema operativo pueda verificar que una aplicación descargada procede de verdad del desarrollador que dice y que no se ha manipulado desde entonces. S/MIME la aplica al correo electrónico, permitiendo que los destinatarios verifiquen el remitente de un mensaje y detecten manipulaciones. Los certificados de cliente permiten que un servidor verifique la identidad del dispositivo o usuario que se conecta, en lugar de al revés, algo habitual en las VPN corporativas, los inicios de sesión con tarjeta inteligente y la autenticación máquina a máquina.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué pasa si se compromete una clave privada?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Todo lo que esa clave estaba encargada de proteger queda en riesgo: un atacante con la clave privada detrás de un certificado TLS podría suplantar ese sitio web, uno con la clave de firma de código podría publicar malware que parece firmado legítimamente por un desarrollador de confianza, y uno con un certificado personal podría falsificar correos firmados o autenticarse como la víctima. La respuesta es revocar el certificado comprometido de inmediato, lo que lo publica en una Lista de Revocación de Certificados (CRL) o hace que devuelva «revocado» mediante OCSP, de modo que las partes que confían en él dejen de hacerlo, y después emitir un certificado nuevo a partir de un par de claves recién generado. Sin embargo, la revocación solo protege de cara al futuro, no deshace nada que ya se hubiera firmado con la clave comprometida antes de que se descubriera el compromiso.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../certificados-tls-transparencia/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Certificados TLS y Certificate Transparency, explicados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../criptografia-basica-que-puedes-usar/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Criptografía que sí puedes usar</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-funcionan-las-redes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funcionan las redes (sin el póster OSI)</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

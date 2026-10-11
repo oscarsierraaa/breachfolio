@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, &#39;JetBrains Mono&#39;, SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"></path>
+  </pattern>
+  <radialGradient id="rad" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="hsl(84 70% 56%)" stop-opacity="0.4"></stop>
+    <stop offset="60%" stop-color="hsl(84 70% 56%)" stop-opacity="0.06"></stop>
+    <stop offset="100%" stop-color="hsl(84 70% 56%)" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="hsl(95 22% 8%)" stop-opacity="0"></stop>
+    <stop offset="100%" stop-color="hsl(95 22% 8%)" stop-opacity="0.92"></stop>
+  </linearGradient>
+  <linearGradient id="hue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="hsl(72 70% 60%)"></stop>
+    <stop offset="100%" stop-color="hsl(84 70% 56%)"></stop>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(95 26% 5%)"></rect>
+<rect width="1200" height="675" fill="hsl(95 22% 8%)" opacity="0.6"></rect>
+<rect width="1200" height="675" fill="url(#grid)"></rect>
+
+      <rect x="70" y="130" width="510" height="380" rx="12" fill="hsl(95 26% 5%)" stroke="hsl(84 70% 56%)" stroke-opacity="0.35" stroke-width="1.2"></rect>
+      <rect x="70" y="130" width="510" height="32" rx="12" fill="hsl(95 22% 8%)"></rect>
+      <rect x="70" y="148" width="510" height="14" fill="hsl(95 22% 8%)"></rect>
+      <circle cx="88" cy="146" r="5" fill="hsl(0 70% 55%)" opacity="0.85"></circle>
+      <circle cx="104" cy="146" r="5" fill="hsl(40 80% 55%)" opacity="0.85"></circle>
+      <circle cx="120" cy="146" r="5" fill="hsl(84 70% 56%)" opacity="0.85"></circle>
+      <text x="325" y="150" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" letter-spacing="2">kali ~ root</text>
+      <text x="88" y="180" font-size="12" font-family="ui-monospace" fill="hsl(84 70% 56%)" opacity="0.95" letter-spacing="1">┌──(root㉿kali)-[~]</text><text x="88" y="202" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.85" letter-spacing="1">└─$ nmap -sV target.lab</text><text x="88" y="224" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.6" letter-spacing="1">Starting Nmap 7.95SVN</text><text x="88" y="246" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.6" letter-spacing="1">Service detection ...</text><text x="88" y="268" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="1">22/tcp  open  ssh   OpenSSH 8.4</text><text x="88" y="290" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="1">80/tcp  open  http  nginx 1.22</text><text x="88" y="312" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="1">443/tcp open  ssl   nginx 1.22</text><text x="88" y="334" font-size="12" font-family="ui-monospace" fill="hsl(84 70% 56%)" opacity="0.95" letter-spacing="1">┌──(root㉿kali)-[~]</text><text x="88" y="356" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.85" letter-spacing="1">└─$ msfconsole</text>
+      <rect x="620" y="130" width="510" height="380" rx="12" fill="hsl(95 26% 5%)" stroke="hsl(84 70% 56%)" stroke-opacity="0.35" stroke-width="1.2"></rect>
+      <rect x="620" y="130" width="510" height="32" rx="12" fill="hsl(95 22% 8%)"></rect>
+      <rect x="620" y="148" width="510" height="14" fill="hsl(95 22% 8%)"></rect>
+      <circle cx="638" cy="146" r="5" fill="hsl(0 70% 55%)" opacity="0.85"></circle>
+      <circle cx="654" cy="146" r="5" fill="hsl(40 80% 55%)" opacity="0.85"></circle>
+      <circle cx="670" cy="146" r="5" fill="hsl(84 70% 56%)" opacity="0.85"></circle>
+      <text x="875" y="150" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" letter-spacing="2">parrot ~ user</text>
+      <text x="638" y="180" font-size="12" font-family="ui-monospace" fill="hsl(72 70% 60%)" opacity="0.95" letter-spacing="1">┌─[user@parrot]─[~]</text><text x="638" y="202" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.85" letter-spacing="1">└──╼ $ anonsurf start</text><text x="638" y="224" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.6" letter-spacing="1">[*] Switching to Tor...</text><text x="638" y="246" font-size="12" font-family="ui-monospace" fill="hsl(84 70% 56%)" opacity="0.85" letter-spacing="1">[+] DNS routed via Tor</text><text x="638" y="268" font-size="12" font-family="ui-monospace" fill="hsl(84 70% 56%)" opacity="0.85" letter-spacing="1">[+] AppArmor: enforce</text><text x="638" y="290" font-size="12" font-family="ui-monospace" fill="hsl(72 70% 60%)" opacity="0.95" letter-spacing="1">┌─[user@parrot]─[~]</text><text x="638" y="312" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.85" letter-spacing="1">└──╼ $ aircrack-ng -h</text><text x="638" y="334" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.6" letter-spacing="1">Aircrack-ng 1.7</text><text x="638" y="356" font-size="12" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.6" letter-spacing="1">wifi audit · battery 78%</text>
+<rect width="1200" height="675" fill="url(#vfade)"></rect>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(84 70% 56%)" opacity="0.95">TOOLS / 04</text>
+  <text x="40" y="615" fill="hsl(240 5% 65%)" opacity="0.55">KALI LINUX  VS  PARROT OS</text>
+  <text x="1160" y="615" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO.COM</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(84 70% 56%)"></circle>
+<circle cx="1160" cy="50" r="9" fill="hsl(84 70% 56%)" opacity="0.25"></circle>
+</svg>

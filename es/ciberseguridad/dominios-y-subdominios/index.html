@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qué son los subdominios y cómo enumerarlos | Breachfolio</title>
+  <meta name="description" content="De qué se compone un dominio, por qué los subdominios son superficie de ataque y cómo enumerarlos –pasiva y activamente– con crt.sh, Amass, subfinder y más." />
+  <meta name="keywords" content="dominios vs subdominios" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/domains-vs-subdomains/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Qué son los subdominios y cómo enumerarlos | Breachfolio" />
+  <meta property="og:description" content="De qué se compone un dominio, por qué los subdominios son superficie de ataque y cómo enumerarlos –pasiva y activamente– con crt.sh, Amass, subfinder y más." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-subdomains.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Qué son los subdominios y cómo enumerarlos | Breachfolio" />
+  <meta name="twitter:description" content="De qué se compone un dominio, por qué los subdominios son superficie de ataque y cómo enumerarlos –pasiva y activamente– con crt.sh, Amass, subfinder y más." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-subdomains.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Dominios vs subdominios: cómo enumerarlos",
+      "description": "De qué se compone un dominio, por qué los subdominios son superficie de ataque y cómo enumerarlos –pasiva y activamente– con crt.sh, Amass, subfinder y más.",
+      "image": "https://breachfolio.com/assets/img/hero-subdomains.webp",
+      "datePublished": "2026-07-18",
+      "dateModified": "2026-07-18",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" },
+      "inLanguage": "es",
+      "keywords": "dominios vs subdominios"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Dominios vs subdominios", "item": "https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué son los subdominios?", "acceptedAnswer": { "@type": "Answer", "text": "Un subdominio es cualquier etiqueta añadida delante de un dominio registrado, como api.example.com, blog.example.com o dev.example.com – todos son subdominios de example.com. El propietario del dominio los crea gratis y al instante añadiendo un registro DNS, sin pasar por ningún registrador ni pagar nada extra. Las empresas los usan para separar servicios (correo, API, panel de administración, entornos de pruebas) bajo el mismo dominio principal. En seguridad importan porque cada subdominio es una superficie expuesta más, y como son tan baratos de crear, es habitual que se olviden y queden sin vigilancia." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un dominio y un subdominio?", "acceptedAnswer": { "@type": "Answer", "text": "Un dominio (más exactamente, un dominio registrable como example.com) es el nombre que registras con un registrador, pagas y que WHOIS conoce: es tu dominio de segundo nivel más su dominio de nivel superior. Un subdominio es cualquier etiqueta añadida a la izquierda de ese dominio registrable, como api.example.com o dev.example.com. La diferencia práctica crucial es el control y el coste: registrar un dominio implica un registrador y una tarifa, mientras que el propietario del dominio puede crear subdominios ilimitados gratis, al instante, con solo añadir registros DNS a la zona que ya controla. Por eso precisamente los subdominios proliferan y por eso tan a menudo se convierten en superficie de ataque olvidada y sin vigilar." } },
+        { "@type": "Question", "name": "¿Cómo encuentro todos los subdominios de un dominio?", "acceptedAnswer": { "@type": "Answer", "text": "Empieza en modo pasivo, porque es rápido, silencioso y legal contra cualquier objetivo. Busca en los registros de Certificate Transparency con crt.sh, luego ejecuta agregadores como subfinder, assetfinder y Amass en modo pasivo para tirar de decenas de conjuntos de datos a la vez, y consulta servicios de DNS pasivo como SecurityTrails, VirusTotal y Netcraft en busca de nombres históricos. Fusiona y elimina duplicados de los resultados, y luego resuélvelos con dnsx para ver cuáles están realmente vivos. Para encontrar nombres que no aparecen en ningún conjunto de datos público puedes hacer fuerza bruta de nombres candidatos con gobuster o ffuf usando un buen diccionario, pero solo contra dominios que posees o que estás autorizado explícitamente a probar. Ningún método por sí solo es completo, así que la enumeración real combina varios." } },
+        { "@type": "Question", "name": "¿Qué es un subdomain takeover?", "acceptedAnswer": { "@type": "Answer", "text": "Ocurre cuando un subdominio tiene un registro DNS –normalmente un CNAME– que apunta a un servicio de terceros (un bucket en la nube, una app de Heroku o GitHub Pages, un host SaaS) que desde entonces se ha eliminado, mientras el registro DNS se quedó atrás. Ese registro «colgante» apunta ahora a un nombre de servicio que cualquiera puede registrar. Un atacante que lo reclama gana el control del contenido servido en el propio nombre de host de la víctima, lo que permite un phishing convincente, robo de cookies con alcance al dominio padre y abuso de la confianza same-site. Lo detectas buscando CNAME a proveedores conocidos que devuelven un error «no such app / not found», y automatizas la comprobación con herramientas como subjack o las plantillas de takeover de nuclei. La solución es sencilla: elimina el registro DNS obsoleto." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre enumeración pasiva y activa de subdominios?", "acceptedAnswer": { "@type": "Answer", "text": "La enumeración pasiva recopila datos de subdominios de terceros –registros de certificados, índices de buscadores, bases de datos de DNS pasivo– y nunca envía un solo paquete al objetivo, así que este no puede saber que miraste. La enumeración activa interactúa con la propia infraestructura del objetivo: resuelve nombres contra su DNS, se conecta a sus servidores o hace fuerza bruta de nombres de host candidatos, todo lo cual puede quedar registrado. La pasiva es la opción segura por defecto que puedes ejecutar contra cualquiera; la activa conlleva peso operativo y, a veces, legal, y debe reservarse para activos que posees o que estás autorizado a probar. El flujo habitual es pasiva primero para construir una lista, y luego una pasada activa controlada para validarla y ampliarla." } },
+        { "@type": "Question", "name": "¿Es legal la enumeración de subdominios?", "acceptedAnswer": { "@type": "Answer", "text": "La enumeración pasiva –leer registros de Certificate Transparency, consultar servicios de DNS pasivo, usar agregadores que tiran de conjuntos de datos de terceros– es leer información ya pública y es legal en la mayoría de jurisdicciones, porque nunca tocas los sistemas del objetivo. Las técnicas activas son distintas: hacer fuerza bruta de subdominios, resolver nombres directamente contra el DNS de un objetivo o sondear los hosts descubiertos envía tráfico a infraestructura que puede que no tengas derecho a probar, y en volumen puede parecer reconocimiento para un ataque. Haz enumeración activa solo contra dominios que posees o para los que tienes autorización explícita y por escrito para probar, como un alcance de pentest firmado o la lista dentro de alcance de un programa de bug bounty. Encontrar un subdominio no es permiso para atacar lo que corre en él." } },
+        { "@type": "Question", "name": "¿Por qué importan tanto en seguridad los subdominios dev y staging?", "acceptedAnswer": { "@type": "Answer", "text": "Porque concentran el riesgo. Los entornos no productivos llamados dev, staging, uat, test o similares se montan para comodidad del desarrollador, no para una exposición hostil a internet: a menudo ejecutan software desactualizado, vienen con credenciales por defecto o débiles, devuelven mensajes de error verbosos y se sientan tras poco o ningún WAF o monitorización. Y sin embargo con frecuencia conectan con las mismas bases de datos o servicios internos que producción. Un atacante que no puede penetrar el sitio principal endurecido buscará exactamente estos nombres de host olvidados, y por eso enumerarlos y sacarlos de internet público (o bloquearlos como es debido) es uno de los resultados de mayor valor de una evaluación de subdominios." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Dominios vs subdominios</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-subdomains.webp" alt="Dominios vs subdominios: cómo enumerarlos." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Dominios vs subdominios: cómo enumerarlos.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">De qué se compone un dominio, por qué los subdominios son superficie de ataque y cómo enumerarlos –pasiva y activamente– con crt.sh, Amass, subfinder y más.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>18 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Toda investigación, todo encargo de bug bounty y la fase de reconocimiento de todo atacante empiezan en el mismo sitio: un nombre. Antes de que nadie toque un servicio, quiere saber cómo de grande es el objetivo en realidad, y la respuesta sincera casi siempre es «más grande de lo que sugiere la web de marketing». Ese hueco entre <code>example.com</code> y las decenas de nombres de host olvidados que cuelgan de él es donde vive una enorme cantidad de riesgo real. Este artículo desmonta el nombre, explica de dónde salen los subdominios y recorre cómo <strong>enumerarlos</strong> bien: de forma pasiva, de forma activa y de forma responsable.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 480 176" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="150" y="20" width="180" height="40" rx="10" fill="hsl(var(--accent) / 0.14)" stroke="hsl(var(--accent) / 0.5)"/><text x="240" y="45" text-anchor="middle" fill="hsl(var(--foreground))" font-size="14" font-weight="700">ejemplo.com</text><path d="M 240 60 C 240 100, 57.6 80, 57.6 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="16" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="57.6" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">www</text><path d="M 240 60 C 240 100, 148.8 80, 148.8 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="107.20000000000002" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="148.8" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">mail</text><path d="M 240 60 C 240 100, 240 80, 240 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="198.4" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="240" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">dev</text><path d="M 240 60 C 240 100, 331.20000000000005 80, 331.20000000000005 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="289.6" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="331.20000000000005" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">api</text><path d="M 240 60 C 240 100, 422.40000000000003 80, 422.40000000000003 120" fill="none" stroke="hsl(var(--border))" stroke-width="1.4"/><rect x="380.8" y="120" width="83.2" height="40" rx="8" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><text x="422.40000000000003" y="144" text-anchor="middle" fill="hsl(var(--foreground))" font-size="12" font-weight="600">shop</text></svg>
+        <figcaption>Un dominio, muchos subdominios – cada uno una superficie de ataque.</figcaption>
+      </figure>
+      <h2>Anatomía de un nombre de dominio</h2>
+
+<p>Un nombre de dominio parece una sola cosa, pero en realidad es una pila de etiquetas que se leen <strong>de derecha a izquierda</strong>, cada una un nivel de delegación en una jerarquía global. Coge un nombre completamente cualificado como <code>api.staging.example.com</code> y desármalo:</p>
+
+<table>
+  <thead>
+    <tr><th>Parte</th><th>Ejemplo</th><th>Qué es</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Raíz</td><td><code>.</code> (implícita)</td><td>La cima sin nombre del árbol. Está ahí de verdad: <code>example.com.</code> con un punto final es el FQDN auténtico.</td></tr>
+    <tr><td>TLD</td><td><code>com</code></td><td>Dominio de nivel superior. Gestionado por un registro (Verisign para <code>.com</code>) bajo la ICANN. Puede ser un gTLD (<code>.com</code>, <code>.io</code>) o un ccTLD (<code>.uk</code>, <code>.es</code>).</td></tr>
+    <tr><td>Dominio de segundo nivel</td><td><code>example</code></td><td>La etiqueta que registras y pagas. <code>example</code> + <code>.com</code> es el <em>dominio registrable</em>: la unidad que WHOIS conoce.</td></tr>
+    <tr><td>Subdominio</td><td><code>staging</code>, <code>api</code></td><td>Cualquier etiqueta a la izquierda del dominio registrable. Los creas tú mismo, gratis, tantos como quieras.</td></tr>
+    <tr><td>FQDN</td><td><code>api.staging.example.com</code></td><td>El nombre de dominio completamente cualificado: la ruta completa e inequívoca del host a la raíz.</td></tr>
+  </tbody>
+</table>
+
+<p>Dos sutilezas confunden a la gente. Primera, «www» no es especial: <code>www.example.com</code> es solo un subdominio llamado <code>www</code>, en nada distinto en su naturaleza de <code>api</code> o <code>vpn</code>. Segunda, la frontera entre «dominio registrable» y «subdominio» no siempre está a dos etiquetas desde la derecha. Bajo <code>example.co.uk</code>, el dominio registrable tiene tres etiquetas de profundidad porque <code>co.uk</code> es un TLD efectivo. La <a href="https://publicsuffix.org" target="_blank" rel="noopener noreferrer">Public Suffix List</a> es el mapa autoritativo de dónde cae esa línea, y toda herramienta de enumeración seria la consulta para no confundir <code>co.uk</code> con el subdominio de alguien.</p>
+
+<h2>Qué es un subdominio, y por qué le importa a la seguridad</h2>
+
+<p>Un subdominio es simplemente una entrada DNS que el propietario del dominio creó bajo un nombre que controla. No hay registrador, ni tarifa, ni paso de aprobación: quien controla la zona DNS de <code>example.com</code> puede hacer aparecer <code>internal.example.com</code> en segundos. Esa comodidad es exactamente por lo que los subdominios importan tanto a un defensor o a un investigador.</p>
+
+<ul>
+  <li><strong>Son la superficie de ataque.</strong> El dominio registrable es una marca; los subdominios son las máquinas, aplicaciones y API reales. Cartografiarlos es cartografiar el objetivo. Diez subdominios que no conocías son diez servicios que nadie parchea, vigila ni tiene en mente.</li>
+  <li><strong>Filtran entornos.</strong> Nombres como <code>dev.</code>, <code>staging.</code>, <code>uat.</code>, <code>test.</code>, <code>jenkins.</code> o <code>vpn.</code> anuncian sistemas no productivos que a menudo se montan por comodidad, no por robustez: credenciales por defecto, errores verbosos, sin WAF, software obsoleto. Un atacante que no puede entrar por la puerta principal entrará encantado por staging.</li>
+  <li><strong>Permiten el subdomain takeover.</strong> Un subdominio que apunta (vía <code>CNAME</code>) a un servicio en la nube que ya no existe puede ser reclamado en silencio por un atacante; más sobre esto abajo.</li>
+</ul>
+
+<p>Por eso la enumeración de subdominios es una habilidad fundamental de OSINT y reconocimiento. Si eres nuevo en la disciplina más amplia, nuestra guía sobre <a href="../que-es-osint/">qué es OSINT y el flujo de trabajo que lo rodea</a> pone este paso en contexto: la enumeración es la fase de «pivotar hacia fuera», donde un artefacto (un dominio) se usa para descubrir el siguiente (sus hosts).</p>
+
+<h2>Los registros DNS que hacen reales a los subdominios</h2>
+
+<p>Un subdominio solo «existe» en internet porque un registro DNS responde por él. Entender los tipos de registro es lo que separa una lista de nombres de una comprensión de la infraestructura que hay detrás. El propio proceso de resolución lo cubrimos en <a href="../como-funcionan-las-redes/">cómo funcionan las redes</a>; aquí está el subconjunto práctico que importa para la enumeración:</p>
+
+<table>
+  <thead>
+    <tr><th>Registro</th><th>Responde a la pregunta</th><th>Por qué importa en la enumeración</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>A</code></td><td>¿En qué dirección IPv4 está este host?</td><td>Confirma que un nombre está vivo y apunta a algún sitio. Invierte la IP para encontrar vecinos.</td></tr>
+    <tr><td><code>AAAA</code></td><td>¿En qué dirección IPv6 está este host?</td><td>Cada vez más común; a veces los hosts exponen IPv6 sin el mismo firewall que IPv4.</td></tr>
+    <tr><td><code>CNAME</code></td><td>¿De qué otro nombre es alias este nombre?</td><td>El registro clave para la caza de takeovers: un CNAME que apunta a un servicio sin reclamar es la vulnerabilidad.</td></tr>
+    <tr><td><code>MX</code></td><td>¿Qué servidores gestionan el correo de este dominio?</td><td>Revela el proveedor de correo y, a menudo, la nomenclatura de las pasarelas internas.</td></tr>
+    <tr><td><code>TXT</code></td><td>Texto arbitrario: SPF, DKIM, tokens de verificación.</td><td>Los registros SPF enumeran IP emisoras y servicios de terceros; los tokens de verificación identifican el SaaS que usa una empresa.</td></tr>
+    <tr><td><code>NS</code></td><td>¿Qué servidores de nombres son autoritativos para esta zona?</td><td>Identifica el proveedor de DNS y puede revelar subzonas delegadas gestionadas por otros equipos.</td></tr>
+  </tbody>
+</table>
+
+<p>Puedes sacar cualquiera de estos con <code>dig</code>. Un vistazo rápido a los registros de un nombre que estás investigando te dice si es un host real, un alias o un extremo de correo:</p>
+
+<pre tabindex="0"><code>$ dig +short A api.example.com
+203.0.113.42
+
+$ dig +short CNAME assets.example.com
+example-cdn.s3.amazonaws.com.
+
+$ dig +short TXT example.com
+"v=spf1 include:_spf.google.com include:mailgun.org ~all"</code></pre>
+
+<p>Esa única línea de SPF ya te dice que la organización usa Google Workspace y Mailgun: inteligencia de infraestructura, directa desde un registro público, sin tocar el objetivo ni una vez.</p>
+
+<h2>Enumeración pasiva vs activa</h2>
+
+<p>Hay dos formas fundamentalmente distintas de descubrir subdominios, y saber en qué modo estás en cada paso es a la vez una decisión de seguridad operativa (OPSEC) y, a veces, legal.</p>
+
+<p>La enumeración <strong>pasiva</strong> lee datos de subdominios de <em>terceros</em> –registros de certificados, índices de buscadores, bases de datos de DNS pasivo– y nunca envía un paquete al objetivo. El objetivo no tiene forma de saber que miraste. La enumeración <strong>activa</strong> resuelve o solicita nombres <em>contra la propia infraestructura del objetivo</em>: consulta sus resolvers DNS, se conecta a sus servidores y puede quedar registrada. La fuerza bruta de subdominios es activa por definición. Como regla, empieza en modo pasivo y solo pasa a activo dentro de un alcance autorizado.</p>
+
+<table>
+  <thead>
+    <tr><th>Técnica</th><th>Modo</th><th>Herramienta</th><th>Cuándo usarla</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Búsqueda en Certificate Transparency</td><td>Pasiva</td><td>crt.sh</td><td>Siempre; la primera pasada más rápida y silenciosa. Los registros de CT filtran nombres que nadie pretendía publicar.</td></tr>
+    <tr><td>Fuentes pasivas agregadas</td><td>Pasiva</td><td>subfinder, Amass (pasivo), assetfinder</td><td>Un primer barrido amplio que tira de decenas de conjuntos de datos a la vez.</td></tr>
+    <tr><td>DNS pasivo / DNS histórico</td><td>Pasiva</td><td>SecurityTrails, VirusTotal, Netcraft</td><td>Cuando quieres histórico: nombres que resolvían en el pasado pero se eliminaron.</td></tr>
+    <tr><td>Resolución / validación DNS</td><td>Activa</td><td>dnsx</td><td>Para confirmar qué nombres descubiertos están realmente vivos antes de actuar sobre ellos.</td></tr>
+    <tr><td>Fuerza bruta de DNS</td><td>Activa</td><td>gobuster, ffuf, Amass (activo)</td><td>Solo en objetivos autorizados: para encontrar nombres que no aparecen en ningún conjunto de datos público.</td></tr>
+    <tr><td>Detección de takeover</td><td>Activa</td><td>subjack, nuclei</td><td>Tras la enumeración, para probar si los CNAME colgantes son reclamables.</td></tr>
+  </tbody>
+</table>
+
+<h2>Enumeración pasiva, con comandos</h2>
+
+<h3>Certificate Transparency (crt.sh)</h3>
+
+<p>Todo certificado TLS de confianza pública queda registrado en registros de <strong>Certificate Transparency</strong> de solo adición (append-only), el mecanismo que explicamos en <a href="../certificados-tls-transparencia/">certificados TLS y Certificate Transparency</a>. Como un certificado nombra los hosts que cubre, esos registros son una lista accidental y autoritativa de los subdominios de una organización. La vía más fácil es <a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a>, consultable desde el navegador o la línea de comandos:</p>
+
+<pre tabindex="0"><code># Todos los nombres jamás certificados bajo example.com, sin duplicados
+$ curl -s "https://crt.sh/?q=%25.example.com&output=json" \
+    | jq -r '.[].name_value' \
+    | sed 's/\*\.//g' \
+    | sort -u
+api.example.com
+dev.example.com
+mail.example.com
+vpn.example.com
+...</code></pre>
+
+<p>El <code>%25</code> es un <code>%</code> codificado como URL, el comodín SQL que crt.sh entiende. Esta única petición, enviada a un tercero y nunca al objetivo, a menudo devuelve más nombres de host reales que cualquier otra técnica individual.</p>
+
+<h3>Agregadores: subfinder, Amass, assetfinder</h3>
+
+<p><a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener noreferrer">subfinder</a> (de <a href="https://projectdiscovery.io" target="_blank" rel="noopener noreferrer">ProjectDiscovery</a>) consulta decenas de fuentes pasivas a la vez y es la opción rápida por defecto:</p>
+
+<pre tabindex="0"><code>$ subfinder -d example.com -silent
+api.example.com
+blog.example.com
+cdn.example.com
+staging.example.com</code></pre>
+
+<p><a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener noreferrer">Amass</a>, el proyecto de OWASP, es el más exhaustivo. Ejecútalo en modo pasivo para permanecer del todo fuera del objetivo mientras tira de su amplia lista de fuentes:</p>
+
+<pre tabindex="0"><code>$ amass enum -passive -d example.com</code></pre>
+
+<p><a href="https://github.com/tomnomnom/assetfinder" target="_blank" rel="noopener noreferrer">assetfinder</a> es una herramienta diminuta y rápida que rasca un puñado de las fuentes de mayor valor; perfecta para encadenar con otras herramientas:</p>
+
+<pre tabindex="0"><code>$ assetfinder --subs-only example.com | sort -u</code></pre>
+
+<p>En la práctica ejecutas varias y fusionas los resultados, porque ninguna fuente por sí sola es completa:</p>
+
+<pre tabindex="0"><code>$ { subfinder -d example.com -silent; assetfinder --subs-only example.com; } \
+    | sort -u > subs-passive.txt</code></pre>
+
+<h2>Enumeración activa, con comandos</h2>
+
+<div class="callout">
+  <div class="label">Autorización primero</div>
+  <p>Todo lo de esta sección envía tráfico a la infraestructura que estás enumerando. Ejecútalo solo contra dominios que posees o para los que tienes <strong>autorización explícita y por escrito</strong> para probar (tus propios activos, un alcance de pentest firmado o la lista dentro de alcance de un programa de bug bounty). Hacer fuerza bruta y resolver nombres contra un objetivo que no tienes permiso para probar puede constituir actividad no autorizada. Observa, no te entrometas.</p>
+</div>
+
+<h3>Validar lo que encontraste (dnsx)</h3>
+
+<p>Una lista pasiva está llena de nombres muertos: hosts que se dieron de baja o que nunca llegaron a estar vivos. <a href="https://github.com/projectdiscovery/dnsx" target="_blank" rel="noopener noreferrer">dnsx</a> resuelve la lista contra el DNS y se queda solo con los que responden, mostrando opcionalmente los datos del registro:</p>
+
+<pre tabindex="0"><code>$ cat subs-passive.txt | dnsx -silent -a -resp
+api.example.com    [203.0.113.42]
+cdn.example.com    [198.51.100.10]
+vpn.example.com    [203.0.113.77]</code></pre>
+
+<h3>Fuerza bruta de DNS (gobuster, ffuf, Amass activo)</h3>
+
+<p>Algunos subdominios no aparecen en ningún conjunto de datos público. La única forma de encontrarlos es adivinar nombres candidatos a partir de un diccionario y comprobar cuáles resuelven. <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreferrer">gobuster</a> en modo <code>dns</code> es el clásico:</p>
+
+<pre tabindex="0"><code>$ gobuster dns -d example.com \
+    -w subdomains-top1million-5000.txt
+Found: grafana.example.com
+Found: git.example.com
+Found: backup.example.com</code></pre>
+
+<p>Los buenos diccionarios vienen de <a href="https://github.com/danielmiessler/SecLists" target="_blank" rel="noopener noreferrer">SecLists</a> (la carpeta <code>Discovery/DNS</code>). Para encontrar <em>virtual hosts</em> –sitios distintos servidos desde la misma IP según la cabecera <code>Host</code>–, <a href="https://github.com/ffuf/ffuf" target="_blank" rel="noopener noreferrer">ffuf</a> hace fuzzing de esa cabecera y filtra el tamaño de la respuesta por defecto:</p>
+
+<pre tabindex="0"><code>$ ffuf -w subdomains.txt \
+    -u https://example.com \
+    -H "Host: FUZZ.example.com" \
+    -fs 4242</code></pre>
+
+<p>Amass también puede hacer resolución activa y fuerza bruta cuando quitas el flag <code>-passive</code> y añades <code>-brute</code>: potente, y firmemente en el terreno de «solo objetivos autorizados».</p>
+
+<h2>DNS con comodín y falsos positivos</h2>
+
+<p>Antes de fiarte de un resultado de fuerza bruta, comprueba si hay un registro <strong>comodín</strong> (wildcard). Una entrada <code>*.example.com</code> hace que <em>todos</em> los subdominios posibles resuelvan a la misma dirección, así que una fuerza bruta ingenua reportará miles de hosts «encontrados» que en realidad no existen. La prueba es una única consulta por un nombre que ningún administrador cuerdo crearía:</p>
+
+<pre tabindex="0"><code>$ dig +short definitely-not-real-8f3a9.example.com
+198.51.100.200   &lt;- una respuesta significa que hay un comodín en juego</code></pre>
+
+<p>Si un nombre basura aleatorio resuelve, la zona tiene un comodín, y debes filtrar en consecuencia: anota la IP del comodín y descarta cualquier nombre de fuerza bruta que resuelva a ella, o usa una herramienta que lo haga automáticamente. Amass, el resolver de subfinder y dnsx incluyen todos lógica de filtrado de comodines precisamente porque es una fuente de ruido tan común. La lección general vale para todo el OSINT: un resultado que no has corroborado es una pista, no un hallazgo.</p>
+
+<h2>Subdomain takeover</h2>
+
+<p>Un <strong>subdomain takeover</strong> es uno de los problemas de mayor impacto que la enumeración saca a la luz. El montaje: una empresa crea <code>promo.example.com</code> como un <code>CNAME</code> que apunta a un servicio de terceros –un bucket en la nube, una app de Heroku, un sitio de GitHub Pages, una landing de SaaS–. Más tarde, elimina el recurso en el proveedor pero se olvida de quitar el registro DNS. El <code>CNAME</code> queda ahora <em>colgante</em>: apunta a un nombre de servicio que cualquiera puede registrar.</p>
+
+<p>Si un atacante registra ese nombre de servicio, el propio DNS de la víctima envía ahora a los visitantes a contenido controlado por el atacante en un nombre de host de aspecto legítimo. Eso permite un phishing convincente, robo de cookies con alcance al dominio padre y evasiones de la confianza same-site. La señal reveladora es un <code>CNAME</code> a un proveedor conocido combinado con la página de error «no such app / bucket not found» de ese proveedor:</p>
+
+<pre tabindex="0"><code>$ dig +short CNAME promo.example.com
+example-promo.herokuapp.com.
+
+$ curl -s https://promo.example.com | grep -i "no such app"
+&lt;title&gt;No such app&lt;/title&gt;   &lt;- CNAME colgante, probablemente reclamable</code></pre>
+
+<p>A escala automatizas la detección. <a href="https://github.com/haccer/subjack" target="_blank" rel="noopener noreferrer">subjack</a> comprueba una lista de subdominios contra una base de datos de huellas de servicios vulnerables:</p>
+
+<pre tabindex="0"><code>$ subjack -w subs-live.txt -t 100 -ssl \
+    -c fingerprints.json -v</code></pre>
+
+<p><a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener noreferrer">nuclei</a> incluye un conjunto mantenido de plantillas de takeover y es la opción más moderna:</p>
+
+<pre tabindex="0"><code>$ nuclei -l subs-live.txt -t http/takeovers/</code></pre>
+
+<p>Encontrar un takeover no es lo mismo que explotarlo. En un encargo autorizado, lo responsable suele ser demostrar que es reclamable con un fichero marcador inofensivo y reportarlo, no servir contenido real desde el nombre de host.</p>
+
+<h2>Herramientas y webs que conviene guardar</h2>
+
+<p>Más allá de las herramientas de línea de comandos anteriores, varios servicios web hacen descubrimiento de subdominios e infraestructura desde el navegador, lo cual es ideal para una primera ojeada rápida y del todo pasiva:</p>
+
+<ul>
+  <li><a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a>: búsqueda en registros de Certificate Transparency. La mejor fuente pasiva individual de subdominios.</li>
+  <li><a href="https://dnsdumpster.com" target="_blank" rel="noopener noreferrer">DNSDumpster</a>: reconocimiento de DNS gratuito que mapea los hosts, registros y relaciones de red de un dominio en una única vista visual.</li>
+  <li><a href="https://securitytrails.com" target="_blank" rel="noopener noreferrer">SecurityTrails</a>: datos históricos de DNS y subdominios; ve a qué apuntaba antes un nombre, inestimable para rastrear infraestructura a lo largo del tiempo.</li>
+  <li><a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a>: la pestaña «Relations» de un dominio enumera los subdominios observados que ha visto en circulación.</li>
+  <li><a href="https://www.netcraft.com" target="_blank" rel="noopener noreferrer">Netcraft</a>: informes de sitios de larga trayectoria y una base de datos consultable de hosts e historial de alojamiento.</li>
+  <li><a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener noreferrer">Amass (OWASP)</a> y la suite de <a href="https://projectdiscovery.io" target="_blank" rel="noopener noreferrer">ProjectDiscovery</a> –<a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener noreferrer">subfinder</a> y <a href="https://github.com/projectdiscovery/dnsx" target="_blank" rel="noopener noreferrer">dnsx</a>–: para una enumeración programable y repetible.</li>
+</ul>
+
+<p>Una consulta de registro redondea el cuadro: emparejar la enumeración con <a href="../que-es-whois/">WHOIS</a> te dice no solo qué hosts existen, sino quién registró el dominio padre y cuándo. Juntos convierten un solo nombre en un mapa.</p>
+
+<h2>La conclusión</h2>
+
+<p>Un nombre de dominio es una jerarquía, y los subdominios que cuelgan de él son la superficie de ataque real y desparramada que la mayoría de las organizaciones infravalora. Enumerarlos bien significa empezar en modo pasivo –Certificate Transparency y agregadores que nunca tocan el objetivo–, validar con resolución, y hacer fuerza bruta o probar takeover solo donde tengas autorización explícita. Hazlo en ese orden y verás sistemáticamente más de un objetivo de lo que pretendía mostrar, sin cruzar jamás la línea de la observación a la intrusión.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué son los subdominios?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un subdominio es cualquier etiqueta añadida delante de un dominio registrado, como api.example.com, blog.example.com o dev.example.com – todos son subdominios de example.com. El propietario del dominio los crea gratis y al instante añadiendo un registro DNS, sin pasar por ningún registrador ni pagar nada extra. Las empresas los usan para separar servicios (correo, API, panel de administración, entornos de pruebas) bajo el mismo dominio principal. En seguridad importan porque cada subdominio es una superficie expuesta más, y como son tan baratos de crear, es habitual que se olviden y queden sin vigilancia.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un dominio y un subdominio?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un dominio (más exactamente, un dominio registrable como example.com) es el nombre que registras con un registrador, pagas y que WHOIS conoce: es tu dominio de segundo nivel más su dominio de nivel superior. Un subdominio es cualquier etiqueta añadida a la izquierda de ese dominio registrable, como api.example.com o dev.example.com. La diferencia práctica crucial es el control y el coste: registrar un dominio implica un registrador y una tarifa, mientras que el propietario del dominio puede crear subdominios ilimitados gratis, al instante, con solo añadir registros DNS a la zona que ya controla. Por eso precisamente los subdominios proliferan y por eso tan a menudo se convierten en superficie de ataque olvidada y sin vigilar.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo encuentro todos los subdominios de un dominio?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Empieza en modo pasivo, porque es rápido, silencioso y legal contra cualquier objetivo. Busca en los registros de Certificate Transparency con crt.sh, luego ejecuta agregadores como subfinder, assetfinder y Amass en modo pasivo para tirar de decenas de conjuntos de datos a la vez, y consulta servicios de DNS pasivo como SecurityTrails, VirusTotal y Netcraft en busca de nombres históricos. Fusiona y elimina duplicados de los resultados, y luego resuélvelos con dnsx para ver cuáles están realmente vivos. Para encontrar nombres que no aparecen en ningún conjunto de datos público puedes hacer fuerza bruta de nombres candidatos con gobuster o ffuf usando un buen diccionario, pero solo contra dominios que posees o que estás autorizado explícitamente a probar. Ningún método por sí solo es completo, así que la enumeración real combina varios.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es un subdomain takeover?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Ocurre cuando un subdominio tiene un registro DNS –normalmente un CNAME– que apunta a un servicio de terceros (un bucket en la nube, una app de Heroku o GitHub Pages, un host SaaS) que desde entonces se ha eliminado, mientras el registro DNS se quedó atrás. Ese registro «colgante» apunta ahora a un nombre de servicio que cualquiera puede registrar. Un atacante que lo reclama gana el control del contenido servido en el propio nombre de host de la víctima, lo que permite un phishing convincente, robo de cookies con alcance al dominio padre y abuso de la confianza same-site. Lo detectas buscando CNAME a proveedores conocidos que devuelven un error «no such app / not found», y automatizas la comprobación con herramientas como subjack o las plantillas de takeover de nuclei. La solución es sencilla: elimina el registro DNS obsoleto.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre enumeración pasiva y activa de subdominios?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La enumeración pasiva recopila datos de subdominios de terceros –registros de certificados, índices de buscadores, bases de datos de DNS pasivo– y nunca envía un solo paquete al objetivo, así que este no puede saber que miraste. La enumeración activa interactúa con la propia infraestructura del objetivo: resuelve nombres contra su DNS, se conecta a sus servidores o hace fuerza bruta de nombres de host candidatos, todo lo cual puede quedar registrado. La pasiva es la opción segura por defecto que puedes ejecutar contra cualquiera; la activa conlleva peso operativo y, a veces, legal, y debe reservarse para activos que posees o que estás autorizado a probar. El flujo habitual es pasiva primero para construir una lista, y luego una pasada activa controlada para validarla y ampliarla.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es legal la enumeración de subdominios?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La enumeración pasiva –leer registros de Certificate Transparency, consultar servicios de DNS pasivo, usar agregadores que tiran de conjuntos de datos de terceros– es leer información ya pública y es legal en la mayoría de jurisdicciones, porque nunca tocas los sistemas del objetivo. Las técnicas activas son distintas: hacer fuerza bruta de subdominios, resolver nombres directamente contra el DNS de un objetivo o sondear los hosts descubiertos envía tráfico a infraestructura que puede que no tengas derecho a probar, y en volumen puede parecer reconocimiento para un ataque. Haz enumeración activa solo contra dominios que posees o para los que tienes autorización explícita y por escrito para probar, como un alcance de pentest firmado o la lista dentro de alcance de un programa de bug bounty. Encontrar un subdominio no es permiso para atacar lo que corre en él.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué importan tanto en seguridad los subdominios dev y staging?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque concentran el riesgo. Los entornos no productivos llamados dev, staging, uat, test o similares se montan para comodidad del desarrollador, no para una exposición hostil a internet: a menudo ejecutan software desactualizado, vienen con credenciales por defecto o débiles, devuelven mensajes de error verbosos y se sientan tras poco o ningún WAF o monitorización. Y sin embargo con frecuencia conectan con las mismas bases de datos o servicios internos que producción. Un atacante que no puede penetrar el sitio principal endurecido buscará exactamente estos nombres de host olvidados, y por eso enumerarlos y sacarlos de internet público (o bloquearlos como es debido) es uno de los resultados de mayor valor de una evaluación de subdominios.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-es-osint/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es OSINT: herramientas y flujo de trabajo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../certificados-tls-transparencia/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Certificados TLS y Certificate Transparency</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../que-es-whois/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es WHOIS</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-funcionan-las-redes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funcionan las redes</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

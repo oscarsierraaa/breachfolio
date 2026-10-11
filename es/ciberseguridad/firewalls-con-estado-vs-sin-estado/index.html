@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Firewalls con estado vs sin estado, y NGFW explicado</title>
+  <meta name="description" content="Los filtros sin estado juzgan cada paquete por separado; los firewalls con estado rastrean conexiones; los NGFW añaden inspección profunda." />
+  <meta name="keywords" content="firewall con estado vs sin estado, qué es un firewall sin estado, firewall de filtrado de paquetes, NGFW explicado, firewall de nueva generación, tabla de estados de firewall, ejemplo de handshake TCP en un firewall" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/firewalls-stateful-vs-stateless/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Firewalls con estado vs sin estado, y NGFW explicado | Breachfolio" />
+  <meta property="og:description" content="Los filtros sin estado juzgan cada paquete por separado; los firewalls con estado rastrean conexiones; los NGFW añaden inspección profunda." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-firewalls.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Firewalls con estado vs sin estado, y NGFW explicado | Breachfolio" />
+  <meta name="twitter:description" content="Los filtros sin estado juzgan cada paquete por separado; los firewalls con estado rastrean conexiones; los NGFW añaden inspección profunda." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-firewalls.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Firewalls con estado vs sin estado, y NGFW explicado",
+      "description": "Los filtros de paquetes sin estado juzgan cada paquete por separado; los firewalls con estado rastrean las conexiones en una tabla de estados; los NGFW añaden inspección profunda de paquetes, con un ejemplo resuelto.",
+      "image": "https://breachfolio.com/assets/img/hero-firewalls.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" },
+      "inLanguage": "es",
+      "keywords": "firewall con estado vs sin estado, qué es un firewall sin estado, firewall de filtrado de paquetes, NGFW explicado, firewall de nueva generación, tabla de estados de firewall, ejemplo de handshake TCP en un firewall"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Firewalls con estado vs sin estado, y NGFW explicado", "item": "https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la principal diferencia entre un firewall con estado y uno sin estado?", "acceptedAnswer": { "@type": "Answer", "text": "Un firewall sin estado evalúa cada paquete de forma aislada frente a una lista estática de reglas, sin memoria de lo que vino antes. Un firewall con estado mantiene una tabla de estados que registra cada conexión que ya ha permitido, y deja pasar automáticamente el tráfico de vuelta que coincide con una entrada existente sin necesitar una regla separada para ello. En la práctica, esto significa que los firewalls con estado necesitan reglas mucho menos numerosas y más simples, y ofrecen mejor protección frente a paquetes falsificados o no solicitados, motivo por el que se convirtieron en la opción por defecto en casi todos los firewalls modernos, desde routers domésticos hasta puertas de enlace empresariales." } },
+        { "@type": "Question", "name": "¿Por qué los firewalls sin estado necesitan más reglas abiertas que los firewalls con estado?", "acceptedAnswer": { "@type": "Answer", "text": "Como un firewall sin estado no tiene ningún concepto de conexión en curso, no puede reconocer un paquete de respuesta como perteneciente a una solicitud que ya enviaste. Para dejar entrar siquiera el tráfico de vuelta, un administrador tiene que escribir una regla de entrada separada que lo permita, normalmente abriendo todo el rango de puertos efímeros (aproximadamente de 1024 a 65535) para tráfico que diga originarse en puertos de salida habituales como el 443. Esa apertura amplia es exactamente la ambigüedad que cierra un firewall con estado, ya que en su lugar puede rastrear la conexión concreta y permitir solo respuestas genuinas a ella." } },
+        { "@type": "Question", "name": "¿Qué añade un NGFW más allá de un firewall con estado?", "acceptedAnswer": { "@type": "Answer", "text": "Un firewall de nueva generación conserva el rastreo con estado como su cimiento y añade visibilidad sobre el propio tráfico: inspección profunda de los payloads, identificación de la aplicación real en uso sin importar el puerto (de modo que puede distinguir una videollamada de una transferencia de archivos aunque ambas usen puertos parecidos), un sistema de prevención de intrusiones integrado que compara el tráfico con firmas de ataque conocidas, y a menudo reconocimiento de identidad de usuario e inspección TLS. Donde un firewall con estado decide en función de direcciones, puertos y estado de la conexión, un NGFW también decide en función de qué es realmente el tráfico y qué contiene." } },
+        { "@type": "Question", "name": "¿Se puede atacar o agotar un firewall con estado?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Como un firewall con estado debe reservar memoria para cada conexión que rastrea, un atacante puede intentar agotar su tabla de estados abriendo un número muy grande de conexiones o de handshakes TCP a medias más rápido de lo que caducan; una inundación SYN es el ejemplo clásico. Una vez que la tabla se llena, el firewall puede verse obligado a descartar nuevas conexiones legítimas o, en implementaciones peores, a fallar en modo abierto (fail open). Los firewalls con estado modernos se defienden de esto con cookies SYN, limitación de la tasa de conexiones y tiempos de espera agresivos en los handshakes incompletos." } },
+        { "@type": "Question", "name": "¿Qué tipo de firewall usa mi router doméstico?", "acceptedAnswer": { "@type": "Answer", "text": "Casi todos los routers de consumo vendidos en las dos últimas décadas ejecutan un firewall con estado por defecto, normalmente implementado mediante Network Address Translation (NAT) combinada con rastreo de conexiones. Por eso, nada más sacarlo de la caja, los dispositivos de tu red doméstica pueden llegar a internet libremente mientras que las conexiones entrantes no solicitadas desde internet se bloquean automáticamente: el NAT y la tabla de estados trabajan juntos para que solo se permita de vuelta el tráfico que coincide con una conexión que inició tu dispositivo." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Firewalls con estado vs sin estado, y NGFW explicado</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-firewalls.webp" alt="Un firewall inspeccionando paquetes entre una red interna e internet: firewalls con estado vs sin estado, explicados" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · REDES</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Firewalls con estado vs sin estado, y NGFW explicado.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Los filtros de paquetes sin estado juzgan cada paquete por separado. Los firewalls con estado recuerdan la conversación. Los NGFW también leen el payload. Esto es lo que cambia de verdad en cada capa, con un ejemplo resuelto.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>«Firewall» es una palabra que en las últimas tres décadas ha significado varias tecnologías genuinamente distintas, y la mayoría de las explicaciones pasan por alto cuál de ellas están describiendo en realidad. Eso importa, porque una regla que funciona perfectamente en un tipo de firewall puede ser un agujero de seguridad o un quebradero de cabeza innecesario en otro. La verdadera línea divisoria no es «firewall sí o firewall no»: es si el dispositivo que evalúa tu tráfico <strong>recuerda algo sobre la conexión de la que forma parte</strong>. Esa única distinción es lo que separa el filtrado de paquetes sin estado de los firewalls con estado que casi todo el mundo ejecuta hoy en la práctica, y es el cimiento sobre el que se asienta todo lo que añade un firewall de nueva generación (NGFW).</p>
+
+<h2>Qué aplica realmente un firewall</h2>
+
+<p>En esencia, un firewall es un motor de políticas situado entre dos redes (o dos zonas de la misma red) que decide, paquete a paquete o conexión a conexión, qué puede pasar y qué se descarta. Todo firewall hace esto inspeccionando alguna combinación de: dirección IP de origen y destino, puerto de origen y destino, y protocolo (TCP, UDP, ICMP, etcétera). Lo que cambia entre generaciones de firewalls es cuánto contexto se aplica a esa decisión: ninguno, algo, o mucho.</p>
+
+<h2>Firewalls sin estado: filtrado de paquetes sin memoria</h2>
+
+<p>Un firewall sin estado, también llamado firewall de filtrado de paquetes, evalúa cada paquete individual contra una lista estática de reglas, sin ninguna conciencia de qué paquetes vinieron antes o después. Cada paquete es una pregunta nueva y aislada: ¿coincide esta combinación de IP de origen, IP de destino, puerto y protocolo con una regla de «permitir»? Si sí, pasa; si no, se descarta. El firewall no tiene ningún concepto de «conexión»: solo paquetes individuales que coinciden o no con reglas.</p>
+
+<p>Esto tiene una consecuencia real y estructural: como el firewall no puede reconocer un paquete de respuesta como perteneciente a una solicitud que se acaba de enviar, un administrador tiene que escribir <strong>reglas explícitas para ambas direcciones</strong> de cada tipo de tráfico que quiera permitir. La navegación web saliente necesita una regla de salida que permita tráfico al puerto 443, y una <em>regla de entrada separada</em> que permita las respuestas de vuelta, que, como llegan por el puerto alto que le tocara al cliente, normalmente significa abrir todo el rango de puertos efímeros en lugar de un puerto concreto.</p>
+
+<ul>
+  <li><strong>Puntos fuertes:</strong> extremadamente rápidos, poca sobrecarga de memoria y CPU, sencillos de implementar en hardware; por eso siguen apareciendo como listas de control de acceso (ACL) en routers y switches.</li>
+  <li><strong>Puntos débiles:</strong> los conjuntos de reglas crecen mucho y son propensos a errores; los amplios rangos de entrada abiertos para permitir el «tráfico de vuelta» pueden ser abusados por paquetes no solicitados que simplemente afirman venir de un puerto permitido; no hay capacidad de distinguir una respuesta legítima de una falsificada.</li>
+</ul>
+
+<h2>Firewalls con estado: rastrear la conversación</h2>
+
+<p>Un firewall con estado resuelve esto manteniendo una <strong>tabla de estados</strong> (a veces llamada tabla de conexiones): un registro vivo de cada conexión que ya ha aprobado, indexado por la tupla de cinco elementos formada por IP de origen, puerto de origen, IP de destino, puerto de destino y protocolo, junto con el estado actual de la conexión (nueva, establecida o relacionada con una ya existente; la terminología que popularizó netfilter/conntrack de Linux).</p>
+
+<p>Cuando se inicia una nueva conexión saliente y coincide con una regla de permiso, el firewall crea una entrada en la tabla de estados para ella. Todo paquete posterior –en cualquier dirección– que coincida con una entrada existente se permite automáticamente, sin necesitar su propia regla explícita. Un paquete que dice ser una respuesta pero no coincide con ninguna entrada de la tabla se descarta, sin importar de qué puerto diga venir. Por eso normalmente basta con una sola regla de salida («permitir que esta red llegue a internet»): el propio firewall se ocupa de cada paquete de vuelta.</p>
+
+<ul>
+  <li><strong>Puntos fuertes:</strong> conjuntos de reglas muchísimo más simples, una postura por defecto mucho más sólida (no entra nada que no se haya iniciado específicamente desde dentro, o que no esté explícitamente permitido), el comportamiento por defecto detrás del NAT de prácticamente cualquier router doméstico y de todo firewall empresarial actual.</li>
+  <li><strong>Puntos débiles:</strong> la tabla de estados consume memoria y debe mantenerse por conexión, lo que crea un recurso que se puede atacar: inundar un firewall con nuevos intentos de conexión puede agotar su tabla. Además, sigue razonando únicamente sobre direcciones, puertos y estado de la conexión; no tiene ni idea de qué hay realmente dentro del payload.</li>
+</ul>
+
+<h2>Firewalls de nueva generación (NGFW): inspeccionar el payload</h2>
+
+<p>Un NGFW conserva todo lo que hace un firewall con estado y añade visibilidad sobre el contenido y la identidad del tráfico, no solo sobre su direccionamiento:</p>
+
+<ul>
+  <li><strong>Inspección profunda de paquetes (DPI):</strong> mirar dentro del propio payload del paquete, no solo sus cabeceras, para identificar el protocolo y el contenido reales que transporta, detectando, por ejemplo, tráfico disfrazado para parecer otra cosa en el cable.</li>
+  <li><strong>Reconocimiento de aplicaciones:</strong> identificar la aplicación concreta que genera el tráfico (una videollamada, un cliente de sincronización de archivos, un producto SaaS concreto) sin importar qué puerto use, ya que las aplicaciones modernas cada vez tunelizan más todo por el puerto 443.</li>
+  <li><strong>Prevención de intrusiones integrada (IPS):</strong> comparar el tráfico en tiempo real con una base de datos de firmas de ataque conocidas y patrones de comportamiento, y bloquear las coincidencias en línea en lugar de limitarse a registrarlas.</li>
+  <li><strong>Reconocimiento de usuario e identidad:</strong> vincular las reglas a usuarios o grupos autenticados en lugar de solo a direcciones IP, algo que importa enormemente en cuanto el DHCP y los dispositivos móviles hacen poco fiable el mapeo entre IP y persona.</li>
+  <li><strong>Inspección TLS:</strong> en despliegues empresariales, terminar y restablecer las conexiones cifradas en el propio firewall para que la DPI y el IPS puedan ver realmente dentro de un tráfico que, de otro modo, sería opaco; una capacidad que conlleva sus propias contrapartidas de privacidad y confianza.</li>
+</ul>
+
+<p>Los productos NGFW comerciales –la serie PA de Palo Alto Networks, la línea FortiGate de Fortinet y Cisco Firepower entre ellos– se construyen todos exactamente sobre esta misma pila: el rastreo de conexiones con estado como capa base, con DPI, identificación de aplicaciones y prevención de intrusiones superpuestas encima. La misma estratificación aparece en formato open source cuando un firewall con estado como pfSense se combina con un motor IPS como Suricata o Snort.</p>
+
+<p>Donde un firewall con estado responde a «¿se permite que exista esta conexión?», un NGFW responde además a «¿qué transporta realmente esta conexión, y coincide con algo que hemos decidido bloquear?».</p>
+
+<h2>Ejemplo resuelto: un handshake TCP, dos firewalls</h2>
+
+<p>Supongamos que un cliente interno en <code>10.0.0.15</code> abre una conexión HTTPS a un servidor web en <code>203.0.113.50</code>, usando el puerto de origen efímero <code>51823</code>. Así es como se gestiona el mismo handshake de tres paquetes bajo cada modelo.</p>
+
+<h3>Firewall sin estado</h3>
+
+<pre tabindex="0"><code>Regla 1 (salida, obligatoria):
+  allow  src=10.0.0.0/24  dst=any        dport=443
+
+Regla 2 (entrada, obligatoria para dejar entrar la respuesta):
+  allow  src=any:443      dst=10.0.0.0/24  dport=1024-65535
+
+Paquete 1: 10.0.0.15:51823 -> 203.0.113.50:443   SYN       coincide con la Regla 1, pasa
+Paquete 2: 203.0.113.50:443 -> 10.0.0.15:51823   SYN-ACK   coincide con la Regla 2, pasa
+Paquete 3: 10.0.0.15:51823 -> 203.0.113.50:443   ACK       coincide con la Regla 1, pasa</code></pre>
+
+<p>Fíjate en la Regla 2: como el firewall no tiene ni idea de que hay realmente una conexión pendiente hacia <code>203.0.113.50</code>, tiene que permitir cualquier paquete que diga venir del puerto 443 hacia cualquier host interno en cualquier puerto efímero. Un host malicioso, desde cualquier sitio, podría fabricar un paquete con puerto de origen 443 y colarlo a través de la Regla 2 aunque nunca se hubiera solicitado una conexión real; el firewall simplemente no puede notar la diferencia.</p>
+
+<h3>Firewall con estado</h3>
+
+<pre tabindex="0"><code>Regla (salida, la única regla necesaria):
+  allow  src=10.0.0.0/24  dst=any  dport=443
+
+Paquete 1: 10.0.0.15:51823 -> 203.0.113.50:443   SYN
+  -> coincide con la regla de salida, pasa, la tabla de estados recibe una entrada nueva:
+     [10.0.0.15:51823 <-> 203.0.113.50:443, TCP, state=NEW]
+
+Paquete 2: 203.0.113.50:443 -> 10.0.0.15:51823   SYN-ACK
+  -> no necesita ninguna regla de permiso; coincide con la entrada existente en la tabla de estados, pasa
+     el estado se actualiza a ESTABLISHED
+
+Paquete 3: 10.0.0.15:51823 -> 203.0.113.50:443   ACK
+  -> coincide con la entrada de la tabla de estados, pasa
+
+Paquete no solicitado de un host no relacionado que dice venir del puerto 443,
+con destino 10.0.0.15:51823, sin ningún SYN previo registrado:
+  -> ninguna entrada coincidente en la tabla de estados -> se descarta, sin importar el puerto de origen que diga tener</code></pre>
+
+<p>El firewall con estado necesitó exactamente una regla, y el paquete falsificado se descarta automáticamente porque no corresponde a ninguna conexión que el firewall haya visto iniciarse de verdad. Esa es toda la ventaja resumida en una comparación: el firewall sin estado tiene que confiar en los metadatos que declara cada paquete; el firewall con estado confía en su propia memoria de lo que ya aprobó.</p>
+
+<h2>Comparativa de un vistazo</h2>
+
+<table>
+  <thead>
+    <tr><th>Propiedad</th><th>Sin estado</th><th>Con estado</th><th>NGFW</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Qué inspecciona</td><td>Cabeceras, por paquete</td><td>Cabeceras, por conexión</td><td>Cabeceras + payload, por conexión</td></tr>
+    <tr><td>Memoria del tráfico pasado</td><td>Ninguna</td><td>Tabla de estados por conexión</td><td>Tabla de estados + contexto de aplicación/firmas</td></tr>
+    <tr><td>Complejidad de las reglas</td><td>Alta: reglas explícitas en ambas direcciones</td><td>Baja: sobre todo reglas de salida, las respuestas son automáticas</td><td>Baja, más políticas de aplicación/usuario</td></tr>
+    <tr><td>Sobrecarga de rendimiento</td><td>Muy baja</td><td>Baja a moderada</td><td>Moderada a alta (DPI, IPS, inspección TLS)</td></tr>
+    <tr><td>Vulnerable a</td><td>Paquetes falsificados que coinciden con reglas de entrada amplias</td><td>Agotamiento de la tabla de estados (inundaciones SYN)</td><td>Lo mismo que con estado, más técnicas de evasión de DPI</td></tr>
+    <tr><td>Despliegue típico</td><td>ACL de routers/switches, filtrado de borde</td><td>Routers domésticos (NAT), la mayoría de firewalls empresariales, firewalls de host</td><td>Perímetro de red empresarial, borde del centro de datos</td></tr>
+  </tbody>
+</table>
+
+<p>Estas tres capas no son alternativas mutuamente excluyentes: la mayoría de las redes reales ejecutan más de una a la vez. Las ACL de un router (sin estado) pueden filtrar tráfico obviamente malformado justo en el borde antes de que llegue siquiera a un firewall con estado que hace el rastreo real de conexiones, que a su vez puede estar detrás o junto a un NGFW haciendo inspección profunda sobre el tráfico que cruza hacia una zona más sensible. Combinarlas en capas aprovecha los puntos fuertes de cada una: el filtrado sin estado es barato y rápido para un rechazo grueso, el filtrado con estado gestiona con eficiencia el grueso del tráfico legítimo, y la inspección NGFW se reserva para el tráfico y las zonas donde su coste extra está de verdad justificado.</p>
+
+<h2>Firewalls de host: el mismo modelo en tu propia máquina</h2>
+
+<p>Todo lo anterior describe firewalls de red situados entre redes, pero el mismo modelo con estado se ejecuta localmente en casi todos los sistemas operativos modernos, protegiendo un único host en lugar de una red entera. Linux usa <code>netfilter</code>, configurado a través de <code>iptables</code> o del más reciente <code>nftables</code>, ambos con su propia tabla de rastreo de conexiones (<code>conntrack</code>), exactamente análoga a la tabla de estados descrita antes. Windows viene con Windows Defender Firewall, y macOS tiene su Application Firewall más el filtro de paquetes <code>pf</code> subyacente, heredado de BSD.</p>
+
+<pre tabindex="0"><code># Un firewall de host con estado mínimo en nftables:
+# permitir de vuelta el tráfico established/related, descartar todo lo demás no solicitado
+$ sudo nft add rule inet filter input ct state established,related accept
+$ sudo nft add rule inet filter input ct state invalid drop
+$ sudo nft add rule inet filter input drop</code></pre>
+
+<p>Esa primera línea hace precisamente lo que hacía la tabla de estados del ejemplo resuelto anterior: <code>ct state established,related</code> le dice al kernel que permita automáticamente cualquier paquete que coincida con una conexión que este host ya inició, sin necesitar una regla separada para la dirección de respuesta. Los firewalls de host importan incluso dentro de una red que ya tiene un firewall perimetral, porque contienen el radio de impacto si otro dispositivo de la misma red se ve comprometido: un firewall de red por sí solo no hace nada para detener el movimiento lateral entre dos máquinas que ya están dentro de él.</p>
+
+<h2>Probar tus propias reglas de firewall desde fuera</h2>
+
+<p>La única forma de saber si una regla de firewall hace realmente lo que pretendías es probarla desde un punto de vista ajeno a tus propias suposiciones, idealmente desde una red completamente distinta. Un escaneo de puertos básico contra tu propia IP pública muestra qué es realmente accesible, sin importar lo que diga el archivo de reglas:</p>
+
+<pre tabindex="0"><code># Desde un host externo, escanea los puertos TCP más comunes
+$ nmap -Pn tu.ip.publica.aqui
+
+PORT     STATE    SERVICE
+22/tcp   filtered ssh
+443/tcp  open     https
+8080/tcp closed   http-proxy</code></pre>
+
+<p><code>open</code> significa que un servicio respondió a la conexión, lo esperable para cualquier cosa que hayas expuesto deliberadamente, como un servidor web en el 443. <code>closed</code> significa que el host es accesible pero no hay nada escuchando en ese puerto, así que se rechazó activamente. <code>filtered</code> significa que no volvió ninguna respuesta en absoluto, que es lo que produce un firewall con estado bien configurado para un puerto sin ninguna regla de permiso que coincida: el paquete SYN simplemente se descarta, sin dar a un atacante externo ninguna confirmación de que el host siquiera existe en ese puerto. Ver «filtered» en lugar de «closed» en puertos que no pretendías exponer es una forma rápida y práctica de confirmar que tus reglas están haciendo de verdad su trabajo, y no solo pareciendo correctas sobre el papel.</p>
+
+<h2>Dónde sigue apareciendo cada tipo hoy</h2>
+
+<p>El filtrado sin estado no ha desaparecido: sigue vivo como ACL rápidas y baratas en routers y switches, a menudo usadas como primer filtro grueso antes de que el tráfico llegue siquiera a un dispositivo con estado, precisamente porque es muy ligero. La inspección con estado es la suposición por defecto en casi todo lo demás: el NAT de tu router doméstico, iptables/nftables con conntrack en Linux, Windows Defender Firewall y la capa base de prácticamente todo appliance de firewall comercial que se vende hoy. La capacidad NGFW se sitúa encima de esa base con estado en el perímetro de red y dentro de los centros de datos, allí donde una organización necesita ver qué es realmente el tráfico y no solo adónde dice que va; consulta nuestro <a href="../../laboratorio/lab-04-segmentacion-de-red-con-pfsense/">laboratorio práctico de segmentación de red con pfSense</a> para ver un ejemplo funcionando de reglas de firewall con estado segmentando una red real.</p>
+
+<h2>La conclusión</h2>
+
+<p>Los firewalls sin estado filtran paquetes de forma aislada y necesitan reglas explícitas para cada dirección del tráfico, lo que obliga a abrir puertos de entrada amplios que debilitan el propio modelo que se supone que deben aplicar. Los firewalls con estado arreglan eso recordando las conexiones en una tabla de estados, dejando que una sola regla de salida autorice implícitamente su propio tráfico de vuelta, motivo por el que se convirtieron en la opción por defecto en casi todas partes. Los NGFW se construyen sobre esa base con estado y añaden la capacidad de leer realmente lo que hay dentro del tráfico: la identidad de la aplicación, las firmas de intrusión y, en entornos empresariales, el propio contenido descifrado. Ninguna de estas capas sustituye a las demás; entender cuál está protegiendo realmente una red dada es el primer paso para configurarla correctamente.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la principal diferencia entre un firewall con estado y uno sin estado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un firewall sin estado evalúa cada paquete de forma aislada frente a una lista estática de reglas, sin memoria de lo que vino antes. Un firewall con estado mantiene una tabla de estados que registra cada conexión que ya ha permitido, y deja pasar automáticamente el tráfico de vuelta que coincide con una entrada existente sin necesitar una regla separada para ello. En la práctica, esto significa que los firewalls con estado necesitan reglas mucho menos numerosas y más simples, y ofrecen mejor protección frente a paquetes falsificados o no solicitados, motivo por el que se convirtieron en la opción por defecto en casi todos los firewalls modernos, desde routers domésticos hasta puertas de enlace empresariales.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué los firewalls sin estado necesitan más reglas abiertas que los firewalls con estado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Como un firewall sin estado no tiene ningún concepto de conexión en curso, no puede reconocer un paquete de respuesta como perteneciente a una solicitud que ya enviaste. Para dejar entrar siquiera el tráfico de vuelta, un administrador tiene que escribir una regla de entrada separada que lo permita, normalmente abriendo todo el rango de puertos efímeros (aproximadamente de 1024 a 65535) para tráfico que diga originarse en puertos de salida habituales como el 443. Esa apertura amplia es exactamente la ambigüedad que cierra un firewall con estado, ya que en su lugar puede rastrear la conexión concreta y permitir solo respuestas genuinas a ella.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué añade un NGFW más allá de un firewall con estado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un firewall de nueva generación conserva el rastreo con estado como su cimiento y añade visibilidad sobre el propio tráfico: inspección profunda de los payloads, identificación de la aplicación real en uso sin importar el puerto (de modo que puede distinguir una videollamada de una transferencia de archivos aunque ambas usen puertos parecidos), un sistema de prevención de intrusiones integrado que compara el tráfico con firmas de ataque conocidas, y a menudo reconocimiento de identidad de usuario e inspección TLS. Donde un firewall con estado decide en función de direcciones, puertos y estado de la conexión, un NGFW también decide en función de qué es realmente el tráfico y qué contiene.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Se puede atacar o agotar un firewall con estado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sí. Como un firewall con estado debe reservar memoria para cada conexión que rastrea, un atacante puede intentar agotar su tabla de estados abriendo un número muy grande de conexiones o de handshakes TCP a medias más rápido de lo que caducan; una inundación SYN es el ejemplo clásico. Una vez que la tabla se llena, el firewall puede verse obligado a descartar nuevas conexiones legítimas o, en implementaciones peores, a fallar en modo abierto (fail open). Los firewalls con estado modernos se defienden de esto con cookies SYN, limitación de la tasa de conexiones y tiempos de espera agresivos en los handshakes incompletos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué tipo de firewall usa mi router doméstico?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Casi todos los routers de consumo vendidos en las dos últimas décadas ejecutan un firewall con estado por defecto, normalmente implementado mediante Network Address Translation (NAT) combinada con rastreo de conexiones. Por eso, nada más sacarlo de la caja, los dispositivos de tu red doméstica pueden llegar a internet libremente mientras que las conexiones entrantes no solicitadas desde internet se bloquean automáticamente: el NAT y la tabla de estados trabajan juntos para que solo se permita de vuelta el tráfico que coincide con una conexión que inició tu dispositivo.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../como-funcionan-las-redes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funcionan las redes (sin el póster OSI)</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../laboratorio/lab-04-segmentacion-de-red-con-pfsense/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 04 – pon un firewall en medio</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../como-funciona-una-vpn/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funciona realmente una VPN, y qué es lo que no oculta</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../recursos/puertos-comunes-chuleta/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Puertos comunes que vale la pena memorizar</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

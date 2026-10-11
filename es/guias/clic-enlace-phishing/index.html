@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>He hecho clic en un enlace de phishing: qué pasa ahora</title>
+  <meta name="description" content="Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. Lo que decide es lo que hiciste después: si escribiste algo, descargaste o aprobaste un aviso." />
+  <meta name="keywords" content="he hecho clic en un enlace de phishing, he pinchado un enlace falso, abrí un enlace de phishing qué hago, clic enlace sospechoso, enlace phishing móvil, phishing qué hacer" />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/clic-enlace-phishing/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/clicked-phishing-link/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/clic-enlace-phishing/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/clicked-phishing-link/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="He hecho clic en un enlace de phishing: qué pasa ahora | Breachfolio" />
+  <meta property="og:description" content="Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. Lo que decide es lo que hiciste después: si escribiste algo, descargaste o aprobaste un aviso." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/clic-enlace-phishing/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-phishing-link-clicked.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="He hecho clic en un enlace de phishing: qué pasa ahora | Breachfolio" />
+  <meta name="twitter:description" content="Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. Lo que decide es lo que hiciste después: si escribiste algo, descargaste o aprobaste un aviso." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-phishing-link-clicked.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "He hecho clic en un enlace de phishing: qué pasa ahora",
+      "description": "Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. Lo que decide es lo que hiciste después: si escribiste algo, descargaste o aprobaste un aviso.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-phishing-link-clicked.webp",
+      "datePublished": "2026-08-29",
+      "dateModified": "2026-08-29",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Daniel A.",
+          "url": "https://breachfolio.com/es/legal/about/"
+        },
+        {
+          "@type": "Person",
+          "name": "Óscar S.",
+          "url": "https://breachfolio.com/es/legal/about/"
+        }
+      ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/guias/clic-enlace-phishing/"
+      },
+      "inLanguage": "es",
+      "keywords": "he hecho clic en un enlace de phishing, he pinchado un enlace falso, abrí un enlace de phishing qué hago, clic enlace sospechoso, enlace phishing móvil, phishing qué hacer"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://breachfolio.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías",
+          "item": "https://breachfolio.com/es/guias/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "He hecho clic en un enlace de phishing",
+          "item": "https://breachfolio.com/es/guias/clic-enlace-phishing/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/guias/clic-enlace-phishing/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Solo lo abrí y lo cerré. ¿Tengo que hacer algo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prácticamente nada. Cierra la pestaña, comprueba que el navegador está actualizado y marca el mensaje como phishing. Abrir una página, sin escribir ni descargar nada, casi nunca compromete el equipo: el navegador la ejecuta aislada del resto del sistema. No hace falta formatear, ni cambiar contraseñas, ni instalar nada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y si fue en el móvil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aún menos motivo para preocuparse. En Android e iOS las aplicaciones están más separadas entre sí que los programas de un ordenador, y una página no puede instalar nada sola. El riesgo real en el móvil es el mismo que en el ordenador: que escribieras la contraseña, o que instalaras algo fuera de la tienda oficial dándole permisos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Metí la contraseña pero me di cuenta enseguida. ¿Llego a tiempo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Normalmente sí, y cuanto antes mejor, pero hazlo en el orden correcto: cambia la contraseña entrando por la aplicación oficial y después cierra todas las sesiones abiertas. Ese segundo paso es el que casi nadie da y el que decide: si se llevaron la cookie de sesión, pueden seguir dentro aunque la contraseña ya sea otra."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hace falta formatear el ordenador?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Casi nunca. Solo tiene sentido plantearlo si descargaste un fichero y además lo ejecutaste, y ni siquiera entonces es el primer paso: antes van cambiar las contraseñas desde otro dispositivo y pasar un análisis completo. Formatear porque hiciste clic es como cambiar la cerradura porque alguien llamó al timbre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve de algo pasar el antivirus?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sirve si ejecutaste algo; si solo abriste la página, no hay nada que encontrar. Y en ese caso usa el que ya trae el sistema, con un análisis completo en vez de rápido. Instalar dos o tres antivirus más no multiplica la protección: se interfieren entre ellos y suelen dejar el equipo peor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Fue en el ordenador del trabajo. ¿Aviso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, ya, y aunque creas que no pasó nada. En una empresa la información importa más que la culpa: avisar pronto permite revisar accesos y cortar por lo sano, y avisar tarde es lo que convierte un incidente pequeño en uno grande. Nadie ha sido despedido por avisar rápido de un clic; por callarlo tres días, alguno sí."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guías</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Correo hackeado</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-guide-phishing-link-clicked.webp" alt="Una mano cambiando una aguja de vía mientras se acerca un tren, con una sola ruta iluminada en rojo" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUÍAS · PHISHING</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">He hecho clic en un enlace de phishing. Esto es lo que pasa de verdad.</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">La respuesta corta</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. El clic no es el accidente: es el desvío. Lo que decide es lo que hiciste en los diez segundos siguientes.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Te ha llegado un correo o un SMS, has pinchado sin pensar, y al medio segundo se te ha puesto el estómago del revés. Antes de nada: <strong class="text-foreground">esto le pasa a todo el mundo</strong>, incluida gente que se dedica a esto. Vamos a averiguar si de verdad tienes un problema.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-29">29 de agosto de 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-2xl text-[16.5px] leading-[1.8] text-muted-foreground space-y-5">
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Primero, baja las pulsaciones</h2>
+      <p>La mayoría de artículos sobre esto empiezan con una lista de catástrofes y te dejan peor de lo que llegaste. Vamos al revés, porque es lo que dicen los hechos:</p>
+      <p><strong class="text-foreground">Abrir un enlace, por sí solo, casi nunca compromete nada.</strong> Un navegador actualizado abre la página dentro de una caja aislada del resto del sistema. Lo que hace daño no es la visita: es lo que la página consigue que hagas después.</p>
+      <p>Así que la pregunta útil no es «¿he hecho clic?». Es <strong class="text-foreground">«¿qué hice después de hacer clic?»</strong>.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">La escala: sitúate antes de hacer nada</h2>
+      <p>De menos a más grave. Busca tu peldaño y actúa solo a partir de ahí:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. Lo abriste y lo cerraste.</strong> No escribiste nada, no descargaste nada. <em>Casi con total seguridad no ha pasado nada.</em> Es el caso más común con diferencia.</li>
+        <li><strong class="text-foreground">2. Lo abriste en el móvil.</strong> Aún menos probable que pase algo: las aplicaciones del teléfono están más aisladas entre sí que los programas de un ordenador.</li>
+        <li><strong class="text-foreground">3. Te salió una descarga y no la abriste.</strong> Un fichero en la carpeta de descargas <em>no hace nada</em> mientras no lo ejecutes. Bórralo y sigue con tu vida.</li>
+        <li><strong class="text-foreground">4. Escribiste tu usuario y contraseña.</strong> <strong class="text-foreground">Aquí empieza el problema de verdad</strong>, y es el escenario realmente frecuente. Ve a la sección correspondiente.</li>
+        <li><strong class="text-foreground">5. Descargaste un fichero Y lo abriste.</strong> Especialmente si era un <code>.exe</code>, un <code>.msi</code>, un <code>.scr</code> o un documento que te pidió «habilitar contenido». Esto es lo serio.</li>
+        <li><strong class="text-foreground">6. Aprobaste algo.</strong> Diste un código de verificación por teléfono, pulsaste «sí» en un aviso del móvil, o concediste permisos a una aplicación. <strong class="text-foreground">Es el peldaño más alto</strong>, porque tu segundo factor deja de protegerte.</li>
+      </ul>
+      <p>Fíjate en el salto: <strong class="text-foreground">entre el 3 y el 4 no hay medio peldaño, hay un abismo.</strong> Todo lo anterior es ruido; a partir de ahí hay que actuar.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Por qué el clic solo casi nunca infecta</h2>
+      <p>Merece la pena entenderlo, porque es lo que te va a evitar el pánico la próxima vez:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">La página se abre aislada.</strong> El navegador ejecuta el contenido de una web en un compartimento separado del sistema operativo.</li>
+        <li><strong class="text-foreground">Descargar no es ejecutar.</strong> Que un fichero llegue a tu disco no significa que se haya puesto en marcha. Hace falta que lo abras tú.</li>
+        <li><strong class="text-foreground">El sistema te avisa antes.</strong> Windows y macOS interponen una advertencia antes de ejecutar algo descargado y sin firmar.</li>
+        <li><strong class="text-foreground">Y sobre todo: el phishing casi nunca busca infectarte.</strong> Busca que <em>escribas</em>. Es más barato y funciona mejor. La página falsa no es una trampa técnica, es un formulario.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">La excepción que sí existe, y cuándo importa</h2>
+      <p>Sería deshonesto rematar con un «no te preocupes» y ya. Existe la <strong class="text-foreground">descarga automática</strong>: una página que aprovecha un fallo del navegador para instalar algo sin que toques nada.</p>
+      <p>Ahora bien, hay que decir <em>lo que hace falta</em> para que eso funcione, porque es justo lo que se omite: <strong class="text-foreground">un navegador sin actualizar</strong>, y un fallo aún sin parchear. Con los navegadores actuales, que se actualizan solos y en silencio, es difícil y raro.</p>
+      <p>Traducido a algo accionable: <strong class="text-foreground">si tu navegador está al día, este párrafo no va contigo.</strong> Si llevas meses ignorando el «reiniciar para actualizar», hazlo ahora y deja de leer un momento.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Si solo lo abriste y lo cerraste</h2>
+      <p>Peldaños 1 a 3. Esto es todo lo que hay que hacer, y no es mucho:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Cierra la pestaña</strong> y no vuelvas a ella. No hace falta borrar el historial ni «limpiar» nada.</li>
+        <li><strong class="text-foreground">Borra el fichero descargado</strong> si lo hubo, sin abrirlo.</li>
+        <li><strong class="text-foreground">Comprueba que el navegador está actualizado.</strong> Dos minutos, y cubre la excepción de arriba.</li>
+        <li><strong class="text-foreground">No formatees, no cambies todas tus contraseñas</strong> y no compres nada. No hay motivo.</li>
+        <li><strong class="text-foreground">Marca el mensaje como phishing</strong> en tu correo. Ayuda a que no le llegue al siguiente.</li>
+      </ul>
+      <p>Y ya está. <strong class="text-foreground">De verdad.</strong></p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Si escribiste la contraseña: el orden importa</h2>
+      <p>Peldaño 4, el frecuente. Aquí sí hay que moverse, y <strong class="text-foreground">el orden no es el que parece</strong>:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. Cambia la contraseña de esa cuenta</strong>, entrando por la aplicación oficial o escribiendo tú la dirección. <em>Nunca desde el enlace del mensaje.</em></li>
+        <li><strong class="text-foreground">2. Cierra todas las sesiones abiertas.</strong> Esto es lo que casi nadie hace y lo que más importa: si se llevaron la cookie de sesión, <strong class="text-foreground">siguen dentro aunque cambies la contraseña</strong>. Casi todos los servicios tienen un «cerrar sesión en todos los dispositivos».</li>
+        <li><strong class="text-foreground">3. Activa la verificación en dos pasos</strong> si no la tenías. Es lo que hace que la contraseña robada valga poco.</li>
+        <li><strong class="text-foreground">4. Cambia esa misma contraseña donde la repitieras.</strong> Si la usabas en tres sitios más, tienes cuatro problemas, no uno.</li>
+        <li><strong class="text-foreground">5. Si era la del correo, ve primero ahí.</strong> El correo es la llave maestra: con él se recuperan todas las demás. Tienes los pasos en <a href="../correo-hackeado/" class="text-accent ul-link">esta guía</a>.</li>
+      </ul>
+      <p>El error habitual es hacer el 1 y saltarse el 2. <strong class="text-foreground">Cambiar la contraseña sin cerrar sesiones deja la puerta igual de abierta</strong>, solo que ahora crees que la has cerrado.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Si descargaste y abriste un fichero</h2>
+      <p>Peldaño 5. Lo único de toda esta guía que justifica preocuparse en serio:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Desconecta el equipo de la red</strong> si sospechas de verdad. Corta la salida de datos mientras te organizas.</li>
+        <li><strong class="text-foreground">Cambia las contraseñas desde OTRO dispositivo.</strong> Hacerlo desde el equipo sospechoso es regalar también las nuevas.</li>
+        <li><strong class="text-foreground">Pasa un análisis completo</strong>, no rápido, con el antivirus del sistema, que ya llevas instalado.</li>
+        <li><strong class="text-foreground">Asume que las contraseñas del navegador se han ido.</strong> Es lo primero que se lleva este tipo de programa, y no puede protegerlas: <a href="../contrasenas-en-el-navegador/" class="text-accent ul-link">aquí se explica por qué</a>.</li>
+        <li><strong class="text-foreground">Si es un equipo del trabajo, avisa ya</strong>, aunque te dé apuro. Avisar tarde es lo que convierte un incidente en un desastre.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Las señales de que sí ha pasado algo</h2>
+      <p>No las busques con lupa; si aparecen, se ven solas:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Avisos de inicio de sesión</strong> desde sitios donde no has estado.</li>
+        <li><strong class="text-foreground">Contactos que reciben mensajes tuyos</strong> que no has enviado.</li>
+        <li><strong class="text-foreground">El móvil se queda sin cobertura</strong> de golpe y sin avería. Es la firma del duplicado de SIM.</li>
+        <li><strong class="text-foreground">Reglas nuevas en tu correo</strong> que reenvían o archivan solas. Es lo primero que configura quien entra, para que no veas los avisos.</li>
+        <li><strong class="text-foreground">Cargos pequeños y raros</strong> en la tarjeta. Se prueba con poco antes de ir a por lo grande.</li>
+      </ul>
+      <p>Ese cuarto punto merece una mirada aunque estés en el peldaño 1: <strong class="text-foreground">revisa las reglas de reenvío de tu correo.</strong> Es treinta segundos y es donde se esconde el problema silencioso.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Lo que no hay que hacer</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Formatear el ordenador «por si acaso».</strong> Desproporcionado en todos los casos menos el peldaño 5, y ni siquiera ahí es lo primero.</li>
+        <li><strong class="text-foreground">Instalar tres antivirus más.</strong> Se estorban entre ellos. El del sistema, bien actualizado, basta.</li>
+        <li><strong class="text-foreground">Volver a la página «a comprobar una cosa».</strong> No hay nada que comprobar.</li>
+        <li><strong class="text-foreground">Contestar al mensaje</strong> para ver qué dicen. Confirma que tu dirección está viva y funciona.</li>
+        <li><strong class="text-foreground">Cambiar cincuenta contraseñas a la vez</strong> y desde el mismo equipo. Ordena por importancia y hazlo desde uno limpio.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Lo que hay que llevarse</h2>
+      <p>Que el clic es el desvío, no el choque. <strong class="text-foreground">Casi todo el mundo que busca esto está en el peldaño 1 y no le ha pasado nada</strong>, y lo que necesita es que alguien se lo diga con argumentos en vez de venderle miedo.</p>
+      <p>Y si estás más arriba en la escala, lo importante es el orden: <strong class="text-foreground">cerrar sesiones antes que casi nada, y cambiar contraseñas desde un dispositivo distinto.</strong> Con eso resuelto, lo demás es papeleo.</p>
+      <p>Una última cosa, para la próxima: si tenías activada la verificación en dos pasos en la cuenta afectada, <strong class="text-foreground">la contraseña que hayas escrito vale bastante poco.</strong> Es la única medida de esta guía que trabaja por ti antes de que ocurra nada.</p>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Preguntas frecuentes</div>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Solo lo abrí y lo cerré. ¿Tengo que hacer algo?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Prácticamente nada. Cierra la pestaña, comprueba que el navegador está actualizado y marca el mensaje como phishing. Abrir una página, sin escribir ni descargar nada, casi nunca compromete el equipo: el navegador la ejecuta aislada del resto del sistema. No hace falta formatear, ni cambiar contraseñas, ni instalar nada.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Y si fue en el móvil?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Aún menos motivo para preocuparse. En Android e iOS las aplicaciones están más separadas entre sí que los programas de un ordenador, y una página no puede instalar nada sola. El riesgo real en el móvil es el mismo que en el ordenador: que escribieras la contraseña, o que instalaras algo fuera de la tienda oficial dándole permisos.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Metí la contraseña pero me di cuenta enseguida. ¿Llego a tiempo?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Normalmente sí, y cuanto antes mejor, pero hazlo en el orden correcto: cambia la contraseña entrando por la aplicación oficial y después cierra todas las sesiones abiertas. Ese segundo paso es el que casi nadie da y el que decide: si se llevaron la cookie de sesión, pueden seguir dentro aunque la contraseña ya sea otra.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Hace falta formatear el ordenador?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Casi nunca. Solo tiene sentido plantearlo si descargaste un fichero y además lo ejecutaste, y ni siquiera entonces es el primer paso: antes van cambiar las contraseñas desde otro dispositivo y pasar un análisis completo. Formatear porque hiciste clic es como cambiar la cerradura porque alguien llamó al timbre.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Sirve de algo pasar el antivirus?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Sirve si ejecutaste algo; si solo abriste la página, no hay nada que encontrar. Y en ese caso usa el que ya trae el sistema, con un análisis completo en vez de rápido. Instalar dos o tres antivirus más no multiplica la protección: se interfieren entre ellos y suelen dejar el equipo peor.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Fue en el ordenador del trabajo. ¿Aviso?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Sí, ya, y aunque creas que no pasó nada. En una empresa la información importa más que la culpa: avisar pronto permite revisar accesos y cortar por lo sano, y avisar tarde es lo que convierte un incidente pequeño en uno grande. Nadie ha sido despedido por avisar rápido de un clic; por callarlo tres días, alguno sí.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Seguir leyendo</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../correo-hackeado/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Me han hackeado el correo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../tarjeta-web-falsa/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">He metido mi tarjeta en una web falsa</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

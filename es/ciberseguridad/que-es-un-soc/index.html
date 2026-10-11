@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qué es un SOC (Security Operations Center) | Breachfolio</title>
+  <meta name="description" content="Un SOC es el equipo que monitoriza, detecta, prioriza y responde a amenazas 24/7. Qué hace de verdad un SOC, cómo fluye una alerta y cómo montarlo." />
+  <meta name="keywords" content="qué es un soc" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-a-soc/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-a-soc/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Qué es un SOC (Security Operations Center) | Breachfolio" />
+  <meta property="og:description" content="Un SOC es el equipo que monitoriza, detecta, prioriza y responde a amenazas 24/7. Qué hace de verdad un SOC, cómo fluye una alerta y cómo montarlo." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-soc.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Qué es un SOC (Security Operations Center) | Breachfolio" />
+  <meta name="twitter:description" content="Un SOC es el equipo que monitoriza, detecta, prioriza y responde a amenazas 24/7. Qué hace de verdad un SOC, cómo fluye una alerta y cómo montarlo." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-soc.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Qué es un SOC (Security Operations Center)",
+      "description": "Un SOC es el equipo que monitoriza, detecta, prioriza y responde a amenazas 24/7. Qué hace de verdad un SOC, cómo fluye una alerta y cómo montarlo.",
+      "image": "https://breachfolio.com/assets/img/hero-soc.webp",
+      "datePublished": "2026-07-16",
+      "dateModified": "2026-07-16",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" },
+      "inLanguage": "es",
+      "keywords": "qué es un soc"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Qué es un SOC (Security Operatio…", "item": "https://breachfolio.com/es/ciberseguridad/que-es-un-soc/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/que-es-un-soc/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Es un SOC lo mismo que un NOC?", "acceptedAnswer": { "@type": "Answer", "text": "No. Un NOC (Network Operations Center, centro de operaciones de red) mantiene los sistemas en marcha y con buen rendimiento: disponibilidad, uptime, latencia, capacidad. Un SOC mantiene los sistemas seguros, detectando y respondiendo a ataques. Vigilan infraestructura que se solapa y ambos funcionan las 24 horas, pero sus objetivos divergen: un NOC pregunta \"¿funciona?\" mientras que un SOC pregunta \"¿alguien lo está atacando?\". Las organizaciones grandes operan ambos, a veces codo con codo." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un SOC interno y uno externalizado?", "acceptedAnswer": { "@type": "Answer", "text": "Un SOC interno lo dotan y operan tus propios empleados, lo que te da máximo contexto y control a un coste fijo alto y difícil de sostener 24/7. Un SOC externalizado (un proveedor MSSP o MDR) alquila esa capacidad: más rápido de poner en marcha y más barato para cubrir noches, pero con menos contexto de negocio y, en el caso del MSSP, a menudo más reenvío de alertas que respuesta práctica. Muchas organizaciones acaban en un híbrido cogestionado: equipo interno de día, proveedor para fuera de horario y picos." } },
+        { "@type": "Question", "name": "¿Qué hace en realidad un analista de SOC?", "acceptedAnswer": { "@type": "Answer", "text": "Sobre todo triaje e investigación. Un analista de Nivel 1 trabaja la cola de alertas y decide, para cada una, si es un falso positivo, algo benigno o algo que merece escalarse. Los niveles superiores recogen esas escalaciones, investigan alcance y causa raíz, ejecutan la respuesta a incidentes, buscan amenazas que no han disparado ninguna alerta y afinan las detecciones. El día tiene mucho menos de \"hacking\" y mucho más de reconocimiento disciplinado de patrones sobre datos ruidosos." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre un SOC y un CSIRT o CERT?", "acceptedAnswer": { "@type": "Answer", "text": "Un SOC es monitorización y detección continuas: el equipo siempre activo que vigila por si hay problemas. Un CSIRT (Computer Security Incident Response Team, equipo de respuesta a incidentes de seguridad) o CERT es el grupo centrado en la respuesta que toma el relevo cuando se confirma algo serio, encargándose de la contención, el forense y la recuperación. En muchas organizaciones el nivel sénior del SOC es el CSIRT; en otras son equipos separados. Piensa en el SOC como el detector de humo y la alarma, y en el CSIRT como los bomberos." } },
+        { "@type": "Question", "name": "¿Cuánto cuesta un SOC y por qué es tan caro?", "acceptedAnswer": { "@type": "Answer", "text": "El coste dominante no son las herramientas: son las personas. Una cobertura 24/7 de verdad requiere varios analistas repartidos en turnos, y el personal cualificado de SOC es escaso y muy demandado, así que tanto los salarios como la rotación son altos. A eso se suma el licenciamiento del SIEM (a menudo tarificado por volumen de datos, que crece sin parar), más las suscripciones de EDR, SOAR e inteligencia de amenazas. Esa cuenta de personal más datos es justo la razón de que existan los modelos externalizados y cogestionados: reparten esos costes fijos entre muchos clientes." } },
+        { "@type": "Question", "name": "¿Necesitan un SOC las empresas pequeñas?", "acceptedAnswer": { "@type": "Answer", "text": "Necesitan la función, no necesariamente la sala ni la plantilla. Una empresa pequeña rara vez justifica un SOC interno completo, pero aun así necesita a alguien monitorizando y listo para responder, que es justo lo que se diseñaron para ofrecer los modelos MDR y cogestionado. La respuesta equivocada es dar por hecho que eres demasiado pequeño para ser un objetivo; los ataques automatizados y oportunistas no comprueban el tamaño de tu empresa antes de llamar a la puerta." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Qué es un SOC (Security Operatio…</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-soc.webp" alt="Qué es un SOC (Security Operations Center)." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · SOC</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Qué es un SOC (Security Operations Center).</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Un SOC es el equipo que monitoriza, detecta, prioriza y responde a amenazas 24/7. Qué hace de verdad un SOC, cómo fluye una alerta y cómo montarlo.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>16 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Pregunta a diez personas qué es un SOC y la mitad señalará una sala a oscuras llena de pantallas. Esa imagen no es falsa, pero es lo menos importante. Un <strong>SOC (Security Operations Center, centro de operaciones de seguridad)</strong> no es una sala ni un producto que compras: es una <strong>función</strong>, el equipo permanente, los procesos y las herramientas con los que una organización vigila sus sistemas, decide qué es un ataque real y actúa antes de que se convierta en una brecha. Hay SOC que ocupan una sala de guerra, otros son totalmente remotos y algunos son tres personas que se pasan un teléfono de guardia. Las pantallas son atrezo. Lo que importa es el trabajo.</p>
+
+<p>La ciberseguridad es un deporte de equipo, y el SOC es el equipo que nunca se va a casa. Los cortafuegos, los agentes de endpoint y los proveedores de identidad generan señales cada segundo del día; alguien tiene que leerlas, separar el ruido del único evento que importa y actuar mientras todavía importa. Ese "alguien", organizado en turnos y flujos de trabajo, es el SOC.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 432" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Ingesta de logs</text><path d="M 192 53 L 192 72" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 68 L 192 73 L 196 68" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="78" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="78" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="107" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Detección</text><path d="M 192 129 L 192 148" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 144 L 192 149 L 196 144" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="154" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="154" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="183" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Triaje</text><path d="M 192 205 L 192 224" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 220 L 192 225 L 196 220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="230" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="230" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="259" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Investigación</text><path d="M 192 281 L 192 300" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 296 L 192 301 L 196 296" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="306" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="306" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="335" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Contención</text><path d="M 192 357 L 192 376" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 372 L 192 377 L 196 372" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="382" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="382" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="411" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Mejora (tuning)</text></svg>
+        <figcaption>El recorrido de una alerta por un SOC, de principio a fin.</figcaption>
+      </figure>
+      <h2>Qué es de verdad un SOC (y por qué no es una sala)</h2>
+<p>Las organizaciones montan un SOC por una razón contundente: los ataques no esperan al horario de oficina, y detectar sin responder no es más que logging caro. Un escáner de vulnerabilidades te dice dónde eres débil. Un SOC te dice cuándo alguien está explotando activamente esa debilidad, y te lleva a contenerlo. El valor es <strong>continuo</strong>: cobertura durante noches, fines de semana y festivos, porque es justo cuando los adversarios prefieren moverse.</p>
+
+<p>La otra razón es la consolidación. Los entornos modernos se reparten entre portátiles, servidores, cuentas cloud, aplicaciones SaaS y sistemas de identidad, cada uno con sus propios logs y alertas. Por su cuenta, esas señales son cien alarmas de incendio inconexas. El SOC las reúne en un solo sitio, las correlaciona y convierte "un inicio de sesión aquí, un archivo allá, un proceso raro por allí" en una única historia coherente: <em>esta cuenta fue tomada, y hasta aquí llegó.</em></p>
+
+<h2>Qué hace un SOC un martes cualquiera</h2>
+<p>Quita el marketing y el trabajo diario se reduce a cinco actividades recurrentes. Se solapan, y un mismo analista suele encadenar varias en una hora, pero conviene nombrarlas con claridad:</p>
+
+<ul>
+  <li><strong>Monitorización.</strong> Vigilar las colas de alertas y los cuadros de mando alimentados por todas las fuentes de logs del entorno. Es la base: ojos en la pantalla o, cada vez más, ojos en una cola bien afinada.</li>
+  <li><strong>Detección.</strong> Convertir telemetría en bruto en alertas con sentido mediante reglas, correlación y analítica de comportamiento. Una buena detección es la diferencia entre pillar una intrusión y archivar la prueba de una que se te escapó.</li>
+  <li><strong>Triaje.</strong> El reflejo central del oficio: para cada alerta, decidir rápido si es un falso positivo, un verdadero positivo benigno (real pero autorizado) o algo que hay que escalar y trabajar.</li>
+  <li><strong>Investigación.</strong> Una vez que una alerta sobrevive al triaje, tirar del hilo –qué host, qué usuario, qué se ejecutó, qué habló con qué– para establecer el alcance y la causa raíz.</li>
+  <li><strong>Respuesta a incidentes.</strong> Cuando se confirma, contener el daño, erradicar el punto de apoyo, recuperar y dejar por escrito qué pasó para que no vuelva a ocurrir igual.</li>
+</ul>
+
+<p>Todo lo demás que hace un SOC –threat hunting, ingeniería de detección, reporte a dirección– cuelga de estas cinco. Si entiendes cómo viaja una sola alerta a través de ellas, entiendes el SOC.</p>
+
+<h2>La vida de una alerta, de principio a fin</h2>
+<p>Las definiciones abstractas no se quedan, así que sigamos una alerta real de cabo a rabo. Es una habitual: <strong>viaje imposible</strong>, un inicio de sesión desde una ubicación a la que el mismo usuario no podría haber llegado físicamente en el tiempo transcurrido desde su último acceso.</p>
+
+<p><strong>Ingesta y detección.</strong> El proveedor de identidad de la empresa vuelca los logs de inicio de sesión en el SIEM. Una regla de correlación detecta que el usuario <code>j.martin</code> se autenticó desde la oficina corporativa a las 09:04 y, de nuevo, desde una IP geolocalizada a dos husos horarios de distancia a las 09:26 y, crucialmente, el segundo inicio de sesión <em>superó</em> la autenticación multifactor. La regla dispara una alerta a la cola.</p>
+
+<pre tabindex="0"><code>[ALERT] rule: identity.impossible_travel   severity: HIGH
+user:     j.martin@corp.example
+event_1:  2026-07-14 09:04:11  IP 198.51.100.20  (oficina / esperado)
+event_2:  2026-07-14 09:26:47  IP 203.0.113.77   (ASN de datacenter, extranjero)
+mfa:      SATISFIED on event_2
+mapping:  ATT&CK T1078 Valid Accounts</code></pre>
+
+<p><strong>Triaje.</strong> Un analista de Nivel 1 la coge. Primera pregunta: ¿es solo una VPN o un proxy corporativo lo que hace que el usuario <em>parezca</em> extranjero? Lo comprueba: la segunda IP pertenece al rango de datacenter de un proveedor de hosting, no a una salida corporativa conocida. Que el MFA esté superado es el detalle que convierte un encogimiento de hombros en una preocupación: una contraseña robada por sí sola no debería pasar el MFA. Esto no es un falso positivo limpio. Se escala.</p>
+
+<p><strong>Investigación.</strong> Un analista de Nivel 2 toma el relevo y abre el foco. Saca los logs de identidad y ve que la segunda sesión creó de inmediato un nuevo <strong>consentimiento de aplicación OAuth</strong> y una regla de bandeja de entrada que reenvía automáticamente los correos de finanzas a una dirección externa: comportamiento clásico posterior a un compromiso. Cruza la telemetría del endpoint (EDR) del portátil de j.martin y no encuentra nada malicioso ahí, lo que apunta a un <strong>robo de token de sesión</strong> o a una aprobación por fatiga de MFA antes que a malware en el dispositivo. El alcance ya está claro: la cuenta está comprometida, el atacante tiene tokens de sesión válidos y ya está preparando el robo de datos.</p>
+
+<p><strong>Contención y respuesta.</strong> El equipo se mueve. Deshabilita la cuenta, <strong>revoca todas las sesiones activas y los tokens de refresco</strong> (deshabilitar la contraseña no basta cuando el atacante tiene tokens vivos), borra la regla maliciosa de la bandeja y la concesión OAuth ilegítima, fuerza un restablecimiento de credenciales fuera de banda y revisa los correos reenviados para calibrar el impacto. Como el punto débil era el token –no el dispositivo–, aislar el portátil no habría servido de nada; revocar las sesiones es lo que de verdad corta el acceso al atacante.</p>
+
+<p><strong>Mejora y afinado.</strong> El último paso es el que los SOC flojos se saltan. El equipo escribe una nota breve tras el incidente y luego la realimenta en la detección: añadir o afinar una regla para <em>nuevas concesiones de consentimiento OAuth en cuentas privilegiadas</em>, alertar sobre <em>reglas de reenvío automático a dominios externos</em> y bajar el ruido de la regla de viaje imposible para que la próxima de verdad no quede enterrada. La alerta que costó una hora de trabajo se convierte en una detección que la próxima vez salta en segundos. Ese bucle –cada incidente mejora la siguiente detección– es lo que separa a un SOC que madura de uno que reaprende siempre la misma lección.</p>
+
+<h2>El pipeline de detección: de los logs al SIEM, a las reglas y al SOAR</h2>
+<p>Detrás de cada alerta hay un pipeline, y vale la pena ver el conjunto y no solo las herramientas. Tiene cuatro etapas.</p>
+
+<h3>1. Fuentes de logs: la materia prima</h3>
+<p>La detección solo es tan buena como sus entradas. Un SOC competente ingiere telemetría de cuatro grandes dominios, y las lagunas en cualquiera de ellos son puntos ciegos en los que un atacante puede vivir:</p>
+<ul>
+  <li><strong>Endpoint</strong>: agentes EDR en portátiles y servidores; lanzamientos de procesos, escrituras de archivos, cambios de registro, ejecución de scripts. Aquí es donde ves lo que realmente <em>se ejecutó</em>.</li>
+  <li><strong>Red</strong>: cortafuegos, proxies, DNS y NetFlow; quién habló con quién, y esa conexión saliente rara que parece command-and-control.</li>
+  <li><strong>Identidad</strong>: el proveedor de identidad y el directorio; inicios de sesión, eventos de MFA, cambios de privilegios. En entornos cloud-first, la identidad es el nuevo perímetro y a menudo el primer sitio donde asoma un compromiso.</li>
+  <li><strong>Cloud y SaaS</strong>: logs de plano de control y de auditoría de los proveedores cloud y las aplicaciones de negocio; nuevas claves de API, permisos cambiados, descargas masivas.</li>
+</ul>
+
+<h3>2. SIEM: el sistema nervioso central</h3>
+<p>Todo eso desemboca en una plataforma <strong>SIEM (Security Information and Event Management, gestión de información y eventos de seguridad)</strong>: la capa de agregación y correlación que normaliza formatos de log dispares en algo consultable y permite que una sola regla razone a través de varias fuentes. La alerta de viaje imposible de antes solo existe porque el SIEM pudo alinear dos eventos de identidad por usuario y hora. El SIEM es donde viven las detecciones y donde los analistas pivotan durante una investigación.</p>
+
+<h3>3. Reglas de detección: convertir datos en alertas</h3>
+<p>Un montón de logs, por sí solo, no detecta nada. Las <strong>reglas de detección:</strong> desde firmas simples hasta lógica de correlación y analítica de comportamiento– son las que convierten la telemetría en una alerta que merece la atención de una persona. Escribirlas y afinarlas es una disciplina en sí misma (ingeniería de detección) y es un equilibrio constante entre pillar ataques reales y ahogar a los analistas en ruido.</p>
+
+<h3>4. SOAR: automatizar lo aburrido</h3>
+<p><strong>SOAR (Security Orchestration, Automation and Response, orquestación, automatización y respuesta de seguridad)</strong> se sitúa por encima y se encarga del trabajo repetitivo de pegamento: enriquecer una alerta con contexto de inteligencia de amenazas, abrir un caso, extraer los datos de endpoint relacionados, incluso auto-contener en situaciones claras. El SOAR no sustituye a los analistas; elimina los veinte minutos de copiar y pegar alrededor de cada alerta para que dediquen su criterio a donde de verdad hace falta. Profundizamos en todo esto en <a href="../herramientas-de-un-soc/" target="_blank" rel="noopener noreferrer">el stack del SOC: SIEM, SOAR y EDR</a>; aquí son solo las estaciones del pipeline.</p>
+
+<h2>Niveles: N1, N2, N3</h2>
+<p>Los SOC más grandes organizan a los analistas en niveles para que el problema adecuado llegue al nivel de destreza adecuado sin hacer perder el tiempo a nadie.</p>
+<ul>
+  <li><strong>Nivel 1 (triaje).</strong> Primera línea. Trabaja la cola de alertas, resuelve los falsos positivos obvios y escala el resto. Mucho volumen, decisiones rápidas.</li>
+  <li><strong>Nivel 2 (investigación).</strong> Recoge las escalaciones, hace análisis más profundo, gestiona incidentes reales y empieza a dar forma a las detecciones.</li>
+  <li><strong>Nivel 3 (hunting e ingeniería).</strong> Trabajo sénior: threat hunting proactivo, ingeniería de detección, forense y los incidentes difíciles. A menudo se solapa con la parte de construcción del blue team.</li>
+</ul>
+<p>Los SOC más pequeños comprimen todo esto en una o dos personas que se lo ponen todo. Para un desglose completo de quién hace qué, cómo van los turnos y cómo se paga cada rol, mira <a href="../roles-de-un-soc/" target="_blank" rel="noopener noreferrer">dentro de un SOC: roles y niveles del equipo</a>.</p>
+
+<h2>Construir, comprar o combinar: modelos de aprovisionamiento</h2>
+<p>No todas las organizaciones operan su propio SOC, y "tener un SOC" puede significar cosas muy distintas. Hay cuatro modelos habituales, y el adecuado depende del presupuesto, del talento interno y de cuánto control necesites conservar.</p>
+
+<table>
+  <thead>
+    <tr><th>Modelo</th><th>Qué es</th><th>A favor</th><th>En contra</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Interno</strong></td>
+      <td>Contratas, dotas de personal y operas todo el SOC internamente.</td>
+      <td>Máximo contexto sobre tu entorno; control total; conocimiento institucional profundo.</td>
+      <td>Caro; difícil cubrir 24/7; cargas solo con el problema de contratación y retención.</td>
+    </tr>
+    <tr>
+      <td><strong>MSSP</strong></td>
+      <td>Un Managed Security Service Provider (proveedor de servicios de seguridad gestionados) monitoriza tus alertas, normalmente desde su propio SOC.</td>
+      <td>Cobertura rentable; alguien vigila fuera de horario; rápido de poner en marcha.</td>
+      <td>A menudo reenvía alertas más que responde a fondo; menos contexto sobre tu negocio; el incidente real lo sigues gestionando tú.</td>
+    </tr>
+    <tr>
+      <td><strong>MDR</strong></td>
+      <td>Managed Detection and Response (detección y respuesta gestionadas): un MSSP que además investiga y responde activamente, a menudo con sus propias herramientas.</td>
+      <td>Orientado a resultados; contención real, no solo tickets; ideal para equipos sin profundidad interna.</td>
+      <td>Más caro que un MSSP a secas; quedas atado a su stack; la autoridad de respuesta hay que negociarla con cuidado.</td>
+    </tr>
+    <tr>
+      <td><strong>Cogestionado</strong></td>
+      <td>Un híbrido: tu equipo lleva el día y el contexto; un proveedor cubre noches, picos o destrezas especializadas.</td>
+      <td>Lo mejor de ambos: contexto interno más cobertura 24 horas; escala sin plantilla completa.</td>
+      <td>La responsabilidad compartida exige traspasos rigurosos; una propiedad difusa deja caer incidentes si la gobernanza es débil.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Las métricas que de verdad importan</h2>
+<p>Un SOC que no puede medirse no puede mejorar. Un puñado de métricas hace casi todo el trabajo útil, y cada una responde a una pregunta concreta sobre cómo rinde el equipo.</p>
+<ul>
+  <li><strong>MTTD (Mean Time to Detect, tiempo medio de detección).</strong> Cuánto tarda el SOC en darse cuenta desde que empieza la actividad maliciosa. Cuanto más bajo, mejor; es la medida estrella de la calidad de detección.</li>
+  <li><strong>MTTR (Mean Time to Respond, tiempo medio de respuesta).</strong> Cuánto pasa desde la detección hasta la contención o resolución. (Ojo con la definición: algunos equipos leen la "R" como responder, remediar o resolver, así que acordad cuál antes de comparar cifras.)</li>
+  <li><strong>Dwell time (tiempo de permanencia).</strong> La ventana total en que un atacante estuvo dentro antes de ser expulsado, desde el compromiso inicial hasta la contención completa. Es la métrica que mejor captura la exposición real. Los informes del sector llevan años registrando una tendencia a la baja del dwell time a medida que madura la detección, pero sigue variando enormemente según la organización, así que trata cualquier cifra concreta con cautela.</li>
+  <li><strong>Tasa de falsos positivos.</strong> La proporción de alertas que resultan no ser nada. Una tasa alta no es solo esfuerzo desperdiciado: provoca la fatiga de alertas que hace que los equipos se pierdan lo de verdad.</li>
+  <li><strong>Cobertura.</strong> Cuánto del manual de jugadas del atacante puedes detectar de verdad. La forma estándar de expresarlo es mapear tus detecciones sobre las técnicas de <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> y mirar el heatmap resultante; los huecos son las técnicas que ahora mismo se te escaparían.</li>
+</ul>
+
+<h2>Por qué operar un SOC es genuinamente difícil</h2>
+<p>Nada de esto es fácil, y los modos de fallo son lo bastante consistentes como para ponerles nombre:</p>
+<ul>
+  <li><strong>Fatiga de alertas.</strong> Cuando la cola nunca se vacía y la mayoría de las alertas son ruido, los analistas empiezan a firmar sin mirar. La alerta peligrosa es la que llega en la sexta hora de un turno lleno de falsos positivos.</li>
+  <li><strong>Deuda de afinado.</strong> Las reglas de detección se pudren. Los entornos cambian, aparecen aplicaciones nuevas y la regla precisa de ayer se convierte en el generador de ruido de hoy. El afinado no se termina nunca.</li>
+  <li><strong>Lagunas de cobertura.</strong> Solo puedes detectar aquello de lo que tienes logs. Una fuente de logs que falta –una cuenta cloud sin monitorizar, un servidor olvidado– es una habitación con las luces apagadas, y los atacantes buscan justo esas.</li>
+  <li><strong>Retención de talento.</strong> El trabajo de SOC, sobre todo el de Nivel 1, quema a la gente. El trabajo por turnos, el alto volumen de alertas y el triaje repetitivo disparan la rotación, y cada baja se lleva conocimiento específico del entorno. La automatización y una carrera profesional real desde N1 hacia arriba son las defensas habituales.</li>
+</ul>
+
+<h2>La curva de madurez del SOC</h2>
+<p>No todos los SOC están al mismo nivel, y la forma honesta de pensar en el progreso es una curva de lo reactivo a lo proactivo. Puedes situar en ella a casi cualquier equipo.</p>
+
+<table>
+  <thead>
+    <tr><th>Etapa</th><th>Postura</th><th>Cómo se ve</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Reactivo</strong></td><td>Solo alarmas</td><td>Espera a que lleguen alertas, las trabaja ad hoc, apenas afina, cobertura desconocida.</td></tr>
+    <tr><td><strong>Estructurado</strong></td><td>Con proceso</td><td>Niveles definidos, runbooks, métricas registradas, triaje consistente. El bucle de la alerta funciona.</td></tr>
+    <tr><td><strong>Proactivo</strong></td><td>Hunting</td><td>Threat hunting por hipótesis, ingeniería de detección como práctica, objetivos de cobertura guiados por ATT&amp;CK.</td></tr>
+    <tr><td><strong>Optimizado</strong></td><td>Autooptimizado</td><td>La automatización gestiona la respuesta rutinaria; cada incidente afina la detección de forma medible; la inteligencia marca las prioridades.</td></tr>
+  </tbody>
+</table>
+
+<p>El salto que más importa es el de reactivo a proactivo: pasar de solo responder a las alarmas a buscar activamente al atacante que aún no ha hecho saltar ninguna. Eso es el <strong>threat hunting</strong>, y es la señal más clara de que un SOC ha madurado.</p>
+
+<h2>Dónde encaja el SOC: blue team, respuesta a incidentes e inteligencia de amenazas</h2>
+<p>El SOC no opera solo: es el corazón operativo de un esfuerzo defensivo más amplio. El <strong>blue team</strong> es la disciplina defensiva más amplia; el SOC es su brazo operativo siempre activo, aunque los dos términos se usan de forma intercambiable (mira <a href="../equipo-rojo-azul-y-morado-explicado/" target="_blank" rel="noopener noreferrer">equipos red, blue y purple explicados</a>). La <strong>respuesta a incidentes</strong> es el extremo afilado al que el SOC escala cuando algo se confirma serio: a veces un CSIRT dedicado, a veces el propio Nivel 3 del SOC. Y la <strong>inteligencia de amenazas</strong> lo alimenta desde fuera: saber qué adversarios y técnicas están activos ahora mismo, para que las detecciones y los hunts apunten a lo que los atacantes hacen de verdad y no a lo que hicieron el año pasado. Entender las amenazas en sí es trabajo aguas arriba; nuestra guía de <a href="../modelado-de-amenazas-con-stride/" target="_blank" rel="noopener noreferrer">modelado de amenazas con STRIDE</a> es una buena entrada. Un SOC sano es un núcleo al que se conectan estos tres, no un silo.</p>
+
+<h2>Herramientas y marcos que conviene conocer</h2>
+<p>Dos marcos y un artículo más a fondo te llevarán mucho más allá de esta visión general:</p>
+<ul>
+  <li><strong><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a></strong>: una base de conocimiento gratuita y curada de tácticas y técnicas reales de adversarios. Es el lenguaje común que usan los SOC para describir ataques, medir la cobertura de detección y planificar hunts. Si aprendes un solo marco, que sea este.</li>
+  <li><strong><a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61</a></strong>: la Computer Security Incident Handling Guide, que establece el ciclo de vida del incidente sobre el que se construye el proceso de respuesta de todo SOC: preparación; detección y análisis; contención, erradicación y recuperación; y actividad posterior al incidente. El modelo de seis pasos de <a href="https://www.sans.org/" target="_blank" rel="noopener noreferrer">SANS</a> (recordado a menudo como PICERL) cubre lo mismo con un desglose ligeramente distinto.</li>
+  <li><strong>El stack de herramientas.</strong> Aquí, a propósito, dejamos las herramientas en un papel secundario. Para la comparación real de plataformas SIEM, SOAR y EDR y cómo encajan, lee <a href="../herramientas-de-un-soc/" target="_blank" rel="noopener noreferrer">el stack del SOC: SIEM, SOAR y EDR</a>.</li>
+</ul>
+
+<p>Quítalo todo y un SOC es una promesa simple hecha de forma continua: alguien está vigilando, alguien se dará cuenta y alguien actuará. Todo lo de arriba –los niveles, el pipeline, las métricas, la curva de madurez– no es más que la maquinaria que mantiene esa promesa a las tres de la madrugada.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es un SOC lo mismo que un NOC?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. Un NOC (Network Operations Center, centro de operaciones de red) mantiene los sistemas en marcha y con buen rendimiento: disponibilidad, uptime, latencia, capacidad. Un SOC mantiene los sistemas seguros, detectando y respondiendo a ataques. Vigilan infraestructura que se solapa y ambos funcionan las 24 horas, pero sus objetivos divergen: un NOC pregunta "¿funciona?" mientras que un SOC pregunta "¿alguien lo está atacando?". Las organizaciones grandes operan ambos, a veces codo con codo.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un SOC interno y uno externalizado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un SOC interno lo dotan y operan tus propios empleados, lo que te da máximo contexto y control a un coste fijo alto y difícil de sostener 24/7. Un SOC externalizado (un proveedor MSSP o MDR) alquila esa capacidad: más rápido de poner en marcha y más barato para cubrir noches, pero con menos contexto de negocio y, en el caso del MSSP, a menudo más reenvío de alertas que respuesta práctica. Muchas organizaciones acaban en un híbrido cogestionado: equipo interno de día, proveedor para fuera de horario y picos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué hace en realidad un analista de SOC?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sobre todo triaje e investigación. Un analista de Nivel 1 trabaja la cola de alertas y decide, para cada una, si es un falso positivo, algo benigno o algo que merece escalarse. Los niveles superiores recogen esas escalaciones, investigan alcance y causa raíz, ejecutan la respuesta a incidentes, buscan amenazas que no han disparado ninguna alerta y afinan las detecciones. El día tiene mucho menos de "hacking" y mucho más de reconocimiento disciplinado de patrones sobre datos ruidosos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre un SOC y un CSIRT o CERT?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un SOC es monitorización y detección continuas: el equipo siempre activo que vigila por si hay problemas. Un CSIRT (Computer Security Incident Response Team, equipo de respuesta a incidentes de seguridad) o CERT es el grupo centrado en la respuesta que toma el relevo cuando se confirma algo serio, encargándose de la contención, el forense y la recuperación. En muchas organizaciones el nivel sénior del SOC es el CSIRT; en otras son equipos separados. Piensa en el SOC como el detector de humo y la alarma, y en el CSIRT como los bomberos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuánto cuesta un SOC y por qué es tan caro?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El coste dominante no son las herramientas: son las personas. Una cobertura 24/7 de verdad requiere varios analistas repartidos en turnos, y el personal cualificado de SOC es escaso y muy demandado, así que tanto los salarios como la rotación son altos. A eso se suma el licenciamiento del SIEM (a menudo tarificado por volumen de datos, que crece sin parar), más las suscripciones de EDR, SOAR e inteligencia de amenazas. Esa cuenta de personal más datos es justo la razón de que existan los modelos externalizados y cogestionados: reparten esos costes fijos entre muchos clientes.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Necesitan un SOC las empresas pequeñas?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Necesitan la función, no necesariamente la sala ni la plantilla. Una empresa pequeña rara vez justifica un SOC interno completo, pero aun así necesita a alguien monitorizando y listo para responder, que es justo lo que se diseñaron para ofrecer los modelos MDR y cogestionado. La respuesta equivocada es dar por hecho que eres demasiado pequeño para ser un objetivo; los ataques automatizados y oportunistas no comprueban el tamaño de tu empresa antes de llamar a la puerta.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../roles-de-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Dentro de un SOC: roles y niveles del equipo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../herramientas-de-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">El stack del SOC: SIEM, SOAR y EDR</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../equipo-rojo-azul-y-morado-explicado/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Equipos red, blue y purple explicados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../modelado-de-amenazas-con-stride/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Modelado de amenazas con STRIDE</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

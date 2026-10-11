@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="compare">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Splunk vs Wazuh vs ELK: which SIEM fits | Breachfolio</title>
+  <meta name="description" content="Three SIEM platforms, three completely different cost models. Which one actually fits your team's budget and skill set, not just its feature list." />
+  <meta name="keywords" content="splunk vs wazuh vs elk, splunk vs wazuh, wazuh vs elastic security, best free siem, is wazuh a good splunk alternative, siem cost comparison, splunk ingestion pricing, open source siem for small teams, wazuh host intrusion detection, elk stack vs splunk pricing, siem for regulated industry, free siem with hids" />
+  <link rel="canonical" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/splunk-vs-wazuh-vs-elk/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Splunk vs Wazuh vs ELK: which SIEM fits | Breachfolio" />
+  <meta property="og:description" content="Three SIEM platforms, three completely different cost models. Which one actually fits your team's budget and skill set, not just its feature list." />
+  <meta property="og:url" content="https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cmp-siem.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Splunk vs Wazuh vs ELK: which SIEM fits | Breachfolio" />
+  <meta name="twitter:description" content="Three SIEM platforms, three completely different cost models. Which one actually fits your team's budget and skill set, not just its feature list." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cmp-siem.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Splunk vs Wazuh vs ELK: which SIEM fits your budget",
+      "description": "Three SIEM platforms, three completely different cost models. Which one actually fits your team's budget and skill set, not just its feature list.",
+      "image": "https://breachfolio.com/assets/img/thumb-cmp-siem.webp",
+      "datePublished": "2026-07-08", "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/"
+      },
+      "inLanguage": "en",
+      "keywords": "Splunk vs Wazuh vs ELK, SIEM comparison, splunk vs wazuh, wazuh vs elastic security, best free siem, is wazuh a good splunk alternative, splunk ingestion pricing, open source siem for small teams, wazuh host intrusion detection"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compare",
+          "item": "https://breachfolio.com/compare/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Splunk vs Wazuh vs ELK",
+          "item": "https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which SIEM is best for a small team on a tight budget?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wazuh. It is free and open source at any scale, and it combines centralized log analysis with host-based intrusion detection – file integrity monitoring, rootkit detection, and vulnerability detection – on the same lightweight agent, without a Splunk-style ingest-volume bill that can grow unpredictably."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Splunk worth the cost compared to Wazuh or ELK?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a regulated enterprise with existing Splunk expertise and a genuine support requirement, yes – the licensing cost is the price of a tool that actually gets operated properly and that auditors recognize by name. For a five-person team, a Splunk deployment nobody funded properly is usually worse than Wazuh's free, all-in-one model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Splunk priced compared to Wazuh and ELK?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Splunk is licensed primarily by the volume of data ingested per day, which can produce serious bill shock as log sources grow. Wazuh is free at any scale. ELK's core stack is free and self-managed, but Elastic Security's more advanced detection features live behind paid tiers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I choose ELK/Elastic Security if I'm already running Elastic Stack for logs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually yes – extending into Elastic Security is often the path of least resistance if you're already running Elastic for application logs, provided someone on the team genuinely understands Elasticsearch operations like sharding, index lifecycle management, and cluster sizing."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Compare</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Splunk vs Wazuh vs ELK</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../assets/img/thumb-cmp-siem.webp" alt="Hero illustration for: Splunk vs Wazuh vs ELK: which SIEM fits your budget." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">COMPARE</span>
+          <span class="text-muted">SIEM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Splunk vs Wazuh vs ELK: which SIEM fits your budget.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">Three genuinely different cost models wearing the same "SIEM" label. The right pick depends far more on your budget and team size than on any feature checklist.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-08">July 8, 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>10 min read</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p>Ask three security engineers which SIEM to buy and you will get three answers, delivered with the same certainty, for three completely different reasons. That is because "SIEM" is doing a lot of work as a label. <strong>Splunk</strong>, <strong>Wazuh</strong>, and the <strong>ELK / Elastic Stack</strong> all promise to centralize your logs and help you catch bad things happening on your network, but they are built on opposite assumptions about who is paying, who is operating the thing, and how much in-house expertise is available to keep it running. Comparing them on features alone misses the point. Comparing them on cost model and team fit is the comparison that actually survives a budget review.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Quick verdict</h2>
+
+<table>
+  <thead><tr><th>Use case</th><th>Pick</th></tr></thead>
+  <tbody>
+    <tr><td>Enterprise budget, need vendor support and polish</td><td>Splunk</td></tr>
+    <tr><td>Free/open-source, want built-in host-based intrusion detection too</td><td>Wazuh</td></tr>
+    <tr><td>Already running Elastic Stack for logs, want to add security</td><td>ELK / Elastic Security</td></tr>
+    <tr><td>Small team, tight budget, want something production-ready fast</td><td>Wazuh</td></tr>
+    <tr><td>Regulated industry needing a well-known, auditor-friendly vendor name</td><td>Splunk</td></tr>
+  </tbody>
+</table>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">How they actually differ</h2>
+
+<p><strong>Splunk</strong> is commercial software, and its pricing model is the single most consequential fact about it: you are licensed primarily by the volume of data you ingest per day, not by seats or hosts. That model scales beautifully when you are small and painfully once you are not: a few extra debug-level log sources, a new fleet of endpoints shipping verbose telemetry, and your daily ingest can quietly double. In exchange you get a genuinely enormous app and add-on ecosystem (Splunkbase has thousands of pre-built integrations), a search language, SPL, that experienced analysts consider best-in-class for ad-hoc investigation, and vendor support that regulated industries and auditors recognize by name. None of that is free, and the pricing conversation with procurement tends to happen after the technical team has already fallen in love with the product.</p>
+
+<p><strong>Wazuh</strong> takes the opposite bet: it is free and open-source at any scale, full stop. It is built on top of OpenSearch (a fork of Elasticsearch) and combines SIEM-style centralized log analysis with host-based intrusion detection running directly on the same lightweight agent – file integrity monitoring, rootkit detection, configuration assessment, and vulnerability detection all ship in one deployment, rather than requiring a separate HIDS product bolted alongside your log pipeline. The tradeoff is ecosystem size: Wazuh's community and third-party integration catalog is smaller than Splunk's, and the company behind it is considerably smaller than either Splunk Inc. or Elastic. What you get instead is a cost curve that stays flat as your data volume grows, which matters enormously once your log volume is the thing driving the rest of the industry's pricing model.</p>
+
+<p><strong>ELK / Elastic Stack:</strong> Elasticsearch, Logstash, and Kibana, with Elastic Security layered on top – sits in between on the open-core model. The core stack is free and self-managed, and it is genuinely powerful: flexible ingest pipelines, a mature query language, and a search engine that scales to serious data volumes when tuned correctly. Elastic Security's more advanced detection features, though, live behind paid tiers, and running the whole stack well – sharding strategy, index lifecycle management, cluster sizing – requires real in-house Elasticsearch operational expertise that a lot of teams underestimate until week three of a rollout.</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># Wazuh manager: checking which agents are actually reporting in</span>
+<span class="term-cmt">$</span> sudo /var/ossec/bin/agent_control -lc
+<span class="term-out">Wazuh agent_control. List of agents:</span>
+<span class="term-out">   ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active</span>
+<span class="term-ok">   ID: 003, Name: web-01, IP: 10.0.1.12, Active</span>
+<span class="term-ok">   ID: 007, Name: db-02, IP: 10.0.1.30, Active</span>
+<span class="term-warn">   ID: 011, Name: jump-host, IP: 10.0.1.5, Disconnected</span>
+
+<span class="term-out">Wazuh agent_control: Number of agents: 4</span></code></pre>
+
+<p>That single command doubles as a cost lesson: the same agent reporting host telemetry is also the file-integrity and rootkit sensor, at no incremental license cost – the kind of consolidation Splunk and Elastic both charge extra to approximate.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Where each one falls short</h2>
+
+<ul>
+  <li><strong>Splunk:</strong> ingestion-based pricing can produce serious bill shock as log volume grows organically – a new application, a noisier firewall, a cloud migration that doubles telemetry – and it is easy to underestimate the real number at procurement time, before production traffic patterns are known.</li>
+  <li><strong>Wazuh:</strong> a smaller community and commercial support ecosystem than the other two means fewer out-of-the-box integrations for niche or legacy log sources, and you will occasionally write your own decoder or rule rather than finding one already maintained upstream.</li>
+  <li><strong>ELK / Elastic Security:</strong> running it well at scale requires real in-house Elasticsearch operational skill – cluster health, shard sizing, and retention tuning are not optional homework – and the free self-managed tier alone lacks some of the security-specific detection features (certain analytics, prebuilt detection rules, endpoint response actions) that live behind Elastic's paid subscriptions.</li>
+</ul>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The verdict that survives budget review</h2>
+
+<p>Match the tool to your team's size, budget, and existing expertise – not to whichever product has the longest feature list on its homepage. A five-person security team is almost always better served by <strong>Wazuh's free, all-in-one model</strong> than by a Splunk deployment nobody funded properly, where the license renewal becomes a fight every year and the team ends up filtering out log sources just to stay under the ingest cap. Conversely, a regulated enterprise with existing Splunk expertise on staff and a genuine support requirement will find the licensing cost is the price of a tool that actually gets used properly, rather than the false economy of a free platform nobody has time to operate correctly. And if you are already running Elastic for application logs, extending into Elastic Security is frequently the path of least resistance – provided someone on the team actually understands how the cluster works underneath it. The SIEM that fits is the one your team and your budget can sustain past the first year, not the one that wins the feature comparison.</p>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+            <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+            <a class="ul-link" href="../../legal/about/">About us</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Previous</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">All Compare articles</div>
+        </a>
+        <a href="../snort-vs-suricata/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Next</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Snort vs Suricata</div>
+        </a>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Which SIEM is best for a small team on a tight budget?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Wazuh. It is free and open source at any scale, and it combines centralized log analysis with host-based intrusion detection – file integrity monitoring, rootkit detection, and vulnerability detection – on the same lightweight agent, without a Splunk-style ingest-volume bill that can grow unpredictably.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is Splunk worth the cost compared to Wazuh or ELK?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          For a regulated enterprise with existing Splunk expertise and a genuine support requirement, yes: the licensing cost is the price of a tool that actually gets operated properly and that auditors recognize by name. For a five-person team, a Splunk deployment nobody funded properly is usually worse than Wazuh's free, all-in-one model.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How is Splunk priced compared to Wazuh and ELK?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Splunk is licensed primarily by the volume of data ingested per day, which can produce serious bill shock as log sources grow. Wazuh is free at any scale. ELK's core stack is free and self-managed, but Elastic Security's more advanced detection features live behind paid tiers.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Should I choose ELK/Elastic Security if I'm already running Elastic Stack for logs?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Usually yes – extending into Elastic Security is often the path of least resistance if you're already running Elastic for application logs, provided someone on the team genuinely understands Elasticsearch operations like sharding, index lifecycle management, and cluster sizing.
+        </div>
+      </details>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">On this page</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Related</div>
+        <ul class="space-y-3">
+          <li><a href="../../cybersecurity/red-blue-purple-team-explained/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Red team, blue team, purple team</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">CYBERSECURITY · 9</div>
+          </a></li>
+          <li><a href="../../lab/lab-03-wazuh-siem-home-lab/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">A SIEM you can actually read (lab)</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LAB · 12</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

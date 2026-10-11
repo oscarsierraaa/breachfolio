@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Las disciplinas -INT: OSINT, SIGINT, HUMINT y más | Breachfolio</title>
+  <meta name="description" content="Dónde encaja OSINT entre las disciplinas de inteligencia: SIGINT, HUMINT, GEOINT, MASINT y TECHINT – qué recopila cada una, quién la usa y cómo se solapan." />
+  <meta name="keywords" content="disciplinas de inteligencia explicadas, OSINT vs SIGINT, qué es HUMINT, qué es GEOINT, MASINT explicado, TECHINT explicado, taxonomía de las disciplinas -INT, inteligencia de todas las fuentes" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/intelligence-disciplines-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Las disciplinas -INT: OSINT, SIGINT, HUMINT y más | Breachfolio" />
+  <meta property="og:description" content="Dónde encaja OSINT entre las disciplinas de inteligencia: SIGINT, HUMINT, GEOINT, MASINT y TECHINT – qué recopila cada una, quién la usa y cómo se solapan." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-int-disciplines.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Las disciplinas -INT: OSINT, SIGINT, HUMINT y más | Breachfolio" />
+  <meta name="twitter:description" content="Dónde encaja OSINT entre las disciplinas de inteligencia: SIGINT, HUMINT, GEOINT, MASINT y TECHINT – qué recopila cada una, quién la usa y cómo se solapan." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-int-disciplines.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Las disciplinas -INT: OSINT, SIGINT, HUMINT y más",
+      "description": "Dónde encaja OSINT entre las disciplinas de inteligencia: SIGINT, HUMINT, GEOINT, MASINT y TECHINT – qué recopila cada una, quién la usa y cómo se solapan.",
+      "image": "https://breachfolio.com/assets/img/hero-int-disciplines.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" },
+      "inLanguage": "es",
+      "keywords": "disciplinas de inteligencia explicadas, OSINT vs SIGINT, qué es HUMINT, qué es GEOINT, MASINT explicado, TECHINT explicado, taxonomía de las disciplinas -INT, inteligencia de todas las fuentes"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Las disciplinas -INT: OSINT, SIGINT, HUMINT y más", "item": "https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué significa «-INT» en terminología de inteligencia?", "acceptedAnswer": { "@type": "Answer", "text": "El sufijo «-INT» marca una disciplina de recopilación –una categoría definida por el tipo de fuente de la que procede la información, y no por el asunto investigado–. OSINT es inteligencia de fuentes abiertas y públicas; SIGINT es inteligencia de señales interceptadas; HUMINT es inteligencia de personas. La taxonomía existe porque cada tipo de fuente exige métodos de recopilación, herramientas, autoridad legal y conjuntos de habilidades distintos, así que las organizaciones de inteligencia (y, a menor escala, los investigadores de seguridad) organizan su trabajo en torno a qué disciplinas utiliza realmente una investigación concreta." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre OSINT y SIGINT?", "acceptedAnswer": { "@type": "Answer", "text": "OSINT se construye por entero a partir de información que ya está disponible públicamente: cualquiera puede acceder a la misma web, el mismo registro WHOIS o la misma publicación en redes sociales que consulta un investigador de OSINT. SIGINT se construye interceptando comunicaciones y señales electrónicas que no son públicas, como llamadas telefónicas, transmisiones de radio o emisiones de radar, lo que generalmente exige equipo de interceptación especializado y una autoridad legal que solo poseen las agencias gubernamentales. La línea práctica es el acceso: si puedes obtener la información sin interceptar una comunicación privada, es terreno de OSINT; si exige interceptar una señal que no estaba destinada a ti, es SIGINT y queda fuera de lo que cualquier investigador privado puede hacer legalmente." } },
+        { "@type": "Question", "name": "¿Es HUMINT lo mismo que la ingeniería social?", "acceptedAnswer": { "@type": "Answer", "text": "Están estrechamente relacionadas, pero no son idénticas. HUMINT es la disciplina de inteligencia más amplia de reunir información mediante la interacción humana directa: entrevistas, elicitación, informantes y construcción de relaciones. La ingeniería social, tal y como se usa en las pruebas de seguridad, es una aplicación específica de las técnicas de HUMINT orientada a manipular a un objetivo para que realice una acción o revele información, normalmente como parte de un test de penetración autorizado o una simulación de phishing. Todo encargo de ingeniería social usa métodos de HUMINT, pero HUMINT como disciplina es mucho más amplia que las pruebas de seguridad por sí solas: incluye entrevistas diplomáticas, periodísticas y de investigación legítimas que no tienen nada que ver con la manipulación." } },
+        { "@type": "Question", "name": "¿Pueden los civiles o investigadores privados usar GEOINT?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, en un grado considerable. Aunque el GEOINT más sensible –la asignación de tareas a satélites clasificados, datos de sensores de nivel militar– sigue restringido a las agencias gubernamentales, una gran cantidad de datos geoespaciales y de imágenes está ahora disponible abiertamente: proveedores comerciales de imágenes de satélite, Google Earth, OpenStreetMap y las imágenes incrustadas en las propias publicaciones de redes sociales. Este solapamiento es precisamente la razón por la que los investigadores de fuentes abiertas practican habitualmente una forma de GEOINT cuando geolocalizan una foto o un vídeo usando puntos de referencia, sombras y rasgos del terreno, incluso sin ningún acceso gubernamental." } },
+        { "@type": "Question", "name": "¿Por qué OSINT es la disciplina más usada fuera de las agencias gubernamentales?", "acceptedAnswer": { "@type": "Answer", "text": "OSINT se construye por entero sobre fuentes que ya son legalmente accesibles para el público, lo que significa que no requiere ninguna autoridad legal especial, acreditación gubernamental ni capacidad de interceptación para practicarse –a diferencia de SIGINT, MASINT o el GEOINT clasificado, que dependen de capacidades y potestades legales que están efectivamente reservadas a las agencias estatales–. Esa accesibilidad es la razón por la que OSINT es la disciplina que usan investigadores de seguridad, periodistas, equipos de inteligencia de amenazas e investigadores privados: es la única disciplina -INT en la que la barrera de entrada es la habilidad y la diligencia, y no la autoridad legal o el hardware especializado." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">ES</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Las disciplinas -INT: OSINT, SIGINT, HUMINT y más</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-int-disciplines.webp" alt="Un conjunto de canales de recopilación superpuestos que alimentan una sola imagen de inteligencia – las disciplinas -INT: OSINT, SIGINT, HUMINT, GEOINT, MASINT, TECHINT" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Las disciplinas -INT: dónde encaja OSINT entre ellas.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">OSINT, SIGINT, HUMINT, GEOINT, MASINT, TECHINT – la taxonomía completa en torno a la que se organiza el trabajo de inteligencia, qué recopila realmente cada una, y por qué OSINT es la que está abierta para todos los demás.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Nuestra <a href="../que-es-osint/">inmersión completa en OSINT</a> cubre una sola disciplina a fondo: las herramientas, el flujo de trabajo, la línea legal, el OPSEC. Lo que deliberadamente no hace es responder a una pregunta que surge en cuanto empiezas a leer sobre inteligencia en un sentido más amplio: si OSINT es inteligencia de fuentes abiertas, ¿qué son todos esos otros acrónimos <code>-INT</code> con los que te vas topando –SIGINT, HUMINT, GEOINT y el resto–? Este artículo es ese mapa. No te convertirá en experto en ninguna disciplina concreta, pero te dirá qué recopila realmente cada una, quién puede usarla de verdad y dónde encaja exactamente OSINT en ese espectro –lo cual, resulta, explica bastante bien por qué OSINT se convirtió en la disciplina por defecto para investigadores de seguridad, periodistas e investigadores privados que no llevan placa de ningún gobierno.</p>
+
+<h2>Por qué el trabajo de inteligencia se divide en disciplinas «-INT»</h2>
+
+<p>El trabajo de inteligencia profesional lleva mucho tiempo organizándose en torno a <strong>disciplinas de recopilación:</strong> categorías definidas no por el asunto investigado, sino por el <em>tipo de fuente</em> de la que procede la información–. Una pregunta como «¿qué está planeando esta organización?» podría responderse leyendo sus declaraciones públicas (OSINT), interceptando sus comunicaciones (SIGINT), hablando con alguien de dentro (HUMINT) o examinando imágenes de satélite de sus instalaciones (GEOINT). Cada tipo de fuente exige métodos de recopilación, herramientas, autoridad legal y formación completamente distintos, así que tratarlas como disciplinas separadas –cada una con su propio oficio– es sencillamente cómo se organiza el trabajo, ya sea dentro de una agencia de inteligencia nacional o de un equipo de seguridad mucho más pequeño.</p>
+
+<p>El patrón del sufijo es constante en todas ellas: coge el tipo de fuente, abrévialo y añade <code>-INT</code>. En cuanto conoces el patrón, los acrónimos desconocidos dejan de ser un misterio.</p>
+
+<h2>OSINT – inteligencia de fuentes abiertas</h2>
+
+<p>OSINT es inteligencia construida por entero a partir de fuentes que ya son, legítimamente, públicas: sitios web, registros DNS, resoluciones judiciales, registros mercantiles, redes sociales, imágenes de satélite disponibles comercialmente y datos de brechas ya públicos. Nada en OSINT exige acceso especial, una placa ni forzar nada: si un ciudadano de a pie con un navegador puede acabar encontrándolo, es terreno legítimo para OSINT. Esa accesibilidad es precisamente lo que la convierte en la única disciplina de esta lista que investigadores de seguridad, periodistas, analistas de inteligencia de amenazas e investigadores privados pueden practicar sin ninguna afiliación gubernamental.</p>
+
+<p>Tratamos OSINT en toda su profundidad en otro sitio: el ciclo de inteligencia, las herramientas por categoría, los límites legales y el OPSEC del investigador viven todos en <a href="../que-es-osint/">Qué es OSINT: herramientas y flujo de trabajo</a>. Considera este artículo el mapa del territorio circundante; aquel es la inmersión profunda en el territorio en sí.</p>
+
+<h2>SIGINT – inteligencia de señales</h2>
+
+<p>SIGINT es la inteligencia derivada de interceptar comunicaciones y emisiones electrónicas que nunca estuvieron pensadas para ser públicas –llamadas telefónicas, transmisiones de radio, señales de radar, enlaces por satélite–. Tradicionalmente se divide en dos subramas: <strong>COMINT</strong> (inteligencia de comunicaciones, interceptar el contenido de las conversaciones) y <strong>ELINT</strong> (inteligencia electrónica, analizar emisiones que no son comunicaciones, como las firmas de radar, para caracterizar las capacidades de un sistema sin necesidad de entender lo que «dice»).</p>
+
+<p>A diferencia de OSINT, la recopilación de SIGINT exige interceptar algo privado, lo que la sitúa firmemente en el terreno de las agencias de inteligencia nacionales que operan bajo una autoridad legal específica: no es una disciplina disponible para investigadores privados, e intentar interceptar comunicaciones a las que no tienes derecho de acceso es un delito grave en prácticamente cualquier jurisdicción. La línea divisoria entre OSINT y SIGINT es exactamente esta: OSINT lee lo que ya está abierto; SIGINT intercepta lo que no lo está.</p>
+
+<h2>HUMINT – inteligencia humana</h2>
+
+<p>HUMINT es, con diferencia, la disciplina de inteligencia más antigua: información obtenida mediante contacto interpersonal directo –entrevistas, elicitación, informantes cultivados y, en sus formas más adversariales, ingeniería social–. Donde OSINT es pasiva (lees lo que ya está publicado) y SIGINT es técnica (interceptas una señal), HUMINT es fundamentalmente relacional: depende de que una persona, de buen grado o no, proporcione información a través de la conversación.</p>
+
+<p>En un contexto de seguridad, las técnicas de HUMINT sustentan los encargos autorizados de ingeniería social: un pretexto telefónico para probar los procedimientos de verificación de una organización, o una campaña de phishing diseñada para obtener credenciales mediante un pretexto elaborado. En el momento en que un investigador de OSINT coge el teléfono y se abre camino hablando hacia la información en lugar de leerla de una fuente pública, ha salido de OSINT y ha entrado en HUMINT: una distinción que vale la pena mantener precisa, porque las técnicas al estilo HUMINT cargan con un peso legal y ético que el OSINT puro no tiene.</p>
+
+<h2>GEOINT – inteligencia geoespacial</h2>
+
+<p>GEOINT es la inteligencia derivada de imágenes y datos geográficos: fotos de satélite, imágenes aéreas, datos cartográficos y las pistas geográficas incrustadas dentro de cualquier foto o vídeo. El trabajo clásico de GEOINT incluye identificar la disposición de unas instalaciones a partir de imágenes cenitales o rastrear cambios en una ubicación a lo largo del tiempo comparando pasadas de satélite históricas.</p>
+
+<p>GEOINT se solapa con OSINT más que casi cualquier otro par de esta lista, porque una cantidad sustancial de datos geoespaciales está ahora disponible abiertamente: proveedores comerciales de satélites, Google Earth, OpenStreetMap y las imágenes que la gente corriente publica cada día en redes sociales. Cuando un investigador de fuentes abiertas geolocaliza una foto haciendo coincidir la silueta de una montaña, el rótulo de una tienda o la posición del sol con una ubicación y una hora conocidas (una técnica que también se cubre dentro del oficio de GEOINT), está practicando GEOINT en abierto: las dos disciplinas realmente se mezclan a nivel de trabajo diario, aunque las imágenes de satélite clasificadas y encargadas por gobiernos siguen quedando firmemente fuera del alcance civil.</p>
+
+<h2>MASINT – inteligencia de medición y firmas</h2>
+
+<p>MASINT es la disciplina más técnica y menos accesible de esta lista: inteligencia derivada de medir y analizar las firmas físicas distintivas que producen objetos y eventos –secciones transversales de radar, firmas acústicas, lecturas sísmicas, trazas espectrales y químicas, incluso la «huella» electromagnética particular de un equipo concreto–. El objetivo suele ser identificar o caracterizar algo –un vehículo, un sistema de armas, una prueba nuclear– a partir de las huellas físicas que inevitablemente deja atrás, en lugar de a partir de lo que comunica o de lo que se fotografía.</p>
+
+<p>MASINT depende de equipos de sensores especializados, a menudo extremadamente caros, y de una profunda pericia técnica para interpretar los datos resultantes, lo que la mantiene casi por completo dentro de las agencias militares y de inteligencia nacional. Prácticamente no existe un equivalente civil o para investigadores privados: es la disciplina más alejada de todo lo que toca OSINT.</p>
+
+<h2>TECHINT – inteligencia técnica</h2>
+
+<p>TECHINT es la inteligencia derivada de examinar directamente equipos, armas o material extranjero: desmontar una pieza de hardware capturada o una muestra de malware para entender exactamente cómo funciona, de qué es capaz y quién la construyó. Históricamente esto significaba examinar físicamente equipo militar capturado; en un contexto de ciberseguridad, el equivalente moderno más cercano es la ingeniería inversa de malware: desmontar una muestra para entender sus capacidades, su infraestructura y su probable autoría.</p>
+
+<p>TECHINT está más cerca de la accesibilidad civil de OSINT que SIGINT o MASINT, ya que las muestras de malware a menudo se pueden compartir públicamente (a través de servicios como MalwareBazaar) y la ingeniería inversa no requiere autoridad gubernamental, solo las herramientas y la habilidad adecuadas. Se mezcla con frecuencia con OSINT en el trabajo de inteligencia de amenazas: OSINT mapea la infraestructura de cara al público de un atacante, mientras que un análisis al estilo TECHINT de sus herramientas revela cómo se está usando realmente esa infraestructura.</p>
+
+<h2>CYBINT y las disciplinas más recientes y menos formales</h2>
+
+<p>Las seis disciplinas anteriores son el conjunto clásico y doctrinalmente establecido, pero no capturan del todo cuánto se ha desplazado el trabajo de inteligencia hacia la infraestructura digital. Algunos profesionales y organizaciones hablan ahora de <strong>CYBINT</strong> (o inteligencia de red digital) como una disciplina emergente por derecho propio: inteligencia derivada del análisis de tráfico de red, el forense digital y la infraestructura del propio ciberespacio, estrechamente relacionada con OSINT y TECHINT, y con la que a menudo se solapa mucho, ya que gran parte de lo que cubre CYBINT (infraestructura de dominios, artefactos de malware, logs de red) es o bien observable abiertamente o se recupera mediante examen técnico directo.</p>
+
+<p>A diferencia de las seis disciplinas clásicas, CYBINT no tiene el mismo respaldo doctrinal de décadas, y distintas organizaciones trazan sus límites de forma diferente: algunas la integran por completo en OSINT y TECHINT en lugar de tratarla como algo separado. Vale la pena saber que el término existe, pero las técnicas subyacentes que describe son las que este grupo de artículos ya cubre: el mapeo de infraestructura al estilo OSINT y el análisis de artefactos al estilo TECHINT, aplicados específicamente a redes y sistemas.</p>
+
+<h2>Un ejemplo práctico: una afirmación, tres disciplinas</h2>
+
+<p>Supongamos que un grupo hacktivista publica una foto en internet afirmando haber vulnerado unas instalaciones, junto con un fragmento de código que dice haber extraído de ellas. Valorar esa afirmación de una forma que realmente puedas respaldar recurre a más de una disciplina a la vez, aunque cada paso aquí se mantenga por completo dentro de lo que está legalmente abierto para un investigador civil:</p>
+
+<ul>
+  <li><strong>OSINT</strong> recopila la propia publicación: quién la publicó, cuándo se creó la cuenta, qué más ha publicado esa cuenta y si la afirmación se ha corroborado en algún otro sitio.</li>
+  <li><strong>GEOINT</strong> examina la foto: ¿coinciden el equipo, la señalización o el terreno visible con las instalaciones que se reclaman, usando imágenes de satélite y fotos a nivel de calle como referencia de comparación?</li>
+  <li><strong>Un análisis al estilo TECHINT</strong> examina el fragmento de código: ¿corresponde realmente a sistemas que las instalaciones podrían usar de forma plausible, o es genérico, copiado y pegado, o fabricado para parecer convincente?</li>
+</ul>
+
+<p>Nada de eso requirió interceptar una señal ni cultivar a un informante: es técnica de tres disciplinas, aplicada por completo a través de canales abiertos, que converge en una sola valoración. Esta es la forma práctica que adopta la inteligencia de todas las fuentes a escala civil: no agencias combinando fuentes clasificadas, sino un único investigador trabajando deliberadamente varios ángulos antes de tratar una afirmación como verificada.</p>
+
+<h2>Cómo se combinan las disciplinas: inteligencia de todas las fuentes</h2>
+
+<p>Las investigaciones reales rara vez se quedan dentro del carril de una sola disciplina. El trabajo de inteligencia profesional tiene un nombre para combinar varias disciplinas de recopilación en una sola valoración: <strong>inteligencia de todas las fuentes</strong> (all-source intelligence) –la práctica de triangular una conclusión a partir de varios tipos de fuente independientes en lugar de confiar en uno solo–. Una valoración de inteligencia nacional podría combinar interceptaciones de SIGINT, informes de HUMINT e imágenes de GEOINT en una sola imagen, cada disciplina cubriendo un hueco que las demás no pueden.</p>
+
+<p>La misma fusión ocurre a escala civil, solo que con un conjunto más reducido de disciplinas disponibles. Un analista de inteligencia de amenazas que geolocaliza la foto del servidor de un atacante a partir de una captura de pantalla filtrada está mezclando OSINT y GEOINT. Un investigador de malware que extrae dominios de mando y control de una muestra sometida a ingeniería inversa y luego pivota a través de logs de Certificate Transparency para mapear el resto de esa infraestructura está mezclando TECHINT y OSINT. Nombrar de qué disciplina procede una prueba concreta no es un ejercicio académico: es lo que te permite valorar cuán fiable es en realidad esa prueba y dónde están sus puntos ciegos.</p>
+
+<h2>Las disciplinas de un vistazo</h2>
+
+<table>
+  <thead>
+    <tr><th>Disciplina</th><th>Fuente de inteligencia</th><th>Quién suele recopilarla</th><th>Ejemplo relevante en ciberseguridad</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>OSINT</strong></td><td>Información disponible públicamente</td><td>Cualquiera – investigadores, periodistas, equipos de seguridad</td><td>Logs de Certificate Transparency que revelan los subdominios de una organización</td></tr>
+    <tr><td><strong>SIGINT</strong></td><td>Comunicaciones interceptadas y señales electrónicas</td><td>Agencias de inteligencia nacionales</td><td>No accesible para investigadores privados ni civiles</td></tr>
+    <tr><td><strong>HUMINT</strong></td><td>Interacción humana directa</td><td>Oficiales de inteligencia, investigadores, red teams autorizados</td><td>Llamadas con pretexto durante una prueba de ingeniería social autorizada</td></tr>
+    <tr><td><strong>GEOINT</strong></td><td>Imágenes y datos geográficos</td><td>Analistas de imágenes gubernamentales; se solapa mucho con OSINT en imágenes abiertas</td><td>Geolocalizar una foto filtrada usando sombras y puntos de referencia</td></tr>
+    <tr><td><strong>MASINT</strong></td><td>Mediciones físicas y firmas técnicas</td><td>Agencias militares y de inteligencia nacional</td><td>No accesible para investigadores privados ni civiles</td></tr>
+    <tr><td><strong>TECHINT</strong></td><td>Examen de equipos, hardware y software</td><td>Analistas técnicos militares; se solapa con investigadores de seguridad</td><td>Aplicar ingeniería inversa a una muestra de malware para mapear su infraestructura</td></tr>
+  </tbody>
+</table>
+
+<h2>Por qué OSINT es la que está abierta para todos los demás</h2>
+
+<p>Al poner en fila las seis disciplinas, una cosa se vuelve obvia: OSINT es la única cuya barrera de entrada es la habilidad y la diligencia, y no la autoridad legal, una acreditación gubernamental o hardware especializado de interceptación. SIGINT y MASINT están efectivamente cerradas para cualquiera fuera de una agencia nacional, tanto legal como técnicamente. HUMINT y TECHINT se solapan parcialmente con la práctica civil –ingeniería social e ingeniería inversa de malware–, pero cargan con un peso legal y ético real en cuanto no están autorizadas. GEOINT está partida por la mitad, con una mitad genuinamente abierta que los investigadores de OSINT ya usan a diario.</p>
+
+<p>Esa es la respuesta honesta a «por qué todo el mundo habla de OSINT y no de las demás»: no es que OSINT sea más importante, es que es la única disciplina que una persona curiosa puede de verdad coger y empezar a practicar, legalmente, hoy mismo. Si esa es la parte que buscabas, el flujo de trabajo completo –el ciclo de inteligencia, las herramientas por categoría y cómo mantenerte del lado correcto de la línea legal– te espera en <a href="../que-es-osint/">Qué es OSINT: herramientas y flujo de trabajo</a>.</p>
+
+<h2>La conclusión</h2>
+
+<p>El sufijo «-INT» marca una disciplina de recopilación, definida por de dónde viene la información y no por de qué trata. OSINT recopila de lo que ya es público; SIGINT intercepta señales; HUMINT reúne información de personas; GEOINT lee imágenes y geografía; MASINT mide firmas físicas; TECHINT examina equipos y código directamente. Las investigaciones reales mezclan varias de estas en una imagen de todas las fuentes, pero solo OSINT –y, parcialmente, GEOINT y TECHINT– está realmente disponible para cualquiera sin mandato gubernamental. Saber a qué disciplina pertenece realmente una prueba es el primer paso para juzgar cuánto confiar en ella.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué significa «-INT» en terminología de inteligencia?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El sufijo «-INT» marca una disciplina de recopilación –una categoría definida por el tipo de fuente de la que procede la información, y no por el asunto investigado–. OSINT es inteligencia de fuentes abiertas y públicas; SIGINT es inteligencia de señales interceptadas; HUMINT es inteligencia de personas. La taxonomía existe porque cada tipo de fuente exige métodos de recopilación, herramientas, autoridad legal y conjuntos de habilidades distintos, así que las organizaciones de inteligencia (y, a menor escala, los investigadores de seguridad) organizan su trabajo en torno a qué disciplinas utiliza realmente una investigación concreta.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre OSINT y SIGINT?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          OSINT se construye por entero a partir de información que ya está disponible públicamente: cualquiera puede acceder a la misma web, el mismo registro WHOIS o la misma publicación en redes sociales que consulta un investigador de OSINT. SIGINT se construye interceptando comunicaciones y señales electrónicas que no son públicas, como llamadas telefónicas, transmisiones de radio o emisiones de radar, lo que generalmente exige equipo de interceptación especializado y una autoridad legal que solo poseen las agencias gubernamentales. La línea práctica es el acceso: si puedes obtener la información sin interceptar una comunicación privada, es terreno de OSINT; si exige interceptar una señal que no estaba destinada a ti, es SIGINT y queda fuera de lo que cualquier investigador privado puede hacer legalmente.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es HUMINT lo mismo que la ingeniería social?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Están estrechamente relacionadas, pero no son idénticas. HUMINT es la disciplina de inteligencia más amplia de reunir información mediante la interacción humana directa: entrevistas, elicitación, informantes y construcción de relaciones. La ingeniería social, tal y como se usa en las pruebas de seguridad, es una aplicación específica de las técnicas de HUMINT orientada a manipular a un objetivo para que realice una acción o revele información, normalmente como parte de un test de penetración autorizado o una simulación de phishing. Todo encargo de ingeniería social usa métodos de HUMINT, pero HUMINT como disciplina es mucho más amplia que las pruebas de seguridad por sí solas: incluye entrevistas diplomáticas, periodísticas y de investigación legítimas que no tienen nada que ver con la manipulación.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Pueden los civiles o investigadores privados usar GEOINT?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sí, en un grado considerable. Aunque el GEOINT más sensible –la asignación de tareas a satélites clasificados, datos de sensores de nivel militar– sigue restringido a las agencias gubernamentales, una gran cantidad de datos geoespaciales y de imágenes está ahora disponible abiertamente: proveedores comerciales de imágenes de satélite, Google Earth, OpenStreetMap y las imágenes incrustadas en las propias publicaciones de redes sociales. Este solapamiento es precisamente la razón por la que los investigadores de fuentes abiertas practican habitualmente una forma de GEOINT cuando geolocalizan una foto o un vídeo usando puntos de referencia, sombras y rasgos del terreno, incluso sin ningún acceso gubernamental.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué OSINT es la disciplina más usada fuera de las agencias gubernamentales?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          OSINT se construye por entero sobre fuentes que ya son legalmente accesibles para el público, lo que significa que no requiere ninguna autoridad legal especial, acreditación gubernamental ni capacidad de interceptación para practicarse –a diferencia de SIGINT, MASINT o el GEOINT clasificado, que dependen de capacidades y potestades legales que están efectivamente reservadas a las agencias estatales–. Esa accesibilidad es la razón por la que OSINT es la disciplina que usan investigadores de seguridad, periodistas, equipos de inteligencia de amenazas e investigadores privados: es la única disciplina -INT en la que la barrera de entrada es la habilidad y la diligencia, y no la autoridad legal o el hardware especializado.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-es-osint/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es OSINT: herramientas y flujo de trabajo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../shodan-y-censys/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Shodan y Censys explicados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../investigar-un-dominio-sospechoso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Investigar un dominio sospechoso: workflow</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../fundamentos-de-inteligencia-de-amenazas/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Fundamentos de la inteligencia de amenazas (CTI), explicados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../ingenieria-social-explicada/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Ingeniería social explicada: tácticas y defensas</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

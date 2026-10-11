@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="mtgrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="mtglow" cx="0.5" cy="0.46" r="0.65"><stop offset="0%" stop-color="hsl(265 84% 68%)" stop-opacity="0.30"/><stop offset="55%" stop-color="hsl(265 84% 68%)" stop-opacity="0.05"/><stop offset="100%" stop-color="hsl(265 84% 68%)" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+<rect width="800" height="400" fill="url(#mtgrid)"/>
+<ellipse cx="400" cy="210" rx="380" ry="250" fill="url(#mtglow)"/>
+
+<!-- Kali attacker box -->
+<rect x="60" y="150" width="180" height="100" rx="10" fill="hsl(240 9% 9%)" stroke="hsl(265 84% 68%)" stroke-width="2.5" opacity="0.95"/>
+<circle cx="88" cy="176" r="5" fill="hsl(0 72% 55%)"/><circle cx="106" cy="176" r="5" fill="hsl(45 90% 55%)"/><circle cx="124" cy="176" r="5" fill="hsl(265 84% 68%)"/>
+<text x="150" y="205" text-anchor="middle" font-size="15" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.5">Kali Linux</text>
+<text x="150" y="224" text-anchor="middle" font-size="11" fill="hsl(265 84% 68%)" letter-spacing="2">ATTACKER</text>
+<text x="150" y="240" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">192.168.56.10</text>
+
+<!-- Metasploitable target box -->
+<rect x="560" y="150" width="180" height="100" rx="10" fill="hsl(240 9% 9%)" stroke="hsl(288 85% 70%)" stroke-width="2.5" opacity="0.95"/>
+<circle cx="588" cy="176" r="5" fill="hsl(0 72% 55%)"/><circle cx="606" cy="176" r="5" fill="hsl(45 90% 55%)"/><circle cx="624" cy="176" r="5" fill="hsl(288 85% 70%)"/>
+<text x="650" y="205" text-anchor="middle" font-size="15" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.5">Metasploitable 2</text>
+<text x="650" y="224" text-anchor="middle" font-size="11" fill="hsl(288 85% 70%)" letter-spacing="2">TARGET</text>
+<text x="650" y="240" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">192.168.56.20</text>
+
+<!-- host-only network bar -->
+<rect x="270" y="184" width="260" height="32" rx="7" fill="hsl(265 84% 68% / 0.07)" stroke="hsl(265 84% 68%)" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.85"/>
+<text x="400" y="204" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" letter-spacing="1.5">HOST-ONLY · 192.168.56.0/24</text>
+
+<!-- wires box -> network bar -->
+<path d="M240 200 L270 200" fill="none" stroke="hsl(265 84% 68%)" stroke-width="2" opacity="0.6"/>
+<path d="M530 200 L560 200" fill="none" stroke="hsl(288 85% 70%)" stroke-width="2" opacity="0.6"/>
+
+<!-- attack path arrow: Kali -> port 21 vsftpd -> port 6200 root shell -->
+<path d="M150 250 C 150 300, 650 300, 650 250" fill="none" stroke="hsl(288 85% 70%)" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity="0.85"/>
+<path d="M650 250 l-11 -16 M650 250 l-19 6" stroke="hsl(288 85% 70%)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+<rect x="300" y="286" width="200" height="34" rx="6" fill="hsl(240 9% 9%)" stroke="hsl(288 85% 70%)" stroke-width="1.6" opacity="0.95"/>
+<text x="400" y="303" text-anchor="middle" font-size="11.5" fill="hsl(0 0% 98%)" letter-spacing="0.5">21/tcp vsftpd 2.3.4</text>
+<text x="400" y="316" text-anchor="middle" font-size="10" fill="hsl(288 85% 70%)" letter-spacing="1.5">BACKDOOR TRIGGER</text>
+
+<rect x="590" y="270" width="120" height="34" rx="6" fill="hsl(240 9% 9%)" stroke="hsl(288 85% 70%)" stroke-width="1.6" opacity="0.95"/>
+<text x="650" y="291" text-anchor="middle" font-size="11" fill="hsl(288 85% 70%)" letter-spacing="1">6200/tcp ROOT</text>
+
+<g font-size="12" letter-spacing="3" font-weight="500">
+  <text x="24" y="34" fill="hsl(265 84% 68%)" opacity="0.95">LAB / WALKTHROUGH</text>
+  <text x="24" y="378" fill="hsl(240 5% 65%)" opacity="0.6">KALI -&gt; METASPLOITABLE 2 · PORT 21 -&gt; 6200</text>
+  <text x="776" y="378" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="776" cy="30" r="4" fill="hsl(265 84% 68%)"/>
+<circle cx="776" cy="30" r="9" fill="hsl(265 84% 68%)" opacity="0.25"/>
+</svg>

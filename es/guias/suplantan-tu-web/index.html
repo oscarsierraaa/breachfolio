@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qué hacer si suplantan tu web y cómo cerrarla</title>
+  <meta name="description" content="Han copiado tu web para engañar a tus clientes. Cómo reunir pruebas, a qué registrador y hosting escribir, cómo marcarla en los navegadores y qué hacer en España." />
+  <meta name="keywords" content="suplantan tu web, qué hacer si suplantan tu web, han clonado mi web, denunciar web que suplanta mi marca, cerrar web falsa, suplantación de identidad web" />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/suplantan-tu-web/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/cloned-website-what-to-do/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/suplantan-tu-web/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/cloned-website-what-to-do/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Qué hacer si suplantan tu web y cómo cerrarla | Breachfolio" />
+  <meta property="og:description" content="Han copiado tu web para engañar a tus clientes. Cómo reunir pruebas, a qué registrador y hosting escribir, cómo marcarla en los navegadores y qué hacer en España." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/suplantan-tu-web/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-cloned-website.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Qué hacer si suplantan tu web y cómo cerrarla | Breachfolio" />
+  <meta name="twitter:description" content="Han copiado tu web para engañar a tus clientes. Cómo reunir pruebas, a qué registrador y hosting escribir, cómo marcarla en los navegadores y qué hacer en España." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-cloned-website.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Qué hacer si suplantan tu web y cómo cerrarla",
+      "description": "Alguien entró en tu correo. Échalo, deshaz la regla de reenvío que dejó puesta y asegura las cuentas que se recuperan por ahí, en ese orden.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-cloned-website.webp",
+      "datePublished": "2026-08-17",
+      "dateModified": "2026-08-17",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/guias/suplantan-tu-web/"
+      },
+      "inLanguage": "es",
+      "keywords": "me han hackeado el correo, correo hackeado que hacer, recuperar cuenta de gmail hackeada, alguien entro en mi correo, regla de reenvio atacante, contrasenas de aplicacion gmail, cerrar todas las sesiones correo, cuenta de outlook comprometida, cambiaron mi correo de recuperacion, mis contactos reciben spam, filtros que borran correos, aplicaciones conectadas acceso al buzon, proteger correo despues de hackeo, robo de cuenta de correo"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Guías", "item": "https://breachfolio.com/es/guias/" },
+        { "@type": "ListItem", "position": 3, "name": "Correo hackeado", "item": "https://breachfolio.com/es/guias/suplantan-tu-web/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/guias/suplantan-tu-web/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "He cambiado la contraseña. ¿Ya está seguro mi correo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por sí sola no. Cambiar la contraseña no siempre cierra las sesiones que ya están abiertas, y no hace nada contra una regla de reenvío, un filtro, una contraseña de aplicación o una app conectada que se añadieran mientras tenían acceso. Cualquiera de esas cosas sigue mandándoles una copia de tu correo después. Cambia la contraseña, cierra todas las sesiones y repasa los ajustes uno a uno."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué la guía dice que arregle el correo antes que el banco?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque el enlace para restablecer la contraseña del banco llega al correo. Si alguien sigue controlando el buzón, puede pedir un restablecimiento en cualquier cuenta asociada a esa dirección, recibir el enlace y volver a dejarte fuera minutos después de que termines. El correo es la cuenta que da acceso a las demás, así que va primero aunque parezca menos urgente que el dinero."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "No consigo entrar de ninguna manera. ¿Y ahora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usa el formulario de recuperación del proveedor en lugar del acceso normal, y rellénalo desde un dispositivo y una red que ya hayas usado con esa cuenta, porque eso es una señal que el proveedor valora. Responde de memoria aunque no sea exacto: una fecha aproximada ayuda más que dejarlo en blanco. Si te cambiaron el correo o el teléfono de recuperación, dilo explícitamente, y cuenta con que el proceso tarde días y no minutos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debería avisar a mis contactos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y por un canal distinto del buzón comprometido. Quien tuvo acceso puede haber escrito a tus contactos haciéndose pasar por ti, normalmente para pedir dinero o mandar un enlace, y quienes más se fían de ti son los que más papeletas tienen de caer. Basta un mensaje corto diciendo que cualquier cosa rara que haya salido de tu dirección estos días no eras tú."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guías</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Correo hackeado</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-guide-cloned-website.webp" alt="Alguien ha estado en tu correo y ha dejado las cosas ligeramente fuera de sitio." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUÍAS · SUPLANTACIÓN DE MARCA</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Han copiado tu web. Este es el orden para cerrarla.</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">Haz esto primero</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Guarda las pruebas antes de denunciar nada. Copia la URL completa, haz capturas con la fecha visible y consulta el WHOIS del dominio. Las webs clonadas desaparecen en días, y sin pruebas la denuncia se queda en nada.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Alguien ha copiado tu web, tu logotipo y tus textos para engañar a gente que cree estar tratando contigo. No puedes borrarla tú, pero sí puedes hacer que la cierren quienes tienen la llave: el registrador del dominio, el proveedor de alojamiento y los navegadores.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-17">17 de agosto de 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-2xl text-[16.5px] leading-[1.8] text-muted-foreground space-y-5">
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Primero: confirma que es una suplantación</h2>
+      <p>No todo lo que se parece a tu web lo es. Antes de mover nada, descarta las tres confusiones habituales:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Una copia en caché.</strong> Google, archive.org o un lector de artículos pueden mostrar tu contenido en otro dominio sin que nadie te esté suplantando.</li>
+        <li><strong class="text-foreground">Un agregador o revendedor.</strong> Si vendes a través de terceros, es normal que tus fichas y fotos aparezcan en sitios que no controlas.</li>
+        <li><strong class="text-foreground">Tu propio sitio en otro dominio.</strong> Dominios antiguos, entornos de pruebas o versiones con y sin <code>www</code> que quedaron indexadas.</li>
+      </ul>
+      <p>Es una suplantación cuando el sitio <strong class="text-foreground">se hace pasar por ti</strong>: usa tu nombre o tu marca, copia tu diseño y pide datos, pagos o contacto como si fuera tuyo.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Reúne las pruebas antes de denunciar</h2>
+      <p>Esta parte es la que decide si la denuncia prospera, y es la que casi todo el mundo se salta con las prisas. Necesitas:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">La URL completa</strong>, no solo el dominio. La página concreta que copia la tuya.</li>
+        <li><strong class="text-foreground">Capturas de pantalla</strong> donde se vea la barra de direcciones entera y, si puedes, la fecha del sistema.</li>
+        <li><strong class="text-foreground">El WHOIS del dominio</strong>: cuándo se registró y con qué registrador. Casi siempre está registrado hace pocos días, y eso ya es un indicio.</li>
+        <li><strong class="text-foreground">La IP y el alojamiento</strong>, para saber a qué proveedor escribir.</li>
+        <li><strong class="text-foreground">Una copia de tu contenido original</strong> con fecha anterior: tu propia web archivada, facturas de diseño, el registro de tu marca si lo tienes.</li>
+      </ul>
+      <p>Si no sabes leer un WHOIS, lo explicamos en <a href="../../ciberseguridad/que-es-whois/" class="text-accent ul-link">qué es WHOIS</a> y en <a href="../../ciberseguridad/investigar-un-dominio-sospechoso/" class="text-accent ul-link">cómo investigar un dominio sospechoso</a>.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Denuncia al registrador del dominio</h2>
+      <p>El registrador es la empresa donde se compró el dominio, y aparece en el WHOIS. Es quien puede suspenderlo, y por eso es la vía más rápida que existe: si acepta la denuncia, el sitio deja de resolver en cuestión de horas.</p>
+      <p>Busca en el WHOIS el contacto de abuso, casi siempre <code>abuse@</code> del registrador. Escribe en inglés si el registrador es extranjero, sé breve y adjunta las pruebas. Di explícitamente que el dominio se usa para suplantar tu identidad comercial y engañar a clientes.</p>
+      <p>Si el registrador no responde en unos días, puedes reclamar ante la <a href="https://www.icann.org/compliance/complaint" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">ICANN</a>, que es el organismo que le obliga a atender las denuncias de abuso.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Denuncia al proveedor de alojamiento</h2>
+      <p>En paralelo, escribe a quien aloja el sitio. Un proveedor serio retira contenido fraudulento rápido, porque tenerlo le cuesta reputación de red. También aquí el contacto suele ser <code>abuse@</code>.</p>
+      <p>Si el sitio está detrás de un servicio intermediario tipo CDN, ese servicio no aloja el contenido pero sí tiene un canal de denuncia y, en casos de phishing, suele reenviarlo al alojamiento real.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Marca la web en los navegadores</h2>
+      <p>Esto no cierra el sitio, pero corta el daño mucho antes que cualquier trámite: cuando Google o Microsoft lo marcan, quien entre se encuentra una pantalla roja de advertencia en lugar de tu copia.</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><a href="https://safebrowsing.google.com/safebrowsing/report_phish/" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Google Safe Browsing</a>, que protege a Chrome, Firefox y Safari a la vez.</li>
+        <li><strong class="text-foreground">Microsoft SmartScreen</strong>, para Edge, desde el propio navegador en Ayuda y comentarios.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">En España: a quién acudir</h2>
+      <p>Además de las vías técnicas, en España tienes cuatro puertas y conviene saber cuál es cuál:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">INCIBE, teléfono 017.</strong> Gratuito y confidencial. Te orientan sobre los pasos y, si eres empresa, te derivan a INCIBE-CERT. Es la llamada más útil si no sabes por dónde empezar.</li>
+        <li><strong class="text-foreground">La <a href="https://www.osi.es/" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Oficina de Seguridad del Internauta</a></strong>, la parte de INCIBE dirigida a ciudadanos y pequeños negocios.</li>
+        <li><strong class="text-foreground">Policía Nacional</strong>, si hay estafa a personas. Puedes denunciar por internet, aunque para delitos con autor desconocido normalmente habrá que ratificar en comisaría.</li>
+        <li><strong class="text-foreground">Guardia Civil</strong>, a través de su Grupo de Delitos Telemáticos.</li>
+      </ul>
+      <p>Y si tienes la <strong class="text-foreground">marca registrada</strong>, tienes una vía extra y bastante contundente: usar tu nombre comercial sin permiso es una infracción, y tanto registradores como plataformas responden mucho más rápido a una reclamación por marca que a una queja genérica. Si no la tienes registrada, es el momento de planteártelo.</p>
+      <p>Los pasos comunes a cualquier denuncia de web fraudulenta están en <a href="../denunciar-web-fraudulenta/" class="text-accent ul-link">cómo denunciar phishing y webs fraudulentas</a>.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Avisa a tus clientes antes de que caigan</h2>
+      <p>Mientras el cierre se tramita, la copia sigue funcionando. Un aviso claro y sin dramatismo en tu web, tus redes y, si procede, por correo a tus clientes evita la mayor parte del daño.</p>
+      <p>Di tres cosas: cuál es tu dominio real, qué cosas no vas a pedir nunca (contraseñas, códigos de verificación, pagos por transferencia inmediata) y dónde pueden confirmar si algo es tuyo. No hace falta enlazar al sitio falso.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Lo que no debes hacer</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">No intentes tumbar el sitio por tu cuenta.</strong> Atacar un servidor ajeno es delito aunque el servidor sea de un delincuente, y te coloca a ti en el lado equivocado de la denuncia.</li>
+        <li><strong class="text-foreground">No contactes al suplantador.</strong> Solo le confirma que te has dado cuenta y le da tiempo a mover la copia a otro dominio.</li>
+        <li><strong class="text-foreground">No compres el dominio falso.</strong> Es dinero perdido y una invitación a que registren tres más.</li>
+        <li><strong class="text-foreground">No metas datos reales</strong> en el formulario del sitio clonado para «ver qué pasa».</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Cuánto tarda</h2>
+      <p>Con las pruebas bien preparadas, el marcado en navegadores suele llegar en horas y la suspensión del dominio en días. Si el dominio está en un registrador que ignora las denuncias, puede alargarse semanas, y ahí es donde la reclamación ante ICANN y la vía de marca marcan la diferencia.</p>
+      <p>Cuenta también con que la copia reaparezca en otro dominio. Es habitual y no significa que hayas hecho nada mal: la segunda denuncia va mucho más rápida porque ya tienes el material preparado.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Cómo ponérselo más difícil la próxima vez</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Registra tu marca.</strong> Es la herramienta que más acelera cualquier retirada.</li>
+        <li><strong class="text-foreground">Vigila los dominios parecidos</strong> al tuyo, con letras cambiadas o terminaciones distintas. Hay avisos gratuitos de registro de dominios similares.</li>
+        <li><strong class="text-foreground">Configura SPF, DKIM y DMARC</strong> en tu correo. No impide que copien la web, pero sí que manden correos que parezcan tuyos, que es lo que da credibilidad al engaño.</li>
+        <li><strong class="text-foreground">Ten las pruebas de autoría a mano</strong>: tu web archivada periódicamente y el registro de tus contenidos.</li>
+      </ul>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Preguntas frecuentes</div>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Puedo obligar a que cierren la web copiada?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Tú directamente no, pero sí quienes tienen la llave. El registrador puede suspender el dominio y el proveedor de alojamiento puede retirar el contenido, y ambos suelen hacerlo cuando reciben una denuncia con pruebas de que el sitio suplanta a un negocio real. Tener la marca registrada acelera mucho el proceso.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Cuánto tarda en cerrarse una web que me suplanta?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            El aviso en los navegadores suele activarse en horas, y es lo que corta el daño de verdad. La suspensión del dominio va de un par de días a varias semanas según lo diligente que sea el registrador. Si no responde, la reclamación ante la ICANN es el siguiente escalón.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Sirve de algo denunciar si el dominio está en el extranjero?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Sí, y suele ser la vía que funciona. Los registradores y los proveedores de alojamiento operan con políticas de abuso propias, independientes del país de la víctima, y el marcado de Google y Microsoft es global. La denuncia policial en España sirve para el expediente y para cualquier reclamación posterior, pero lo que cierra el sitio es la vía técnica.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Y si además mandan correos haciéndose pasar por mi empresa?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Es lo habitual: la web clonada da credibilidad al correo. Configura SPF, DKIM y DMARC en tu dominio para que los servidores rechacen los mensajes que digan venir de ti sin serlo. No borra la copia, pero le quita el canal por el que llega a la gente.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>¿Tengo que avisar a mis clientes?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Conviene, y cuanto antes. Mientras la copia siga en pie, cada día que pasa es gente que puede caer. Un aviso corto diciendo cuál es tu dominio real y qué no vas a pedir nunca evita la mayoría del daño. Si se han filtrado datos de clientes, además puede haber obligaciones de notificación que conviene consultar.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../denunciar-web-fraudulenta/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo denunciar phishing y webs fraudulentas</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ciberseguridad/investigar-un-dominio-sospechoso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Investigar un dominio sospechoso</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

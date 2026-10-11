@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img" aria-label="Deprecated net-tools commands mapped to their modern iproute2 replacements">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="hsl(168 78% 46%)" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="hsl(168 78% 46%)" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+  <rect width="800" height="400" fill="url(#grid)"/>
+  <rect width="800" height="400" fill="url(#glow)"/>
+
+  <text x="24" y="30" font-family="ui-monospace,monospace" font-size="11" letter-spacing="2" fill="hsl(0 0% 100% / 0.35)">NET-TOOLS (DEPRECATED)</text>
+  <text x="776" y="30" font-family="ui-monospace,monospace" font-size="11" letter-spacing="2" fill="hsl(168 78% 46%)" text-anchor="end">IPROUTE2 (CURRENT)</text>
+
+  <!-- rows -->
+  <g font-family="ui-monospace,monospace" font-size="15">
+    <!-- row 1 -->
+    <rect x="24" y="60" width="200" height="44" rx="8" fill="hsl(0 0% 100% / 0.04)" stroke="hsl(0 0% 100% / 0.1)"/>
+    <text x="124" y="87" fill="hsl(0 0% 100% / 0.55)" text-anchor="middle">ifconfig</text>
+    <rect x="576" y="60" width="200" height="44" rx="8" fill="hsl(168 78% 46% / 0.12)" stroke="hsl(168 78% 46% / 0.5)"/>
+    <text x="676" y="87" fill="hsl(168 90% 75%)" text-anchor="middle">ip addr</text>
+    <line x1="224" y1="82" x2="576" y2="82" stroke="hsl(168 78% 46% / 0.4)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- row 2 -->
+    <rect x="24" y="130" width="200" height="44" rx="8" fill="hsl(0 0% 100% / 0.04)" stroke="hsl(0 0% 100% / 0.1)"/>
+    <text x="124" y="157" fill="hsl(0 0% 100% / 0.55)" text-anchor="middle">route</text>
+    <rect x="576" y="130" width="200" height="44" rx="8" fill="hsl(168 78% 46% / 0.12)" stroke="hsl(168 78% 46% / 0.5)"/>
+    <text x="676" y="157" fill="hsl(168 90% 75%)" text-anchor="middle">ip route</text>
+    <line x1="224" y1="152" x2="576" y2="152" stroke="hsl(168 78% 46% / 0.4)" stroke-width="1.5"/>
+
+    <!-- row 3 -->
+    <rect x="24" y="200" width="200" height="44" rx="8" fill="hsl(0 0% 100% / 0.04)" stroke="hsl(0 0% 100% / 0.1)"/>
+    <text x="124" y="227" fill="hsl(0 0% 100% / 0.55)" text-anchor="middle">netstat</text>
+    <rect x="576" y="200" width="200" height="44" rx="8" fill="hsl(168 78% 46% / 0.12)" stroke="hsl(168 78% 46% / 0.5)"/>
+    <text x="676" y="227" fill="hsl(168 90% 75%)" text-anchor="middle">ss</text>
+    <line x1="224" y1="222" x2="576" y2="222" stroke="hsl(168 78% 46% / 0.4)" stroke-width="1.5"/>
+
+    <!-- row 4 -->
+    <rect x="24" y="270" width="200" height="44" rx="8" fill="hsl(0 0% 100% / 0.04)" stroke="hsl(0 0% 100% / 0.1)"/>
+    <text x="124" y="297" fill="hsl(0 0% 100% / 0.55)" text-anchor="middle">arp</text>
+    <rect x="576" y="270" width="200" height="44" rx="8" fill="hsl(168 78% 46% / 0.12)" stroke="hsl(168 78% 46% / 0.5)"/>
+    <text x="676" y="297" fill="hsl(168 90% 75%)" text-anchor="middle">ip neigh</text>
+    <line x1="224" y1="292" x2="576" y2="292" stroke="hsl(168 78% 46% / 0.4)" stroke-width="1.5"/>
+
+    <!-- tcpdump standalone -->
+    <rect x="300" y="340" width="200" height="44" rx="8" fill="hsl(190 85% 52% / 0.12)" stroke="hsl(190 85% 52% / 0.5)"/>
+    <text x="400" y="367" fill="hsl(190 90% 78%)" text-anchor="middle">tcpdump — unchanged</text>
+  </g>
+</svg>

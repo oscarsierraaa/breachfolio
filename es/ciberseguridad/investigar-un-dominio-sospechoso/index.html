@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investigar un dominio sospechoso: workflow | Breachfolio</title>
+  <meta name="description" content="Workflow OSINT pasivo y reproducible para investigar un dominio sospechoso: OPSEC, reputación, WHOIS, DNS, certificados, pivoting y documentar IOC." />
+  <meta name="keywords" content="investigar un dominio sospechoso" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/investigate-a-suspicious-domain/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Investigar un dominio sospechoso: workflow | Breachfolio" />
+  <meta property="og:description" content="Workflow OSINT pasivo y reproducible para investigar un dominio sospechoso: OPSEC, reputación, WHOIS, DNS, certificados, pivoting y documentar IOC." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-investigate-domain.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Investigar un dominio sospechoso: workflow | Breachfolio" />
+  <meta name="twitter:description" content="Workflow OSINT pasivo y reproducible para investigar un dominio sospechoso: OPSEC, reputación, WHOIS, DNS, certificados, pivoting y documentar IOC." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-investigate-domain.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Investigar un dominio sospechoso: workflow",
+      "description": "Workflow OSINT pasivo y reproducible para investigar un dominio sospechoso: OPSEC, reputación, WHOIS, DNS, certificados, pivoting y documentar IOC.",
+      "image": "https://breachfolio.com/assets/img/hero-investigate-domain.webp",
+      "datePublished": "2026-07-20",
+      "dateModified": "2026-07-20",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" },
+      "inLanguage": "es",
+      "keywords": "investigar un dominio sospechoso"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Investigar un dominio sospechoso", "item": "https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cómo compruebo con seguridad si una web es una estafa?", "acceptedAnswer": { "@type": "Answer", "text": "Nunca cargues una URL sospechosa en tu navegador habitual. Deja que sea un sandbox remoto el que mire: envíala a urlscan.io, que renderiza la página en su propia infraestructura y devuelve una captura, la cadena de redirecciones y cada dominio que contacta, de modo que tu equipo nunca se conecta y tu IP nunca aparece en los registros del atacante. Contrasta la capa de reputación –VirusTotal, Google Safe Browsing, los feeds de abuse.ch, AbuseIPDB– y lee la fecha de registro en WHOIS/RDAP. Si tienes que interactuar más directamente, hazlo desde una máquina virtual desechable detrás de una VPN, sobre una instantánea que puedas revertir. La regla de oro es pasiva: observa a través de terceros, no interactúes con el sitio en sí." } },
+        { "@type": "Question", "name": "¿Cómo sé qué antigüedad tiene un dominio?", "acceptedAnswer": { "@type": "Answer", "text": "Consulta su registro de alta. La forma clásica es el cliente whois (whois example.com) o el buscador web de ICANN en lookup.icann.org; la forma moderna y estructurada es RDAP, que devuelve JSON: por ejemplo, curl -s https://rdap.org/domain/example.com y lee el evento con eventAction «registration». La fecha de creación es el campo que importa. Un dominio registrado hace días que suplanta a una empresa consolidada y pide credenciales es una fuerte señal de alarma por sí solo; un negocio legítimo de diez años no muda de repente su página de login a un dominio de una semana. Los logs de Certificate Transparency en crt.sh te dan una segunda cronología independiente, ya que el primer certificado suele emitirse justo después del registro." } },
+        { "@type": "Question", "name": "¿Cómo averiguo quién está detrás de un sitio de phishing?", "acceptedAnswer": { "@type": "Answer", "text": "De forma pasiva y con expectativas realistas. WHOIS/RDAP te da el registrar y las fechas, aunque el nombre del registrante suele estar enmascarado por privacidad. Las pistas más fuertes son de infraestructura: la IP de hosting y el ASN (dig, ipinfo.io, bgp.he.net), el número de serie del certificado y los subdominios (crt.sh), y el hash del favicon y los hosts compartidos (Shodan, Censys). Pivotar sobre esos artefactos compartidos suele enlazar un grupo de dominios parecidos con un mismo operador y una misma red, que es lo que una retirada realmente necesita. Atribuir una identidad del mundo real rara vez es posible solo con fuentes abiertas y es tarea de las fuerzas del orden; tu objetivo es cartografiar la infraestructura y entregar las pruebas, no desenmascarar a una persona." } },
+        { "@type": "Question", "name": "¿Es seguro visitar un enlace sospechoso?", "acceptedAnswer": { "@type": "Answer", "text": "Da por hecho que no. Una página de phishing o malware activa puede tomarte huellas, explotar tu navegador o simplemente registrar tu IP y saber que la están investigando, y los atacantes a menudo hacen cloaking: sirven contenido inofensivo a los investigadores y el payload real solo a víctimas recién llegadas. Así que no lo visites directamente. Usa urlscan.io o un sandbox similar para ver la página en remoto, y si necesitas ir más allá, usa una máquina virtual aislada detrás de una VPN con una instantánea que puedas revertir. Recuerda también que un candado HTTPS válido solo prueba que la conexión está cifrada, no que el sitio sea quien dice ser: muchísimas páginas de phishing tienen certificados perfectamente válidos." } },
+        { "@type": "Question", "name": "¿Cuáles son los IOC de un dominio malicioso?", "acceptedAnswer": { "@type": "Answer", "text": "Los indicadores de compromiso son los artefactos concretos y bloqueables que produce una investigación: el dominio y sus subdominios, las direcciones IPv4/IPv6 de hosting, el ASN, las URL (sobre todo el endpoint que recibe las credenciales), los números de serie y hashes de certificados, los hashes de archivo de cualquier payload descargado y huellas como un hash de favicon reutilizado. Los buenos IOC se escriben siempre desactivados –paypa1-secure[.]com, hxxps://, 198.51.100[.]24– para que nadie los clique por accidente, y cada uno lleva una nota breve sobre cómo se observó. Los metes en listas de bloqueo (filtros DNS, proxies, EDR) y en informes al registrar, al hosting y a feeds de threat intelligence como ThreatFox de abuse.ch." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre investigación pasiva y activa, y dónde está la línea legal?", "acceptedAnswer": { "@type": "Answer", "text": "La investigación pasiva lee datos de terceros y de logs públicos –WHOIS/RDAP, Certificate Transparency, urlscan, feeds de reputación, motores de búsqueda como Shodan– sin tocar nunca los propios servidores del objetivo. El objetivo no puede saber que has mirado. La investigación activa toca el objetivo directamente: resolver sus hosts contra él mismo, escanear puertos, enviar sus formularios, probar el login. Ahí es donde corre la línea legal. Leer registros públicos sobre un dominio, incluso uno obviamente criminal, es OSINT lícito; escanearle los puertos, hacerle fuerza bruta o «solo probar» su formulario es acceso no autorizado y un delito bajo leyes como la Computer Fraud and Abuse Act de EE. UU. y la Computer Misuse Act del Reino Unido, por muy malicioso que sea el objetivo. Mantente pasivo: cartografía la infraestructura, documéntala y entrégala a quien esté autorizado a actuar." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Investigar un dominio sospechoso</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-investigate-domain.webp" alt="Investigar un dominio sospechoso: workflow." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Investigar un dominio sospechoso: workflow.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Workflow OSINT pasivo y reproducible para investigar un dominio sospechoso: OPSEC, reputación, WHOIS, DNS, certificados, pivoting y documentar IOC.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>20 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>15 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Un usuario te reenvía un enlace. Una alerta del SIEM salta por una conexión saliente. Una solicitud de retirada aterriza en tu mesa. Sea cual sea el desencadenante, la pregunta es la misma: <strong>¿es hostil este dominio y con qué está conectado?</strong> Esta es la versión del analista de esa investigación: un workflow reproducible que puedes ejecutar de principio a fin sin cargar nunca el sitio en tu navegador real. Si solo necesitas la comprobación rápida a nivel de usuario («¿es esto una estafa?»), lee mejor <a href="../../guias/dominio-falso/">cómo comprobar si un dominio es sospechoso</a>. Esta pieza es el complemento técnico, y da por hecho que quieres infraestructura, pruebas y pivotes que puedas entregar a una retirada o a una regla de detección.</p>
+
+<p>Todo lo de aquí es <strong>OSINT pasivo</strong>: leemos lo que terceros y el propio objetivo ya han publicado, y dejamos que sean los sandboxes los que toquen algo. No iniciamos sesión, no enviamos formularios, no escaneamos puertos ni sondeamos fallos. No es solo buena educación: es la línea que separa la investigación de un delito de uso indebido de sistemas informáticos. Si eres nuevo en la disciplina, <a href="../que-es-osint/">qué es OSINT</a> expone al completo la distinción entre pasivo y activo y los límites legales. Mantén una regla en la cabeza en todo momento: <strong>observa, no interactúes; documenta, no exploites.</strong></p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 508" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">OPSEC primero</text><path d="M 192 53 L 192 72" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 68 L 192 73 L 196 68" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="78" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="78" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="107" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Reputación</text><path d="M 192 129 L 192 148" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 144 L 192 149 L 196 144" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="154" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="154" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="183" fill="hsl(var(--foreground))" font-size="15" font-weight="600">WHOIS / antigüedad</text><path d="M 192 205 L 192 224" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 220 L 192 225 L 196 220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="230" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="230" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="259" fill="hsl(var(--foreground))" font-size="15" font-weight="600">DNS y hosting</text><path d="M 192 281 L 192 300" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 296 L 192 301 L 196 296" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="306" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="306" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="335" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Certificados (CT)</text><path d="M 192 357 L 192 376" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 372 L 192 377 L 196 372" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="382" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="382" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="411" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Análisis del sitio (sandbox)</text><path d="M 192 433 L 192 452" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 448 L 192 453 L 196 448" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="458" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="458" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="487" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Pivotar y reportar</text></svg>
+        <figcaption>Un flujo seguro y repetible para investigar un dominio sospechoso.</figcaption>
+      </figure>
+      <h2>Paso 0 – OPSEC primero, antes de tocar nada</h2>
+
+<p><strong>Por qué:</strong> en el momento en que visitas un dominio de phishing o malware activo desde tu navegador habitual, pueden pasar tres cosas malas. Pueden explotarte o crear una huella de tu equipo; puedes filtrar tu IP real a los registros del atacante y avisarle de que lo están investigando (con lo que rota su infraestructura o te sirve un señuelo limpio); y puedes contaminar tus propios hallazgos con cookies y sesiones de tu identidad real. Los atacantes hacen cloaking de forma rutinaria: muestran contenido benigno a las IP de centros de datos y a investigadores conocidos, y el payload real solo a visitantes residenciales recién llegados.</p>
+
+<p><strong>Cómo:</strong> nunca abras la URL directamente. Usa un entorno de análisis desechable y deja que sandboxes remotos obtengan la página por ti:</p>
+
+<ul>
+  <li><strong>Una VM desechable o un perfil de navegador aislado</strong> que puedas revertir a una instantánea limpia, nunca tu equipo anfitrión ni el del trabajo.</li>
+  <li><strong>Una VPN o una salida de investigación</strong> para que tu IP doméstica o corporativa nunca aparezca en los registros del objetivo.</li>
+  <li><strong><a href="https://urlscan.io" target="_blank" rel="noopener noreferrer">urlscan.io</a></strong> para renderizar la página en remoto y darte una captura, la cadena de redirecciones y la lista de recursos sin que tu equipo se conecte nunca. Envíalo como <em>unlisted</em> (no listado) si el caso es sensible, ya que cualquiera puede buscar los escaneos públicos, incluido el atacante.</li>
+</ul>
+
+<p>Un hábito recorre todo el workflow: escribe cada indicador <strong>desactivado</strong> (defanged) –<code>paypa1-secure[.]com</code>, <code>hxxps://</code>, <code>198.51.100[.]24</code>– para que nadie en el hilo lo clique por reflejo. Solo lo reactivas (quitas los corchetes) dentro de un comando que ejecutas a propósito.</p>
+
+<h2>El mapa de referencia rápida</h2>
+
+<p>Toda la investigación es una secuencia de «qué intento averiguar, qué herramienta lo responde y qué miro exactamente». Ten esta tabla al lado:</p>
+
+<table>
+  <thead><tr><th>Objetivo</th><th>Herramienta</th><th>Qué buscas</th></tr></thead>
+  <tbody>
+    <tr><td>No quemarte al mirar</td><td>urlscan.io, VM/sandbox, VPN</td><td>Renderizar en remoto; ocultar tu origen</td></tr>
+    <tr><td>¿Ya se sabe que es malo?</td><td>VirusTotal, URLhaus/ThreatFox, Safe Browsing, AbuseIPDB, GreyNoise</td><td>Detecciones existentes, denuncias de abuso</td></tr>
+    <tr><td>Antigüedad / quién lo registró</td><td>WHOIS / RDAP</td><td>Fecha de creación, registrar, privacidad</td></tr>
+    <tr><td>Dónde está alojado</td><td>dig, ipinfo.io, bgp.he.net</td><td>Registros A/MX/NS/TXT, geo de la IP, ASN</td></tr>
+    <tr><td>Historial de certificados</td><td>crt.sh</td><td>Fechas de emisión, subdominios hermanos</td></tr>
+    <tr><td>Qué hace el sitio</td><td>urlscan.io, web-check.xyz, Wayback, BuiltWith/Wappalyzer, securityheaders.com</td><td>Captura, redirecciones, tecnología, cabeceras</td></tr>
+    <tr><td>Variantes parecidas</td><td>dnstwist</td><td>Typosquats que resuelven</td></tr>
+    <tr><td>Infraestructura relacionada</td><td>Shodan, Censys</td><td>Misma IP / certificado / hash de favicon</td></tr>
+    <tr><td>A quién avisar</td><td>Reportar / bloquear</td><td>Registrar, hosting, contactos de abuso</td></tr>
+  </tbody>
+</table>
+
+<h2>Paso 1 – Reputación: ¿ya lo ha hecho alguien?</h2>
+
+<p><strong>Por qué:</strong> la mayoría de los dominios maliciosos no son novedosos. Antes de dedicar una hora a la infraestructura, comprueba si la comunidad ya lo ha marcado: un acierto positivo puede cerrar el caso en treinta segundos. Un resultado limpio no prueba nada (el phishing recién creado está activo durante horas antes de que nadie lo indexe), así que trata «desconocido» como «sigue adelante», nunca como «seguro».</p>
+
+<p><strong>Cómo:</strong> pasa el dominio, la URL y su IP de hosting por la capa de reputación:</p>
+
+<ul>
+  <li><a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a>: decenas de motores más un grafo de relaciones (la misma IP, los certificados y los dominios hermanos sobre los que pivotarás más adelante).</li>
+  <li><a href="https://urlhaus.abuse.ch" target="_blank" rel="noopener noreferrer">URLhaus</a> y <a href="https://threatfox.abuse.ch" target="_blank" rel="noopener noreferrer">ThreatFox</a> de <a href="https://abuse.ch" target="_blank" rel="noopener noreferrer">abuse.ch</a>: URL maliciosas e indicadores de compromiso compartidos, gratis y de gran calidad.</li>
+  <li><a href="https://transparencyreport.google.com/safe-browsing/search" target="_blank" rel="noopener noreferrer">Google Safe Browsing</a>: ¿está ya la URL en la lista de bloqueo que lee tu navegador?</li>
+  <li><a href="https://www.abuseipdb.com" target="_blank" rel="noopener noreferrer">AbuseIPDB</a>: denuncias de abuso de la comunidad y una puntuación de confianza para la IP de hosting.</li>
+  <li><a href="https://www.greynoise.io" target="_blank" rel="noopener noreferrer">GreyNoise</a>: ¿esa IP forma parte del «ruido de fondo» que barre todo internet, o está tranquila y es selectiva? Reduce los falsos positivos cuando triages una dirección.</li>
+</ul>
+
+<h2>Paso 2 – WHOIS / RDAP: ¿qué antigüedad tiene y quién lo gestiona?</h2>
+
+<p><strong>Por qué:</strong> la antigüedad del dominio es una de las señales sueltas más potentes en el triaje de phishing. Una marca consolidada no pone de repente su página de login en un dominio registrado el martes pasado. Un registro de hace solo <em>días</em>, en un registrar masivo, suplantando a una empresa con una década de historia, es una señal de alarma por sí solo. WHOIS/RDAP también te da el registrar, que necesitarás saber para saber a quién reportar. Lee <a href="../que-es-whois/">qué es WHOIS</a> para saber cómo interpretar cada campo y por qué el enmascaramiento por privacidad es normal.</p>
+
+<p><strong>Cómo:</strong> usa el cliente <code>whois</code> clásico, o consulta <strong>RDAP</strong> (el reemplazo moderno, estructurado y en JSON) directamente:</p>
+
+<pre tabindex="0"><code>$ whois paypa1-secure.com | grep -Ei 'creat|registrar:|expir'
+Registrar: Cheap-Bulk-Reg, LLC
+Creation Date: 2026-07-12T09:14:00Z
+Registry Expiry Date: 2027-07-12T09:14:00Z
+
+$ curl -s https://rdap.org/domain/paypa1-secure.com \
+    | jq '.events[] | select(.eventAction=="registration")'
+{
+  "eventAction": "registration",
+  "eventDate": "2026-07-12T09:14:00Z"
+}</code></pre>
+
+<p>Registrado hace unos pocos días, en un registrar masivo y barato, con un plazo de un año pagado por completo: el perfil clásico del phishing de usar y tirar. Que la protección de privacidad oculte el nombre del registrante es habitual y no es sospechoso por sí solo: la <em>fecha</em> es la que carga con el peso.</p>
+
+<h2>Paso 3 – DNS y hosting: ¿dónde vive realmente?</h2>
+
+<p><strong>Por qué:</strong> la IP y la red que hay detrás de un dominio son lo que te permite pivotar al resto de la campaña. Los servidores de nombres, la configuración de correo y el ASN te dicen con qué tipo de operador tratas: una nube de primer nivel, un revendedor barato o una red con fama de mirar hacia otro lado.</p>
+
+<p><strong>Cómo:</strong> resuelve los registros principales con <code>dig</code>, geolocaliza la IP con <a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">ipinfo.io</a> y consulta la red en <a href="https://bgp.he.net" target="_blank" rel="noopener noreferrer">bgp.he.net</a>:</p>
+
+<pre tabindex="0"><code>$ dig +short A   paypa1-secure.com
+198.51.100.24
+$ dig +short NS  paypa1-secure.com
+ns1.cheap-dns.example.
+ns2.cheap-dns.example.
+$ dig +short MX  paypa1-secure.com
+$ dig +short TXT paypa1-secure.com
+"v=spf1 -all"
+
+$ curl -s https://ipinfo.io/198.51.100.24/json | jq '{ip,org,country,hostname}'
+{
+  "ip": "198.51.100.24",
+  "org": "AS64501 Example Hosting Reseller",
+  "country": "NL",
+  "hostname": "vps-24.example-host.test"
+}</code></pre>
+
+<p>La ausencia de registro MX y una política SPF <code>-all</code> bien cerrada te dicen que el dominio no está pensado para enviar correo desde sí mismo, algo coherente con un señuelo de phishing basado solo en enlaces y no con un negocio real. La IP se resuelve a un ASN pequeño de reseller, no a la nube real de la marca. En bgp.he.net puedes ver todos los demás prefijos y dominios que anuncia ese ASN, lo que se convierte en un pivote en el Paso 6. (Las direcciones de aquí son rangos de documentación del RFC 5737 y un ASN de documentación del RFC 5398; el caso es ficticio.)</p>
+
+<h2>Paso 4 – Certificados y logs de CT: el libro de historia gratuito</h2>
+
+<p><strong>Por qué:</strong> todo certificado TLS de confianza pública se escribe en los logs de <strong>Certificate Transparency</strong>, que son de solo adición (append-only) y legibles por todo el mundo. Eso te da dos regalos: una cronología precisa (un certificado emitido el mismo día en que se registró el dominio) y subdominios hermanos que el operador quizá nunca quiso exponer. Consulta <a href="../certificados-tls-transparencia/">TLS certificate transparency</a> para saber por qué existen estos logs y cómo leerlos.</p>
+
+<p><strong>Cómo:</strong> consulta <a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a>, sin necesidad de tocar el objetivo en absoluto:</p>
+
+<pre tabindex="0"><code>$ curl -s 'https://crt.sh/?q=paypa1-secure.com&output=json' \
+    | jq -r '.[] | "\(.entry_timestamp)  \(.name_value)"' | sort -u
+2026-07-12T09:41:03  paypa1-secure.com
+2026-07-12T09:41:03  www.paypa1-secure.com
+2026-07-12T10:02:55  login.paypa1-secure.com
+2026-07-12T10:02:55  secure.paypa1-secure.com</code></pre>
+
+<p>El certificado se emitió minutos después del registro, y hay subdominios –<code>login.</code>, <code>secure.</code>– que gritan robo de credenciales. Anota el número de serie del certificado y la CA emisora; un número de serie o una clave reutilizados en varios dominios son uno de los pivotes más limpios que existen.</p>
+
+<h2>Paso 5 – Analiza el sitio sin visitarlo</h2>
+
+<p><strong>Por qué:</strong> aun así quieres saber qué <em>hace</em> la página –qué aspecto tiene, a dónde envía su formulario, qué carga, cómo redirige–, pero te niegas a cargarla tú mismo. Los sandboxes remotos y los archivos responden a todo eso de forma segura.</p>
+
+<p><strong>Cómo:</strong> apila las herramientas de análisis pasivo de sitios:</p>
+
+<ul>
+  <li><a href="https://urlscan.io" target="_blank" rel="noopener noreferrer">urlscan.io</a>: el ancla. Un navegador remoto carga la URL y devuelve una captura, la cadena completa de redirecciones, cada dominio contactado y los recursos de la página. Ves el clon del login sin renderizarlo nunca en local.</li>
+  <li><a href="https://web-check.xyz" target="_blank" rel="noopener noreferrer">web-check.xyz</a>: un panel de una sola página con DNS, cabeceras, certificados y tecnología detectada en una única vista.</li>
+  <li><a href="https://web.archive.org" target="_blank" rel="noopener noreferrer">Wayback Machine</a>: lo que el dominio (o los inquilinos anteriores de su IP) sirvió en el pasado; útil cuando un sitio ya se ha cambiado o retirado.</li>
+  <li><a href="https://builtwith.com" target="_blank" rel="noopener noreferrer">BuiltWith</a> y <a href="https://www.wappalyzer.com" target="_blank" rel="noopener noreferrer">Wappalyzer</a>: el stack tecnológico y cualquier huella de kit de phishing.</li>
+  <li><a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer">securityheaders.com</a>: un kit de usar y tirar suele sacar una F; un banco de verdad no.</li>
+</ul>
+
+<p>La señal que más te importa de urlscan: <strong>¿a dónde envía realmente el formulario?</strong> Una página de login con la marca de PayPal que envía las credenciales a un host no relacionado en el mismo reseller barato es lo más parecido a una confesión que da este workflow.</p>
+
+<h2>Paso 6 – Typosquatting y pivotar a la campaña más amplia</h2>
+
+<p><strong>Por qué:</strong> un dominio de phishing rara vez está solo. El mismo actor suele registrar un abanico de dominios parecidos y alojarlos en infraestructura compartida. Encontrar los hermanos convierte un indicador en el mapa de una campaña, y en una retirada mucho más útil.</p>
+
+<p><strong>Cómo:</strong> ejecuta <a href="https://github.com/elceef/dnstwist" target="_blank" rel="noopener noreferrer">dnstwist</a> contra la marca <em>legítima</em> para enumerar los parecidos registrados, y luego pivota sobre los artefactos compartidos que recopilaste. Fíjate en cómo <code>paypa1-</code> cambia la letra «l» por el dígito «1»: justo el truco que modela la herramienta:</p>
+
+<pre tabindex="0"><code>$ dnstwist --registered --format cli paypal.com
+paypa1.com          203.0.113.10    registered
+paypa1-secure.com   198.51.100.24   registered  2026-07-12
+paypai-login.com    198.51.100.24   registered  2026-07-12</code></pre>
+
+<p>Dos de esos squats comparten <strong>198.51.100.24</strong>: tu host. Ahora pivota sobre cada artefacto compartido:</p>
+
+<ul>
+  <li><strong>Misma IP / ASN:</strong> haz una búsqueda inversa de la dirección y explora el ASN en bgp.he.net en busca de dominios coalojados.</li>
+  <li><strong>Mismo certificado:</strong> busca en crt.sh el número de serie del certificado o un valor de Subject poco habitual.</li>
+  <li><strong>Mismo favicon:</strong> los kits de phishing reutilizan el favicon de una marca, y su hash se puede buscar. Aquí es donde <a href="../shodan-y-censys/">Shodan y Censys</a> se ganan el sueldo:</li>
+</ul>
+
+<pre tabindex="0"><code>$ shodan search 'http.favicon.hash:-1234567890' --fields ip_str,org
+198.51.100.24   Example Hosting Reseller
+203.0.113.77    Example Hosting Reseller
+203.0.113.10    Example Hosting Reseller</code></pre>
+
+<p>Tres hosts, un favicon, un reseller: la huella de la campaña. Todo hasta aquí ha sido pasivo: consultar conjuntos de datos de terceros y motores de búsqueda, sin escanear ni explotar nunca tú mismo los servidores del atacante. Esa distinción es justo donde está la línea legal. Enumerar registros públicos es OSINT; escanear puertos, hacer fuerza bruta contra el login o «probar» el formulario es acceso no autorizado, y es un delito en la mayoría de las jurisdicciones por muy evidentemente malicioso que sea el objetivo. Cartografía la infraestructura, no la ataques.</p>
+
+<h2>Paso 7 – Documenta los IOC y decide</h2>
+
+<p><strong>Por qué:</strong> una investigación sobre la que nadie puede actuar fue un pasatiempo, no trabajo. Empaqueta lo que encontraste en indicadores que otros puedan bloquear y reportar, con las pruebas adjuntas.</p>
+
+<p><strong>Cómo:</strong> escribe un bloque de IOC desactivados y un veredicto de una línea con tu nivel de confianza:</p>
+
+<pre tabindex="0"><code>Indicador                          Tipo    Nota
+paypa1-secure[.]com                domain  typosquat de PayPal, reg. 2026-07-12
+login.paypa1-secure[.]com          host    subdominio de robo de credenciales
+198.51.100[.]24                    ipv4    IP de hosting, AS64501 (reseller)
+203.0.113[.]77                     ipv4    host hermano, mismo hash de favicon
+hxxps://paypa1-secure[.]com/login  url     página de phishing, envía fuera del dominio
+
+Veredicto: malicioso (confianza alta). Phishing de robo de
+credenciales por suplantación de marca. Dominio y certificado,
+ambos con menos de 1 día en la primera observación; el clon del
+login envía a un host no relacionado en infra de reseller
+compartida; dos squats hermanos en la misma IP.</code></pre>
+
+<p>Luego actúa. Para conseguir que se retire, reportas a las partes correctas: el registrar para el dominio, el proveedor de hosting para el servidor, el equipo de abuso de la marca y los organismos de denuncia nacionales. Nuestra guía para <a href="../../guias/denunciar-web-fraudulenta/">reportar una web fraudulenta</a> recorre el proceso, y <a href="../registro-registrador-isp-hosting/">registro, registrar, ISP y hosting</a> explica cuál de esos actores controla qué, para que tu denuncia de abuso llegue a quien realmente puede desenchufarlo. Para proteger a tus propios usuarios ahora mismo, mete los dominios y las IP en las listas de bloqueo de tu filtro DNS, tu proxy y tu EDR.</p>
+
+<h2>El workflow como checklist</h2>
+
+<ul>
+  <li><strong>OPSEC:</strong> VM desechable, VPN y sandboxes remotos, nunca tu navegador real.</li>
+  <li><strong>Reputación:</strong> VirusTotal, URLhaus/ThreatFox, Safe Browsing, AbuseIPDB, GreyNoise.</li>
+  <li><strong>WHOIS/RDAP:</strong> fecha de creación (la antigüedad es la señal más fuerte), registrar, privacidad.</li>
+  <li><strong>DNS:</strong> A/MX/NS/TXT con <code>dig</code>; geo de la IP con ipinfo.io; ASN en bgp.he.net.</li>
+  <li><strong>Certificados:</strong> crt.sh para la cronología de emisión y los subdominios hermanos.</li>
+  <li><strong>Análisis del sitio:</strong> urlscan.io, web-check.xyz, Wayback, BuiltWith/Wappalyzer, securityheaders.com: ¿a dónde envía el formulario?</li>
+  <li><strong>Typosquat y pivote:</strong> dnstwist sobre la marca real; pivota sobre IP, certificado y hash de favicon compartidos con Shodan/Censys.</li>
+  <li><strong>Documenta y decide:</strong> IOC desactivados, un veredicto con nivel de confianza, y luego reporta y bloquea.</li>
+</ul>
+
+<p>Ejecuta estos pasos en orden y la imagen casi siempre se resuelve antes de llegar al final. La antigüedad del dominio y la cronología del certificado suelen decidirlo; el análisis del sitio confirma la intención; y los pivotes convierten un enlace malo en el mapa de una campaña. La disciplina que lo hace repetible es la misma que lo mantiene legal y te mantiene a salvo: recopilación pasiva, documentación cuidadosa y no interactuar ni una sola vez con la máquina del atacante.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo compruebo con seguridad si una web es una estafa?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Nunca cargues una URL sospechosa en tu navegador habitual. Deja que sea un sandbox remoto el que mire: envíala a urlscan.io, que renderiza la página en su propia infraestructura y devuelve una captura, la cadena de redirecciones y cada dominio que contacta, de modo que tu equipo nunca se conecta y tu IP nunca aparece en los registros del atacante. Contrasta la capa de reputación –VirusTotal, Google Safe Browsing, los feeds de abuse.ch, AbuseIPDB– y lee la fecha de registro en WHOIS/RDAP. Si tienes que interactuar más directamente, hazlo desde una máquina virtual desechable detrás de una VPN, sobre una instantánea que puedas revertir. La regla de oro es pasiva: observa a través de terceros, no interactúes con el sitio en sí.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo sé qué antigüedad tiene un dominio?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Consulta su registro de alta. La forma clásica es el cliente whois (whois example.com) o el buscador web de ICANN en lookup.icann.org; la forma moderna y estructurada es RDAP, que devuelve JSON: por ejemplo, curl -s https://rdap.org/domain/example.com y lee el evento con eventAction «registration». La fecha de creación es el campo que importa. Un dominio registrado hace días que suplanta a una empresa consolidada y pide credenciales es una fuerte señal de alarma por sí solo; un negocio legítimo de diez años no muda de repente su página de login a un dominio de una semana. Los logs de Certificate Transparency en crt.sh te dan una segunda cronología independiente, ya que el primer certificado suele emitirse justo después del registro.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo averiguo quién está detrás de un sitio de phishing?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          De forma pasiva y con expectativas realistas. WHOIS/RDAP te da el registrar y las fechas, aunque el nombre del registrante suele estar enmascarado por privacidad. Las pistas más fuertes son de infraestructura: la IP de hosting y el ASN (dig, ipinfo.io, bgp.he.net), el número de serie del certificado y los subdominios (crt.sh), y el hash del favicon y los hosts compartidos (Shodan, Censys). Pivotar sobre esos artefactos compartidos suele enlazar un grupo de dominios parecidos con un mismo operador y una misma red, que es lo que una retirada realmente necesita. Atribuir una identidad del mundo real rara vez es posible solo con fuentes abiertas y es tarea de las fuerzas del orden; tu objetivo es cartografiar la infraestructura y entregar las pruebas, no desenmascarar a una persona.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es seguro visitar un enlace sospechoso?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Da por hecho que no. Una página de phishing o malware activa puede tomarte huellas, explotar tu navegador o simplemente registrar tu IP y saber que la están investigando, y los atacantes a menudo hacen cloaking: sirven contenido inofensivo a los investigadores y el payload real solo a víctimas recién llegadas. Así que no lo visites directamente. Usa urlscan.io o un sandbox similar para ver la página en remoto, y si necesitas ir más allá, usa una máquina virtual aislada detrás de una VPN con una instantánea que puedas revertir. Recuerda también que un candado HTTPS válido solo prueba que la conexión está cifrada, no que el sitio sea quien dice ser: muchísimas páginas de phishing tienen certificados perfectamente válidos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuáles son los IOC de un dominio malicioso?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los indicadores de compromiso son los artefactos concretos y bloqueables que produce una investigación: el dominio y sus subdominios, las direcciones IPv4/IPv6 de hosting, el ASN, las URL (sobre todo el endpoint que recibe las credenciales), los números de serie y hashes de certificados, los hashes de archivo de cualquier payload descargado y huellas como un hash de favicon reutilizado. Los buenos IOC se escriben siempre desactivados –paypa1-secure[.]com, hxxps://, 198.51.100[.]24– para que nadie los clique por accidente, y cada uno lleva una nota breve sobre cómo se observó. Los metes en listas de bloqueo (filtros DNS, proxies, EDR) y en informes al registrar, al hosting y a feeds de threat intelligence como ThreatFox de abuse.ch.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre investigación pasiva y activa, y dónde está la línea legal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La investigación pasiva lee datos de terceros y de logs públicos –WHOIS/RDAP, Certificate Transparency, urlscan, feeds de reputación, motores de búsqueda como Shodan– sin tocar nunca los propios servidores del objetivo. El objetivo no puede saber que has mirado. La investigación activa toca el objetivo directamente: resolver sus hosts contra él mismo, escanear puertos, enviar sus formularios, probar el login. Ahí es donde corre la línea legal. Leer registros públicos sobre un dominio, incluso uno obviamente criminal, es OSINT lícito; escanearle los puertos, hacerle fuerza bruta o «solo probar» su formulario es acceso no autorizado y un delito bajo leyes como la Computer Fraud and Abuse Act de EE. UU. y la Computer Misuse Act del Reino Unido, por muy malicioso que sea el objetivo. Mantente pasivo: cartografía la infraestructura, documéntala y entrégala a quien esté autorizado a actuar.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-es-osint/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">¿Qué es OSINT? Herramientas y workflow</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../que-es-whois/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es WHOIS</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../shodan-y-censys/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Shodan y Censys explicados</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guias/dominio-falso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo comprobar si un dominio es sospechoso</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

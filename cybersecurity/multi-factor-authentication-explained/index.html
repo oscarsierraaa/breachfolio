@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-factor authentication (MFA), explained | Breachfolio</title>
+  <meta name="description" content="The three MFA factor categories, why SMS is the weakest, how FIDO2 hardware keys resist phishing, and how MFA-fatigue prompt-bombing attacks actually work." />
+  <meta name="keywords" content="multi-factor authentication, MFA explained, TOTP RFC 6238, SMS OTP SIM swap, push notification MFA, FIDO2 WebAuthn, hardware security keys, MFA fatigue, prompt bombing" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Multi-factor authentication (MFA), explained | Breachfolio" />
+  <meta property="og:description" content="The three MFA factor categories, why SMS is the weakest, how FIDO2 hardware keys resist phishing, and how MFA-fatigue prompt-bombing attacks actually work." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-mfa.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Multi-factor authentication (MFA), explained | Breachfolio" />
+  <meta name="twitter:description" content="The three MFA factor categories, why SMS is the weakest, how FIDO2 hardware keys resist phishing, and how MFA-fatigue prompt-bombing attacks actually work." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-mfa.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Multi-factor authentication (MFA), explained",
+      "description": "The three MFA factor categories, why SMS is the weakest, how FIDO2 hardware keys resist phishing, and how MFA-fatigue prompt-bombing attacks actually work.",
+      "image": "https://breachfolio.com/assets/img/hero-mfa.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" },
+      "inLanguage": "en",
+      "keywords": "multi-factor authentication, MFA explained, TOTP RFC 6238, SMS OTP SIM swap, push notification MFA, FIDO2 WebAuthn, hardware security keys, MFA fatigue, prompt bombing"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Multi-factor authentication, explained", "item": "https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What are the three factors of authentication?", "acceptedAnswer": { "@type": "Answer", "text": "Authentication factors fall into three independent categories: something you know (a password, PIN, or security question), something you have (a phone with an authenticator app, a hardware security key, or a smart card), and something you are (a fingerprint, face scan, or other biometric trait). True multi-factor authentication combines proofs from at least two different categories: a password plus a security question is not MFA, because both live in the \"something you know\" category and can be defeated by the same phishing page or data breach." } },
+        { "@type": "Question", "name": "Why is SMS-based MFA considered the weakest option?", "acceptedAnswer": { "@type": "Answer", "text": "SMS one-time codes depend on the security of the phone network itself, which introduces attack paths that have nothing to do with the account being protected. In a SIM swap, an attacker convinces or bribes a mobile carrier into moving the victim's phone number onto a SIM the attacker controls, after which every SMS code is delivered straight to the attacker. Text messages can also, in documented cases, be intercepted through known weaknesses in the SS7 signaling protocol carriers use to route calls and texts between networks, without the attacker ever touching the victim's SIM. Because both attacks target infrastructure the account holder has no control over, security guidance – including NIST's digital identity guidelines – has flagged SMS-delivered codes as a weaker method and recommended stronger alternatives wherever they are available." } },
+        { "@type": "Question", "name": "What is an MFA fatigue (prompt-bombing) attack, and how does it work?", "acceptedAnswer": { "@type": "Answer", "text": "It is an attack that targets human patience instead of cryptography. An attacker who has already obtained a valid username and password – through phishing, a password reused from another breach, or infostealer malware – triggers repeated push-approval requests to the legitimate user's phone, sometimes late at night or in rapid bursts. The goal is for the user to tap \"Approve\" out of confusion, habit, or sheer annoyance at the constant interruptions, even though they never initiated the login themselves. Attackers sometimes reinforce this by posing as IT support and telling the target to approve the prompt to \"fix an issue.\" Defenses include number matching, which requires the user to type a code shown on the login screen into the app, and rate-limiting how many push requests a single login attempt can generate." } },
+        { "@type": "Question", "name": "Are hardware security keys really resistant to phishing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, in a way SMS, TOTP codes, and simple push approvals are not. A FIDO2/WebAuthn hardware key performs a cryptographic challenge-response that is bound to the actual website origin (domain) the browser is talking to. If a user is tricked onto a convincing phishing clone hosted on a different domain, the key's cryptographic check fails automatically: it isn't a matter of the user needing to notice a fake URL, the protocol itself refuses to produce a valid response for the wrong origin. TOTP codes and push approvals have no such binding, which is why a real-time phishing proxy can capture and replay them, but a hardware key's response is useless anywhere except the legitimate site it was issued for." } },
+        { "@type": "Question", "name": "Is push-notification MFA safe to use?", "acceptedAnswer": { "@type": "Answer", "text": "It is meaningfully better than a password alone, but it is the method most exposed to MFA-fatigue attacks in its basic form: a plain \"Approve or Deny\" prompt gives a targeted user no context to catch a bogus login they didn't initiate. Organizations that enable number matching, where the user must enter a code displayed on the login screen into the app rather than tap a single button, close off the accidental-approval risk almost entirely, because the user now has to actually be looking at the real login attempt rather than simply reacting to a notification. For personal accounts, push MFA from a reputable authenticator app is a reasonable choice; for anything highly sensitive, a hardware security key remains the stronger option." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Multi-factor authentication, explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-mfa.webp" alt="A phone displaying an authentication prompt beside a hardware security key – multi-factor authentication explained" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · FUNDAMENTALS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Multi-factor authentication, explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">The three factor categories, why SMS is the weakest second factor, how FIDO2 hardware keys resist phishing by design, and how MFA-fatigue prompt-bombing attacks exploit human patience instead of cryptography.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 22, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>A password is a single point of failure wearing a disguise. It can be phished, reused across a dozen breached sites, guessed from a predictable pattern, or typed straight into a pixel-perfect fake login page. <strong>Multi-factor authentication (MFA)</strong> exists to remove that single point of failure by requiring a second, independent proof of identity before granting access, so a stolen password alone is no longer enough to get in. But not all MFA is created equal. Some methods stop nearly every remote attacker cold; others can be talked around by a patient attacker and an annoyed user. This article walks through how each major MFA method actually works, why SMS codes are the weakest of the bunch, and how a specific, well-documented attack pattern known as <strong>MFA fatigue</strong> or <strong>prompt bombing</strong> targets the one part of the system that cryptography can't harden: human patience.</p>
+
+<h2>What "multi-factor" actually means</h2>
+
+<p>Authentication factors fall into three independent categories, and genuine multi-factor authentication combines proof from at least two different categories, not two proofs from the same one. Two passwords is not MFA. A password plus a security question is barely better, because both live in the same category and can both be phished, guessed, or leaked in the same data breach.</p>
+
+<table>
+  <thead>
+    <tr><th>Category</th><th>What it is</th><th>Common examples</th><th>Core weakness</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Something you know</td><td>A secret only you should know</td><td>Password, PIN, security question</td><td>Can be phished, guessed, reused, or leaked in a breach</td></tr>
+    <tr><td>Something you have</td><td>A physical or digital item you possess</td><td>Phone with an authenticator app, hardware security key, smart card</td><td>Can be lost, stolen, cloned (SIM swap), or intercepted</td></tr>
+    <tr><td>Something you are</td><td>A measurable physical trait</td><td>Fingerprint, face scan, iris scan</td><td>Usually only a local unlock, not a remote proof of identity, and can't be reissued if compromised</td></tr>
+  </tbody>
+</table>
+
+<p>In practice, MFA almost always pairs a password (something you know) with a second factor from the "something you have" category. That second factor is where the real security difference between implementations lives: a text message and a hardware cryptographic key both satisfy "something you have" on paper, but they resist attackers to wildly different degrees, which is the whole subject of this article.</p>
+
+<h2>Time-based one-time passcodes (TOTP): the authenticator-app standard</h2>
+
+<p>Authenticator apps like Google Authenticator, Microsoft Authenticator, Authy, and 1Password all implement the same open standard: <strong>TOTP, defined in RFC 6238</strong>. At enrollment, the service and your app agree on a shared secret – usually delivered as a QR code that encodes a base32 string. From that point on, both sides can independently compute the same 6-digit code without ever talking to each other again: they take the shared secret, combine it with the current Unix time divided into fixed steps (almost always 30 seconds), and run it through an HMAC-based one-time-password algorithm (RFC 4226, the non-time-based ancestor TOTP builds on). Because both the app and the server are just doing math against a clock, no network round-trip is required: this is why an authenticator app keeps generating valid codes in airplane mode with zero signal.</p>
+
+<p>You can watch the exact same computation happen on the command line, using the same demo secret that shows up in most TOTP tutorials and libraries:</p>
+
+<pre tabindex="0"><code>$ oathtool --totp -b JBSWY3DPEHPK3PXP
+123456</code></pre>
+
+<p>That single command performs precisely what an authenticator app does locally every 30 seconds: decode the base32 secret, derive a time counter, and produce a code. TOTP's strength is that the code is never transmitted by the service to reach you – there's no SMS message or push notification to intercept in transit. Its main exposure is at the two ends: a phishing page that asks for the code in real time and relays it to the real site within the 30-second window, or malware capable of extracting the enrollment secret from a device or an unencrypted backup.</p>
+
+<h2>SMS one-time codes: convenient, and the weakest link</h2>
+
+<p>SMS codes remain widely deployed because they need no app and work on any phone that can receive a text. That convenience comes at the cost of depending on the security of the phone network itself: an attack surface that has nothing to do with the account being protected and everything to do with infrastructure the account holder doesn't control.</p>
+
+<ul>
+  <li><strong>SIM swap.</strong> An attacker social-engineers, or in some documented cases bribes, a mobile carrier employee into porting the victim's phone number onto a SIM the attacker controls. From that moment, every SMS code meant for the victim – password resets included – arrives on the attacker's device instead.</li>
+  <li><strong>SS7 signaling weaknesses.</strong> SMS text messages are routed between carriers over SS7, a decades-old telecom signaling protocol with known design weaknesses. Security researchers have documented ways to intercept SMS traffic through SS7 without ever touching the victim's physical SIM, which means a SIM-swap defense alone doesn't fully close this gap.</li>
+  <li><strong>Real-time relay.</strong> Because an SMS code is just a string a user types into a login form, a phishing page can capture it the moment it arrives and relay it to the real service before it expires: the same weakness TOTP shares, without even the small protection of never transmitting the code over a public network.</li>
+</ul>
+
+<p>NIST's digital identity guidelines (SP 800-63B) flagged SMS-delivered one-time codes as a weaker "out-of-band" authenticator and pushed organizations toward stronger alternatives where practical, though it stopped short of banning SMS outright. The practical takeaway is simple: treat SMS as the fallback of last resort, not the default, whenever a service offers anything stronger.</p>
+
+<h2>Push-notification MFA: fast, until it's abused</h2>
+
+<p>Push MFA – Duo Push, Okta Verify, Microsoft Authenticator's approve/deny prompts – sends a notification to a device already enrolled and paired with your account. You tap "Approve" (often after checking a location or app name shown for context) and you're in, no code to type at all. It's faster than TOTP and, because the enrolled device has to physically have the app installed and paired, it does require possession, not just knowledge of a code.</p>
+
+<p>That same convenience – a single tap grants access – is exactly the surface a determined attacker learned to abuse, which brings us to the attack this article exists to explain properly.</p>
+
+<h2>MFA fatigue and prompt-bombing attacks</h2>
+
+<p>An <strong>MFA-fatigue attack</strong> (also called <strong>prompt bombing</strong>) is a well-documented, real-world technique that doesn't try to break any cryptography at all – it targets human patience. The setup requires the attacker to already hold a valid username and password, obtained through phishing, a password reused from an unrelated breach, or credentials stolen by infostealer malware. Armed with those working credentials, the attacker repeatedly attempts to log in, and each attempt fires a fresh push-approval request to the legitimate user's phone – sometimes dozens in a row, sometimes timed for late at night when a half-asleep user is more likely to tap without thinking.</p>
+
+<p>The attacker's bet is simple: eventually the target approves one of the prompts, whether out of confusion about what's happening, habit from tapping "Approve" all day, or sheer annoyance at the notifications not stopping. Some variations pair the barrage with a phone call or message from someone posing as IT support or helpdesk staff, instructing the target to "just approve it" to resolve a supposed system issue – folding social engineering directly into the technical attack.</p>
+
+<p>This pattern is well known enough in the security community that vendors now build specific defenses against it directly into push MFA:</p>
+
+<ul>
+  <li><strong>Number matching.</strong> Instead of a plain Approve/Deny button, the login screen displays a short number that the user must type into the authenticator app. A user who wasn't actually logging in has nothing to type and no reason to open the app at all, which closes off the "just tap it to make it stop" failure mode almost entirely.</li>
+  <li><strong>Rate limiting and anomaly detection.</strong> Capping how many push requests a single account can trigger in a short window, and flagging bursts of denied or ignored prompts as a signal worth investigating, turns the attack pattern itself into a detection opportunity.</li>
+  <li><strong>Context-rich prompts.</strong> Showing the requesting device, approximate location, and application name gives an attentive user real information to notice something is wrong – though this only helps if the user is paying attention, which is precisely what fatigue attacks are designed to exploit.</li>
+  <li><strong>Moving to phishing-resistant factors.</strong> For the highest-value accounts, the more durable fix is switching away from accept/deny push entirely, toward a factor that can't be approved by mistake at all – covered next.</li>
+</ul>
+
+<h2>Hardware security keys and FIDO2/WebAuthn: the phishing-resistant option</h2>
+
+<p>A hardware security key – a YubiKey is the best-known example – plugs in over USB, NFC, or Bluetooth and implements the <strong>FIDO2/WebAuthn</strong> standard. At registration, the key generates a unique public/private key pair scoped to the specific website you're enrolling with; the private key never leaves the device, and the server only ever stores the public half.</p>
+
+<p>At login, the browser hands the key a cryptographic challenge from the server. The key signs it and returns the signature, but critically, the entire exchange is bound to the actual website origin (the domain) the browser is talking to, enforced at the protocol level, not something a user can be socially engineered into overriding. If you're on a convincing phishing clone hosted on a different domain, the key's check fails automatically: it isn't that a careful user might notice the fake URL, it's that the cryptography itself refuses to produce a valid response for the wrong origin. That origin-binding is exactly what SMS codes, TOTP codes, and push approvals lack: a user can be tricked into handing any of those over on a fake site, or approving a fraudulent request, because nothing in those flows checks where the approval is actually going.</p>
+
+<p><strong>Passkeys</strong> extend the same idea: they're WebAuthn credentials that sync across your devices through a platform's password manager (iCloud Keychain, Google Password Manager) instead of living on one piece of hardware, while inheriting the identical origin-binding property that makes them phishing-resistant. The tradeoff for hardware keys specifically is cost and the need to carry a physical device – losing your only key without a registered backup can lock you out of an account entirely, which is why registering at least two keys is standard advice.</p>
+
+<h2>Comparing the methods</h2>
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>Phishing-resistant?</th><th>Works offline?</th><th>Primary weakness</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>SMS one-time code</td><td>No</td><td>No – requires carrier signal</td><td>SIM swap, SS7 interception, carrier-side social engineering</td></tr>
+    <tr><td>TOTP authenticator app</td><td>No</td><td>Yes</td><td>Real-time phishing relay of the code; malware exfiltrating the seed</td></tr>
+    <tr><td>Push notification (no number matching)</td><td>No</td><td>No – requires a data connection</td><td>MFA fatigue / prompt-bombing attacks</td></tr>
+    <tr><td>Hardware security key (FIDO2/WebAuthn)</td><td>Yes</td><td>Yes – local challenge-response</td><td>Cost, and device loss without a registered backup key</td></tr>
+  </tbody>
+</table>
+
+<p>The "No" for TOTP and push isn't a knock on the math behind them – it's that neither method cryptographically checks where the approval is going. A real-time phishing proxy sitting between a victim and the real login page can capture a TOTP code the instant it's typed and relay it to the genuine site before the 30-second window closes, or simply trigger the real push request itself and wait for the fatigued or confused user to approve it. Only WebAuthn's origin-binding closes that gap structurally, rather than relying on the user to catch the deception.</p>
+
+<h2>Choosing and layering MFA in practice</h2>
+
+<p>Not every account needs the same level of protection, but a few principles hold consistently:</p>
+
+<ul>
+  <li><strong>Protect the accounts that cascade first.</strong> Your primary email and password manager sit upstream of nearly everything else – anyone who controls them can reset passwords everywhere else. Put a hardware key or passkey on these before anything else.</li>
+  <li><strong>TOTP is a strong, free default.</strong> For the majority of everyday accounts, a TOTP authenticator app is a large security improvement over SMS at zero cost, and is what most services support out of the box.</li>
+  <li><strong>Keep SMS as a fallback, not a primary.</strong> Where a service offers TOTP, push with number matching, or a hardware key, use one of those instead and reserve SMS for accounts that genuinely offer nothing stronger.</li>
+  <li><strong>Register backups before you need them.</strong> A second hardware key, printed recovery codes stored offline, or a backup authenticator entry all prevent a lost phone or key from turning into a full lockout.</li>
+  <li><strong>For organizations, enable number matching everywhere push MFA is deployed</strong>, and treat a burst of denied or ignored push prompts on one account as a detection signal worth an immediate look, not background noise.</li>
+</ul>
+
+<h2>The takeaway</h2>
+
+<p>MFA does not mean "add a text message and call it secure." The category and design of the second factor determines how resistant it actually is to remote and social-engineering attacks: SMS is intercepted through weaknesses in the phone network itself, TOTP codes and simple push approvals can still be phished or relayed in real time, and only hardware security keys and passkeys built on FIDO2/WebAuthn cryptographically refuse to authenticate anywhere other than the genuine site. Add MFA everywhere you can, but where the stakes are highest, prefer the factor an attacker can't simply trick, pressure, or wait for you to hand over.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What are the three factors of authentication?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Authentication factors fall into three independent categories: something you know (a password, PIN, or security question), something you have (a phone with an authenticator app, a hardware security key, or a smart card), and something you are (a fingerprint, face scan, or other biometric trait). True multi-factor authentication combines proofs from at least two different categories: a password plus a security question is not MFA, because both live in the "something you know" category and can be defeated by the same phishing page or data breach.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why is SMS-based MFA considered the weakest option?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          SMS one-time codes depend on the security of the phone network itself, which introduces attack paths that have nothing to do with the account being protected. In a SIM swap, an attacker convinces or bribes a mobile carrier into moving the victim's phone number onto a SIM the attacker controls, after which every SMS code is delivered straight to the attacker. Text messages can also, in documented cases, be intercepted through known weaknesses in the SS7 signaling protocol carriers use to route calls and texts between networks, without the attacker ever touching the victim's SIM. Because both attacks target infrastructure the account holder has no control over, security guidance – including NIST's digital identity guidelines – has flagged SMS-delivered codes as a weaker method and recommended stronger alternatives wherever they are available.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is an MFA fatigue (prompt-bombing) attack, and how does it work?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It is an attack that targets human patience instead of cryptography. An attacker who has already obtained a valid username and password – through phishing, a password reused from another breach, or infostealer malware – triggers repeated push-approval requests to the legitimate user's phone, sometimes late at night or in rapid bursts. The goal is for the user to tap "Approve" out of confusion, habit, or sheer annoyance at the constant interruptions, even though they never initiated the login themselves. Attackers sometimes reinforce this by posing as IT support and telling the target to approve the prompt to "fix an issue." Defenses include number matching, which requires the user to type a code shown on the login screen into the app, and rate-limiting how many push requests a single login attempt can generate.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Are hardware security keys really resistant to phishing?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes, in a way SMS, TOTP codes, and simple push approvals are not. A FIDO2/WebAuthn hardware key performs a cryptographic challenge-response that is bound to the actual website origin (domain) the browser is talking to. If a user is tricked onto a convincing phishing clone hosted on a different domain, the key's cryptographic check fails automatically: it isn't a matter of the user needing to notice a fake URL, the protocol itself refuses to produce a valid response for the wrong origin. TOTP codes and push approvals have no such binding, which is why a real-time phishing proxy can capture and replay them, but a hardware key's response is useless anywhere except the legitimate site it was issued for.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is push-notification MFA safe to use?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It is meaningfully better than a password alone, but it is the method most exposed to MFA-fatigue attacks in its basic form: a plain "Approve or Deny" prompt gives a targeted user no context to catch a bogus login they didn't initiate. Organizations that enable number matching, where the user must enter a code displayed on the login screen into the app rather than tap a single button, close off the accidental-approval risk almost entirely, because the user now has to actually be looking at the real login attempt rather than simply reacting to a notification. For personal accounts, push MFA from a reputable authenticator app is a reasonable choice; for anything highly sensitive, a hardware security key remains the stronger option.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../cybersecurity-101/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cybersecurity 101: the words that mean what</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../cryptography-basics/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cryptography basics: hashing, encryption, signatures</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guides/hacked-messaging-account/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What to do if your messaging account was hacked</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../compare/password-managers-compared/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Bitwarden vs 1Password vs KeePassXC: 2026 Comparison</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../sim-swap-attack-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">SIM swap attacks explained: mechanics and mitigations</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal &amp; info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ejecuta un LLM en tu propia máquina | Breachfolio</title>
+  <meta name="description" content="Por qué ejecutar modelos en local, cómo instalar Ollama y descargar un modelo, y qué datos no deberías entregar nunca a ningún LLM." />
+  <meta name="keywords" content="ejecutar un llm local, llm local para notas de seguridad, instalar ollama, modelos de lenguaje sin conexión, privacidad al usar inteligencia artificial, ollama pull y ollama run, qué modelo local elegir según el hardware, modelos cuantizados q4, llm local para redactar documentación de seguridad, gestión insegura de la salida de un llm, alternativa privada a chatgpt, ia offline para profesionales de seguridad, prompts para resumir incidentes de seguridad, qué no debe entrar nunca en un llm, modelos de pesos abiertos en local" />
+  <link rel="canonical" href="https://breachfolio.com/es/ia/ejecuta-un-llm-local/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/run-a-local-llm-for-security-notes/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ejecuta-un-llm-local/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/run-a-local-llm-for-security-notes/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Ejecuta un LLM en tu propia máquina | Breachfolio" />
+  <meta property="og:description" content="Por qué ejecutar modelos en local, cómo instalar Ollama y descargar un modelo, y qué datos no deberías entregar nunca a ningún LLM." />
+  <meta property="og:url" content="https://breachfolio.com/es/ia/ejecuta-un-llm-local/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-ai-local.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ejecuta un LLM en tu propia máquina | Breachfolio" />
+  <meta name="twitter:description" content="Por qué ejecutar modelos en local, cómo instalar Ollama y descargar un modelo, y qué datos no deberías entregar nunca a ningún LLM." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-ai-local.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Ejecuta un LLM en local para tus notas de seguridad: una configuración práctica con Ollama",
+      "description": "Por qué ejecutar modelos en local, cómo instalar Ollama y descargar un modelo, y qué datos no deberías entregar nunca a ningún LLM.",
+      "image": "https://breachfolio.com/assets/img/thumb-ai-local.webp",
+      "datePublished": "2026-07-15",
+      "dateModified": "2026-07-08",
+      "keywords": "ejecutar un llm local, llm local para notas de seguridad, instalar ollama, modelos de lenguaje sin conexión, privacidad al usar inteligencia artificial, ollama pull y ollama run, qué modelo local elegir según el hardware, modelos cuantizados q4, llm local para redactar documentación de seguridad, gestión insegura de la salida de un llm, alternativa privada a chatgpt, ia offline para profesionales de seguridad, prompts para resumir incidentes de seguridad, qué no debe entrar nunca en un llm, modelos de pesos abiertos en local",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/ia/ejecuta-un-llm-local/"
+      },
+      "inLanguage": "es"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "IA & Seguridad", "item": "https://breachfolio.com/es/ia/" },
+        { "@type": "ListItem", "position": 3, "name": "Ejecuta un LLM en local", "item": "https://breachfolio.com/es/ia/ejecuta-un-llm-local/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ia/ejecuta-un-llm-local/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué ejecutar un LLM en local en lugar de usar uno alojado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque los datos nunca salen de la máquina, no hay que confiar en la política de retención de un proveedor de API, funciona sin conexión con un comportamiento reproducible y no tiene coste por token una vez configurado – ideal para pegar logs, configuraciones o cronologías de incidentes que no deberían salir de la red."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se instala y ejecuta un modelo local con Ollama?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se instala Ollama desde su sitio oficial y luego bastan dos comandos: \"ollama pull llama3.2\" para descargar un modelo de pesos abiertos, y \"ollama run llama3.2\" para empezar a chatear con él totalmente sin conexión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tamaño de modelo conviene según el hardware disponible?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Modelos de 1 a 3 mil millones de parámetros funcionan bien en un portátil sin GPU dedicada para resúmenes y reformateo; modelos de 7 a 8 mil millones razonan mejor pero requieren GPU o bastante RAM; las compilaciones cuantizadas (como q4) reducen el uso de memoria a cambio de algo de calidad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué no se debe pegar nunca en un modelo local, aunque no tenga conexión a internet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Credenciales y secretos activos (claves de API, contraseñas, claves privadas), datos personales reales que no se necesitan procesar, y cualquier salida del modelo que se vaya a ejecutar en un shell o consulta sin revisarla antes."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">IA & Seguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Ejecuta un LLM en local</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-ai-local.webp" alt="Ejecuta un LLM en tu propia máquina." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">IA · PRÁCTICO</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Ejecuta un LLM en tu propia máquina.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Un modelo que nunca ve la red es un modelo que nunca filtra tus notas. Aquí tienes cómo montar uno con Ollama y qué dejar fuera por completo.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Hay un momento concreto que empuja a la gente de seguridad hacia los modelos locales: quieres pegar un fragmento de log, una configuración o la cronología de un incidente en un modelo para que te ayude a pensar, y te das cuenta de que ese fragmento no debería salir de tu red bajo ningún concepto. Un <strong>LLM local</strong> resuelve eso. Se ejecuta en tu propio hardware, funciona sin conexión y nada de lo que escribes se envía a nadie. Para redactar, tomar notas y documentar material sensible, esa propiedad por sí sola ya justifica la configuración.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Por qué en local, concretamente</h2>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Privacidad por diseño.</strong> Los datos nunca salen de la máquina. No hay ningún proveedor de API en el que confiar, ninguna política de retención que leer, ninguna transferencia transfronteriza que justificar ante un equipo de cumplimiento.</li>
+        <li><strong>Sin conexión y reproducible.</strong> El modelo funciona en un avión o en un laboratorio aislado, y la misma versión del modelo te da el mismo comportamiento mañana: sin actualizaciones silenciosas del lado del servidor.</li>
+        <li><strong>Sin coste por token.</strong> Una vez que está en marcha, puedes lanzarle todo el texto que tu hardware permita sin vigilar un contador.</li>
+      </ul>
+
+      <p>La contrapartida es honesta: un modelo que puedes ejecutar en un portátil es más pequeño y menos capaz que los mayores modelos alojados. Para resumir notas, reformatear, redactar documentación y usarlo como pato de goma para pensar un problema, esa diferencia rara vez importa. Para razonamiento de frontera, sí importa.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Instalar Ollama</h2>
+
+      <p><a href="https://ollama.com" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Ollama</a> es la forma con menos fricción de ejecutar modelos de pesos abiertos en local en macOS, Linux y Windows. Después de instalarlo desde el sitio oficial, descargar y ejecutar un modelo son dos comandos:</p>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code># descarga un modelo de pesos abiertos pequeño y capaz
+ollama pull llama3.2
+
+# empieza a chatear con él, totalmente sin conexión
+ollama run llama3.2</code></pre>
+
+      <p>Esa es toda la configuración. El primer comando descarga los pesos una sola vez; a partir de ahí todo se ejecuta en local. Si tienes GPU, Ollama la usa automáticamente; en máquinas solo con CPU, un modelo más pequeño (de 1 a 3 mil millones de parámetros) mantiene las respuestas ágiles. Puedes listar lo que has descargado con <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ollama list</code> y eliminar un modelo con <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ollama rm</code>.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Prompts que se ganan su sitio</h2>
+
+      <p>Un modelo local es una potente ayuda para escribir y pensar en el trabajo de seguridad. Unos cuantos patrones que ayudan de forma constante:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Resumir la cronología de un incidente.</strong> Pega notas en bruto con marcas de tiempo y pide un resumen cronológico limpio con una sección de "preguntas abiertas". Ideal para los traspasos.</li>
+        <li><strong>Explicar una configuración o una línea de log.</strong> "Explica qué hace esta regla de iptables, línea por línea, y señala cualquier cosa que parezca demasiado permisiva." Sigues verificando, pero acelera la lectura.</li>
+        <li><strong>Redactar documentación.</strong> Convierte una lista con viñetas de lo que hiciste en un primer borrador de runbook, y luego edítalo. El modelo se encarga del texto repetitivo; tú aportas el criterio.</li>
+        <li><strong>Generar material de estudio.</strong> Dale un tema y pídele preguntas de práctica: combina bien con nuestros <a href="../prompts-para-autoaprendizaje/" class="text-accent ul-link">prompts para autoestudio</a>.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Lo que nunca entra en ningún modelo, local o no</h2>
+
+      <p>Ejecutarlo en local elimina el riesgo de exposición a la red, pero no suspende el buen criterio. Mantén esto fuera del prompt pase lo que pase:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Credenciales y secretos activos.</strong> Claves de API, contraseñas, claves privadas. Un modelo local no las va a exfiltrar, pero acaban en el historial de tu shell, en el scrollback y en cualquier transcripción guardada. Censúralos primero.</li>
+        <li><strong>Datos personales reales</strong> que no necesitas procesar. Minimizar lo que manejas es un hábito que merece la pena mantener incluso cuando la herramienta está sin conexión.</li>
+        <li><strong>Cualquier cosa que luego pegarías en un shell o en una consulta sin leerla.</strong> Trata la salida del modelo como el borrador de un becario rápido y confiado: útil, a veces equivocado, nunca de fiar a ciegas. Este es el riesgo de "gestión insegura de la salida" de la <a href="../red-teaming-de-ia-desde-cero/" class="text-accent ul-link">lista OWASP para LLM</a>, aplicado a tu propio flujo de trabajo.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Elegir el tamaño de modelo para tu hardware</h2>
+
+      <p>La frustración inicial más habitual es descargar un modelo demasiado grande para la máquina y verlo arrastrarse. Una guía aproximada para ajustar el modelo al hardware:</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Clase de modelo</th><th class="px-4 py-2.5 font-display font-semibold">Ajuste de hardware</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Modelos de 1 a 3B de parámetros</strong></td><td class="px-4 py-2.5">Funcionan cómodamente en un portátil moderno sin GPU dedicada. Son ideales para resúmenes, reformateo y explicaciones: las tareas de pan y mantequilla de las notas de seguridad.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Modelos de 7 a 8B</strong></td><td class="px-4 py-2.5">Requieren o bien una GPU o bien una máquina con bastante RAM y paciencia. Razonan notablemente mejor y siguen siendo perfectamente ejecutables en una estación de trabajo decente.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Compilaciones cuantizadas</strong> (etiquetas como <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">q4</code>)</td><td class="px-4 py-2.5">Sacrifican algo de calidad a cambio de una gran reducción del uso de memoria, que a menudo es la diferencia entre un modelo que cabe y uno que tira de disco.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Empieza pequeño, confirma que el flujo de trabajo es útil y luego sube de tamaño solo si la calidad realmente se queda corta. Un modelo de 3B rápido que de verdad usas gana a uno de 8B lento que evitas. Puedes tener varios descargados a la vez y cambiar según la tarea: uno pequeño para reformatear rápido, uno mayor cuando necesitas que razone.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Una nota sobre el alcance.</strong> Esto es herramienta defensiva y práctica: un modelo en hardware que tú controlas, usado para ayudarte con tus propias notas y documentación. No es una forma de procesar datos que no estás autorizado a manejar.</div>
+
+      <p>Un LLM local no va a sustituir a tu mejor modelo alojado para el razonamiento difícil. Pero como asistente privado, sin conexión y de coste cero para el día a día de la escritura de seguridad (resúmenes, explicaciones, borradores, estudio), es una de las herramientas de mayor valor que puedes montar en diez minutos, y cada byte se queda en tu máquina.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué ejecutar un LLM en local en lugar de usar uno alojado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque los datos nunca salen de la máquina, no hay que confiar en la política de retención de un proveedor de API, funciona sin conexión con un comportamiento reproducible y no tiene coste por token una vez configurado – ideal para pegar logs, configuraciones o cronologías de incidentes que no deberían salir de la red.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo se instala y ejecuta un modelo local con Ollama?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Se instala Ollama desde su sitio oficial y luego bastan dos comandos: <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ollama pull llama3.2</code> para descargar un modelo de pesos abiertos, y <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">ollama run llama3.2</code> para empezar a chatear con él totalmente sin conexión.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué tamaño de modelo conviene según el hardware disponible?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Modelos de 1 a 3 mil millones de parámetros funcionan bien en un portátil sin GPU dedicada para resúmenes y reformateo; modelos de 7 a 8 mil millones razonan mejor pero requieren GPU o bastante RAM; las compilaciones cuantizadas (como <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">q4</code>) reducen el uso de memoria a cambio de algo de calidad.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué no se debe pegar nunca en un modelo local, aunque no tenga conexión a internet?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Credenciales y secretos activos (claves de API, contraseñas, claves privadas), datos personales reales que no se necesitan procesar, y cualquier salida del modelo que se vaya a ejecutar en un shell o consulta sin revisarla antes.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../red-teaming-de-ia-desde-cero/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Fundamentos del red teaming de IA</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../prompts-para-autoaprendizaje/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Prompts para autoestudio</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ciberseguridad/fundamentos-de-linux-para-seguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Fundamentos de Linux</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de IA</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

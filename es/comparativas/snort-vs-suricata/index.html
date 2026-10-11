@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="compare">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snort vs Suricata: el otro debate de IDS | Breachfolio</title>
+  <meta name="description" content="Snort escribió el formato de reglas que todos usan. Suricata reconstruyó el motor por debajo. Cuál encaja con el rendimiento y el hardware de tu red." />
+  <meta name="keywords" content="snort vs suricata, mejor ids ips 2026, es suricata más rápido que snort, snort vs suricata rendimiento, suricata multihilo vs snort, diferencias entre snort y suricata, reglas de snort en suricata, suricata ja3 fingerprint tls, snort 3 procesamiento multihilo, qué ids elegir para red de alto rendimiento, suricata eve.json registro de protocolos, snort talos cisco reglas, suricata vs snort detección de intrusiones" />
+  <link rel="canonical" href="https://breachfolio.com/es/comparativas/snort-vs-suricata/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/snort-vs-suricata/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/snort-vs-suricata/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/snort-vs-suricata/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Snort vs Suricata: el otro debate de IDS | Breachfolio" />
+  <meta property="og:description" content="Snort escribió el formato de reglas que todos usan. Suricata reconstruyó el motor por debajo. Cuál encaja con el rendimiento y el hardware de tu red." />
+  <meta property="og:url" content="https://breachfolio.com/es/comparativas/snort-vs-suricata/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cmp-ids.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Snort vs Suricata: el otro debate de IDS | Breachfolio" />
+  <meta name="twitter:description" content="Snort escribió el formato de reglas que todos usan. Suricata reconstruyó el motor por debajo. Cuál encaja con el rendimiento y el hardware de tu red." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cmp-ids.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Snort vs Suricata: el otro debate de IDS",
+      "description": "Snort escribió el formato de reglas que todos usan. Suricata reconstruyó el motor por debajo. Cuál encaja con el rendimiento y el hardware de tu red.",
+      "image": "https://breachfolio.com/assets/img/thumb-cmp-ids.webp",
+      "datePublished": "2026-07-08", "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/comparativas/snort-vs-suricata/"
+      },
+      "inLanguage": "es",
+      "keywords": "snort vs suricata, mejor ids ips 2026, es suricata más rápido que snort, snort vs suricata rendimiento, suricata multihilo vs snort, diferencias entre snort y suricata, reglas de snort en suricata, suricata ja3 fingerprint tls, snort 3 procesamiento multihilo, qué ids elegir para red de alto rendimiento, suricata eve.json registro de protocolos, snort talos cisco reglas, suricata vs snort detección de intrusiones"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://breachfolio.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Comparativas",
+          "item": "https://breachfolio.com/es/comparativas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Snort vs Suricata",
+          "item": "https://breachfolio.com/es/comparativas/snort-vs-suricata/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/comparativas/snort-vs-suricata/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Snort o Suricata para una red de alto rendimiento con hardware de varios núcleos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Suricata, por su multihilo nativo diseñado desde el primer día para repartir el tráfico entre todos los núcleos disponibles sin necesitar balanceo de carga externo." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Son compatibles las reglas de Snort con Suricata?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, Suricata se construyó para consumir la misma sintaxis de reglas de Snort y los conjuntos de Emerging Threats (ET), que se cargan y ejecutan prácticamente tal cual." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sigue siendo Snort de un solo hilo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La rama clásica 2.9.x sí; Snort 3, con disponibilidad general desde 2021, añadió procesamiento multihilo real, aunque buena parte de los despliegues en producción todavía ejecutan 2.9.x." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál ofrece más visibilidad a nivel de protocolo, como TLS o DNS?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Suricata, que registra metadatos ricos –fingerprints TLS JA3/JA3S, certificados, extracción de ficheros– de forma nativa en su salida eve.json sin reglas adicionales." }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Comparativas</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Snort vs Suricata</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../../assets/img/thumb-cmp-ids.webp" alt="Ilustración de cabecera para: Snort vs Suricata: el otro debate de IDS." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">COMPARATIVAS</span>
+          <span class="text-muted">IDS/IPS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Snort vs Suricata: el otro debate de IDS.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">Snort definió el formato de reglas en el que todo el sector sigue escribiendo. Suricata reconstruyó el motor por debajo para el hardware moderno de varios núcleos. Esto es lo que eso cambia de verdad.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-08">8 de julio de 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>9 min de lectura</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p>Pregunta a cinco profesionales "¿Snort o Suricata?" y obtendrás cinco respuestas distintas, la mayoría desfasadas una década. <strong>Snort</strong>, lanzado por primera vez por Martin Roesch en 1998 y luego mantenido por el equipo Talos de Cisco, escribió el formato de firmas en el que todo el sector sigue escribiendo reglas – <code>alert</code>, <code>msg</code>, <code>sid</code>, <code>flow</code>, todo ello. <strong>Suricata</strong>, construido por la Open Information Security Foundation a partir de 2009, tomó ese linaje y reconstruyó el motor por debajo para un hardware que la arquitectura original de Snort nunca tuvo que prever: máquinas de varios núcleos moviendo decenas de gigabits por segundo. Ninguna de las dos herramientas está obsoleta. La verdadera pregunta es qué arquitectura encaja con la red, y con el equipo, que tienes delante.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Veredicto rápido</h2>
+
+<table>
+  <thead><tr><th>Caso de uso</th><th>Elige</th></tr></thead>
+  <tbody>
+    <tr><td>Formato de firmas de largo recorrido y bien conocido, con enormes conjuntos de reglas de la comunidad (Snort VRT/Talos)</td><td>Snort</td></tr>
+    <tr><td>Red de alto rendimiento, hardware de varios núcleos que quieres aprovechar por completo</td><td>Suricata</td></tr>
+    <tr><td>Quieres multihilo integrado sin ajustes adicionales</td><td>Suricata</td></tr>
+    <tr><td>Necesitas IPS (bloqueo en línea) con el motor más maduro y probado en combate</td><td>Cualquiera – hoy ambos admiten el modo en línea</td></tr>
+    <tr><td>Quieres fingerprinting nativo TLS/JA3 y un registro más rico a nivel de protocolo de serie</td><td>Suricata</td></tr>
+  </tbody>
+</table>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">En qué se diferencian de verdad por dentro</h2>
+
+<p>El clásico motor 2.x de Snort ejecuta la detección en un único hilo por proceso. Ese era un diseño razonable a finales de los 90 y siguió siendo adecuado para la mayoría de los enlaces corporativos durante años, pero significaba que escalar Snort para saturar una interfaz de 10G, 40G o más rápida exigía añadir capacidad extra desde fuera – ejecutar varias instancias de Snort tras un balanceador de carga, o repartir manualmente el tráfico entre las colas de la NIC y fijar una instancia a cada una. Funciona, pero es un apaño operativo, no una capacidad nativa. <strong>Snort 3</strong>, el motor reescrito que alcanzó disponibilidad general en 2021, es una mejora genuina en este punto: añadió procesamiento de paquetes multihilo real y puede usar varios núcleos de forma nativa dentro de un único proceso en ejecución. Eso cierra gran parte de la brecha histórica, y merece reconocerse en lugar de repetir el viejo estribillo de "Snort es de un solo hilo" como si nada hubiera cambiado. También conviene ser honesto: una parte importante de los despliegues de Snort en producción siguen ejecutando la <strong>rama 2.9.x</strong>, donde la vieja limitación aún se aplica por completo.</p>
+
+<p>Lo que Snort siempre ha tenido, y aún tiene en mayor cantidad que nadie, son reglas y gente que las escribe. La sintaxis que introdujo es la lengua franca de la detección por firmas en red, y <strong>Cisco Talos</strong> mantiene uno de los feeds de reglas de grado comercial más grandes y curados con más actividad del sector, construido sobre décadas de ajuste acumulado y supresión de falsos positivos.</p>
+
+<p>Suricata se diseñó desde el primer día para ejecutar <strong>múltiples hilos repartidos entre todos los núcleos de CPU disponibles</strong> en un único proceso, usando métodos de captura de paquetes como AF_PACKET, PF_RING o RSS/hashing simétrico a nivel de NIC para repartir el tráfico entrante entre hilos de trabajo sin que un operador tenga que montar un balanceo de carga externo para lograrlo. Ese diseño nativo es la mayor diferencia estructural entre los dos motores.</p>
+
+<p>La otra diferencia estructural es la profundidad del análisis de protocolos. Suricata trata la inspección de la capa de aplicación – HTTP, TLS, DNS, SMB y más – como una parte central del motor en lugar de como un añadido opcional, y registra los metadatos extraídos directamente en su salida <code>eve.json</code>: sujeto y emisor del certificado TLS, ventanas de validez del certificado, <strong>fingerprints TLS JA3/JA3S</strong> y extracción completa de ficheros sobre protocolos como HTTP y SMB, todo sin necesitar un montón de reglas personalizadas adicionales para activarlo. Ese registro más rico y estructurado es una ventaja operativa genuina para cualquiera que alimente un SIEM aguas abajo.</p>
+
+<p>Nada de eso deja sin valor la inversión existente en Snort si un equipo cambia de motor. Suricata se construyó deliberadamente para consumir la misma sintaxis de reglas que Snort y los conjuntos de reglas de Emerging Threats (ET), añadiendo por encima solo un modesto conjunto de palabras clave específicas de Suricata. En la práctica, la inmensa mayoría de un conjunto de reglas de Snort o ET ya ajustado se carga y se ejecuta en Suricata prácticamente tal cual – años de ajuste y supresión de firmas no se tiran a la basura solo porque haya cambiado el motor de debajo.</p>
+
+<p>Un ejemplo mínimo hace tangible ese linaje compartido. Esta misma línea de regla es sintaxis válida para ambos motores:</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># una regla mínima, válida en ambos motores - señala una ráfaga de intentos de conexión SSH desde un mismo origen</span>
+<span class="term-out">alert tcp any any -> $HOME_NET 22 (msg:"SSH brute-force attempt"; flow:to_server,established; threshold:type threshold, track by_src, count 5, seconds 60; sid:1000001; rev:1;)</span>
+
+<span class="term-cmt"># action=alert  proto=tcp  src=any:any -> dst=$HOME_NET:22
+# opciones: estado de flow, threshold (dispara una vez por cada 5 aciertos en 60s desde un mismo src), sid/rev para el seguimiento</span></code></pre>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Dónde se queda corta cada una</h2>
+
+<p>La mayor debilidad estructural de Snort ha sido exprimir todo el valor del hardware con muchos núcleos en enlaces de muy alto rendimiento. Incluso con el procesamiento de paquetes multihilo de Snort 3, la mayoría de los benchmarks publicados y de las recomendaciones de los fabricantes siguen apuntando a que <strong>Suricata se pone por delante en rendimiento bruto multigigabit</strong> por máquina. Y para la parte significativa de la base instalada que sigue ejecutando la rama 2.9.x, el apaño sigue siendo el mismo de siempre: ejecutar varios procesos de Snort ligados a distintas interfaces o colas de NIC. Más piezas móviles que gestionar, no un techo técnico infranqueable, pero sí un peaje operativo real.</p>
+
+<p>La configuración por defecto de Suricata no es ligera. El análisis completo de protocolos, el fingerprinting TLS y la extracción de ficheros cuestan CPU y memoria incluso en un despliegue que no necesita el registro extra, y afinar bien Suricata en hardware limitado – un appliance, una máquina de una oficina remota, una VM con recursos capados – exige un ajuste deliberado: afinidad de hilos y CPU, dimensionado del ring buffer y una decisión consciente sobre qué tipos de log de <code>eve.json</code> merece la pena conservar de verdad. La base de código de Suricata también avanza más rápido y abarca más terreno que la de Snort, lo cual es bueno para seguir el ritmo de los protocolos nuevos, pero implica cambios más frecuentes de una versión a otra en la sintaxis de configuración, el comportamiento de las palabras clave y los formatos de salida por defecto que los operadores tienen que vigilar en cada actualización.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">El veredicto que sobrevive a producción</h2>
+
+<p>Pon esas concesiones junto al hardware moderno y la balanza se inclina con bastante claridad: la mayoría de los equipos que levantan hoy un despliegue nuevo, sobre máquinas de varios núcleos inspeccionando decenas de gigabits, se decantan por Suricata por su multihilo nativo y por la visibilidad a nivel de protocolo – TLS/JA3, extracción de ficheros, metadatos ricos de DNS y HTTP – que viene integrada en el motor en lugar de acoplada después. Snort sigue siendo una opción totalmente válida y bien respaldada, sobre todo allí donde un equipo ya tiene años de reglas ajustadas, listas de supresión y experiencia institucional con Snort acumulados, donde arrancar un stack de detección que funciona para perseguir una ventaja de arquitectura rara vez sale rentable. Esto no va de que una herramienta esté obsoleta. Va de emparejar la arquitectura del motor, y la memoria muscular operativa que ya hay en casa, con el hardware que de verdad hace la inspección.</p>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+
+            <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+
+            <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../splunk-vs-wazuh-vs-elk/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Comparativas</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Splunk vs Wazuh vs ELK</div>
+        </a>
+        <a href="../../laboratorio/lab-05-ids-con-suricata/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Lab</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Ver los paquetes, no solo los logs</div>
+        </a>
+        <a href="../nessus-vs-openvas/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Comparativas</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Nessus vs OpenVAS</div>
+        </a>
+        <a href="../" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Explorar</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Todas las Comparativas</div>
+        </a>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Snort o Suricata para una red de alto rendimiento con hardware de varios núcleos?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Suricata, por su multihilo nativo diseñado desde el primer día para repartir el tráfico entre todos los núcleos disponibles sin necesitar balanceo de carga externo.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Son compatibles las reglas de Snort con Suricata?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sí, Suricata se construyó para consumir la misma sintaxis de reglas de Snort y los conjuntos de Emerging Threats (ET), que se cargan y ejecutan prácticamente tal cual.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Sigue siendo Snort de un solo hilo?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La rama clásica 2.9.x sí; Snort 3, con disponibilidad general desde 2021, añadió procesamiento multihilo real, aunque buena parte de los despliegues en producción todavía ejecutan 2.9.x.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál ofrece más visibilidad a nivel de protocolo, como TLS o DNS?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Suricata, que registra metadatos ricos –fingerprints TLS JA3/JA3S, certificados, extracción de ficheros– de forma nativa en su salida eve.json sin reglas adicionales.
+        </div>
+      </details>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">En esta página</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Relacionado</div>
+        <ul class="space-y-3">
+          <li><a href="../splunk-vs-wazuh-vs-elk/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Splunk vs Wazuh vs ELK</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">SIEM · 8</div>
+          </a></li>
+          <li><a href="../../laboratorio/lab-05-ids-con-suricata/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Ver los paquetes, no solo los logs</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LAB · 6</div>
+          </a></li>
+          <li><a href="../nessus-vs-openvas/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Nessus vs OpenVAS</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">SCAN · 7</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

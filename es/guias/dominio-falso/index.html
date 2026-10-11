@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cómo comprobar si un dominio es falso | Breachfolio</title>
+  <meta name="description" content="El candado HTTPS no demuestra nada por sí solo. Las señales reales: el dominio de verdad, su antigüedad y qué te pide la página." />
+  <meta name="keywords" content="cómo saber si un dominio es falso, comprobar si una web es fraudulenta, dominio sospechoso cómo detectarlo, ICANN Lookup comprobar dominio, Google Safe Browsing España, phishing dominio falso banco, verificar legitimidad de una web, checklist dominio sospechoso, suplantación de marca dominio falso" />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/dominio-falso/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/check-suspicious-domain/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/dominio-falso/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/check-suspicious-domain/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Cómo comprobar si un dominio es falso | Breachfolio" />
+  <meta property="og:description" content="El candado HTTPS no demuestra nada por sí solo. Las señales reales: el dominio de verdad, su antigüedad y qué te pide la página." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/dominio-falso/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-domain.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cómo comprobar si un dominio es falso | Breachfolio" />
+  <meta name="twitter:description" content="El candado HTTPS no demuestra nada por sí solo. Las señales reales: el dominio de verdad, su antigüedad y qué te pide la página." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-domain.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cómo comprobar si un dominio es falso o sospechoso",
+      "description": "El candado HTTPS no demuestra nada por sí solo. Las señales reales: el dominio de verdad, su antigüedad y qué te pide la página.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-domain.webp",
+      "datePublished": "2026-07-09",
+      "dateModified": "2026-07-09",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/guias/dominio-falso/"
+      },
+      "inLanguage": "es",
+      "keywords": "c\u00f3mo saber si un dominio es falso, comprobar si una web es fraudulenta, dominio sospechoso c\u00f3mo detectarlo, ICANN Lookup comprobar dominio, Google Safe Browsing Espa\u00f1a, phishing dominio falso banco, verificar legitimidad de una web, checklist dominio sospechoso, suplantaci\u00f3n de marca dominio falso"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Guías", "item": "https://breachfolio.com/es/guias/" },
+        { "@type": "ListItem", "position": 3, "name": "Dominio falso", "item": "https://breachfolio.com/es/guias/dominio-falso/" }
+      ]
+    },
+    {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "@id": "https://breachfolio.com/es/guias/dominio-falso/#faq",
+            "mainEntity": [
+                  {
+                        "@type": "Question",
+                        "name": "¿El candado HTTPS garantiza que una web es segura?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "No. El HTTPS solo indica que la conexión está cifrada, no dice nada sobre quién controla realmente la web."
+                        }
+                  },
+                  {
+                        "@type": "Question",
+                        "name": "¿Cómo compruebo quién registró un dominio?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Con ICANN Lookup (lookup.icann.org) puedes consultar datos públicos de registro como el registrador y la fecha de creación."
+                        }
+                  },
+                  {
+                        "@type": "Question",
+                        "name": "¿Cuál es la señal más clara de que un dominio es falso?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Que use el nombre de una marca conocida mientras pide contraseñas, tarjeta bancaria o códigos de un solo uso – algo que una web legítima rara vez necesita a la vez."
+                        }
+                  }
+            ]
+      }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guías</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Dominio falso</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-guide-domain.webp" alt="¿Es falso este dominio? Cómo comprobarlo." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUÍAS · PHISHING</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">¿Es falso este dominio? Cómo comprobarlo.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">El candado HTTPS no demuestra nada sobre quién controla realmente una web. Esto es lo que hay que mirar antes de confiar en un enlace.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Comprobar si un dominio es falso no consiste solo en mirar si aparece el candado de HTTPS. Muchísimas webs fraudulentas tienen certificados de seguridad perfectamente válidos y un diseño tan cuidado como el de la marca que imitan: <strong>HTTPS solo cifra la conexión, no dice nada sobre quién está al otro lado</strong>. Lo que de verdad importa es <strong>revisar varias señales a la vez</strong>: el nombre exacto del dominio, el contexto en el que ha llegado el enlace, su antigüedad, si redirige por el camino y, sobre todo, qué te está pidiendo la página.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">1. Mira el dominio real, no el texto del enlace</h2>
+
+<p>Un enlace puede mostrar un texto perfectamente legítimo –"Banco Santander", "Correos", "Agencia Tributaria"– y llevar a un <strong>dominio completamente distinto</strong>. En el móvil es todavía más fácil confundirse, porque la barra de direcciones suele estar recortada y solo se ve el principio o el final de la URL. Antes de abrir cualquier enlace dudoso, <strong>mantenlo pulsado (o cópialo)</strong> para ver la dirección completa, sin recortar, y léela entera.</p>
+
+<p>Y ten en cuenta algo importante: que una web contenga la palabra "correos", "aeat" o "banco" en algún punto de su dirección <strong>no significa que sea oficial</strong>. Cualquiera puede registrar un dominio que incluya esas palabras.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">2. Desconfía de dominios muy largos o con muchos guiones</h2>
+
+<p>Los dominios oficiales suelen ser <strong>cortos y reconocibles</strong>. Los fraudulentos, en cambio, tienden a ser <strong>largos, forzados y llenos de guiones</strong> para intentar parecer legítimos a simple vista. Fíjate en ejemplos como estos, claramente ficticios pero representativos del patrón:</p>
+
+<ul>
+  <li><code>pago-seguro-cliente-banco.com</code></li>
+  <li><code>agencia-tributaria-reembolso-online.net</code></li>
+</ul>
+
+<p>Cuanto más largo y más artificial parezca el dominio, más motivos hay para <strong>pararse a revisarlo antes de seguir</strong>.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">3. Revisa si usa una marca conocida sin ser su dominio real</h2>
+
+<p>Si un dominio menciona el nombre de una marca conocida pero no coincide con su dominio oficial, esa es <strong>una señal de alarma por sí sola</strong>. La forma correcta de comprobarlo nunca es buscar el dominio "oficial" a partir del enlace que has recibido, porque ese enlace puede llevarte a otra web falsa que refuerce el engaño. <strong>Escribe tú mismo la dirección de memoria</strong>, o búscala a través de una fuente fiable que ya conozcas de antes.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">4. Comprueba la antigüedad y datos públicos</h2>
+
+<p><a href="https://lookup.icann.org" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">ICANN Lookup</a> permite consultar los datos públicos de registro de cualquier dominio: quién es el registrador, la <strong>fecha exacta de creación</strong> y los servidores de nombres (nameservers) que usa. Un dominio registrado hace pocos días o semanas no es automáticamente fraudulento –hay negocios legítimos que empiezan así–, pero si además ese dominio imita a una marca conocida y te está pidiendo datos sensibles, la combinación de "recién creado" más "suplanta a otro" es <strong>una señal de riesgo muy importante</strong>.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">5. Comprueba si aparece marcado como peligroso</h2>
+
+<p>El <a href="https://transparencyreport.google.com/safe-browsing/search" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">informe de transparencia de Google Safe Browsing</a> permite consultar el estado de seguridad de cualquier web. Si el dominio aparece marcado como no seguro, <strong>no interactúes con él bajo ningún concepto</strong>. Ahora bien: que no aparezca marcado <strong>tampoco es garantía de que sea seguro</strong>, porque los dominios fraudulentos suelen ser muy recientes y todavía no han sido detectados ni catalogados.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">6. Fíjate en qué pide la página</h2>
+
+<p>Con independencia de cómo se vea el dominio, lo que la página te pide es <strong>una de las señales más fiables de todas</strong>. Sospecha especialmente si te solicita:</p>
+
+<ul>
+  <li>El número completo de tu tarjeta bancaria y el CVV</li>
+  <li>Un código recibido por SMS</li>
+  <li>Tu DNI o documento de identidad</li>
+  <li>Usuario y contraseña de tu banco, correo o cualquier otro servicio</li>
+  <li>La frase semilla (seed phrase) de un monedero de criptomonedas</li>
+  <li>La descarga e instalación de un archivo o una aplicación</li>
+  <li>Un pago urgente para "liberar" un paquete, un reembolso o evitar una supuesta sanción</li>
+</ul>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">7. Comprueba redirecciones y acortadores</h2>
+
+<p>Los enlaces acortados (bit.ly, tinyurl y similares) <strong>ocultan el destino real</strong> hasta que se hace clic, lo que los convierte en una herramienta habitual para disfrazar dominios fraudulentos. <strong>Extrema la precaución</strong> si recibes un enlace acortado por SMS, correo electrónico o redes sociales, sobre todo si viene acompañado de urgencia o de una oferta que parece demasiado buena.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Variantes de dominio falso que vas a encontrar</h2>
+
+<p>No todos los dominios fraudulentos siguen el patrón del nombre largo con guiones. El <strong>typosquatting</strong> apuesta por tus dedos: registra el dominio con una letra bailada o duplicada, confiando en que lo teclees mal o no lo mires dos veces. Los <strong>caracteres visualmente idénticos</strong> van un paso más allá: una letra de otro alfabeto que se dibuja igual en pantalla puede hacer que dos dominios distintos parezcan exactamente el mismo. El <strong>subdominio engañoso</strong> coloca el nombre de la marca delante de un dominio ajeno: la marca aparece al principio de la dirección, pero el dominio real es lo que va justo antes de la primera barra. Y el <strong>cambio de terminación</strong> registra el mismo nombre con otra extensión: la marca es real, la terminación no es la suya.</p>
+
+<p>Dos canales merecen mención aparte. Los <strong>anuncios en buscadores</strong>: un dominio falso puede aparecer encima del resultado legítimo si el estafador paga por ello, así que "lo encontré buscando en Google" no es una verificación. Y los <strong>códigos QR</strong> en correos, cartas falsas o pegatinas encima de carteles reales: un QR es un enlace que ni siquiera puedes leer antes de abrirlo, lo que lo convierte en el acortador perfecto. Con ambos, la regla es la misma que con cualquier enlace recibido: el dominio se comprueba después de abrirlo y antes de escribir nada.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Un caso paso a paso: el paquete de Jorge</h2>
+
+<p>Jorge, 41 años, espera un pedido. Le llega un SMS: "Su paquete está retenido por 1,99 € de aduanas" con un enlace acortado. Está en el autobús, con prisa, y la cantidad es tan pequeña que casi ni lo piensa. Pulsa el enlace y aterriza en una página con el logo de Correos, colores idénticos y un formulario de tarjeta. Algo le hace mirar la barra de direcciones: el dominio es una cadena larga con "correos" en medio, guiones a los lados y una terminación que no ha visto nunca.</p>
+
+<p>En vez de pagar, hace la comprobación de dos minutos: abre una pestaña nueva, escribe él mismo la web oficial de Correos y busca su envío con el número de seguimiento real. Su paquete está en reparto, sin ninguna incidencia ni pago pendiente. El SMS era pesca al azar – miles de mensajes idénticos enviados a números al azar, esperando a los que justo esperan un paquete. La lección que se lleva: <strong>el importe pequeño es el anzuelo, no la prueba de que sea inofensivo</strong>. Nadie regala su tarjeta por 1.000 euros, pero el CVV que entregas por 1,99 vale exactamente lo mismo para el estafador.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Hábitos que evitan la comprobación de urgencia</h2>
+
+<p>La mejor revisión de dominios es la que no llegas a necesitar. Crea <strong>marcadores en el navegador para tus webs sensibles:</strong> banco, correo, administración pública, y entra siempre desde ahí, nunca desde enlaces recibidos. Usa un <strong>gestor de contraseñas</strong>: además de recordar las claves, se niega a autocompletar en un dominio que no coincide con el guardado, lo que lo convierte en un detector de webs falsas silencioso y automático. Y en el móvil, donde la barra de direcciones recortada juega en tu contra, acostúmbrate a girar el teléfono o tocar la barra para ver la URL completa antes de escribir nada.</p>
+
+<p>Comparte también la regla con quien más la necesita: la persona de tu familia que paga recibos desde el móvil o espera paquetes a menudo. Basta con una frase: <strong>ningún organismo ni empresa te pide pagar o identificarte desde un enlace de SMS:</strong> si llega algo así, se entra a la web oficial escribiéndola a mano y se comprueba allí. Ante la duda, la <strong>Línea 017 de INCIBE</strong> resuelve consultas gratuitas sobre webs sospechosas, y si un dominio falso te ha llegado suplantando a una empresa real, reportarlo ayuda a que se bloquee antes de que caiga el siguiente.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Checklist de dominio sospechoso</h2>
+
+<ul>
+  <li>El dominio es muy largo o está compuesto por varias palabras encadenadas</li>
+  <li>Tiene muchos guiones</li>
+  <li>Incluye palabras como "login", "verify", "pago" o "seguridad"</li>
+  <li>Menciona una marca conocida pero no es su dominio oficial</li>
+  <li>Se creó recientemente, según ICANN Lookup</li>
+  <li>Llega a través de un acortador de enlaces</li>
+  <li>Redirige varias veces antes de llegar a la página final</li>
+  <li>Pide tarjeta bancaria, contraseña o códigos de un solo uso</li>
+  <li>No muestra datos legales claros (empresa, dirección, contacto)</li>
+  <li>Transmite una sensación de urgencia excesiva</li>
+</ul>
+
+<div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">La versión en una frase.</strong> Ninguna señal aislada confirma al cien por cien que un dominio sea falso, pero varias juntas –sobre todo "usa una marca conocida" combinada con "pide datos sensibles"– deben frenar cualquier interacción hasta verificarlo por canales oficiales.</div>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿El candado HTTPS garantiza que una web es segura?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No. El HTTPS solo indica que la conexión está cifrada, no dice nada sobre quién controla realmente la web.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Cómo compruebo quién registró un dominio?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Con ICANN Lookup (<code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">lookup.icann.org</code>) puedes consultar datos públicos de registro como el registrador y la fecha de creación.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Cuál es la señal más clara de que un dominio es falso?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Que use el nombre de una marca conocida mientras pide contraseñas, tarjeta bancaria o códigos de un solo uso – algo que una web legítima rara vez necesita a la vez.
+  </div>
+</details>
+
+<div class="mt-12 pt-8 border-t border-border">
+  <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <a href="../tarjeta-web-falsa/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">He metido mi tarjeta en una web falsa</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../denunciar-web-fraudulenta/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">Cómo denunciar una web fraudulenta</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../sms-aeat-falso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">¿Es falso este SMS de la AEAT?</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">Todas las guías</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

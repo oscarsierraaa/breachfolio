@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Herramientas SOC: SIEM, SOAR, EDR y más | Breachfolio</title>
+  <meta name="description" content="El stack del SOC por categorías: SIEM, EDR/XDR, SOAR, NDR, inteligencia de amenazas, sandboxes y enriquecimiento, con herramientas OSS y comerciales reales." />
+  <meta name="keywords" content="herramientas SOC" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-tools-siem-soar-edr/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Herramientas SOC: SIEM, SOAR, EDR y más | Breachfolio" />
+  <meta property="og:description" content="El stack del SOC por categorías: SIEM, EDR/XDR, SOAR, NDR, inteligencia de amenazas, sandboxes y enriquecimiento, con herramientas OSS y comerciales reales." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-soc-tools.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Herramientas SOC: SIEM, SOAR, EDR y más | Breachfolio" />
+  <meta name="twitter:description" content="El stack del SOC por categorías: SIEM, EDR/XDR, SOAR, NDR, inteligencia de amenazas, sandboxes y enriquecimiento, con herramientas OSS y comerciales reales." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-soc-tools.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Herramientas SOC: SIEM, SOAR, EDR y más",
+      "description": "El stack del SOC por categorías: SIEM, EDR/XDR, SOAR, NDR, inteligencia de amenazas, sandboxes y enriquecimiento, con herramientas OSS y comerciales reales.",
+      "image": "https://breachfolio.com/assets/img/hero-soc-tools.webp",
+      "datePublished": "2026-07-17",
+      "dateModified": "2026-07-17",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" },
+      "inLanguage": "es",
+      "keywords": "herramientas SOC"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Herramientas SOC", "item": "https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre SIEM y SOAR?", "acceptedAnswer": { "@type": "Answer", "text": "Un SIEM recopila, almacena y busca datos de log y lanza alertas cuando sus detecciones saltan: es el sistema de registro. Un SOAR se sitúa por encima y actúa sobre esas alertas, ejecutando playbooks automatizados que enriquecen indicadores, abren casos y toman acciones de respuesta. Dicho simple: el SIEM te dice que algo ha pasado; el SOAR hace algo al respecto. Muchos equipos empiezan solo con un SIEM y añaden un SOAR cuando el volumen de alertas supera al triaje manual." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre EDR y antivirus?", "acceptedAnswer": { "@type": "Answer", "text": "El antivirus tradicional coteja archivos contra una lista de firmas conocidas como maliciosas y los bloquea: es esencialmente un filtro. El EDR (Endpoint Detection and Response) registra el comportamiento en el endpoint –árboles de procesos, líneas de comandos, conexiones de red– y detecta actividad sospechosa incluso de malware nunca visto antes, y luego deja a un analista responder en remoto aislando el host o matando un proceso. El antivirus previene amenazas conocidas; el EDR detecta y te permite investigar y contener las desconocidas." } },
+        { "@type": "Question", "name": "¿Cuál es el mejor SIEM open source?", "acceptedAnswer": { "@type": "Answer", "text": "Para la mayoría de los equipos, Wazuh. Es gratis a cualquier escala y combina análisis de logs estilo SIEM con detección de intrusiones en host en un solo agente, así que obtienes visibilidad del endpoint sin un segundo producto. Elastic Security (el stack ELK) es la alternativa fuerte si quieres máxima flexibilidad y tienes destreza interna de operación de Elasticsearch, y Graylog es una opción más ligera centrada en la gestión de logs. Mira nuestra comparación Splunk vs Wazuh vs ELK para ver las contrapartidas." } },
+        { "@type": "Question", "name": "¿Necesitas de verdad un SOAR?", "acceptedAnswer": { "@type": "Answer", "text": "No al principio. Un equipo pequeño ahogado en un puñado de alertas al día hace mejor en poner a punto las detecciones y la gestión de casos antes de automatizar nada. Necesitas un SOAR cuando el trabajo repetitivo de nivel 1 –enriquecer los mismos indicadores, copiar datos entre herramientas, abrir tickets– empieza a comerse horas que no tienes. Cuando eso ocurre, una opción gratuita como Shuffle o el nivel community de Tines te deja automatizar la parte pesada sin un gran desembolso." } },
+        { "@type": "Question", "name": "¿Qué es una TIP y necesito MISP?", "acceptedAnswer": { "@type": "Answer", "text": "Una plataforma de inteligencia de amenazas (TIP) recopila, deduplica y organiza lo que sabes sobre los atacantes –indicadores de compromiso, campañas y actores– para que puedas empujar ese conocimiento a las detecciones y traerlo al enriquecimiento. MISP es el estándar open source y vale la pena tenerlo en cuanto consumes más de un feed de amenazas o compartes inteligencia con otros equipos. Por debajo de ese umbral, búsquedas gratuitas como VirusTotal y AbuseIPDB pueden bastar, pero MISP es donde los feeds dispersos se convierten en una memoria organizada y consultable." } },
+        { "@type": "Question", "name": "SIEM vs XDR: ¿cuál es la diferencia?", "acceptedAnswer": { "@type": "Answer", "text": "Un SIEM es agnóstico de la fuente de datos: le apuntas cualquier log, defines tus propias detecciones y eres dueño de la correlación y el afinado. El XDR (Extended Detection and Response) es una suite integrada de un fabricante que cose la telemetría de endpoint, identidad, correo y cloud de ese fabricante con detecciones ya incluidas, cambiando flexibilidad por menos configuración. El SIEM te da control total y cobertura amplia a costa de esfuerzo de ingeniería; el XDR te da detección rápida y opinada dentro de un ecosistema a costa de lock-in. Los SOC más grandes suelen operar ambos, con el XDR alimentando al SIEM." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Herramientas SOC</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-soc-tools.webp" alt="Herramientas SOC: SIEM, SOAR, EDR y más." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · SOC</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Herramientas SOC: SIEM, SOAR, EDR y más.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">El stack del SOC por categorías: SIEM, EDR/XDR, SOAR, NDR, inteligencia de amenazas, sandboxes y enriquecimiento, con herramientas OSS y comerciales reales.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>17 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>14 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Entra en cualquier Security Operations Center y no encontrarás una sola herramienta haciendo el trabajo. Encontrarás un stack: una docena de productos que ingieren, detectan, enriquecen, deciden y contienen, cada uno dueño de una porción del trabajo y pasando el testigo al siguiente. Los analistas nuevos se pierden porque los fabricantes venden cada caja como si sustituyera a todas las demás. No es así. Un SIEM no es un EDR, un EDR no es un SOAR, y ninguno de ellos es una plataforma de inteligencia de amenazas. La forma más rápida de entender un SOC es aprender primero las <strong>categorías</strong> y luego encajar las herramientas reales en cada una.</p>
+
+<p>Este es el mapa de referencia. De cada categoría obtienes lo que hace de verdad, seguido de las herramientas que la gente usa de verdad –marcadas con claridad como <strong>open source (OSS)</strong> o <strong>comercial:</strong> , cada una enlazada a su propio sitio. Si aún no tienes claro qué es un SOC de entrada, empieza por <a href="/cybersecurity/what-is-a-soc/">qué es un SOC</a> y vuelve.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 356" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Fuentes de log</text><path d="M 192 53 L 192 72" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 68 L 192 73 L 196 68" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="78" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="78" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="107" fill="hsl(var(--foreground))" font-size="15" font-weight="600">SIEM (correlación)</text><path d="M 192 129 L 192 148" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 144 L 192 149 L 196 144" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="154" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="154" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="183" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Reglas de detección</text><path d="M 192 205 L 192 224" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 220 L 192 225 L 196 220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="230" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="230" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="259" fill="hsl(var(--foreground))" font-size="15" font-weight="600">SOAR (automatización)</text><path d="M 192 281 L 192 300" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 296 L 192 301 L 196 296" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="306" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="306" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="335" fill="hsl(var(--foreground))" font-size="15" font-weight="600">EDR (contención)</text></svg>
+        <figcaption>Cómo encaja el stack de un SOC, del log a la respuesta.</figcaption>
+      </figure>
+      <h2>Cómo encajan las piezas</h2>
+
+<p>Antes de la lista de herramientas, ten el pipeline en la cabeza. La telemetría fluye en una dirección y las decisiones fluyen de vuelta. Todo lo de abajo es una variación de esta forma:</p>
+
+<pre tabindex="0">  FUENTES DE LOG / TELEMETRÍA         SIEM                 DETECCIÓN
+  endpoints, cortafuegos, ─────▶   recopila,    ─────▶  reglas sobre los datos
+  cloud, DNS, IDS, apps            normaliza,           (Sigma, consultas nativas)
+                                   almacena, busca            │
+                                                             ▼
+       CONTENCIÓN            GESTIÓN DE CASOS         ALERTA / SOAR
+   aislar host, matar    ◀──  TheHive / Jira   ◀──   triaje + automatización
+   proceso vía EDR             seguir el caso        (enriquecer, correlacionar)
+        ▲                                                    │
+        │                                                    ▼
+        └──────────  ENRIQUECIMIENTO: VirusTotal, GreyNoise, AbuseIPDB, MISP  ◀─┘</pre>
+
+<p>Léelo como una frase: las <strong>fuentes de logs</strong> alimentan un <strong>SIEM</strong>; las <strong>detecciones</strong> (a menudo escritas como reglas Sigma) disparan <strong>alertas</strong>; un <strong>SOAR</strong> o un analista enriquece esas alertas contra <strong>inteligencia de amenazas</strong> y servicios de reputación; los incidentes confirmados se convierten en <strong>casos</strong> en un gestor como TheHive; y la contención ocurre de vuelta en el endpoint a través de un <strong>EDR</strong>. Ten ese bucle en mente y cada categoría de abajo tiene un sitio evidente.</p>
+
+<h2>SIEM: el sistema de registro</h2>
+
+<p>El SIEM (Security Information and Event Management, gestión de información y eventos de seguridad) es el sistema nervioso central del SOC. Recoge logs de todas partes –endpoints, cortafuegos, cloud, proveedores de identidad, aplicaciones–, los normaliza a una forma común, los almacena y te deja buscar y alertar sobre el conjunto. Es donde ocurre la correlación: un login fallido aquí, más una cuenta de administrador nueva allá, más datos saliendo de la red, se convierten en una sola historia. Si un SOC tiene un único núcleo, es este.</p>
+
+<ul>
+<li><a href="https://www.splunk.com" target="_blank" rel="noopener noreferrer">Splunk</a> (comercial): el referente del mercado; enorme ecosistema de apps y el lenguaje de búsqueda SPL, tarificado principalmente por volumen de ingesta diaria.</li>
+<li><a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-sentinel" target="_blank" rel="noopener noreferrer">Microsoft Sentinel</a> (comercial): SIEM nativo de cloud sobre Azure, consultado con KQL, potente si ya vives en el ecosistema de Microsoft.</li>
+<li><a href="https://www.ibm.com/qradar" target="_blank" rel="noopener noreferrer">IBM QRadar</a> (comercial): SIEM empresarial de largo recorrido con correlación madura y gestión de ofensas.</li>
+<li><a href="https://www.elastic.co" target="_blank" rel="noopener noreferrer">Elastic Security / ELK</a> (open core): el Elastic Stack más una capa de seguridad; gratis para autoalojar, con funciones de detección avanzadas en los niveles de pago.</li>
+<li><a href="https://wazuh.com" target="_blank" rel="noopener noreferrer">Wazuh</a> (OSS): gratis a cualquier escala, combina análisis de logs estilo SIEM con detección de intrusiones en host en un solo agente.</li>
+<li><a href="https://graylog.org" target="_blank" rel="noopener noreferrer">Graylog</a> (open core): plataforma ligera centrada primero en la gestión de logs, con una interfaz de búsqueda amable y una edición open source.</li>
+<li><a href="https://cloud.google.com/security/products/security-operations" target="_blank" rel="noopener noreferrer">Google SecOps (Chronicle)</a> (comercial): SIEM en cloud construido para volúmenes de log muy grandes, con inteligencia de amenazas de Google integrada.</li>
+</ul>
+
+<p>Elegir entre las tres grandes opciones open y comercial merece su propio artículo; escribimos uno: <a href="/compare/splunk-vs-wazuh-vs-elk/">Splunk vs Wazuh vs ELK</a>. La versión corta es una tabla.</p>
+
+<table>
+<thead><tr><th>SIEM</th><th>¿OSS?</th><th>Fuerte en</th><th>Ojo con</th></tr></thead>
+<tbody>
+<tr><td>Splunk</td><td>No</td><td>Potencia de búsqueda, ecosistema de apps, soporte del fabricante</td><td>La tarifa por ingesta se puede disparar</td></tr>
+<tr><td>Microsoft Sentinel</td><td>No</td><td>Nativo de cloud, integración estrecha con Microsoft/Entra</td><td>El coste y el lock-in van con Azure</td></tr>
+<tr><td>IBM QRadar</td><td>No</td><td>Correlación madura, despliegues empresariales</td><td>Pesado, UX anticuada, licenciamiento caro</td></tr>
+<tr><td>Elastic Security / ELK</td><td>Open core</td><td>Ingesta flexible, escala si se afina</td><td>Requiere destreza real de operación de Elasticsearch</td></tr>
+<tr><td>Wazuh</td><td>Sí</td><td>Gratis a escala, HIDS integrado</td><td>Ecosistema más pequeño, más hazlo tú mismo</td></tr>
+<tr><td>Graylog</td><td>Open core</td><td>Gestión de logs simple, arranque fácil</td><td>Menos funciones específicas de seguridad</td></tr>
+<tr><td>Google SecOps</td><td>No</td><td>Volúmenes enormes, inteligencia de amenazas de Google</td><td>Solo cloud, precios opacos</td></tr>
+</tbody>
+</table>
+
+<h2>EDR / XDR: ojos en el endpoint</h2>
+
+<p>El Endpoint Detection and Response pone un sensor en cada portátil y servidor. A diferencia del antivirus de antaño, no se limita a cotejar archivos conocidos como maliciosos: registra árboles de procesos, líneas de comandos, conexiones de red y cambios de registro, luego marca comportamientos sospechosos y te deja responder en remoto: aislar el host, matar un proceso, extraer un archivo. <strong>XDR</strong> (Extended Detection and Response) es la misma idea ampliada para correlacionar señales de endpoint, identidad, correo y cloud en una sola consola.</p>
+
+<ul>
+<li><a href="https://www.crowdstrike.com" target="_blank" rel="noopener noreferrer">CrowdStrike Falcon</a> (comercial): agente cloud ligero, muy bien considerado por su calidad de detección y su threat hunting.</li>
+<li><a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint" target="_blank" rel="noopener noreferrer">Microsoft Defender for Endpoint</a> (comercial): profundamente integrado en Windows y en el stack de seguridad de Microsoft.</li>
+<li><a href="https://www.sentinelone.com" target="_blank" rel="noopener noreferrer">SentinelOne</a> (comercial): IA de comportamiento en el propio agente, con rollback automático de los cambios del ransomware.</li>
+<li><a href="https://www.elastic.co/security/endpoint-security" target="_blank" rel="noopener noreferrer">Elastic Defend</a> (open core): el propio agente de endpoint de Elastic, que alimenta las detecciones directamente en Elastic Security.</li>
+<li><a href="https://limacharlie.io" target="_blank" rel="noopener noreferrer">LimaCharlie</a> (comercial, por uso): un "motor EDR como servicio" sobre el que construir, popular entre MSSP y quienes montan a medida.</li>
+<li><a href="https://wazuh.com" target="_blank" rel="noopener noreferrer">Wazuh agent</a> (OSS): la opción gratuita; monitorización de integridad de archivos, recolección de logs y acciones de respuesta, aunque más ligera en EDR de comportamiento en tiempo real que los nombres comerciales.</li>
+</ul>
+
+<h2>SOAR: automatizar lo aburrido</h2>
+
+<p>Security Orchestration, Automation and Response es el pegamento y el robot. Un SOAR ejecuta <strong>playbooks</strong>: cuando llega una alerta, enriquece automáticamente los indicadores, consulta servicios de reputación, abre o actualiza un caso, avisa al analista y –donde confíes en él– toma acciones como bloquear una IP. El objetivo es eliminar el clicar repetitivo de nivel 1 para que las personas dediquen el tiempo al criterio, no a copiar y pegar.</p>
+
+<ul>
+<li><a href="https://www.paloaltonetworks.com/cortex/cortex-xsoar" target="_blank" rel="noopener noreferrer">Palo Alto Cortex XSOAR</a> (comercial): una de las plataformas SOAR más consolidadas, con un gran marketplace de integraciones.</li>
+<li><a href="https://www.splunk.com/en_us/products/splunk-security-orchestration-and-automation.html" target="_blank" rel="noopener noreferrer">Splunk SOAR</a> (comercial): automatización que encaja de forma natural en un SOC centrado en Splunk.</li>
+<li><a href="https://www.tines.com" target="_blank" rel="noopener noreferrer">Tines</a> (comercial, con nivel community gratuito): automatización no-code/low-code, adorada por lo rápido que se construye un flujo.</li>
+<li><a href="https://shuffler.io" target="_blank" rel="noopener noreferrer">Shuffle</a> (OSS): SOAR de código abierto que casa de maravilla con TheHive y MISP en un stack gratuito.</li>
+<li><a href="https://swimlane.com" target="_blank" rel="noopener noreferrer">Swimlane</a> (comercial): automatización con énfasis en la gestión de casos y el reporte a escala.</li>
+</ul>
+
+<h2>IDS / IPS / NDR: vigilar el cable</h2>
+
+<p>Donde el EDR vigila los hosts, esta categoría vigila el tráfico de red. Un <strong>IDS</strong> (Intrusion Detection System, sistema de detección de intrusiones) inspecciona los paquetes en busca de patrones conocidos como maliciosos y alerta; un <strong>IPS</strong> además puede bloquear en línea. El <strong>NDR</strong> (Network Detection and Response) se apoya en el comportamiento y los metadatos más que en las firmas puras. Estos sensores alimentan al SIEM con la parte de la historia del tráfico que tus endpoints no pueden ver.</p>
+
+<ul>
+<li><a href="https://suricata.io" target="_blank" rel="noopener noreferrer">Suricata</a> (OSS): IDS/IPS multihilo de alto rendimiento, con rico logging de protocolos y extracción de archivos.</li>
+<li><a href="https://www.snort.org" target="_blank" rel="noopener noreferrer">Snort</a> (OSS): el IDS/IPS original basado en firmas, respaldado por un enorme ruleset comunitario.</li>
+<li><a href="https://zeek.org" target="_blank" rel="noopener noreferrer">Zeek</a> (OSS): no es un motor de firmas sino un marco de análisis de red que convierte el tráfico en logs ricos y estructurados; el favorito de los hunters.</li>
+<li><a href="https://securityonion.net" target="_blank" rel="noopener noreferrer">Security Onion</a> (OSS): toda una distro gratuita que empaqueta Suricata, Zeek, el Elastic Stack y herramientas de casos en una sola plataforma desplegable.</li>
+</ul>
+
+<p>Los motores de firmas son primos cercanos con una división de diseño real: mira <a href="/compare/snort-vs-suricata/">Snort vs Suricata</a> para saber cuándo elegir cuál.</p>
+
+<h2>Plataformas de inteligencia de amenazas (TIP)</h2>
+
+<p>Una TIP es donde un SOC recopila, deduplica y operativiza lo que sabe sobre los atacantes: indicadores de compromiso (IOC), campañas y actores de amenaza. Su trabajo es convertir feeds dispersos en inteligencia estructurada que puedas empujar a las detecciones y traer al enriquecimiento. Es la memoria del SOC.</p>
+
+<ul>
+<li><a href="https://www.misp-project.org" target="_blank" rel="noopener noreferrer">MISP</a> (OSS): el estándar de facto de código abierto para compartir IOC, con comunidades de intercambio y exportación fácil a tu SIEM.</li>
+<li><a href="https://www.opencti.io" target="_blank" rel="noopener noreferrer">OpenCTI</a> (OSS): un grafo de conocimiento que modela actores, técnicas y relaciones sobre los indicadores en bruto.</li>
+<li><a href="https://otx.alienvault.com" target="_blank" rel="noopener noreferrer">AlienVault OTX</a> (gratis): un intercambio abierto de amenazas con "pulses" comunitarios a los que puedes suscribirte.</li>
+<li><a href="https://www.recordedfuture.com" target="_blank" rel="noopener noreferrer">Recorded Future</a> (comercial): inteligencia a gran escala y en tiempo real con analítica potente.</li>
+<li><a href="https://www.anomali.com" target="_blank" rel="noopener noreferrer">Anomali</a> (comercial): gestión de inteligencia de amenazas y cotejo contra tu telemetría.</li>
+<li><a href="https://threatconnect.com" target="_blank" rel="noopener noreferrer">ThreatConnect</a> (comercial): TIP con flujo de trabajo y automatización integrados.</li>
+<li><a href="https://socradar.io" target="_blank" rel="noopener noreferrer">SOCRadar</a> (comercial): inteligencia de superficie de ataque externa y de riesgo digital, incluida la monitorización de la dark web.</li>
+</ul>
+
+<h2>Gestión de casos y ticketing</h2>
+
+<p>Las alertas son ruido hasta que alguien se hace dueño de ellas. La gestión de casos es donde una alerta se convierte en una investigación con línea temporal, asignados, evidencias y un veredicto. Sin ella, el trabajo se cuela por las grietas y no puedes demostrar qué hiciste.</p>
+
+<ul>
+<li><a href="https://thehive-project.org" target="_blank" rel="noopener noreferrer">TheHive</a> (OSS): gestión de casos de respuesta a incidentes hecha a propósito, diseñada para emparejarse con MISP y los analizadores de Cortex.</li>
+<li><a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener noreferrer">Jira</a> (comercial): no es específica de seguridad, pero muchos SOC llevan aquí sus tickets de incidentes para que estén junto al trabajo de ingeniería.</li>
+</ul>
+
+<h2>Sandboxes de malware</h2>
+
+<p>Cuando cae un archivo sospechoso, necesitas saber qué hace sin detonarlo en una máquina real. Una sandbox ejecuta la muestra en un entorno instrumentado y desechable e informa de su comportamiento: archivos soltados, procesos lanzados, dominios contactados. Es clave para triar adjuntos de phishing y binarios desconocidos.</p>
+
+<ul>
+<li><a href="https://any.run" target="_blank" rel="noopener noreferrer">ANY.RUN</a> (comercial, con nivel community gratuito): sandbox interactiva donde observas y clicas a través de la detonación en vivo.</li>
+<li><a href="https://www.joesandbox.com" target="_blank" rel="noopener noreferrer">Joe Sandbox</a> (comercial): análisis profundo y detallado en Windows, macOS, Linux y móvil.</li>
+<li><a href="https://www.hybrid-analysis.com" target="_blank" rel="noopener noreferrer">Hybrid Analysis</a> (gratis): la sandbox pública de CrowdStrike y su repositorio comunitario de informes.</li>
+<li><a href="https://github.com/kevoreilly/CAPEv2" target="_blank" rel="noopener noreferrer">CAPEv2 / Cuckoo</a> (OSS): el clásico autoalojado; CAPEv2 es el sucesor mantenido activamente de Cuckoo Sandbox.</li>
+<li><a href="https://www.vmray.com" target="_blank" rel="noopener noreferrer">VMRay</a> (comercial): análisis resistente a la evasión, pensado para muestras difíciles de detonar.</li>
+<li><a href="https://tria.ge" target="_blank" rel="noopener noreferrer">Triage (tria.ge)</a> (comercial, con nivel gratuito): sandboxing automatizado rápido y de alto rendimiento con informes limpios.</li>
+</ul>
+
+<h2>Enriquecimiento y reputación</h2>
+
+<p>Estas son las búsquedas que un analista hace cincuenta veces al día: ¿este hash, IP, dominio o URL es conocido como malicioso? Los servicios de enriquecimiento responden a eso en segundos y son lo primero que automatiza un playbook de SOAR. Convierten un indicador desnudo en contexto.</p>
+
+<ul>
+<li><a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a> (gratis / comercial): escaneo multimotor de archivos, URL y hashes; la primera parada por reflejo.</li>
+<li><a href="https://www.abuseipdb.com" target="_blank" rel="noopener noreferrer">AbuseIPDB</a> (gratis / comercial): historial de abuso reportado por la comunidad y puntuación de confianza para una IP.</li>
+<li><a href="https://www.greynoise.io" target="_blank" rel="noopener noreferrer">GreyNoise</a> (comercial, con búsquedas gratuitas): te dice si una IP es ruido masivo de internet o algo dirigido, recortando falsos positivos.</li>
+<li><a href="https://urlscan.io" target="_blank" rel="noopener noreferrer">urlscan.io</a> (gratis / comercial): renderiza y disecciona una URL de forma segura, haciendo captura y mapeando lo que carga.</li>
+<li><a href="https://www.shodan.io" target="_blank" rel="noopener noreferrer">Shodan</a> (comercial, con nivel gratuito): buscador de hosts y servicios expuestos a internet.</li>
+<li><a href="https://censys.io" target="_blank" rel="noopener noreferrer">Censys</a> (comercial, con nivel gratuito): escaneo de hosts y certificados a escala de internet para exposición y atribución.</li>
+<li><a href="https://urlhaus.abuse.ch" target="_blank" rel="noopener noreferrer">URLhaus</a> (gratis, abuse.ch): un feed en vivo de URL de distribución de malware.</li>
+<li><a href="https://threatfox.abuse.ch" target="_blank" rel="noopener noreferrer">ThreatFox</a> (gratis, abuse.ch): una base de datos gratuita y compartible de IOC ligados a familias de malware.</li>
+</ul>
+
+<h2>Detection-as-code</h2>
+
+<p>Los SOC modernos tratan las detecciones como software: escritas como texto, versionadas en Git, revisadas y probadas. Eso es lo que significa "detection-as-code", y dos estándares abiertos lo llevan. <strong>Sigma</strong> es un formato genérico y agnóstico de herramienta para detecciones basadas en logs que escribes una vez y conviertes al lenguaje de consulta de tu SIEM. <strong>YARA</strong> describe patrones para identificar y clasificar archivos de malware. Ambos son OSS, ambos son portables y ambos pertenecen a un repositorio antes que pegados en una sola consola.</p>
+
+<ul>
+<li><a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a> (OSS): el formato de reglas "escribe una vez, ejecuta en cualquier sitio" para detecciones de SIEM, con un enorme ruleset público.</li>
+<li><a href="https://virustotal.github.io/yara/" target="_blank" rel="noopener noreferrer">YARA</a> (OSS): reglas de coincidencia de patrones para archivos y memoria; la lingua franca de la identificación de malware.</li>
+<li><a href="https://github.com/SigmaHQ/sigma-cli" target="_blank" rel="noopener noreferrer">pySigma / sigma-cli</a> (OSS): la cadena de herramientas que convierte una regla Sigma en Splunk SPL, KQL, Elasticsearch y más.</li>
+</ul>
+
+<p>Aquí está la promesa del detection-as-code en una sola sesión de consola: coge una regla Sigma portable y compílala en una búsqueda de Splunk que puedes pegar directamente en tu SIEM:</p>
+
+<pre tabindex="0"><code>$ pip install sigma-cli
+$ sigma plugin install splunk
+
+# Convierte una regla Sigma en una búsqueda SPL de Splunk
+$ sigma convert -t splunk rules/windows/process_creation/proc_creation_win_whoami.yml
+
+(source="WinEventLog:Security" EventCode=4688 Image="*\\whoami.exe")
+| table _time, ComputerName, User, CommandLine</code></pre>
+
+<p>Cambia un flag –<code>-t microsoft365defender</code>, <code>-t elasticsearch</code>– y la misma regla se convierte en KQL o en una consulta Lucene. Esa portabilidad es la razón de que los ingenieros de detección estandaricen sobre Sigma. Profundizamos en cómo escribir las tuyas en <a href="/cybersecurity/sigma-and-yara-rules/">reglas Sigma y YARA explicadas</a>.</p>
+
+<h2>Un stack de SOC open source realista que puedes montar</h2>
+
+<p>No necesitas un presupuesto de seis cifras para operar un SOC competente. Aquí tienes un stack gratuito y coherente –la misma filosofía que empaqueta Security Onion– donde cada pieza tiene un trabajo claro y de verdad se hablan entre sí:</p>
+
+<ul>
+<li><strong><a href="https://wazuh.com" target="_blank" rel="noopener noreferrer">Wazuh</a></strong> como SIEM y agente de endpoint: un solo despliegue te da recolección de logs, correlación y detección de intrusiones en host a coste de licencia cero, por muchos datos que envíes.</li>
+<li><strong><a href="https://suricata.io" target="_blank" rel="noopener noreferrer">Suricata</a></strong> y <strong><a href="https://zeek.org" target="_blank" rel="noopener noreferrer">Zeek</a></strong> en la red: Suricata alerta sobre firmas conocidas como maliciosas, Zeek convierte el tráfico en bruto en logs ricos para el hunting. Juntos son tus ojos en el cable.</li>
+<li><strong><a href="https://www.misp-project.org" target="_blank" rel="noopener noreferrer">MISP</a></strong> como plataforma de inteligencia de amenazas: incorpora feeds comunitarios, guarda tus propios IOC y empújalos a Wazuh para que las detecciones se mantengan al día.</li>
+<li><strong><a href="https://thehive-project.org" target="_blank" rel="noopener noreferrer">TheHive</a></strong> para la gestión de casos: cada alerta real se convierte en una investigación con seguimiento, con evidencias y un veredicto, y se integra de forma nativa con MISP.</li>
+<li><strong><a href="https://shuffler.io" target="_blank" rel="noopener noreferrer">Shuffle</a></strong> como SOAR: conecta el resto entre sí: ante una alerta de Wazuh, autoenriquece con <a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a> y <a href="https://www.greynoise.io" target="_blank" rel="noopener noreferrer">GreyNoise</a> y luego abre un caso en TheHive.</li>
+</ul>
+
+<p>Eso es un bucle completo –recopilar, detectar, enriquecer, seguir, responder– construido enteramente sobre open source. Si prefieres desplegarlo preensamblado, <a href="https://securityonion.net" target="_blank" rel="noopener noreferrer">Security Onion</a> trae la mayor parte en una sola imagen. La lección es que son las categorías, no las etiquetas de precio, las que hacen funcionar un SOC. Aprende las cajas y de qué es dueña cada una, y cualquier stack –gratuito, comercial o mixto– deja de parecer una sopa de siglas y empieza a parecer un pipeline sobre el que puedes razonar.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre SIEM y SOAR?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un SIEM recopila, almacena y busca datos de log y lanza alertas cuando sus detecciones saltan: es el sistema de registro. Un SOAR se sitúa por encima y actúa sobre esas alertas, ejecutando playbooks automatizados que enriquecen indicadores, abren casos y toman acciones de respuesta. Dicho simple: el SIEM te dice que algo ha pasado; el SOAR hace algo al respecto. Muchos equipos empiezan solo con un SIEM y añaden un SOAR cuando el volumen de alertas supera al triaje manual.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre EDR y antivirus?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El antivirus tradicional coteja archivos contra una lista de firmas conocidas como maliciosas y los bloquea: es esencialmente un filtro. El EDR (Endpoint Detection and Response) registra el comportamiento en el endpoint –árboles de procesos, líneas de comandos, conexiones de red– y detecta actividad sospechosa incluso de malware nunca visto antes, y luego deja a un analista responder en remoto aislando el host o matando un proceso. El antivirus previene amenazas conocidas; el EDR detecta y te permite investigar y contener las desconocidas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es el mejor SIEM open source?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Para la mayoría de los equipos, Wazuh. Es gratis a cualquier escala y combina análisis de logs estilo SIEM con detección de intrusiones en host en un solo agente, así que obtienes visibilidad del endpoint sin un segundo producto. Elastic Security (el stack ELK) es la alternativa fuerte si quieres máxima flexibilidad y tienes destreza interna de operación de Elasticsearch, y Graylog es una opción más ligera centrada en la gestión de logs. Mira nuestra comparación Splunk vs Wazuh vs ELK para ver las contrapartidas.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Necesitas de verdad un SOAR?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No al principio. Un equipo pequeño ahogado en un puñado de alertas al día hace mejor en poner a punto las detecciones y la gestión de casos antes de automatizar nada. Necesitas un SOAR cuando el trabajo repetitivo de nivel 1 –enriquecer los mismos indicadores, copiar datos entre herramientas, abrir tickets– empieza a comerse horas que no tienes. Cuando eso ocurre, una opción gratuita como Shuffle o el nivel community de Tines te deja automatizar la parte pesada sin un gran desembolso.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es una TIP y necesito MISP?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Una plataforma de inteligencia de amenazas (TIP) recopila, deduplica y organiza lo que sabes sobre los atacantes –indicadores de compromiso, campañas y actores– para que puedas empujar ese conocimiento a las detecciones y traerlo al enriquecimiento. MISP es el estándar open source y vale la pena tenerlo en cuanto consumes más de un feed de amenazas o compartes inteligencia con otros equipos. Por debajo de ese umbral, búsquedas gratuitas como VirusTotal y AbuseIPDB pueden bastar, pero MISP es donde los feeds dispersos se convierten en una memoria organizada y consultable.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>SIEM vs XDR: ¿cuál es la diferencia?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un SIEM es agnóstico de la fuente de datos: le apuntas cualquier log, defines tus propias detecciones y eres dueño de la correlación y el afinado. El XDR (Extended Detection and Response) es una suite integrada de un fabricante que cose la telemetría de endpoint, identidad, correo y cloud de ese fabricante con detecciones ya incluidas, cambiando flexibilidad por menos configuración. El SIEM te da control total y cobertura amplia a costa de esfuerzo de ingeniería; el XDR te da detección rápida y opinada dentro de un ecosistema a costa de lock-in. Los SOC más grandes suelen operar ambos, con el XDR alimentando al SIEM.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-es-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es un SOC (Security Operations Center)</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../reglas-sigma-y-yara/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Reglas Sigma y YARA explicadas</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../comparativas/splunk-vs-wazuh-vs-elk/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Splunk vs Wazuh vs ELK</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../comparativas/snort-vs-suricata/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Snort vs Suricata</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../laboratorio/lab-06-probar-detecciones-atomic-red-team/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 06: prueba tus detecciones con Atomic Red Team</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

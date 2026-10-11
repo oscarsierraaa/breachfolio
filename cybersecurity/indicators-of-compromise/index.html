@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indicators of Compromise (IOCs) explained | Breachfolio</title>
+  <meta name="description" content="What an indicator of compromise is, the main IOC types with examples, atomic vs behavioral, IOC vs IOA, the Pyramid of Pain, decay, and how intel is shared." />
+  <meta name="keywords" content="indicators of compromise" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/indicadores-de-compromiso/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Indicators of Compromise (IOCs) explained | Breachfolio" />
+  <meta property="og:description" content="What an indicator of compromise is, the main IOC types with examples, atomic vs behavioral, IOC vs IOA, the Pyramid of Pain, decay, and how intel is shared." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/indicators-of-compromise/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-iocs.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Indicators of Compromise (IOCs) explained | Breachfolio" />
+  <meta name="twitter:description" content="What an indicator of compromise is, the main IOC types with examples, atomic vs behavioral, IOC vs IOA, the Pyramid of Pain, decay, and how intel is shared." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-iocs.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Indicators of Compromise (IOCs) explained",
+      "description": "What an indicator of compromise is, the main IOC types with examples, atomic vs behavioral, IOC vs IOA, the Pyramid of Pain, decay, and how intel is shared.",
+      "image": "https://breachfolio.com/assets/img/hero-iocs.webp",
+      "datePublished": "2026-07-19",
+      "dateModified": "2026-07-19",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/indicators-of-compromise/" },
+      "inLanguage": "en",
+      "keywords": "indicators of compromise"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Indicators of Compromise (IOCs)…", "item": "https://breachfolio.com/cybersecurity/indicators-of-compromise/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/indicators-of-compromise/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is an indicator of compromise (IOC)?", "acceptedAnswer": { "@type": "Answer", "text": "An IOC is an observable forensic artifact – such as a file hash, IP address, domain, URL, registry key, mutex, or TLS fingerprint – whose presence on your systems strongly suggests a security breach has occurred or is in progress. IOCs are the concrete, matchable values that firewalls block, EDR agents flag, and SIEMs correlate against. They are precise and low-false-positive for known threats, but brittle, because most of them are cheap for an attacker to change." } },
+        { "@type": "Question", "name": "What is the difference between an IOC and an IOA?", "acceptedAnswer": { "@type": "Answer", "text": "An indicator of compromise (IOC) is a specific artifact left behind by a known attack – a hash, an IP, a domain – so it is reactive and tied to one instance. An indicator of attack (IOA) describes the intent and technique of an attack as it happens, such as credential dumping from LSASS or a macro spawning a shell, independent of the tools or infrastructure used. IOAs and the TTPs behind them endure because changing behavior is far more expensive for an attacker than rotating an IP or recompiling a payload." } },
+        { "@type": "Question", "name": "What is the Pyramid of Pain?", "acceptedAnswer": { "@type": "Answer", "text": "The Pyramid of Pain is a model published by David Bianco in 2013 that ranks IOC types by how much difficulty you cause an adversary when you detect and deny them. From bottom (trivial) to top (tough) it runs: hash values, IP addresses, domain names, network/host artifacts, tools, and TTPs. Cheap indicators like hashes are swapped instantly, while detecting an attacker's techniques forces them to re-engineer their whole operation, so defenders should invest detection effort as high up the pyramid as possible." } },
+        { "@type": "Question", "name": "What are some examples of indicators of compromise?", "acceptedAnswer": { "@type": "Answer", "text": "Common examples include file hashes (MD5, SHA-1, SHA-256), malicious IP addresses and domains, full URLs, suspicious file paths and names, Windows registry Run keys used for persistence, malware mutex names, hardcoded or malformed HTTP User-Agent strings, JA3/JA4 TLS fingerprints, and phishing email-header anomalies such as mismatched Return-Path or failing SPF/DKIM/DMARC checks. They range from single atomic values up to behavioral patterns that describe what an attacker does." } },
+        { "@type": "Question", "name": "How are IOCs shared, and what are STIX and TAXII?", "acceptedAnswer": { "@type": "Answer", "text": "IOCs are shared through standards, platforms, and feeds. STIX (Structured Threat Information eXpression) is the standardized, machine-readable language for describing indicators and related intel; TAXII (Trusted Automated eXchange of Intelligence Information) is the protocol that transports STIX between servers over HTTPS – STIX is the \"what,\" TAXII is the \"how.\" Platforms like MISP and OpenCTI store and correlate indicators, and free feeds such as abuse.ch (URLhaus, ThreatFox, MalwareBazaar), AlienVault OTX, and VirusTotal distribute and enrich them." } },
+        { "@type": "Question", "name": "Do IOCs expire, and why?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. IOCs decay because attacker infrastructure is disposable – C2 IPs are abandoned within days and often reassigned to legitimate services, malicious domains get sinkholed or re-registered, and file hashes become useless the moment a sample is recompiled. Stale indicators cause false positives, so mature programs model an indicator \"half-life,\" giving each one a confidence score that drops over time (as MISP's decaying models do) and retiring atomic indicators like IPs and domains on a schedule while keeping durable behavioral rules in place." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Indicators of Compromise (IOCs)…</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-iocs.webp" alt="Indicators of Compromise (IOCs) explained." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · DETECTION</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Indicators of Compromise (IOCs) explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">What an indicator of compromise is, the main IOC types with examples, atomic vs behavioral, IOC vs IOA, the Pyramid of Pain, decay, and how intel is shared.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 19, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Every intrusion leaves fingerprints. A piece of malware writes a file, that file has a hash. A beacon phones home, and the destination is an IP address and a domain. A loader creates a mutex so it does not infect the same machine twice. An <strong>indicator of compromise (IOC)</strong> is any one of those observable artifacts: a forensic breadcrumb that, when you see it on your own network, strongly suggests that something bad has already happened or is happening right now.</p>
+
+<p>IOCs are the raw currency of day-to-day detection: what a firewall blocks, what an EDR agent matches against process telemetry, what a SIEM correlation rule fires on, and what a threat hunter pivots from. They are also the most fragile signal in the defensive stack, because almost all of them are trivially cheap for an attacker to change. Understanding <em>which</em> IOCs are cheap to swap and which are expensive is the single most useful mental model in threat detection, and it has a name: the Pyramid of Pain. This article covers what IOCs are, the types you will actually meet, how they differ from indicators of attack, why they expire, and how the industry shares them.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 460 310" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="155" y="2" width="150" height="46" rx="6" fill="hsl(var(--accent) / 0.30)" stroke="hsl(var(--accent) / 0.5)"/><text x="230" y="30" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="600">TTPs</text><rect x="126" y="54" width="208" height="46" rx="6" fill="hsl(var(--accent) / 0.26)" stroke="hsl(var(--accent) / 0.5)"/><text x="230" y="82" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="600">Tools</text><rect x="97" y="106" width="266" height="46" rx="6" fill="hsl(var(--accent) / 0.22)" stroke="hsl(var(--accent) / 0.5)"/><text x="230" y="134" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="600">Network/host artifacts</text><rect x="68" y="158" width="324" height="46" rx="6" fill="hsl(var(--accent) / 0.18)" stroke="hsl(var(--accent) / 0.5)"/><text x="230" y="186" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="600">Domain names</text><rect x="39" y="210" width="382" height="46" rx="6" fill="hsl(var(--accent) / 0.14)" stroke="hsl(var(--accent) / 0.5)"/><text x="230" y="238" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="600">IP addresses</text><rect x="10" y="262" width="440" height="46" rx="6" fill="hsl(var(--accent) / 0.10)" stroke="hsl(var(--accent) / 0.5)"/><text x="230" y="290" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="600">Hash values</text></svg>
+        <figcaption>The Pyramid of Pain – denying TTPs (top) hurts the attacker far more than blocking a hash (bottom).</figcaption>
+      </figure>
+      <h2>What an IOC is, precisely</h2>
+
+<p>The formal framing comes from threat-intelligence standards. The US National Institute of Standards and Technology, in <a href="https://csrc.nist.gov/pubs/sp/800/150/final" target="_blank" rel="noopener noreferrer">SP 800-150, its Guide to Cyber Threat Information Sharing</a>, describes indicators as the technical artifacts or observables that suggest an attack is imminent, currently underway, or has already occurred. In practice an IOC is a specific, matchable value: <em>this exact hash</em>, <em>this exact domain</em>, <em>this exact registry key</em>. That specificity is its strength and its weakness at the same time. It is unambiguous – either you see the value in your logs or you do not – but it only describes one concrete instantiation of an attack, not the attack itself.</p>
+
+<p>An IOC is not the same thing as a vulnerability (a weakness that could be exploited) or an alert (the output of a detection rule). It is the evidence in between: a vulnerability is the unlocked window, an IOC is the muddy footprint on the carpet, and the alert is the sensor that noticed the footprint.</p>
+
+<h2>The types you will actually see</h2>
+
+<p>IOCs span the whole stack, from a single hash of a file to the shape of a TLS handshake. The examples below use documentation IP ranges (<code>192.0.2.0/24</code>, <code>198.51.100.0/24</code>, from RFC 5737), defanged domains, and the harmless <a href="https://www.eicar.org/download-anti-malware-testfile/" target="_blank" rel="noopener noreferrer">EICAR anti-malware test file</a> so nothing here is live.</p>
+
+<ul>
+  <li><strong>File hashes (MD5, SHA-1, SHA-256).</strong> A cryptographic digest of a file, used to identify a specific malware sample exactly. The EICAR test file, for instance, has MD5 <code>44d88612fea8a8f36de82e1278abb02f</code> and SHA-256 <code>275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f</code>. MD5 and SHA-1 still appear everywhere in feeds despite being cryptographically broken, because for indicator lookups you only need uniqueness, not collision resistance. SHA-256 is the modern default.</li>
+  <li><strong>IP addresses.</strong> Command-and-control servers, scanning sources, exfiltration endpoints – e.g. a beacon calling out to <code>198.51.100.23:443</code>. They live in firewall, proxy, and NetFlow logs.</li>
+  <li><strong>Domain names.</strong> Phishing and C2 domains such as <code>secure-login-update[.]com</code>, often generated in bulk or by a domain-generation algorithm (DGA). They surface in DNS query logs and email.</li>
+  <li><strong>URLs.</strong> A full path pins down a payload or panel more tightly than a bare domain: <code>hxxp://198.51.100.23/panel/gate.php</code>. Proxies, WAFs, and email-link scanners key on these.</li>
+  <li><strong>File paths and file names.</strong> Where malware drops itself, e.g. <code>C:\Users\Public\svch0st.exe</code> or <code>%APPDATA%\Roaming\update\wsus.exe</code>: a lookalike name in an unusual directory.</li>
+  <li><strong>Windows registry keys.</strong> Persistence usually touches the registry. A value under <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run</code> pointing at that dropped binary is a classic autorun IOC.</li>
+  <li><strong>Mutexes (mutants).</strong> Many families create a named mutex so they do not reinfect a host. A hardcoded mutex like <code>Global\\a7f3c1d9-hydrapanel</code> is a high-fidelity indicator because it is often unique to one malware build.</li>
+  <li><strong>User-Agent strings.</strong> Malware HTTP clients frequently ship a hardcoded or malformed User-Agent, e.g. <code>Mozilla/5.0 (Windows NT 6.1) Gecko/20100101 wininet-1.2</code>, which stands out against real browser traffic.</li>
+  <li><strong>JA3 / JA4 TLS fingerprints.</strong> Rather than fingerprinting the destination, these hash the <em>shape</em> of the client's TLS ClientHello – its cipher suites, extensions, and elliptic curves. <a href="https://github.com/salesforce/ja3" target="_blank" rel="noopener noreferrer">JA3</a> (from Salesforce) produces a 32-character MD5 like <code>e7d705a3286e19ea42f587b344ee6865</code>; its successor <a href="https://github.com/FoxIO-LLC/ja4" target="_blank" rel="noopener noreferrer">JA4+</a> (from FoxIO) is more robust and harder to spoof. Because the fingerprint is tied to the attacker's <em>tooling</em> rather than their infrastructure, it survives an IP change, which is exactly why it sits higher on the pyramid.</li>
+  <li><strong>Email headers.</strong> In phishing, the envelope tells the story: a <code>Return-Path</code> that does not match the <code>From</code>, a suspicious <code>Received</code> chain, a telltale <code>X-Mailer</code>, a <code>Reply-To</code> pointing elsewhere, and failing <code>SPF</code>/<code>DKIM</code>/<code>DMARC</code> results are all indicators.</li>
+</ul>
+
+<h2>Atomic, computed, and behavioral</h2>
+
+<p>The classic taxonomy, which comes from Mandiant's <a href="https://github.com/mandiant/OpenIOC_1.1" target="_blank" rel="noopener noreferrer">OpenIOC</a> work, sorts indicators into three buckets by how they are constructed:</p>
+
+<ul>
+  <li><strong>Atomic indicators</strong> cannot be broken down any further and still mean something: an IP address, a domain, an email address, a fixed string. They are the leaf values.</li>
+  <li><strong>Computed indicators</strong> are derived from incident data: a file hash, a regular expression, a YARA condition. They require some processing to produce.</li>
+  <li><strong>Behavioral indicators</strong> combine atomic and computed indicators with logic to describe what an actor <em>does</em>: "a Word process spawns PowerShell, which downloads from this domain and writes to this Run key." These sit closest to attacker behavior and start to blur into the territory of TTPs and indicators of attack.</li>
+</ul>
+
+<p>That progression – from a single brittle value up toward a description of behavior – is the same progression the Pyramid of Pain formalizes.</p>
+
+<h2>IOCs vs IOAs: evidence of the past vs the act itself</h2>
+
+<p>An IOC is reactive by nature. It says "this artifact was seen in a known-bad event, so if you see it too, you are probably compromised." An <strong>indicator of attack (IOA):</strong> a framing popularized by CrowdStrike (see their <a href="https://www.crowdstrike.com/en-us/cybersecurity-101/threat-intelligence/indicators-of-attack-ioa/" target="_blank" rel="noopener noreferrer">IOA explainer</a>) – describes the <em>intent and technique</em> of an attack as it unfolds, independent of the specific tools or infrastructure used. Credential dumping from LSASS memory, a service being created for lateral movement, or macro code spawning a shell are IOAs: they are true no matter which IP the attacker uses or which hash their binary happens to have this week.</p>
+
+<p>This is why IOAs and TTPs (tactics, techniques, and procedures, as catalogued in <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a>) endure while raw IOCs decay. An attacker can regenerate a domain in seconds and recompile a payload to get a fresh hash in minutes, but changing <em>how</em> they steal credentials or move laterally means re-engineering their entire operation. Detection built on behavior degrades slowly; detection built on atomic IOCs degrades the moment the adversary rotates infrastructure. The two are complementary – IOCs give you cheap, precise, low-false-positive matches for known threats; IOAs give you resilience against variants – and a mature program runs both.</p>
+
+<h2>The Pyramid of Pain, level by level</h2>
+
+<p>In 2013, David Bianco published <a href="https://detect-respond.blogspot.com/2013/03/the-pyramid-of-pain.html" target="_blank" rel="noopener noreferrer">The Pyramid of Pain</a>, still the single best framework for reasoning about indicator value. Its premise: not all IOCs are created equal. The pyramid ranks indicator types by how much <em>pain</em> you inflict on an adversary when you deny them the use of that indicator. The higher you detect, the more expensive it is for them to adapt. From bottom to top:</p>
+
+<ol>
+  <li><strong>Hash values (trivial).</strong> Blocking a hash stops exactly one file. Flipping a single byte – padding, recompiling, repacking – produces a brand-new hash and defeats the block instantly. Almost no pain.</li>
+  <li><strong>IP addresses (easy).</strong> Blocking an IP is slightly better, but attackers cycle through VPS providers, proxies, and fast-flux hosting cheaply. An address is abandoned and replaced with a shrug.</li>
+  <li><strong>Domain names (simple).</strong> Registering a new domain costs a few dollars and a few minutes, though it is marginally more effort than rotating an IP because of registration and DNS propagation. Still low pain.</li>
+  <li><strong>Network and host artifacts (annoying).</strong> Now it gets interesting. User-Agent strings, URI patterns, mutexes, registry keys, named pipes, JA3/JA4 fingerprints: these are baked into the attacker's tooling. Detecting them forces the adversary to reconfigure or modify their tools, which is genuinely irritating.</li>
+  <li><strong>Tools (challenging).</strong> If you can reliably detect the tool itself – Mimikatz, a specific Cobalt Strike default profile, a custom loader – the attacker must find, build, or buy a replacement and retrain on it. That is real cost and delay.</li>
+  <li><strong>TTPs (tough).</strong> At the apex you detect behavior: the techniques themselves. To evade this, the adversary must fundamentally rethink how they operate. This is the most painful and most durable place to detect, and it is where behavioral detection engineering (Sigma rules, EDR analytics) earns its keep.</li>
+</ol>
+
+<p>The takeaway is not "ignore the bottom of the pyramid." Cheap hash and IP blocks are still worth having: they are free and they stop commodity noise. The point is to invest your <em>detection engineering effort</em> as high up the pyramid as you can, because that is where the durable wins are.</p>
+
+<h2>The map: IOC type to pyramid level</h2>
+
+<p>This table ties the pieces together – each IOC type, a concrete example, where you would find it in your telemetry, and how easily an attacker evades it, mapped to Bianco's pyramid.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>IOC type</th>
+      <th>Example</th>
+      <th>Where it appears</th>
+      <th>Evasion ease (pyramid level)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>File hash (SHA-256)</td>
+      <td><code>275a021b…651fd0f</code></td>
+      <td>EDR telemetry, sandbox reports, VirusTotal</td>
+      <td>Trivial – recompile flips the hash (Hashes)</td>
+    </tr>
+    <tr>
+      <td>IP address</td>
+      <td><code>198.51.100.23</code></td>
+      <td>Firewall, proxy, NetFlow logs</td>
+      <td>Easy – rotate hosting/VPS (IP Addresses)</td>
+    </tr>
+    <tr>
+      <td>Domain name</td>
+      <td><code>secure-login-update[.]com</code></td>
+      <td>DNS query logs, proxy, email</td>
+      <td>Simple – register another (Domain Names)</td>
+    </tr>
+    <tr>
+      <td>URL / URI path</td>
+      <td><code>hxxp://198.51.100.23/gate.php</code></td>
+      <td>Proxy, WAF, email-link scanners</td>
+      <td>Simple – new path/domain (Domain Names)</td>
+    </tr>
+    <tr>
+      <td>Registry key</td>
+      <td><code>…\CurrentVersion\Run\wsus</code></td>
+      <td>EDR, registry, autoruns</td>
+      <td>Annoying – change the tool (Host Artifacts)</td>
+    </tr>
+    <tr>
+      <td>Mutex</td>
+      <td><code>Global\\a7f3c1d9-hydrapanel</code></td>
+      <td>EDR, memory, sandbox</td>
+      <td>Annoying – recode the tool (Host Artifacts)</td>
+    </tr>
+    <tr>
+      <td>User-Agent</td>
+      <td><code>…Gecko/20100101 wininet-1.2</code></td>
+      <td>Proxy, web-server, IDS logs</td>
+      <td>Annoying – edit the client (Network Artifacts)</td>
+    </tr>
+    <tr>
+      <td>JA3 / JA4 fingerprint</td>
+      <td><code>e7d705a3286e19ea42f587b344ee6865</code></td>
+      <td>Zeek/Suricata TLS logs</td>
+      <td>Annoying-to-tough – tied to tooling (Artifacts/Tools)</td>
+    </tr>
+    <tr>
+      <td>Tool signature</td>
+      <td>Mimikatz, default Cobalt Strike profile</td>
+      <td>EDR, YARA, memory scans</td>
+      <td>Challenging – rebuild/replace (Tools)</td>
+    </tr>
+    <tr>
+      <td>TTP / behavior</td>
+      <td>LSASS credential dump (T1003.001)</td>
+      <td>Correlated EDR telemetry, Sigma</td>
+      <td>Tough – re-engineer the operation (TTPs)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Lifecycle and decay: why IOCs expire</h2>
+
+<p>An IOC has a lifecycle. It is <strong>created</strong> from an incident, a sandbox detonation, or an intelligence report; <strong>enriched and scored</strong> for confidence and context; <strong>distributed</strong> to sensors and feeds; <strong>used</strong> for blocking, matching, and hunting; and then it <strong>ages</strong> until it is <strong>retired</strong>. That last step is not optional housekeeping: it is essential, because indicators go stale and stale indicators are actively harmful.</p>
+
+<p>They decay for concrete reasons. Attacker infrastructure rotates: a C2 IP is abandoned within days and, worse, the same address is later reassigned by the hosting provider to a legitimate customer, so a block you set months ago now generates false positives against a benign service. Malicious domains get sinkholed or expire and are re-registered by someone innocent. Hashes are unique to one build and become irrelevant the instant the actor recompiles. This is the indicator "half-life," and serious platforms model it explicitly. The <a href="https://www.misp-project.org/2019/09/12/Decaying-Of-Indicators.html" target="_blank" rel="noopener noreferrer">MISP decaying models feature</a> assigns each indicator a score that automatically drops over time based on its type and source, so low-confidence, aged indicators stop firing before they drown analysts in noise. The practical rule: an IP or domain block should have an expiry; a behavioral rule generally should not.</p>
+
+<h2>How IOCs are shared</h2>
+
+<p>An IOC discovered by one organization is far more valuable if everyone else can act on it too, which is why threat-intelligence sharing is a whole ecosystem. It runs on standards, platforms, and feeds.</p>
+
+<p><strong>Standards – STIX and TAXII.</strong> <a href="https://oasis-open.github.io/cti-documentation/stix/intro" target="_blank" rel="noopener noreferrer">STIX</a> (Structured Threat Information eXpression) is the JSON-based language for <em>describing</em> threat intel – indicators, threat actors, malware, relationships – in a machine-readable, unambiguous way. <a href="https://oasis-open.github.io/cti-documentation/taxii/intro" target="_blank" rel="noopener noreferrer">TAXII</a> (Trusted Automated eXchange of Intelligence Information) is the transport protocol for <em>moving</em> STIX between servers and clients over HTTPS. The slogan is that STIX is the <em>what</em> and TAXII is the <em>how</em>; both are maintained by <a href="https://oasis-open.github.io/cti-documentation/" target="_blank" rel="noopener noreferrer">OASIS</a>.</p>
+
+<p><strong>Platforms.</strong> <a href="https://www.misp-project.org/" target="_blank" rel="noopener noreferrer">MISP</a> (Malware Information Sharing Platform) is the open-source workhorse for storing, correlating, and sharing IOCs across trusted communities. <a href="https://www.opencti.io/" target="_blank" rel="noopener noreferrer">OpenCTI</a> is a newer open-source platform that structures intelligence around the STIX data model and links indicators to actors, campaigns, and techniques. Both ingest and export via STIX/TAXII.</p>
+
+<p><strong>Feeds.</strong> Plenty of high-quality, free indicator feeds exist. The <a href="https://abuse.ch/" target="_blank" rel="noopener noreferrer">abuse.ch</a> project alone runs three of the best: <a href="https://urlhaus.abuse.ch/" target="_blank" rel="noopener noreferrer">URLhaus</a> for malware-distribution URLs, <a href="https://threatfox.abuse.ch/" target="_blank" rel="noopener noreferrer">ThreatFox</a> for general IOCs, and <a href="https://bazaar.abuse.ch/" target="_blank" rel="noopener noreferrer">MalwareBazaar</a> for malware samples and their hashes. <a href="https://otx.alienvault.com/" target="_blank" rel="noopener noreferrer">AlienVault OTX</a> is a large community "pulse" feed, and <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer">VirusTotal</a> is the go-to for enriching a single hash, domain, or IP against dozens of engines at once.</p>
+
+<h2>How IOCs are used, and where they fall short</h2>
+
+<p>Once indicators are in hand, defenders put them to work three ways. <strong>Blocking</strong> pushes them to enforcement points – firewall deny-lists, DNS sinkholes, EDR block rules, email gateways – so the bad thing never happens. <strong>Matching</strong> feeds them into detection: a SIEM correlates live and historical logs against the indicator set, and IDS engines like Suricata or Snort alert on network matches. Retro-hunting is a special case of matching – sweeping months of stored logs against a <em>newly</em> published IOC to answer "were we already hit?" <strong>Hunting</strong> uses an IOC as a starting pivot: one suspicious domain leads you to the IPs it resolved to, the samples that contacted it, and the hosts that queried it. Our walkthrough on how to <a href="../investigate-a-suspicious-domain/">investigate a suspicious domain</a> shows that pivot end to end, and all of this runs on the SIEM/SOAR/EDR machinery covered in <a href="../soc-tools-siem-soar-edr/">the SOC toolstack</a>.</p>
+
+<p>The limitations are the flip side of the pyramid. Atomic IOCs are <strong>brittle:</strong> cheap for an attacker to change, so a purely IOC-driven defense is always one recompile behind. They are inherently <strong>backward-looking</strong>: you can only match a value once someone has already been burned by it, so you stay blind to genuinely novel infrastructure. And they generate <strong>false positives and noise</strong> as they age, which is exactly why decay scoring matters. The fix is not to abandon IOCs but to layer them: pair the cheap, precise, low-pyramid matches with durable behavioral detection higher up. That is the role of <a href="../sigma-and-yara-rules/">Sigma and YARA rules</a>, which express host and file behavior rather than single values, and the job of turning raw indicators into vetted, contextual, decaying intelligence belongs to the analysts whose roles we break down in <a href="../soc-team-roles/">SOC team roles</a>. IOCs are the floor of a detection program, never the ceiling.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is an indicator of compromise (IOC)?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          An IOC is an observable forensic artifact – such as a file hash, IP address, domain, URL, registry key, mutex, or TLS fingerprint – whose presence on your systems strongly suggests a security breach has occurred or is in progress. IOCs are the concrete, matchable values that firewalls block, EDR agents flag, and SIEMs correlate against. They are precise and low-false-positive for known threats, but brittle, because most of them are cheap for an attacker to change.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between an IOC and an IOA?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          An indicator of compromise (IOC) is a specific artifact left behind by a known attack – a hash, an IP, a domain – so it is reactive and tied to one instance. An indicator of attack (IOA) describes the intent and technique of an attack as it happens, such as credential dumping from LSASS or a macro spawning a shell, independent of the tools or infrastructure used. IOAs and the TTPs behind them endure because changing behavior is far more expensive for an attacker than rotating an IP or recompiling a payload.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the Pyramid of Pain?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          The Pyramid of Pain is a model published by David Bianco in 2013 that ranks IOC types by how much difficulty you cause an adversary when you detect and deny them. From bottom (trivial) to top (tough) it runs: hash values, IP addresses, domain names, network/host artifacts, tools, and TTPs. Cheap indicators like hashes are swapped instantly, while detecting an attacker's techniques forces them to re-engineer their whole operation, so defenders should invest detection effort as high up the pyramid as possible.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What are some examples of indicators of compromise?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Common examples include file hashes (MD5, SHA-1, SHA-256), malicious IP addresses and domains, full URLs, suspicious file paths and names, Windows registry Run keys used for persistence, malware mutex names, hardcoded or malformed HTTP User-Agent strings, JA3/JA4 TLS fingerprints, and phishing email-header anomalies such as mismatched Return-Path or failing SPF/DKIM/DMARC checks. They range from single atomic values up to behavioral patterns that describe what an attacker does.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How are IOCs shared, and what are STIX and TAXII?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          IOCs are shared through standards, platforms, and feeds. STIX (Structured Threat Information eXpression) is the standardized, machine-readable language for describing indicators and related intel; TAXII (Trusted Automated eXchange of Intelligence Information) is the protocol that transports STIX between servers over HTTPS – STIX is the "what," TAXII is the "how." Platforms like MISP and OpenCTI store and correlate indicators, and free feeds such as abuse.ch (URLhaus, ThreatFox, MalwareBazaar), AlienVault OTX, and VirusTotal distribute and enrich them.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Do IOCs expire, and why?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes. IOCs decay because attacker infrastructure is disposable – C2 IPs are abandoned within days and often reassigned to legitimate services, malicious domains get sinkholed or re-registered, and file hashes become useless the moment a sample is recompiled. Stale indicators cause false positives, so mature programs model an indicator "half-life," giving each one a confidence score that drops over time (as MISP's decaying models do) and retiring atomic indicators like IPs and domains on a schedule while keeping durable behavioral rules in place.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../sigma-and-yara-rules/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Sigma and YARA rules explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../soc-team-roles/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">SOC team roles: who does what</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../investigate-a-suspicious-domain/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to investigate a suspicious domain</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../soc-tools-siem-soar-edr/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The SOC toolstack</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

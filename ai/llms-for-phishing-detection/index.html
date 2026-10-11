@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How LLMs help detect phishing (a defensive walkthrough)</title>
+  <meta name="description" content="How LLMs spot phishing that keyword filters miss, where they fit in a detection pipeline, and the false-positive and privacy limits to design around." />
+  <meta name="keywords" content="LLM phishing detection, AI phishing detection, using LLMs to detect phishing, how AI detects phishing emails, phishing detection pipeline, AI email security, large language models cybersecurity, phishing false positives, precision and recall phishing detection, AI intent classification phishing, brand impersonation detection AI, LLM email security limits, privacy risks of AI phishing detection, prompt injection phishing detector, keyword filters vs AI phishing detection" />
+  <link rel="canonical" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/llms-para-detectar-phishing/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="How LLMs help detect phishing (a defensive walkthrough) | Breachfolio" />
+  <meta property="og:description" content="How LLMs spot phishing that keyword filters miss, where they fit in a detection pipeline, and the false-positive and privacy limits to design around." />
+  <meta property="og:url" content="https://breachfolio.com/ai/llms-for-phishing-detection/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-ai-phishing.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How LLMs help detect phishing (a defensive walkthrough) | Breachfolio" />
+  <meta name="twitter:description" content="How LLMs spot phishing that keyword filters miss, where they fit in a detection pipeline, and the false-positive and privacy limits to design around." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-ai-phishing.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How LLMs help detect phishing: a defensive walkthrough",
+      "description": "How LLMs spot phishing that keyword filters miss, where they fit in a detection pipeline, and the false-positive and privacy limits to design around.",
+      "image": "https://breachfolio.com/assets/img/thumb-ai-phishing.webp",
+      "datePublished": "2026-07-10",
+      "dateModified": "2026-07-08",
+      "keywords": "LLM phishing detection, AI phishing detection, using LLMs to detect phishing, how AI detects phishing emails, phishing detection pipeline, AI email security, large language models cybersecurity, phishing false positives, precision and recall phishing detection, AI intent classification phishing, brand impersonation detection AI, LLM email security limits, privacy risks of AI phishing detection, prompt injection phishing detector, keyword filters vs AI phishing detection",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/ai/llms-for-phishing-detection/"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Security", "item": "https://breachfolio.com/ai/" },
+        { "@type": "ListItem", "position": 3, "name": "LLMs for phishing detection", "item": "https://breachfolio.com/ai/llms-for-phishing-detection/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/ai/llms-for-phishing-detection/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "How do LLMs detect phishing that keyword filters miss?", "acceptedAnswer": { "@type": "Answer", "text": "Keyword and blocklist filters catch high-volume, low-effort spam but miss well-written, targeted messages from freshly registered domains. LLMs score meaning rather than exact strings, so they can flag manufactured urgency, unusual requests to move money or credentials, and a mismatch between a claimed sender identity and how the message actually reads." } },
+        { "@type": "Question", "name": "Where does an LLM fit in a phishing detection pipeline?", "acceptedAnswer": { "@type": "Answer", "text": "As a later, more expensive stage, not a replacement for existing filters. Cheap checks like domain reputation and SPF/DKIM/DMARC reject obvious junk first; messages that land in a grey zone are then sent to the model for intent-and-tone scoring; anything scored high-risk but uncertain goes to human review rather than being silently deleted." } },
+        { "@type": "Question", "name": "What are the limits of using LLMs for phishing detection?", "acceptedAnswer": { "@type": "Answer", "text": "False positives train users to ignore warnings or block real mail; attackers adapt their lures once they know defenders use models; sending email content to a third-party model API raises privacy concerns that may require running the model locally; and a detector that reads attacker-controlled email text is itself a target for prompt injection." } },
+        { "@type": "Question", "name": "How do you measure whether an LLM phishing detector actually works?", "acceptedAnswer": { "@type": "Answer", "text": "Test it against a labelled set of real, anonymised mail and track precision (how much of what it flagged was genuinely phishing) and recall (how much actual phishing it caught). The trade-off between the two is a deliberate choice, and both numbers should be re-measured after every change to the prompt, model, or surrounding filters." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">AI Security</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">LLMs for phishing detection</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/thumb-ai-phishing.webp" alt="Using LLMs to catch phishing." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">AI · DEFENSE</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Using LLMs to catch phishing.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Classic filters match known-bad strings. Language models can read intent. Here is how that helps on defense, and where it quietly falls down.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Phishing has always beaten simple filters for one reason: the attacker writes new text every time. A rule that blocks the word "verify your account" is trivially dodged by rephrasing. This is exactly the kind of problem large language models are suited to, because they score meaning rather than exact strings, and that makes them a genuinely useful layer in a modern <strong>defensive</strong> email-security stack.</p>
+
+      <p>This article is about <strong>detection</strong>: using models to protect your own users. It is not about writing more convincing lures. Everything below assumes you are defending an inbox you are responsible for.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Why keyword filters miss modern phishing</h2>
+
+      <p>Traditional detection leans on signals like known-bad sender domains, blocklisted URLs, and suspicious keywords. These catch high-volume, low-effort spam well. They struggle with targeted attacks: a well-written message from a freshly registered domain, with no misspellings and no blocklisted link, sails straight through. The tell in those messages is not a string: it is the <em>intent</em>: manufactured urgency, an unusual request to move money or credentials, a mismatch between who the sender claims to be and how they write.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What the model actually adds</h2>
+
+      <p>A language model reads the message the way a cautious human would and flags the semantic red flags:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Intent classification:</strong> is this message trying to get the reader to authenticate, pay, or install something, and does that request fit the apparent relationship?</li>
+        <li><strong>Tone and pressure analysis:</strong> phishing leans hard on urgency and consequence ("account will be closed today"). Models pick this up reliably.</li>
+        <li><strong>Brand-impersonation checks:</strong> does the message imitate a known brand's voice while the sender domain and links point somewhere unrelated?</li>
+        <li><strong>Context mismatch:</strong> a "CEO" emailing from a personal address asking a junior employee to buy gift cards is a pattern a model recognises even when every individual word is innocent.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Where an LLM fits in the pipeline</h2>
+
+      <p>You do not replace your existing filters with a model – you add the model as a later, more expensive stage. A sensible layout:</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Stage</th><th class="px-4 py-2.5 font-display font-semibold">What happens</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Stage 1 – cheap filters</strong></td><td class="px-4 py-2.5">Domain reputation, SPF/DKIM/DMARC checks, URL blocklists. These reject obvious junk for near-zero cost.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Stage 2 – model scoring</strong></td><td class="px-4 py-2.5">Messages that pass the cheap checks but land in a grey zone get sent to the model for an intent-and-tone assessment. You pay per call, so you only spend it where the cheap layer was inconclusive.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Stage 3 – human review</strong></td><td class="px-4 py-2.5">Anything the model scores as high-risk but not certain goes to a security analyst or a "report phishing" workflow, rather than being silently deleted.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Keeping the model in the middle, not the front, controls both cost and blast radius: a wrong model call quarantines a message for review, it does not delete mail on its own.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The limits you must design around</h2>
+
+      <p>Anyone selling you an LLM phishing detector as a silver bullet is overselling. The real constraints:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>False positives have a cost.</strong> Flag too many legitimate emails and users learn to ignore the warnings, or you block a real invoice. A detector that cries wolf is worse than none.</li>
+        <li><strong>Attackers adapt.</strong> Once defenders use models, attackers test their lures against models too. Detection is a moving target, not a solved problem.</li>
+        <li><strong>Privacy is a first-class concern.</strong> Sending corporate email to a third-party model API means sending potentially sensitive content off-site. For many organisations that is a reason to run the model <a href="../run-a-local-llm-for-security-notes/" class="text-accent ul-link">locally</a> or under a strict data-processing agreement.</li>
+        <li><strong>Prompt injection cuts both ways.</strong> A detector that reads email is itself reading attacker-controlled text. A crafted message could try to talk the classifier out of flagging it – see <a href="../prompt-injection-explained/" class="text-accent ul-link">Prompt injection, explained</a>.</li>
+      </ul>
+
+      <p>The CISA guidance on <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">avoiding phishing</a> still applies underneath all of this: technical detection is one layer, user training and a fast reporting path are the others. The model makes the technical layer smarter; it does not remove the need for the rest.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Measuring whether it actually works</h2>
+
+      <p>A detector you cannot measure is a detector you cannot trust. Before rolling an LLM stage into production, put numbers on it against a labelled set of real (anonymised) mail – known phishing and known legitimate messages both:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Precision:</strong> of everything the model flagged, how much was genuinely phishing. Low precision means noise, and noise trains users to click through your warnings.</li>
+        <li><strong>Recall:</strong> of all the phishing that arrived, how much the model caught. Low recall means a false sense of safety.</li>
+        <li><strong>The trade-off is a dial, not a fact.</strong> Push the threshold to catch more phishing and you flag more legitimate mail; loosen it and the reverse. Choose where to sit deliberately, based on what a miss versus a false alarm costs your organisation.</li>
+      </ul>
+
+      <p>Re-measure after every change to the prompt, the model, or the surrounding filters: the same discipline a red team applies to a model, turned inward on your own detector. Track the numbers over time; a slow drift in recall is often the first sign attackers have adapted to whatever your model keys on.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">A note on scope.</strong> This is defensive security education – using models to protect systems and users you are responsible for. It is not a guide to crafting phishing messages or evading someone else's filters.</div>
+
+      <p>Used well, an LLM turns your phishing filter from a string matcher into something closer to a wary reader. Used badly – as a single unaccountable gate with no human in the loop, unmeasured and untuned – it just fails in new and more confident ways. The value is in the layering, and in measuring the layer you added.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do LLMs detect phishing that keyword filters miss?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Keyword and blocklist filters catch high-volume, low-effort spam but miss well-written, targeted messages from freshly registered domains. LLMs score meaning rather than exact strings, so they can flag manufactured urgency, unusual requests to move money or credentials, and a mismatch between a claimed sender identity and how the message actually reads.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Where does an LLM fit in a phishing detection pipeline?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          As a later, more expensive stage, not a replacement for existing filters. Cheap checks like domain reputation and SPF/DKIM/DMARC reject obvious junk first; messages that land in a grey zone are then sent to the model for intent-and-tone scoring; anything scored high-risk but uncertain goes to human review rather than being silently deleted.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What are the limits of using LLMs for phishing detection?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          False positives train users to ignore warnings or block real mail; attackers adapt their lures once they know defenders use models; sending email content to a third-party model API raises privacy concerns that may require running the model locally; and a detector that reads attacker-controlled email text is itself a target for prompt injection.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do you measure whether an LLM phishing detector actually works?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Test it against a labelled set of real, anonymised mail and track precision (how much of what it flagged was genuinely phishing) and recall (how much actual phishing it caught). The trade-off between the two is a deliberate choice, and both numbers should be re-measured after every change to the prompt, model, or surrounding filters.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../prompt-injection-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Prompt injection, explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../cybersecurity/cybersecurity-101/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cybersecurity 101</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../resources/security-cheat-sheet/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Security acronyms cheat sheet</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All AI articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guides/fake-irs-text-message/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Is that IRS text message fake?</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

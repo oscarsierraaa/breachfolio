@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="glow" cx="0.5" cy="0.45" r="0.55"><stop offset="0%" stop-color="hsl(142 70% 45%)" stop-opacity="0.34"/><stop offset="55%" stop-color="hsl(142 70% 45%)" stop-opacity="0.06"/><stop offset="100%" stop-color="hsl(142 70% 45%)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(240 10% 4%)" stop-opacity="0"/><stop offset="100%" stop-color="hsl(240 10% 4%)" stop-opacity="0.92"/></linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(240 10% 4%)"/>
+<rect width="1200" height="675" fill="hsl(240 9% 7%)" opacity="0.6"/>
+<rect width="1200" height="675" fill="url(#grid)"/>
+<ellipse cx="640" cy="300" rx="560" ry="380" fill="url(#glow)"/>
+<text x="250" y="150" font-family="Sora, sans-serif" font-size="22" font-weight="600" fill="hsl(142 70% 45%)" letter-spacing="2" opacity="0.95">ACTIVE > PASSIVE</text><rect x="250" y="430" width="78" height="40" rx="4" fill="hsl(142 70% 45%)" opacity="0.35"/><rect x="360" y="385" width="78" height="85" rx="4" fill="hsl(142 70% 45%)" opacity="0.46"/><rect x="470" y="340" width="78" height="130" rx="4" fill="hsl(142 70% 45%)" opacity="0.57"/><rect x="580" y="295" width="78" height="175" rx="4" fill="hsl(142 70% 45%)" opacity="0.68"/><rect x="690" y="250" width="78" height="220" rx="4" fill="hsl(142 70% 45%)" opacity="0.79"/><rect x="800" y="205" width="78" height="265" rx="4" fill="hsl(142 70% 45%)" opacity="0.90"/><path d="M250 500 L900 180" fill="none" stroke="hsl(142 70% 45%)" stroke-width="2.5" stroke-dasharray="2 8" stroke-linecap="round" opacity="0.7"/><path d="M900 180 l-22 4 M900 180 l4 22" stroke="hsl(142 70% 45%)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+<rect width="1200" height="675" fill="url(#vfade)"/>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(142 70% 45%)" opacity="0.95">GUIDES / METHOD</text>
+  <text x="40" y="620" fill="hsl(240 5% 65%)" opacity="0.6">HOW TO ACTUALLY LEARN</text>
+  <text x="1160" y="620" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(142 70% 45%)"/>
+<circle cx="1160" cy="50" r="9" fill="hsl(142 70% 45%)" opacity="0.25"/>
+</svg>

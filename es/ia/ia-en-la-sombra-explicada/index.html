@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IA en la sombra explicada: el riesgo de la IA sin gobernanza</title>
+  <meta name="description" content="Pegar datos de empresa en herramientas de IA de consumo es el nuevo shadow IT. El riesgo real de fuga y cómo es un uso gobernado de la IA." />
+  <meta name="keywords" content="IA en la sombra, IA en la sombra explicada, qué es la IA en la sombra, IA en la sombra vs shadow IT, riesgo de fuga de datos con IA, datos de empresa en ChatGPT de consumo, fuga de credenciales por asistentes de código con IA, política de uso de IA, DLP para herramientas de IA, herramientas de IA no autorizadas en el trabajo" />
+  <link rel="canonical" href="https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/shadow-ai-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="IA en la sombra explicada: el riesgo de la IA sin gobernanza | Breachfolio" />
+  <meta property="og:description" content="Pegar datos de empresa en herramientas de IA de consumo es el nuevo shadow IT. El riesgo real de fuga y cómo es un uso gobernado de la IA." />
+  <meta property="og:url" content="https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-shadow-ai.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IA en la sombra explicada: el riesgo de la IA sin gobernanza | Breachfolio" />
+  <meta name="twitter:description" content="Pegar datos de empresa en herramientas de IA de consumo es el nuevo shadow IT. El riesgo real de fuga y cómo es un uso gobernado de la IA." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-shadow-ai.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IA en la sombra, explicada: el riesgo del uso no gobernado de herramientas de IA en el trabajo",
+      "description": "Que los empleados peguen datos de la empresa en herramientas de IA de consumo es el nuevo shadow IT. Cómo la IA en la sombra crea un riesgo real de fuga de datos, y qué aspecto tiene un uso gobernado de la IA.",
+      "image": "https://breachfolio.com/assets/img/hero-shadow-ai.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "keywords": "IA en la sombra, IA en la sombra explicada, qué es la IA en la sombra, IA en la sombra vs shadow IT, riesgo de fuga de datos con IA, datos de empresa en ChatGPT de consumo, fuga de credenciales por asistentes de código con IA, política de uso de IA, DLP para herramientas de IA, herramientas de IA no autorizadas en el trabajo",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/"
+      },
+      "inLanguage": "es"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "IA & Seguridad", "item": "https://breachfolio.com/es/ia/" },
+        { "@type": "ListItem", "position": 3, "name": "IA en la sombra, explicada", "item": "https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ia/ia-en-la-sombra-explicada/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué es la IA en la sombra?", "acceptedAnswer": { "@type": "Answer", "text": "La IA en la sombra es el uso de herramientas de IA, modelos o extensiones de navegador potenciadas por IA dentro de un lugar de trabajo sin el conocimiento, la revisión o la aprobación de los equipos de TI o seguridad. Es el descendiente directo del shadow IT, que describía el mismo patrón con aplicaciones y software en la nube no aprobados, aplicado a la ola actual de productos de IA de consumo." } },
+        { "@type": "Question", "name": "¿En qué se diferencia la IA en la sombra del shadow IT?", "acceptedAnswer": { "@type": "Answer", "text": "La dinámica subyacente es la misma: los empleados adoptan una herramienta conveniente y no aprobada porque resuelve un problema más rápido que la opción autorizada. La IA en la sombra es una preocupación distinta porque el riesgo principal no es solo una aplicación sin monitorizar, sino que los datos que se escriben o pegan en esa aplicación se convierten en una entrada que los sistemas del proveedor procesan, registran y, en algunos casos, usan para mejorar sus modelos, de una forma en que una hoja de cálculo en una unidad en la nube no aprobada nunca lo hizo." } },
+        { "@type": "Question", "name": "¿Qué pasa realmente con los datos pegados en un chatbot de IA de consumo gratuito?", "acceptedAnswer": { "@type": "Answer", "text": "Depende por completo de las condiciones del proveedor para ese producto y ese nivel de servicio concretos. Los niveles gratuitos y orientados al consumidor de muchos chatbots de IA han permitido históricamente usar las conversaciones enviadas para mejorar o entrenar modelos a menos que el usuario lo desactive, y las entradas normalmente se registran para monitorización de abusos independientemente del nivel. Una vez que el texto sensible sale del control de la organización de esta forma, generalmente no hay una manera fiable de eliminarlo ni de demostrar que nunca se conservó, razón por la cual existen los acuerdos empresariales como un arreglo contractualmente distinto." } },
+        { "@type": "Question", "name": "¿Pueden los asistentes de código con IA filtrar credenciales o código propietario?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, principalmente de dos formas. Primero, si un desarrollador pega código, archivos de configuración o salidas de depuración que contienen claves de API o nombres de host internos en un asistente no gestionado, esos datos salen de la organización de la misma forma que cualquier otra entrada de IA en la sombra. Segundo, algunos asistentes y plugins de IDE solicitan permisos amplios y pueden leer más de un espacio de trabajo de lo previsto, incluyendo archivos que nunca estuvieron pensados para formar parte del prompt." } },
+        { "@type": "Question", "name": "¿Qué aspecto tiene realmente un programa de IA gobernado y autorizado?", "acceptedAnswer": { "@type": "Answer", "text": "En la práctica combina un acuerdo empresarial cuyos términos excluyen explícitamente el entrenamiento con los datos enviados, controles de administración y SSO para que el uso esté vinculado a una identidad, herramientas de DLP que puedan inspeccionar o bloquear datos sensibles antes de que lleguen a un endpoint de IA, una política interna de uso de IA por escrito que defina qué clasificaciones de datos pueden y no pueden introducirse, y una herramienta autorizada genuinamente usable para que los empleados no tengan motivo para recurrir a una no aprobada." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">ES</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">IA</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">IA en la sombra, explicada</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-shadow-ai.webp" alt="Una herramienta de IA no oficial operando fuera de la visibilidad de la empresa: la IA en la sombra, explicada" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">IA · SEGURIDAD</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">IA en la sombra, explicada.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Cada herramienta de IA no aprobada a la que recurre un empleado es una puerta de salida de tu perímetro de datos que seguridad nunca llegó a revisar. Así es como funciona realmente ese riesgo.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>«Shadow IT» describía un patrón familiar mucho antes de que la IA entrara en escena: empleados adoptando en silencio aplicaciones en la nube, herramientas para compartir archivos o software que TI nunca aprobó, revisó ni siquiera supo que existía, porque la opción autorizada era más lenta o peor. La <strong class="text-foreground">IA en la sombra</strong> es ese mismo patrón, aplicado a la ola actual de productos de IA –y se está extendiendo más rápido de lo que nunca lo hizo el shadow IT, porque la barrera de entrada es una cuenta gratuita y una pestaña del navegador, no un ticket de TI ni un ciclo de compras.</p>
+
+      <p>La distinción importa porque el riesgo no es solo «hay una aplicación sin monitorizar corriendo en algún sitio». Con la IA en la sombra, lo que suele quedar expuesto son los propios datos –pegados directamente en un cuadro de texto, enviados a los servidores de un tercero y, en algunos casos, usados como entrada de entrenamiento o de registro, sin contrato, sin rastro de auditoría y sin forma de recuperarlos una vez que se han ido.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Qué aspecto tiene realmente la IA en la sombra</h2>
+      <p>Rara vez se anuncia a sí misma como un incidente de seguridad. En la práctica, la IA en la sombra suele ser uno de un pequeño número de hábitos cotidianos:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Una cuenta personal gratuita en un chatbot de consumo</strong> usada para resumir el contrato de un cliente, reescribir un correo interno o redactar una propuesta que contiene detalles sensibles del negocio.</li>
+        <li><strong class="text-foreground">Extensiones de navegador que prometen «superpoderes de IA»</strong> –resume esta página, reescribe este texto, transcribe esta reunión– instaladas sin revisión, a menudo solicitando permisos amplios para leer todo lo que ve el navegador.</li>
+        <li><strong class="text-foreground">Asistentes de código con IA y plugins de IDE sin gestionar</strong>, apuntados a una base de código real, que leen y a veces transmiten archivos fuente, configuración e historial de commits a un servicio de terceros que el equipo de seguridad nunca evaluó.</li>
+        <li><strong class="text-foreground">Herramientas SaaS que añadieron funciones de IA en silencio</strong> a un producto ya aprobado, a veces enrutando los datos hacia un proveedor de modelo distinto en el backend del que cubría la evaluación original del proveedor.</li>
+      </ul>
+      <p>Ninguno de estos casos requiere intención maliciosa. Casi todos son alguien intentando hacer su trabajo más rápido, con una herramienta que resulta funcionar bien. Eso es exactamente lo que también hizo difícil erradicar el shadow IT, y es la misma dinámica que impulsa la adopción aquí.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Por qué ocurre, incluso en empresas concienciadas con la seguridad</h2>
+      <p>La IA en la sombra prospera específicamente donde hay un hueco entre lo que necesitan los empleados y lo que está disponible oficialmente. Un ciclo de compras y revisión de seguridad para una nueva herramienta de IA empresarial puede tardar meses; la demo del producto de un competidor, la recomendación de un compañero o una publicación viral sobre un nuevo asistente se puede probar en treinta segundos. Si la opción autorizada es tosca, restringida o simplemente todavía no existe para un caso de uso concreto, la gente no deja de intentar usar IA: solo deja de pedir permiso primero.</p>
+      <p>También hay un hueco de percepción que empeora esto: una pestaña del navegador y una pantalla de inicio de sesión se ven idénticas, ya sea que la herramienta detrás sea un producto empresarial totalmente auditado o la beta gratuita de una startup de dos personas. Nada en la interfaz indica «esta registra y entrena con tu entrada» frente a «esta, contractualmente, no lo hace». Los empleados no están siendo temerarios tanto como están haciendo un juicio de valor sin información visible en la que basarse, que es exactamente el tipo de hueco que una política por escrito y una lista corta de herramientas aprobadas están pensadas para cerrar.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Los mecanismos de riesgo reales</h2>
+      <p>Vale la pena ser específico sobre cómo la IA en la sombra causa daño realmente, en lugar de tratarla como una vaga preocupación de gobernanza:</p>
+
+      <div class="overflow-x-auto mt-6 mb-6">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Mecanismo</th><th class="px-4 py-2.5 font-display font-semibold">Cómo se desarrolla realmente</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Canales de entrenamiento y registro</strong></td><td class="px-4 py-2.5">Los niveles gratuitos de consumo de muchos productos de IA han permitido históricamente usar las conversaciones enviadas para mejorar el modelo subyacente a menos que el usuario lo desactive, y las entradas normalmente se registran para monitorización de abusos independientemente del nivel. Una vez que se han pegado datos de clientes, código fuente o estrategia interna, normalmente no hay una forma fiable de verificar que se eliminaron o que nunca se conservaron.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Asistentes de código y fuga de credenciales</strong></td><td class="px-4 py-2.5">Un desarrollador depurando un problema pega un archivo de configuración, un log de error o un fragmento de código en un asistente no gestionado para obtener una respuesta más rápida –y con eso se van claves de API, nombres de host internos o lógica propietaria. Algunos asistentes y plugins también solicitan acceso de lectura a todo el espacio de trabajo, lo que puede traer mucho más contexto del que el desarrollador tenía intención de compartir.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Extensiones de navegador con permisos excesivos</strong></td><td class="px-4 py-2.5">Una extensión que lee «la página actual» para resumirla puede, según los permisos que se le concedieron, también leer cualquier otra cosa renderizada en el navegador –paneles internos, sistemas de tickets, correo–, convirtiendo una herramienta de conveniencia en una amplia superficie de exfiltración de datos.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Sin rastro de auditoría</strong></td><td class="px-4 py-2.5">Las herramientas empresariales autorizadas registran quién envió qué, y cuándo, a través de sistemas que seguridad puede consultar. El uso de IA en la sombra normalmente no deja ningún registro así en ningún sitio que la organización controle, lo que se convierte en un hueco grave durante una investigación de brecha, una auditoría de cumplimiento o un e-discovery en litigios.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Esa última fila es fácil de infravalorar hasta que una auditoría o un regulador la pide directamente. Marcos como el RGPD, la HIPAA y SOC 2 exigen todos que una organización sepa a dónde fueron los datos regulados y quién tuvo acceso a ellos. «Es posible que un empleado pegara los datos personales de un cliente en un chatbot de consumo en algún momento, pero no tenemos registro de ello» no es una afirmación respondible en ese tipo de revisión: es un hallazgo. La IA en la sombra no solo crea un riesgo técnico de fuga; crea un hueco precisamente en el tipo de registro que los programas de cumplimiento están construidos para exigir.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">El uso autorizado de IA tiene una estructura distinta</h2>
+      <p>Nada de esto es un argumento en contra de usar herramientas de IA en el trabajo: es un argumento a favor de la diferencia entre usarlas <em>gobernadas</em> y usarlas <em>invisibles a la gobernanza</em>. Un programa de IA correctamente autorizado se construye en torno a unos pocos elementos concretos y verificables, en lugar de una instrucción general de «ten cuidado»:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Condiciones de API empresariales que excluyen explícitamente el entrenamiento con la entrada.</strong> Los acuerdos empresariales serios con los principales proveedores de IA se comprometen contractualmente a que los datos enviados no se usarán para entrenar modelos, un arreglo materialmente distinto de las condiciones por defecto de un nivel de consumo gratuito.</li>
+        <li><strong class="text-foreground">Acceso vinculado a la identidad.</strong> La integración con SSO y las consolas de administración significan que el uso está vinculado a una identidad real de empleado, se puede aprovisionar y desaprovisionar como cualquier otro sistema de la empresa, y produce logs que la organización realmente controla.</li>
+        <li><strong class="text-foreground">Herramientas de DLP orientadas al tráfico de IA.</strong> Sistemas de prevención de pérdida de datos que pueden inspeccionar, marcar o bloquear datos sensibles –credenciales, datos personales regulados, código fuente– antes de que lleguen siquiera a un endpoint de IA, autorizado o no.</li>
+        <li><strong class="text-foreground">Una política interna de uso de IA por escrito.</strong> Un documento concreto y específico que indique qué herramientas están aprobadas, qué clasificaciones de datos pueden o no introducirse en ellas, y cuál es la vía de escalado para una nueva herramienta que alguien quiera adoptar –no un vago memorando de «usa la IA de forma responsable».</li>
+      </ul>
+      <p>El último punto es el que hace más trabajo práctico. Una política que solo dice que no, sin una vía rápida para que una nueva herramienta genuinamente útil sea evaluada y aprobada, garantiza más IA en la sombra, no menos: los empleados rodean las puertas lentas en lugar de esperar por ellas.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Construyendo hacia un uso gobernado de la IA</h2>
+      <p>Reducir la IA en la sombra no es principalmente un problema tecnológico: es un problema de inventario e incentivos, y tiende a seguir una secuencia predecible:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Averigua qué ya está en uso.</strong> Una encuesta corta y no punitiva, junto con datos de descubrimiento de red y de SaaS, normalmente revela mucha más adopción de IA en la sombra de la que esperan los equipos de seguridad: no puedes gobernar lo que no has inventariado.</li>
+        <li><strong class="text-foreground">Levanta una alternativa autorizada que sea realmente competitiva.</strong> Si la herramienta aprobada es notablemente peor que la opción de consumo gratuita que a la gente ya le gusta, la adopción de la versión autorizada se mantiene baja sin importar la política.</li>
+        <li><strong class="text-foreground">Escribe la política con especificidad, no con generalidades.</strong> Nombra las herramientas aprobadas, nombra las clasificaciones de datos que nunca pueden salir del perímetro, y da un punto de contacto real para solicitar la evaluación de una nueva herramienta.</li>
+        <li><strong class="text-foreground">Pon controles técnicos detrás de la política.</strong> Las reglas de DLP y la visibilidad a nivel de red capturan lo que se les escapa a la formación y a las buenas intenciones, y lo hacen de forma consistente en lugar de depender de que todos recuerden las reglas.</li>
+        <li><strong class="text-foreground">Forma para los modos de fallo específicos, no para la IA en abstracto.</strong> «No pegues contratos de clientes en un chatbot gratuito» y «no le des a una extensión de navegador acceso a tu pestaña de correo» son reglas concretas y memorables; «usa la IA de forma responsable» no lo es.</li>
+      </ul>
+
+      <p>Esta es también la razón por la que la IA en la sombra pertenece junto a los temas de seguridad de IA más centrados en el ataque que cubrimos en otros artículos, en lugar de quedar a un lado como un problema puramente de cumplimiento. El <a href="../red-teaming-de-ia-desde-cero/" class="text-accent ul-link">red teaming de IA</a> trata de encontrar debilidades en los sistemas de IA que has elegido construir o desplegar. La <a href="../prompt-injection-explicado/" class="text-accent ul-link">inyección de prompts</a> trata de cómo se atacan esos sistemas una vez que están en producción. La IA en la sombra es la pregunta de gobernanza que subyace a ambas: ninguna de esas pruebas o defensas significa mucho si los datos también están saliendo a través de herramientas de IA que nadie en el equipo de seguridad sabe siquiera que están en uso.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">Una nota sobre el alcance.</strong> Esto está escrito como orientación de gobernanza para organizaciones que están construyendo una política de uso de IA, no como una acusación dirigida a empleados individuales. La mayor parte de la adopción de IA en la sombra viene de personas que intentan trabajar más rápido, no de nadie que intente causar daño –razón por la cual una alternativa autorizada que funcione importa más que una prohibición más estricta.
+      </div>
+
+      <p class="mt-10">La IA en la sombra no es un riesgo futuro hipotético: es la consecuencia directa y predecible de que las herramientas de IA se volvieran gratuitas, rápidas y genuinamente útiles más rápido de lo que la mayoría de las organizaciones pudieron construir un programa de gobernanza a su alrededor. La solución no es intentar prohibir el uso de IA, algo que rara vez funciona durante mucho tiempo contra una herramienta que la gente encuentra genuinamente útil. Es hacer que la vía autorizada sea lo bastante rápida, y la política lo bastante específica, para que rodearla deje de ser la opción más fácil.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es la IA en la sombra?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La IA en la sombra es el uso de herramientas de IA, modelos o extensiones de navegador potenciadas por IA dentro de un lugar de trabajo sin el conocimiento, la revisión o la aprobación de los equipos de TI o seguridad. Es el descendiente directo del shadow IT, que describía el mismo patrón con aplicaciones y software en la nube no aprobados, aplicado a la ola actual de productos de IA de consumo.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿En qué se diferencia la IA en la sombra del shadow IT?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La dinámica subyacente es la misma: los empleados adoptan una herramienta conveniente y no aprobada porque resuelve un problema más rápido que la opción autorizada. La IA en la sombra es una preocupación distinta porque el riesgo principal no es solo una aplicación sin monitorizar, sino que los datos que se escriben o pegan en esa aplicación se convierten en una entrada que los sistemas del proveedor procesan, registran y, en algunos casos, usan para mejorar sus modelos, de una forma en que una hoja de cálculo en una unidad en la nube no aprobada nunca lo hizo.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué pasa realmente con los datos pegados en un chatbot de IA de consumo gratuito?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Depende por completo de las condiciones del proveedor para ese producto y ese nivel de servicio concretos. Los niveles gratuitos y orientados al consumidor de muchos chatbots de IA han permitido históricamente usar las conversaciones enviadas para mejorar o entrenar modelos a menos que el usuario lo desactive, y las entradas normalmente se registran para monitorización de abusos independientemente del nivel. Una vez que el texto sensible sale del control de la organización de esta forma, generalmente no hay una manera fiable de eliminarlo ni de demostrar que nunca se conservó, razón por la cual existen los acuerdos empresariales como un arreglo contractualmente distinto.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Pueden los asistentes de código con IA filtrar credenciales o código propietario?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sí, principalmente de dos formas. Primero, si un desarrollador pega código, archivos de configuración o salidas de depuración que contienen claves de API o nombres de host internos en un asistente no gestionado, esos datos salen de la organización de la misma forma que cualquier otra entrada de IA en la sombra. Segundo, algunos asistentes y plugins de IDE solicitan permisos amplios y pueden leer más de un espacio de trabajo de lo previsto, incluyendo archivos que nunca estuvieron pensados para formar parte del prompt.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué aspecto tiene realmente un programa de IA gobernado y autorizado?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          En la práctica combina un acuerdo empresarial cuyos términos excluyen explícitamente el entrenamiento con los datos enviados, controles de administración y SSO para que el uso esté vinculado a una identidad, herramientas de DLP que puedan inspeccionar o bloquear datos sensibles antes de que lleguen a un endpoint de IA, una política interna de uso de IA por escrito que defina qué clasificaciones de datos pueden y no pueden introducirse, y una herramienta autorizada genuinamente usable para que los empleados no tengan motivo para recurrir a una no aprobada.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../red-teaming-de-ia-desde-cero/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Red teaming de IA, desde cero</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../prompt-injection-explicado/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">La inyección de prompts, explicada</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../ejecuta-un-llm-local/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Ejecuta un LLM en tu propia máquina</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de IA</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="compare">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compare – Security tools head-to-head | Breachfolio</title>
+  <meta name="description" content="Reproducible benchmarks of the offensive- and defensive-security tools practitioners argue about. Every score is versioned. Every test plan is published." />
+  <link rel="canonical" href="https://breachfolio.com/compare/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Compare – Security tools head-to-head | Breachfolio" />
+  <meta property="og:description" content="Reproducible benchmarks of the offensive- and defensive-security tools practitioners argue about. Every score is versioned. Every test plan is published." />
+  <meta property="og:url" content="https://breachfolio.com/compare/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-compare.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Compare – Security tools head-to-head | Breachfolio" />
+  <meta name="twitter:description" content="Reproducible benchmarks of the offensive- and defensive-security tools practitioners argue about. Every score is versioned. Every test plan is published." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-compare.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../assets/shared.js?v=43287f13" defer></script>
+<script src="../assets/analytics.js?v=43287f13" defer></script>
+  <script src="../assets/hack-terminal.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+"@context": "https://schema.org",
+"@graph": [
+  {
+    "@type": "CollectionPage",
+    "@id": "https://breachfolio.com/compare/#collectionpage",
+    "url": "https://breachfolio.com/compare/",
+    "name": "Compare – Security tools head-to-head",
+    "description": "Reproducible benchmarks of the offensive- and defensive-security tools practitioners argue about. Every score is versioned. Every test plan is published.",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@id": "https://breachfolio.com/#website"
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://breachfolio.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare",
+        "item": "https://breachfolio.com/compare/"
+      }
+    ]
+  }
+]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Breachfolio Tool Comparisons",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://breachfolio.com/compare/nmap-vs-masscan/",
+      "name": "Nmap vs Masscan: accuracy versus raw throughput."
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "url": "https://breachfolio.com/compare/burp-vs-zap/",
+      "name": "Burp Suite vs OWASP ZAP: the proxy that pays its rent."
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "url": "https://breachfolio.com/compare/wireshark-vs-tcpdump/",
+      "name": "Wireshark vs tcpdump: pick the right tool, then use the other one anyway."
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "url": "https://breachfolio.com/compare/kali-vs-parrot/",
+      "name": "Kali Linux vs Parrot OS: the pentest distro you actually live in."
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "url": "https://breachfolio.com/compare/metasploit-vs-sliver/",
+      "name": "Metasploit vs Sliver: post-exploitation frameworks in 2026."
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "url": "https://breachfolio.com/compare/splunk-vs-wazuh-vs-elk/",
+      "name": "Splunk vs Wazuh vs ELK: which SIEM fits your budget."
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "url": "https://breachfolio.com/compare/snort-vs-suricata/",
+      "name": "Snort vs Suricata: the other IDS debate."
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "url": "https://breachfolio.com/compare/nessus-vs-openvas/",
+      "name": "Tenable Nessus vs OpenVAS: vulnerability scanners head to head."
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "url": "https://breachfolio.com/compare/burp-vs-caido/",
+      "name": "Burp Suite vs Caido: the new proxy that's actually fast."
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "url": "https://breachfolio.com/compare/password-managers-compared/",
+      "name": "Bitwarden vs 1Password vs KeePassXC: choosing a password manager in 2026."
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "url": "https://breachfolio.com/compare/signal-vs-whatsapp-vs-telegram/",
+      "name": "Signal vs WhatsApp vs Telegram: which app is actually private in 2026."
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "url": "https://breachfolio.com/compare/nordvpn-vs-surfshark-vs-proton-vpn/",
+      "name": "NordVPN vs Surfshark vs Proton VPN: which one is worth it in 2026."
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+  <link rel="next" href="https://breachfolio.com/compare/page-2/" />
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="./" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="./" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Compare</span></li>
+  </ol>
+</nav><main id="main"><section class="sf-hero sf-hero-aura sf-hero-grid sf-hero-fx border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-14 md:pt-20 pb-14 md:pb-20">
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+        <div>
+          <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">Compare · Tool-by-tool</div>
+          <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-2xl">Security tooling, <span class="sf-grad">head to head.</span></h1>
+          <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-xl">Reproducible benchmarks of the offensive- and defensive-security tools practitioners actually argue about. Every score is versioned. Every test plan is published, no paid placement, ever.</p>
+        </div>
+        <div class="relative mx-auto w-full max-w-[380px] aspect-square" aria-hidden="true">
+          <img src="../assets/img/hero-compare.webp" alt="" width="800" height="800" fetchpriority="high" decoding="async" class="w-full h-full object-contain" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="flex flex-wrap items-center gap-3 mb-8">
+      <div class="relative flex-1 min-w-[200px] max-w-xs">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="sf-list-search" type="text" placeholder="Search Compare…" aria-label="Search Compare" class="w-full h-9 rounded-full border border-border bg-surface/40 text-[13px] pl-9 pr-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent/50" />
+      </div>
+      <div id="sf-tag-filter" class="relative">
+        <button id="sf-tag-btn" type="button" class="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-full border border-border text-[12px] font-mono tracking-wider text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+          <span>TOPICS</span><span id="sf-tag-count" class="text-accent"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="sf-tag-panel" class="hidden absolute left-0 mt-2 sf-tag-panel">
+          <input id="sf-tag-search" type="text" placeholder="Search topics…" aria-label="Search topics" />
+          <div id="sf-tag-list"></div>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5" role="group" aria-label="Filter by date range">
+        <label class="sr-only" for="sf-date-from">From date</label>
+        <input type="date" id="sf-date-from" aria-label="From date" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+        <span class="text-muted text-[11px]" aria-hidden="true">→</span>
+        <label class="sr-only" for="sf-date-to">To date</label>
+        <input type="date" id="sf-date-to" aria-label="To date" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+      </div>
+      <button id="sf-list-sort" data-label-desc="Newest first" data-label-asc="Oldest first" type="button" class="ml-auto inline-flex items-center gap-1.5 px-3 h-8 rounded-full border border-border text-muted-foreground hover:text-foreground font-mono text-[11.5px] transition-colors">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="sf-sort-icon transition-transform" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        <span data-sort-label>Newest first</span>
+      </button>
+    </div>
+    <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+      <a href="nordvpn-vs-surfshark-vs-proton-vpn/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="vpn" data-date="2026-08-16">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-vpn-640.webp 640w, ../assets/img/thumb-cmp-vpn-960.webp 960w, ../assets/img/thumb-cmp-vpn.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-vpn.webp" alt="NordVPN vs Surfshark vs Proton VPN comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">VPN</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">13/13</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>August 16, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">NordVPN</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Surfshark</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Proton VPN</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">NordVPN vs Surfshark vs Proton VPN: which one is worth it in 2026.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">Every VPN comparison online exists to place an affiliate link. This one starts with what a VPN doesn&#x27;t do, and the fact that two of the three companies are the same company.</p>
+        </div>
+      </a>
+      <a href="signal-vs-whatsapp-vs-telegram/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="messaging" data-date="2026-07-29">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-messaging-640.webp 640w, ../assets/img/thumb-cmp-messaging-960.webp 960w, ../assets/img/thumb-cmp-messaging.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-messaging.webp" alt="Signal vs WhatsApp vs Telegram messaging privacy comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">MESSAGING</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">11/11</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 29, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Signal</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">WhatsApp</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Telegram</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Signal vs WhatsApp vs Telegram: which app is actually private in 2026.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">Signal and WhatsApp encrypt everything by default. Telegram doesn&#x27;t, unless you know to look for Secret Chats. What actually protects you, and what only looks like it does.</p>
+        </div>
+      </a>
+      <a href="password-managers-compared/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="passwords" data-date="2026-07-29">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-password-managers-640.webp 640w, ../assets/img/thumb-cmp-password-managers-960.webp 960w, ../assets/img/thumb-cmp-password-managers.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-password-managers.webp" alt="Bitwarden vs 1Password vs KeePassXC password manager comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PASSWORDS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">10/10</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 29, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Bitwarden</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">1Password</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">KeePassXC</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Bitwarden vs 1Password vs KeePassXC: choosing a password manager in 2026.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">Three genuinely different answers to where your vault should live. Zero-knowledge encryption, open-source status, self-hosting and real pricing, compared.</p>
+        </div>
+      </a>
+      
+      <a href="nmap-vs-masscan/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="recon" data-date="2026-07-10">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-nmap-640.webp 640w, ../assets/img/thumb-cmp-nmap-960.webp 960w, ../assets/img/thumb-cmp-nmap.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-nmap.webp" alt="Nmap vs Masscan comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">RECON</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">01/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Nmap</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Masscan</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Nmap vs Masscan: accuracy versus raw throughput.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">A /24 sweep, a /16 sweep, then a hostile /8. Where Nmap&#x27;s service detection earns its seconds, and where Masscan stops being a footgun.</p>
+        </div>
+      </a>
+      <a href="burp-vs-zap/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="web" data-date="2026-07-10">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-burp-640.webp 640w, ../assets/img/thumb-cmp-burp-960.webp 960w, ../assets/img/thumb-cmp-burp.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-burp.webp" alt="Burp Suite vs OWASP ZAP comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">WEB</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">02/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Burp Suite</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">OWASP ZAP</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Burp Suite vs OWASP ZAP: pays its rent?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">Eight deliberately-broken apps, both proxies driven by the same playbook. Manual testing ergonomics, extension surface, and the price of &#x27;free&#x27;.</p>
+        </div>
+      </a>
+      <a href="wireshark-vs-tcpdump/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="packets" data-date="2026-07-10">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-wireshark-640.webp 640w, ../assets/img/thumb-cmp-wireshark-960.webp 960w, ../assets/img/thumb-cmp-wireshark.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-wireshark.webp" alt="Wireshark vs tcpdump comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PACKETS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">03/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Wireshark</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">tcpdump</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Wireshark vs tcpdump: pick the right tool.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">When you reach for a GUI, when you reach for a CLI, and how to make them work together in real incident response.</p>
+        </div>
+      </a>
+      <a href="kali-vs-parrot/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="distro" data-date="2026-07-10">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-kali-640.webp 640w, ../assets/img/thumb-cmp-kali-960.webp 960w, ../assets/img/thumb-cmp-kali.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-kali.webp" alt="Kali Linux vs Parrot OS comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">DISTRO</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">04/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Kali Linux</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Parrot OS</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Kali Linux vs Parrot OS: the daily-driver test.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">The boring choice that costs hours: which distro is least painful as a daily driver, not just for a CTF screenshot.</p>
+        </div>
+      </a>
+      <a href="metasploit-vs-sliver/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="c2" data-date="2026-07-10">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-metasploit-640.webp 640w, ../assets/img/thumb-cmp-metasploit-960.webp 960w, ../assets/img/thumb-cmp-metasploit.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-metasploit.webp" alt="Metasploit vs Sliver comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">C2</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">05/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Metasploit</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Sliver</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Metasploit vs Sliver: post-exploitation frameworks in 2026.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">An ageing classic against the modern Go-native challenger. Exploit library, listener ergonomics, and how each one survives a tuned EDR.</p>
+        </div>
+      </a>
+      <a href="splunk-vs-wazuh-vs-elk/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="siem" data-date="2026-07-08">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-siem-640.webp 640w, ../assets/img/thumb-cmp-siem-960.webp 960w, ../assets/img/thumb-cmp-siem.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-siem.webp" alt="Splunk vs Wazuh vs ELK comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SIEM</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">06/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 08, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Splunk</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Wazuh</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">ELK</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Splunk vs Wazuh vs ELK: which SIEM fits your budget.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">Three genuinely different cost models wearing the same "SIEM" label. The right pick depends on budget and team size, not a feature checklist.</p>
+        </div>
+      </a>
+      <a href="snort-vs-suricata/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="ids" data-date="2026-07-08">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-ids-640.webp 640w, ../assets/img/thumb-cmp-ids-960.webp 960w, ../assets/img/thumb-cmp-ids.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-ids.webp" alt="Snort vs Suricata comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">IDS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">07/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 08, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Snort</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Suricata</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Snort vs Suricata: the other IDS debate.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">Snort defined the rules format the whole industry still writes in. Suricata rebuilt the engine underneath it for modern multi-core hardware.</p>
+        </div>
+      </a>
+      <a href="nessus-vs-openvas/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="scanners" data-date="2026-07-08">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/thumb-cmp-scanners-640.webp 640w, ../assets/img/thumb-cmp-scanners-960.webp 960w, ../assets/img/thumb-cmp-scanners.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-cmp-scanners.webp" alt="Nessus vs OpenVAS comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SCANNERS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">08/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 08, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Nessus</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">OpenVAS</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Tenable Nessus vs OpenVAS: scanners head to head.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">A polished commercial plugin feed against a free, community-driven one. The real difference shows up in accuracy, setup time, and audits.</p>
+        </div>
+      </a>
+      <a href="burp-vs-caido/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="web" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../assets/img/006-general-green-glowing-world-network-map-640.webp 640w, ../assets/img/006-general-green-glowing-world-network-map-960.webp 960w, ../assets/img/006-general-green-glowing-world-network-map.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/006-general-green-glowing-world-network-map.webp" alt="Burp Suite vs Caido comparison illustration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">WEB</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">09/09</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+            <span>July 15, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-[17px] font-semibold tracking-tight">Burp Suite</span>
+            <span class="font-mono text-[11px] text-muted tracking-widest">vs</span>
+            <span class="text-[17px] font-semibold tracking-tight">Caido</span>
+          </div>
+          <h2 class="font-display text-[20px] leading-snug font-semibold tracking-tight text-balance">Burp Suite vs Caido: the new proxy that's actually fast.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7]">A Rust-based challenger built for speed and a browser-native UI. Where Caido keeps up, and where its scanner still can't.</p>
+        </div>
+      </a>
+    </div>
+    <div id="empty" class="hidden mt-10 text-center text-muted-foreground text-[14px]">No tools match this filter yet. <button id="sf-list-clear" type="button" class="text-accent underline underline-offset-2">Clear filters</button></div>
+    <nav id="sf-pagination" class="mt-10 flex items-center justify-between gap-4 border-t border-border pt-6" aria-label="Archive pagination">
+      <button id="sf-page-prev" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span class="hidden sm:inline">Previous</span>
+      </button>
+      <div id="sf-page-numbers" class="flex items-center gap-1">
+<span class="sf-page" aria-current="page">1</span>
+<a class="sf-page" href="./page-2/">2</a>
+</div>
+      <button id="sf-page-next" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <span class="hidden sm:inline">Next</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </nav>
+  </section>
+</main>
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="./" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/page.js?v=43287f13" defer></script>
+<script src="../assets/hero-fx.js?v=43287f13" defer></script>
+</body>
+</html>

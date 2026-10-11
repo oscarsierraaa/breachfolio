@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-labelledby="lab04-title lab04-desc">
+  <title id="lab04-title">Two network zones separated by a firewall rule</title>
+  <desc id="lab04-desc">Two boxed zones, A and B, split by a dashed firewall line: an allowed arrow one way, a blocked arrow the other.</desc>
+  <defs>
+    <linearGradient id="lab04-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(288,85%,70%)" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="hsl(265,84%,68%)" stop-opacity="0.03"/>
+    </linearGradient>
+    <marker id="lab04-arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="hsl(265,84%,68%)"/>
+    </marker>
+  </defs>
+  <rect width="900" height="480" fill="#15100e"/>
+  <rect width="900" height="480" fill="url(#lab04-bg)"/>
+  <g transform="translate(158,112)" stroke="hsl(265,84%,68%)" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="0" y="0" width="220" height="248" rx="12" opacity="0.9"/>
+    <text x="110" y="134" font-family="ui-monospace,monospace" font-size="30" fill="hsl(265,84%,68%)" stroke="none" text-anchor="middle">A</text>
+    <rect x="364" y="0" width="220" height="248" rx="12" opacity="0.55"/>
+    <text x="474" y="134" font-family="ui-monospace,monospace" font-size="30" fill="hsl(265,84%,68%)" stroke="none" text-anchor="middle" opacity="0.7">B</text>
+    <path d="M292 -14 V262" stroke-dasharray="9 9" opacity="0.8"/>
+    <path d="M230 88 H352" marker-end="url(#lab04-arrow)"/>
+    <path d="M352 172 H230" stroke-dasharray="7 9" opacity="0.55"/>
+    <circle cx="230" cy="172" r="8" fill="hsl(288,85%,70%)" stroke="none"/>
+  </g>
+</svg>

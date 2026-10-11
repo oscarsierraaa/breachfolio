@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="resources">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Puertos comunes que vale la pena memorizar | Breachfolio</title>
+  <meta name="description" content="Tabla de referencia rápida con los puertos TCP/UDP que todo aprendiz de seguridad debería saberse de memoria, agrupados por función y por qué importan." />
+  <meta name="keywords" content="puertos comunes TCP y UDP, chuleta de puertos de red, qué puerto usa SSH, para qué sirve el puerto 443, puertos bien conocidos registrados y efímeros, tabla de puertos para nmap, puertos que hay que memorizar en ciberseguridad, diferencia entre TCP y UDP, puerto 22 SSH y puerto 3389 RDP, puertos de correo SMTP IMAP POP3, por qué el puerto 445 SMB es peligroso, lista de puertos IANA, cómo leer un escaneo de puertos con nmap -sV" />
+  <link rel="canonical" href="https://breachfolio.com/es/recursos/puertos-comunes-chuleta/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/common-ports-cheat-sheet/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/puertos-comunes-chuleta/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/common-ports-cheat-sheet/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Puertos comunes que vale la pena memorizar | Breachfolio" />
+  <meta property="og:description" content="Tabla de referencia rápida con los puertos TCP/UDP que todo aprendiz de seguridad debería saberse de memoria, agrupados por función y por qué importan." />
+  <meta property="og:url" content="https://breachfolio.com/es/recursos/puertos-comunes-chuleta/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-res-ports.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Puertos comunes que vale la pena memorizar | Breachfolio" />
+  <meta name="twitter:description" content="Tabla de referencia rápida con los puertos TCP/UDP que todo aprendiz de seguridad debería saberse de memoria, agrupados por función y por qué importan." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-res-ports.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Puertos comunes: los puertos TCP y UDP que vale la pena memorizar",
+      "description": "Tabla de referencia rápida con los puertos TCP/UDP que todo aprendiz de seguridad debería saberse de memoria, agrupados por función y por qué importan.",
+      "image": "https://breachfolio.com/assets/img/thumb-res-ports.webp",
+      "datePublished": "2026-07-15",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/recursos/puertos-comunes-chuleta/"
+      },
+      "inLanguage": "es",
+      "keywords": "puertos comunes TCP y UDP, chuleta de puertos de red, qué puerto usa SSH, para qué sirve el puerto 443, puertos bien conocidos registrados y efímeros, tabla de puertos para nmap, puertos que hay que memorizar en ciberseguridad, diferencia entre TCP y UDP, puerto 22 SSH y puerto 3389 RDP, puertos de correo SMTP IMAP POP3, por qué el puerto 445 SMB es peligroso, lista de puertos IANA, cómo leer un escaneo de puertos con nmap -sV"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Recursos", "item": "https://breachfolio.com/es/recursos/" },
+        { "@type": "ListItem", "position": 3, "name": "Puertos comunes que vale la pena memorizar", "item": "https://breachfolio.com/es/recursos/puertos-comunes-chuleta/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/recursos/puertos-comunes-chuleta/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuáles son los puertos más importantes que hay que memorizar en ciberseguridad?", "acceptedAnswer": { "@type": "Answer", "text": "Los que aparecen constantemente en escaneos y auditorías: 80 y 443 para web, 22 para SSH, 3389 para RDP, 25/587/993 para correo, y 53, 3306 y 5432 para DNS y bases de datos." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre puertos bien conocidos, registrados y dinámicos?", "acceptedAnswer": { "@type": "Answer", "text": "Los puertos bien conocidos (0–1023) están reservados para servicios básicos y requieren privilegios elevados para enlazarse en sistemas tipo Unix; los registrados (1024–49151) los asigna IANA a aplicaciones concretas; los dinámicos o efímeros (49152–65535) los elige la propia máquina al azar para el lado cliente de una conexión." } },
+        { "@type": "Question", "name": "¿Por qué se considera peligroso el puerto 3389 (RDP) si está expuesto a internet?", "acceptedAnswer": { "@type": "Answer", "text": "Porque se expone por error con frecuencia y recibe muchísimos ataques automatizados; rara vez debería estar accesible directamente desde internet." } },
+        { "@type": "Question", "name": "¿Un servicio siempre usa su puerto por defecto?", "acceptedAnswer": { "@type": "Answer", "text": "No. La correspondencia entre puerto y servicio es una convención, no una regla: un administrador puede mover SSH al puerto 2222 o ejecutar un servidor web en el 8080, por lo que un buen escáner identifica el servicio real con algo como nmap -sV en vez de fiarse solo del número de puerto." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Recursos</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Puertos comunes que vale la pena memorizar</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-res-ports.webp" alt="Puertos comunes, los que vale la pena memorizar." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">RECURSO · CHULETA</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Puertos comunes, los que vale la pena memorizar.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">No necesitas los 65.535. Necesitas la veintena larga que aparece constantemente. Aquí están, agrupados por lo que hacen y por qué importan en una auditoría.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>15 de julio de 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>6 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p><strong>Los números de puerto</strong> son la forma en que una máquina sabe a qué servicio va destinado un paquete. Hay 65.535 por cada protocolo, pero en la práctica un <strong>conjunto reducido</strong> concentra la inmensa mayoría de lo que te encuentras: leer un <a href="../../laboratorio/lab-04-segmentacion-de-red-con-pfsense/" class="text-accent ul-link">resultado de nmap</a>, escribir una regla de firewall o clasificar tráfico. Memoriza estos y la mayoría de los escaneos se vuelven legibles de un vistazo. La lista autorizada la mantiene <a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">IANA</a>; esta es la versión corta del que está en el terreno.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Web y acceso remoto</h2>
+
+      <p>Los puertos que verás en casi cualquier host que haga algo útil:</p>
+
+      <div class="mt-6 overflow-x-auto"><table class="w-full border-collapse">
+        <thead><tr><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Puerto</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Servicio</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Por qué importa</th></tr></thead>
+        <tbody>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">80 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">HTTP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Web sin cifrar. Verlo abierto invita a mirar qué se sirve y si debería ser HTTPS en su lugar.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">443 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">HTTPS</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Web cifrada. Hoy es el estándar para cualquier cosa pública; su certificado es en sí mismo una fuente de reconocimiento.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">22 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">SSH</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Shell remota cifrada en Linux/Unix. Objetivo prioritario para ataques de credenciales; vigila sus registros de autenticación.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">3389 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">RDP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Escritorio Remoto de Windows. Se expone por error con frecuencia y recibe muchísimos ataques; rara vez debería estar en internet.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">23 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Telnet</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Shell remota sin cifrar. Prácticamente obsoleto; su presencia ya es un hallazgo por sí misma.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Correo electrónico</h2>
+
+      <div class="mt-6 overflow-x-auto"><table class="w-full border-collapse">
+        <thead><tr><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Puerto</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Servicio</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Por qué importa</th></tr></thead>
+        <tbody>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">25 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">SMTP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Transferencia de correo entre servidores. Una mala configuración habilita relays abiertos y suplantación.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">587 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">SMTP (envío)</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Envío de correo desde clientes, con autenticación. La vía de envío moderna.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">993 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">IMAPS</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Acceso cifrado al buzón. Lo que usa un cliente de correo para leer el correo de forma segura.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">110 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">POP3</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Recuperación de correo más antigua. Sigue existiendo; prefiere sus variantes cifradas.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Infraestructura y bases de datos</h2>
+
+      <p>Puertos que revelan lo que una máquina hace de verdad, y que casi nunca deberías ver expuestos a la internet pública:</p>
+
+      <div class="mt-6 overflow-x-auto"><table class="w-full border-collapse">
+        <thead><tr><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Puerto</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Servicio</th><th class="text-left font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-medium border-b border-border px-3 py-2">Por qué importa</th></tr></thead>
+        <tbody>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">53 / TCP+UDP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">DNS</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Resolución de nombres. UDP para las consultas, TCP para respuestas grandes y transferencias de zona.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">3306 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">MySQL/MariaDB</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Base de datos. Expuesta a internet es un hallazgo crítico clásico.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">5432 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">PostgreSQL</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Base de datos. La misma regla: debe estar detrás de la aplicación, nunca de cara al mundo.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">445 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">SMB</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Compartición de archivos de Windows. Históricamente el radio de acción de gusanos que arrasaban redes enteras; mantenlo interno.</td></tr>
+        <tr><td class="border-b border-border px-3 py-2 text-[14px] text-foreground font-medium">3389 / TCP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">RDP</td><td class="border-b border-border px-3 py-2 text-[14px] text-muted-foreground">Repetido aquí como recordatorio: si está de cara a internet, trátalo como un incidente esperando a suceder.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cómo memorizarlos de verdad</h2>
+
+      <p>No intentes memorizar la tabla en frío. Tres hábitos hacen que se te queden:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Agrupa por función, no por número.</strong> «Web» (80/443), «acceso remoto» (22/3389), «correo» (25/587/993), «almacenes de datos» (3306/5432). Recordar es más fácil por función.</li>
+        <li><strong>Aprende los pares.</strong> Muchos servicios vienen en versión en texto plano + cifrada: HTTP/HTTPS (80/443), IMAP/IMAPS. Aprender el par fija los dos.</li>
+        <li><strong>Lee escaneos reales.</strong> Lanza nmap contra tus propios <a href="../../laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" class="text-accent ul-link">hosts de laboratorio</a> y los números se asocian solos a servicios que puedes ver. La repetición en contexto le gana a las tarjetas de memoria.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Bien conocidos, registrados y dinámicos</h2>
+
+      <p>Los puertos se dividen en tres rangos, y saber cuál es cuál explica buena parte de lo que ves en un escaneo:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Puertos bien conocidos (0–1023)</strong> están reservados para servicios básicos: todo lo de las tablas de arriba vive aquí. En sistemas tipo Unix, enlazar a uno de estos requiere privilegios elevados, lo cual es en sí una pequeña propiedad de seguridad: un servicio en el puerto 80 lo arrancó algo con permisos de nivel root.</li>
+        <li><strong>Puertos registrados (1024–49151)</strong> los asigna IANA a aplicaciones concretas, pero no necesitan privilegios especiales; bases de datos como MySQL (3306) y PostgreSQL (5432) se sitúan aquí.</li>
+        <li><strong>Puertos dinámicos / efímeros (49152–65535)</strong> son los que tu máquina elige al azar para el lado cliente de una conexión. Cuando navegas por una web, tu extremo de la conversación está en un puerto efímero; el extremo del servidor está en el 443. Ver muchos puertos de numeración alta en una lista de conexiones es normal, no sospechoso.</li>
+      </ul>
+
+      <p>Por eso también «el puerto te dice el servicio» es <strong>solo una convención</strong>. La correspondencia es un valor por defecto que nadie impone: un administrador puede poner SSH en el 2222 o ejecutar un servidor web en el 8080. Un buen escáner no se limita a leer el número de puerto: <strong>identifica la huella del servicio</strong> que realmente responde, que es para lo que existe <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">nmap -sV</code>.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Cómo usar esto.</strong> Mantén esta página abierta junto a una salida de nmap mientras practicas en tu propio laboratorio. El objetivo no es recitar los 65.535 puertos, es leer un escaneo típico sin recurrir a una referencia. Esa fluidez viene del uso, no de la memorización.</div>
+
+      <p>Un matiz que conviene interiorizar: un servicio puede ejecutarse en cualquier puerto. Encontrar SSH en el 22 es convención, no una regla; un administrador puede moverlo al 2222 o a cualquier otro sitio, y los atacantes a veces esconden servicios en puertos altos inesperados precisamente porque la gente solo echa un vistazo a los bien conocidos. Los números de aquí son los valores por defecto que te encontrarás con más frecuencia, y saberlos de memoria es justo lo que hace que las excepciones te salten a la vista cuando aparecen.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuáles son los puertos más importantes que hay que memorizar en ciberseguridad?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los que aparecen constantemente en escaneos y auditorías: 80 y 443 para web, 22 para SSH, 3389 para RDP, 25/587/993 para correo, y 53, 3306 y 5432 para DNS y bases de datos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre puertos bien conocidos, registrados y dinámicos?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los puertos bien conocidos (0–1023) están reservados para servicios básicos y requieren privilegios elevados para enlazarse en sistemas tipo Unix; los registrados (1024–49151) los asigna IANA a aplicaciones concretas; los dinámicos o efímeros (49152–65535) los elige la propia máquina al azar para el lado cliente de una conexión.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué se considera peligroso el puerto 3389 (RDP) si está expuesto a internet?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque se expone por error con frecuencia y recibe muchísimos ataques automatizados; rara vez debería estar accesible directamente desde internet.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Un servicio siempre usa su puerto por defecto?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. La correspondencia entre puerto y servicio es una convención, no una regla: un administrador puede mover SSH al puerto 2222 o ejecutar un servidor web en el 8080, por lo que un buen escáner identifica el servicio real con algo como nmap -sV en vez de fiarse solo del número de puerto.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../acronimos-de-ciberseguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Siglas de ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ciberseguridad/como-funcionan-las-redes/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo funcionan las redes</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../laboratorio/lab-04-segmentacion-de-red-con-pfsense/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 04: segmenta la red</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los recursos</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

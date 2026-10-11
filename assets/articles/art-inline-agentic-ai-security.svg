@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="aagrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="aaglow" cx="0.4" cy="0.45" r="0.65"><stop offset="0%" stop-color="hsl(190 90% 52%)" stop-opacity="0.28"/><stop offset="55%" stop-color="hsl(190 90% 52%)" stop-opacity="0.05"/><stop offset="100%" stop-color="hsl(190 90% 52%)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="aagateglow" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="hsl(262 83% 68%)" stop-opacity="0.38"/><stop offset="60%" stop-color="hsl(262 83% 68%)" stop-opacity="0.08"/><stop offset="100%" stop-color="hsl(262 83% 68%)" stop-opacity="0"/></radialGradient>
+  <marker id="aaarrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="hsl(190 90% 52%)"/>
+  </marker>
+  <marker id="aaarrowpurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="hsl(262 83% 68%)"/>
+  </marker>
+</defs>
+
+<rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+<rect width="800" height="400" fill="url(#aagrid)"/>
+<ellipse cx="400" cy="200" rx="430" ry="270" fill="url(#aaglow)"/>
+<ellipse cx="520" cy="150" rx="110" ry="110" fill="url(#aagateglow)"/>
+
+<!-- loop connectors -->
+<path d="M152 158 C 220 108, 262 96, 300 84" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.5" opacity="0.85" marker-end="url(#aaarrow)"/>
+<path d="M360 92 C 410 100, 448 118, 470 138" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.5" opacity="0.85" marker-end="url(#aaarrowpurple)"/>
+<path d="M566 168 C 600 190, 626 205, 646 218" fill="none" stroke="hsl(262 83% 68%)" stroke-width="2.5" opacity="0.9" marker-end="url(#aaarrow)"/>
+<path d="M660 266 L660 292" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.5" opacity="0.85" marker-end="url(#aaarrow)"/>
+<path d="M598 314 C 540 322, 470 322, 420 320" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.5" opacity="0.85" marker-end="url(#aaarrow)"/>
+<path d="M346 300 C 260 260, 190 220, 148 192" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.5" stroke-dasharray="1 7" opacity="0.6" marker-end="url(#aaarrow)"/>
+
+<!-- PERCEIVE -->
+<circle cx="120" cy="170" r="36" fill="hsl(240 10% 4%)" stroke="hsl(190 90% 52%)" stroke-width="3"/>
+<text x="120" y="166" text-anchor="middle" font-size="11.5" fill="hsl(190 90% 52%)" letter-spacing="1">PER-</text>
+<text x="120" y="180" text-anchor="middle" font-size="11.5" fill="hsl(190 90% 52%)" letter-spacing="1">CEIVE</text>
+<text x="120" y="222" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="2">1 · READS INPUT</text>
+
+<!-- PLAN -->
+<circle cx="330" cy="90" r="36" fill="hsl(240 10% 4%)" stroke="hsl(190 90% 52%)" stroke-width="3"/>
+<text x="330" y="95" text-anchor="middle" font-size="12.5" fill="hsl(190 90% 52%)" letter-spacing="1">PLAN</text>
+<text x="330" y="46" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="2">2 · CHOOSES NEXT STEP</text>
+
+<!-- GATE (approval / guardrail) -->
+<g transform="translate(520 150) rotate(45)">
+  <rect x="-40" y="-40" width="80" height="80" rx="10" fill="hsl(240 10% 4%)" stroke="hsl(262 83% 68%)" stroke-width="3.5"/>
+</g>
+<path d="M520 132 v11 M513 143 a7 7 0 0 1 14 0 v6 h-14 z" fill="none" stroke="hsl(262 83% 68%)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="507" y="149" width="26" height="18" rx="3" fill="none" stroke="hsl(262 83% 68%)" stroke-width="2.4"/>
+<text x="520" y="96" text-anchor="middle" font-size="12.5" fill="hsl(262 83% 68%)" letter-spacing="1">APPROVAL GATE</text>
+<text x="520" y="228" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.85" letter-spacing="2">3 · HUMAN CHECKPOINT</text>
+
+<!-- ACT -->
+<circle cx="660" cy="240" r="36" fill="hsl(240 10% 4%)" stroke="hsl(190 90% 52%)" stroke-width="3"/>
+<text x="660" y="245" text-anchor="middle" font-size="12.5" fill="hsl(190 90% 52%)" letter-spacing="1">ACT</text>
+<text x="660" y="196" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="2">4 · EXECUTES</text>
+
+<!-- TOOL CALL -->
+<rect x="598" y="294" width="124" height="38" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(190 90% 52%)" stroke-width="1.8" opacity="0.95"/>
+<text x="660" y="318" text-anchor="middle" font-size="12" fill="hsl(190 90% 52%)" letter-spacing="1.5">TOOL CALL</text>
+
+<!-- OBSERVE -->
+<circle cx="380" cy="320" r="36" fill="hsl(240 10% 4%)" stroke="hsl(190 90% 52%)" stroke-width="3"/>
+<text x="380" y="325" text-anchor="middle" font-size="12" fill="hsl(190 90% 52%)" letter-spacing="0.5">OBSERVE</text>
+<text x="380" y="372" text-anchor="middle" font-size="11" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="2">5 · READS RESULT, LOOPS</text>
+
+<g font-size="12" letter-spacing="3" font-weight="500">
+  <text x="24" y="34" fill="hsl(190 90% 52%)" opacity="0.95">AI / AGENTIC SECURITY</text>
+  <text x="24" y="392" fill="hsl(240 5% 65%)" opacity="0.6">PERCEIVE -&gt; PLAN -&gt; APPROVAL -&gt; ACT -&gt; OBSERVE</text>
+  <text x="776" y="392" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="776" cy="30" r="4" fill="hsl(190 90% 52%)"/>
+<circle cx="776" cy="30" r="9" fill="hsl(190 90% 52%)" opacity="0.25"/>
+</svg>

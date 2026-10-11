@@ -1,0 +1,23 @@
+# Breachfolio
+# Independent education on AI and cybersecurity.
+
+/* TEAM */
+Editor & maintainer: Daniel A.
+Editor & maintainer: Óscar S.
+Contact: secforgeweb [at] gmail.com
+Location: Spain
+
+We publish under first name and initial. This is a side project about fraud
+and security, not a personal brand.
+
+/* HOW THE WRITING IS MADE */
+Articles are drafted with AI assistance and reviewed by a person before
+publication. Nothing publishes automatically. The full process, including
+what we do and do not test ourselves, is written out at:
+https://breachfolio.com/legal/methodology/
+
+/* SITE */
+Last update: 2026-07-30
+Language: English (primary), Spanish (secondary)
+Standards: HTML5, CSS3
+Components: Tailwind CSS (compiled), Pagefind, Sora, JetBrains Mono

@@ -1,0 +1,39 @@
+# Breachfolio — redirecciones 301
+# Para Netlify y Cloudflare Pages. Formato: <from> <to> <status>
+
+# Antigua home React → home estática
+/Breachfolio.html                           /index.html                                           301
+
+# Migración learn/ → cybersecurity/
+/learn/                                  /cybersecurity/                                       301
+/learn/index.html                        /cybersecurity/index.html                             301
+/learn/cybersecurity-101.html            /cybersecurity/cybersecurity-101.html                 301
+/learn/how-networks-work.html            /cybersecurity/how-networks-work.html                 301
+/learn/linux-fundamentals.html           /cybersecurity/linux-fundamentals.html                301
+/learn/cryptography-basics.html          /cybersecurity/cryptography-basics.html               301
+/learn/threat-modeling-stride.html       /cybersecurity/threat-modeling-stride.html            301
+
+# IA y seguridad: ahora vive bajo cybersecurity
+/ai-security.html                        /cybersecurity/ai-security/                           301
+/ai-security                             /cybersecurity/ai-security/                           301
+
+# Prompts fusionado dentro de AI (jul 2026)
+/prompts/prompts-for-self-study.html     /ai/prompts-for-self-study.html                       301
+/prompts/*                               /ai/                                                  301
+/es/prompts/*                            /es/ai/                                               301
+
+# Carpeta de subidas (era backup de desarrollo) → 410 Gone
+/uploads/*                               /404.html                                             410
+
+# Carpeta interna (docs de la skill_google, no es contenido del sitio) → 404
+/skill_google/*                          /404.html                                             404
+
+# Rutas pretty (sin .html) — convención: dejar que el host las resuelva si soporta clean URLs
+# Si no, descomenta estas líneas:
+# /ai                                    /ai/index.html                                        301
+# /prompts                               /prompts/index.html                                   301
+# /compare                               /compare/index.html                                   301
+# /cybersecurity                         /cybersecurity/index.html                             301
+# /lab                                   /lab/index.html                                       301
+# /news                                  /news/index.html                                      301
+# /resources                             /resources/index.html                                 301

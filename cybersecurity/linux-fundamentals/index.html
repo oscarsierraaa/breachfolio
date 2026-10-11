@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cyber">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux fundamentals for security: the working subset | Breachfolio</title>
+  <meta name="description" content="The 25 Linux commands you will type every day, the five you will type in a hurry, and the file permissions that decide who owns the box." />
+  <meta name="keywords" content="linux for cybersecurity, essential linux commands cheat sheet, linux file permissions explained, chmod numeric permissions, what is the SUID bit, linux commands for incident response, how to read file permissions in linux, linux commands for penetration testing, netstat vs ss, linux commands for forensics, linux permission triplets, linux commands for security analysts" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/fundamentos-de-linux-para-seguridad/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Linux fundamentals for security: the working subset | Breachfolio" />
+  <meta property="og:description" content="The 25 Linux commands you will type every day, the five you will type in a hurry, and the file permissions that decide who owns the box." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/linux-fundamentals/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-linux.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Linux fundamentals for security: the working subset | Breachfolio" />
+  <meta name="twitter:description" content="The 25 Linux commands you will type every day, the five you will type in a hurry, and the file permissions that decide who owns the box." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-linux.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Linux fundamentals for security, the working subset.",
+      "description": "The 25 Linux commands you will type every day, the five you will type in a hurry, and the file permissions that decide who owns the box.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-linux.webp",
+      "datePublished": "2026-07-10", "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/cybersecurity/linux-fundamentals/"
+      },
+      "inLanguage": "en",
+      "keywords": "linux for cybersecurity, essential linux commands cheat sheet, linux file permissions explained, chmod numeric permissions, what is the SUID bit, linux commands for incident response, how to read file permissions in linux, linux commands for penetration testing, netstat vs ss, linux commands for forensics, linux permission triplets, linux commands for security analysts"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cybersecurity",
+          "item": "https://breachfolio.com/cybersecurity/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Linux fundamentals for security, the working subset.",
+          "item": "https://breachfolio.com/cybersecurity/linux-fundamentals/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/linux-fundamentals/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the most important Linux commands for cybersecurity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A working set of about 25 commands covers 80% of real-world security workflows: navigation and file reading (ls -la, cd, cat, less), searching (grep -r, find), permissions (chmod, chown), process and service inspection (ps -ef, top, systemctl, journalctl), network inspection (netstat -tulpn, ss -tulpn, curl, dig), and remote access (ssh, scp). Chaining them with pipes is what turns a short list into a large vocabulary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do Linux file permissions work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every file has three triplets of permissions – owner, group, and everyone else – and each triplet has three bits: read, write, and execute. In numeric form each triplet is a digit from 0-7, where read=4, write=2, execute=1, so chmod 750 means the owner gets read+write+execute, the group gets read+execute, and everyone else gets nothing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the SUID bit and why does it matter for security?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A file with the SUID bit set runs as its owner rather than as the user who executed it, which makes it a common privilege escalation vector if misconfigured. You can list every SUID file on a system with find / -perm -4000 -type f 2>/dev/null – on a compromised box, this is one of the first things to check."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which Linux commands are useful during incident response?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When responding to a fresh alert, the fast checks are: last -a | head -20 for recent logins, w for who is active right now, ss -tunap for active sockets tied to processes, ls -lat /tmp /var/tmp /dev/shm | head for freshly dropped files in common dumping grounds, and journalctl --since \"1 hour ago\" -p warning for recent system warnings."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Linux fundamentals for security, the working subset.</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../assets/img/thumb-cyber-linux.webp" alt="Hero illustration for: Linux fundamentals for security, the working subset." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">LEVEL 2</span>
+          <span class="text-muted">CYBERSECURITY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Linux fundamentals for security, the working subset.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">The 25 commands you will type every day, the five you will type in a hurry, and the file permissions that decide who owns the box.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-10">July 10, 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>13 min read</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p>Most "intro to Linux" material teaches you Linux as a Unix system. We are going to teach you Linux as a security workstation – what you actually do at the keyboard during recon, triage, and post-exploitation.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The shell, in one paragraph</h2>
+
+<p>The shell is a program that reads a line, runs it, and prints output. Three special characters do most of the work: <code>|</code> sends output to another program, <code>></code> sends it to a file, and <code>&&</code> chains two commands so the second only runs if the first succeeds. You can build anything from there.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The shell is not the commands</h2>
+
+<p>New arrivals conflate "bash" with "Linux". They are not the same thing, and the distinction matters the first time something breaks. <strong>The shell:</strong> bash, zsh, or whatever your prompt is running – is one specific program: an interpreter that reads a line of text and either runs it itself or hands it off. <strong>The commands</strong> you type are, in most cases, separate programs living on disk that the shell finds and launches for you.</p>
+
+<p>Type <code>ls</code> and the shell doesn't "have" an <code>ls</code> feature built in: it searches every directory in the <code>$PATH</code> environment variable, in order, until it finds an executable file named <code>ls</code>, then forks and executes it:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> echo $PATH
+<span class="term-out">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
+<span class="term-cmt">$</span> which ls
+<span class="term-out">/usr/bin/ls</span>
+<span class="term-cmt">$</span> type cd
+<span class="term-out">cd is a shell builtin</span></code></pre>
+
+<p>That last line is the exception that proves the rule. A handful of commands – <code>cd</code>, <code>pwd</code>, <code>alias</code>, <code>export</code>, <code>history</code> – are <strong>builtins</strong>: code that lives inside the shell process, not a separate file on disk. <code>cd</code> has to be a builtin, because changing "the current directory" only means something if it changes the shell's own state; an external <code>cd</code> program would change its own working directory, exit, and leave your shell exactly where it started. <code>type</code> tells you which kind of thing you're actually invoking – builtin, alias, function, or file – and <code>which</code> does the narrower job of finding an external command's location on <code>$PATH</code>.</p>
+
+<div class="callout">
+  <div class="label">Why this matters for security</div>
+  <p><code>$PATH</code> is searched in order, and if an attacker can write a malicious file named <code>ls</code> (or <code>sudo</code>, or <code>curl</code>) into a directory that appears <em>earlier</em> in your <code>$PATH</code> than the real one, your next keystroke runs their code instead of the real tool. This is <strong>PATH hijacking</strong>, a real privilege-escalation technique – never add a world-writable directory, or worse, <code>.</code> (the current directory), to your <code>$PATH</code>.</p>
+</div>
+
+<p>Swapping bash for zsh changes prompt behaviour and scripting syntax; it does not change what <code>ls</code>, <code>grep</code>, or <code>chmod</code> do, because those live outside the shell entirely. That is why the working vocabulary below transfers no matter which shell you land in.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The 25 commands</h2>
+
+<p>If you can use these without thinking, you can read 80% of real-world security workflows.</p>
+
+<table>
+  <thead><tr><th>Command</th><th>What it does</th><th>Used for</th></tr></thead>
+  <tbody>
+    <tr><td><code>ls -la</code></td><td>List files with details</td><td>Recon, permission audit</td></tr>
+    <tr><td><code>cd</code> / <code>pwd</code></td><td>Move / where am I</td><td>Always</td></tr>
+    <tr><td><code>cat</code> / <code>less</code></td><td>Read a file</td><td>Configs, logs</td></tr>
+    <tr><td><code>grep -r</code></td><td>Search text recursively</td><td>Finding secrets, errors</td></tr>
+    <tr><td><code>find</code></td><td>Search by name / size / time</td><td>Locating dropped files</td></tr>
+    <tr><td><code>chmod</code> / <code>chown</code></td><td>Change permissions / owner</td><td>Hardening, lateral movement</td></tr>
+    <tr><td><code>ps -ef</code></td><td>List processes</td><td>What is running</td></tr>
+    <tr><td><code>top</code> / <code>htop</code></td><td>Live process view</td><td>Triage</td></tr>
+    <tr><td><code>netstat -tulpn</code></td><td>Open ports + process</td><td>What is listening</td></tr>
+    <tr><td><code>ss -tulpn</code></td><td>Modern replacement</td><td>Same</td></tr>
+    <tr><td><code>curl -v</code></td><td>HTTP from CLI</td><td>API testing</td></tr>
+    <tr><td><code>wget</code></td><td>Download files</td><td>Pulling tools</td></tr>
+    <tr><td><code>ssh</code> / <code>scp</code></td><td>Remote shell / copy</td><td>Lateral movement</td></tr>
+    <tr><td><code>tar</code></td><td>Pack / unpack archives</td><td>Exfil, deploy</td></tr>
+    <tr><td><code>systemctl</code></td><td>Service control</td><td>Persistence, audit</td></tr>
+    <tr><td><code>journalctl</code></td><td>Read systemd logs</td><td>Triage</td></tr>
+    <tr><td><code>tail -f</code></td><td>Follow a log</td><td>Live monitoring</td></tr>
+    <tr><td><code>history</code></td><td>What was typed</td><td>Forensics</td></tr>
+    <tr><td><code>sudo</code></td><td>Run as root</td><td>Privilege use / audit</td></tr>
+    <tr><td><code>id</code> / <code>whoami</code></td><td>Who am I, what groups</td><td>Recon on yourself</td></tr>
+    <tr><td><code>uname -a</code></td><td>Kernel info</td><td>Exploit selection</td></tr>
+    <tr><td><code>iptables -L</code></td><td>Firewall rules</td><td>Egress mapping</td></tr>
+    <tr><td><code>dig</code> / <code>host</code></td><td>DNS lookup</td><td>Recon</td></tr>
+    <tr><td><code>scp</code> / <code>rsync</code></td><td>Move files reliably</td><td>Backups, exfil</td></tr>
+    <tr><td><code>tmux</code> / <code>screen</code></td><td>Persistent sessions</td><td>Long jobs</td></tr>
+  </tbody>
+</table>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Permissions in five minutes</h2>
+
+<p>Every file has three triplets of permissions: owner, group, everyone. Each triplet has three bits: read, write, execute.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> ls -l /etc/shadow
+<span class="term-out">-rw-r----- 1 root shadow 1832 May  6 14:01 /etc/shadow</span>
+<span class="term-cmt">   ^ owner=root  group=shadow</span>
+<span class="term-cmt">   rw- = read+write for owner</span>
+<span class="term-cmt">   r-- = read for shadow group</span>
+<span class="term-cmt">   --- = no access for everyone else</span></code></pre>
+
+<h3>Reading the full <code>ls -l</code> line</h3>
+
+<p>The shadow example above is one field of interest. A real line has ten, and once you can read all ten without stopping to think, permission problems stop being mysterious.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> ls -l deploy.sh
+<span class="term-out">-rwxr-xr-- 1 dan devops 812 Jul 22 09:14 deploy.sh</span></code></pre>
+
+<table>
+  <thead><tr><th>Field</th><th>Value</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>Type</td><td><code>-</code></td><td>Regular file. <code>d</code>=directory, <code>l</code>=symlink, <code>s</code>=socket.</td></tr>
+    <tr><td>Owner perms</td><td><code>rwx</code></td><td><code>dan</code> can read, write, and execute this file.</td></tr>
+    <tr><td>Group perms</td><td><code>r-x</code></td><td>Members of <code>devops</code> can read and execute, not write.</td></tr>
+    <tr><td>Other perms</td><td><code>r--</code></td><td>Everyone else can only read it.</td></tr>
+    <tr><td>Link count</td><td><code>1</code></td><td>Number of hard links pointing at this inode.</td></tr>
+    <tr><td>Owner</td><td><code>dan</code></td><td>The user who owns the file.</td></tr>
+    <tr><td>Group</td><td><code>devops</code></td><td>The group that owns the file.</td></tr>
+    <tr><td>Size</td><td><code>812</code></td><td>Bytes.</td></tr>
+    <tr><td>Modified</td><td><code>Jul 22 09:14</code></td><td>Last write time, not last read.</td></tr>
+    <tr><td>Name</td><td><code>deploy.sh</code></td><td>Symlinks show <code>name -> target</code> here instead.</td></tr>
+  </tbody>
+</table>
+
+<p>The two most common permission mistakes both live in that first character group: the execute bit missing on something you meant to run, or a file that should be private staying group- or world-readable – an SSH private key with anything looser than <code>600</code> will make <code>ssh</code> refuse to use it at all.</p>
+
+<p>Numeric form: each triplet is a 0–7 digit. <code>chmod 750 file</code> means owner=rwx, group=r-x, world=none. The numbers are read=4, write=2, execute=1 – add them per triplet, so <code>rwx</code> = 4+2+1 = 7, <code>r-x</code> = 4+0+1 = 5, <code>r--</code> = 4+0+0 = 4.</p>
+
+<h3>Symbolic notation: the other way to write it</h3>
+
+<p>Numeric mode replaces a whole triplet at once – you can't add one permission without knowing the target number for the rest. <strong>Symbolic mode</strong> edits in place instead, which is what you want for a one-off change on a file whose current permissions you haven't memorised. The grammar is <code>who</code> + <code>operator</code> + <code>what</code>: <code>who</code> is <code>u</code>/<code>g</code>/<code>o</code>/<code>a</code> (user, group, other, all); <code>operator</code> is <code>+</code>/<code>-</code>/<code>=</code> (add, remove, set exactly); <code>what</code> is any combination of <code>r</code>, <code>w</code>, <code>x</code>.</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># Make a script executable for its owner only, leave everything else alone</span>
+<span class="term-cmt">$</span> chmod u+x deploy.sh
+
+<span class="term-cmt"># Remove write access for the group</span>
+<span class="term-cmt">$</span> chmod g-w deploy.sh
+
+<span class="term-cmt"># Set "other" to read-only, exactly, regardless of what it was before</span>
+<span class="term-cmt">$</span> chmod o=r deploy.sh
+
+<span class="term-cmt"># Combine several changes in one call</span>
+<span class="term-cmt">$</span> chmod u+rwx,g+rx,o-rwx deploy.sh</code></pre>
+
+<p>Use numeric mode when you know the exact target state; use symbolic mode when adjusting one bit on a file you didn't create.</p>
+
+<h3>Chmod values you'll actually type</h3>
+
+<table>
+  <thead><tr><th>Value</th><th>Meaning</th><th>Typical use</th></tr></thead>
+  <tbody>
+    <tr><td><code>600</code></td><td>Owner rw, nobody else anything</td><td>SSH private keys, secrets, credential files</td></tr>
+    <tr><td><code>644</code></td><td>Owner rw, group/other read</td><td>Default for most non-executable files</td></tr>
+    <tr><td><code>400</code></td><td>Owner read-only</td><td>Files you want protected even from your own accidental overwrite</td></tr>
+    <tr><td><code>700</code></td><td>Owner rwx, nobody else anything</td><td>Personal scripts, the <code>~/.ssh</code> directory</td></tr>
+    <tr><td><code>750</code></td><td>Owner rwx, group rx, other none</td><td>Service files shared within a team or group, not the world</td></tr>
+    <tr><td><code>755</code></td><td>Owner rwx, group/other rx</td><td>Default for scripts and executables meant to be run by anyone</td></tr>
+    <tr><td><code>777</code></td><td>Everyone rwx</td><td>Almost never correct: a routine finding in security audits</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="label">SUID, the one footnote that matters</div>
+  <p>A file with the SUID bit set runs as its owner, not as you. <code>find / -perm -4000 -type f 2>/dev/null</code> lists all of them. On a compromised box, this is where you look first.</p>
+</div>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The five "in a hurry" commands</h2>
+
+<p>When the alert is fresh and the senior engineer is in a meeting, these are the ones you reach for.</p>
+
+<ol>
+  <li><strong><code>last -a | head -20</code>:</strong> who logged in recently, from where.</li>
+  <li><strong><code>w</code>:</strong> who is on the box right now, what are they running.</li>
+  <li><strong><code>ss -tunap</code>:</strong> active sockets and the process behind each one.</li>
+  <li><strong><code>ls -lat /tmp /var/tmp /dev/shm | head</code>:</strong> fresh files in the obvious dumping grounds.</li>
+  <li><strong><code>journalctl --since "1 hour ago" -p warning</code>:</strong> recent warnings in the system log.</li>
+</ol>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Pipes: the move that doubles your effective vocabulary</h2>
+
+<p>Two commands you have can be combined into a third. A few examples worth memorising:</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># Top 10 processes by RSS memory</span>
+ps -eo pid,rss,cmd --sort=-rss | head -11
+
+<span class="term-cmt"># Find every world-writable file under /etc</span>
+find /etc -type f -perm -o=w 2>/dev/null
+
+<span class="term-cmt"># Recent failed SSH logins, grouped by source IP</span>
+journalctl -u ssh | grep "Failed" | awk '{print $NF}' | sort | uniq -c | sort -rn</code></pre>
+
+<p>Memorising these is not the point. The point is internalising the shape: <em>list</em> → <em>filter</em> → <em>group</em> → <em>count</em>. Once you see it, you will write your own.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">When it breaks: two errors you'll see constantly</h2>
+
+<p>Two error messages account for a disproportionate share of "why isn't this working" moments. Both are diagnostic, not scary – each one tells you exactly where to look, if you know what it actually means.</p>
+
+<h3>"command not found"</h3>
+
+<p>This is not a permissions problem and the tool is not broken. It means the shell walked every directory in <code>$PATH</code>, in order, and found no executable file matching that name. Nothing more, nothing less.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> nmap -sV target.local
+<span class="term-warn">bash: nmap: command not found</span></code></pre>
+
+<p>The first thing to check is not "is my system broken" – it's one of three much more boring possibilities, roughly in order of likelihood:</p>
+
+<ol>
+  <li><strong>Typo.</strong> <code>ifconfg</code> instead of <code>ifconfig</code>. More common than anyone likes to admit.</li>
+  <li><strong>Not installed.</strong> Confirm with your package manager: <code>dpkg -l | grep nmap</code> (Debian/Ubuntu) or <code>rpm -q nmap</code> (RHEL/Fedora). If it's missing, install it.</li>
+  <li><strong>Installed, but not on <code>$PATH</code>.</strong> Tools installed via <code>pip install --user</code>, <code>go install</code>, or a manual download often land in <code>~/.local/bin</code> or <code>~/go/bin</code>, which may not be on <code>$PATH</code> yet. Check with <code>echo $PATH</code>, and if the directory is missing, add it in your shell's startup file (<code>~/.bashrc</code> or <code>~/.zshrc</code>) and re-source it: <code>source ~/.bashrc</code>.</li>
+</ol>
+
+<h3>"Permission denied"</h3>
+
+<p>This one has two genuinely different causes that people constantly conflate, and reaching for <code>sudo</code> as a reflex fixes one of them by accident while masking the real problem in the other.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> ./deploy.sh
+<span class="term-warn">bash: ./deploy.sh: Permission denied</span></code></pre>
+
+<p><strong>Cause one: the execute bit isn't set.</strong> You can <code>cat</code> the file fine – you can read it – but reading and executing are separate permission bits, and a freshly downloaded or copied script often keeps its read bit while losing execute. Check with <code>ls -l deploy.sh</code>; if you don't see an <code>x</code> in the owner triplet, that's it. Fix: <code>chmod +x deploy.sh</code>.</p>
+
+<p><strong>Cause two: you genuinely don't have access.</strong> Wrong owner, wrong group, or a parent directory that blocks you – you need execute permission on every directory in the path just to traverse into a file, not only on the file itself. Check ownership with <code>ls -l</code>, check your own groups with <code>id</code>, and compare. If you're not in the group that owns the file, the fix is getting added to that group, not reflexively reaching for <code>sudo</code>.</p>
+
+<p>A third, less common cause: the filesystem may be mounted <code>noexec</code>, which blocks execution of <em>any</em> file on it regardless of permission bits – common on <code>/tmp</code> in hardened environments as a deliberate anti-malware control. Check with <code>mount | grep noexec</code>. No amount of <code>chmod</code> fixes that.</p>
+
+<p>None of this becomes instinct from reading it once: it comes from breaking things on purpose, on a machine where breaking things has no consequences. If you don't have one set up yet, our guide on <a href="../../lab/build-a-home-lab-on-one-laptop/">building a home lab on one laptop</a> walks through getting a throwaway Linux VM running in under an hour.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What are the most important Linux commands for cybersecurity?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    A working set of about 25 commands covers 80% of real-world security workflows: navigation and file reading (ls -la, cd, cat, less), searching (grep -r, find), permissions (chmod, chown), process and service inspection (ps -ef, top, systemctl, journalctl), network inspection (netstat -tulpn, ss -tulpn, curl, dig), and remote access (ssh, scp). Chaining them with pipes is what turns a short list into a large vocabulary.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>How do Linux file permissions work?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Every file has three triplets of permissions – owner, group, and everyone else – and each triplet has three bits: read, write, and execute. In numeric form each triplet is a digit from 0-7, where read=4, write=2, execute=1, so chmod 750 means the owner gets read+write+execute, the group gets read+execute, and everyone else gets nothing.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What is the SUID bit and why does it matter for security?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    A file with the SUID bit set runs as its owner rather than as the user who executed it, which makes it a common privilege escalation vector if misconfigured. You can list every SUID file on a system with find / -perm -4000 -type f 2>/dev/null – on a compromised box, this is one of the first things to check.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>Which Linux commands are useful during incident response?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    When responding to a fresh alert, the fast checks are: last -a | head -20 for recent logins, w for who is active right now, ss -tunap for active sockets tied to processes, ls -lat /tmp /var/tmp /dev/shm | head for freshly dropped files in common dumping grounds, and journalctl --since "1 hour ago" -p warning for recent system warnings.
+  </div>
+</details>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+            <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+            <a class="ul-link" href="../../legal/about/">About us</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../how-networks-work/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Previous</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">How networks actually work (without the OSI poster).</div>
+        </a>
+        <a href="../cryptography-basics/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Next</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Cryptography you can actually use.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">On this page</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Related</div>
+        <ul class="space-y-3">
+          <li><a href="../cybersecurity-101/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Cybersecurity 101: the words that mean what.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 1 · 7</div>
+          </a></li>
+          <li><a href="../how-networks-work/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">How networks actually work (without the OSI poster).</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 1 · 11</div>
+          </a></li>
+          <li><a href="../cryptography-basics/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Cryptography you can actually use.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 2 · 9</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

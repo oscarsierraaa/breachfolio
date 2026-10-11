@@ -1,0 +1,41 @@
+# Breachfolio — Security headers (Netlify / Cloudflare Pages)
+# Inert on the current host (Hostinger/Apache reads .htaccess instead) —
+# kept in sync so it's correct if the site is ever moved to a platform that
+# reads this file. Mirrors .htaccess exactly; update both together.
+
+/*
+  # ── TRANSPORT ──────────────────────────────────────────────────────────
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # ── CONTENT SECURITY POLICY ───────────────────────────────────────────
+  # Matches .htaccess: self-hosted fonts (no fonts.googleapis.com), the
+  # fixed inline-script hash, and the Google/AdSense origins the site
+  # actually loads (tag, ads, Supabase).
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-SYdyKsa7frBTauY387OmRS9559c8p85HPXLMSVr8PEY=' 'sha256-ZLcYcZFfs1bfSINgv8lCU0I923vWDWb3zQd3nQpNN1Q=' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.googletagservices.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.ipify.org https://ipapi.co https://aarzgpypqqeptwophtbe.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; frame-src https://www.googletagmanager.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.safeframe.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+  # ── CLICKJACKING ───────────────────────────────────────────────────────
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+
+  # ── XSS FILTER (legacy, still respected by some browsers) ─────────────
+  X-XSS-Protection: 1; mode=block
+
+  # ── REFERRER ───────────────────────────────────────────────────────────
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # ── PERMISSIONS ────────────────────────────────────────────────────────
+  # Deny every capability we never use.
+  Permissions-Policy: accelerometer=(), autoplay=(self), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self), usb=(), xr-spatial-tracking=()
+
+  # ── CROSS-ORIGIN ISOLATION (helps prevent Spectre-class attacks) ──────
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
+
+# ── STATIC ASSET CACHING ───────────────────────────────────────────────
+/assets/*
+  Cache-Control: public, max-age=2592000, immutable
+
+# ── PREVENT DIRECTORY LISTING ON API / UPLOADS ─────────────────────────
+/uploads/*
+  X-Robots-Tag: noindex, nofollow

@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your data already leaked: how to check and what to do</title>
+  <meta name="description" content="How to check whether your email is in a breach, what appearing on the list actually means, and the order of actions that genuinely reduces your risk." />
+  <meta name="keywords" content="check if my data was breached, have i been pwned, my email was leaked, data breach what to do, leaked passwords, credential stuffing" />
+  <link rel="canonical" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/comprobar-datos-filtrados/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Your data already leaked: how to check and what to do | Breachfolio" />
+  <meta property="og:description" content="How to check whether your email is in a breach, what appearing on the list actually means, and the order of actions that genuinely reduces your risk." />
+  <meta property="og:url" content="https://breachfolio.com/guides/check-if-your-data-was-breached/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-data-leak.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Your data already leaked: how to check and what to do | Breachfolio" />
+  <meta name="twitter:description" content="How to check whether your email is in a breach, what appearing on the list actually means, and the order of actions that genuinely reduces your risk." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-data-leak.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Your data already leaked: how to check and what to do",
+      "description": "How to check whether your email is in a breach, what appearing on the list actually means, and the order of actions that genuinely reduces your risk.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-data-leak.webp",
+      "datePublished": "2026-08-26",
+      "dateModified": "2026-08-26",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Daniel A.",
+          "url": "https://breachfolio.com/legal/about/"
+        },
+        {
+          "@type": "Person",
+          "name": "Óscar S.",
+          "url": "https://breachfolio.com/legal/about/"
+        }
+      ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/guides/check-if-your-data-was-breached/"
+      },
+      "inLanguage": "en",
+      "keywords": "check if my data was breached, have i been pwned, my email was leaked, data breach what to do, leaked passwords, credential stuffing"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://breachfolio.com/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Check if your data was breached",
+          "item": "https://breachfolio.com/guides/check-if-your-data-was-breached/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/guides/check-if-your-data-was-breached/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it safe to enter my email into Have I Been Pwned?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It does not ask for a password, needs no account, and has years of standing in the field, used by companies and public bodies alike. What deserves scrutiny are sites that, for the same answer, want you to create an account, hand over a phone number or pay a subscription."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I appear in several breaches. Have I been hacked?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almost certainly not. Appearing means companies you had accounts with lost data, not that anyone got into yours. It is normal after years online. What decides whether it actually affects you is whether you reused those passwords elsewhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I delete my data from a breach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Once data is circulating it exists in many copies at once and there is no way to withdraw it. Be sceptical of any service charging to promise otherwise. What you can do is ask the company to delete what it still holds, and above all make what leaked useless for getting into your accounts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My phone number leaked. Should I change it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually not worth it: a large disruption for a small gain, since your number circulates on more lists than you think. Stripping it of power works better: stop using SMS as a second factor where a code app exists, and distrust any call that uses your name and number as proof of identity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are paid dark web monitoring services worth it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most people, no. They largely do what a free notification does: tell you that you appeared in a breach. None can withdraw the data, whatever the marketing implies. That money goes considerably further on a password manager, which attacks the cause rather than reporting the effect."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "The company never told me about the breach. Can I do anything?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can complain to your data protection regulator. Companies are obliged to notify breaches to the authority and to tell you when they pose a high risk to you. Keep screenshots of where you found your data listed: a complaint goes better with evidence."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guides</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Hacked email account</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-guide-data-leak.webp" alt="A torn box on a conveyor belt spilling its contents, which cannot be put back" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUIDES · PREVENTIVE SECURITY</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Your data has already leaked. Here is what you can still do.</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">Start here</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Check your address on Have I Been Pwned. And before changing any password, read the section on order: almost everyone starts with the one that matters least.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">If you have used the internet for more than five years, your email is in some breach. That is not alarmism, it is arithmetic. The useful question is not whether it happened, but what exactly leaked and how much of it still works today.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-26">August 26, 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-2xl text-[16.5px] leading-[1.8] text-muted-foreground space-y-5">
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">The uncomfortable part, first</h2>
+      <p><strong class="text-foreground">A breach cannot be undone.</strong> Once a company's data is circulating, it exists in dozens of copies at once. There is no delete button, no company to call to have it withdrawn, and no paid service that removes it, however loudly one advertises otherwise.</p>
+      <p>That sounds like bad news and partly is. But it has a very useful consequence: <strong class="text-foreground">stop spending effort trying to erase what leaked and spend it making it useless.</strong> That is the whole point of this guide.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Where to check</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground"><a href="https://haveibeenpwned.com/" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Have I Been Pwned</a></strong>. The reference. Enter your email and it tells you which breaches you appear in, when, and what kind of data was exposed in each. Free, no sign-up.</li>
+        <li><strong class="text-foreground">Your browser's or password manager's checker.</strong> Chrome, Firefox, Safari and the password managers flag a saved password that appears in a known breach. This is the most useful form, because it names <em>which password</em> rather than just telling you something happened.</li>
+        <li><strong class="text-foreground">The security section of your Google or Apple account.</strong> Both review saved passwords and flag compromised and reused ones.</li>
+      </ul>
+      <p><strong class="text-foreground">A warning about sites that ask for more than they should.</strong> Some services want you to register, hand over a phone number or buy a monitoring subscription in order to "check your data". Before giving anything, ask whether you are handing over fresh data in exchange for learning that old data leaked.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">What appearing on the list means, and what it does not</h2>
+      <p>This is where people get confused, and the confusion leads them to do the wrong thing.</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">It means</strong> a company you had an account with lost data, and yours was in it.</li>
+        <li><strong class="text-foreground">It does not mean</strong> anyone got into that account, or is using it now.</li>
+        <li><strong class="text-foreground">It does not mean</strong> your computer or phone has a virus. The breach was theirs, not yours.</li>
+        <li><strong class="text-foreground">It does mean</strong> that if you reused that password elsewhere, <em>those other sites</em> are the real problem.</li>
+      </ul>
+      <p>Look at what kind of data each breach exposed, because they do not weigh the same. Your email and a sign-up date leaking is annoying. <strong class="text-foreground">Passwords, security answers or your phone number</strong> leaking is a different category.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">The right order, which almost nobody follows</h2>
+      <p>The instinct is to go to the breached site and change the password there. <strong class="text-foreground">That is the least urgent step of all.</strong> This is the order that actually reduces risk:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">1. Your main email, before anything else.</strong> It is the account that can reset every other one. If it falls, the strength of the rest stops mattering. How to secure it is in <a href="../hacked-email-account/" class="text-accent ul-link">someone is in your email</a>.</li>
+        <li><strong class="text-foreground">2. Every site where you reused that password.</strong> This is the step that counts. Attackers take the email and password pair from one breach and try it on fifty other services. It is called credential stuffing and it works precisely because people reuse.</li>
+        <li><strong class="text-foreground">3. Your bank and anything holding money.</strong> Even if they appear in no breach, if they shared a password with something that did, they no longer count as safe.</li>
+        <li><strong class="text-foreground">4. Turn on two-factor where you can</strong>, starting with email. It is worth more than any long password: even holding yours, they cannot get in without the second step. Explained in <a href="../../cybersecurity/multi-factor-authentication-explained/" class="text-accent ul-link">multi-factor authentication</a>.</li>
+        <li><strong class="text-foreground">5. And last, yes, the account on the breached site.</strong></li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Why changing the password is rarely enough</h2>
+      <p>Because the problem was never that password: it was that it existed in more places.</p>
+      <p>If you change it on the breached site and leave the same one on your email, your shop account and your social network, <strong class="text-foreground">you have fixed nothing</strong>. You closed the door they were no longer coming through and left the rest open.</p>
+      <p>The only realistic way to stop this recurring is for <strong class="text-foreground">every site to have a different password</strong>, and that does not survive on memory: it survives on a manager. Which one to pick is in <a href="../../compare/password-managers-compared/" class="text-accent ul-link">the password manager comparison</a>.</p>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">The data you cannot change</h2>
+      <p>Here is the part no tool solves. A password changes in thirty seconds. These do not:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Your phone number.</strong> Changing it is a serious nuisance, and it happens to be the recovery key to half your digital life.</li>
+        <li><strong class="text-foreground">Your national ID, date of birth, address.</strong> They do not change, full stop.</li>
+        <li><strong class="text-foreground">Security answers</strong> like "mother's maiden name", which are public to anyone who looks for two minutes.</li>
+      </ul>
+      <p>What you can do is <strong class="text-foreground">strip them of power</strong>:</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Stop using SMS as a second factor</strong> wherever an alternative exists, and use a code app. The reason is in <a href="../../cybersecurity/sim-swap-attack-explained/" class="text-accent ul-link">SIM swap attacks</a>: with your number leaked, cloning your line is a well-trodden path.</li>
+        <li><strong class="text-foreground">Replace security answers with invented text.</strong> It does not have to be true. "Mother's maiden name" can be a random word stored in your manager.</li>
+        <li><strong class="text-foreground">Assume your name and number are circulating</strong>, and treat any call or text "from your bank" that uses them as what it is: somebody reading from a list.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">Watching from here on</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">Subscribe to Have I Been Pwned's notifications.</strong> It emails you if your address turns up in a new breach. Free, and the highest-value two minutes available.</li>
+        <li><strong class="text-foreground">Act on your manager's reused-password warnings.</strong> That list everybody ignores is exactly the map of what breaks in the next breach.</li>
+        <li><strong class="text-foreground">Review active sessions</strong> on your email and social accounts periodically. A device you do not recognise is a far more reliable signal than any hunch.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">What you can demand from the company</h2>
+      <p>This gets overlooked: <strong class="text-foreground">the company that lost your data has obligations too</strong>, not just you.</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-foreground">It has to tell you</strong> when the breach poses a high risk to you, and notify the data protection authority.</li>
+        <li><strong class="text-foreground">You can complain to your regulator</strong> if you believe it failed to do so, or failed to protect your data properly. In Spain that is the AEPD.</li>
+        <li><strong class="text-foreground">You can ask it to delete your data</strong> if you are no longer a customer. That does not recover what leaked, but it reduces what leaks next time.</li>
+      </ul>
+
+      <h2 class="font-display text-foreground text-[26px] md:text-[30px] font-semibold tracking-tight pt-4">What to take away</h2>
+      <p>That "has my data leaked?" nearly always has the same answer, which is why it is the wrong question. <strong class="text-foreground">The good one is: how much of what leaked still gets someone into something of mine?</strong></p>
+      <p>If the answer is "nothing, because every account has its own password and email has two-factor", a breach is an annoyance. If the answer is "the password I use everywhere", it is a serious problem, and no checking website fixes it: you do, in an afternoon.</p>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Frequently asked questions</div>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Is it safe to enter my email into Have I Been Pwned?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Yes. It does not ask for a password, needs no account, and has years of standing in the field, used by companies and public bodies alike. What deserves scrutiny are sites that, for the same answer, want you to create an account, hand over a phone number or pay a subscription.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>I appear in several breaches. Have I been hacked?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Almost certainly not. Appearing means companies you had accounts with lost data, not that anyone got into yours. It is normal after years online. What decides whether it actually affects you is whether you reused those passwords elsewhere.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Can I delete my data from a breach?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            No. Once data is circulating it exists in many copies at once and there is no way to withdraw it. Be sceptical of any service charging to promise otherwise. What you can do is ask the company to delete what it still holds, and above all make what leaked useless for getting into your accounts.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>My phone number leaked. Should I change it?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Usually not worth it: a large disruption for a small gain, since your number circulates on more lists than you think. Stripping it of power works better: stop using SMS as a second factor where a code app exists, and distrust any call that uses your name and number as proof of identity.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>Are paid dark web monitoring services worth it?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            For most people, no. They largely do what a free notification does: tell you that you appeared in a breach. None can withdraw the data, whatever the marketing implies. That money goes considerably further on a password manager, which attacks the cause rather than reporting the effect.
+          </div>
+        </details>
+
+        <details class="group border border-border rounded-card mb-3">
+          <summary class="cursor-pointer list-none px-5 py-4 text-foreground font-medium text-[15.5px] flex items-center justify-between">
+            <span>The company never told me about the breach. Can I do anything?</span><span class="text-accent" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+            Yes. You can complain to your data protection regulator. Companies are obliged to notify breaches to the authority and to tell you when they pose a high risk to you. Keep screenshots of where you found your data listed: a complaint goes better with evidence.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../hacked-email-account/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Someone is in your email</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/password-managers-compared/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Best password manager 2026</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

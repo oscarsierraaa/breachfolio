@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-labelledby="lab03-title lab03-desc">
+  <title id="lab03-title">A SIEM dashboard reading a detection</title>
+  <desc id="lab03-desc">A monitor showing a pulse line spiking into an alert, representing a SIEM catching a real detection.</desc>
+  <defs>
+    <linearGradient id="lab03-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(265,84%,68%)" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="hsl(288,85%,70%)" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="480" fill="#15100e"/>
+  <rect width="900" height="480" fill="url(#lab03-bg)"/>
+  <g transform="translate(243,122)" stroke="hsl(265,84%,68%)" stroke-width="4.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="0" y="0" width="414" height="248" rx="12"/>
+    <rect x="158" y="270" width="98" height="18" rx="4"/>
+    <path d="M36 176 L104 176 L130 90 L171 216 L207 130 L243 176 L378 176" opacity="0.95"/>
+    <circle cx="338" cy="54" r="20" opacity="0.85"/>
+    <path d="M338 42v24M326 54h24" stroke-width="3.5" opacity="0.85"/>
+  </g>
+</svg>

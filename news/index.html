@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="news">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>News – AI &amp; cybersecurity updates, in context | Breachfolio</title>
+  <meta name="description" content="What changed this week in AI and cybersecurity. New CVEs, new model releases, new attack patterns – with context for practitioners." />
+  <link rel="canonical" href="https://breachfolio.com/news/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/news/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/noticias/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/news/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="News – AI &amp; cybersecurity updates, in context | Breachfolio" />
+  <meta property="og:description" content="What changed this week in AI and cybersecurity. New CVEs, new model releases, new attack patterns – with context for practitioners." />
+  <meta property="og:url" content="https://breachfolio.com/news/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/og-default.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="News – AI &amp; cybersecurity updates, in context | Breachfolio" />
+  <meta name="twitter:description" content="What changed this week in AI and cybersecurity. New CVEs, new model releases, new attack patterns – with context for practitioners." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/og-default.png" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../assets/shared.js?v=43287f13" defer></script>
+<script src="../assets/analytics.js?v=43287f13" defer></script>
+  <script src="../assets/dynamic-news.js?v=43287f13" defer></script>
+  <script src="../assets/news-ticker.js?v=43287f13" defer></script>
+  <script src="../assets/hero-fx.js?v=43287f13" defer></script>
+  <script src="../assets/hack-terminal.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+"@context": "https://schema.org",
+"@graph": [
+  {
+    "@type": "CollectionPage",
+    "@id": "https://breachfolio.com/news/#collectionpage",
+    "url": "https://breachfolio.com/news/",
+    "name": "News – AI &amp; cybersecurity updates, in context",
+    "description": "What changed this week in AI and cybersecurity. New CVEs, new model releases, new attack patterns – with context for practitioners.",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@id": "https://breachfolio.com/#website"
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://breachfolio.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "News",
+        "item": "https://breachfolio.com/news/"
+      }
+    ]
+  }
+]
+}</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Breachfolio News",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://breachfolio.com/news/microsoft-warns-acr-stealer-surge/",
+      "name": "Microsoft warns of surge in ACR Stealer attacks against enterprise customers"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "url": "https://breachfolio.com/news/ai-threat-blind-trust/",
+      "name": "The Real AI Threat Is Blind Trust – Why Autonomous Execution Without Oversight Is Dangerous"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "url": "https://breachfolio.com/news/inc-ransomware-sonicwall-zero-day-exploit/",
+      "name": "Inc Ransomware Exploits SonicWall SMA Zero-Days – Full Root Access Achieved via Chaining"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "url": "https://breachfolio.com/news/vite-npm-blockchain-rat-attack/",
+      "name": "Seven Malicious Vite npm Packages Use Blockchain C2 to Deliver a RAT – Supply Chain Risks Expand"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "url": "https://breachfolio.com/news/government-ransomware-daily-threat/",
+      "name": "Government Agencies Falling Victim to Ransomware Daily, Warns Study – High-Stakes Public Impact"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "url": "https://breachfolio.com/news/global-cyber-roundup-security-updates/",
+      "name": "Global Cyber Roundup: Iran Tracking, macOS Malware, and Defense Sector Ransomware"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "url": "https://breachfolio.com/news/ukraine-appoints-intelligence-expert-acting-defense-minister/",
+      "name": "Ukraine Appoints Intelligence Expert as Acting Defense Minister to Strengthen Strategy"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "url": "https://breachfolio.com/news/sharefile-zero-day-disruption/",
+      "name": "Progress confirms zero-day vulnerability behind ShareFile disruption – vendor issues patch to restore service"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "url": "https://breachfolio.com/news/sharepoint-cve-2026-45659/",
+      "name": "SharePoint RCE lands on CISA's must-patch list – the bulletin came weeks after the fix"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "url": "https://breachfolio.com/news/simplehelp-cve-2026-48558/",
+      "name": "A perfect 10.0 in SimpleHelp puts MSPs back in the supply-chain blast radius"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "url": "https://breachfolio.com/news/jetbrains-ide-vulnerabilities/",
+      "name": "JetBrains patches auth bypass and RCE across Hub, YouTrack, IntelliJ and more"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "url": "https://breachfolio.com/news/claude-sonnet-5-release/",
+      "name": "Anthropic ships Claude Sonnet 5 as the new default – agentic performance near Opus, at Sonnet pricing"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "url": "https://breachfolio.com/news/kfc-japan-logistics-cyberattack/",
+      "name": "Cyberattack threatens utterly critical infrastructure in Japan: KFC"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "url": "https://breachfolio.com/news/identity-attacks-top-ransomware-cause/",
+      "name": "Identity Attacks Overtake Exploits as Top Ransomware Cause"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "url": "https://breachfolio.com/news/gold-eagle-vulnerability-clearinghouse/",
+      "name": "Trump administration unveils AI-supported clearinghouse for cyber vulnerabilities"
+    }
+  ]
+}
+</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="./" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="./" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">News</span></li>
+  </ol>
+</nav><main id="main"><section class="sf-hero sf-hero-aura sf-hero-grid sf-hero-fx border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-14 md:pt-20 pb-12 md:pb-16">
+      <div class="grid lg:grid-cols-[1fr_0.85fr] gap-8 lg:gap-12 items-end">
+        <div>
+          <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">News archive</div>
+          <h1 class="font-display mt-5 text-[clamp(2.1rem,5vw,3.4rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-2xl">Cybersecurity intelligence, <span class="sf-grad">curated and contextual.</span></h1>
+          <p class="mt-5 text-muted-foreground text-[16.5px] md:text-[18px] leading-[1.7] max-w-xl">In-depth analysis, threat research and industry perspective to help you stay ahead of what's next – new CVEs, model releases and attack patterns, without the breathless coverage.</p>
+        </div>
+        <div class="w-full">
+          <label for="sf-list-search" class="sr-only">Search news</label>
+          <div class="relative">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="sf-list-search" type="text" placeholder="Search news, topics, CVEs…" aria-label="Search news" class="w-full h-14 rounded-full border border-border bg-surface/50 text-[15px] pl-12 pr-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent/60 focus:bg-surface transition-colors" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <!-- Latest from the wire – feed automático (pipeline n8n → data/news.json) -->
+    <div class="flex items-center gap-2.5 mb-6">
+      <span class="sf-cat-dot sf-cat" style="--cat: var(--accent)"></span>
+      <h2 class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted">Latest from the wire</h2>
+    </div>
+    <div class="sf-news-rail-wrap mb-16">
+      <div class="sf-news-rail-track" data-sf-news="../data/news.json" data-sf-mode="cards" data-sf-limit="8">
+<!-- prerender-news-wire.mjs: dynamic-news.js lo reemplaza al cargar -->
+<article class="sf-news-card"><a href="/news/android-car-head-unit-malware-update-channel/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/hero-news-car-botnet-640.webp 640w, https://breachfolio.com/assets/img/hero-news-car-botnet-960.webp 960w, https://breachfolio.com/assets/img/hero-news-car-botnet.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/hero-news-car-botnet.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-08-23T09:00:00.000000+00:00">23 Aug 2026</time><h3 class="sf-news-card-title line-clamp-2">Car screens were infected through their own update channel</h3><p class="sf-news-card-excerpt line-clamp-2">Kaspersky documents the first malware built for Android car head units. It did not arrive through a dodgy app: it came through the unit own update channel.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/vmware-vcenter-cve-2026-59310-exploited/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/hero-news-global-campaign-640.webp 640w, https://breachfolio.com/assets/img/hero-news-global-campaign-960.webp 960w, https://breachfolio.com/assets/img/hero-news-global-campaign.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/hero-news-global-campaign.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-08-20T09:00:00.000000+00:00">20 Aug 2026</time><h3 class="sf-news-card-title line-clamp-2">A vCenter flaw was exploited five days after the patch shipped</h3><p class="sf-news-card-excerpt line-clamp-2">CVE-2026-59310 allows unauthenticated code execution on VMware vCenter. Broadcom shipped the fix on 29 July; exploitation began five days later. 361 victims across 47 countries.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/adobe-commerce-account-takeover-cve-2026-71362/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/030-guide-identical-luxury-storefronts-night-street-640.webp 640w, https://breachfolio.com/assets/img/030-guide-identical-luxury-storefronts-night-street-960.webp 960w, https://breachfolio.com/assets/img/030-guide-identical-luxury-storefronts-night-street.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/030-guide-identical-luxury-storefronts-night-street.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-08-13T09:00:00.000000+00:00">13 Aug 2026</time><h3 class="sf-news-card-title line-clamp-2">Adobe patches a Magento flaw that hands over customer accounts</h3><p class="sf-news-card-excerpt line-clamp-2">CVE-2026-71362 lets an attacker switch into another customer’s session on Adobe Commerce, with no account and nothing for the victim to click. CVSS 9.1, fixed in the August update.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/microsoft-warns-acr-stealer-surge/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/061-news-satellite-hijacked-red-signal-orbit-640.webp 640w, https://breachfolio.com/assets/img/061-news-satellite-hijacked-red-signal-orbit-960.webp 960w, https://breachfolio.com/assets/img/061-news-satellite-hijacked-red-signal-orbit.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/061-news-satellite-hijacked-red-signal-orbit.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-07-19T08:50:05.283739+00:00">19 Jul 2026</time><h3 class="sf-news-card-title line-clamp-2">Microsoft warns of surge in ACR Stealer attacks against enterprise customers</h3><p class="sf-news-card-excerpt line-clamp-2">Microsoft has observed a surge in attacks using the ACR Stealer malware to steal browser-stored passwords, authentication tokens, and sensitive documents from its enterprise customers. The malware effectively bypasses standard defenses by targeting active sessions. To mitigate this risk, implement strict conditional access policies and mandate frequent re-authentication for all cloud resources.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/ai-threat-blind-trust/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/079-news-engine-running-before-security-gate-640.webp 640w, https://breachfolio.com/assets/img/079-news-engine-running-before-security-gate-960.webp 960w, https://breachfolio.com/assets/img/079-news-engine-running-before-security-gate.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/079-news-engine-running-before-security-gate.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-07-19T08:50:05.283739+00:00">19 Jul 2026</time><h3 class="sf-news-card-title line-clamp-2">The Real AI Threat Is Blind Trust: Why Autonomous Execution Without Oversight Is Dangerous</h3><p class="sf-news-card-excerpt line-clamp-2">AI models left to both interpret and execute commands eliminate critical cybersecurity oversight. When systems perform actions autonomously, they become vulnerable to adversarial prompt injection that can lead to large-scale unauthorized activity. Organizations must move away from automated execution for sensitive tasks to prevent systemic failures. To protect your environment, implement mandatory manual approval workflows for all AI-initiated actions that modify system states or data.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/inc-ransomware-sonicwall-zero-day-exploit/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/002-news-phone-shield-invisible-signal-protection-640.webp 640w, https://breachfolio.com/assets/img/002-news-phone-shield-invisible-signal-protection-960.webp 960w, https://breachfolio.com/assets/img/002-news-phone-shield-invisible-signal-protection.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/002-news-phone-shield-invisible-signal-protection.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-07-18T07:32:37.04061+00:00">18 Jul 2026</time><h3 class="sf-news-card-title line-clamp-2">Inc Ransomware Exploits SonicWall SMA Zero-Days: Full Root Access Achieved via Chaining</h3><p class="sf-news-card-excerpt line-clamp-2">When chained together, the two vulnerabilities allow threat actors to gain root-level capabilities on SonicWall&#39;s mobile access appliances. This exploitation facilitates unauthorized network access and potential ransomware deployment. Patch your appliances immediately to the latest firmware version to defend against this critical threat.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/vite-npm-blockchain-rat-attack/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/011-news-infected-supply-chain-lockbox-network-640.webp 640w, https://breachfolio.com/assets/img/011-news-infected-supply-chain-lockbox-network-960.webp 960w, https://breachfolio.com/assets/img/011-news-infected-supply-chain-lockbox-network.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/011-news-infected-supply-chain-lockbox-network.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-07-18T07:32:37.04061+00:00">18 Jul 2026</time><h3 class="sf-news-card-title line-clamp-2">Seven Malicious Vite npm Packages Use Blockchain C2 to Deliver a RAT: Supply Chain Risks Expand</h3><p class="sf-news-card-excerpt line-clamp-2">Cybersecurity researchers have discovered a cluster of seven malicious npm packages targeting the Vite frontend tooling ecosystem. The campaign, dubbed ViteVenom, uses blockchain-based infrastructure to hide C2 communication and deliver a remote access trojan. This attack highlights the ongoing risk of malicious dependencies in modern software development. Audit your development dependencies for unauthorized packages immediately.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+<article class="sf-news-card"><a href="/news/government-ransomware-daily-threat/" class="group flex flex-col flex-1"><div class="sf-news-card-media"><img srcset="https://breachfolio.com/assets/img/072-news-network-mesh-tearing-over-city-640.webp 640w, https://breachfolio.com/assets/img/072-news-network-mesh-tearing-over-city-960.webp 960w, https://breachfolio.com/assets/img/072-news-network-mesh-tearing-over-city.webp 1280w" sizes="(max-width: 382px) 80vw, 306px" src="https://breachfolio.com/assets/img/072-news-network-mesh-tearing-over-city.webp" alt="" loading="lazy" decoding="async" width="640" height="360" /><span class="sf-news-card-tag">NEWS</span></div><div class="sf-news-card-body"><time class="sf-news-card-date" datetime="2026-07-18T07:32:37.04061+00:00">18 Jul 2026</time><h3 class="sf-news-card-title line-clamp-2">Government Agencies Falling Victim to Ransomware Daily, Warns Study: High-Stakes Public Impact</h3><p class="sf-news-card-excerpt line-clamp-2">Government organizations are increasingly targeted by ransomware operators who understand that public service disruption is unacceptable. These attackers exploit critical IT infrastructure and sensitive citizen databases to force ransom payments. Implement a zero-trust architecture and ensure you have immutable, offline, and frequently tested backups to protect against operational disruption and data extortion.</p><span class="sf-news-card-cta">Read <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></article>
+</div>
+    </div>
+
+    <!-- Chips de tema -->
+    <div class="flex flex-wrap items-center gap-2 mb-6">
+      <div id="sf-tag-filter" class="relative">
+        <button id="sf-tag-btn" type="button" class="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-full border border-border text-[12px] font-mono tracking-wider text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+          <span>TOPICS</span><span id="sf-tag-count" class="text-accent"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="sf-tag-panel" class="hidden absolute left-0 mt-2 sf-tag-panel">
+          <input id="sf-tag-search" type="text" placeholder="Search topics…" aria-label="Search topics" />
+          <div id="sf-tag-list"></div>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5" role="group" aria-label="Filter by date range">
+        <label class="sr-only" for="sf-date-from">From date</label>
+        <input type="date" id="sf-date-from" aria-label="From date" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+        <span class="text-muted text-[11px]" aria-hidden="true">→</span>
+        <label class="sr-only" for="sf-date-to">To date</label>
+        <input type="date" id="sf-date-to" aria-label="To date" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+      </div>
+      <button id="sf-list-clear" type="button" class="ml-auto inline-flex items-center gap-1.5 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        Clear filters
+      </button>
+    </div>
+    <!-- Toolbar: resultados · orden · vista -->
+    <div class="flex flex-wrap items-center gap-3 mb-8 pb-6 border-b border-border">
+      <span class="text-[13.5px] text-muted-foreground"><span id="sf-count" class="text-foreground font-medium">15</span> results</span>
+      <div class="ml-auto flex items-center gap-2">
+        <button id="sf-list-sort" data-label-desc="Latest" data-label-asc="Oldest" type="button" class="sf-tool">
+          <span class="text-muted hidden sm:inline">Sort by</span>
+          <span data-sort-label class="text-foreground">Latest</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sf-sort-icon transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="flex items-center gap-1 pl-1" role="group" aria-label="View mode">
+          <button type="button" class="sf-view-btn" data-view="list" aria-pressed="true" aria-label="List view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+          <button type="button" class="sf-view-btn" data-view="grid" aria-pressed="false" aria-label="Grid view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div id="cards" class="grid gap-5">
+      <!-- n8n:news-card-insert -->
+
+      <article id="android-car-head-unit-malware-update-channel" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-08-23">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Aug 23, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="android-car-head-unit-malware-update-channel/" class="ul-link">Car screens were infected through their own update channel</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Kaspersky documents the first malware campaign with an infection chain built for car head units. It arrived through TWCore, the legitimate system app that handles analytics and updates, delivered over the MQTT update channel. It calls home every 90 minutes and supports nine commands.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">Android</span><span class="sf-tag">Botnet</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.kaspersky.com/blog/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="android-car-head-unit-malware-update-channel/" aria-label="Source"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/hero-news-car-botnet-640.webp 640w, ../assets/img/hero-news-car-botnet-960.webp 960w, ../assets/img/hero-news-car-botnet.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/hero-news-car-botnet.webp" alt="Cars in a car park linked by glowing network lines, each vehicle a node" loading="lazy" decoding="async" width="1200" height="675"></div></a>
+      </article>
+      <article id="vmware-vcenter-cve-2026-59310-exploited" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-08-20">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Aug 20, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>6 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="vmware-vcenter-cve-2026-59310-exploited/" class="ul-link">A vCenter flaw was exploited five days after the patch shipped</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">CVE-2026-59310 allows unauthenticated code execution on VMware vCenter. Broadcom shipped the fix on 29 July; exploitation began five calendar days later. 361 victim IPs across 47 countries, with Germany and France in the top five, and a Babuk-derived ransomware as the payload.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">VMware</span><span class="sf-tag">Ransomware</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="vmware-vcenter-cve-2026-59310-exploited/" aria-label="Source"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/hero-news-global-campaign-640.webp 640w, ../assets/img/hero-news-global-campaign-960.webp 960w, ../assets/img/hero-news-global-campaign.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/hero-news-global-campaign.webp" alt="Security operations team watching a world map light up with intrusion alerts" loading="lazy" decoding="async" width="1200" height="675"></div></a>
+      </article>
+      <article id="adobe-commerce-account-takeover-cve-2026-71362" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-08-13">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Aug 13, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>4 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="adobe-commerce-account-takeover-cve-2026-71362/" class="ul-link">Adobe patches a Magento flaw that hands over customer accounts</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">CVE-2026-71362 lets an attacker switch into another customer&#x27;s session on Adobe Commerce, with no account, no admin rights and nothing for the victim to click. CVSS 9.1, patched in the August update. Adobe reports no known exploitation; Sansec says its WAF is already blocking attempts.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">Account takeover</span><span class="sf-tag">Magento</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://helpx.adobe.com/security/products/magento/apsb26-92.html" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="adobe-commerce-account-takeover-cve-2026-71362/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/030-guide-identical-luxury-storefronts-night-street-640.webp 640w, ../assets/img/030-guide-identical-luxury-storefronts-night-street-960.webp 960w, ../assets/img/030-guide-identical-luxury-storefronts-night-street.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/030-guide-identical-luxury-storefronts-night-street.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1200" height="675"></div></a>
+      </article>
+      <article id="microsoft-warns-acr-stealer-surge" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="threat-intel" data-date="2026-07-19">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 19, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>3 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="microsoft-warns-acr-stealer-surge/" class="ul-link">Microsoft warns of surge in ACR Stealer attacks against enterprise customers</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Microsoft has observed a surge in attacks using the ACR Stealer malware to steal browser-stored passwords, authentication tokens, and sensitive documents from its enterprise customers. The malware effectively bypasses standard defenses by targeting active sessions. To mitigate this risk, implement strict conditional access policies and mandate frequent re-authentication for all cloud resources.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Threat research</span>
+            <span class="sf-tag">Malware</span><span class="sf-tag">Credential Theft</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.bleepingcomputer.com/news/security/microsoft-warns-of-surge-in-acr-stealer-attacks-on-customers/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="microsoft-warns-acr-stealer-surge/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/061-news-satellite-hijacked-red-signal-orbit-640.webp 640w, ../assets/img/061-news-satellite-hijacked-red-signal-orbit-960.webp 960w, ../assets/img/061-news-satellite-hijacked-red-signal-orbit.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/061-news-satellite-hijacked-red-signal-orbit.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="ai-threat-blind-trust" class="card sf-news-row sf-cat sf-cat--web relative border-b border-border py-7" data-tags="ai-security" data-date="2026-07-19">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 19, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>3 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="ai-threat-blind-trust/" class="ul-link">The Real AI Threat Is Blind Trust – Why Autonomous Execution Without Oversight Is Dangerous</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">AI models left to both interpret and execute commands eliminate critical cybersecurity oversight. When systems perform actions autonomously, they become vulnerable to adversarial prompt injection that can lead to large-scale unauthorized activity. Organizations must move away from automated execution for sensitive tasks to prevent systemic failures. To protect your environment, implement mandatory manual approval workflows for all AI-initiated actions that modify system states or data.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>AI security</span>
+            <span class="sf-tag">AI Security</span><span class="sf-tag">Automation</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.darkreading.com/application-security/real-ai-threat-blind-trust" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="ai-threat-blind-trust/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/079-news-engine-running-before-security-gate-640.webp 640w, ../assets/img/079-news-engine-running-before-security-gate-960.webp 960w, ../assets/img/079-news-engine-running-before-security-gate.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/079-news-engine-running-before-security-gate.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="inc-ransomware-sonicwall-zero-day-exploit" class="card sf-news-row sf-cat sf-cat--malware relative border-b border-border py-7" data-tags="ransomware" data-date="2026-07-18">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 18, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>3 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="inc-ransomware-sonicwall-zero-day-exploit/" class="ul-link">Inc Ransomware Exploits SonicWall SMA Zero-Days – Full Root Access Achieved via Chaining</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">When chained together, the two vulnerabilities allow threat actors to gain root-level capabilities on SonicWall's mobile access appliances. This exploitation facilitates unauthorized network access and potential ransomware deployment. Patch your appliances immediately to the latest firmware version to defend against this critical threat.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Ransomware</span>
+            <span class="sf-tag">Ransomware</span><span class="sf-tag">SonicWall</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.darkreading.com/vulnerabilities-threats/inc-ransomware-exploits-sonicwall-sma-zero-days" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="inc-ransomware-sonicwall-zero-day-exploit/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/002-news-phone-shield-invisible-signal-protection-640.webp 640w, ../assets/img/002-news-phone-shield-invisible-signal-protection-960.webp 960w, ../assets/img/002-news-phone-shield-invisible-signal-protection.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/002-news-phone-shield-invisible-signal-protection.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="vite-npm-blockchain-rat-attack" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="supply-chain" data-date="2026-07-18">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 18, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>3 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="vite-npm-blockchain-rat-attack/" class="ul-link">Seven Malicious Vite npm Packages Use Blockchain C2 to Deliver a RAT – Supply Chain Risks Expand</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Cybersecurity researchers have discovered a cluster of seven malicious npm packages targeting the Vite frontend tooling ecosystem. The campaign, dubbed ViteVenom, uses blockchain-based infrastructure to hide C2 communication and deliver a remote access trojan. This attack highlights the ongoing risk of malicious dependencies in modern software development. Audit your development dependencies for unauthorized packages immediately.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Supply chain</span>
+            <span class="sf-tag">Supply Chain</span><span class="sf-tag">npm</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://thehackernews.com/2026/07/seven-malicious-vite-npm-packages-use.html" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="vite-npm-blockchain-rat-attack/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/011-news-infected-supply-chain-lockbox-network-640.webp 640w, ../assets/img/011-news-infected-supply-chain-lockbox-network-960.webp 960w, ../assets/img/011-news-infected-supply-chain-lockbox-network.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/011-news-infected-supply-chain-lockbox-network.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="government-ransomware-daily-threat" class="card sf-news-row sf-cat sf-cat--malware relative border-b border-border py-7" data-tags="ransomware" data-date="2026-07-18">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 18, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>3 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="government-ransomware-daily-threat/" class="ul-link">Government Agencies Falling Victim to Ransomware Daily, Warns Study – High-Stakes Public Impact</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Government organizations are increasingly targeted by ransomware operators who understand that public service disruption is unacceptable. These attackers exploit critical IT infrastructure and sensitive citizen databases to force ransom payments. Implement a zero-trust architecture and ensure you have immutable, offline, and frequently tested backups to protect against operational disruption and data extortion.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Ransomware</span>
+            <span class="sf-tag">Ransomware</span><span class="sf-tag">Government</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.infosecurity-magazine.com/news/government-ransomware-daily/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="government-ransomware-daily-threat/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/072-news-network-mesh-tearing-over-city-640.webp 640w, ../assets/img/072-news-network-mesh-tearing-over-city-960.webp 960w, ../assets/img/072-news-network-mesh-tearing-over-city.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/072-news-network-mesh-tearing-over-city.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="global-cyber-roundup-security-updates" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="threat-intel" data-date="2026-07-17">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 17, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>4 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="global-cyber-roundup-security-updates/" class="ul-link">Global Cyber Roundup: Iran Tracking, macOS Malware, and Defense Sector Ransomware</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Noteworthy reports indicate Iranian state-affiliated actors are tracking U.S. military personnel via mobile telemetry, while a new macOS malware, CrashStealer, has emerged. Additionally, AI agents like OpenClaw have been exploited via WhatsApp, and defense contractor TKMS confirmed a ransomware attack. To protect your organization, treat all AI-integrated agents as high-risk components, conduct rigorous security assessments before deployment, and ensure mobile device location permissions are strictly managed to prevent sensitive data exposure.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Threat research</span>
+            <span class="sf-tag">Threat Research</span><span class="sf-tag">Malware</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.securityweek.com/in-other-news-iran-tracks-us-military-phones-crashstealer-macos-malware-cvd-blueprint/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="global-cyber-roundup-security-updates/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/091-news-war-room-national-cyber-coordination-map-640.webp 640w, ../assets/img/091-news-war-room-national-cyber-coordination-map-960.webp 960w, ../assets/img/091-news-war-room-national-cyber-coordination-map.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/091-news-war-room-national-cyber-coordination-map.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="ukraine-appoints-intelligence-expert-acting-defense-minister" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="threat-intel" data-date="2026-07-17">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 17, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>4 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="ukraine-appoints-intelligence-expert-acting-defense-minister/" class="ul-link">Ukraine Appoints Intelligence Expert as Acting Defense Minister to Strengthen Strategy</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Ukrainian President Volodymyr Zelensky has appointed Yevhenii Khmara, formerly the acting head of the Security Service of Ukraine (SBU), as the nation's new acting defense minister. Khmara, a major general with extensive counterintelligence and unconventional warfare experience, is tasked with modernizing military command and integrating intelligence-led operations into the national defense strategy. Partners and contractors are advised to review communication security protocols and prepare for tighter oversight in defense procurement processes.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Threat research</span>
+            <span class="sf-tag">Defense</span><span class="sf-tag">Ukraine</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://therecord.media/ukraine-acting-defense-minister-yevhenii-khmara" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="ukraine-appoints-intelligence-expert-acting-defense-minister/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/082-news-restaurant-kitchen-drowning-in-receipts-640.webp 640w, ../assets/img/082-news-restaurant-kitchen-drowning-in-receipts-960.webp 960w, ../assets/img/082-news-restaurant-kitchen-drowning-in-receipts.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/082-news-restaurant-kitchen-drowning-in-receipts.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="kfc-japan-logistics-cyberattack" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="threat-intel" data-date="2026-07-16">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 16, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>1 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="kfc-japan-logistics-cyberattack/" class="ul-link">Cyberattack threatens utterly critical infrastructure in Japan: KFC</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">The Colonel stops taking online orders and may close stores after a logistics partner's systems go down – another reminder that supply-chain outages hit customer-facing services first.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Threat Research</span>
+            <span class="sf-tag">Japan</span><span class="sf-tag">Retail</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.theregister.com/security/2026/07/16/cyberattack-threatens-utterly-critical-infrastructure-in-japan-kfc/5272220" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="kfc-japan-logistics-cyberattack/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/013-news-crisis-room-global-threat-map-640.webp 640w, ../assets/img/013-news-crisis-room-global-threat-map-960.webp 960w, ../assets/img/013-news-crisis-room-global-threat-map.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/013-news-crisis-room-global-threat-map.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1200" height="675"></div></a>
+      </article>
+
+      <article id="identity-attacks-top-ransomware-cause" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="phishing" data-date="2026-07-16">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 16, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>1 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="identity-attacks-top-ransomware-cause/" class="ul-link">Identity Attacks Overtake Exploits as Top Ransomware Cause</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Email attacks overtook exploits as the top ransomware root cause last year. Multifactor authentication (MFA) was deployed in 97% of credential-based attacks but failed to prevent compromise.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Threat Research</span>
+            <span class="sf-tag">Email</span><span class="sf-tag">MFA</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.darkreading.com/identity-access-management-security/identity-attacks-overtake-exploits-top-ransomware-cause" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="identity-attacks-top-ransomware-cause/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/001-general-phishing-email-hook-warning-icons-640.webp 640w, ../assets/img/001-general-phishing-email-hook-warning-icons-960.webp 960w, ../assets/img/001-general-phishing-email-hook-warning-icons.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/001-general-phishing-email-hook-warning-icons.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1200" height="675"></div></a>
+      </article>
+
+      <article id="gold-eagle-vulnerability-clearinghouse" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-07-16">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 16, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>1 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="gold-eagle-vulnerability-clearinghouse/" class="ul-link">Trump administration unveils AI-supported clearinghouse for cyber vulnerabilities</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">The Gold Eagle program will allow industry, critical infrastructure operators and the government to use artificial intelligence to rapidly detect, prioritize and patch cybersecurity vulnerabilities, officials said.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">AI</span><span class="sf-tag">Policy</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://therecord.media/gold-eagle-cybersecurity-vulnerabilities-clearinghouse" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="gold-eagle-vulnerability-clearinghouse/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/005-general-shielded-brain-ai-security-lock-640.webp 640w, ../assets/img/005-general-shielded-brain-ai-security-lock-960.webp 960w, ../assets/img/005-general-shielded-brain-ai-security-lock.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/005-general-shielded-brain-ai-security-lock.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1200" height="675"></div></a>
+      </article>
+
+      <article id="sharefile-zero-day-disruption" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-07-15">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 15, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>4 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="sharefile-zero-day-disruption/" class="ul-link">Progress confirms zero-day vulnerability behind ShareFile disruption – vendor issues patch to restore service</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Progress Software has confirmed that a zero-day vulnerability in its ShareFile product was the cause of recent service disruptions for customers using the Storage Zones Controller. The company has since released a fix to address the security flaw and is actively working to restore services for impacted users. While initial reports highlighted instability, the company's subsequent patch is intended to remediate the underlying exploit. If you are operating a ShareFile Storage Zones Controller environment, verify that you have applied the latest vendor-supplied patch immediately to regain service stability and mitigate potential compromise.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">Zero-day</span><span class="sf-tag">ShareFile</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.securityweek.com/progress-confirms-zero-day-vulnerability-behind-sharefile-disruption/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="sharefile-zero-day-disruption/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/thumb-news-sharefile-640.webp 640w, ../assets/img/thumb-news-sharefile-960.webp 960w, ../assets/img/thumb-news-sharefile.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-news-sharefile.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="sharepoint-cve-2026-45659" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-07-10">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="sharepoint-cve-2026-45659/" class="ul-link">SharePoint RCE lands on CISA's must-patch list: the bulletin came weeks after the fix</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Microsoft shipped the fix for CVE-2026-45659 in May's cumulative update but published the bulletin weeks later. CISA has confirmed active exploitation and added it to the KEV catalog: the CVSS 8.8 flaw is RCE via unsafe deserialization. On-prem SharePoint? Confirm you're on the May cumulative update.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">RCE</span><span class="sf-tag">SharePoint</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://thehackernews.com/2026/07/sharepoint-rce-cve-2026-45659-added-to.html" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="sharepoint-cve-2026-45659/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/thumb-news-sharepoint-640.webp 640w, ../assets/img/thumb-news-sharepoint-960.webp 960w, ../assets/img/thumb-news-sharepoint.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-news-sharepoint.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="simplehelp-cve-2026-48558" class="card sf-news-row sf-cat sf-cat--threat relative border-b border-border py-7" data-tags="supply-chain" data-date="2026-07-10">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>6 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="simplehelp-cve-2026-48558/" class="ul-link">A perfect 10.0 in SimpleHelp puts MSPs back in the supply-chain blast radius</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">CVE-2026-48558 scores maximum CVSS severity in SimpleHelp, an RMM tool widely used by managed service providers; exploitation is tracked via the "TaskWeaver" loader. One vulnerable MSP endpoint can fan out into every client network that MSP touches – if you outsource IT, this is the week to ask your provider directly.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Supply chain</span>
+            <span class="sf-tag">RMM</span><span class="sf-tag">MSP</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://threat-modeling.com/vulnerability-intelligence-report-july-2-2026/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="simplehelp-cve-2026-48558/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/thumb-news-simplehelp-640.webp 640w, ../assets/img/thumb-news-simplehelp-960.webp 960w, ../assets/img/thumb-news-simplehelp.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-news-simplehelp.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="jetbrains-ide-vulnerabilities" class="card sf-news-row sf-cat sf-cat--vuln relative border-b border-border py-7" data-tags="vulnerabilities" data-date="2026-07-10">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="jetbrains-ide-vulnerabilities/" class="ul-link">JetBrains patches auth bypass and RCE across Hub, YouTrack, IntelliJ and more</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">A cluster of critical flaws across JetBrains' on-prem tools chains into auth bypass, account takeover and RCE – the sharpest a CVSS 9.8 from predictable account-restore codes. An IDE runs with your privileges: patch before opening untrusted repositories in any JetBrains product.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>Vulnerabilities</span>
+            <span class="sf-tag">Auth bypass</span><span class="sf-tag">Dev tooling</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://cybersecuritynews.com/jetbrains-vulnerabilities/" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="jetbrains-ide-vulnerabilities/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/thumb-news-jetbrains-640.webp 640w, ../assets/img/thumb-news-jetbrains-960.webp 960w, ../assets/img/thumb-news-jetbrains.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-news-jetbrains.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+      <article id="claude-sonnet-5-release" class="card sf-news-row sf-cat sf-cat--web relative border-b border-border py-7" data-tags="ai-security" data-date="2026-07-10">
+        <button type="button" class="sf-bookmark" aria-label="Save article"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+        <div>
+          <div class="flex items-center gap-2.5 mb-3 font-mono text-[10.5px] text-muted tracking-wider uppercase"><span>Jul 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>6 min read</span></div>
+          <h3 class="font-display text-[20px] md:text-[22px] leading-snug font-semibold tracking-tight text-balance pr-8"><a href="claude-sonnet-5-release/" class="ul-link">Anthropic ships Claude Sonnet 5 as the new default – agentic performance near Opus, at Sonnet pricing</a></h3>
+          <p class="mt-2.5 text-muted-foreground text-[14.5px] leading-[1.65] line-clamp-2">Claude Sonnet 5 went live June 30 and is the new default for Free and Pro users, pitched squarely at agentic work: planning, tool use and autonomous runs at a level that used to need a pricier model. If Claude is wired into your tooling, benchmark against your own eval set before switching wholesale.</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="sf-cat-badge"><span class="sf-cat-dot"></span>AI Security</span>
+            <span class="sf-tag">LLM</span><span class="sf-tag">Model release</span>
+          </div>
+          <div class="flex items-center gap-2.5 mt-4">
+            <span class="sf-byline-ava"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 20 5v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z" fill="hsl(var(--accent) / 0.15)" stroke="hsl(var(--accent))" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="leading-tight"><div class="text-[13px] text-foreground font-medium">Daniel A. &amp; Óscar S.</div><div class="text-[11px] text-muted">Breachfolio</div></div>
+            <a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" rel="noopener noreferrer" class="ml-2 text-accent text-[12.5px] font-medium ul-link">Source →</a>
+          </div>
+        </div>
+        <a href="claude-sonnet-5-release/" aria-label="Read our take"><div class="sf-thumb sf-news-media"><img srcset="../assets/img/thumb-news-claude-640.webp 640w, ../assets/img/thumb-news-claude-960.webp 960w, ../assets/img/thumb-news-claude.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../assets/img/thumb-news-claude.webp" alt="Cybersecurity intelligence, curated and contextual." loading="lazy" decoding="async" width="1280" height="720"></div></a>
+      </article>
+
+    </div>
+    <div id="empty" class="hidden mt-10 text-center text-muted-foreground text-[14px]">No articles match this filter yet.</div>
+
+    <!-- Paginación: 6 entradas por página, crece sola cuando haya más -->
+    <nav id="sf-pagination" class="mt-10 flex items-center justify-between gap-4 border-t border-border pt-6" aria-label="Archive pagination">
+      <button id="sf-page-prev" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span class="hidden sm:inline">Previous</span>
+      </button>
+      <div id="sf-page-numbers" class="flex items-center gap-1">
+        <span class="sf-page" aria-current="page">1</span>
+      </div>
+      <button id="sf-page-next" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <span class="hidden sm:inline">Next</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </nav>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="../cybersecurity/" class="h-10 px-5 inline-flex items-center rounded-full border border-border bg-surface/40 text-[13px] hover:text-foreground text-muted-foreground">Browse Cybersecurity</a>
+      <a href="../compare/" class="h-10 px-5 inline-flex items-center rounded-full border border-border bg-surface/40 text-[13px] hover:text-foreground text-muted-foreground">Browse Comparisons</a>
+    </div>
+  </section></main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="./" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

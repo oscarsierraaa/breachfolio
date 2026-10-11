@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab 06: test your detections with Atomic Red Team | Breachfolio</title>
+  <meta name="description" content="Your home lab SIEM and IDS have never proved they detect anything. Run small, documented ATT&amp;CK techniques with Atomic Red Team and find out which alerts fire." />
+  <meta name="keywords" content="atomic red team tutorial, test siem detections, invoke-atomicredteam, mitre att&ck home lab, detection engineering lab, validate wazuh rules, purple team home lab, atomic red team wazuh, does my siem detect anything, detection testing tutorial, att&ck technique testing, adversary emulation home lab, blue team lab exercise, atomic test cleanup, detection coverage gap" />
+  <link rel="canonical" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-06-probar-detecciones-atomic-red-team/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Lab 06: test your detections with Atomic Red Team | Breachfolio" />
+  <meta property="og:description" content="Your home lab SIEM and IDS have never proved they detect anything. Run small, documented ATT&amp;CK techniques with Atomic Red Team and find out which alerts fire." />
+  <meta property="og:url" content="https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-lab-siem.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lab 06: test your detections with Atomic Red Team | Breachfolio" />
+  <meta name="twitter:description" content="Your home lab SIEM and IDS have never proved they detect anything. Run small, documented ATT&amp;CK techniques with Atomic Red Team and find out which alerts fire." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-lab-siem.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Lab 06: test your detections with Atomic Red Team",
+      "description": "Your home lab SIEM and IDS have never proved they detect anything. Run small, documented ATT&CK techniques with Atomic Red Team and find out which alerts fire.",
+      "image": "https://breachfolio.com/assets/img/thumb-lab-siem.webp",
+      "datePublished": "2026-08-01",
+      "dateModified": "2026-08-01",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/"
+      },
+      "inLanguage": "en",
+      "keywords": "atomic red team tutorial, test siem detections, invoke-atomicredteam, mitre att&ck home lab, detection engineering lab, validate wazuh rules, purple team home lab, atomic red team wazuh, does my siem detect anything, detection testing tutorial, att&ck technique testing, adversary emulation home lab, blue team lab exercise, atomic test cleanup, detection coverage gap"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Lab", "item": "https://breachfolio.com/lab/" },
+        { "@type": "ListItem", "position": 3, "name": "Lab 06: test your detections", "item": "https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/lab/lab-06-test-detections-atomic-red-team/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Atomic Red Team?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Atomic Red Team is a free, open-source library of small attack simulations maintained by Red Canary. Each test, called an atomic, reproduces one technique from the MITRE ATT&CK matrix in a few commands, and ships with the exact steps it runs and a cleanup routine that undoes them. It exists so defenders can check whether their own tooling notices a technique, rather than assuming it does."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is running Atomic Red Team on my own lab dangerous?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The atomics are deliberately small and documented, and most ship with a cleanup command, but they do make real changes: creating users, writing scheduled tasks, dropping files. Run them only on a lab VM you own, take a snapshot before you start, and always read the test with -ShowDetails before executing it so you know what it will do. Do not run them on a machine that matters to you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did my SIEM not alert when I ran an atomic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually because the data it needs is not being collected. A rule can only match on a log that reaches the SIEM, so the first thing to check is whether the relevant source, such as command-line process creation or PowerShell script block logging, is enabled on the target and forwarded by the agent. A silent run is a finding in itself: it marks a real gap in coverage rather than a failure of the exercise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this red teaming or blue teaming?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Neither on its own. Running a known technique specifically to measure whether defenders see it is usually called purple teaming, because the point is not to win but to produce evidence about detection coverage. Atomic Red Team is built for that loop: you already know the answer to what happened, so the only open question is whether your tooling noticed."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Lab 06: test your detections</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/thumb-lab-siem.webp" alt="Lab 06 – find out whether your lab actually detects anything." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">LAB · SERIES</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Lab 06 – find out whether your lab actually detects anything.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">You have a SIEM and an IDS. Neither has proved it works. Atomic Red Team runs one documented technique at a time so you can watch an alert fire, or notice that it never does.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-01">August 1, 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>By the end of Lab 05 you had a working environment: an attacker box, a segmented network, a vulnerable target, host-based detection and network-based detection. What you did not have was any evidence that the detection half of it works. A dashboard with no alerts on it looks identical whether you are safe or blind. This lab closes that gap by running known techniques on purpose and checking, one at a time, whether your own tooling says anything.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">An untested detection is a guess</h2>
+
+      <p>Installing Wazuh in <a href="../lab-03-wazuh-siem-home-lab/" class="text-accent ul-link">Lab 03</a> gave you a SIEM with a default ruleset, and <a href="../lab-05-ids-suricata/" class="text-accent ul-link">Lab 05</a> gave you Suricata with the ET Open signatures. Both arrived with hundreds of rules already enabled, which is easy to read as coverage. It is not. A rule fires only when the log or packet it matches on actually reaches the tool, and in a fresh install a surprising number of interesting events are simply never collected.</p>
+
+      <p>The way to find out is to generate the event yourself. That sounds like it needs an attack, but it does not need a real one, and it definitely does not need a target that is not yours. It needs a small, precise, repeatable action whose exact behaviour you already know.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What Atomic Red Team is</h2>
+
+      <p><a href="https://github.com/redcanaryco/atomic-red-team" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Atomic Red Team</a> is a free, open-source library maintained by Red Canary. Each entry, called an <em>atomic</em>, reproduces a single technique from the <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">MITRE ATT&amp;CK</a> matrix in a handful of commands, and each one is published together with the exact commands it will run and a cleanup routine that reverses them.</p>
+
+      <p>That last part is what makes it usable here. You are not deploying malware and hoping for the best; you are running a documented action, with a known identifier such as <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">T1087.001</code>, that maps to a specific row in a public matrix. When an alert appears you can say precisely which technique produced it, and when no alert appears you know exactly what you missed.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Install the runner on a target you own</h2>
+
+      <p>The tests are executed by a companion project, <a href="https://github.com/redcanaryco/invoke-atomicredteam/wiki" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Invoke-AtomicRedTeam</a>, which runs under PowerShell. Install it on a lab VM that is already reporting to your SIEM, so the events have somewhere to go. Take a snapshot of that VM first.</p>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code><span class="term-cmt"># on the lab VM, in an elevated PowerShell session</span>
+<span class="term-cmt">PS&gt;</span> IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing)
+<span class="term-cmt">PS&gt;</span> Install-AtomicRedTeam -getAtomics
+
+<span class="term-cmt"># confirm it loaded</span>
+<span class="term-cmt">PS&gt;</span> Import-Module invoke-atomicredteam -Force</code></pre>
+
+      <p>The snapshot matters more than it sounds. Atomics are small, but they are not simulations: they create local accounts, write scheduled tasks and drop files for real. On a VM you can roll back, that is exactly what you want. On a machine you care about, it is not.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Read the test before you run it</h2>
+
+      <p>Never execute an atomic you have not read. Every test can print its own plan first, and doing so is half the educational value of the exercise:</p>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code><span class="term-cmt"># show what T1087.001 would do, without doing it</span>
+<span class="term-cmt">PS&gt;</span> Invoke-AtomicTest T1087.001 -ShowDetails
+
+<span class="term-cmt"># check and satisfy anything the test needs first</span>
+<span class="term-cmt">PS&gt;</span> Invoke-AtomicTest T1087.001 -CheckPrereqs
+
+<span class="term-cmt"># run it</span>
+<span class="term-cmt">PS&gt;</span> Invoke-AtomicTest T1087.001
+
+<span class="term-cmt"># put the machine back the way you found it</span>
+<span class="term-cmt">PS&gt;</span> Invoke-AtomicTest T1087.001 -Cleanup</code></pre>
+
+      <p>T1087.001 is <strong>Local Account Discovery</strong>: the sort of thing an intruder does in the first minutes after landing on a host, to learn who else has an account on it. It is a deliberately mild starting point. It reads information, changes almost nothing, and still produces exactly the kind of command-line activity a SIEM is supposed to notice.</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Technique</th><th class="px-4 py-2.5 font-display font-semibold">What it looks like, and why it is a good first test</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>T1087.001</strong><br /><span class="text-muted-foreground text-[13.5px]">Local Account Discovery</span></td><td class="px-4 py-2.5">Enumerates local users. Almost no side effects, and it exercises whether you are collecting process command lines at all.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>T1082</strong><br /><span class="text-muted-foreground text-[13.5px]">System Information Discovery</span></td><td class="px-4 py-2.5">Asks the host to describe itself. Noisy in the logs, harmless in effect, and frequently missed by default rules.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>T1053.005</strong><br /><span class="text-muted-foreground text-[13.5px]">Scheduled Task</span></td><td class="px-4 py-2.5">Creates a persistence mechanism, so it makes a real change. Run this one only once you trust your cleanup step and your snapshot.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Read the result from both sides</h2>
+
+      <p>Now go and look, in this order. First the SIEM: search Wazuh for events on that host in the minute you ran the test, and see whether anything was flagged rather than merely logged. Then the IDS: most discovery techniques are local and will produce nothing in Suricata, and noticing that silence is itself the lesson. Network detection and host detection see different things, which is precisely why <a href="../lab-04-network-segmentation-pfsense/" class="text-accent ul-link">Lab 04</a> and Lab 05 were worth building separately.</p>
+
+      <p>Write down three columns for each atomic you run: the technique ID, whether the raw event was collected, and whether a rule actually alerted on it. Those are three different states, and conflating the last two is the most common mistake people make when they assess their own coverage. An event sitting in the index that nothing matches on will not wake anybody up at three in the morning.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">When nothing fires at all</h2>
+
+      <p>Sooner or later you will run a test, go to the SIEM and find nothing. Resist the urge to treat that as a broken lab. It is the most useful result the exercise produces, and it almost always has the same cause: the data was never collected in the first place.</p>
+
+      <p>Check that direction before touching any rules. Is command-line process creation being recorded on the target? Is PowerShell script block logging on? Is the agent forwarding that channel to the manager, or filtering it out? Detection engineering in the real world spends far more time on collection gaps than on clever rule logic, and this is where you get to see why.</p>
+
+      <p>Only once you are sure the event arrives does it make sense to ask why nothing matched it. At that point you are writing or tuning a rule against a log you can actually see, which is a much better place to start than guessing.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Where this leaves the series</h2>
+
+      <p>Six labs in, the environment is no longer just built, it is measured. You know which techniques your setup notices, which ones it records without reacting, and which ones pass through it entirely. That short list is worth more than any dashboard, because it is specific to the lab you own and you produced it yourself.</p>
+
+      <p>It is also the honest version of the question everyone asks about security tooling. Not whether it is installed, but what it has been shown to catch.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Legal &amp; scope.</strong> Every technique in this series is executed against machines you built, inside a private lab you control. Atomic Red Team makes real changes to the host it runs on, so snapshot the VM first and run the cleanup step afterwards. Running these tests against systems, sites or networks you do not own – or lack explicit written authorization to test – is unlawful in most jurisdictions. The lab exists precisely so you never have to.</div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is Atomic Red Team?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Atomic Red Team is a free, open-source library of small attack simulations maintained by Red Canary. Each test, called an atomic, reproduces one technique from the MITRE ATT&amp;CK matrix in a few commands, and ships with the exact steps it runs and a cleanup routine that undoes them. It exists so defenders can check whether their own tooling notices a technique, rather than assuming it does.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is running Atomic Red Team on my own lab dangerous?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          The atomics are deliberately small and documented, and most ship with a cleanup command, but they do make real changes: creating users, writing scheduled tasks, dropping files. Run them only on a lab VM you own, take a snapshot before you start, and always read the test with -ShowDetails before executing it so you know what it will do. Do not run them on a machine that matters to you.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why did my SIEM not alert when I ran an atomic?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Usually because the data it needs is not being collected. A rule can only match on a log that reaches the SIEM, so the first thing to check is whether the relevant source, such as command-line process creation or PowerShell script block logging, is enabled on the target and forwarded by the agent. A silent run is a finding in itself: it marks a real gap in coverage rather than a failure of the exercise.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is this red teaming or blue teaming?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Neither on its own. Running a known technique specifically to measure whether defenders see it is usually called purple teaming, because the point is not to win but to produce evidence about detection coverage. Atomic Red Team is built for that loop: you already know the answer to what happened, so the only open question is whether your tooling noticed.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../lab-05-ids-suricata/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 05: watch the packets</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../lab-03-wazuh-siem-home-lab/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 03: add a SIEM</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../cybersecurity/sigma-and-yara-rules/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Sigma and YARA rules</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All lab walkthroughs</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

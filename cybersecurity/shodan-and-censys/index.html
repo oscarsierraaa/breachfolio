@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shodan and Censys explained | Breachfolio</title>
+  <meta name="description" content="Shodan and Censys are search engines for internet-exposed devices – what they index, real query examples, the legal line, OPSEC and free-tier limits." />
+  <meta name="keywords" content="shodan and censys" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/shodan-y-censys/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Shodan and Censys explained | Breachfolio" />
+  <meta property="og:description" content="Shodan and Censys are search engines for internet-exposed devices – what they index, real query examples, the legal line, OPSEC and free-tier limits." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/shodan-and-censys/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-shodan-censys.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shodan and Censys explained | Breachfolio" />
+  <meta name="twitter:description" content="Shodan and Censys are search engines for internet-exposed devices – what they index, real query examples, the legal line, OPSEC and free-tier limits." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-shodan-censys.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Shodan and Censys explained",
+      "description": "Shodan and Censys are search engines for internet-exposed devices – what they index, real query examples, the legal line, OPSEC and free-tier limits.",
+      "image": "https://breachfolio.com/assets/img/hero-shodan-censys.webp",
+      "datePublished": "2026-07-16",
+      "dateModified": "2026-07-16",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/shodan-and-censys/" },
+      "inLanguage": "en",
+      "keywords": "shodan and censys"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "Shodan and Censys explained", "item": "https://breachfolio.com/cybersecurity/shodan-and-censys/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/shodan-and-censys/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is using Shodan legal?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Searching Shodan (or Censys) is passive OSINT – you are querying a database of banners the engine already collected, not connecting to or attacking any target, so simply looking is legal in the vast majority of jurisdictions. The tools are used every day by defenders, researchers, and academics. The legality changes entirely based on what you do with a result: the moment you connect to a device you do not own, try a credential, probe for flaws, or run an exploit, you cross into unauthorised access and likely break laws such as the US Computer Fraud and Abuse Act or the UK Computer Misuse Act. \"It was exposed on Shodan\" is not a defence. Observe and document; never interact with systems you are not authorised to test." } },
+        { "@type": "Question", "name": "Shodan vs Censys, which is better?", "acceptedAnswer": { "@type": "Answer", "text": "Neither is universally better; they have different strengths. Shodan is faster to skim, has a friendlier one-line filter syntax, keeps deep historical data, and is stronger on IoT, industrial control systems, and unusual non-web protocols. Censys has a more rigid but more precise structured query language, excellent TLS-certificate data fed by Certificate Transparency, and frequent full-internet scans that keep coverage fresh. For odd exposed devices and quick eyeballing, reach for Shodan; for structured, certificate-heavy attack-surface work you will script against, reach for Censys. Experienced analysts use both and cross-check, because each occasionally sees a host the other misses." } },
+        { "@type": "Question", "name": "Is Shodan free?", "acceptedAnswer": { "@type": "Answer", "text": "Partly. You can browse some results and need a free account to use filters at all, but the free tier caps how many results and which filters you can access. Shodan has historically sold a one-time lifetime membership (frequently discounted) that unlocks more filters, screenshots, larger result sets, and API query credits, with higher subscription tiers for heavy or commercial use. Censys offers a similar model: a free community tier with a limited number of monthly queries and shallow pagination, and paid plans for bulk data and the richer datasets. For zero-cost host triage, Shodan's InternetDB and the nrich CLI need no paid key at all." } },
+        { "@type": "Question", "name": "Can Shodan find my devices, and how do I protect them?", "acceptedAnswer": { "@type": "Answer", "text": "If a device has a public IP with a service listening, Shodan and Censys will eventually index it, no link or exposure on your part is required beyond being reachable. To reduce your footprint: put management interfaces (SSH, RDP, databases, admin panels) behind a VPN or firewall instead of the open internet, close ports you do not need, require authentication everywhere and change default credentials, keep software patched so version banners do not advertise known CVEs, and periodically search your own IP ranges, organisation name, and certificate common names on both engines to catch anything exposed by mistake. Shodan Monitor and Censys attack-surface features can alert you when something new appears." } },
+        { "@type": "Question", "name": "Shodan vs Nmap – what is the difference?", "acceptedAnswer": { "@type": "Answer", "text": "They answer related questions in opposite ways. Nmap is an active scanner: you point it at targets and it sends packets to them in real time to discover ports, services, and versions, which means it touches the target, appears in their logs, and requires authorisation to be legal against systems you do not own. Shodan is a search engine over data already collected by someone else's continuous internet-wide scanning: querying it sends nothing to the target and is passive from your side. Use Shodan for fast, no-touch reconnaissance and inventory; use Nmap when you have permission and need current, precise, verified results. For how large-scale active scanning itself works, see our Nmap vs Masscan comparison." } },
+        { "@type": "Question", "name": "What can attackers actually do with Shodan?", "acceptedAnswer": { "@type": "Answer", "text": "Shodan gives an attacker the same passive reconnaissance it gives a defender – a map of exposed services, versions, and likely vulnerabilities across the internet – which is precisely why defenders should use it first. It cannot break into anything on its own; it only reveals what is already reachable. The realistic risk is that it makes finding low-hanging fruit trivial: unpatched software with a known CVE, databases left open without authentication, or default-credentialed devices. The defence is the same list that protects you from anyone: do not expose what does not need exposing, patch so your banners do not advertise old vulnerabilities, authenticate everything, and audit your own attack surface on these engines before someone else does." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Shodan and Censys explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-shodan-censys.webp" alt="Shodan and Censys explained." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Shodan and Censys explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Shodan and Censys are search engines for internet-exposed devices – what they index, real query examples, the legal line, OPSEC and free-tier limits.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 16, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Google indexes what people <em>publish</em>: pages, links, words on a screen. <strong>Shodan</strong> and <strong>Censys</strong> index what machines <em>expose</em>: the open ports, running services, software versions, and TLS certificates of devices connected directly to the internet. They are search engines for the infrastructure layer: the routers, servers, webcams, databases, industrial controllers, and forgotten staging boxes that answer when something knocks on a port. If you do <a href="../what-is-osint/">OSINT</a> or defend an attack surface, these two are among the first tools you learn, and the pair that most beginners confuse. This article explains what they actually do, how they differ, how to query them with real examples, and where the legal and ethical line sits.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 292" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">IP address</text><rect x="12" y="62" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="62" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="91" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Open ports</text><rect x="12" y="122" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="122" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="151" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Service banners</text><rect x="12" y="182" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="182" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="211" fill="hsl(var(--foreground))" font-size="15" font-weight="600">TLS certificate</text><rect x="12" y="242" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="242" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="271" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Geolocation / ASN</text></svg>
+        <figcaption>What internet-wide scanners index for every exposed host.</figcaption>
+      </figure>
+      <h2>Search engines that connect, not crawl</h2>
+
+<p>A web crawler like Googlebot follows hyperlinks. It starts on a page, reads the links, follows them, and builds an index of human-readable content. It never opens a raw port or asks a server "what are you running?": it just requests web pages the way a browser would.</p>
+
+<p>Shodan and Censys work the opposite way. They continuously scan the entire routable <strong>IPv4</strong> address space (and a growing slice of IPv6), connecting to common ports – 21, 22, 23, 80, 443, 3389, and thousands more – and recording exactly what answers. They do not care whether a link points to the device. If it has a public IP and a service listening, it eventually shows up in the index. This is the same class of activity as an <a href="../../compare/nmap-vs-masscan/">internet-wide port scan</a>, but done once, centrally, and stored so you can query the results instead of scanning yourself.</p>
+
+<p>The practical consequence: you can learn an enormous amount about internet-facing infrastructure without ever sending a single packet to the target. From your side, a Shodan or Censys search is <strong>passive:</strong> you are reading a database somebody else already collected.</p>
+
+<h2>What a banner is, and why it is the whole game</h2>
+
+<p>When you connect to a service, it usually greets you. That greeting – the service type, software name, version, supported options, sometimes a hostname or a login prompt – is called a <strong>banner</strong>. Grabbing banners at internet scale is the core of what these engines do. Here is what a plain HTTP banner looks like when you fetch it by hand:</p>
+
+<pre tabindex="0"><code>$ curl -sI http://example.org
+HTTP/1.1 200 OK
+Server: nginx/1.24.0            # software + exact version
+Date: Wed, 15 Jul 2026 09:14:02 GMT
+Content-Type: text/html
+X-Powered-By: PHP/8.2.4         # even more version detail leaks here</code></pre>
+
+<p>An SSH service is just as chatty before you ever authenticate:</p>
+
+<pre tabindex="0"><code>$ nc example.org 22
+SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13   # protocol, product, build, distro</code></pre>
+
+<p>Multiply that across every open port on the internet and you have Shodan and Censys. From a banner alone you can often tell the exact software, its version (and therefore its known vulnerabilities), the operating system, and sometimes the organisation that owns it.</p>
+
+<h2>What they index</h2>
+
+<p>Both engines store far more than a raw text banner. A typical host record contains:</p>
+
+<ul>
+  <li><strong>Open ports and services.</strong> Which ports answer, and what protocol each speaks (HTTP, SSH, RDP, MQTT, Modbus, and so on).</li>
+  <li><strong>Software and versions.</strong> Parsed from banners – <code>nginx 1.24.0</code>, <code>OpenSSH 9.6</code>, <code>MongoDB 7.0</code> – which maps directly to CVEs.</li>
+  <li><strong>TLS certificates.</strong> Subject and issuer, common name (CN) and subject alternative names (SANs), validity dates, and fingerprints. Certificates are a goldmine for pivoting between hosts that share one.</li>
+  <li><strong>HTTP metadata.</strong> Page title, response headers, and even a hash of the favicon: a surprisingly reliable way to fingerprint a specific application or admin panel.</li>
+  <li><strong>Geolocation and network ownership.</strong> Approximate country and city, plus the <strong>ASN</strong> and organisation the IP belongs to (see how names, IPs and networks relate in <a href="../domains-vs-subdomains/">domains vs subdomains</a>).</li>
+  <li><strong>Vulnerability hints.</strong> Both tag hosts with likely CVEs based on the version they advertise. This is inference from a banner, not proof of exploitability.</li>
+  <li><strong>Screenshots</strong> of exposed web, VNC, and RDP services (Shodan, on paid tiers).</li>
+</ul>
+
+<h2>Shodan vs Censys: two philosophies</h2>
+
+<h3>Shodan (shodan.io)</h3>
+
+<p>Created by John Matherly and public since 2009, <strong>Shodan</strong> is the original "search engine for internet-connected devices." Its personality is device- and protocol-centric. It shines on the weird, non-web corners of the internet: industrial control systems (ICS/SCADA), IoT, VNC, RDP, databases, printers, maritime and building-automation gear. It carries deep historical banner data, a friendly one-line filter syntax, a well-documented API, an official command-line client, and bolt-on products like Shodan Maps, Images, Monitor, and an Exploits index. If your question is "what strange thing is exposed on this network?", Shodan usually gets you there first.</p>
+
+<h3>Censys (censys.io)</h3>
+
+<p><strong>Censys</strong> grew out of academic research at the University of Michigan – the same group behind the ZMap fast-scanner – and went commercial in 2017. Its personality is data- and certificate-centric. It performs frequent full-internet scans, keeps a rigorously structured host schema, and treats <strong>TLS certificates</strong> as a first-class dataset fed by both its own scans and Certificate Transparency logs. The query language is more verbose but more precise: you filter on explicit nested fields rather than short keywords. Analysts who want clean, structured, certificate-heavy data for attack-surface management tend to prefer Censys.</p>
+
+<p>Neither is strictly "better." Shodan is faster to eyeball and stronger on odd protocols and history; Censys is stronger on structured queries, certificates, and fresh full-scan coverage. Serious researchers use both and cross-check.</p>
+
+<h2>Shodan queries you will actually use</h2>
+
+<p>Shodan filters are <code>key:value</code> pairs; bare words are full-text banner matches. Note that Shodan uses two-letter <strong>country codes</strong> (<code>ES</code>, not "Spain"). These examples are framed around inventorying infrastructure you own or are authorised to assess:</p>
+
+<pre tabindex="0"><code>product:"Apache httpd" country:"ES" port:443   # Apache on 443, hosted in Spain
+http.title:"Login"                             # pages whose &lt;title&gt; contains "Login"
+org:"Your Company Ltd"                          # everything Shodan maps to that org
+net:203.0.113.0/24                              # a specific CIDR block you own
+ssl.cert.subject.cn:"example.com"               # hosts serving a cert with that CN
+hostname:example.com                            # banners tied to that hostname
+http.favicon.hash:-1234567890                   # every host sharing one favicon
+vuln:CVE-2021-44228                             # hosts flagged for a CVE (paid filter)</code></pre>
+
+<p>Combine filters with spaces (implicit AND) and prefix with <code>-</code> to negate. Before running a full search, <code>count</code> is your friend: it returns just the number of matches and is cheap:</p>
+
+<pre tabindex="0"><code>$ shodan init YOUR_API_KEY
+$ shodan count 'port:443 country:ES'
+1893472
+$ shodan host 8.8.8.8                            # everything known about one IP
+$ shodan search --fields ip_str,port,org 'ssl.cert.subject.cn:"example.com"'</code></pre>
+
+<h2>Censys queries</h2>
+
+<p>Censys Search uses a structured language with explicit field paths joined by <code>and</code> / <code>or</code>. It accepts country names, and the fields read almost like documentation:</p>
+
+<pre tabindex="0"><code>services.service_name: HTTP and location.country: "Spain"
+services.port: 443 and services.tls.certificates.leaf_data.subject.common_name: "example.com"
+autonomous_system.organization: "Your Company Ltd"
+services.software.product: "nginx" and location.country_code: ES
+dns.names: example.com and services.service_name: HTTPS</code></pre>
+
+<p>The verbosity is the point: because every attribute lives at a known path, a Censys query is unambiguous and easy to script against the API. The same certificate-pivot idea as Shodan's <code>ssl.cert.subject.cn</code> becomes the explicit <code>services.tls.certificates.leaf_data.subject.common_name</code>.</p>
+
+<h2>The command line: shodan and nrich</h2>
+
+<p>You do not need the website. The official <code>shodan</code> Python CLI covers search, count, host lookups, and streaming. For quick triage of a list of IPs, Shodan also ships <strong>nrich</strong>, which queries the free <code>InternetDB</code> service (no paid key required) and prints open ports and known CVEs per IP:</p>
+
+<pre tabindex="0"><code>$ cat my-ips.txt
+203.0.113.10
+203.0.113.42
+$ nrich my-ips.txt
+203.0.113.10 (host.example.com)
+  Ports: 22, 80, 443
+  CVEs:  CVE-2023-38408
+203.0.113.42
+  Ports: 3389
+  CVEs:  None found</code></pre>
+
+<p>That single command turns a raw IP list into a first-pass exposure report – ideal for auditing your own ranges.</p>
+
+<h2>Legitimate uses, and the legal line</h2>
+
+<p>These are mainstream, defensible tools when used for the right things:</p>
+
+<ul>
+  <li><strong>Know your own attack surface.</strong> Search your CIDR blocks, org name, and certificate CN to find shadow IT, forgotten staging servers, exposed databases, and management interfaces you never meant to publish.</li>
+  <li><strong>Threat intelligence.</strong> Fingerprint and track adversary infrastructure, C2 panels, and phishing kits by certificate, favicon hash, or banner signature.</li>
+  <li><strong>Research and measurement.</strong> Study how a vulnerability spreads or how quickly the internet patches after a disclosure.</li>
+  <li><strong>Investigations.</strong> Enrich an IP or domain during an inquiry – this pairs naturally with <a href="../investigate-a-suspicious-domain/">investigating a suspicious domain</a> and <a href="../what-is-whois/">reading WHOIS</a>.</li>
+</ul>
+
+<p>Now the boundary, stated plainly. <strong>Querying Shodan or Censys is passive OSINT</strong>: you are reading a dataset, not touching the target, and looking at a banner someone chose to expose is not a crime. But the results are addresses of real systems, and what you do <em>next</em> is where the law lives. The moment you connect to a discovered device you do not own, try a default or leaked credential, submit input to probe for flaws, or run an exploit, you have left OSINT and almost certainly broken computer-misuse law: the US Computer Fraud and Abuse Act, the UK Computer Misuse Act, and their equivalents elsewhere. "It was open on Shodan" has never been a defence. Observe, do not interact; document, do not exploit; and only act against systems you own or have explicit, written authorisation to test.</p>
+
+<h2>OPSEC and the limits of free plans</h2>
+
+<p>Because you query the engines rather than the target, your searches do not appear in the target's logs, but the search provider does log <em>you</em>. Use it accordingly, and mind the free-tier ceilings:</p>
+
+<ul>
+  <li><strong>Shodan.</strong> A free account is required even to use filters, and it caps how much you see. Historically Shodan sells a one-time lifetime membership (often discounted) that unlocks more filters, results, and API query credits; some filters (like <code>vuln:</code>) and screenshots require higher tiers. Watch your API <em>query credits</em> – <code>count</code> spends far fewer than a full <code>search</code>.</li>
+  <li><strong>Censys.</strong> A free community tier gives a limited number of queries per month and shallow result pagination, with bulk export and the richer datasets reserved for paid plans.</li>
+  <li><strong>General OPSEC.</strong> Research from a dedicated account and, for sensitive work, a separate browser profile or VM behind a VPN. Never turn a search result into an unauthorised connection. If you do need to actively verify a host, do it only inside a signed scope – and remember that active scanning is a different legal posture from querying an index.</li>
+</ul>
+
+<h2>Alternatives worth knowing</h2>
+
+<ul>
+  <li><a href="https://www.zoomeye.org" target="_blank" rel="noopener noreferrer">ZoomEye</a> – a device and web-app search engine from Knownsec, historically strong on assets in Asia, with a Shodan-like <code>app:</code>/<code>country:</code> dork syntax and a credit-based free tier.</li>
+  <li><a href="https://fofa.info" target="_blank" rel="noopener noreferrer">FOFA</a> – a Chinese internet-asset engine known for powerful fingerprint queries over <code>title=</code>, <code>body=</code>, <code>cert=</code>, and <code>domain=</code> fields; excellent for hunting look-alike infrastructure.</li>
+  <li><a href="https://netlas.io" target="_blank" rel="noopener noreferrer">Netlas</a> – searchable internet-scan data (hosts, certificates, DNS, WHOIS) with an Elasticsearch-style query DSL and a relatively generous free daily allowance.</li>
+  <li><a href="https://www.greynoise.io" target="_blank" rel="noopener noreferrer">GreyNoise</a> – the odd one out, and the perfect complement. Instead of cataloguing exposed devices, it characterises the <em>scanners</em>. When an IP hits your firewall, GreyNoise tells you whether it is internet "background noise" hammering everyone or something actually targeting you, and its RIOT dataset flags benign common services – a huge cut in false positives during triage.</li>
+  <li><a href="https://exploits.shodan.io" target="_blank" rel="noopener noreferrer">Shodan Exploits</a> and <a href="https://www.exploit-db.com" target="_blank" rel="noopener noreferrer">Exploit-DB</a> – once you have a version from a banner, these map it to known exploits and PoCs. Use them to understand and prioritise risk on your own systems, never to attack others.</li>
+</ul>
+
+<h2>The engines side by side</h2>
+
+<table>
+  <thead>
+    <tr><th>Engine</th><th>Free tier?</th><th>Strong at</th><th>Query style</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Shodan</td><td>Yes (limited); one-time paid membership common</td><td>IoT, ICS/SCADA, odd protocols, history, exploits</td><td>Short <code>key:value</code> filters, e.g. <code>port:443 org:"..."</code></td></tr>
+    <tr><td>Censys</td><td>Yes (limited monthly queries)</td><td>Certificates, structured host data, fresh full scans</td><td>Explicit field paths, e.g. <code>services.port: 443 and ...</code></td></tr>
+    <tr><td>ZoomEye</td><td>Yes (credit-based)</td><td>Web apps and assets, strong Asia coverage</td><td>Dorks, e.g. <code>app:"nginx" country:"CN"</code></td></tr>
+    <tr><td>Netlas</td><td>Yes (daily allowance)</td><td>Certificates, DNS/WHOIS, responses in one place</td><td>Elasticsearch-style DSL, e.g. <code>http.title:"Login"</code></td></tr>
+  </tbody>
+</table>
+
+<h2>Tools and resources</h2>
+
+<ul>
+  <li><a href="https://www.shodan.io" target="_blank" rel="noopener noreferrer">Shodan</a> and its <a href="https://help.shodan.io/the-basics/search-query-fundamentals" target="_blank" rel="noopener noreferrer">search filter reference</a> – the canonical list of every filter.</li>
+  <li><a href="https://cli.shodan.io" target="_blank" rel="noopener noreferrer">Shodan CLI docs</a> and <a href="https://github.com/shodan" target="_blank" rel="noopener noreferrer">nrich</a> – command-line search and the free InternetDB triage tool.</li>
+  <li><a href="https://search.censys.io" target="_blank" rel="noopener noreferrer">Censys Search</a> and its <a href="https://docs.censys.com/" target="_blank" rel="noopener noreferrer">query syntax reference</a> – the full field schema.</li>
+  <li><a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a> – Certificate Transparency search that pairs perfectly with certificate-based pivoting on either engine.</li>
+  <li><a href="https://www.greynoise.io" target="_blank" rel="noopener noreferrer">GreyNoise</a> – separate real threats from mass-scan noise when triaging an IP.</li>
+</ul>
+
+<p>The mindset that ties it together is simple. Shodan and Censys do not hack anything; they hold a mirror up to the internet and let you read what is already exposed. That makes them indispensable for defenders auditing their own surface and for researchers mapping the wider one, and it puts the entire ethical weight on the step after the search. Find, understand, and fix what is yours. Never touch what is not.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is using Shodan legal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes. Searching Shodan (or Censys) is passive OSINT – you are querying a database of banners the engine already collected, not connecting to or attacking any target, so simply looking is legal in the vast majority of jurisdictions. The tools are used every day by defenders, researchers, and academics. The legality changes entirely based on what you do with a result: the moment you connect to a device you do not own, try a credential, probe for flaws, or run an exploit, you cross into unauthorised access and likely break laws such as the US Computer Fraud and Abuse Act or the UK Computer Misuse Act. "It was exposed on Shodan" is not a defence. Observe and document; never interact with systems you are not authorised to test.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Shodan vs Censys, which is better?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Neither is universally better; they have different strengths. Shodan is faster to skim, has a friendlier one-line filter syntax, keeps deep historical data, and is stronger on IoT, industrial control systems, and unusual non-web protocols. Censys has a more rigid but more precise structured query language, excellent TLS-certificate data fed by Certificate Transparency, and frequent full-internet scans that keep coverage fresh. For odd exposed devices and quick eyeballing, reach for Shodan; for structured, certificate-heavy attack-surface work you will script against, reach for Censys. Experienced analysts use both and cross-check, because each occasionally sees a host the other misses.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is Shodan free?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Partly. You can browse some results and need a free account to use filters at all, but the free tier caps how many results and which filters you can access. Shodan has historically sold a one-time lifetime membership (frequently discounted) that unlocks more filters, screenshots, larger result sets, and API query credits, with higher subscription tiers for heavy or commercial use. Censys offers a similar model: a free community tier with a limited number of monthly queries and shallow pagination, and paid plans for bulk data and the richer datasets. For zero-cost host triage, Shodan's InternetDB and the nrich CLI need no paid key at all.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Can Shodan find my devices, and how do I protect them?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          If a device has a public IP with a service listening, Shodan and Censys will eventually index it, no link or exposure on your part is required beyond being reachable. To reduce your footprint: put management interfaces (SSH, RDP, databases, admin panels) behind a VPN or firewall instead of the open internet, close ports you do not need, require authentication everywhere and change default credentials, keep software patched so version banners do not advertise known CVEs, and periodically search your own IP ranges, organisation name, and certificate common names on both engines to catch anything exposed by mistake. Shodan Monitor and Censys attack-surface features can alert you when something new appears.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Shodan vs Nmap – what is the difference?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          They answer related questions in opposite ways. Nmap is an active scanner: you point it at targets and it sends packets to them in real time to discover ports, services, and versions, which means it touches the target, appears in their logs, and requires authorisation to be legal against systems you do not own. Shodan is a search engine over data already collected by someone else's continuous internet-wide scanning: querying it sends nothing to the target and is passive from your side. Use Shodan for fast, no-touch reconnaissance and inventory; use Nmap when you have permission and need current, precise, verified results. For how large-scale active scanning itself works, see our Nmap vs Masscan comparison.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What can attackers actually do with Shodan?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Shodan gives an attacker the same passive reconnaissance it gives a defender – a map of exposed services, versions, and likely vulnerabilities across the internet – which is precisely why defenders should use it first. It cannot break into anything on its own; it only reveals what is already reachable. The realistic risk is that it makes finding low-hanging fruit trivial: unpatched software with a known CVE, databases left open without authentication, or default-credentialed devices. The defence is the same list that protects you from anyone: do not expose what does not need exposing, patch so your banners do not advertise old vulnerabilities, authenticate everything, and audit your own attack surface on these engines before someone else does.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../what-is-osint/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is OSINT? Tools and workflow</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/nmap-vs-masscan/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Nmap vs Masscan</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../domains-vs-subdomains/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Domains vs subdomains</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../investigate-a-suspicious-domain/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to investigate a suspicious domain</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../resources/common-ports-cheat-sheet/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Common ports cheat sheet: the ones worth memorising</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

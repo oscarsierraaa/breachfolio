@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingeniería social explicada: tácticas y defensas | Breachfolio</title>
+  <meta name="description" content="Pretexting, phishing, vishing, smishing, baiting y tailgating – las técnicas principales de ingeniería social y los principios psicológicos que hay detrás." />
+  <meta name="keywords" content="ingeniería social, pretexting, phishing vishing smishing, baiting, tailgating, manipulación psicológica, principios de influencia" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/social-engineering-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/social-engineering-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Ingeniería social explicada: tácticas y defensas | Breachfolio" />
+  <meta property="og:description" content="Pretexting, phishing, vishing, smishing, baiting y tailgating – las técnicas principales de ingeniería social y los principios psicológicos que hay detrás." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-social-engineering.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ingeniería social explicada: tácticas y defensas | Breachfolio" />
+  <meta name="twitter:description" content="Pretexting, phishing, vishing, smishing, baiting y tailgating – las técnicas principales de ingeniería social y los principios psicológicos que hay detrás." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-social-engineering.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Ingeniería social explicada: tácticas y defensas",
+      "description": "Pretexting, phishing, vishing, smishing, baiting y tailgating – las técnicas principales de ingeniería social y los principios psicológicos que hay detrás.",
+      "image": "https://breachfolio.com/assets/img/hero-social-engineering.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" },
+      "inLanguage": "es",
+      "keywords": "ingeniería social, pretexting, phishing vishing smishing, baiting, tailgating, manipulación psicológica, principios de influencia"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Ingeniería social explicada", "item": "https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué es la ingeniería social?", "acceptedAnswer": { "@type": "Answer", "text": "La ingeniería social es la manipulación de personas, en lugar de sistemas, para que realicen una acción que ayuda a un atacante –entregar una contraseña, aprobar un pago fraudulento, abrir un adjunto malicioso, o dejar pasar a alguien por una puerta cerrada. Funciona porque apunta a la confianza, al hábito y a la emoción en lugar de a un fallo técnico, lo que significa que ningún firewall o parche puede cerrar la brecha por completo. Toda brecha importante que empieza con un correo de phishing es, en su raíz, un ataque de ingeniería social." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre phishing, vishing y smishing?", "acceptedAnswer": { "@type": "Answer", "text": "Son la misma técnica subyacente –un mensaje fraudulento que suplanta a una parte de confianza para robar credenciales o instalar malware– entregada por canales distintos. El phishing llega por correo electrónico, el vishing («phishing de voz») llega como una llamada telefónica, a menudo hoy potenciada con clonación de voz mediante IA para suplantar a una persona real, y el smishing («phishing por SMS») llega como un mensaje de texto, suplantando frecuentemente a un banco, una empresa de mensajería o una agencia gubernamental. Los atacantes a menudo los encadenan, por ejemplo un correo de phishing seguido de una llamada de vishing que lo referencia para parecer más creíble." } },
+        { "@type": "Question", "name": "¿Qué principios psicológicos explotan los ingenieros sociales?", "acceptedAnswer": { "@type": "Answer", "text": "Los ingenieros sociales se apoyan en principios de influencia bien documentados de la psicología social: autoridad (la gente cumple con figuras percibidas de poder, como un «departamento de TI» o «la Agencia Tributaria»), urgencia y escasez (la gente apurada se salta los pasos de verificación), prueba social («todos los demás del equipo ya hicieron esto»), reciprocidad (un pequeño favor crea la obligación de devolver otro), simpatía (confiamos en la gente que nos parece amistosa o similar a nosotros), y compromiso/consistencia (una vez que alguien accede a algo pequeño, tiende a seguir accediendo). Los atacantes raras veces se apoyan en solo uno; un pretexto convincente suele apilar dos o tres." } },
+        { "@type": "Question", "name": "¿Qué es el pretexting?", "acceptedAnswer": { "@type": "Answer", "text": "El pretexting es la invención de un escenario falso y a menudo una identidad falsa para manipular a un objetivo y hacer que revele información o conceda acceso –por ejemplo, un atacante que llama a una mesa de ayuda haciéndose pasar por un empleado bloqueado, o que se hace pasar por un proveedor para conseguir que una recepcionista le franquee la entrada a un edificio con su credencial. Con frecuencia es el fundamento que sostiene otras técnicas: un correo de phishing o una llamada de vishing casi siempre llevan un pretexto, ya sea «tu cuenta ha sido suspendida» o «soy de TI corporativo»." } },
+        { "@type": "Question", "name": "¿Cómo ponen a prueba los red teams la resiliencia frente a la ingeniería social?", "acceptedAnswer": { "@type": "Answer", "text": "Bajo un engagement autorizado y con alcance definido, los red teams ejecutan las mismas técnicas que usan los atacantes reales –campañas simuladas de phishing y vishing, llamadas con pretexto a mesas de ayuda, e intentos físicos de tailgating contra puertas aseguradas con credencial– para medir si las personas, y no solo la tecnología, detendrán una intrusión. A diferencia de un escaneo o un test de penetración contra infraestructura, esto pone a prueba específicamente la toma de decisiones humana bajo presión, y los hallazgos alimentan directamente formación de concienciación específica y correcciones de proceso como la verificación por devolución de llamada." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Ingeniería social explicada</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-social-engineering.webp" alt="Una mano que atraviesa una pantalla hacia una persona, ilustrando la manipulación en lugar de un exploit técnico – ingeniería social" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · FUNDAMENTOS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Ingeniería social, explicada.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Las técnicas principales que usan los atacantes –pretexting, phishing, vishing, smishing, baiting y tailgating– y los principios psicológicos que hacen que funcionen incluso con gente inteligente.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>La mayoría de las brechas no empiezan con un zero-day. Empiezan con alguien contestando una llamada, haciendo clic en un enlace que parecía rutinario, o sosteniendo una puerta abierta para un desconocido que carga una caja. La <strong>ingeniería social</strong> es la práctica de manipular a las personas –en lugar de explotar código– para que realicen una acción que ayuda a un atacante. Funciona precisamente porque no toca ni un solo sistema vulnerable: apunta a la confianza, al hábito, a la deferencia hacia la autoridad, y al instinto muy humano de ser útil bajo presión de tiempo. Este artículo desglosa las técnicas principales, los principios psicológicos que hay detrás, cómo se desarrolla realmente un ataque de ingeniería social, y cómo las organizaciones –incluidos los red teams– ponen a prueba y construyen resiliencia frente a ella.</p>
+
+<h2>Qué hace que sea «ingeniería»</h2>
+
+<p>La palabra es deliberada. Los ingenieros sociales no improvisan un timo sobre la marcha; investigan un objetivo, diseñan un pretexto, y lo ejecutan metódicamente, del mismo modo que un atacante técnico mapea una red antes de explotarla. La «vulnerabilidad» que se explota no es un parche que falta: es una respuesta humana predecible ante un escenario cuidadosamente construido. Eso es lo que separa la ingeniería social de una estafa con suerte: es reproducible, enseñable, y se vuelve más efectiva cuanto más sabe el atacante sobre el rol, las relaciones y la rutina del objetivo.</p>
+
+<h2>Las técnicas principales</h2>
+
+<p>La mayoría de los ataques reales se construyen a partir de un pequeño conjunto de técnicas bien definidas, a menudo combinadas. Conocer sus nombres hace que sea mucho más fácil reconocerlas en el momento:</p>
+
+<table>
+  <thead>
+    <tr><th>Técnica</th><th>Qué es</th><th>Canal habitual</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Pretexting</strong></td><td>Inventar un escenario falso y a menudo una identidad falsa para justificar una petición de información o acceso</td><td>Teléfono, correo, en persona</td></tr>
+    <tr><td><strong>Phishing</strong></td><td>Correo fraudulento que suplanta a un remitente de confianza para robar credenciales o entregar malware</td><td>Correo electrónico</td></tr>
+    <tr><td><strong>Vishing</strong></td><td>Phishing por voz –una llamada telefónica que suplanta a un banco, al soporte de TI o a un ejecutivo, cada vez más ayudada por clonación de voz con IA</td><td>Teléfono / VoIP</td></tr>
+    <tr><td><strong>Smishing</strong></td><td>Phishing por SMS –un mensaje de texto que suplanta a una empresa de mensajería, un banco o una agencia tributaria con un enlace malicioso</td><td>SMS / apps de mensajería</td></tr>
+    <tr><td><strong>Baiting</strong></td><td>Ofrecer algo tentador –un USB «encontrado», una descarga gratuita, una oferta demasiado buena– para atraer a una víctima hacia una acción comprometedora</td><td>Medios físicos, anuncios, descargas</td></tr>
+    <tr><td><strong>Tailgating / piggybacking</strong></td><td>Seguir a una persona autorizada a través de una puerta asegurada sin credencial propia, a menudo cargando algo que desaliente que le pidan explicaciones</td><td>Puntos de acceso físico</td></tr>
+    <tr><td><strong>Quid pro quo</strong></td><td>Ofrecer un servicio o beneficio a cambio de información o acceso –una falsa llamada de «soporte de TI» que arregla un problema menor a cambio de una contraseña</td><td>Teléfono, en persona</td></tr>
+  </tbody>
+</table>
+
+<p>Estas no son categorías abstractas: aparecen constantemente en las guías de estafas para consumidores de este sitio, porque una estafa por SMS y una brecha empresarial se construyen con el mismo manual, solo que apuntando a un objetivo y una recompensa distintos. Nuestro análisis de la <a href="../../guias/sms-aeat-falso/">estafa del SMS falso de la Agencia Tributaria</a> es un ejemplo de manual de smishing, que explota la autoridad y el miedo a una agencia tributaria. Nuestra <a href="../../guias/phishing-paypal/">guía de la estafa de phishing de PayPal</a> cubre el phishing clásico por correo, usando la urgencia («tu cuenta será suspendida») para cortocircuitar una lectura cuidadosa. Y nuestra guía sobre las <a href="../../guias/estafa-voz-clonada-ia/">estafas de voz clonada con IA</a> muestra cómo el vishing ha evolucionado de «un desconocido con un guion» a «una voz clonada de alguien a quien realmente conoces», lo cual es una escalada directa del mismo principio de pretexting.</p>
+
+<h2>Los principios psicológicos que se explotan</h2>
+
+<p>La ingeniería social no surgió de la informática: toma prestado directamente de décadas de investigación en psicología social sobre qué hace que la gente cumpla con una petición, catalogado de forma más famosa por los principios de influencia del psicólogo Robert Cialdini. Los atacantes raras veces inventan nuevas tácticas de persuasión; reutilizan otras bien estudiadas:</p>
+
+<table>
+  <thead>
+    <tr><th>Principio</th><th>La idea</th><th>Cómo se usa como arma</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Autoridad</strong></td><td>La gente cumple más fácilmente con instrucciones de una figura percibida de poder o experiencia</td><td>«Esto es Seguridad de TI» o «Esto es la Agencia Tributaria» adjunto a una instrucción urgente</td></tr>
+    <tr><td><strong>Urgencia / escasez</strong></td><td>La presión de tiempo y el miedo a perderse algo cortocircuitan el pensamiento cuidadoso y deliberado</td><td>«Tu cuenta será suspendida en 24 horas» o «actúa ahora o pierde el acceso»</td></tr>
+    <tr><td><strong>Prueba social</strong></td><td>La gente se fija en el comportamiento de otros para decidir qué es normal o seguro</td><td>«El resto del equipo ya completó esto», refiriéndose a un compañero falso</td></tr>
+    <tr><td><strong>Reciprocidad</strong></td><td>Recibir algo, incluso algo pequeño, crea una obligación sentida de devolver el favor</td><td>Un técnico de TI falso que «ayuda» con un problema menor antes de pedir una contraseña</td></tr>
+    <tr><td><strong>Simpatía (liking)</strong></td><td>La gente se deja persuadir más fácilmente por quienes le resultan simpáticos, familiares o similares a sí misma</td><td>Un atacante que imita el tono de un objetivo, hace referencia a conexiones compartidas, o se hace pasar por un nuevo compañero amistoso</td></tr>
+    <tr><td><strong>Compromiso / consistencia</strong></td><td>Una vez que alguien accede a una petición pequeña, tiende a mantenerse consistente y aceptar peticiones cada vez mayores</td><td>Un pretexto que empieza con una petición inocua antes de escalar hacia la petición real</td></tr>
+  </tbody>
+</table>
+
+<p>La ingeniería social efectiva raras veces se apoya en una sola palanca. Un pretexto convincente suele apilar dos o tres a la vez –un mensaje «urgente» (urgencia) de «Seguridad de TI» (autoridad) que menciona que «todos los demás ya actualizaron su contraseña» (prueba social). Reconocer ese patrón de apilamiento suele ser una señal más rápida que detectar cualquier detalle sospechoso individual.</p>
+
+<h2>Anatomía de un ataque</h2>
+
+<p>Un ataque de ingeniería social, ya sea contra un individuo o una organización, suele seguir el mismo ciclo de vida:</p>
+
+<ol>
+  <li><strong>Reconocimiento.</strong> El atacante investiga al objetivo –puesto de trabajo, nombre del jefe, relaciones con proveedores, noticias públicas recientes– a menudo extraído directamente de LinkedIn, del propio sitio web de una empresa, o de una brecha de datos. Este es funcionalmente el mismo trabajo de recolección cubierto en <a href="../que-es-osint/">qué es OSINT</a>, solo que orientado a construir un pretexto en lugar de un mapa de infraestructura.</li>
+  <li><strong>Desarrollo del pretexto.</strong> El atacante diseña un escenario y una identidad plausibles: un nuevo proveedor, un ejecutivo estresado, un técnico de soporte, una agencia gubernamental.</li>
+  <li><strong>Contacto inicial.</strong> Se entrega el pretexto –un correo, una llamada, un texto, un acercamiento físico– diseñado para activar uno o más de los principios de influencia anteriores.</li>
+  <li><strong>Explotación.</strong> El objetivo cumple: hace clic en un enlace, lee en voz alta un código de un solo uso, transfiere fondos, o abre una puerta. Este es el momento en que la técnica se convierte en un compromiso real.</li>
+  <li><strong>Salida y cobertura.</strong> Un atacante hábil cierra la interacción limpiamente, a veces reforzando el pretexto («gracias, eso era todo lo que necesitaba») para que la víctima no tenga motivo inmediato de sospecha.</li>
+</ol>
+
+<h2>Defensa en profundidad: controles técnicos y humanos juntos</h2>
+
+<p>Como la ingeniería social apunta a las personas, ningún control puramente técnico cierra por completo la brecha –pero los controles técnicos siguen eliminando una gran parte de la oportunidad. La autenticación de correo (SPF, DKIM, DMARC) bloquea una fracción significativa de direcciones de remitente suplantadas antes de que un correo de phishing llegue siquiera a una bandeja de entrada. La autenticación multifactor limita el daño de una contraseña robada, aunque no es inmune a los proxies de phishing en tiempo real ni al bombardeo de solicitudes de fatiga de MFA. La verificación por devolución de llamada –colgar y marcar un número que ya conoces, en lugar de uno proporcionado por quien llama– derrota al vishing sin importar cuán convincente suene la voz. Las alarmas de tailgating en lectores de credenciales y una cultura de «sin excepciones, todo el mundo pasa su credencial» derrotan el piggybacking físico.</p>
+
+<p>El lado humano importa igual de mucho: formación de concienciación regular y realista; una cultura donde verificar una petición inusual se trata como diligencia profesional en lugar de desconfianza hacia un compañero; y una forma clara y de baja fricción de reportar un contacto sospechoso para que el «casi me pilla» de una persona se convierta en la alerta temprana de toda la organización. Ninguna de las dos capas funciona sola: los controles técnicos capturan lo que la gente pasa por alto, y la gente formada captura lo que los controles técnicos pasan por alto.</p>
+
+<h2>Compromiso del correo empresarial: pretexting a escala en el trabajo</h2>
+
+<p>El <strong>compromiso del correo empresarial (BEC, Business Email Compromise)</strong> es donde estas técnicas convergen en una de las formas de ingeniería social más dañinas financieramente, precisamente porque casi nunca necesita malware alguno. Un ataque BEC típico empieza con reconocimiento –el atacante estudia el organigrama público de una empresa, sus comunicados de prensa y el formato de sus direcciones de correo, a veces reforzado por un compromiso previo y no relacionado de un buzón real mediante phishing. A partir de ahí, el pretexto suele ser uno de unos pocos guiones muy trillados: un correo que parece venir del CEO, instruyendo urgentemente a finanzas para transferir fondos para una «adquisición confidencial»; un mensaje que suplanta a un proveedor conocido, pidiendo actualizar los datos bancarios registrados antes de pagar la próxima factura; o una petición suplantada de RR. HH. pidiendo a un empleado que redirija su propio depósito de nómina.</p>
+
+<p>Lo que hace instructivo al BEC es lo limpiamente que encaja con los principios de influencia de arriba. La autoridad hace el trabajo inicial –un mensaje que parece venir de un ejecutivo sénior desalienta el tipo de rechazo que invitaría una petición de un compañero. La urgencia cierra el círculo –«transfiere esto antes de que acabe el día, estoy en reuniones seguidas y no puedo atender llamadas» elimina el momento natural en que alguien podría coger el teléfono y comprobarlo. Y como el correo a menudo llega desde un dominio que difiere en un solo carácter del real, o desde una cuenta genuinamente comprometida, se cuela por debajo del filtro instintivo de «¿de verdad un desconocido me enviaría esto?» que atrapa a las estafas más burdas. La contramedida que funciona de forma consistente es procedimental, no técnica: un paso de verificación obligatorio y fuera de banda –una llamada telefónica a un número conocido, no al que aparece en el correo– para cualquier petición de mover dinero o cambiar datos de pago, sin importar cuán sénior parezca el remitente ni cuán urgente afirme ser el mensaje.</p>
+
+<h2>Cómo ponen a prueba los red teams la resiliencia frente a la ingeniería social</h2>
+
+<p>Las organizaciones que quieren saber cómo aguantarían realmente no tienen que esperar a que un atacante real lo averigüe por ellas. Bajo un acuerdo firmado y con alcance definido, un red team ejecuta las mismas técnicas descritas arriba –campañas simuladas de phishing, llamadas de vishing a mesas de ayuda y personal, e intentos físicos de tailgating contra entradas aseguradas con credencial– específicamente para poner a prueba la toma de decisiones humana y los procesos, no solo los firewalls y los endpoints. Eso es un ejercicio significativamente distinto de un test de penetración técnico, porque la «vulnerabilidad» que se está sondeando vive en la política y el comportamiento, no en el código. Nuestro artículo complementario sobre <a href="../que-hace-un-red-team/">qué hace realmente un red team</a> cubre cómo se delimitan, autorizan y reportan estos engagements –incluido cómo los resultados de ingeniería social típicamente alimentan directamente formación específica y correcciones de proceso como la verificación obligatoria por devolución de llamada, en lugar de culpar a quien cayó en el pretexto.</p>
+
+<h2>Reconocer y reportar en el momento</h2>
+
+<p>Las técnicas individuales varían, pero las señales se agrupan en torno al mismo puñado de patrones sin importar el canal:</p>
+
+<table>
+  <thead>
+    <tr><th>Señal de alarma</th><th>Por qué funciona en las personas</th><th>Qué hacer en su lugar</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Presión de tiempo artificial («actúa en la próxima hora»)</td><td>Explota la urgencia para impedir un pensamiento deliberado y cuidadoso</td><td>Trata la propia presión como la señal de alarma; frena deliberadamente</td></tr>
+    <tr><td>Una petición de pasar a un canal «privado» o inusual</td><td>Elimina testigos y verificación institucional</td><td>Insiste en continuar por el canal normal y registrado</td></tr>
+    <tr><td>Datos de contacto proporcionados por el propio mensaje</td><td>Permite que el atacante controle también el paso de «verificación»</td><td>Busca el número o la dirección de forma independiente, nunca uses lo que te proporcionaron</td></tr>
+    <tr><td>Una apelación a una autoridad que no puedes confirmar de forma independiente</td><td>Dispara el cumplimiento automático ante un poder percibido</td><td>Verifica la identidad de la persona por un segundo canal de confianza</td></tr>
+    <tr><td>Una petición pequeña, seguida de una más grande</td><td>Explota el compromiso/consistencia para escalar hacia la petición real</td><td>Evalúa cada petición por sus propios méritos, no como continuación de una confianza ya concedida</td></tr>
+  </tbody>
+</table>
+
+<p>Más allá de reconocer el patrón en el momento, frena cada vez que un mensaje o una llamada cree urgencia artificial –esa presión es en sí misma una señal, no una razón para apresurarse. Verifica la identidad por un canal en el que ya confías, no por uno que te proporcione el contacto –llama al número que aparece al dorso de tu tarjeta, no al que viene en el mensaje. Sé escéptico ante cualquier contacto no solicitado que te pida actuar, hacer clic, pagar o revelar información, incluso si parece venir de alguien que conoces. Y reporta el intento, aunque no haya pasado nada –un SMS de smishing que ignoraste podría ser la misma campaña que atrape a un compañero mañana. Nuestra biblioteca de guías de estafas para consumidores, incluidos los análisis del <a href="../../guias/sms-aeat-falso/">SMS falso de la Agencia Tributaria</a> y del <a href="../../guias/phishing-paypal/">phishing de PayPal</a>, da detalles específicos por canal sobre exactamente qué comprobar antes de actuar.</p>
+
+<h2>En resumen</h2>
+
+<p>La ingeniería social triunfa apuntando a la única parte de cualquier programa de seguridad que no se puede parchear: el juicio humano bajo presión. Las técnicas –pretexting, phishing, vishing, smishing, baiting, tailgating, quid pro quo– son un conjunto pequeño y aprendible, y las palancas psicológicas detrás de ellas –autoridad, urgencia, prueba social, reciprocidad, simpatía y compromiso– están bien documentadas y son predecibles una vez que sabes qué buscar. Reconocer el patrón, verificar por un canal de confianza, y construir una cultura donde frenar se premia en lugar de penalizarse cierra la mayor parte de la brecha que ningún firewall podría cerrar jamás.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es la ingeniería social?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La ingeniería social es la manipulación de personas, en lugar de sistemas, para que realicen una acción que ayuda a un atacante –entregar una contraseña, aprobar un pago fraudulento, abrir un adjunto malicioso, o dejar pasar a alguien por una puerta cerrada. Funciona porque apunta a la confianza, al hábito y a la emoción en lugar de a un fallo técnico, lo que significa que ningún firewall o parche puede cerrar la brecha por completo. Toda brecha importante que empieza con un correo de phishing es, en su raíz, un ataque de ingeniería social.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre phishing, vishing y smishing?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Son la misma técnica subyacente –un mensaje fraudulento que suplanta a una parte de confianza para robar credenciales o instalar malware– entregada por canales distintos. El phishing llega por correo electrónico, el vishing («phishing de voz») llega como una llamada telefónica, a menudo hoy potenciada con clonación de voz mediante IA para suplantar a una persona real, y el smishing («phishing por SMS») llega como un mensaje de texto, suplantando frecuentemente a un banco, una empresa de mensajería o una agencia gubernamental. Los atacantes a menudo los encadenan, por ejemplo un correo de phishing seguido de una llamada de vishing que lo referencia para parecer más creíble.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué principios psicológicos explotan los ingenieros sociales?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los ingenieros sociales se apoyan en principios de influencia bien documentados de la psicología social: autoridad (la gente cumple con figuras percibidas de poder, como un «departamento de TI» o «la Agencia Tributaria»), urgencia y escasez (la gente apurada se salta los pasos de verificación), prueba social («todos los demás del equipo ya hicieron esto»), reciprocidad (un pequeño favor crea la obligación de devolver otro), simpatía (confiamos en la gente que nos parece amistosa o similar a nosotros), y compromiso/consistencia (una vez que alguien accede a algo pequeño, tiende a seguir accediendo). Los atacantes raras veces se apoyan en solo uno; un pretexto convincente suele apilar dos o tres.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es el pretexting?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El pretexting es la invención de un escenario falso y a menudo una identidad falsa para manipular a un objetivo y hacer que revele información o conceda acceso –por ejemplo, un atacante que llama a una mesa de ayuda haciéndose pasar por un empleado bloqueado, o que se hace pasar por un proveedor para conseguir que una recepcionista le franquee la entrada a un edificio con su credencial. Con frecuencia es el fundamento que sostiene otras técnicas: un correo de phishing o una llamada de vishing casi siempre llevan un pretexto, ya sea «tu cuenta ha sido suspendida» o «soy de TI corporativo».
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo ponen a prueba los red teams la resiliencia frente a la ingeniería social?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Bajo un engagement autorizado y con alcance definido, los red teams ejecutan las mismas técnicas que usan los atacantes reales –campañas simuladas de phishing y vishing, llamadas con pretexto a mesas de ayuda, e intentos físicos de tailgating contra puertas aseguradas con credencial– para medir si las personas, y no solo la tecnología, detendrán una intrusión. A diferencia de un escaneo o un test de penetración contra infraestructura, esto pone a prueba específicamente la toma de decisiones humana bajo presión, y los hallazgos alimentan directamente formación de concienciación específica y correcciones de proceso como la verificación por devolución de llamada.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../que-hace-un-red-team/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué hace realmente un red team</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guias/sms-aeat-falso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo saber si un SMS de la AEAT es falso</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guias/phishing-paypal/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Phishing de PayPal: falso pago recibido</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../guias/estafa-soporte-tecnico-falso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Estafa del soporte técnico falso: pop-ups y acceso remoto</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

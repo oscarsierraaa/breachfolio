@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="hlgrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="hlglow" cx="0.5" cy="0.4" r="0.68"><stop offset="0%" stop-color="hsl(142 76% 45%)" stop-opacity="0.28"/><stop offset="55%" stop-color="hsl(142 76% 45%)" stop-opacity="0.05"/><stop offset="100%" stop-color="hsl(142 76% 45%)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="hlvfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(240 10% 4%)" stop-opacity="0"/><stop offset="100%" stop-color="hsl(240 10% 4%)" stop-opacity="0.5"/></linearGradient>
+</defs>
+<rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+<rect width="800" height="400" fill="url(#hlgrid)"/>
+<ellipse cx="400" cy="200" rx="380" ry="250" fill="url(#hlglow)"/>
+
+<!-- repeat-weekly loop arc above the bars -->
+<path d="M628 166 C 628 104, 140 104, 140 172" fill="none" stroke="hsl(142 76% 45%)" stroke-width="2" stroke-dasharray="3 7" stroke-linecap="round" opacity="0.55"/>
+<path d="M140 172 l-13 -18 M140 172 l18 -10" stroke="hsl(142 76% 45%)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+<text x="400" y="98" text-anchor="middle" font-size="11" letter-spacing="2.5" fill="hsl(142 76% 45%)" opacity="0.75">REPEAT WEEKLY — CONSISTENCY OVER MONTHS</text>
+
+<!-- legend -->
+<g font-size="11" letter-spacing="1.5">
+  <rect x="222" y="128" width="12" height="12" rx="2" fill="hsl(142 76% 45%)"/><text x="240" y="138" fill="hsl(240 5% 65%)" opacity="0.85">STUCK-FIRST</text>
+  <rect x="372" y="128" width="12" height="12" rx="2" fill="hsl(168 78% 50%)"/><text x="390" y="138" fill="hsl(240 5% 65%)" opacity="0.85">RECALL</text>
+  <rect x="480" y="128" width="12" height="12" rx="2" fill="hsl(240 5% 65%)" opacity="0.5"/><text x="498" y="138" fill="hsl(240 5% 65%)" opacity="0.85">NOTES</text>
+</g>
+
+<!-- baseline -->
+<line x1="90" y1="330" x2="710" y2="330" stroke="hsl(240 5% 65%)" stroke-width="1" opacity="0.25"/>
+
+<!-- session bars: stuck-first (bottom) -> recall -> notes (top) -->
+<g>
+  <!-- S1 -->
+  <rect x="108" y="240" width="64" height="90" rx="3" fill="hsl(142 76% 45%)" opacity="0.9"/>
+  <rect x="108" y="200" width="64" height="40" rx="3" fill="hsl(168 78% 50%)" opacity="0.85"/>
+  <rect x="108" y="172" width="64" height="28" rx="3" fill="hsl(240 5% 65%)" opacity="0.35"/>
+  <text x="140" y="352" text-anchor="middle" font-size="12" letter-spacing="2" fill="hsl(240 5% 65%)" opacity="0.7">S1</text>
+
+  <!-- S2 -->
+  <rect x="238" y="230" width="64" height="100" rx="3" fill="hsl(142 76% 45%)" opacity="0.9"/>
+  <rect x="238" y="194" width="64" height="36" rx="3" fill="hsl(168 78% 50%)" opacity="0.85"/>
+  <rect x="238" y="170" width="64" height="24" rx="3" fill="hsl(240 5% 65%)" opacity="0.35"/>
+  <text x="270" y="352" text-anchor="middle" font-size="12" letter-spacing="2" fill="hsl(240 5% 65%)" opacity="0.7">S2</text>
+
+  <!-- S3 -->
+  <rect x="368" y="246" width="64" height="84" rx="3" fill="hsl(142 76% 45%)" opacity="0.9"/>
+  <rect x="368" y="198" width="64" height="48" rx="3" fill="hsl(168 78% 50%)" opacity="0.85"/>
+  <rect x="368" y="166" width="64" height="32" rx="3" fill="hsl(240 5% 65%)" opacity="0.35"/>
+  <text x="400" y="352" text-anchor="middle" font-size="12" letter-spacing="2" fill="hsl(240 5% 65%)" opacity="0.7">S3</text>
+
+  <!-- S4 -->
+  <rect x="498" y="234" width="64" height="96" rx="3" fill="hsl(142 76% 45%)" opacity="0.9"/>
+  <rect x="498" y="200" width="64" height="34" rx="3" fill="hsl(168 78% 50%)" opacity="0.85"/>
+  <rect x="498" y="174" width="64" height="26" rx="3" fill="hsl(240 5% 65%)" opacity="0.35"/>
+  <text x="530" y="352" text-anchor="middle" font-size="12" letter-spacing="2" fill="hsl(240 5% 65%)" opacity="0.7">S4</text>
+
+  <!-- S5 (optional session) -->
+  <rect x="628" y="238" width="64" height="92" rx="3" fill="hsl(142 76% 45%)" opacity="0.6"/>
+  <rect x="628" y="196" width="64" height="42" rx="3" fill="hsl(168 78% 50%)" opacity="0.55"/>
+  <rect x="628" y="166" width="64" height="30" rx="3" fill="hsl(240 5% 65%)" opacity="0.25"/>
+  <text x="660" y="352" text-anchor="middle" font-size="12" letter-spacing="2" fill="hsl(240 5% 65%)" opacity="0.55">S5</text>
+</g>
+
+<rect width="800" height="400" fill="url(#hlvfade)"/>
+
+<g font-size="12" letter-spacing="3" font-weight="500">
+  <text x="24" y="34" fill="hsl(142 76% 45%)" opacity="0.95">METHOD / WEEKLY RHYTHM</text>
+  <text x="24" y="378" fill="hsl(240 5% 65%)" opacity="0.6">FOUR TO FIVE FOCUSED SESSIONS, NOT ONE BINGE</text>
+  <text x="776" y="378" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="776" cy="30" r="4" fill="hsl(142 76% 45%)"/>
+<circle cx="776" cy="30" r="9" fill="hsl(142 76% 45%)" opacity="0.25"/>
+</svg>

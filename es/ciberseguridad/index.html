@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cyber">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ciberseguridad – De cero a profesional en activo | Breachfolio</title>
+  <meta name="description" content="Un camino guiado de ciberseguridad desde los fundamentos hasta la práctica real. Vocabulario, redes, Linux, criptografía, modelado de amenazas. Práctico, gratuito." />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Ciberseguridad – De cero a profesional en activo | Breachfolio" />
+  <meta property="og:description" content="Un camino guiado de ciberseguridad desde los fundamentos hasta la práctica real. Vocabulario, redes, Linux, criptografía, modelado de amenazas. Práctico, gratuito." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-cybersecurity.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ciberseguridad – De cero a profesional en activo | Breachfolio" />
+  <meta name="twitter:description" content="Un camino guiado de ciberseguridad desde los fundamentos hasta la práctica real. Vocabulario, redes, Linux, criptografía, modelado de amenazas. Práctico, gratuito." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-cybersecurity.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script src="../../assets/hack-terminal.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+"@context": "https://schema.org",
+"@graph": [
+  {
+    "@type": "CollectionPage",
+    "@id": "https://breachfolio.com/es/ciberseguridad/#collectionpage",
+    "url": "https://breachfolio.com/es/ciberseguridad/",
+    "name": "Ciberseguridad – De cero a profesional en activo",
+    "description": "Un camino guiado de ciberseguridad desde los fundamentos hasta la práctica real. Vocabulario, redes, Linux, criptografía, modelado de amenazas. Práctico, gratuito.",
+    "inLanguage": "es",
+    "isPartOf": {
+      "@id": "https://breachfolio.com/#website"
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://breachfolio.com/es/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Ciberseguridad",
+        "item": "https://breachfolio.com/es/ciberseguridad/"
+      }
+    ]
+  }
+]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Breachfolio Cybersecurity Guides",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://breachfolio.com/es/ciberseguridad/ciberseguridad-101/",
+      "name": "Cybersecurity 101: the words that mean what."
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "url": "https://breachfolio.com/es/ciberseguridad/como-funcionan-las-redes/",
+      "name": "How networks actually work (without the OSI poster)."
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "url": "https://breachfolio.com/es/ciberseguridad/fundamentos-de-linux-para-seguridad/",
+      "name": "Linux fundamentals for security, the working subset."
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "url": "https://breachfolio.com/es/ciberseguridad/criptografia-basica-que-puedes-usar/",
+      "name": "Cryptography you can actually use."
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "url": "https://breachfolio.com/es/ciberseguridad/modelado-de-amenazas-con-stride/",
+      "name": "Threat modeling with STRIDE: a worked example."
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "url": "https://breachfolio.com/es/ciberseguridad/como-empezar-en-ciberseguridad/",
+      "name": "How to start in cybersecurity: the real roadmap, and where it leads."
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "url": "https://breachfolio.com/es/ciberseguridad/equipo-rojo-azul-y-morado-explicado/",
+      "name": "Red team, blue team, purple team: what each one actually does."
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "url": "https://breachfolio.com/es/ciberseguridad/como-aprender-ciberseguridad/",
+      "name": "How to actually learn cybersecurity (without burning out on tutorials)."
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "url": "https://breachfolio.com/es/ciberseguridad/que-es-un-soc/",
+      "name": "Qué es un SOC (Security Operations Center)."
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "url": "https://breachfolio.com/es/ciberseguridad/que-es-osint/",
+      "name": "Qué es OSINT: herramientas y flujo."
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "url": "https://breachfolio.com/es/ciberseguridad/shodan-y-censys/",
+      "name": "Shodan y Censys explicados."
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "url": "https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/",
+      "name": "Roles y niveles de un equipo SOC."
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "url": "https://breachfolio.com/es/ciberseguridad/herramientas-de-un-soc/",
+      "name": "Herramientas SOC: SIEM, SOAR, EDR y más."
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "url": "https://breachfolio.com/es/ciberseguridad/que-es-whois/",
+      "name": "Qué es WHOIS y cómo leerlo."
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "url": "https://breachfolio.com/es/ciberseguridad/dominios-y-subdominios/",
+      "name": "Dominios vs subdominios: cómo enumerarlos."
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "url": "https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/",
+      "name": "Reglas Sigma y YARA explicadas."
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "url": "https://breachfolio.com/es/ciberseguridad/indicadores-de-compromiso/",
+      "name": "Indicadores de compromiso (IOC) explicados."
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "url": "https://breachfolio.com/es/ciberseguridad/investigar-un-dominio-sospechoso/",
+      "name": "Investigar un dominio sospechoso: workflow."
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "url": "https://breachfolio.com/es/ciberseguridad/registro-registrador-isp-hosting/",
+      "name": "Registro vs registrar vs ISP vs hosting."
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "url": "https://breachfolio.com/es/ciberseguridad/forense-digital-y-dfir/",
+      "name": "Forense digital y DFIR explicados."
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "url": "https://breachfolio.com/es/ciberseguridad/que-hace-un-red-team/",
+      "name": "Qué hace realmente un red team."
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "url": "https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/",
+      "name": "Certificados TLS y Certificate Transparency, explicados."
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "url": "https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/",
+      "name": "Autenticación multifactor (MFA), explicada."
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "url": "https://breachfolio.com/es/ciberseguridad/infraestructura-de-clave-publica-pki-explicada/",
+      "name": "Infraestructura de clave pública (PKI), explicada."
+    },
+    {
+      "@type": "ListItem",
+      "position": 25,
+      "url": "https://breachfolio.com/es/ciberseguridad/cve-vs-cvss-explicado/",
+      "name": "CVE vs CVSS: ¿cuál es la diferencia?"
+    },
+    {
+      "@type": "ListItem",
+      "position": 26,
+      "url": "https://breachfolio.com/es/ciberseguridad/fundamentos-de-inteligencia-de-amenazas/",
+      "name": "Fundamentos de la inteligencia de amenazas (CTI), explicados."
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
+      "url": "https://breachfolio.com/es/ciberseguridad/ingenieria-social-explicada/",
+      "name": "Ingeniería social, explicada."
+    },
+    {
+      "@type": "ListItem",
+      "position": 28,
+      "url": "https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/",
+      "name": "Ataques de SIM swapping, explicados."
+    },
+    {
+      "@type": "ListItem",
+      "position": 29,
+      "url": "https://breachfolio.com/es/ciberseguridad/como-funciona-una-vpn/",
+      "name": "Cómo funciona realmente una VPN, y qué es lo que no oculta."
+    },
+    {
+      "@type": "ListItem",
+      "position": 30,
+      "url": "https://breachfolio.com/es/ciberseguridad/firewalls-con-estado-vs-sin-estado/",
+      "name": "Firewalls con estado vs sin estado, y NGFW explicado."
+    },
+    {
+      "@type": "ListItem",
+      "position": 31,
+      "url": "https://breachfolio.com/es/ciberseguridad/disciplinas-de-inteligencia-explicadas/",
+      "name": "Las disciplinas -INT: dónde encaja OSINT entre ellas."
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+  <link rel="next" href="https://breachfolio.com/es/ciberseguridad/page-2/" />
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="./" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="./" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Ciberseguridad</span></li>
+  </ol>
+</nav><main id="main"><section class="sf-hero sf-hero-aura sf-hero-grid sf-hero-fx border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-14 md:pt-20 pb-14 md:pb-20">
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+        <div>
+          <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">Ciberseguridad · Base de conocimiento</div>
+          <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-2xl">Conocimiento que <span class="sf-grad">fortalece tu defensa.</span></h1>
+          <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-xl">Guías en profundidad, análisis y conocimiento práctico sobre amenazas, vulnerabilidades y las herramientas en las que confían los equipos de seguridad. Un camino guiado desde los fundamentos hasta la práctica real.</p>
+        </div>
+        <div class="relative mx-auto w-full max-w-[360px] aspect-square" aria-hidden="true">
+          <img src="../../assets/img/hero-cybersecurity.webp" alt="" width="800" height="800" fetchpriority="high" decoding="async" class="w-full h-full object-contain" />
+        </div>
+      </div>
+
+      <!-- Browse by topic – sistema multi-color de categorías (sin cifras inventadas) -->
+      <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="modelado-de-amenazas-con-stride/" class="sf-cat-card sf-cat sf-cat--threat">
+          <span class="sf-cat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
+          <div class="font-display text-[16px] font-semibold tracking-tight">Inteligencia de amenazas</div>
+          <p class="text-muted-foreground text-[13px] leading-[1.6]">Adversarios, campañas y cómo pensar en términos de amenazas, ataques y riesgo.</p>
+        </a>
+        <a href="../recursos/owasp-top-10-referencia-rapida/" class="sf-cat-card sf-cat sf-cat--vuln">
+          <span class="sf-cat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v3M11 14h.01"/></svg></span>
+          <div class="font-display text-[16px] font-semibold tracking-tight">Vulnerabilidades</div>
+          <p class="text-muted-foreground text-[13px] leading-[1.6]">Descubre, prioriza y entiende los fallos que de verdad importan – OWASP Top 10.</p>
+        </a>
+        <a href="../comparativas/burp-vs-zap/" class="sf-cat-card sf-cat sf-cat--web">
+          <span class="sf-cat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>
+          <div class="font-display text-[16px] font-semibold tracking-tight">Seguridad web</div>
+          <p class="text-muted-foreground text-[13px] leading-[1.6]">Asegura apps web y APIs – y los proxies usados para probarlas de principio a fin.</p>
+        </a>
+        <a href="como-funcionan-las-redes/" class="sf-cat-card sf-cat sf-cat--cloud">
+          <span class="sf-cat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.3-2A4.5 4.5 0 0 0 6 18z"/><path d="M8 21h8M12 18v3"/></svg></span>
+          <div class="font-display text-[16px] font-semibold tracking-tight">Redes y nube</div>
+          <p class="text-muted-foreground text-[13px] leading-[1.6]">Cómo fluye el tráfico de verdad – IP, TCP, DNS, TLS – y dónde puede mentir un atacante.</p>
+        </a>
+        <a href="../laboratorio/objetivo-vulnerable-dvwa-en-docker/" class="sf-cat-card sf-cat sf-cat--malware">
+          <span class="sf-cat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="12" height="10" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2M4 12H2M22 12h-2M5 16l-2 1M19 16l2 1M9 18l-1 2M15 18l1 2"/></svg></span>
+          <div class="font-display text-[16px] font-semibold tracking-tight">Malware y objetivos</div>
+          <p class="text-muted-foreground text-[13px] leading-[1.6]">Analiza comportamientos con seguridad en objetivos desechables y deliberadamente vulnerables.</p>
+        </a>
+        <a href="../recursos/primeras-24-horas-de-un-incidente/" class="sf-cat-card sf-cat sf-cat--incident">
+          <span class="sf-cat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"/><path d="M12 8v4l3 2"/></svg></span>
+          <div class="font-display text-[16px] font-semibold tracking-tight">Respuesta a incidentes</div>
+          <p class="text-muted-foreground text-[13px] leading-[1.6]">Detecta, contén y recupera – un manual tranquilo y ordenado para las primeras 24 horas.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="mb-8">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">Últimas novedades</div>
+      <h2 class="font-display mt-3 text-[clamp(1.5rem,3vw,2rem)] leading-tight tracking-tight font-semibold">Conocimiento práctico para quienes defienden hoy.</h2>
+    </div>
+    <div class="flex flex-wrap items-center gap-3 mb-8">
+      <div class="relative flex-1 min-w-[200px] max-w-xs">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="sf-list-search" type="text" placeholder="Buscar en Ciberseguridad…" aria-label="Buscar en Ciberseguridad" class="w-full h-9 rounded-full border border-border bg-surface/40 text-[13px] pl-9 pr-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent/50" />
+      </div>
+      <div id="sf-tag-filter" class="relative">
+        <button id="sf-tag-btn" type="button" class="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-full border border-border text-[12px] font-mono tracking-wider text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+          <span>TEMAS</span><span id="sf-tag-count" class="text-accent"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="sf-tag-panel" class="hidden absolute left-0 mt-2 sf-tag-panel">
+          <input id="sf-tag-search" type="text" placeholder="Buscar tema…" aria-label="Buscar tema" />
+          <div id="sf-tag-list"></div>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5" role="group" aria-label="Filtrar por rango de fechas">
+        <label class="sr-only" for="sf-date-from">Desde</label>
+        <input type="date" id="sf-date-from" aria-label="Desde" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+        <span class="text-muted text-[11px]" aria-hidden="true">→</span>
+        <label class="sr-only" for="sf-date-to">Hasta</label>
+        <input type="date" id="sf-date-to" aria-label="Hasta" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+      </div>
+      <button id="sf-list-sort" data-label-desc="Más recientes primero" data-label-asc="Más antiguos primero" type="button" class="ml-auto inline-flex items-center gap-1.5 px-3 h-8 rounded-full border border-border text-muted-foreground hover:text-foreground font-mono text-[11.5px] transition-colors">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="sf-sort-icon transition-transform" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        <span data-sort-label>Más recientes primero</span>
+      </button>
+    </div>
+
+    <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <a href="certificados-tls-transparencia/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint cryptography" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-tls-ct-640.webp 640w, ../../assets/img/hero-tls-ct-960.webp 960w, ../../assets/img/hero-tls-ct.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-tls-ct.webp" alt="Certificados TLS y Certificate Transparency, explicados – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Certificados TLS y Certificate Transparency, explicados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Qué prueba realmente un certificado, la cadena de confianza detrás del candado y cómo los registros de Certificate Transparency hacen imposible ocultar un certificado mal emitido.</p>
+        </div>
+      </a>
+      <a href="autenticacion-multifactor-explicada/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals authentication" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-mfa-640.webp 640w, ../../assets/img/hero-mfa-960.webp 960w, ../../assets/img/hero-mfa.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-mfa.webp" alt="Autenticación multifactor (MFA), explicada – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FUNDAMENTALS</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Autenticación multifactor (MFA), explicada.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Las tres categorías de factores MFA, por qué el SMS es la más débil, cómo las llaves FIDO2 resisten el phishing, y cómo funcionan realmente los ataques de fatiga MFA.</p>
+        </div>
+      </a>
+      <a href="infraestructura-de-clave-publica-pki-explicada/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="crypto" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-pki-640.webp 640w, ../../assets/img/hero-pki-960.webp 960w, ../../assets/img/hero-pki.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-pki.webp" alt="Infraestructura de clave pública (PKI), explicada – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · CRYPTOGRAPHY</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Infraestructura de clave pública (PKI), explicada.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Cómo funciona en realidad la PKI: pares de claves, firmas digitales, autoridades de certificación y la cadena de confianza, y dónde se usan de verdad TLS, la firma de código y S/MIME.</p>
+        </div>
+      </a>
+      <a href="cve-vs-cvss-explicado/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals vulnerabilities" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-cve-cvss-640.webp 640w, ../../assets/img/hero-cve-cvss-960.webp 960w, ../../assets/img/hero-cve-cvss.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-cve-cvss.webp" alt="CVE vs CVSS: ¿cuál es la diferencia? – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FUNDAMENTALS</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">CVE vs CVSS: ¿cuál es la diferencia?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">CVE identifica una vulnerabilidad; CVSS puntúa su gravedad. Cómo encajan el catálogo de MITRE y el sistema de puntuación 0-10 de FIRST, con un ejemplo resuelto.</p>
+        </div>
+      </a>
+      <a href="fundamentos-de-inteligencia-de-amenazas/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="blue-team detection" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-cti-640.webp 640w, ../../assets/img/hero-cti-960.webp 960w, ../../assets/img/hero-cti.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-cti.webp" alt="Fundamentos de la inteligencia de amenazas (CTI), explicados – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · DETECTION</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Fundamentos de la inteligencia de amenazas (CTI), explicados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Los cuatro niveles de la inteligencia de amenazas, el ciclo de inteligencia, los estándares STIX/TAXII, y cómo la CTI impulsa la ingeniería de detección mapeada a MITRE ATT&CK.</p>
+        </div>
+      </a>
+      <a href="ingenieria-social-explicada/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals social-engineering" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-social-engineering-640.webp 640w, ../../assets/img/hero-social-engineering-960.webp 960w, ../../assets/img/hero-social-engineering.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-social-engineering.webp" alt="Ingeniería social, explicada – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FUNDAMENTALS</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Ingeniería social, explicada.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Pretexting, phishing, vishing, smishing, baiting y tailgating: las técnicas principales de ingeniería social y los principios psicológicos detrás de ellas.</p>
+        </div>
+      </a>
+      <a href="ataques-de-sim-swapping/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals identity" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-sim-swap-640.webp 640w, ../../assets/img/hero-sim-swap-960.webp 960w, ../../assets/img/hero-sim-swap.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-sim-swap.webp" alt="Ataques de SIM swapping, explicados – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FUNDAMENTALS</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Ataques de SIM swapping, explicados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Cómo funciona realmente el fraude de port-out y transferencia de eSIM, por qué el número de teléfono se convirtió en el eslabón débil de la recuperación de cuentas.</p>
+        </div>
+      </a>
+      <a href="como-funciona-una-vpn/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="networking fundamentals" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-vpn-640.webp 640w, ../../assets/img/hero-vpn-960.webp 960w, ../../assets/img/hero-vpn.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-vpn.webp" alt="Cómo funciona realmente una VPN, y qué es lo que no oculta – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · NETWORKING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Cómo funciona realmente una VPN, y qué es lo que no oculta.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Comparativa de protocolos de túnel, qué oculta realmente una VPN a tu ISP y a tu red local, y por qué el proveedor que eliges importa tanto como el propio cifrado.</p>
+        </div>
+      </a>
+      <a href="firewalls-con-estado-vs-sin-estado/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="networking fundamentals" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-firewalls-640.webp 640w, ../../assets/img/hero-firewalls-960.webp 960w, ../../assets/img/hero-firewalls.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-firewalls.webp" alt="Firewalls con estado vs sin estado, y NGFW explicado – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · NETWORKING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Firewalls con estado vs sin estado, y NGFW explicado.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Los filtros sin estado juzgan cada paquete por separado. Los firewalls con estado recuerdan la conversación. Los NGFW también leen el payload, con un ejemplo resuelto.</p>
+        </div>
+      </a>
+      <a href="disciplinas-de-inteligencia-explicadas/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint" data-date="2026-07-22">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-int-disciplines-640.webp 640w, ../../assets/img/hero-int-disciplines-960.webp 960w, ../../assets/img/hero-int-disciplines.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-int-disciplines.webp" alt="Las disciplinas -INT: dónde encaja OSINT entre ellas – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Las disciplinas -INT: dónde encaja OSINT entre ellas.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Dónde encaja OSINT entre las disciplinas de inteligencia: SIGINT, HUMINT, GEOINT, MASINT y TECHINT – qué recopila cada una y cómo se solapan.</p>
+        </div>
+      </a>
+      <a href="forense-digital-y-dfir/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="blueteam foundations" data-date="2026-07-21">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-dfir-640.webp 640w, ../../assets/img/hero-dfir-960.webp 960w, ../../assets/img/hero-dfir.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-dfir.webp" alt="Forense digital y DFIR explicados – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · BLUE TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>21 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>14 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Forense digital y DFIR explicados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Forense digital y DFIR: el ciclo de respuesta a incidentes, cadena de custodia, orden de volatilidad, las herramientas clave y un triaje de host paso a paso.</p>
+        </div>
+      </a>
+      <a href="que-hace-un-red-team/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="redteam foundations" data-date="2026-07-21">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-red-team-640.webp 640w, ../../assets/img/hero-red-team-960.webp 960w, ../../assets/img/hero-red-team.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-red-team.webp" alt="Qué hace realmente un red team – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · RED TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>21 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Qué hace realmente un red team.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Qué hace realmente un red team: engagements por objetivos, autorización y Reglas de Enfrentamiento, el ciclo de ataque mapeado a MITRE, C2 y cómo empezar.</p>
+        </div>
+      </a>
+      <a href="investigar-un-dominio-sospechoso/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint networking" data-date="2026-07-20">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-investigate-domain-640.webp 640w, ../../assets/img/hero-investigate-domain-960.webp 960w, ../../assets/img/hero-investigate-domain.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-investigate-domain.webp" alt="Investigar un dominio sospechoso: workflow – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>20 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>15 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Investigar un dominio sospechoso: workflow.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Workflow OSINT pasivo y reproducible para investigar un dominio sospechoso: OPSEC, reputación, WHOIS, DNS, certificados, pivoting y documentar IOC.</p>
+        </div>
+      </a>
+      <a href="registro-registrador-isp-hosting/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint networking" data-date="2026-07-20">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-domain-layers-640.webp 640w, ../../assets/img/hero-domain-layers-960.webp 960w, ../../assets/img/hero-domain-layers.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-domain-layers.webp" alt="Registro vs registrar vs ISP vs hosting – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>20 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Registro vs registrar vs ISP vs hosting.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Registro, registrar, ISP y hosting: cuatro capas que la gente confunde sin parar. Quién controla qué, cómo encontrar cada una y a quién reportar abusos.</p>
+        </div>
+      </a>
+      <a href="reglas-sigma-y-yara/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="blue-team" data-date="2026-07-19">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-detection-rules-640.webp 640w, ../../assets/img/hero-detection-rules-960.webp 960w, ../../assets/img/hero-detection-rules.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-detection-rules.webp" alt="Reglas Sigma y YARA explicadas – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · BLUE TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>19 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Reglas Sigma y YARA explicadas.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Las reglas Sigma detectan amenazas en logs; YARA caza malware en ficheros. Guía práctica de detección como código: cómo convertir y probar reglas.</p>
+        </div>
+      </a>
+      <a href="indicadores-de-compromiso/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="blue-team" data-date="2026-07-19">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-iocs-640.webp 640w, ../../assets/img/hero-iocs-960.webp 960w, ../../assets/img/hero-iocs.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-iocs.webp" alt="Indicadores de compromiso (IOC) explicados – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · BLUE TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>19 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Indicadores de compromiso (IOC) explicados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Qué es un indicador de compromiso, los tipos de IOC con ejemplos, atómico vs conductual, IOC vs IOA, la Pirámide del Dolor, la caducidad y cómo se comparte.</p>
+        </div>
+      </a>
+      <a href="que-es-whois/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint" data-date="2026-07-18">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-whois-640.webp 640w, ../../assets/img/hero-whois-960.webp 960w, ../../assets/img/hero-whois.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-whois.webp" alt="Qué es WHOIS y cómo leerlo – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>18 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Qué es WHOIS y cómo leerlo.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">WHOIS explicado: qué devuelve una consulta, cómo leer cada campo, por qué el RGPD lo redacta, RDAP, WHOIS de IP vía los RIR y herramientas para investigar.</p>
+        </div>
+      </a>
+      <a href="dominios-y-subdominios/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint networking" data-date="2026-07-18">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-subdomains-640.webp 640w, ../../assets/img/hero-subdomains-960.webp 960w, ../../assets/img/hero-subdomains.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-subdomains.webp" alt="Dominios vs subdominios: cómo enumerarlos – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>18 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Dominios vs subdominios: cómo enumerarlos.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">De qué se compone un dominio, por qué los subdominios son superficie de ataque y cómo enumerarlos –pasiva y activamente– con crt.sh, Amass, subfinder y más.</p>
+        </div>
+      </a>
+      <a href="roles-de-un-soc/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="soc career" data-date="2026-07-17">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-soc-roles-640.webp 640w, ../../assets/img/hero-soc-roles-960.webp 960w, ../../assets/img/hero-soc-roles.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-soc-roles.webp" alt="Roles y niveles de un equipo SOC – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · BLUE TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>17 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Roles y niveles de un equipo SOC.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Dentro de un SOC: el modelo de niveles, cada rol del analista N1 al SOC manager, cómo escalan las alertas, los turnos y la carrera real.</p>
+        </div>
+      </a>
+      <a href="herramientas-de-un-soc/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="soc tools" data-date="2026-07-17">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-soc-tools-640.webp 640w, ../../assets/img/hero-soc-tools-960.webp 960w, ../../assets/img/hero-soc-tools.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-soc-tools.webp" alt="Herramientas SOC: SIEM, SOAR, EDR y más – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · BLUE TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>17 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>14 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Herramientas SOC: SIEM, SOAR, EDR y más.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">El stack del SOC por categorías: SIEM, EDR/XDR, SOAR, NDR, inteligencia de amenazas, sandboxes y enriquecimiento, con herramientas OSS y comerciales reales.</p>
+        </div>
+      </a>
+      <a href="que-es-un-soc/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="blue-team soc" data-date="2026-07-16">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-soc-640.webp 640w, ../../assets/img/hero-soc-960.webp 960w, ../../assets/img/hero-soc.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-soc.webp" alt="Qué es un SOC (Security Operations Center) – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · BLUE TEAM</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>16 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Qué es un SOC (Security Operations Center).</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Un SOC es el equipo que monitoriza, detecta, prioriza y responde a amenazas 24/7. Qué hace de verdad un SOC, cómo fluye una alerta y cómo montarlo.</p>
+        </div>
+      </a>
+      <a href="que-es-osint/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint" data-date="2026-07-16">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-osint-640.webp 640w, ../../assets/img/hero-osint-960.webp 960w, ../../assets/img/hero-osint.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-osint.webp" alt="Qué es OSINT: herramientas y flujo – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>16 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>14 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Qué es OSINT: herramientas y flujo.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">OSINT convierte fuentes públicas en inteligencia, no es hacking. Ciclo de inteligencia, disciplinas -INT, límites legales, OPSEC, flujo y herramientas reales.</p>
+        </div>
+      </a>
+      <a href="shodan-y-censys/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="osint tools" data-date="2026-07-16">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-shodan-censys-640.webp 640w, ../../assets/img/hero-shodan-censys-960.webp 960w, ../../assets/img/hero-shodan-censys.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-shodan-censys.webp" alt="Shodan y Censys explicados – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · OSINT</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>16 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Shodan y Censys explicados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Shodan y Censys son buscadores de dispositivos expuestos en internet: qué indexan, ejemplos reales de consultas, el límite legal, OPSEC y planes gratuitos.</p>
+        </div>
+      </a>
+
+      <a href="ciberseguridad-101/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img src="../../assets/img/thumb-cyber-101.webp" alt="Ciberseguridad 101: las palabras que sí significan algo – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FOUNDATIONS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">01/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Ciberseguridad 101: las palabras que sí significan algo.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Amenaza, vulnerabilidad, exploit, riesgo – cuatro palabras que se usan indistintamente, y el modelo mental que por fin las separa.</p>
+        </div>
+      </a>
+      <a href="como-funcionan-las-redes/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals networking" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-networks-640.webp 640w, ../../assets/img/thumb-cyber-networks-960.webp 960w, ../../assets/img/thumb-cyber-networks.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-networks.webp" alt="Cómo funcionan las redes – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FOUNDATIONS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">02/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Cómo funcionan las redes.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">IP, TCP, DNS, TLS – trazado a través de una sola petición curl. Qué añade cada capa, y en cuáles puede mentir un atacante.</p>
+        </div>
+      </a>
+      <a href="fundamentos-de-linux-para-seguridad/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals linux" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-linux-640.webp 640w, ../../assets/img/thumb-cyber-linux-960.webp 960w, ../../assets/img/thumb-cyber-linux.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-linux.webp" alt="Fundamentos de Linux para seguridad, el subconjunto práctico – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · WORKING TOOLS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">03/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Fundamentos de Linux para seguridad, el subconjunto práctico.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Los 25 comandos que escribirás cada día, los cinco que escribirás con prisa, y los permisos de archivo que deciden quién es dueño de la máquina.</p>
+        </div>
+      </a>
+      <a href="criptografia-basica-que-puedes-usar/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="crypto" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-crypto-640.webp 640w, ../../assets/img/thumb-cyber-crypto-960.webp 960w, ../../assets/img/thumb-cyber-crypto.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-crypto.webp" alt="Criptografía que sí puedes usar – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 2 · WORKING TOOLS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">04/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Criptografía que sí puedes usar.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Hashing frente a cifrado, simétrico frente a asimétrico, y las tres primitivas a las que recurrir antes de inventarte nada.</p>
+        </div>
+      </a>
+      <a href="modelado-de-amenazas-con-stride/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="blue-team" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-stride-640.webp 640w, ../../assets/img/thumb-cyber-stride-960.webp 960w, ../../assets/img/thumb-cyber-stride.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-stride.webp" alt="Modelado de amenazas con STRIDE – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 3 · METHODS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">05/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>15 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Modelado de amenazas con STRIDE.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Elegimos una app web diminuta y la recorremos con STRIDE, y luego escribimos el prompt que hace que un LLM haga el 60% del trabajo de un revisor.</p>
+        </div>
+      </a>
+      <a href="como-empezar-en-ciberseguridad/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="career" data-date="2026-07-08">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-roadmap-640.webp 640w, ../../assets/img/thumb-cyber-roadmap-960.webp 960w, ../../assets/img/thumb-cyber-roadmap.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-roadmap.webp" alt="Cómo empezar en ciberseguridad: el roadmap real – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · FOUNDATIONS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">06/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>July 08, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Cómo empezar en ciberseguridad: el roadmap real.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">El orden de aprendizaje que de verdad funciona, el roadmap oficial de roadmap.sh que vale la pena seguir, y los puestos de trabajo reales al otro lado.</p>
+        </div>
+      </a>
+      <a href="equipo-rojo-azul-y-morado-explicado/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="red-team blue-team" data-date="2026-07-08">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-teams-640.webp 640w, ../../assets/img/thumb-cyber-teams-960.webp 960w, ../../assets/img/thumb-cyber-teams.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-teams.webp" alt="Equipo rojo, azul y morado explicado – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · TEAMS</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">07/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>July 08, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Equipo rojo, azul y morado.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">El rojo ataca, el azul defiende, el morado cierra el círculo entre ambos. Qué hace cada uno en el día a día, y cómo se traduce en puestos reales.</p>
+        </div>
+      </a>
+      <a href="como-aprender-ciberseguridad/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="fundamentals career" data-date="2026-07-08">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-learn-640.webp 640w, ../../assets/img/thumb-cyber-learn-960.webp 960w, ../../assets/img/thumb-cyber-learn.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-learn.webp" alt="Cómo aprender ciberseguridad de verdad – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 1 · METHOD</div>
+          <div class="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-accent/80">08/08</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>July 08, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>9 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Cómo aprender ciberseguridad de verdad.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Por qué ocurre el infierno de los tutoriales, cómo es el aprendizaje activo en este campo, y un ritmo semanal que sobrevive más allá del segundo mes.</p>
+        </div>
+      </a>
+      <a href="../ia/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="ai" data-date="2026-04-20">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/thumb-cyber-aisec-640.webp 640w, ../../assets/img/thumb-cyber-aisec-960.webp 960w, ../../assets/img/thumb-cyber-aisec.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/thumb-cyber-aisec.webp" alt="IA en ciberseguridad: ataque y defensa – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">LEVEL 3 · SUB-PILLAR</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>Continúa tu camino</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">IA en ciberseguridad: ataque y defensa →</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Dónde aparece de verdad la inteligencia artificial en el día a día de quien defiende – su propio sub-pilar, que merece una visita aparte.</p>
+        </div>
+      </a>
+
+    </div>
+    <div id="empty" class="hidden mt-10 text-center text-muted-foreground text-[14px]">Ningún artículo coincide con este filtro todavía. <button id="sf-list-clear" type="button" class="text-accent underline underline-offset-2">Limpiar filtros</button></div>
+    <nav id="sf-pagination" class="mt-10 flex items-center justify-between gap-4 border-t border-border pt-6" aria-label="Archive pagination">
+      <button id="sf-page-prev" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span class="hidden sm:inline">Anterior</span>
+      </button>
+      <div id="sf-page-numbers" class="flex items-center gap-1">
+<span class="sf-page" aria-current="page">1</span>
+<a class="sf-page" href="./page-2/">2</a>
+<a class="sf-page" href="./page-3/">3</a>
+<a class="sf-page" href="./page-4/">4</a>
+<a class="sf-page" href="./page-5/">5</a>
+<a class="sf-page" href="./page-6/">6</a>
+</div>
+      <button id="sf-page-next" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <span class="hidden sm:inline">Siguiente</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </nav>
+  </section>
+</main>
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="./" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+<script src="../../assets/hero-fx.js?v=43287f13" defer></script>
+</body>
+</html>

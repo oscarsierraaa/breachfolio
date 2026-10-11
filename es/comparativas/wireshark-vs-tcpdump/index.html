@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="compare">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wireshark vs tcpdump | Breachfolio</title>
+  <meta name="description" content="Comparamos Wireshark y tcpdump para captura, análisis, scripting y respuesta a incidentes. La respuesta aburrida es 'ambos'; la interesante está en qué orden." />
+  <meta name="keywords" content="wireshark vs tcpdump, diferencia entre wireshark y tcpdump, cuándo usar tcpdump en vez de wireshark, tshark automatizar análisis de paquetes, capturar tráfico de red sin gui, wireshark follow tcp stream, filtros bpf vs filtros de visualización wireshark, tcpdump captura remota headless, wireshark para respuesta a incidentes, analizar un pcap desde línea de comandos, tcpdump filtro de captura ejemplos, wireshark decodificar protocolos industriales" />
+  <link rel="canonical" href="https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/compare/wireshark-vs-tcpdump/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/compare/wireshark-vs-tcpdump/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Wireshark vs tcpdump: cuándo usar cada uno | Breachfolio" />
+  <meta property="og:description" content="Comparamos Wireshark y tcpdump para captura, análisis, scripting y respuesta a incidentes. La respuesta aburrida es 'ambos'; la interesante está en qué orden." />
+  <meta property="og:url" content="https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cmp-wireshark.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wireshark vs tcpdump: cuándo usar cada uno | Breachfolio" />
+  <meta name="twitter:description" content="Comparamos Wireshark y tcpdump para captura, análisis, scripting y respuesta a incidentes. La respuesta aburrida es 'ambos'; la interesante está en qué orden." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cmp-wireshark.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Wireshark vs tcpdump: elige la herramienta correcta y luego usa la otra igualmente.",
+      "description": "Comparamos Wireshark y tcpdump para captura, análisis, scripting y respuesta a incidentes. La respuesta aburrida es 'ambos'. La interesante es 'en qué orden'.",
+      "image": "https://breachfolio.com/assets/img/thumb-cmp-wireshark.webp",
+      "datePublished": "2026-07-15", "dateModified": "2026-07-15",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/"
+      },
+      "inLanguage": "es",
+      "keywords": "wireshark vs tcpdump, diferencia entre wireshark y tcpdump, cuándo usar tcpdump en vez de wireshark, tshark automatizar análisis de paquetes, capturar tráfico de red sin gui, wireshark follow tcp stream, filtros bpf vs filtros de visualización wireshark, tcpdump captura remota headless, wireshark para respuesta a incidentes, analizar un pcap desde línea de comandos, tcpdump filtro de captura ejemplos, wireshark decodificar protocolos industriales"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://breachfolio.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Comparativas",
+          "item": "https://breachfolio.com/es/comparativas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Wireshark vs tcpdump: elige la herramienta correcta y luego usa la otra igualmente.",
+          "item": "https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/comparativas/wireshark-vs-tcpdump/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Wireshark o tcpdump para capturar tráfico en un servidor remoto sin interfaz gráfica?",
+          "acceptedAnswer": { "@type": "Answer", "text": "tcpdump, porque es la herramienta correcta para captura headless con bajo consumo de CPU y funciona bien en máquinas remotas por SSH." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puede tcpdump analizar protocolos como HTTP o TLS en profundidad?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No con la misma profundidad; para eso se usa Wireshark o su versión de línea de comandos, tshark, que comparten los mismos disectores de protocolos." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Son iguales los filtros de tcpdump y los de Wireshark?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. tcpdump usa filtros BPF (de captura, tipo tcp port 443); Wireshark añade además filtros de visualización con sintaxis distinta (tipo tcp.port == 443), aplicados sobre un pcap ya cargado." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es necesario elegir entre Wireshark y tcpdump?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No, se usan juntos en un mismo flujo de trabajo: tcpdump captura los bytes, Wireshark los explica, y tshark automatiza ambos pasos." }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Comparativas</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Wireshark vs tcpdump: elige la herramienta correcta y luego usa la otra igualmente.</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../../assets/img/thumb-cmp-wireshark.webp" alt="Ilustración principal de: Wireshark vs tcpdump: elige la herramienta correcta y luego usa la otra igualmente." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">PACKETS</span>
+          <span class="text-muted">COMPARE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Wireshark vs tcpdump: elige la herramienta correcta y luego usa la otra igualmente.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">Cuándo tirar de una GUI, cuándo tirar de una CLI y cómo hacer que trabajen juntas en una respuesta a incidentes real.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-15">15 de julio de 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>7 min de lectura</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p><strong>Wireshark</strong> y <strong>tcpdump</strong> no son una elección. Son un flujo de trabajo. tcpdump captura los bytes; Wireshark lee el pcap. Puedes hacerlo todo con cualquiera de los dos, pero irás lento. Lo acertado es aprender en qué destaca cada uno y dejar que haga justo eso.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">El reparto, en una tabla</h2>
+
+<table>
+  <thead><tr><th>Tarea</th><th>Herramienta</th></tr></thead>
+  <tbody>
+    <tr><td>Capturar en una máquina remota / headless</td><td>tcpdump</td></tr>
+    <tr><td>Capturar con un filtro de kernel ajustado y poca CPU</td><td>tcpdump</td></tr>
+    <tr><td>Leer un pcap y seguir un flujo TCP</td><td>Wireshark</td></tr>
+    <tr><td>Decodificar un protocolo poco común (DICOM, BACnet, SCADA)</td><td>Wireshark</td></tr>
+    <tr><td>Extraer bytes de una captura de 50 GB sin abrirla</td><td>tcpdump / tshark</td></tr>
+    <tr><td>Enseñarle a alguien no técnico qué está fallando</td><td>Wireshark</td></tr>
+  </tbody>
+</table>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Dos lenguajes de filtros, no los confundas</h2>
+
+<p>Aquí es donde la mayoría se hace daño. Hay dos lenguajes de filtros y se parecen, pero no son lo mismo.</p>
+
+<ul>
+  <li><strong>Filtros BPF (de captura):</strong> se aplican en el kernel y deciden qué entra en el búfer de captura. Los usan tcpdump y el diálogo de captura de Wireshark. Se parecen a <code>tcp port 443</code>.</li>
+  <li><strong>Filtros de visualización:</strong> se aplican sobre un pcap ya cargado y deciden qué se muestra. Solo Wireshark y tshark. Se parecen a <code>tcp.port == 443</code>.</li>
+</ul>
+
+<p>Misma intención, sintaxis distinta, semántica distinta. BPF no puede llegar a las capas de aplicación; los filtros de visualización sí. Usar por error un filtro de visualización en el momento de la captura <strong>produce un pcap vacío sin avisar</strong>.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Manual de captura</h2>
+
+<pre tabindex="0"><code><span class="term-cmt"># Búfer circular: conserva el último 1 GB en 10 ficheros de 100 MB cada uno</span>
+sudo tcpdump -i eth0 -w cap-%Y%m%d-%H%M%S.pcap -W 10 -C 100
+
+<span class="term-cmt"># Capturar solo el tráfico hacia/desde un host, sin ruido de DNS</span>
+sudo tcpdump -i eth0 'host 10.0.0.42 and not port 53' -w host42.pcap
+
+<span class="term-cmt"># Recortar cada paquete para que los datos personales nunca lleguen al disco</span>
+sudo tcpdump -i eth0 -s 96 -w headers-only.pcap</code></pre>
+
+<p>Lo último importa más de lo que la gente cree. Una captura con las cargas útiles completas en una estación de trabajo compartida es <strong>un incidente de protección de datos esperando a ocurrir</strong>. <code>-s 96</code> conserva las cabeceras y un pedacito de la carga útil – suficiente para depurar la mayoría de protocolos, nada para recuperar contenido.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Leer un pcap sin GUI con tshark</h2>
+
+<p>El hermano de línea de comandos de Wireshark. Los mismos disectores, la misma sintaxis de filtros de visualización. Te deja hacer la mitad de aquello para lo que la gente abre Wireshark, en una shell, en un servidor.</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># Los 10 hosts que más bytes han enviado</span>
+tshark -r cap.pcap -q -z conv,ip | head -25
+
+<span class="term-cmt"># Todos los SNI de TLS del fichero</span>
+tshark -r cap.pcap -Y 'tls.handshake.type == 1' -T fields -e tls.handshake.extensions_server_name | sort -u
+
+<span class="term-cmt"># Todas las rutas de las peticiones HTTP</span>
+tshark -r cap.pcap -Y http.request -T fields -e http.request.full_uri</code></pre>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cuándo Wireshark se gana el sueldo</h2>
+
+<p><strong>«Follow TCP stream»</strong> es la función de la que no puedes prescindir y que no puedes replicar en cinco líneas de script. Dos clics convierten mil paquetes en una transcripción limpia de una sesión HTTP, SMTP o Telnet. Decodificada, en orden y con la codificación correcta adivinada.</p>
+
+<p>La biblioteca de disectores de protocolos de Wireshark es la otra razón. Protocolos industriales y médicos de nicho – Modbus, BACnet, DICOM, S7 – se decodifican de fábrica. tcpdump te muestra bytes; Wireshark te muestra el significado.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Reglas operativas</h2>
+
+<ul>
+  <li>Nunca ejecutes Wireshark como root sobre una captura de producción. Captura con tcpdump como root y lee el pcap con tu usuario.</li>
+  <li>Usa <code>editcap</code> (viene con Wireshark) para recortar un pcap gigante por ventana temporal antes de abrirlo. Wireshark abrirá ficheros de varios GB; no será divertido.</li>
+  <li>Si un compañero te pide «el paquete», envía el pcap más pequeño que demuestre el problema. El BPF de tcpdump te deja construirlo en una sola línea.</li>
+  <li>Elimina antes los secretos: <code>tshark -F pcap -r in.pcap -w out.pcap -Y 'not (tcp.port == 22)'</code> descarta todos los paquetes SSH.</li>
+</ul>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">La conclusión</h2>
+
+<p><strong>tcpdump captura. Wireshark explica. tshark automatiza ambos.</strong> No eliges – combinas.</p>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+
+            <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+
+            <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../burp-vs-zap/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Anterior</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Burp Suite vs OWASP ZAP: el proxy que se gana el alquiler.</div>
+        </a>
+        <a href="../kali-vs-parrot/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Siguiente</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Kali Linux vs Parrot OS: la distro de pentest en la que realmente vives.</div>
+        </a>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Wireshark o tcpdump para capturar tráfico en un servidor remoto sin interfaz gráfica?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          tcpdump, porque es la herramienta correcta para captura headless con bajo consumo de CPU y funciona bien en máquinas remotas por SSH.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Puede tcpdump analizar protocolos como HTTP o TLS en profundidad?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No con la misma profundidad; para eso se usa Wireshark o su versión de línea de comandos, tshark, que comparten los mismos disectores de protocolos.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Son iguales los filtros de tcpdump y los de Wireshark?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. tcpdump usa filtros BPF (de captura, tipo tcp port 443); Wireshark añade además filtros de visualización con sintaxis distinta (tipo tcp.port == 443), aplicados sobre un pcap ya cargado.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es necesario elegir entre Wireshark y tcpdump?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No, se usan juntos en un mismo flujo de trabajo: tcpdump captura los bytes, Wireshark los explica, y tshark automatiza ambos pasos.
+        </div>
+      </details>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">En esta página</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Relacionado</div>
+        <ul class="space-y-3">
+          <li><a href="../nmap-vs-masscan/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Nmap vs Masscan: precisión frente a rendimiento bruto.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">RECON · 8</div>
+          </a></li>
+          <li><a href="../burp-vs-zap/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Burp Suite vs OWASP ZAP: el proxy que se gana el alquiler.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">WEB · 10</div>
+          </a></li>
+          <li><a href="../splunk-vs-wazuh-vs-elk/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Splunk vs Wazuh vs ELK: qué SIEM encaja con tu presupuesto.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">SIEM · 10</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

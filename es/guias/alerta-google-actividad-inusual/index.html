@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Falsa alerta de Google de actividad inusual | Breachfolio</title>
+  <meta name="description" content="¿Has recibido una alerta de actividad inusual de Google o Gmail? Aprende a verificarla sin pulsar enlaces y protege tu cuenta si hubo un acceso." />
+  <meta name="keywords" content="alerta actividad inusual Google falsa, phishing Gmail, alerta de seguridad Google, inicio de sesión sospechoso, cuenta Google comprometida, email falso de Google" />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/alerta-google-actividad-inusual/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/fake-google-unusual-activity-alert/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/alerta-google-actividad-inusual/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/fake-google-unusual-activity-alert/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Falsa alerta de Google de actividad inusual | Breachfolio" />
+  <meta property="og:description" content="¿Has recibido una alerta de actividad inusual de Google o Gmail? Aprende a verificarla sin pulsar enlaces y protege tu cuenta si hubo un acceso." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/alerta-google-actividad-inusual/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-google-alert.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Falsa alerta de Google de actividad inusual | Breachfolio" />
+  <meta name="twitter:description" content="¿Has recibido una alerta de actividad inusual de Google o Gmail? Aprende a verificarla sin pulsar enlaces y protege tu cuenta si hubo un acceso." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-google-alert.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Falsa alerta de Google de actividad inusual en la cuenta",
+      "description": "¿Has recibido una alerta de actividad inusual de Google o Gmail? Aprende a verificarla sin pulsar enlaces y protege tu cuenta si hubo un acceso.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-google-alert.webp",
+      "datePublished": "2026-07-11",
+      "dateModified": "2026-07-16",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/guias/alerta-google-actividad-inusual/"
+      },
+      "inLanguage": "es",
+      "keywords": "alerta actividad inusual Google falsa, phishing Gmail, alerta de seguridad Google, inicio de sesión sospechoso, cuenta Google comprometida, email falso de Google"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Guías", "item": "https://breachfolio.com/es/guias/" },
+        { "@type": "ListItem", "position": 3, "name": "Falsa alerta de actividad inusual de Google", "item": "https://breachfolio.com/es/guias/alerta-google-actividad-inusual/" }
+      ]
+    },
+    {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "@id": "https://breachfolio.com/es/guias/alerta-google-actividad-inusual/#faq",
+            "mainEntity": [
+                  {
+                        "@type": "Question",
+                        "name": "¿Envía Google alertas de seguridad reales por email?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Sí, y por eso los delincuentes las imitan – comprueba siempre la actividad directamente dentro de tu cuenta en lugar de confiar en el correo."
+                        }
+                  },
+                  {
+                        "@type": "Question",
+                        "name": "¿Dónde veo qué dispositivos tienen sesión iniciada en mi cuenta?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "En la sección de seguridad de tu Cuenta de Google, en \"Tus dispositivos\"."
+                        }
+                  },
+                  {
+                        "@type": "Question",
+                        "name": "¿Qué hago si recibo un código de verificación que no he pedido?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "No lo compartas con nadie y no apruebes nunca una solicitud de inicio de sesión que tú no hayas iniciado."
+                        }
+                  }
+            ]
+      }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guías</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Falsa alerta de actividad inusual de Google</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-guide-google-alert.webp" alt="¿Google ha detectado actividad sospechosa? Cómo distinguir una alerta real del phishing" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUÍAS · RECUPERACIÓN</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">¿Google ha detectado actividad sospechosa? Cómo distinguir una alerta real del phishing</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">¿Ya introdujiste datos en la página falsa? Haz esto primero</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Desde otro dispositivo de confianza, cambia primero tu contraseña de Google y después cualquier otra que hubieras reutilizado en otros sitios.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Google sí envía este tipo de alertas – precisamente por eso las falsas son tan convincentes.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p><a href="https://support.google.com/accounts/answer/140921" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">Google</a> sí envía alertas legítimas cuando detecta un inicio de sesión extraño o un cambio de seguridad en tu cuenta, y los delincuentes copian el aspecto exacto de esos avisos para llevarte a una página que roba credenciales. Un mensaje falso puede decir "actividad inusual detectada", "inicio de sesión sospechoso bloqueado" o "tu cuenta será suspendida", y <strong>la diferencia visual respecto a una alerta real puede ser casi nula</strong>. Google recomienda comprobar la cuenta directamente y revisar la actividad de seguridad reciente en lugar de confiar en el correo, y ofrece un canal específico para <a href="https://support.google.com/mail/answer/8253" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">reportar correos de phishing</a> en Gmail.</p>
+
+<p>El motivo por el que esta estafa concreta funciona tan bien es estructural: las alertas de la Cuenta de Google son uno de los pocos correos automáticos que la mayoría de personas está entrenada para tomarse en serio y sobre los que actúa rápido, ya que una alerta real puede significar de verdad que alguien intenta entrar en tu bandeja de entrada, tus fotos y, a menudo, en la vía de recuperación de cualquier otra cuenta ligada a esa dirección de correo. Los atacantes saben que la urgencia combinada con un enfoque de seguridad tiende a superar el escepticismo que la gente aplica a correos de phishing más claramente comerciales. La solución no es desconfiar por defecto de cualquier correo de Google – es evitar siempre el correo por completo y comprobar la misma información en la fuente, cada vez, sin importar lo convincente o sencillo que parezca el mensaje.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cómo comprobar la alerta</h2>
+<p>No uses el botón que aparece dentro del mensaje. En su lugar, escribe tú mismo myaccount.google.com en el navegador, o abre la configuración de la cuenta desde el propio Gmail. Revisa la actividad de seguridad reciente, la lista de tus dispositivos, el acceso de aplicaciones de terceros, tus métodos de recuperación y las reglas de reenvío y filtros de Gmail, y busca sesiones que no reconozcas. Si el evento marcado aparece realmente, confirma si fuiste tú; si no aparece en absoluto, es una señal clara de que el propio correo era el ataque.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Señales de una versión de phishing</h2>
+<ul>
+  <li>El enlace no lleva realmente a un dominio propiedad de Google</li>
+  <li>Una página de terceros pide a la vez tu contraseña y un código de verificación</li>
+  <li>El mensaje amenaza con cerrar la cuenta en solo unas horas</li>
+  <li>Pide instalar una aplicación o un certificado</li>
+  <li>Solicita un pago por "seguridad de la cuenta"</li>
+  <li>El nombre visible dice Google pero la dirección real de envío es distinta</li>
+  <li>Un gestor de contraseñas no reconoce el dominio como un inicio de sesión guardado</li>
+  <li>La actividad marcada no aparece al comprobar la cuenta directamente</li>
+</ul>
+<p><strong>Nunca envíes un código de verificación de Google a nadie</strong>, ni siquiera a alguien que diga ser soporte técnico: un delincuente puede iniciar un intento real de acceso con tu contraseña y llamarte después pidiendo el código con la excusa de "cancelar" el inicio de sesión sospechoso. Compartir ese código le da acceso.</p>
+
+<p>También ayuda entender por qué la versión telefónica de esta estafa busca específicamente un código de verificación y no solo una contraseña. Una contraseña sola suele no bastar para entrar en una cuenta protegida con verificación en dos pasos, así que un atacante que ya tiene tu contraseña por una filtración ajena todavía necesita el segundo factor para completar el inicio de sesión. Ese es precisamente el propósito de la llamada de seguimiento: conseguir que, en ese momento, entregues el único dato que de otro modo les habría detenido. Reconocer que la petición del código es el objetivo real – y no un detalle secundario – hace mucho más fácil negarse en el acto, sea cual sea el argumento que use quien llama.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Variantes que vas a encontrar</h2>
+<p>La versión por correo es solo la forma más común. <strong>El mismo cebo llega por otros canales, cada uno con su propio tipo de credibilidad.</strong> Un SMS asegura que se ha bloqueado un inicio de sesión y añade un enlace acortado. Una notificación del navegador – aceptada sin querer en una web de spam – imita un aviso del sistema. Una invitación de calendario se cuela en tu agenda con un enlace de phishing en la descripción.</p>
+<p>Y luego está la versión telefónica, la más peligrosa. Alguien llama diciendo ser "soporte de Google", a veces segundos después de que recibas un código auténtico que ellos mismos han provocado al intentar entrar con una contraseña filtrada. Google no llama en frío por alertas de seguridad, así que la propia llamada es la señal. Una variante más silenciosa ataca tu correo de recuperación: comprometen esa cuenta antigua y olvidada, y la principal cae con ella. <strong>Sea cual sea el canal, la respuesta es la misma – ciérralo y comprueba la cuenta escribiendo tú mismo la dirección.</strong></p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Un caso paso a paso: noventa segundos hasta perder la cuenta</h2>
+<p>Marcos, autónomo, contesta mensajes entre dos trabajos cuando le llega un correo: "Inicio de sesión sospechoso bloqueado – verifica tu identidad en 24 horas o tu cuenta será suspendida". Todo su negocio pasa por esa bandeja. Pulsa el botón azul, aterriza en una página de acceso idéntica a la real e introduce su contraseña. La página le pide el código que acaba de llegarle por SMS, y también lo escribe. La web le da las gracias y le redirige a la portada real de Google.</p>
+<p>Nada parece ir mal hasta la mañana siguiente, cuando varios clientes le preguntan por facturas extrañas enviadas desde su dirección. En los ajustes de Gmail descubre una regla de reenvío que él nunca creó, copiando cada mensaje a una dirección desconocida. Desde su portátil cambia la contraseña, cierra todas las sesiones, borra la regla y activa la verificación en dos pasos con una app de autenticación. <strong>La lección: la página falsa no solo robó su contraseña – retransmitió su código real al instante</strong>, y el único paso que habría roto la cadena era escribir myaccount.google.com por su cuenta en lugar de pulsar el botón.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Si la actividad es real y no fuiste tú</h2>
+<p>Cambia tu contraseña inmediatamente por una robusta y exclusiva que no hayas usado en ningún otro sitio. Cierra cualquier sesión que no reconozcas. Elimina dispositivos y accesos de aplicaciones de terceros que no te resulten familiares. Activa la verificación en dos pasos si aún no la tienes. Revisa Gmail específicamente en busca de reglas de reenvío o filtros que puedan estar ocultando en silencio mensajes que te llegan – una táctica habitual una vez que una cuenta está comprometida.</p>
+
+<p>La misma lógica se aplica mucho más allá de Google en concreto – cualquier cuenta que ofrezca verificación en dos pasos está protegida por el mismo principio, y cualquier mensaje que te pida leer o escribir un código en un sitio distinto del servicio en el que realmente estás iniciando sesión debería tratarse igual, sea cual sea la marca o el logotipo que aparezca en él. Aprender a reconocer la forma de este ataque en concreto, en lugar de memorizar la versión de una sola empresa, es lo que realmente sirve para la siguiente plataforma que resulte atacada.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Si ya introdujiste datos en la página falsa</h2>
+<p>Desde otro dispositivo de confianza, cambia primero tu contraseña de Google y después cualquier otra contraseña que hubieras reutilizado en otros sitios. Revisa la actividad de seguridad de la cuenta, las sesiones activas, los métodos de recuperación y la configuración de Gmail en busca de algo que no te resulte familiar. Si también introdujiste datos de pago, contacta con tu banco o emisor de tarjeta de inmediato. Reporta el correo original como phishing directamente dentro de Gmail.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Ajustes que dejan sin efecto la próxima alerta falsa</h2>
+<p>Puedes configurar tu cuenta para que a este phishing le quede muy poco que robar. <strong>Cambia tu segundo factor de los códigos por SMS a una app de autenticación o, mejor, a una passkey.</strong> Un código por SMS puede retransmitirse desde una página falsa, como le pasó a Marcos; una passkey está ligada al dominio real y no funciona en una web impostora. Ejecuta además la Revisión de seguridad de Google un par de veces al año: repasa dispositivos, accesos de terceros y recuperación en minutos.</p>
+<p>Dos ajustes discretos importan más de lo que parece. Comprueba que tu correo y teléfono de recuperación están al día y pertenecen a cuentas que proteges: una bandeja de recuperación abandonada es una puerta trasera. Y deja que un gestor de contraseñas rellene tu contraseña de Google: en una página imitación se negará a autocompletar, y esa negativa es en sí misma una alarma.</p>
+<p>Por último, extiende el hábito a quienes comparten tu vida digital. Cualquiera cuyo correo sea la dirección de recuperación de tus cuentas – tu pareja, un padre, un socio – forma parte de tu seguridad, lo sepa o no. Acordad una regla: <strong>nadie actúa nunca desde un correo de seguridad; todos comprueban escribiendo la dirección por su cuenta.</strong> Ante la duda, la línea 017 del INCIBE atiende consultas gratis.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Checklist rápido</h2>
+<ul>
+  <li>No pulses nunca el botón dentro de un correo de alerta de seguridad inesperado</li>
+  <li>Comprueba la actividad escribiendo tú mismo myaccount.google.com</li>
+  <li>No compartas nunca un código de verificación con nadie, bajo ninguna circunstancia</li>
+  <li>Activa la verificación en dos pasos si todavía no la tienes</li>
+  <li>Revisa las reglas de reenvío y los filtros de Gmail tras cualquier actividad sospechosa</li>
+  <li>Reporta los correos de phishing directamente con la herramienta integrada de Gmail</li>
+</ul>
+
+<div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">La versión en una frase.</strong> No confíes nunca en el enlace de una alerta de seguridad – comprueba la actividad real de tu Cuenta de Google escribiendo tú mismo la dirección, y no compartas nunca un código de verificación con quien te contacte.</div>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Envía Google alertas de seguridad reales por email?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Sí, y por eso los delincuentes las imitan – comprueba siempre la actividad directamente dentro de tu cuenta en lugar de confiar en el correo.
+  </div>
+</details>
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Dónde veo qué dispositivos tienen sesión iniciada en mi cuenta?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    En la sección de seguridad de tu Cuenta de Google, en "Tus dispositivos".
+  </div>
+</details>
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Qué hago si recibo un código de verificación que no he pedido?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No lo compartas con nadie y no apruebes nunca una solicitud de inicio de sesión que tú no hayas iniciado.
+  </div>
+</details>
+
+<div class="mt-12 pt-8 border-t border-border">
+  <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <a href="../pig-butchering-cripto/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">La app muestra ganancias pero no te deja retirar</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../estafa-voz-clonada-ia/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">Esa llamada no era realmente tu familiar</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../falso-pedido-amazon/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">Esa confirmación de pedido de Amazon es falsa</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">Todas las guías</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

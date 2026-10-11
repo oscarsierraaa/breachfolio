@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="m2grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="m2glow" cx="0.5" cy="0.5" r="0.62"><stop offset="0%" stop-color="hsl(265 84% 68%)" stop-opacity="0.30"/><stop offset="55%" stop-color="hsl(265 84% 68%)" stop-opacity="0.05"/><stop offset="100%" stop-color="hsl(265 84% 68%)" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+<rect width="800" height="400" fill="url(#m2grid)"/>
+<ellipse cx="400" cy="205" rx="380" ry="250" fill="url(#m2glow)"/>
+
+<!-- connecting lines: central VM to each port node -->
+<path d="M320 175 L165 115" fill="none" stroke="hsl(265 84% 68%)" stroke-width="1.6" stroke-dasharray="3 6" opacity="0.6"/>
+<path d="M480 175 L635 115" fill="none" stroke="hsl(288 85% 70%)" stroke-width="1.6" stroke-dasharray="3 6" opacity="0.6"/>
+<path d="M320 235 L165 295" fill="none" stroke="hsl(288 85% 70%)" stroke-width="1.6" stroke-dasharray="3 6" opacity="0.6"/>
+<path d="M480 235 L635 295" fill="none" stroke="hsl(265 84% 68%)" stroke-width="1.6" stroke-dasharray="3 6" opacity="0.6"/>
+
+<!-- central VM box -->
+<rect x="300" y="160" width="200" height="90" rx="10" fill="hsl(240 9% 9%)" stroke="hsl(265 84% 68%)" stroke-width="2.5" opacity="0.97"/>
+<circle cx="328" cy="186" r="5" fill="hsl(0 72% 55%)"/><circle cx="346" cy="186" r="5" fill="hsl(45 90% 55%)"/><circle cx="364" cy="186" r="5" fill="hsl(265 84% 68%)"/>
+<text x="400" y="215" text-anchor="middle" font-size="15" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.5">Metasploitable 2</text>
+<text x="400" y="232" text-anchor="middle" font-size="10.5" fill="hsl(265 84% 68%)" letter-spacing="2">DELIBERATELY VULNERABLE</text>
+<text x="400" y="246" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">192.168.56.20 · host-only</text>
+
+<!-- node: vsftpd 21/tcp - backdoored software -->
+<rect x="40" y="70" width="200" height="52" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(265 84% 68%)" stroke-width="1.8" opacity="0.97"/>
+<text x="62" y="92" font-size="12.5" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.3">21/tcp · vsftpd 2.3.4</text>
+<text x="62" y="109" font-size="10.5" fill="hsl(265 84% 68%)" letter-spacing="1.5">BACKDOORED SOFTWARE</text>
+
+<!-- node: distcc 3632/tcp - unpatched RCE -->
+<rect x="560" y="70" width="200" height="52" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(288 85% 70%)" stroke-width="1.8" opacity="0.97"/>
+<text x="582" y="92" font-size="12.5" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.3">3632/tcp · distcc</text>
+<text x="582" y="109" font-size="10.5" fill="hsl(288 85% 70%)" letter-spacing="1.5">UNPATCHED RCE</text>
+
+<!-- node: tomcat 8180/tcp - default creds -->
+<rect x="40" y="278" width="200" height="52" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(288 85% 70%)" stroke-width="1.8" opacity="0.97"/>
+<text x="62" y="300" font-size="12.5" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.3">8180/tcp · Apache Tomcat</text>
+<text x="62" y="317" font-size="10.5" fill="hsl(288 85% 70%)" letter-spacing="1.5">DEFAULT CREDENTIALS</text>
+
+<!-- node: samba 445/tcp - misconfigured share -->
+<rect x="560" y="278" width="200" height="52" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(265 84% 68%)" stroke-width="1.8" opacity="0.97"/>
+<text x="582" y="300" font-size="12.5" font-weight="600" fill="hsl(0 0% 98%)" letter-spacing="0.3">445/tcp · Samba</text>
+<text x="582" y="317" font-size="10.5" fill="hsl(265 84% 68%)" letter-spacing="1.5">MISCONFIGURED SHARE</text>
+
+<g font-size="12" letter-spacing="3" font-weight="500">
+  <text x="24" y="34" fill="hsl(265 84% 68%)" opacity="0.95">LAB / TARGETS</text>
+  <text x="24" y="378" fill="hsl(240 5% 65%)" opacity="0.6">FOUR OPEN PORTS · FOUR FAILURE CATEGORIES</text>
+  <text x="776" y="378" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="776" cy="30" r="4" fill="hsl(265 84% 68%)"/>
+<circle cx="776" cy="30" r="9" fill="hsl(265 84% 68%)" opacity="0.25"/>
+</svg>

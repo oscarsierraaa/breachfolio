@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab 04: segment your home lab network with pfSense | Breachfolio</title>
+  <meta name="description" content="Add a pfSense firewall to your home lab, split it into isolated VLAN-style segments, write minimal allow rules, and verify isolation with nmap." />
+  <meta name="keywords" content="pfsense home lab, network segmentation lab, pfsense firewall tutorial, vlan style network segmentation, pfsense lan wan setup, verify network isolation with nmap, firewall rules least privilege, pfsense install guide, home lab firewall between vms, segment home lab network, pfsense rule order first match, pfsense virtualbox setup, blocking lateral movement lab, pfsense states table reset, network defender skills lab" />
+  <link rel="canonical" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/lab-04-segmentacion-de-red-con-pfsense/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Lab 04: segment your home lab network with pfSense | Breachfolio" />
+  <meta property="og:description" content="Add a pfSense firewall to your home lab, split it into isolated VLAN-style segments, write minimal allow rules, and verify isolation with nmap." />
+  <meta property="og:url" content="https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/lab2-firewall.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lab 04: segment your home lab network with pfSense | Breachfolio" />
+  <meta name="twitter:description" content="Add a pfSense firewall to your home lab, split it into isolated VLAN-style segments, write minimal allow rules, and verify isolation with nmap." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/lab2-firewall.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Lab 04: segment your home lab network with pfSense",
+      "description": "Add a pfSense firewall to your home lab, split it into isolated VLAN-style segments, write minimal allow rules, and verify isolation with nmap.",
+      "image": "https://breachfolio.com/assets/img/lab2-firewall.webp",
+      "datePublished": "2026-07-10",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/"
+      },
+      "inLanguage": "en",
+      "keywords": "pfsense home lab, network segmentation lab, pfsense firewall tutorial, vlan style network segmentation, pfsense lan wan setup, verify network isolation with nmap, firewall rules least privilege, pfsense install guide, home lab firewall between vms, segment home lab network, pfsense rule order first match, pfsense virtualbox setup, blocking lateral movement lab, pfsense states table reset, network defender skills lab"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Lab", "item": "https://breachfolio.com/lab/" },
+        { "@type": "ListItem", "position": 3, "name": "Lab 04: network segmentation", "item": "https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/lab/lab-04-network-segmentation-pfsense/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why add pfSense to a home lab that already has attacker, target, and SIEM VMs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By Lab 03 the lab sits on one flat network where every VM can reach every other VM. Segmentation is one of the most effective security controls there is: it is what stops one compromised machine from becoming every machine. pfSense, a free open-source firewall, is added as the router in the middle so that isolation can be practised, not just described."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the LAN-A / LAN-B topology used in this lab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "pfSense holds a WAN uplink plus two internal segments: LAN-A (\"trusted\"), which holds the attacker/analyst VM, and LAN-B (\"targets\"), which holds the deliberately vulnerable machines. The rules are asymmetric: LAN-A can reach LAN-B for testing, but LAN-B cannot initiate connections into LAN-A, mirroring how untrusted systems are isolated in production."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you verify the pfSense segmentation rules actually work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With nmap run against your own hosts. From the LAN-A analyst VM, scan a LAN-B target to confirm the allowed direction works, then run the reverse scan from LAN-B toward LAN-A, which should time out or return nothing. If the reverse scan succeeds, the rule order or interface assignment is wrong and needs to be fixed and re-tested."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What causes pfSense segmentation to behave unexpectedly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three things account for almost every problem: network adapters mapped to the wrong segment in the hypervisor, rule order mistakes (pfSense evaluates rules top to bottom and stops at the first match, so a broad allow above a block rule silently defeats it), and stale connection states left over from before a rule change, which can be cleared under Diagnostics → States → Reset."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Lab 04: network segmentation</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/lab2-firewall.webp" alt="Lab 04 – put a firewall in the middle." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">LAB · SERIES</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Lab 04 – put a firewall in the middle.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">A flat lab where every VM can reach every other VM teaches bad habits. Add pfSense, split the network, and prove the walls hold with nmap.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>By Lab 03 your lab has attacker, target and monitoring, but they all sit on one flat network where everything can reach everything. Real networks are not built that way, and neither should your lab be. In this lab you add <a href="https://www.pfsense.org" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">pfSense</a>, a free <strong>open-source firewall</strong>, as the router in the middle, then carve the lab into isolated segments and prove the isolation actually works.</p>
+
+      <p>This matters beyond tidiness. <strong>Segmentation</strong> is one of the most effective controls there is: it is what stops one compromised machine from becoming every machine. Practising it in a lab is how the concept stops being an abstraction.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The topology you are building</h2>
+
+      <p>You will end up with pfSense holding two internal segments plus an uplink:</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Segment</th><th class="px-4 py-2.5 font-display font-semibold">Role</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>WAN</strong></td><td class="px-4 py-2.5">pfSense's uplink to the outside (a NAT adapter), so lab VMs can fetch updates without being exposed.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>LAN-A ("trusted")</strong></td><td class="px-4 py-2.5">Your attacker/analyst VM (e.g. a Kali or analysis box).</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>LAN-B ("targets")</strong></td><td class="px-4 py-2.5">The deliberately vulnerable machines from Lab 02, walled off from anything you care about.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>The whole point is that <strong>LAN-B cannot initiate connections into LAN-A</strong>, while LAN-A can reach LAN-B for testing. That asymmetry mirrors how you would isolate untrusted systems in production.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Install and place pfSense</h2>
+
+      <ol class="mt-4 space-y-3 list-decimal pl-5 marker:text-accent">
+        <li>Create a new VM from the pfSense installer ISO. Give it two or three network adapters: one NAT (WAN) and one or two internal/host-only adapters (the LAN segments).</li>
+        <li>Run the installer: it is a guided, text-based process. When it boots, pfSense assigns WAN and LAN automatically; you confirm which adapter is which by MAC address.</li>
+        <li>From a VM on the LAN side, browse to the pfSense web UI (default <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">https://192.168.1.1</code>) and finish the setup wizard. Change the default admin password immediately – habit, even in a lab.</li>
+      </ol>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Write the minimum rules</h2>
+
+      <p>pfSense defaults to <strong>"block everything inbound"</strong> on WAN and <strong>"allow everything"</strong> on LAN. You are going to tighten the internal side. On the <strong>LAN-B (targets)</strong> interface, replace the default allow-all with rules that:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li>Allow LAN-B to reach the WAN (so targets can be updated), but <strong>not</strong> the LAN-A subnet.</li>
+        <li>Explicitly block LAN-B → LAN-A. This is the wall: a compromised target cannot pivot into your analyst box.</li>
+        <li>On LAN-A, allow LAN-A → LAN-B so you can still run your tests against the targets.</li>
+      </ul>
+
+      <p>Order matters in pfSense: rules are evaluated <strong>top to bottom, first match wins</strong>. Put the block rule above any broad allow. This tiny rule set is the entire lesson – least privilege expressed as firewall policy.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Verify with nmap – against your own hosts</h2>
+
+      <p>Rules you have not tested are just hopes. From your LAN-A analyst VM, scan a target on LAN-B to confirm you <em>can</em> reach it:</p>
+
+      <pre class="mt-6 rounded-card border border-border bg-surface-2 p-4 overflow-x-auto text-[13px] leading-relaxed"><code><span class="term-cmt"># from LAN-A, scanning YOUR OWN target on LAN-B</span>
+<span class="term-cmt">$</span> nmap -sV 10.10.20.10</code></pre>
+
+      <p>Then do the reverse: from a LAN-B target, try to scan the analyst box on LAN-A. It should time out or return nothing: the pfSense block rule is doing its job. If the reverse scan succeeds, your rule order or interface assignment is wrong; fix it and re-test. That round trip – change a rule, verify with a scan – is exactly the loop a network defender runs, and now you own both ends of it.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Common mistakes to check first</h2>
+
+      <p>If the segmentation behaves unexpectedly, three things cause almost every problem:</p>
+
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong>Adapters mapped to the wrong segment.</strong> In the hypervisor, double-check which virtual adapter is WAN, which is LAN-A and which is LAN-B. A mislabelled adapter makes correct-looking rules apply to the wrong traffic. pfSense identifies interfaces by MAC – match them carefully.</li>
+        <li><strong>Rule order.</strong> pfSense stops at the first matching rule. A broad "allow LAN to any" sitting above your block rule silently defeats it. Keep the specific block above the general allow.</li>
+        <li><strong>Stale states.</strong> pfSense keeps a state table of existing connections. After changing a rule, reset states (Diagnostics → States → Reset) so an already-open connection is not what you are measuring.</li>
+      </ul>
+
+      <p>Work through those in order and the isolation behaves. The habit of trusting a verification scan over a rule you "know" is correct is worth more than the pfSense knowledge itself: it is the mindset that catches real misconfigurations in real networks.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Legal & scope.</strong> Every scan in this lab targets machines you built, on a private segmented network you control. nmap against hosts or networks you do not own – or lack explicit written permission to scan – can be unlawful regardless of intent. Keep it inside the lab.</div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Why add pfSense to a home lab that already has attacker, target, and SIEM VMs?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          By Lab 03 the lab sits on one flat network where every VM can reach every other VM. Segmentation is one of the most effective security controls there is: it is what stops one compromised machine from becoming every machine. pfSense, a free open-source firewall, is added as the router in the middle so that isolation can be practised, not just described.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the LAN-A / LAN-B topology used in this lab?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          pfSense holds a WAN uplink plus two internal segments: LAN-A ("trusted"), which holds the attacker/analyst VM, and LAN-B ("targets"), which holds the deliberately vulnerable machines. The rules are asymmetric: LAN-A can reach LAN-B for testing, but LAN-B cannot initiate connections into LAN-A, mirroring how untrusted systems are isolated in production.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do you verify the pfSense segmentation rules actually work?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          With nmap run against your own hosts. From the LAN-A analyst VM, scan a LAN-B target to confirm the allowed direction works, then run the reverse scan from LAN-B toward LAN-A, which should time out or return nothing. If the reverse scan succeeds, the rule order or interface assignment is wrong and needs to be fixed and re-tested.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What causes pfSense segmentation to behave unexpectedly?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Three things account for almost every problem: network adapters mapped to the wrong segment in the hypervisor, rule order mistakes (pfSense evaluates rules top to bottom and stops at the first match, so a broad allow above a block rule silently defeats it), and stale connection states left over from before a rule change, which can be cleared under Diagnostics → States → Reset.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../lab-03-wazuh-siem-home-lab/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 03: add a SIEM</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../lab-05-ids-suricata/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 05: an IDS with Suricata</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../cybersecurity/how-networks-work/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How networks work</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All lab walkthroughs</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

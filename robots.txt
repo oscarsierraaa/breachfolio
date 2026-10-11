@@ -1,0 +1,59 @@
+# Breachfolio robots.txt
+# Independent education on AI and cybersecurity.
+
+User-agent: *
+Allow: /
+
+# Block development / utility paths
+Disallow: /uploads/
+Disallow: /skill_google/
+Disallow: /assets/_dev/
+Disallow: /docs/
+Disallow: /*.bak$
+Disallow: /*.tmp$
+Disallow: /index-react.html
+Disallow: /breachfolio.jsx
+Disallow: /imagenes/
+
+# AI assistants & answer engines — explicitly welcome.
+# These bots are already allowed by the wildcard above; the explicit
+# Allow blocks document the intent (so nobody "tightens" robots.txt and
+# accidentally cuts off ChatGPT/Perplexity/Gemini citations, which drive
+# real human clicks) and keep training/answering crawlers unblocked.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Answer-engine hint file (llmstxt.org convention)
+# See: https://breachfolio.com/llms.txt
+
+Sitemap: https://breachfolio.com/sitemap.xml

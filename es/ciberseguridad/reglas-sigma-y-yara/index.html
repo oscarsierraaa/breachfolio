@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reglas Sigma y YARA explicadas | Breachfolio</title>
+  <meta name="description" content="Las reglas Sigma detectan amenazas en logs; YARA caza malware en ficheros. Guía práctica de detección como código: cómo convertir y probar reglas." />
+  <meta name="keywords" content="reglas sigma y yara" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/sigma-and-yara-rules/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/sigma-and-yara-rules/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Reglas Sigma y YARA explicadas | Breachfolio" />
+  <meta property="og:description" content="Las reglas Sigma detectan amenazas en logs; YARA caza malware en ficheros. Guía práctica de detección como código: cómo convertir y probar reglas." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-detection-rules.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Reglas Sigma y YARA explicadas | Breachfolio" />
+  <meta name="twitter:description" content="Las reglas Sigma detectan amenazas en logs; YARA caza malware en ficheros. Guía práctica de detección como código: cómo convertir y probar reglas." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-detection-rules.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Reglas Sigma y YARA explicadas",
+      "description": "Las reglas Sigma detectan amenazas en logs; YARA caza malware en ficheros. Guía práctica de detección como código: cómo convertir y probar reglas.",
+      "image": "https://breachfolio.com/assets/img/hero-detection-rules.webp",
+      "datePublished": "2026-07-19",
+      "dateModified": "2026-07-19",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" },
+      "inLanguage": "es",
+      "keywords": "reglas sigma y yara"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Reglas Sigma y YARA explicadas", "item": "https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/reglas-sigma-y-yara/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre Sigma y YARA?", "acceptedAnswer": { "@type": "Answer", "text": "Detectan clases distintas de evidencia. Sigma describe comportamiento sospechoso en eventos de log y se convierte en consultas de SIEM (Splunk SPL, KQL, EQL y otras), así que responde a «¿ocurrió esto?». YARA hace coincidencia de patrones en los bytes en bruto de ficheros, memoria y buffers de red, así que responde a «¿es malicioso esto?». Sigma vigila tus logs; YARA vigila tus ficheros. Los programas de detección maduros usan ambas porque los ataques dejan las dos clases de rastro." } },
+        { "@type": "Question", "name": "¿Qué es una regla Sigma?", "acceptedAnswer": { "@type": "Answer", "text": "Una regla Sigma es un pequeño fichero YAML, neutral respecto al fabricante, que describe una detección sobre datos de log. Sus partes clave son un logsource (dónde buscar, como los eventos de creación de proceso de Windows), un bloque detection (los patrones campo/valor a coincidir, usando modificadores como contains y endswith) y una condition (la lógica booleana que ata las coincidencias entre sí). Como es abstracta, una misma regla Sigma puede convertirse al lenguaje de consulta de muchos SIEM distintos." } },
+        { "@type": "Question", "name": "¿Cómo convierto una regla Sigma a Splunk o Elastic?", "acceptedAnswer": { "@type": "Answer", "text": "Usa sigma-cli, la interfaz de línea de comandos de pySigma. Instálala con «pipx install sigma-cli» y luego ejecuta «sigma convert -t splunk -p sysmon tu_regla.yml» para emitir Splunk SPL, o cambia «-t splunk» por «-t elasticsearch» para emitir una consulta de Elastic (o «-t kusto» para KQL de Microsoft Sentinel). El flag «-p» selecciona un pipeline que mapea los campos abstractos de Sigma sobre tu esquema de log. Ejecuta «sigma list targets» para ver todos los backends disponibles." } },
+        { "@type": "Question", "name": "¿Para qué sirve una regla YARA?", "acceptedAnswer": { "@type": "Answer", "text": "Las reglas YARA identifican y clasifican malware haciendo coincidencia de patrones en el contenido de ficheros y en memoria. Los analistas las usan para tomar la huella de familias de malware, cazar código malicioso conocido en discos y RAM en investigaciones DFIR, impulsar la detección en productos EDR y sandboxes, y escanear subidas en servicios como VirusTotal y YARAify de abuse.ch. Una regla YARA combina meta (metadatos), strings (los patrones de bytes, texto o regex) y una condition (la lógica que declara una coincidencia)." } },
+        { "@type": "Question", "name": "¿Dónde puedo encontrar reglas de detección ya hechas?", "acceptedAnswer": { "@type": "Answer", "text": "Las principales fuentes abiertas son SigmaHQ/sigma para reglas Sigma, Neo23x0/signature-base y Yara-Rules/rules para firmas YARA, y elastic/detection-rules para la lógica EQL y KQL de Elastic. YARAify de abuse.ch te permite escanear ficheros contra un gran pool público de YARA. Leer estos repositorios es además la forma más rápida de aprender los modismos de cada lenguaje antes de escribir los tuyos." } },
+        { "@type": "Question", "name": "¿YARA puede escanear memoria o es solo para ficheros en disco?", "acceptedAnswer": { "@type": "Answer", "text": "Ambas cosas. YARA se diseñó para coincidir contra cualquier buffer de bytes, así que más allá de los ficheros en disco puede escanear memoria de procesos en vivo y volcados de memoria, y por eso es un básico de la respuesta a incidentes y el forense. Los investigadores rastrean imágenes de RAM en busca de malware que se desempaqueta en memoria y nunca deja una copia limpia en disco, capturando amenazas que un escaneo solo de ficheros pasaría por alto." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Reglas Sigma y YARA explicadas</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-detection-rules.webp" alt="Reglas Sigma y YARA explicadas." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · DETECCIÓN</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Reglas Sigma y YARA explicadas.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Las reglas Sigma detectan amenazas en logs; YARA caza malware en ficheros. Guía práctica de detección como código: cómo convertir y probar reglas.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>19 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Dos reglas pueden describir el mismo ataque desde extremos opuestos. Una dice: <em>«cuando un host Windows registra un proceso de PowerShell que sale a internet y descarga código, lanza una alerta».</em> La otra dice: <em>«cuando un fichero en disco contiene este patrón de bytes exacto, márcalo como malware».</em> La primera es una regla <strong>Sigma</strong>: razona sobre <em>eventos</em> de tus logs. La segunda es una regla <strong>YARA</strong>: razona sobre <em>bytes</em> de tus ficheros. Aprende ambas y podrás expresar detecciones que viajan entre herramientas en lugar de pudrirse dentro de la consola de un único fabricante.</p>
+
+<p>Esta es la idea central de la <strong>detección como código</strong>, y es el hilo que cose todo este artículo. Empecemos por ahí y luego recorramos cada lenguaje con reglas reales y ejecutables que podrás leer línea a línea.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 520 180" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="6" y="2" width="244" height="174" rx="12" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="6" y="2" width="244" height="40" rx="12" fill="hsl(var(--accent) / 0.12)"/><text x="128" y="26" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="700">Sigma</text><circle cx="24" cy="61" r="2.5" fill="hsl(var(--accent))"/><text x="36" y="65" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Analiza: logs / eventos</text><circle cx="24" cy="91" r="2.5" fill="hsl(var(--accent))"/><text x="36" y="95" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Corre en: SIEM</text><circle cx="24" cy="121" r="2.5" fill="hsl(var(--accent))"/><text x="36" y="125" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Formato: YAML</text><circle cx="24" cy="151" r="2.5" fill="hsl(var(--accent))"/><text x="36" y="155" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Se convierte a queries</text><rect x="270" y="2" width="244" height="174" rx="12" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="270" y="2" width="244" height="40" rx="12" fill="hsl(var(--accent) / 0.12)"/><text x="392" y="26" text-anchor="middle" fill="hsl(var(--foreground))" font-size="13.5" font-weight="700">YARA</text><circle cx="288" cy="61" r="2.5" fill="hsl(var(--accent))"/><text x="300" y="65" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Analiza: archivos / memoria</text><circle cx="288" cy="91" r="2.5" fill="hsl(var(--accent))"/><text x="300" y="95" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Corre en: scanners / EDR</text><circle cx="288" cy="121" r="2.5" fill="hsl(var(--accent))"/><text x="300" y="125" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Formato: reglas</text><circle cx="288" cy="151" r="2.5" fill="hsl(var(--accent))"/><text x="300" y="155" fill="hsl(var(--muted-foreground, var(--muted)))" font-size="12">Detecta malware</text></svg>
+        <figcaption>Detección como código: Sigma para logs, YARA para archivos.</figcaption>
+      </figure>
+      <h2>¿Qué es la detección como código y por qué molestarse?</h2>
+
+<p>Durante años, la lógica de detección vivió donde nadie podía verla: tecleada a mano en la barra de búsqueda de un SIEM, guardada como regla de correlación en una interfaz gráfica o, peor aún, en la cabeza de un analista. Ese enfoque tiene tres problemas crónicos. No es <strong>portable</strong>: una búsqueda de Splunk no se ejecuta en Elastic. No es <strong>revisable</strong>: no hay diff, ni pull request, ni historial de quién cambió qué y por qué. Y no es <strong>comprobable</strong>: te enteras de que una regla estaba rota cuando no salta durante un incidente.</p>
+
+<p>La detección como código trata las detecciones igual que los ingenieros tratan el software. Las reglas son ficheros de texto plano, almacenados en Git, revisados por un segundo par de ojos, versionados, etiquetados con la técnica que cubren y validados en CI antes de llegar a producción. Obtienes un changelog para tus defensas. Cuando una detección falla, puedes hacer bisect. Cuando cambias de plataforma, migras las reglas en vez de reescribir tu programa desde cero. Sigma y YARA son los dos formatos más adoptados para hacer exactamente esto: uno para logs, otro para ficheros.</p>
+
+<h2>Sigma: una regla de detección genérica para logs y SIEM</h2>
+
+<p>Sigma es un formato abierto y neutral respecto al fabricante para describir detecciones sobre datos de logs. Creado por Florian Roth y Thomas Patzke y mantenido por el proyecto <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">SigmaHQ</a>, se suele describir como «el YAML que significa lo mismo en todas partes». Escribes la lógica una vez y un conversor la traduce al lenguaje de consulta del SIEM que realmente uses: Splunk SPL, KQL y EQL de Elastic, KQL de Microsoft Sentinel, AQL de QRadar y muchos más. Piensa en Sigma como la interlingua del <a href="../herramientas-de-un-soc/" target="_blank" rel="noopener noreferrer">stack del SOC</a>: los analistas leen una gramática y cada plataforma habla por debajo su propio dialecto.</p>
+
+<h3>Cómo se estructura una regla Sigma</h3>
+
+<p>Toda regla Sigma es un documento YAML con un puñado de claves portantes:</p>
+
+<ul>
+  <li><strong>title / id / description</strong>: metadatos para humanos. El <code>id</code> es un UUID estable para que el tooling pueda seguir una regla a través de renombrados.</li>
+  <li><strong>logsource</strong>: <em>dónde</em> buscar. Una <code>category</code> (como <code>process_creation</code>), un <code>product</code> (como <code>windows</code>) o un <code>service</code> (como <code>sshd</code>). Esto es lo que permite mapear una misma regla sobre muchos esquemas de log distintos.</li>
+  <li><strong>detection</strong>: <em>qué</em> buscar. Uno o varios bloques de «selección» con nombre, con coincidencias campo/valor, usando modificadores como <code>|contains</code>, <code>|endswith</code> o <code>|contains|all</code>.</li>
+  <li><strong>condition</strong>: <em>cómo</em> se combinan las selecciones, con lógica booleana del tipo <code>selection and not filter</code>.</li>
+  <li><strong>falsepositives / level / tags</strong>: pistas de triaje y, sobre todo, etiquetas de técnica de MITRE ATT&amp;CK para que la regla encaje en un mapa de cobertura.</li>
+</ul>
+
+<h3>Una regla Sigma completa, comentada</h3>
+
+<p>Aquí tienes una regla completa y válida que detecta un clásico <em>download cradle</em> de PowerShell, el tipo de <em>one-liner</em> que adoran los droppers de malware:</p>
+
+<pre tabindex="0"><code>title: PowerShell Web Download via Net.WebClient   # se muestra en la alerta
+id: e6c54d94-498c-4b93-a2d1-1a3e7f9c02aa           # UUID estable para el seguimiento
+status: test                                        # experimental | test | stable
+description: Detects PowerShell using Net.WebClient to pull a remote payload
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+author: Breachfolio
+date: 2026/07/15
+logsource:                     # DÓNDE buscar, independiente del SIEM
+  category: process_creation   # p. ej. Sysmon Event ID 1
+  product: windows
+detection:                     # QUÉ buscar
+  selection_img:               # el propio binario de PowerShell
+    - Image|endswith: '\powershell.exe'
+    - OriginalFileName: 'PowerShell.EXE'
+  selection_cli:               # Y ambas cadenas en la línea de comandos
+    CommandLine|contains|all:
+      - 'Net.WebClient'
+      - 'DownloadString'
+  condition: selection_img and selection_cli   # cómo se combinan los bloques
+falsepositives:
+  - Legitimate admin or software-deployment scripts
+level: high                    # informational | low | medium | high | critical
+tags:
+  - attack.execution
+  - attack.t1059.001</code></pre>
+
+<p>Léela de arriba abajo y es casi prosa: en Windows, en eventos de creación de proceso, busca PowerShell donde la línea de comandos contenga a la vez <code>Net.WebClient</code> y <code>DownloadString</code>. Fíjate en lo que la regla <em>no</em> dice: nunca menciona Splunk, Elastic ni un mapeo de campos concreto. Esa abstracción es justo el propósito de todo esto.</p>
+
+<h3>Convertir Sigma a tu SIEM con sigma-cli y pySigma</h3>
+
+<p>El motor que convierte ese YAML en una consulta real es <a href="https://github.com/SigmaHQ/pySigma" target="_blank" rel="noopener noreferrer">pySigma</a>, que normalmente se maneja a través de la herramienta de línea de comandos <a href="https://github.com/SigmaHQ/sigma-cli" target="_blank" rel="noopener noreferrer">sigma-cli</a>. Instálala y lista los backends disponibles:</p>
+
+<pre tabindex="0"><code>$ pipx install sigma-cli
+$ sigma list targets          # splunk, elasticsearch, kusto (Sentinel/KQL), qradar, ...
+$ sigma list pipelines        # sysmon, windows-audit, crowdstrike, ...</code></pre>
+
+<p>Un «pipeline» le indica al conversor cómo los campos abstractos (como <code>Image</code>) se mapean sobre el esquema concreto de tus logs (como un evento <code>EventCode=1</code> de Sysmon). Para emitir Splunk SPL de la regla anterior usando el pipeline de Sysmon:</p>
+
+<pre tabindex="0"><code>$ sigma convert -t splunk -p sysmon powershell_webclient.yml</code></pre>
+
+<p>La salida es una búsqueda nativa de Splunk; el texto exacto depende del pipeline, pero tiene este aspecto:</p>
+
+<pre tabindex="0"><code>EventCode=1 (Image="*\\powershell.exe" OR OriginalFileName="PowerShell.EXE")
+  CommandLine="*Net.WebClient*" CommandLine="*DownloadString*"</code></pre>
+
+<p>Cambia <code>-t splunk</code> por <code>-t elasticsearch</code> y obtienes una consulta de Elastic en su lugar; pon <code>-t kusto</code> y obtienes KQL para Microsoft Sentinel o Defender. Una regla de origen, muchos destinos. Así es como una comunidad de miles de personas puede compartir detecciones pese a ejecutar plataformas completamente distintas.</p>
+
+<h2>YARA: coincidencia de patrones en ficheros, memoria y malware</h2>
+
+<p>YARA responde a una pregunta distinta. No mira eventos; mira <em>contenido</em>: los bytes en bruto de ficheros, memoria de procesos o buffers de red. Creado por <strong>Victor Alvarez</strong> y mantenido por <strong>VirusTotal</strong>, YARA es el estándar de facto para describir familias de malware y a menudo se le llama «la navaja suiza de coincidencia de patrones para investigadores de malware». Donde Sigma expresa un comportamiento en tus logs, una regla YARA expresa una <em>firma</em>: las huellas que hacen que un fragmento de código sea reconociblemente él mismo. Esas huellas son una especie de <a href="../indicadores-de-compromiso/" target="_blank" rel="noopener noreferrer">indicador de compromiso</a>, codificado para que un escáner pueda actuar sobre él.</p>
+
+<h3>Cómo se estructura una regla YARA</h3>
+
+<p>Una regla YARA tiene tres secciones dentro de un bloque <code>rule</code>:</p>
+
+<ul>
+  <li><strong>meta</strong>: metadatos de formato libre: autor, descripción, fecha, enlaces de referencia, hashes de muestras. No influye en la coincidencia; está ahí para las personas y el tooling de triaje.</li>
+  <li><strong>strings</strong>: los patrones a buscar. Pueden ser texto (<code>"System.Net.WebClient"</code>), secuencias de bytes en hexadecimal (<code>{ 4D 5A }</code>) o expresiones regulares (<code>/[a-f0-9]{32}/</code>), cada uno con modificadores como <code>nocase</code>, <code>ascii</code> y <code>wide</code>.</li>
+  <li><strong>condition</strong>: la lógica booleana que decide una coincidencia: cuántas cadenas, en qué combinación, en qué offset, bajo qué tamaño de fichero. Aquí reside la verdadera expresividad de YARA.</li>
+</ul>
+
+<h3>Una regla YARA completa</h3>
+
+<p>Aquí tienes una regla que marca un pequeño ejecutable de Windows que lleva incrustado un stub descargador de PowerShell:</p>
+
+<pre tabindex="0"><code>rule Win_Downloader_PowerShell_Stub
+{
+    meta:
+        description = "Windows PE bundling a PowerShell download cradle"
+        author      = "Breachfolio"
+        date        = "2026-07-15"
+        reference   = "https://attack.mitre.org/techniques/T1059/001/"
+        hash        = "d41d8cd98f00b204e9800998ecf8427e"
+
+    strings:
+        $mz        = { 4D 5A }                          // bytes mágicos PE "MZ"
+        $ps_enc    = "powershell -nop -w hidden -enc" ascii wide nocase
+        $webclient = "System.Net.WebClient" ascii wide
+        $download  = "DownloadString" ascii wide
+
+    condition:
+        // debe empezar por MZ, ser pequeño y contener las cadenas del descargador
+        $mz at 0 and filesize &lt; 500KB and $ps_enc and $webclient and $download
+}</code></pre>
+
+<p>El modificador <code>ascii wide</code> le dice a YARA que coincida tanto con la codificación en texto plano como con la UTF-16 de una cadena, algo esencial en Windows, donde el mismo texto aparece de las dos formas. La condición <code>$mz at 0</code> ancla la firma «MZ» al primerísimo byte para que la regla solo salte con ficheros PE reales, y <code>filesize &lt; 500KB</code> evita malgastar ciclos en ficheros grandes e irrelevantes. Detalles pequeños como estos son la diferencia entre una regla precisa y una máquina de falsos positivos.</p>
+
+<h3>Probar una regla YARA desde la línea de comandos</h3>
+
+<p>La CLI de <code>yara</code> es deliciosamente directa. Apúntala a una regla y a un objetivo:</p>
+
+<pre tabindex="0"><code>$ yara -r -s downloader.yar /samples/            # -r recursivo, -s muestra las cadenas coincidentes
+Win_Downloader_PowerShell_Stub /samples/dropper.exe
+0x0:$mz: 4D 5A
+0x3f10:$ps_enc: powershell -nop -w hidden -enc
+0x41a8:$webclient: System.Net.WebClient</code></pre>
+
+<p>El mismo binario funciona contra un volcado de memoria o, con una integración de escáner, contra memoria de procesos en vivo, y por eso YARA aparece constantemente en el <a href="../forense-digital-y-dfir/" target="_blank" rel="noopener noreferrer">forense digital y el DFIR</a>, donde los investigadores rastrean imágenes de RAM y disco en busca de código malicioso conocido que nunca tocó un log.</p>
+
+<h2>Cuándo usar cada una</h2>
+
+<p>La línea divisoria es sencilla: <strong>Sigma es para lo que ocurrió; YARA es para lo que algo es.</strong> Si tu evidencia es un evento (un proceso que se lanzó, un usuario que se autenticó, una consulta DNS que se resolvió), tira de Sigma. Si tu evidencia es un artefacto (un fichero, una región de memoria, un documento), tira de YARA. La mayoría de los programas de detección maduros usan ambas, porque los ataques dejan las dos clases de rastro.</p>
+
+<table>
+  <thead>
+    <tr><th>Dimensión</th><th>Sigma</th><th>YARA</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Qué inspecciona</td><td>Eventos de log (datos del SIEM)</td><td>Ficheros, memoria, bytes en bruto</td></tr>
+    <tr><td>Pregunta que responde</td><td>«¿Ocurrió este comportamiento?»</td><td>«¿Es malicioso esto?»</td></tr>
+    <tr><td>Formato</td><td>YAML, convertido a consultas de SIEM</td><td>Sintaxis nativa de reglas <code>.yar</code></td></tr>
+    <tr><td>Dónde se ejecuta</td><td>Splunk, Elastic, Sentinel, QRadar…</td><td>CLI de yara, EDR, sandboxes, VirusTotal</td></tr>
+    <tr><td>Secciones principales</td><td>logsource, detection, condition</td><td>meta, strings, condition</td></tr>
+    <tr><td>Ejemplo de uso</td><td>Alertar de un download cradle de PowerShell en logs</td><td>Marcar una familia de dropper en disco o en RAM</td></tr>
+    <tr><td>Mantenedor</td><td>SigmaHQ (Roth, Patzke)</td><td>VirusTotal (Victor Alvarez)</td></tr>
+  </tbody>
+</table>
+
+<h2>Los primos: KQL, SPL, EQL y reglas de Suricata</h2>
+
+<p>Sigma y YARA no viven solas. Una vez convertida, una regla Sigma se convierte en lenguaje de consulta nativo: <strong>SPL</strong> en Splunk, <strong>KQL</strong> en Microsoft Sentinel y Elastic, o <strong>EQL</strong> (Event Query Language) en Elastic para detecciones basadas en secuencias que encadenan eventos en orden. Estos son los lenguajes de «tiempo de ejecución» a los que Sigma compila; seguirás leyéndolos y afinándolos a mano, pero Sigma conserva la fuente de verdad portable.</p>
+
+<p>En el lado de la red, el equivalente de YARA son las reglas de <strong>Suricata</strong> (y Snort), que hacen coincidencia de patrones sobre paquetes y flujos en vez de ficheros. Una firma de Suricata se lee un poco como una regla YARA cruzada con una ACL de cortafuegos:</p>
+
+<pre tabindex="0"><code>alert http any any -&gt; any any (msg:"Suspicious PowerShell UA";
+  http.user_agent; content:"WindowsPowerShell"; sid:1000001; rev:1;)</code></pre>
+
+<p>Si quieres ver cómo se comparan cara a cara los motores de detección de red, nuestro análisis <a href="../../comparativas/snort-vs-suricata/" target="_blank" rel="noopener noreferrer">Snort vs Suricata</a> cubre ese terreno. El modelo mental que conviene retener: Sigma vigila los logs, YARA vigila los ficheros, Suricata vigila el cable, y los programas maduros conectan los tres al mismo pipeline de alertas.</p>
+
+<h2>Dónde encontrar reglas de detección</h2>
+
+<p>Rara vez partes de un fichero en blanco. Repositorios abiertos, enormes y bien curados ya cubren el terreno común, y leerlos es la forma más rápida de aprender los modismos:</p>
+
+<ul>
+  <li><a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">SigmaHQ/sigma</a>: el repositorio canónico de reglas Sigma, con miles de reglas mantenidas por la comunidad y mapeadas a MITRE ATT&amp;CK.</li>
+  <li><a href="https://github.com/Neo23x0/signature-base" target="_blank" rel="noopener noreferrer">Neo23x0/signature-base</a>: la base de firmas YARA (y Sigma) de Florian Roth, muy usada, el conjunto de reglas que hay detrás de los escáneres THOR/LOKI.</li>
+  <li><a href="https://github.com/Yara-Rules/rules" target="_blank" rel="noopener noreferrer">Yara-Rules/rules</a>: una gran colección comunitaria de reglas YARA organizada por familia de malware y categoría.</li>
+  <li><a href="https://github.com/elastic/detection-rules" target="_blank" rel="noopener noreferrer">elastic/detection-rules</a>: el conjunto abierto de reglas de detección de Elastic Security, incluida lógica EQL y KQL que puedes estudiar junto a Sigma.</li>
+  <li><a href="https://yaraify.abuse.ch/" target="_blank" rel="noopener noreferrer">YARAify (abuse.ch)</a>: un servicio gratuito para escanear ficheros contra un gran pool público de reglas YARA y para cazar con las tuyas propias.</li>
+</ul>
+
+<p>Para las referencias oficiales, ten a mano la <a href="https://yara.readthedocs.io/" target="_blank" rel="noopener noreferrer">documentación de YARA</a> y la <a href="https://github.com/SigmaHQ/sigma-specification" target="_blank" rel="noopener noreferrer">especificación de Sigma</a>: ambas son la verdad de referencia cuando un modificador o una condición no se comporta como esperas.</p>
+
+<h2>Escribir y probar reglas sin ahogarte en falsos positivos</h2>
+
+<p>Una regla que nunca salta es inútil; una regla que salta con todo es peor, porque enseña a tus analistas a ignorarla. La disciplina que separa a los buenos ingenieros de detección de los malos es <strong>probar contra la realidad</strong>. Unos pocos hábitos cargan con casi todo el peso:</p>
+
+<ul>
+  <li><strong>Prueba con muestras tanto benignas como maliciosas.</strong> Ejecuta YARA contra una carpeta de binarios limpios y legítimos (<code>yara -r rule.yar /clean_corpus/</code>) y confirma cero coincidencias antes de fiarte de una coincidencia en una muestra real. Para Sigma, valida la consulta convertida contra logs históricos y cuenta lo ruidosa que es durante una semana normal.</li>
+  <li><strong>Ancla y restringe.</strong> En YARA, usa límites de <code>filesize</code>, anclas de offset como <code>$mz at 0</code> y exige varias cadenas juntas en vez de una sola común. En Sigma, añade selecciones <code>filter</code> y condiciones <code>and not</code> para recortar el software legítimo conocido.</li>
+  <li><strong>Rellena <code>falsepositives</code> con honestidad.</strong> Ese campo no es decoración: es la nota que tu yo futuro leerá a las 3 de la madrugada decidiendo si una alerta importa.</li>
+  <li><strong>Haz lint y valida en CI.</strong> <code>sigma check</code> valida la sintaxis de la regla, y <code>yara -w</code> (desactiva los avisos) más un paso de compilación cazan reglas rotas antes de que se publiquen. Conecta ambos a un check de pull request para que una regla mala nunca se fusione.</li>
+  <li><strong>Etiqueta contra un marco.</strong> Mapear cada regla a una técnica de MITRE ATT&amp;CK convierte un montón de detecciones en un mapa de cobertura, para que veas ante qué estás ciego.</li>
+</ul>
+
+<p>Haz estas cosas y la detección dejará de ser folclore. Tus reglas se convierten en artefactos que puedes revisar, migrar y en los que confiar, que es la promesa entera de la detección como código. Sigma te da ojos portables sobre tus logs; YARA te da huellas precisas para tus ficheros. Aprende a escribir y probar ambas y podrás describir casi cualquier amenaza en una forma que sobrevive a la herramienta que hoy te toque usar.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre Sigma y YARA?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Detectan clases distintas de evidencia. Sigma describe comportamiento sospechoso en eventos de log y se convierte en consultas de SIEM (Splunk SPL, KQL, EQL y otras), así que responde a «¿ocurrió esto?». YARA hace coincidencia de patrones en los bytes en bruto de ficheros, memoria y buffers de red, así que responde a «¿es malicioso esto?». Sigma vigila tus logs; YARA vigila tus ficheros. Los programas de detección maduros usan ambas porque los ataques dejan las dos clases de rastro.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es una regla Sigma?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Una regla Sigma es un pequeño fichero YAML, neutral respecto al fabricante, que describe una detección sobre datos de log. Sus partes clave son un logsource (dónde buscar, como los eventos de creación de proceso de Windows), un bloque detection (los patrones campo/valor a coincidir, usando modificadores como contains y endswith) y una condition (la lógica booleana que ata las coincidencias entre sí). Como es abstracta, una misma regla Sigma puede convertirse al lenguaje de consulta de muchos SIEM distintos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo convierto una regla Sigma a Splunk o Elastic?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Usa sigma-cli, la interfaz de línea de comandos de pySigma. Instálala con «pipx install sigma-cli» y luego ejecuta «sigma convert -t splunk -p sysmon tu_regla.yml» para emitir Splunk SPL, o cambia «-t splunk» por «-t elasticsearch» para emitir una consulta de Elastic (o «-t kusto» para KQL de Microsoft Sentinel). El flag «-p» selecciona un pipeline que mapea los campos abstractos de Sigma sobre tu esquema de log. Ejecuta «sigma list targets» para ver todos los backends disponibles.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Para qué sirve una regla YARA?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Las reglas YARA identifican y clasifican malware haciendo coincidencia de patrones en el contenido de ficheros y en memoria. Los analistas las usan para tomar la huella de familias de malware, cazar código malicioso conocido en discos y RAM en investigaciones DFIR, impulsar la detección en productos EDR y sandboxes, y escanear subidas en servicios como VirusTotal y YARAify de abuse.ch. Una regla YARA combina meta (metadatos), strings (los patrones de bytes, texto o regex) y una condition (la lógica que declara una coincidencia).
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Dónde puedo encontrar reglas de detección ya hechas?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Las principales fuentes abiertas son SigmaHQ/sigma para reglas Sigma, Neo23x0/signature-base y Yara-Rules/rules para firmas YARA, y elastic/detection-rules para la lógica EQL y KQL de Elastic. YARAify de abuse.ch te permite escanear ficheros contra un gran pool público de YARA. Leer estos repositorios es además la forma más rápida de aprender los modismos de cada lenguaje antes de escribir los tuyos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿YARA puede escanear memoria o es solo para ficheros en disco?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Ambas cosas. YARA se diseñó para coincidir contra cualquier buffer de bytes, así que más allá de los ficheros en disco puede escanear memoria de procesos en vivo y volcados de memoria, y por eso es un básico de la respuesta a incidentes y el forense. Los investigadores rastrean imágenes de RAM en busca de malware que se desempaqueta en memoria y nunca deja una copia limpia en disco, capturando amenazas que un escaneo solo de ficheros pasaría por alto.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../herramientas-de-un-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">El stack del SOC: SIEM, SOAR y EDR</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../indicadores-de-compromiso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué son los IOC</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../comparativas/snort-vs-suricata/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Snort vs Suricata</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../forense-digital-y-dfir/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Forense digital y DFIR</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../recursos/eventos-de-seguridad-de-windows-chuleta/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Eventos de seguridad de Windows: chuleta de triaje</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

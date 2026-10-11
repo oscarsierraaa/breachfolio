@@ -1,0 +1,270 @@
+{
+  "site": "breachfolio",
+  "generated_at": "2026-08-29T19:13:13.522Z",
+  "items": [
+    {
+      "id": "/guides/clicked-phishing-link/",
+      "title": "I clicked a phishing link: what actually happens now",
+      "summary": "If you only opened it and closed it, almost certainly nothing happened. What decides is what you did next: typed something, downloaded, or approved a prompt.",
+      "url": "/guides/clicked-phishing-link/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-phishing-link-clicked.webp",
+      "lang": "en",
+      "published_at": "2026-08-29",
+      "expires_at": null
+    },
+    {
+      "id": "/guides/browser-saved-passwords/",
+      "title": "Is it safe to save passwords in your browser?",
+      "summary": "It does encrypt them, and anyone saying otherwise is out of date. What decides the risk is different: whether something can run on your computer as you.",
+      "url": "/guides/browser-saved-passwords/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-browser-passwords.webp",
+      "lang": "en",
+      "published_at": "2026-08-29",
+      "expires_at": null
+    },
+    {
+      "id": "/guides/photo-of-your-id-risks/",
+      "title": "A photo of your ID: what can really be done with it",
+      "summary": "The photo alone is rarely enough: what decides the risk is what else they hold about you. Plus the free credit check almost no article mentions.",
+      "url": "/guides/photo-of-your-id-risks/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-id-document.webp",
+      "lang": "en",
+      "published_at": "2026-08-26",
+      "expires_at": null
+    },
+    {
+      "id": "/guides/check-if-your-data-was-breached/",
+      "title": "Your data already leaked: how to check and what to do",
+      "summary": "How to check whether your email is in a breach, what appearing on the list actually means, and the order of actions that genuinely reduces your risk.",
+      "url": "/guides/check-if-your-data-was-breached/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-data-leak.webp",
+      "lang": "en",
+      "published_at": "2026-08-26",
+      "expires_at": null
+    },
+    {
+      "id": "/news/android-car-head-unit-malware-update-channel/",
+      "title": "Android car screens infected through their own updater",
+      "summary": "Kaspersky documents the first malware built for Android car head units. It did not arrive through a dodgy app: it came through the unit’s own update channel.",
+      "url": "/news/android-car-head-unit-malware-update-channel/",
+      "source_url": null,
+      "image": "/assets/img/hero-news-car-botnet.webp",
+      "lang": "en",
+      "published_at": "2026-08-23",
+      "expires_at": null
+    },
+    {
+      "id": "/news/vmware-vcenter-cve-2026-59310-exploited/",
+      "title": "vCenter flaw exploited five days after the patch",
+      "summary": "CVE-2026-59310 allows unauthenticated code execution on VMware vCenter. Broadcom patched on 29 July; exploitation began five days later. 361 victims in 47 countries.",
+      "url": "/news/vmware-vcenter-cve-2026-59310-exploited/",
+      "source_url": null,
+      "image": "/assets/img/hero-news-global-campaign.webp",
+      "lang": "en",
+      "published_at": "2026-08-20",
+      "expires_at": null
+    },
+    {
+      "id": "/guides/cloned-website-what-to-do/",
+      "title": "Your website has been cloned: what to do",
+      "summary": "Someone copied your website to deceive your customers. How to gather evidence, which registrar and host to contact, and how to get it flagged in browsers.",
+      "url": "/guides/cloned-website-what-to-do/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-cloned-website.webp",
+      "lang": "en",
+      "published_at": "2026-08-17",
+      "expires_at": null
+    },
+    {
+      "id": "/compare/nordvpn-vs-surfshark-vs-proton-vpn/",
+      "title": "Best VPN 2026: NordVPN vs Surfshark vs Proton VPN",
+      "summary": "NordVPN, Surfshark and Proton VPN compared on jurisdiction, audits, open source and what they actually protect. Two of the three are the same company.",
+      "url": "/compare/nordvpn-vs-surfshark-vs-proton-vpn/",
+      "source_url": null,
+      "image": "/assets/img/thumb-cmp-vpn.webp",
+      "lang": "en",
+      "published_at": "2026-08-16",
+      "expires_at": null
+    },
+    {
+      "id": "/news/adobe-commerce-account-takeover-cve-2026-71362/",
+      "title": "Adobe patches a Magento flaw that hands over accounts",
+      "summary": "CVE-2026-71362 lets an attacker switch into another customer's session on Adobe Commerce, with no account and no clicking. Patch is out; Sansec reports attempts.",
+      "url": "/news/adobe-commerce-account-takeover-cve-2026-71362/",
+      "source_url": null,
+      "image": "/assets/img/030-guide-identical-luxury-storefronts-night-street.webp",
+      "lang": "en",
+      "published_at": "2026-08-13",
+      "expires_at": null
+    },
+    {
+      "id": "/guides/hacked-email-account/",
+      "title": "My email was hacked: what to do right now",
+      "summary": "Someone got into your email. Lock them out, undo the forwarding rule they left behind, and secure the accounts that reset through it, in that order.",
+      "url": "/guides/hacked-email-account/",
+      "source_url": null,
+      "image": "/assets/img/035-guide-closet-rearranged-by-stranger.webp",
+      "lang": "en",
+      "published_at": "2026-08-10",
+      "expires_at": null
+    },
+    {
+      "id": "/resources/windows-security-event-ids-cheat-sheet/",
+      "title": "Windows security event IDs: a triage cheat sheet",
+      "summary": "The Windows event IDs worth checking first when something looks wrong: sign-ins, privilege, new services, scheduled tasks and cleared logs.",
+      "url": "/resources/windows-security-event-ids-cheat-sheet/",
+      "source_url": null,
+      "image": "/assets/img/047-guide-forensic-table-envelope-layers-analysis.webp",
+      "lang": "en",
+      "published_at": "2026-08-03",
+      "expires_at": null
+    },
+    {
+      "id": "/lab/lab-06-test-detections-atomic-red-team/",
+      "title": "Lab 06: test your detections with Atomic Red Team",
+      "summary": "Your home lab SIEM and IDS have never proved they detect anything. Run small, documented ATT&amp;CK techniques with Atomic Red Team and find out which alerts fire.",
+      "url": "/lab/lab-06-test-detections-atomic-red-team/",
+      "source_url": null,
+      "image": "/assets/img/thumb-lab-siem.webp",
+      "lang": "en",
+      "published_at": "2026-08-01",
+      "expires_at": null
+    },
+    {
+      "id": "/es/guias/contrasenas-en-el-navegador/",
+      "title": "¿Es seguro guardar las contraseñas en el navegador?",
+      "summary": "Sí las cifra, y quien diga lo contrario va desfasado. Lo que decide el riesgo es otra cosa: si algo puede ejecutarse en tu ordenador con tu sesión.",
+      "url": "/es/guias/contrasenas-en-el-navegador/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-browser-passwords.webp",
+      "lang": "es",
+      "published_at": "2026-08-29",
+      "expires_at": null
+    },
+    {
+      "id": "/es/guias/clic-enlace-phishing/",
+      "title": "He hecho clic en un enlace de phishing: qué pasa ahora",
+      "summary": "Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. Lo que decide es lo que hiciste después: si escribiste algo, descargaste o aprobaste un aviso.",
+      "url": "/es/guias/clic-enlace-phishing/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-phishing-link-clicked.webp",
+      "lang": "es",
+      "published_at": "2026-08-29",
+      "expires_at": null
+    },
+    {
+      "id": "/es/guias/foto-dni-riesgos/",
+      "title": "Foto de tu DNI: qué pueden hacer de verdad con ella",
+      "summary": "Con la foto sola casi nunca basta: lo que decide el riesgo es qué más tienen de ti. Y la comprobación gratuita del Banco de España que casi nadie menciona.",
+      "url": "/es/guias/foto-dni-riesgos/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-id-document.webp",
+      "lang": "es",
+      "published_at": "2026-08-26",
+      "expires_at": null
+    },
+    {
+      "id": "/es/guias/comprobar-datos-filtrados/",
+      "title": "Tus datos ya están filtrados: cómo comprobarlo y qué hacer",
+      "summary": "Cómo comprobar si tu correo está en una filtración, qué significa de verdad salir en la lista, y el orden de actuación que sí reduce el riesgo.",
+      "url": "/es/guias/comprobar-datos-filtrados/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-data-leak.webp",
+      "lang": "es",
+      "published_at": "2026-08-26",
+      "expires_at": null
+    },
+    {
+      "id": "/es/noticias/malware-pantallas-coche-android-actualizacion/",
+      "title": "Infectan pantallas de coche Android por su actualización",
+      "summary": "Kaspersky documenta el primer malware diseñado para pantallas de coche Android. No llegó por una app rara: llegó por el canal de actualización oficial.",
+      "url": "/es/noticias/malware-pantallas-coche-android-actualizacion/",
+      "source_url": null,
+      "image": "/assets/img/hero-news-car-botnet.webp",
+      "lang": "es",
+      "published_at": "2026-08-23",
+      "expires_at": null
+    },
+    {
+      "id": "/es/noticias/vmware-vcenter-cve-2026-59310-explotada/",
+      "title": "Explotan un fallo de vCenter cinco días tras el parche",
+      "summary": "CVE-2026-59310 permite ejecutar código sin autenticación en VMware vCenter. Broadcom parcheó el 29 de julio y cinco días después ya había explotación: 361 víctimas.",
+      "url": "/es/noticias/vmware-vcenter-cve-2026-59310-explotada/",
+      "source_url": null,
+      "image": "/assets/img/hero-news-global-campaign.webp",
+      "lang": "es",
+      "published_at": "2026-08-20",
+      "expires_at": null
+    },
+    {
+      "id": "/es/guias/suplantan-tu-web/",
+      "title": "Qué hacer si suplantan tu web y cómo cerrarla",
+      "summary": "Han copiado tu web para engañar a tus clientes. Cómo reunir pruebas, a qué registrador y hosting escribir, cómo marcarla en los navegadores y qué hacer en España.",
+      "url": "/es/guias/suplantan-tu-web/",
+      "source_url": null,
+      "image": "/assets/img/hero-guide-cloned-website.webp",
+      "lang": "es",
+      "published_at": "2026-08-17",
+      "expires_at": null
+    },
+    {
+      "id": "/es/comparativas/nordvpn-vs-surfshark-vs-proton-vpn/",
+      "title": "Mejor VPN 2026: NordVPN vs Surfshark vs Proton VPN",
+      "summary": "NordVPN, Surfshark y Proton VPN comparados por jurisdicción, auditorías, código abierto y qué protegen de verdad. Dos de los tres son la misma empresa.",
+      "url": "/es/comparativas/nordvpn-vs-surfshark-vs-proton-vpn/",
+      "source_url": null,
+      "image": "/assets/img/thumb-cmp-vpn.webp",
+      "lang": "es",
+      "published_at": "2026-08-16",
+      "expires_at": null
+    },
+    {
+      "id": "/es/noticias/robo-de-cuentas-adobe-commerce-cve-2026-71362/",
+      "title": "Adobe parchea un fallo de Magento que entrega cuentas",
+      "summary": "CVE-2026-71362 permite colarse en la sesión de otro cliente en Adobe Commerce, sin cuenta y sin que nadie pulse nada. Ya hay parche, y Sansec detecta intentos.",
+      "url": "/es/noticias/robo-de-cuentas-adobe-commerce-cve-2026-71362/",
+      "source_url": null,
+      "image": "/assets/img/030-guide-identical-luxury-storefronts-night-street.webp",
+      "lang": "es",
+      "published_at": "2026-08-13",
+      "expires_at": null
+    },
+    {
+      "id": "/es/guias/correo-hackeado/",
+      "title": "Me han hackeado el correo: qué hacer ahora",
+      "summary": "Alguien entró en tu correo. Échalo, deshaz la regla de reenvío que dejó puesta y asegura las cuentas que se recuperan por ahí, en ese orden.",
+      "url": "/es/guias/correo-hackeado/",
+      "source_url": null,
+      "image": "/assets/img/035-guide-closet-rearranged-by-stranger.webp",
+      "lang": "es",
+      "published_at": "2026-08-10",
+      "expires_at": null
+    },
+    {
+      "id": "/es/recursos/eventos-de-seguridad-de-windows-chuleta/",
+      "title": "Eventos de seguridad de Windows: chuleta de triaje",
+      "summary": "Los eventos de Windows que conviene mirar primero cuando algo va mal: inicios de sesión, privilegios, servicios nuevos, tareas y registros borrados.",
+      "url": "/es/recursos/eventos-de-seguridad-de-windows-chuleta/",
+      "source_url": null,
+      "image": "/assets/img/047-guide-forensic-table-envelope-layers-analysis.webp",
+      "lang": "es",
+      "published_at": "2026-08-03",
+      "expires_at": null
+    },
+    {
+      "id": "/es/laboratorio/lab-06-probar-detecciones-atomic-red-team/",
+      "title": "Lab 06: prueba tus detecciones con Atomic Red Team",
+      "summary": "Tu SIEM y tu IDS nunca han demostrado que detecten nada. Ejecuta técnicas de ATT&amp;CK con Atomic Red Team y comprueba qué alertas saltan.",
+      "url": "/es/laboratorio/lab-06-probar-detecciones-atomic-red-team/",
+      "source_url": null,
+      "image": "/assets/img/thumb-lab-siem.webp",
+      "lang": "es",
+      "published_at": "2026-08-01",
+      "expires_at": null
+    }
+  ]
+}

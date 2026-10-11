@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-labelledby="lab-arch-title lab-arch-desc">
+  <title id="lab-arch-title">Home lab architecture diagram</title>
+  <desc id="lab-arch-desc">A laptop runs a hypervisor that hosts three isolated virtual machines: Kali attacker, Metasploitable target, and Juice Shop target. They communicate through a host-only network with no internet access.</desc>
+
+  <style>
+    .label-xl { font: 600 16px 'Sora', system-ui, sans-serif; fill: #fafafa; }
+    .label-md { font: 500 13px 'Sora', system-ui, sans-serif; fill: #fafafa; }
+    .label-sm { font: 500 11px 'JetBrains Mono', ui-monospace, monospace; fill: #a8a8a3; letter-spacing: 0.06em; }
+    .label-mono { font: 400 11px 'JetBrains Mono', ui-monospace, monospace; fill: #fafafa; }
+    .net-line { stroke: #4ade80; stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; opacity: 0.6; }
+    .barrier { stroke: #ef4444; stroke-width: 1.8; fill: none; stroke-dasharray: 6 4; opacity: 0.75; }
+    .vm-rect { fill: #1a1a1c; stroke: #2a2a2e; stroke-width: 1.4; rx: 10; }
+    .vm-attacker { stroke: #4ade80; }
+    .vm-target { stroke: #38bdf8; }
+    .laptop-rect { fill: #0a0a0b; stroke: #3a3a3e; stroke-width: 1.5; rx: 14; }
+    .hyper-rect { fill: rgba(74, 222, 128, 0.05); stroke: rgba(74, 222, 128, 0.4); stroke-width: 1.4; stroke-dasharray: 5 4; rx: 10; }
+    .legend-dot { stroke-width: 1.5; fill: none; }
+  </style>
+
+  <!-- Background subtle grid -->
+  <defs>
+    <pattern id="lab-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#fafafa" stroke-opacity="0.025" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="480" fill="url(#lab-grid)" />
+
+  <!-- INTERNET (excluded) -->
+  <g transform="translate(40, 30)">
+    <rect x="0" y="0" width="160" height="64" rx="10" fill="#0e0e10" stroke="#3a3a3e" stroke-width="1.2"/>
+    <text x="80" y="26" class="label-md" text-anchor="middle">Internet</text>
+    <text x="80" y="46" class="label-sm" text-anchor="middle">UNREACHABLE</text>
+  </g>
+
+  <!-- Red barrier -->
+  <line x1="220" y1="62" x2="290" y2="62" class="barrier" />
+  <text x="255" y="50" class="label-sm" text-anchor="middle" fill="#ef4444">NO ROUTE</text>
+
+  <!-- Laptop outer -->
+  <g transform="translate(290, 30)">
+    <rect x="0" y="0" width="580" height="420" class="laptop-rect" />
+    <text x="20" y="28" class="label-sm">YOUR LAPTOP · HOST OS</text>
+
+    <!-- Hypervisor envelope -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="540" height="350" class="hyper-rect" />
+      <text x="16" y="22" class="label-sm" fill="#4ade80">VIRTUALBOX · HYPERVISOR</text>
+
+      <!-- Host-only network bar -->
+      <g transform="translate(16, 130)">
+        <rect x="0" y="0" width="508" height="40" rx="8" fill="rgba(74, 222, 128, 0.08)" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <text x="254" y="18" class="label-md" text-anchor="middle">Host-only network</text>
+        <text x="254" y="32" class="label-mono" text-anchor="middle">192.168.56.0/24</text>
+      </g>
+
+      <!-- VM: Kali -->
+      <g transform="translate(16, 50)">
+        <rect x="0" y="0" width="158" height="70" class="vm-rect vm-attacker" />
+        <text x="79" y="24" class="label-md" text-anchor="middle">Kali Linux</text>
+        <text x="79" y="40" class="label-sm" text-anchor="middle" fill="#4ade80">ATTACKER</text>
+        <text x="79" y="56" class="label-mono" text-anchor="middle">.10</text>
+      </g>
+
+      <!-- VM: Metasploitable -->
+      <g transform="translate(191, 50)">
+        <rect x="0" y="0" width="158" height="70" class="vm-rect vm-target" />
+        <text x="79" y="24" class="label-md" text-anchor="middle">Metasploitable 2</text>
+        <text x="79" y="40" class="label-sm" text-anchor="middle" fill="#38bdf8">TARGET · LINUX</text>
+        <text x="79" y="56" class="label-mono" text-anchor="middle">.20</text>
+      </g>
+
+      <!-- VM: Juice Shop -->
+      <g transform="translate(366, 50)">
+        <rect x="0" y="0" width="158" height="70" class="vm-rect vm-target" />
+        <text x="79" y="24" class="label-md" text-anchor="middle">Juice Shop</text>
+        <text x="79" y="40" class="label-sm" text-anchor="middle" fill="#38bdf8">TARGET · WEB</text>
+        <text x="79" y="56" class="label-mono" text-anchor="middle">.30</text>
+      </g>
+
+      <!-- Wires VM → network -->
+      <path d="M 95 120 L 95 130" class="net-line" />
+      <path d="M 270 120 L 270 130" class="net-line" />
+      <path d="M 445 120 L 445 130" class="net-line" />
+
+      <!-- Annotation -->
+      <g transform="translate(16, 195)">
+        <text x="0" y="0" class="label-md" fill="#fafafa">Inside the lab:</text>
+        <text x="0" y="22" class="label-sm" fill="#a8a8a3">• VMs reach each other freely on .56.0/24</text>
+        <text x="0" y="42" class="label-sm" fill="#a8a8a3">• None of them can reach your home network</text>
+        <text x="0" y="62" class="label-sm" fill="#a8a8a3">• None of them can reach the Internet</text>
+        <text x="0" y="82" class="label-sm" fill="#a8a8a3">• Snapshots reset any VM to clean state in seconds</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- LEGEND -->
+  <g transform="translate(40, 410)">
+    <text x="0" y="0" class="label-sm">LEGEND</text>
+    <g transform="translate(0, 18)">
+      <rect x="0" y="-9" width="14" height="14" rx="3" fill="#1a1a1c" stroke="#4ade80" stroke-width="1.3"/>
+      <text x="22" y="2" class="label-md">Attacker VM</text>
+    </g>
+    <g transform="translate(0, 42)">
+      <rect x="0" y="-9" width="14" height="14" rx="3" fill="#1a1a1c" stroke="#38bdf8" stroke-width="1.3"/>
+      <text x="22" y="2" class="label-md">Target VM</text>
+    </g>
+  </g>
+</svg>

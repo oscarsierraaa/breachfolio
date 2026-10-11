@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Autenticación multifactor (MFA), explicada | Breachfolio</title>
+  <meta name="description" content="Las tres categorías de factores de MFA, por qué el SMS es la más débil, cómo resisten el phishing las llaves FIDO2 y qué es el prompt bombing." />
+  <meta name="keywords" content="autenticación multifactor, MFA explicada, TOTP RFC 6238, SMS OTP SIM swap, MFA por notificación push, FIDO2 WebAuthn, llaves de seguridad hardware, fatiga MFA, prompt bombing" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/multi-factor-authentication-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Autenticación multifactor (MFA), explicada | Breachfolio" />
+  <meta property="og:description" content="Las tres categorías de factores de MFA, por qué el SMS es la más débil, cómo resisten el phishing las llaves FIDO2 y qué es el prompt bombing." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-mfa.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Autenticación multifactor (MFA), explicada | Breachfolio" />
+  <meta name="twitter:description" content="Las tres categorías de factores de MFA, por qué el SMS es la más débil, cómo resisten el phishing las llaves FIDO2 y qué es el prompt bombing." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-mfa.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Autenticación multifactor (MFA), explicada",
+      "description": "Las tres categorías de factores de MFA, por qué el SMS es la más débil, cómo las llaves de seguridad FIDO2 resisten el phishing y cómo funcionan en realidad los ataques de fatiga MFA (prompt bombing).",
+      "image": "https://breachfolio.com/assets/img/hero-mfa.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" },
+      "inLanguage": "es",
+      "keywords": "autenticación multifactor, MFA explicada, TOTP RFC 6238, SMS OTP SIM swap, MFA por notificación push, FIDO2 WebAuthn, llaves de seguridad hardware, fatiga MFA, prompt bombing"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Autenticación multifactor, explicada", "item": "https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/autenticacion-multifactor-explicada/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Cuáles son los tres factores de autenticación?", "acceptedAnswer": { "@type": "Answer", "text": "Los factores de autenticación se dividen en tres categorías independientes: algo que sabes (una contraseña, un PIN o una pregunta de seguridad), algo que tienes (un teléfono con una app de autenticación, una llave de seguridad hardware o una tarjeta inteligente) y algo que eres (una huella dactilar, un escaneo facial u otro rasgo biométrico). La autenticación multifactor genuina combina pruebas de al menos dos categorías distintas: una contraseña más una pregunta de seguridad no es MFA, porque ambas viven en la categoría «algo que sabes» y pueden vencerse con la misma página de phishing o la misma filtración de datos." } },
+        { "@type": "Question", "name": "¿Por qué se considera que la MFA por SMS es la opción más débil?", "acceptedAnswer": { "@type": "Answer", "text": "Los códigos de un solo uso por SMS dependen de la seguridad de la propia red telefónica, lo que introduce vías de ataque que no tienen nada que ver con la cuenta que se intenta proteger. En un SIM swap, un atacante convence o soborna a un operador móvil para que traspase el número de la víctima a una SIM que él controla, tras lo cual todos los códigos SMS llegan directamente al atacante. Los mensajes de texto también pueden, en casos documentados, interceptarse aprovechando debilidades conocidas del protocolo de señalización SS7 que usan los operadores para enrutar llamadas y textos entre redes, sin que el atacante llegue a tocar la SIM de la víctima. Como ambos ataques apuntan a infraestructura sobre la que el titular de la cuenta no tiene ningún control, las guías de seguridad – incluidas las directrices de identidad digital del NIST – han señalado los códigos entregados por SMS como un método más débil y han recomendado alternativas más sólidas allá donde estén disponibles." } },
+        { "@type": "Question", "name": "¿Qué es un ataque de fatiga MFA (prompt bombing) y cómo funciona?", "acceptedAnswer": { "@type": "Answer", "text": "Es un ataque que apunta a la paciencia humana en lugar de a la criptografía. Un atacante que ya ha conseguido un nombre de usuario y una contraseña válidos – mediante phishing, una contraseña reutilizada de otra filtración o malware infostealer – desencadena solicitudes de aprobación push repetidas al teléfono del usuario legítimo, a veces de madrugada o en ráfagas rápidas. El objetivo es que el usuario pulse «Aprobar» por confusión, por costumbre o por pura molestia ante las interrupciones constantes, aunque él nunca haya iniciado ese inicio de sesión. Los atacantes a veces refuerzan esto haciéndose pasar por soporte técnico y diciendo al objetivo que apruebe la solicitud para «solucionar un problema». Las defensas incluyen la coincidencia de números (number matching), que obliga al usuario a escribir en la app un código mostrado en la pantalla de inicio de sesión, y limitar cuántas solicitudes push puede generar un solo intento de inicio de sesión." } },
+        { "@type": "Question", "name": "¿Son las llaves de seguridad hardware realmente resistentes al phishing?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, de una forma en que el SMS, los códigos TOTP y las simples aprobaciones push no lo son. Una llave hardware FIDO2/WebAuthn realiza un desafío-respuesta criptográfico que está ligado al origen (dominio) real del sitio web con el que está hablando el navegador. Si engañan a un usuario para que entre en un clon de phishing convincente alojado en un dominio distinto, la comprobación criptográfica de la llave falla automáticamente, no se trata de que el usuario tenga que fijarse en una URL falsa, es el propio protocolo el que se niega a producir una respuesta válida para el origen equivocado. Los códigos TOTP y las aprobaciones push no tienen ese vínculo, por lo que un proxy de phishing en tiempo real puede capturarlos y reenviarlos, pero la respuesta de una llave hardware es inútil en cualquier sitio que no sea el legítimo para el que se emitió." } },
+        { "@type": "Question", "name": "¿Es seguro usar la MFA por notificación push?", "acceptedAnswer": { "@type": "Answer", "text": "Es notablemente mejor que una contraseña sola, pero es el método más expuesto a los ataques de fatiga MFA en su forma básica: una simple solicitud de «Aprobar o Denegar» no le da al usuario objetivo ningún contexto para detectar un inicio de sesión falso que él no inició. Las organizaciones que activan la coincidencia de números, donde el usuario debe introducir en la app un código mostrado en la pantalla de inicio de sesión en lugar de pulsar un solo botón, cierran casi por completo el riesgo de aprobación accidental, porque el usuario ahora tiene que estar mirando de verdad el intento de inicio de sesión real en lugar de simplemente reaccionar a una notificación. Para cuentas personales, la MFA push de una app de autenticación de confianza es una opción razonable; para cualquier cosa muy sensible, una llave de seguridad hardware sigue siendo la opción más sólida." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Autenticación multifactor, explicada</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-mfa.webp" alt="Un teléfono mostrando una solicitud de autenticación junto a una llave de seguridad hardware – autenticación multifactor explicada" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · FUNDAMENTOS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Autenticación multifactor, explicada.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Las tres categorías de factores, por qué el SMS es el segundo factor más débil, cómo las llaves hardware FIDO2 resisten el phishing por diseño, y cómo los ataques de fatiga MFA (prompt bombing) explotan la paciencia humana en lugar de la criptografía.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>13 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Una contraseña es un punto único de fallo disfrazado. Puede sufrir phishing, reutilizarse en una docena de sitios filtrados, adivinarse a partir de un patrón predecible o teclearse directamente en una página de inicio de sesión falsa pixel-perfect. La <strong>autenticación multifactor (MFA)</strong> existe para eliminar ese punto único de fallo exigiendo una segunda prueba de identidad, independiente, antes de conceder el acceso –de modo que una contraseña robada por sí sola ya no basta para entrar. Pero no toda la MFA es igual. Algunos métodos frenan en seco a casi cualquier atacante remoto; otros se pueden sortear con un atacante paciente y un usuario molesto. Este artículo recorre cómo funciona en realidad cada método principal de MFA, por qué los códigos SMS son los más débiles del grupo, y cómo un patrón de ataque concreto y bien documentado conocido como <strong>fatiga MFA</strong> o <strong>prompt bombing</strong> apunta a la única parte del sistema que la criptografía no puede blindar: la paciencia humana.</p>
+
+<h2>Qué significa en realidad «multifactor»</h2>
+
+<p>Los factores de autenticación se dividen en tres categorías independientes, y la autenticación multifactor genuina combina pruebas de al menos dos categorías distintas –no dos pruebas de la misma categoría. Dos contraseñas no son MFA. Una contraseña más una pregunta de seguridad es apenas mejor, porque ambas viven en la misma categoría y ambas pueden sufrir phishing, adivinarse o filtrarse en la misma brecha de datos.</p>
+
+<table>
+  <thead>
+    <tr><th>Categoría</th><th>Qué es</th><th>Ejemplos habituales</th><th>Debilidad principal</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Algo que sabes</td><td>Un secreto que solo tú deberías conocer</td><td>Contraseña, PIN, pregunta de seguridad</td><td>Puede sufrir phishing, adivinarse, reutilizarse o filtrarse en una brecha</td></tr>
+    <tr><td>Algo que tienes</td><td>Un objeto físico o digital que posees</td><td>Teléfono con app de autenticación, llave de seguridad hardware, tarjeta inteligente</td><td>Puede perderse, robarse, clonarse (SIM swap) o interceptarse</td></tr>
+    <tr><td>Algo que eres</td><td>Un rasgo físico medible</td><td>Huella dactilar, escaneo facial, escaneo de iris</td><td>Normalmente solo es un desbloqueo local, no una prueba remota de identidad, y no puede reemitirse si se compromete</td></tr>
+  </tbody>
+</table>
+
+<p>En la práctica, la MFA casi siempre combina una contraseña (algo que sabes) con un segundo factor de la categoría «algo que tienes». Ese segundo factor es donde vive la verdadera diferencia de seguridad entre las distintas implementaciones –un mensaje de texto y una llave criptográfica hardware satisfacen ambos, sobre el papel, «algo que tienes», pero resisten a los atacantes en grados enormemente distintos, que es precisamente el tema de este artículo.</p>
+
+<h2>Contraseñas de un solo uso basadas en tiempo (TOTP): el estándar de las apps de autenticación</h2>
+
+<p>Las apps de autenticación como Google Authenticator, Microsoft Authenticator, Authy y 1Password implementan todas el mismo estándar abierto: <strong>TOTP, definido en el RFC 6238</strong>. Durante el registro, el servicio y tu app acuerdan un secreto compartido –normalmente entregado como un código QR que codifica una cadena en base32. A partir de ese momento, ambas partes pueden calcular de forma independiente el mismo código de 6 dígitos sin volver a hablar entre sí jamás: toman el secreto compartido, lo combinan con el tiempo Unix actual dividido en pasos fijos (casi siempre 30 segundos) y lo procesan mediante un algoritmo de contraseña de un solo uso basado en HMAC (RFC 4226, el antecesor no basado en tiempo sobre el que se construye TOTP). Como tanto la app como el servidor se limitan a hacer cálculos contra un reloj, no hace falta ningún viaje de ida y vuelta por red –por eso una app de autenticación sigue generando códigos válidos en modo avión y sin cobertura.</p>
+
+<p>Puedes ver ese mismo cálculo exacto en la línea de comandos, usando el mismo secreto de demostración que aparece en la mayoría de los tutoriales y librerías de TOTP:</p>
+
+<pre tabindex="0"><code>$ oathtool --totp -b JBSWY3DPEHPK3PXP
+123456</code></pre>
+
+<p>Ese único comando hace exactamente lo mismo que una app de autenticación hace localmente cada 30 segundos: decodificar el secreto en base32, derivar un contador de tiempo y producir un código. La fortaleza de TOTP es que el servicio nunca te transmite el código para que te llegue –no hay ningún mensaje SMS ni notificación push que interceptar en tránsito. Su exposición principal está en los dos extremos: una página de phishing que pide el código en tiempo real y lo reenvía al sitio real dentro de la ventana de 30 segundos, o malware capaz de extraer el secreto de registro de un dispositivo o de una copia de seguridad sin cifrar.</p>
+
+<h2>Códigos SMS de un solo uso: cómodos, y el eslabón más débil</h2>
+
+<p>Los códigos SMS siguen muy extendidos porque no necesitan ninguna app y funcionan en cualquier teléfono capaz de recibir un mensaje de texto. Esa comodidad tiene el coste de depender de la seguridad de la propia red telefónica –una superficie de ataque que no tiene nada que ver con la cuenta protegida y todo que ver con infraestructura que el titular de la cuenta no controla.</p>
+
+<ul>
+  <li><strong>SIM swap.</strong> Un atacante manipula mediante ingeniería social, o en algunos casos documentados soborna, a un empleado de un operador móvil para que traslade el número de la víctima a una SIM que él controla. A partir de ese momento, todos los códigos SMS destinados a la víctima –incluidos los de restablecimiento de contraseña– llegan al dispositivo del atacante en su lugar.</li>
+  <li><strong>Debilidades de señalización SS7.</strong> Los mensajes de texto SMS se enrutan entre operadores mediante SS7, un protocolo de señalización de telecomunicaciones de décadas de antigüedad con debilidades de diseño conocidas. Investigadores de seguridad han documentado formas de interceptar tráfico SMS a través de SS7 sin llegar a tocar la SIM física de la víctima, lo que significa que una defensa contra el SIM swap por sí sola no cierra del todo esta brecha.</li>
+  <li><strong>Reenvío en tiempo real.</strong> Como un código SMS no es más que una cadena que el usuario teclea en un formulario de inicio de sesión, una página de phishing puede capturarlo en el momento en que llega y reenviarlo al servicio real antes de que caduque –la misma debilidad que comparte TOTP, sin siquiera la pequeña protección de no transmitir nunca el código por una red pública.</li>
+</ul>
+
+<p>Las directrices de identidad digital del NIST (SP 800-63B) señalaron los códigos de un solo uso entregados por SMS como un autenticador «fuera de banda» más débil y empujaron a las organizaciones hacia alternativas más sólidas allá donde fuera práctico, aunque sin llegar a prohibir el SMS por completo. La conclusión práctica es sencilla: trata el SMS como el recurso de última instancia, no como el predeterminado, siempre que un servicio ofrezca algo más sólido.</p>
+
+<h2>MFA por notificación push: rápida, hasta que se abusa de ella</h2>
+
+<p>La MFA push –Duo Push, Okta Verify, las solicitudes de aprobar/denegar de Microsoft Authenticator– envía una notificación a un dispositivo ya registrado y vinculado a tu cuenta. Pulsas «Aprobar» (a menudo después de comprobar una ubicación o un nombre de app mostrados como contexto) y ya estás dentro, sin ningún código que teclear. Es más rápida que TOTP y, como el dispositivo registrado tiene que tener físicamente la app instalada y vinculada, sí exige posesión, no solo el conocimiento de un código.</p>
+
+<p>Esa misma comodidad –un solo toque concede el acceso– es exactamente la superficie que un atacante decidido aprendió a explotar, lo que nos lleva al ataque que este artículo existe para explicar bien.</p>
+
+<h2>Ataques de fatiga MFA y prompt bombing</h2>
+
+<p>Un <strong>ataque de fatiga MFA</strong> (también llamado <strong>prompt bombing</strong>) es una técnica bien documentada y real que no intenta romper ninguna criptografía en absoluto –apunta a la paciencia humana. El montaje exige que el atacante ya tenga en su poder un nombre de usuario y una contraseña válidos, obtenidos mediante phishing, una contraseña reutilizada de una filtración sin relación o credenciales robadas por malware infostealer. Armado con esas credenciales funcionales, el atacante intenta iniciar sesión repetidamente, y cada intento dispara una nueva solicitud de aprobación push al teléfono del usuario legítimo –a veces decenas seguidas, a veces programadas de madrugada, cuando un usuario medio dormido tiene más probabilidades de pulsar sin pensar.</p>
+
+<p>La apuesta del atacante es simple: tarde o temprano el objetivo aprueba una de las solicitudes, ya sea por confusión sobre lo que está pasando, por la costumbre de pulsar «Aprobar» todo el día, o por pura molestia ante unas notificaciones que no cesan. Algunas variantes combinan el aluvión con una llamada o un mensaje de alguien que se hace pasar por soporte técnico o personal de helpdesk, indicando al objetivo que «simplemente lo apruebe» para resolver un supuesto problema del sistema –incorporando la ingeniería social directamente al ataque técnico.</p>
+
+<p>Este patrón es lo bastante conocido en la comunidad de seguridad como para que los fabricantes ya integren defensas específicas contra él directamente en la MFA push:</p>
+
+<ul>
+  <li><strong>Coincidencia de números (number matching).</strong> En lugar de un simple botón Aprobar/Denegar, la pantalla de inicio de sesión muestra un número corto que el usuario debe teclear en la app de autenticación. Un usuario que en realidad no estaba iniciando sesión no tiene nada que teclear ni ningún motivo para abrir siquiera la app, lo que cierra casi por completo el modo de fallo de «pulsar para que pare».</li>
+  <li><strong>Límite de frecuencia y detección de anomalías.</strong> Poner un tope a cuántas solicitudes push puede disparar una sola cuenta en una ventana corta de tiempo, y marcar ráfagas de solicitudes denegadas o ignoradas como una señal que merece investigarse, convierte el propio patrón de ataque en una oportunidad de detección.</li>
+  <li><strong>Solicitudes ricas en contexto.</strong> Mostrar el dispositivo solicitante, la ubicación aproximada y el nombre de la aplicación le da a un usuario atento información real para notar que algo va mal –aunque esto solo ayuda si el usuario está prestando atención, que es precisamente lo que los ataques de fatiga están diseñados para explotar.</li>
+  <li><strong>Pasarse a factores resistentes al phishing.</strong> Para las cuentas de mayor valor, la solución más duradera es abandonar por completo la push de aceptar/denegar, a favor de un factor que no se pueda aprobar por error en absoluto –lo cual se trata a continuación.</li>
+</ul>
+
+<h2>Llaves de seguridad hardware y FIDO2/WebAuthn: la opción resistente al phishing</h2>
+
+<p>Una llave de seguridad hardware –la YubiKey es el ejemplo más conocido– se conecta por USB, NFC o Bluetooth e implementa el estándar <strong>FIDO2/WebAuthn</strong>. Durante el registro, la llave genera un par único de claves pública/privada limitado al sitio web concreto en el que te estás registrando; la clave privada nunca sale del dispositivo, y el servidor solo llega a almacenar la mitad pública.</p>
+
+<p>Al iniciar sesión, el navegador le entrega a la llave un desafío criptográfico procedente del servidor. La llave lo firma y devuelve la firma –pero, de forma crucial, todo el intercambio está ligado al origen (el dominio) real del sitio web con el que está hablando el navegador, algo que se impone a nivel de protocolo y que ningún usuario puede saltarse por mucha ingeniería social que sufra. Si estás en un clon de phishing convincente alojado en un dominio distinto, la comprobación de la llave falla automáticamente: no es que un usuario cuidadoso pueda fijarse en la URL falsa, es que la propia criptografía se niega a producir una respuesta válida para el origen equivocado. Ese vínculo con el origen es precisamente lo que les falta a los códigos SMS, a los códigos TOTP y a las aprobaciones push –a un usuario se le puede engañar para que entregue cualquiera de ellos en un sitio falso, o para que apruebe una solicitud fraudulenta, porque nada en esos flujos comprueba hacia dónde va realmente la aprobación.</p>
+
+<p>Las <strong>passkeys</strong> extienden la misma idea: son credenciales WebAuthn que se sincronizan entre tus dispositivos a través del gestor de contraseñas de una plataforma (iCloud Keychain, el Gestor de contraseñas de Google) en lugar de vivir en una sola pieza de hardware, heredando la misma propiedad de vínculo con el origen que las hace resistentes al phishing. La contrapartida específica de las llaves hardware es el coste y la necesidad de llevar encima un dispositivo físico –perder tu única llave sin una copia de seguridad registrada puede dejarte fuera de una cuenta por completo, por lo que registrar al menos dos llaves es el consejo habitual.</p>
+
+<h2>Comparando los métodos</h2>
+
+<table>
+  <thead>
+    <tr><th>Método</th><th>¿Resistente al phishing?</th><th>¿Funciona sin conexión?</th><th>Debilidad principal</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Código SMS de un solo uso</td><td>No</td><td>No – necesita cobertura del operador</td><td>SIM swap, interceptación SS7, ingeniería social contra el operador</td></tr>
+    <tr><td>App de autenticación TOTP</td><td>No</td><td>Sí</td><td>Reenvío en tiempo real del código mediante phishing; malware que exfiltra la semilla</td></tr>
+    <tr><td>Notificación push (sin coincidencia de números)</td><td>No</td><td>No – necesita conexión de datos</td><td>Ataques de fatiga MFA / prompt bombing</td></tr>
+    <tr><td>Llave de seguridad hardware (FIDO2/WebAuthn)</td><td>Sí</td><td>Sí – desafío-respuesta local</td><td>Coste, y pérdida del dispositivo sin una llave de respaldo registrada</td></tr>
+  </tbody>
+</table>
+
+<p>El «No» de TOTP y de push no es una crítica a las matemáticas que hay detrás –es que ninguno de los dos métodos comprueba criptográficamente hacia dónde va la aprobación. Un proxy de phishing en tiempo real situado entre una víctima y la página de inicio de sesión real puede capturar un código TOTP en el instante en que se teclea y reenviarlo al sitio genuino antes de que se cierre la ventana de 30 segundos, o simplemente disparar él mismo la solicitud push real y esperar a que el usuario fatigado o confundido la apruebe. Solo el vínculo con el origen de WebAuthn cierra esa brecha de forma estructural, en lugar de depender de que el usuario detecte el engaño.</p>
+
+<h2>Elegir y combinar la MFA en la práctica</h2>
+
+<p>No todas las cuentas necesitan el mismo nivel de protección, pero unos pocos principios se mantienen de forma constante:</p>
+
+<ul>
+  <li><strong>Protege primero las cuentas que arrastran a las demás.</strong> Tu correo principal y tu gestor de contraseñas están aguas arriba de casi todo lo demás –quien los controle puede restablecer contraseñas en todos los demás sitios. Pon en ellos una llave hardware o una passkey antes que en nada más.</li>
+  <li><strong>TOTP es una opción predeterminada sólida y gratuita.</strong> Para la mayoría de las cuentas del día a día, una app de autenticación TOTP supone una gran mejora de seguridad frente al SMS sin coste alguno, y es lo que la mayoría de los servicios admiten de serie.</li>
+  <li><strong>Deja el SMS como recurso de reserva, no como principal.</strong> Donde un servicio ofrezca TOTP, push con coincidencia de números o una llave hardware, usa una de esas opciones y reserva el SMS para las cuentas que de verdad no ofrezcan nada más sólido.</li>
+  <li><strong>Registra copias de seguridad antes de necesitarlas.</strong> Una segunda llave hardware, códigos de recuperación impresos y guardados sin conexión, o una entrada de autenticación de respaldo evitan que perder un teléfono o una llave se convierta en un bloqueo total.</li>
+  <li><strong>En las organizaciones, activa la coincidencia de números en todos los sitios donde se despliegue la MFA push</strong>, y trata una ráfaga de solicitudes push denegadas o ignoradas en una sola cuenta como una señal de detección que merece una revisión inmediata, no ruido de fondo.</li>
+</ul>
+
+<h2>La conclusión</h2>
+
+<p>MFA no significa «añade un mensaje de texto y llámalo seguro». La categoría y el diseño del segundo factor determinan lo resistente que es en realidad a los ataques remotos y de ingeniería social: el SMS se intercepta mediante debilidades de la propia red telefónica, los códigos TOTP y las simples aprobaciones push todavía pueden sufrir phishing o reenviarse en tiempo real, y solo las llaves de seguridad hardware y las passkeys construidas sobre FIDO2/WebAuthn se niegan criptográficamente a autenticar en cualquier sitio que no sea el genuino. Añade MFA en todo lo que puedas –pero donde más se juegue, prefiere el factor que un atacante no pueda simplemente engañar, presionar o esperar a que tú mismo le entregues.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuáles son los tres factores de autenticación?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los factores de autenticación se dividen en tres categorías independientes: algo que sabes (una contraseña, un PIN o una pregunta de seguridad), algo que tienes (un teléfono con una app de autenticación, una llave de seguridad hardware o una tarjeta inteligente) y algo que eres (una huella dactilar, un escaneo facial u otro rasgo biométrico). La autenticación multifactor genuina combina pruebas de al menos dos categorías distintas: una contraseña más una pregunta de seguridad no es MFA, porque ambas viven en la categoría «algo que sabes» y pueden vencerse con la misma página de phishing o la misma filtración de datos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué se considera que la MFA por SMS es la opción más débil?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los códigos de un solo uso por SMS dependen de la seguridad de la propia red telefónica, lo que introduce vías de ataque que no tienen nada que ver con la cuenta que se intenta proteger. En un SIM swap, un atacante convence o soborna a un operador móvil para que traspase el número de la víctima a una SIM que él controla, tras lo cual todos los códigos SMS llegan directamente al atacante. Los mensajes de texto también pueden, en casos documentados, interceptarse aprovechando debilidades conocidas del protocolo de señalización SS7 que usan los operadores para enrutar llamadas y textos entre redes, sin que el atacante llegue a tocar la SIM de la víctima. Como ambos ataques apuntan a infraestructura sobre la que el titular de la cuenta no tiene ningún control, las guías de seguridad – incluidas las directrices de identidad digital del NIST – han señalado los códigos entregados por SMS como un método más débil y han recomendado alternativas más sólidas allá donde estén disponibles.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es un ataque de fatiga MFA (prompt bombing) y cómo funciona?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Es un ataque que apunta a la paciencia humana en lugar de a la criptografía. Un atacante que ya ha conseguido un nombre de usuario y una contraseña válidos – mediante phishing, una contraseña reutilizada de otra filtración o malware infostealer – desencadena solicitudes de aprobación push repetidas al teléfono del usuario legítimo, a veces de madrugada o en ráfagas rápidas. El objetivo es que el usuario pulse «Aprobar» por confusión, por costumbre o por pura molestia ante las interrupciones constantes, aunque él nunca haya iniciado ese inicio de sesión. Los atacantes a veces refuerzan esto haciéndose pasar por soporte técnico y diciendo al objetivo que apruebe la solicitud para «solucionar un problema». Las defensas incluyen la coincidencia de números (number matching), que obliga al usuario a escribir en la app un código mostrado en la pantalla de inicio de sesión, y limitar cuántas solicitudes push puede generar un solo intento de inicio de sesión.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Son las llaves de seguridad hardware realmente resistentes al phishing?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sí, de una forma en que el SMS, los códigos TOTP y las simples aprobaciones push no lo son. Una llave hardware FIDO2/WebAuthn realiza un desafío-respuesta criptográfico que está ligado al origen (dominio) real del sitio web con el que está hablando el navegador. Si engañan a un usuario para que entre en un clon de phishing convincente alojado en un dominio distinto, la comprobación criptográfica de la llave falla automáticamente, no se trata de que el usuario tenga que fijarse en una URL falsa, es el propio protocolo el que se niega a producir una respuesta válida para el origen equivocado. Los códigos TOTP y las aprobaciones push no tienen ese vínculo, por lo que un proxy de phishing en tiempo real puede capturarlos y reenviarlos, pero la respuesta de una llave hardware es inútil en cualquier sitio que no sea el legítimo para el que se emitió.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es seguro usar la MFA por notificación push?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Es notablemente mejor que una contraseña sola, pero es el método más expuesto a los ataques de fatiga MFA en su forma básica: una simple solicitud de «Aprobar o Denegar» no le da al usuario objetivo ningún contexto para detectar un inicio de sesión falso que él no inició. Las organizaciones que activan la coincidencia de números, donde el usuario debe introducir en la app un código mostrado en la pantalla de inicio de sesión en lugar de pulsar un solo botón, cierran casi por completo el riesgo de aprobación accidental, porque el usuario ahora tiene que estar mirando de verdad el intento de inicio de sesión real en lugar de simplemente reaccionar a una notificación. Para cuentas personales, la MFA push de una app de autenticación de confianza es una opción razonable; para cualquier cosa muy sensible, una llave de seguridad hardware sigue siendo la opción más sólida.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../ciberseguridad-101/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Ciberseguridad 101: las palabras que sí significan algo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../criptografia-basica-que-puedes-usar/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Criptografía que sí puedes usar</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guias/whatsapp-hackeado/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cómo recuperar WhatsApp hackeado</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../../comparativas/gestores-de-contrasenas-comparados/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Bitwarden vs 1Password vs KeePassXC: comparativa 2026</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

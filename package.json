@@ -1,0 +1,41 @@
+{
+  "name": "breachfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tw.css -o assets/tw.css --minify",
+    "build:search": "pagefind --site . --output-subdir _pagefind --exclude-selectors \"nav, header, footer, #sf-mobile-menu\"",
+    "build:pagination": "node tools/generate-pagination.mjs",
+    "build:latest": "node tools/generate-latest.mjs",
+    "build:sitemap": "node tools/generate-sitemap.mjs",
+    "build:html-sitemap": "node tools/generate-html-sitemap.mjs",
+    "build:version": "node tools/bump-asset-version.mjs",
+    "build:llms": "node tools/generate-llms.mjs",
+    "build:feed": "node tools/generate-feed.mjs",
+    "build:consent": "node tools/inject-consent.mjs",
+    "build:adsense": "node tools/inject-adsense.mjs",
+    "build": "npm run build:css && npm run build:pagination && npm run build:consent && npm run build:adsense && npm run build:latest && npm run build:feed && npm run build:news && npm run build:html-sitemap && npm run build:version && npm run build:search && npm run build:sitemap && npm run build:llms",
+    "build:news": "node tools/prerender-news-wire.mjs --apply",
+    "build:images": "node tools/responsive-card-images.mjs --apply"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/secforge-git/breachfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/secforge-git/breachfolio/issues"
+  },
+  "homepage": "https://github.com/secforge-git/breachfolio#readme",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "pagefind": "^1.5.2",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phishing de PayPal: falso pago recibido | Breachfolio</title>
+  <meta name="description" content="¿PayPal dice que has recibido un pago o que tu cuenta está limitada? Aprende a comprobarlo sin pulsar enlaces y evita perder productos, dinero o credenciales." />
+  <meta name="keywords" content="phishing PayPal, has recibido un pago PayPal falso, cuenta PayPal limitada, factura PayPal falsa, email de PayPal estafa, verificar pago PayPal" />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/phishing-paypal/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/paypal-phishing-scam/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/phishing-paypal/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/paypal-phishing-scam/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Phishing de PayPal: falso pago recibido | Breachfolio" />
+  <meta property="og:description" content="¿PayPal dice que has recibido un pago o que tu cuenta está limitada? Aprende a comprobarlo sin pulsar enlaces y evita perder productos, dinero o credenciales." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/phishing-paypal/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guide-paypal.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Phishing de PayPal: falso pago recibido | Breachfolio" />
+  <meta name="twitter:description" content="¿PayPal dice que has recibido un pago o que tu cuenta está limitada? Aprende a comprobarlo sin pulsar enlaces y evita perder productos, dinero o credenciales." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guide-paypal.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Phishing de PayPal: falso pago recibido y cuenta limitada",
+      "description": "¿PayPal dice que has recibido un pago o que tu cuenta está limitada? Aprende a comprobarlo sin pulsar enlaces y evita perder productos, dinero o credenciales.",
+      "image": "https://breachfolio.com/assets/img/hero-guide-paypal.webp",
+      "datePublished": "2026-07-11",
+      "dateModified": "2026-07-16",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/guias/phishing-paypal/"
+      },
+      "inLanguage": "es",
+      "keywords": "phishing PayPal, has recibido un pago PayPal falso, cuenta PayPal limitada, factura PayPal falsa, email de PayPal estafa, verificar pago PayPal"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Guías", "item": "https://breachfolio.com/es/guias/" },
+        { "@type": "ListItem", "position": 3, "name": "Phishing de PayPal", "item": "https://breachfolio.com/es/guias/phishing-paypal/" }
+      ]
+    },
+    {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "@id": "https://breachfolio.com/es/guias/phishing-paypal/#faq",
+            "mainEntity": [
+                  {
+                        "@type": "Question",
+                        "name": "¿Un email de PayPal confirma que puedo enviar el producto?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "No. Confirma que el pago aparece en la Actividad oficial de PayPal antes de enviar nada."
+                        }
+                  },
+                  {
+                        "@type": "Question",
+                        "name": "¿Debo pagar una factura que no reconozco?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "No. Repórtala directamente desde PayPal en lugar de pagarla o de llamar a un teléfono adjunto."
+                        }
+                  },
+                  {
+                        "@type": "Question",
+                        "name": "¿Dónde reporto un correo falso de PayPal?",
+                        "acceptedAnswer": {
+                              "@type": "Answer",
+                              "text": "Reenvíalo a phishing@paypal.com."
+                        }
+                  }
+            ]
+      }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Guías</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Phishing de PayPal</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-guide-paypal.webp" alt="¿Es real el pago de PayPal? Cómo comprobar &quot;has recibido un pago&quot; y los avisos de cuenta." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">GUÍAS · PHISHING</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">¿Es real el pago de PayPal? Cómo comprobar "has recibido un pago" y los avisos de cuenta.</h1>
+      <div class="mt-6 rounded-card border border-accent/30 bg-accent/5 px-5 py-4 md:px-6 md:py-5 max-w-2xl">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-1.5">¿Ya has entregado información? Haz esto primero</div>
+        <p class="text-[15px] md:text-[16px] leading-snug text-foreground font-medium">Cambia la contraseña de PayPal de inmediato, junto con cualquier otra cuenta donde la hayas reutilizado, y activa la verificación en dos pasos.</p>
+      </div>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Un email de PayPal nunca es por sí solo prueba de un pago ni de un problema. Esto es lo que de verdad cuenta antes de enviar un producto o entregar datos.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Las estafas que suplantan a PayPal afectan de forma distinta a compradores y vendedores, pero todas persiguen lo mismo: que actúes antes de comprobar qué está pasando de verdad en tu cuenta. Un vendedor puede recibir un email que asegura que el pago está retenido hasta que envíe el producto. Un comprador puede recibir un aviso de "cuenta limitada", una factura de algo que nunca pidió, o una solicitud de pago con un teléfono urgente adjunto. La propia <a href="https://www.paypal.com/es/cshelp/article/what-are-common-scams-and-how-do-i-spot-them-help201" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">PayPal advierte</a> de que los delincuentes falsifican habitualmente confirmaciones de pago, avisos de suspensión y facturas, y la solución es siempre la misma: <strong>verificarlo dentro de la app o cuenta oficial, nunca respondiendo al mensaje ni pulsando el enlace que contiene</strong>.</p>
+
+<p>Lo que convierte a PayPal en un objetivo habitual de suplantación es que se sitúa entre compradores, vendedores y sus cuentas bancarias, así que un mensaje convincente sobre dinero puede provocar una reacción rápida: los vendedores quieren cobrar, los compradores quieren evitar perder un artículo que ya han pagado, y ambos grupos están acostumbrados a recibir correos transaccionales legítimos del servicio con regularidad.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">La estafa del "pago recibido" falso</h2>
+
+<p>Un delincuente afirma haber comprado un artículo y envía una confirmación de pago muy convincente pero completamente falsa, a veces diciendo que el dinero está "pendiente", a veces alegando que pagó de más por error y pidiendo que le devuelvas la diferencia. Si la operación no aparece en tu Actividad real de PayPal, <strong>no hay ningún pago confirmado:</strong> no envíes el artículo ni devuelvas nada basándote solo en lo que dice un email.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">La estafa de la "cuenta limitada"</h2>
+
+<p>Esta versión amenaza con la suspensión y enlaza a una página construida para parecer idéntica al inicio de sesión real de PayPal, que después de "iniciar sesión" pide un número de tarjeta, un documento de identidad o un código SMS de un solo uso. Abre la app o escribe tú mismo la dirección oficial en lugar de seguir el enlace. Una restricción real de la cuenta siempre es visible directamente dentro de la propia cuenta o en el Centro de resoluciones – nunca requiere que entregues datos nuevos a través de un enlace de email.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Facturas falsas y llamadas de soporte</h2>
+
+<p>Algunos estafadores usan la <a href="https://www.paypal.com/es/cshelp/article/what-are-invoice-scams-and-payment-request-scams-on-paypal-help1059" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">función real de facturación de PayPal</a> para enviar una solicitud de pago con apariencia legítima, y le añaden una nota alarmante afirmando que se acaba de cargar una compra cara y exigiendo una llamada urgente para "cancelarla". El teléfono de la nota no pertenece a PayPal – su único propósito es conseguir que hables con un falso agente de soporte. La propia PayPal recomienda no pagar la factura ni llamar al número que aparece en ella.</p>
+
+<p>Esta versión es especialmente eficaz porque la factura en sí es técnicamente real – se ha generado de verdad a través del sistema de PayPal, solo que desde la cuenta de un estafador y no de un negocio legítimo. Por eso el correo puede superar comprobaciones básicas de autenticidad, mientras que el "problema" que describe y el teléfono adjunto son completamente inventados.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Señales de alarma</h2>
+
+<ul>
+  <li>Un saludo genérico o un tono de urgencia artificial</li>
+  <li>Un enlace o dominio que en realidad no es de PayPal</li>
+  <li>Una solicitud de tu contraseña, un código de un solo uso, el número de tu tarjeta o un documento de identidad</li>
+  <li>Un "pago" que solo existe en el email, no en la actividad de tu cuenta</li>
+  <li>Presión para enviar un artículo antes de que el dinero aparezca de verdad</li>
+  <li>Una factura desconocida acompañada de un teléfono de "soporte"</li>
+  <li>Cualquier solicitud de pago en criptomonedas o tarjetas regalo</li>
+</ul>
+
+<p>No hace falta que aparezcan todas estas señales a la vez para que un mensaje merezca una comprobación. Una sola solicitud que solo existe en un email, sin ningún reflejo en tu cuenta real, ya es motivo suficiente para detenerte y verificarlo de forma independiente antes de hacer nada más.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Qué hacer</h2>
+
+<p>No respondas al mensaje ni pulses nada de lo que contiene. Entra directamente en PayPal y revisa Actividad, tus notificaciones y el Centro de resoluciones para ver si algo coincide con lo que dice el mensaje. Si el mensaje es falso, reenvíalo a phishing@paypal.com.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Si ya has entregado información</h2>
+
+<p>Cambia la contraseña de PayPal de inmediato, junto con cualquier otra cuenta donde la hayas reutilizado. Activa la verificación en dos pasos si aún no la tienes. Revisa los dispositivos y tarjetas vinculados a tu cuenta y elimina cualquiera que no reconozcas. Si compartiste datos bancarios, contacta directamente con tu banco. Conserva el email original, sus cabeceras y capturas de pantalla de todo – te serán útiles si necesitas reclamar un cargo o presentar una denuncia.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Otras variantes que vas a encontrar</h2>
+
+<p>Más allá de los tres patrones anteriores, la misma maquinaria de suplantación se disfraza constantemente. <strong>El canal y la historia cambian; la exigencia de actuar fuera de tu cuenta real, nunca.</strong></p>
+
+<ul>
+  <li><strong>La versión por SMS.</strong> Un texto breve – "PayPal: tu cuenta está temporalmente restringida, verifícala aquí" – con un enlace acortado. La pantalla del móvil oculta la URL completa y el SMS transmite más urgencia que el correo.</li>
+  <li><strong>El reembolso por pago excesivo.</strong> Un "comprador" asegura haber pagado de más por error, te enseña una confirmación falsa por el importe superior y te pide que le devuelvas la diferencia por Bizum, transferencia o tarjetas regalo. El pago original nunca existió; tu devolución es dinero real que sale de tu cuenta.</li>
+  <li><strong>El salto fuera de la plataforma.</strong> En un portal de compraventa de segunda mano, el comprador insiste en "solo PayPal, pero seguimos por email o WhatsApp". Sacar la conversación de la plataforma elimina sus controles antifraude y deja al estafador con el control de cada mensaje que ves.</li>
+  <li><strong>La solicitud entre "amigos y familiares".</strong> Alguien te pide enviar o recibir dinero con la opción de amigos y familiares "para ahorrar comisiones". Esa modalidad no tiene ninguna protección de compra, y precisamente por eso la exigen.</li>
+  <li><strong>El gancho del "dinero retenido".</strong> Un mensaje dice que hay un pago esperándote y que solo tienes que confirmar tus datos – o tu tarjeta – para liberarlo. Los fondos retenidos reales aparecen dentro de tu cuenta con instrucciones claras; nunca exigen volver a introducir credenciales desde un enlace.</li>
+</ul>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cómo se vive desde dentro: un caso realista</h2>
+
+<p>Marcos es carpintero autónomo y vende una mesa auxiliar de 600 euros a través de un anuncio online. Un comprador acepta enseguida – casi demasiado deprisa – y minutos después llega un email que parece exactamente una confirmación de pago de PayPal: el logo correcto, el formato correcto, el importe exacto. Con un matiz: una nota destacada dice que el dinero está "retenido hasta que el vendedor facilite un número de seguimiento". Marcos tiene encargos pendientes y no quiere una disputa, así que envía la mesa esa misma tarde y responde con el número de seguimiento, tal y como se le indica.</p>
+
+<p>Dos días después entra en su cuenta real de PayPal para pasar el dinero al banco. No hay ningún pago. Nunca lo hubo: la confirmación era un correo fabricado, y el "comprador" ya no responde. La mesa está perdida, y como dentro de PayPal nunca existió ninguna transacción, no hay nada sobre lo que el proceso de disputas pueda actuar. <strong>La lección le cuesta una mesa en lugar de arruinarlo, y es la misma que todo vendedor acaba aprendiendo:</strong> un email se falsifica en minutos, pero la página de Actividad de tu propia sesión, no. Si el dinero no está ahí, no existe – da igual lo oficial que parezca el mensaje o lo impaciente que suene el comprador.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Prevención un nivel más allá</h2>
+
+<p>Unos pocos ajustes y hábitos, configurados una sola vez, hacen que todas las variantes de esta estafa sean mucho más difíciles. <strong>El objetivo es sacar la decisión del momento de presión por completo.</strong></p>
+
+<ul>
+  <li><strong>Usa una app de autenticación para la verificación en dos pasos.</strong> Los códigos de app son más difíciles de interceptar que los SMS y protegen la cuenta aunque una página de phishing capture tu contraseña.</li>
+  <li><strong>Entra solo por un marcador guardado o por la app.</strong> Convierte en regla personal no llegar nunca a PayPal desde un enlace de un mensaje. Un gestor de contraseñas lo refuerza: no autocompletará en un dominio de imitación, lo cual ya es en sí un aviso.</li>
+  <li><strong>Comprueba Actividad antes de enviar – siempre.</strong> Hazlo un paso mecánico de tu rutina de venta, como imprimir la etiqueta. La rutina gana a la intuición bajo presión.</li>
+  <li><strong>Revisa tarjetas, bancos y dispositivos vinculados cada trimestre.</strong> Elimina lo que ya no uses: cuanto menor sea la huella, menos habrá que limpiar si algo sale mal.</li>
+  <li><strong>Avisa a los vendedores de tu familia.</strong> Cualquiera que venda en portales de segunda mano acabará topándose con la confirmación falsa. Transmite la única regla que importa: sin pago en Actividad, no hay envío. Y si hay pérdida económica, guarda las capturas y denuncia ante la Policía Nacional o la Guardia Civil; para dudas, INCIBE atiende gratis en el 017.</li>
+</ul>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Checklist rápido</h2>
+
+<ul>
+  <li>Confirma cada pago dentro de la Actividad oficial de PayPal, nunca solo por un email</li>
+  <li>No envíes nunca un artículo antes de que el dinero aparezca de verdad en tu cuenta</li>
+  <li>No llames a los teléfonos que aparecen en facturas o solicitudes de pago</li>
+  <li>Trata cualquier solicitud de contraseñas, códigos o documentos de identidad como una señal de alto total</li>
+  <li>Reporta los mensajes sospechosos a phishing@paypal.com</li>
+</ul>
+
+<div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">La versión en una frase.</strong> Un email de PayPal nunca es por sí solo prueba de un pago ni de un problema – lo único que cuenta es lo que de verdad aparece dentro de tu cuenta de PayPal.</div>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Un email de PayPal confirma que puedo enviar el producto?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No. Confirma que el pago aparece en la Actividad oficial de PayPal antes de enviar nada.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Debo pagar una factura que no reconozco?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    No. Repórtala directamente desde PayPal en lugar de pagarla o de llamar a un teléfono adjunto.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Dónde reporto un correo falso de PayPal?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Reenvíalo a phishing@paypal.com.
+  </div>
+</details>
+
+<div class="mt-12 pt-8 border-t border-border">
+  <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <a href="../netflix-pago-fallido/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">¿Es real el email de pago fallido de Netflix?</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../apple-id-bloqueado/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">¿Está tu Apple ID realmente bloqueado?</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../falsa-renovacion-antivirus/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">¿Es real ese aviso de renovación de antivirus?</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+    <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+      <span class="text-[14px] text-foreground">Todas las guías</span>
+      <span class="text-accent" aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

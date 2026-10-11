@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ataques de SIM swapping explicados: mecánica y mitigaciones</title>
+  <meta name="description" content="Cómo funciona el fraude de SIM swapping y port-out, por qué el número de teléfono es el eslabón débil y cómo blindarlo frente a este ataque." />
+  <meta name="keywords" content="ataque de sim swapping, fraude de port-out, fraude de transferencia esim, debilidad del otp por sms, seguridad de recuperación de cuentas, pin del operador, protección contra sim swapping" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/sim-swap-attack-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/sim-swap-attack-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Ataques de SIM swapping explicados: mecánica y mitigaciones | Breachfolio" />
+  <meta property="og:description" content="Cómo funciona el fraude de SIM swapping y port-out, por qué el número de teléfono es el eslabón débil y cómo blindarlo frente a este ataque." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-sim-swap.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ataques de SIM swapping explicados: mecánica y mitigaciones | Breachfolio" />
+  <meta name="twitter:description" content="Cómo funciona el fraude de SIM swapping y port-out, por qué el número de teléfono es el eslabón débil y cómo blindarlo frente a este ataque." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-sim-swap.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Ataques de SIM swapping explicados: mecánica y mitigaciones",
+      "description": "Cómo funciona realmente el fraude de SIM swapping y port-out, por qué el número de teléfono se convirtió en el eslabón débil de la recuperación de cuentas, y cómo blindar un número frente a él.",
+      "image": "https://breachfolio.com/assets/img/hero-sim-swap.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" },
+      "inLanguage": "es",
+      "keywords": "ataque de sim swapping, fraude de port-out, fraude de transferencia esim, debilidad del otp por sms, seguridad de recuperación de cuentas, pin del operador, protección contra sim swapping"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Ataques de SIM swapping explicados", "item": "https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/ataques-de-sim-swapping/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué es un ataque de SIM swapping?", "acceptedAnswer": { "@type": "Answer", "text": "Un ataque de SIM swapping ocurre cuando alguien convence a tu operadora móvil para que transfiera tu número de teléfono a una tarjeta SIM o eSIM que controla, normalmente suplantándote mediante ingeniería social en lugar de mediante ningún hackeo técnico de tu teléfono. En cuanto se completa la transferencia, tu SIM real deja de funcionar, y cada llamada y mensaje dirigidos a tu número –incluidos los códigos de un solo uso usados para restablecer contraseñas– pasan directamente al atacante, que usa ese acceso para tomar el control del correo, la banca y otras cuentas vinculadas al número." } },
+        { "@type": "Question", "name": "¿Cómo consiguen los atacantes que una operadora transfiera mi número?", "acceptedAnswer": { "@type": "Answer", "text": "Sobre todo mediante pretexting e ingeniería social dirigidos al personal de soporte de la operadora o a los portales de autoservicio: los atacantes reúnen tus datos personales a partir de brechas de datos, OSINT o un intento de phishing anterior, y luego llaman o escriben al soporte suplantándote, aportando justo la información correcta suficiente (nombre, dirección, últimos cuatro dígitos de un documento, respuestas a preguntas de seguridad débiles) para pasar las comprobaciones de identidad. Algunos ataques también apuntan directamente a los propios empleados de la operadora, o explotan flujos de recuperación de cuenta online débiles que exigen menos verificación de la que exigiría una llamada telefónica." } },
+        { "@type": "Question", "name": "¿Es el SIM swapping lo mismo que la clonación de SIM?", "acceptedAnswer": { "@type": "Answer", "text": "No, y la distinción importa. La clonación de SIM es un ataque técnico hoy en gran medida obsoleto que duplica físicamente las claves criptográficas de una tarjeta SIM antigua, y requiere acceso físico a la tarjeta y equipo especializado contra esquemas de autenticación anticuados. Un SIM swap moderno no implica ninguna clonación física de tarjeta: es un cambio de cuenta fraudulento, ejecutado en remoto, a nivel de la operadora, iniciado mediante ingeniería social o un proceso de soporte comprometido, que es exactamente por lo que escala mucho mejor para los atacantes de lo que nunca lo hizo la clonación." } },
+        { "@type": "Question", "name": "¿Cómo me protejo del fraude de SIM swapping?", "acceptedAnswer": { "@type": "Answer", "text": "Configura un PIN o contraseña de operadora único que se exija antes de cualquier SIM swap, port-out o cambio de cuenta, y pregunta específicamente si tu operadora ofrece una función de bloqueo de portabilidad o de número. Saca las cuentas críticas –correo, banca, exchanges de criptomonedas– de los códigos de un solo uso por SMS y llévalas a una app de autenticación o a una llave de seguridad hardware, ya que estas no se ven afectadas si te roban el número. Vigila una pérdida repentina e inexplicada de señal móvil o un indicador de «sin servicio» como posible señal de alarma en tiempo real, y usa un correo de recuperación que no esté a su vez protegido únicamente por tu número de teléfono." } },
+        { "@type": "Question", "name": "¿Por qué se considera débil la autenticación de dos factores por SMS?", "acceptedAnswer": { "@type": "Answer", "text": "Los códigos de un solo uso por SMS dependen por completo de la suposición de que solo tú controlas tu número de teléfono, pero un número de teléfono es una dirección de servicio que tu operadora puede reasignar a petición: nunca se diseñó como un secreto criptográfico. Un SIM swap exitoso derrota por completo la MFA basada en SMS, sin que el atacante necesite en absoluto que el segundo factor de tu contraseña sea técnicamente fuerte. Las guías de identidad digital del NIST (SP 800-63B) restringen el SMS como autenticador fuera de banda por esta razón y recomiendan apps de autenticación o llaves de seguridad hardware, que vinculan el segundo factor a un dispositivo concreto o a una clave criptográfica en lugar de a un número que una operadora puede mover." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Ataques de SIM swapping explicados</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-sim-swap.webp" alt="Un número de teléfono siendo reasignado en silencio de un dispositivo a otro: fraude de SIM swapping y port-out" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · FUNDAMENTOS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Ataques de SIM swapping, explicados.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Cómo funciona realmente el fraude de port-out y transferencia de eSIM, por qué el número de teléfono se convirtió en el eslabón débil de la recuperación de cuentas, y cómo blindarlo.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Nadie hackea tu teléfono para hacer un SIM swap. Convencen a tu operadora para que les entregue tu número en su lugar: sin malware, sin cifrado roto, solo una historia bien contada a un agente de soporte o unos pocos clics en un portal de autoservicio. En cuanto se completa esa transferencia, cada llamada y cada mensaje dirigidos a ti –incluidos los códigos de un solo uso que media internet utiliza para comprobar que de verdad eres tú– van directos al atacante. Este artículo explica el mecanismo real detrás del fraude de SIM swapping y port-out, por qué el número de teléfono llegó a ser un ancla de identidad en la que tanto se confía, cómo consiguen los atacantes que el soporte de la operadora coopere, y qué reduce de verdad el riesgo.</p>
+
+<h2>SIM swapping frente a clonación de SIM: una distinción que merece precisión</h2>
+
+<p>Estos dos términos se confunden constantemente, y la diferencia importa. La <strong>clonación de SIM</strong> es el ataque más antiguo, hoy en gran medida obsoleto: extraer físicamente las claves criptográficas de una tarjeta SIM de generación antigua y copiarlas en una segunda tarjeta, lo que requiere acceso físico a la SIM y equipo especializado. No escala, y la seguridad moderna de las SIM (sobre todo con eSIM y la autenticación de última generación) ha hecho que sea mucho más difícil de lograr. Un <strong>SIM swap:</strong> a veces llamado fraude de port-out cuando traslada el número a otra operadora, o SIM-jacking– es una superficie de ataque completamente distinta: no requiere ningún acceso físico a tu tarjeta ni a tu dispositivo. Es un cambio <em>administrativo</em> fraudulento realizado a nivel de la operadora, iniciado en remoto convenciendo a una persona o a un sistema de autoservicio de que el atacante eres tú. Eso es lo que lo hace peligroso a escala: es un ataque social y de proceso, no criptográfico.</p>
+
+<h2>Cómo funciona realmente un SIM swap, paso a paso</h2>
+
+<p>El mecanismo es sencillo en cuanto lo ves desglosado, y precisamente por eso sigue siendo eficaz:</p>
+
+<ol>
+  <li><strong>Reconocimiento.</strong> El atacante recopila suficiente información personal tuya como para sonar convincente: nombre completo, fecha de nacimiento, dirección de facturación, los últimos cuatro dígitos de un documento de identidad y las respuestas a preguntas de seguridad habituales. Esto procede de brechas de datos, OSINT en redes sociales o un mensaje de phishing previo que la recopiló directamente.</li>
+  <li><strong>Contacto con la operadora.</strong> El atacante llama al soporte, usa el chat en vivo o –cada vez más– simplemente inicia sesión en la propia app o web de autoservicio de la operadora, suplantándote con los datos recopilados en el paso uno.</li>
+  <li><strong>La solicitud de transferencia.</strong> Piden un reemplazo de SIM («perdí mi teléfono, activa esta SIM nueva»), un port-out a otra operadora o, en redes modernas, una transferencia instantánea de eSIM a un dispositivo que controlan; ninguna tarjeta SIM física llega a cambiar de manos.</li>
+  <li><strong>Desactivación y traspaso.</strong> La operadora desactiva tu SIM y activa la del atacante. Tu teléfono pierde la señal en silencio –las llamadas fallan, dejan de llegar los mensajes– mientras el dispositivo del atacante empieza a recibir todo lo dirigido a tu número.</li>
+  <li><strong>La cascada de toma de control de cuentas.</strong> Con tu número en su poder, el atacante activa los flujos de «olvidé mi contraseña» en el correo, la banca, los exchanges de criptomonedas y las redes sociales, interceptando los códigos de un solo uso por SMS o las verificaciones por llamada que esos servicios envían para confirmar la identidad. Cada cuenta tomada puede desbloquear la siguiente; el simple acceso al correo suele desencadenar decenas de otros servicios.</li>
+</ol>
+
+<p>Vale la pena señalar específicamente el componente eSIM, porque cambia el perfil de fricción de todo el ataque: muchas operadoras ya permiten a un cliente activar una eSIM nueva al instante mediante una app o un código QR, sin necesidad de visitar una tienda ni esperar el envío de una tarjeta física. Esa comodidad es exactamente lo que aprovecha un atacante que ya ha superado la verificación de identidad mediante ingeniería social: toda la transferencia puede completarse en minutos, de principio a fin, sin llegar a tocar nunca una bandeja de SIM física.</p>
+
+<h2>Por qué el número de teléfono se convirtió en el eslabón débil de la recuperación de cuentas</h2>
+
+<p>Nada de esto importaría demasiado si el número de teléfono no sostuviera tanto peso de la identidad online. Los códigos de un solo uso por SMS se convirtieron en el segundo factor por defecto por una razón sencilla: casi todo el mundo ya tiene un número de teléfono, y enviar un código por SMS no exigía descargar ninguna app, comprar hardware ni apenas formación del usuario. Esa ubicuidad es precisamente lo que convirtió al número de teléfono en un ancla de identidad casi universal: el mismo número suele verificar tu banco, tu correo, tus redes sociales y tu cuenta en un exchange, confiando cada uno de forma independiente en que quien controla esa SIM eres tú.</p>
+
+<p>El problema es que un número de teléfono nunca se diseñó para funcionar como un secreto criptográfico. Es una dirección de servicio que tu operadora puede reasignar a petición, por diseño: es exactamente lo que ocurre cada vez que alguien cambia de operadora de forma legítima o sustituye un teléfono perdido. El OTP por SMS tomó prestada, sin hacer ruido, la comodidad de esa dirección reasignable y la trató como prueba de identidad, lo que significa que la seguridad de docenas de cuentas sin relación entre sí descansa ahora sobre el eslabón más débil de esa cadena: un proceso de soporte de una empresa cuyo trabajo es la atención al cliente, no la garantía de identidad. Compromete el número una sola vez, y heredas la vía de recuperación de todo lo que, aguas abajo, confía en él.</p>
+
+<h2>Cómo los atacantes aplican ingeniería social al soporte de la operadora</h2>
+
+<p>El paso de explotación es una aplicación directa de las técnicas de pretexting y vishing que cubre <a href="https://breachfolio.com/cybersecurity/social-engineering-explained/" target="_blank" rel="noopener noreferrer">nuestra guía general sobre ingeniería social</a>: el atacante adopta la identidad del titular de la cuenta y se apoya en la urgencia («estoy a punto de embarcar y necesito esto resuelto ya») y en la autoridad (una persona que llama con seguridad, ya preparada con «tus» datos de cuenta) para hacer que un agente de soporte se salte una verificación cuidadosa. La autenticación basada en conocimiento débil lo pone más fácil de lo que debería: preguntas de seguridad como el apellido de soltera de la madre o los últimos cuatro dígitos de un número de la Seguridad Social suelen poder responderse a partir de una brecha de datos, una búsqueda en registros públicos o un phishing anterior, lo que significa que el «secreto» que comprueba la operadora nunca fue secreto en realidad. En un número menor de casos documentados, los atacantes han ido más allá y han sobornado directamente o se han confabulado con empleados de la operadora o de una tienda para forzar la transferencia, saltándose por completo la verificación de cara al cliente.</p>
+
+<p>La magnitud del riesgo quedó demostrada públicamente en agosto de 2019, cuando el entonces propio consejero delegado de Twitter, Jack Dorsey, sufrió la toma de control de su cuenta personal de Twitter mediante un SIM swap contra su operadora móvil: un caso real y bien documentado que dejó claro que la técnica funciona con independencia de la sofisticación técnica del objetivo, porque no ataca en absoluto sus defensas técnicas. Ataca el proceso que separa «digo que soy tú» de «la operadora se lo cree».</p>
+
+<h2>A quién apuntan los atacantes, y por qué</h2>
+
+<p>El SIM swapping exige mucho trabajo por víctima –requiere investigación y una interacción de ingeniería social en vivo, no un enlace enviado en masa–, así que los atacantes son selectivos con sus objetivos. Los poseedores de criptomonedas son un objetivo frecuente porque las cuentas de los exchanges de criptomonedas, una vez comprometidas, suelen permitir transferencias irreversibles sin mecanismo de contracargo, a diferencia de una disputa con tarjeta de crédito. Las personas de alto perfil –ejecutivos, periodistas y figuras públicas– son objetivo tanto por el acceso financiero directo como por el valor de secuestrar una cuenta de redes sociales reconocible. Y cualquiera cuya dirección de correo sea localizable junto a un número de teléfono filtrado en una brecha de datos previa se convierte en un objetivo plausible, simplemente porque el paso de reconocimiento ya está medio hecho para el atacante. Nada de esto significa que las personas de bajo perfil estén a salvo; significa que la economía del atacante favorece los objetivos donde el beneficio supera claramente el esfuerzo manual de una llamada de pretexting en vivo.</p>
+
+<h2>Mitigaciones: del lado de la operadora y del individuo</h2>
+
+<p>Los reguladores han empezado a tratar esto como un problema de responsabilidad de las operadoras, más que como uno puramente de concienciación del consumidor. En noviembre de 2023, la Comisión Federal de Comunicaciones (FCC) de Estados Unidos adoptó normas que obligan a las operadoras móviles a usar métodos seguros para verificar la identidad de un cliente antes de procesar un SIM swap o un port-out de número, y a notificar de inmediato al titular de la cuenta cuando se realiza una solicitud de este tipo, una respuesta directa a lo a menudo que una verificación débil por parte de la operadora era el verdadero punto de fallo. Esa presión regulatoria refuerza lo que los usuarios concienciados con la seguridad ya pueden hacer por su cuenta:</p>
+
+<ul>
+  <li><strong>Configura un PIN o contraseña de operadora.</strong> La mayoría de las grandes operadoras te permiten añadir una contraseña separada que debe aportarse, en persona o verificarse de forma independiente, antes de cualquier SIM swap, port-out o cambio de cuenta; pregunta específicamente por ella, ya que suele ser opcional y no venir activada por defecto.</li>
+  <li><strong>Activa una función de bloqueo de portabilidad o de número</strong> si tu operadora la ofrece, que impide por completo la portabilidad o los cambios de SIM hasta que la desactives explícitamente.</li>
+  <li><strong>Evita preguntas de seguridad con respuestas localizables.</strong> Trata las respuestas a las «preguntas de seguridad» como contraseñas: usa cadenas inconexas e imposibles de adivinar, no datos biográficos reales que se puedan investigar o sacar de una brecha.</li>
+  <li><strong>Vigila una pérdida repentina de señal.</strong> Un indicador inesperado de «sin servicio» o «solo SOS», sobre todo justo después de correos de recuperación de cuenta que no esperabas, es una de las pocas señales de alarma en tiempo real de que un swap está en marcha.</li>
+  <li><strong>Desacopla las cuentas críticas de tu número.</strong> Usa un correo de recuperación que no dependa a su vez únicamente de la recuperación por SMS, para que perder tu número no arrastre también la pérdida de tu correo.</li>
+</ul>
+
+<h2>Abandonar la 2FA basada en SMS</h2>
+
+<p>La solución más duradera no consiste en blindar el número de teléfono, sino en eliminarlo por completo de la cadena de autenticación siempre que sea posible. Una app de autenticación genera códigos de un solo uso basados en tiempo (TOTP) de forma local en tu dispositivo, usando un secreto compartido establecido en la configuración; nada viaja por la red móvil, así que un SIM swap no tiene nada que interceptar. Una llave de seguridad hardware va más allá, usando criptografía de clave pública y un paso de desafío-respuesta físico que no se puede phishear ni redirigir en absoluto, aunque el atacante tenga tanto tu contraseña como tu número de teléfono. Las guías de identidad digital del NIST (SP 800-63B) reflejan directamente este cambio: restringen el SMS como autenticador fuera de banda precisamente por escenarios como el SIM swapping, y recomiendan en su lugar apps de autenticación o llaves hardware. Para conocer la mecánica criptográfica que hace que los códigos TOTP y el desafío-respuesta de las llaves hardware resistan este tipo de interceptación, consulta nuestro <a href="../criptografia-basica-que-puedes-usar/">artículo de criptografía básica</a>.</p>
+
+<h2>Si el swap ya ha ocurrido</h2>
+
+<p>Las señales suelen ser inconfundibles en cuanto sabes qué buscar: tu teléfono muestra de repente «sin servicio» o «solo SOS» sin causa aparente, dejas de recibir llamadas o mensajes, o recibes notificaciones inesperadas de restablecimiento de contraseña o de inicio de sesión en un correo al que todavía puedes acceder desde otro dispositivo. La secuencia de respuesta que limita el daño más rápido sigue un orden concreto, porque aquí el orden importa: primero, contacta con tu operadora por un canal independiente –otro teléfono, un ordenador o en persona– para denunciar el fraude y pedir que se bloquee o revierta el número de inmediato. Segundo, y en paralelo si es posible, asegura tu cuenta de correo desde otro dispositivo, ya que el correo suele ser el punto de apoyo de todo lo demás; cambia su contraseña y revoca las sesiones activas. Tercero, trabaja hacia fuera desde el correo hacia cualquier otra cuenta que confiara en el número o el correo comprometidos –banca, exchanges, redes sociales–, comprobando la actividad reciente y rotando credenciales sobre la marcha. Por último, sustituye cualquier autenticación de dos factores por SMS que encuentres por el camino por una app de autenticación o una llave hardware, para que el mismo número no pueda volver a usarse contra ti.</p>
+
+<h2>Comparando los segundos factores</h2>
+
+<p>No toda «autenticación de dos factores» ofrece la misma resistencia a este ataque, y la diferencia se reduce por completo a a qué está realmente vinculado el segundo factor:</p>
+
+<table>
+  <thead>
+    <tr><th>Segundo factor</th><th>A qué está vinculado</th><th>¿Resiste un SIM swap?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Código de un solo uso por SMS</td><td>Tu número de teléfono, que la operadora puede reasignar</td><td>No: esta es exactamente la superficie de ataque que un SIM swap explota</td></tr>
+    <tr><td>Código de verificación por llamada</td><td>Tu número de teléfono, igual que el SMS</td><td>No: igual de vulnerable en cuanto se reasigna el número</td></tr>
+    <tr><td>App de autenticación (TOTP)</td><td>Un secreto almacenado localmente en tu dispositivo concreto durante la configuración</td><td>Sí: la red móvil nunca interviene en la generación del código</td></tr>
+    <tr><td>Llave de seguridad hardware (FIDO2/WebAuthn)</td><td>Una clave privada que nunca sale del dispositivo físico</td><td>Sí: también resiste el phishing en tiempo real, no solo el SIM swap</td></tr>
+  </tbody>
+</table>
+
+<p>El patrón es consistente: todo lo que en última instancia depende de «¿puede esta persona recibir algo en este número de teléfono?» hereda todas las debilidades del proceso de verificación de identidad de la operadora, sin importar cómo se genere el código en sí ni cuántos dígitos tenga. Todo lo que en cambio está vinculado a un dispositivo concreto o a una clave criptográfica esquiva por completo a la operadora, que es precisamente por lo que sacar las cuentas críticas del SMS es el paso de mayor impacto que tiene a su disposición una persona, más que casi cualquier otro hábito de higiene de contraseñas.</p>
+
+<h2>La conclusión</h2>
+
+<p>Un SIM swap no es un hackeo de tu teléfono: es un ataque de ingeniería social exitoso contra el proceso de soporte de tu operadora, que explota el hecho de que un número de teléfono nunca se construyó para ser un ancla de identidad segura. La solución que realmente aguanta tiene dos partes: dificultar el swap en sí bloqueando la cuenta a nivel de operadora con un PIN o un bloqueo de portabilidad, y hacer que el swap resulte inútil para el atacante sacando tus cuentas importantes de la recuperación por SMS y llevándolas a una app de autenticación o una llave hardware que un número de teléfono robado no pueda tocar.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es un ataque de SIM swapping?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Un ataque de SIM swapping ocurre cuando alguien convence a tu operadora móvil para que transfiera tu número de teléfono a una tarjeta SIM o eSIM que controla, normalmente suplantándote mediante ingeniería social en lugar de mediante ningún hackeo técnico de tu teléfono. En cuanto se completa la transferencia, tu SIM real deja de funcionar, y cada llamada y mensaje dirigidos a tu número –incluidos los códigos de un solo uso usados para restablecer contraseñas– pasan directamente al atacante, que usa ese acceso para tomar el control del correo, la banca y otras cuentas vinculadas al número.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo consiguen los atacantes que una operadora transfiera mi número?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sobre todo mediante pretexting e ingeniería social dirigidos al personal de soporte de la operadora o a los portales de autoservicio: los atacantes reúnen tus datos personales a partir de brechas de datos, OSINT o un intento de phishing anterior, y luego llaman o escriben al soporte suplantándote, aportando justo la información correcta suficiente (nombre, dirección, últimos cuatro dígitos de un documento, respuestas a preguntas de seguridad débiles) para pasar las comprobaciones de identidad. Algunos ataques también apuntan directamente a los propios empleados de la operadora, o explotan flujos de recuperación de cuenta online débiles que exigen menos verificación de la que exigiría una llamada telefónica.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es el SIM swapping lo mismo que la clonación de SIM?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No, y la distinción importa. La clonación de SIM es un ataque técnico hoy en gran medida obsoleto que duplica físicamente las claves criptográficas de una tarjeta SIM antigua, y requiere acceso físico a la tarjeta y equipo especializado contra esquemas de autenticación anticuados. Un SIM swap moderno no implica ninguna clonación física de tarjeta: es un cambio de cuenta fraudulento, ejecutado en remoto, a nivel de la operadora, iniciado mediante ingeniería social o un proceso de soporte comprometido, que es exactamente por lo que escala mucho mejor para los atacantes de lo que nunca lo hizo la clonación.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo me protejo del fraude de SIM swapping?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Configura un PIN o contraseña de operadora único que se exija antes de cualquier SIM swap, port-out o cambio de cuenta, y pregunta específicamente si tu operadora ofrece una función de bloqueo de portabilidad o de número. Saca las cuentas críticas –correo, banca, exchanges de criptomonedas– de los códigos de un solo uso por SMS y llévalas a una app de autenticación o a una llave de seguridad hardware, ya que estas no se ven afectadas si te roban el número. Vigila una pérdida repentina e inexplicada de señal móvil o un indicador de «sin servicio» como posible señal de alarma en tiempo real, y usa un correo de recuperación que no esté a su vez protegido únicamente por tu número de teléfono.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué se considera débil la autenticación de dos factores por SMS?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los códigos de un solo uso por SMS dependen por completo de la suposición de que solo tú controlas tu número de teléfono, pero un número de teléfono es una dirección de servicio que tu operadora puede reasignar a petición: nunca se diseñó como un secreto criptográfico. Un SIM swap exitoso derrota por completo la MFA basada en SMS, sin que el atacante necesite en absoluto que el segundo factor de tu contraseña sea técnicamente fuerte. Las guías de identidad digital del NIST (SP 800-63B) restringen el SMS como autenticador fuera de banda por esta razón y recomiendan apps de autenticación o llaves de seguridad hardware, que vinculan el segundo factor a un dispositivo concreto o a una clave criptográfica en lugar de a un número que una operadora puede mover.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../criptografia-basica-que-puedes-usar/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Criptografía que sí puedes usar: hashing, cifrado, firmas</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../ciberseguridad-101/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Ciberseguridad 101: las palabras que sí significan algo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../ingenieria-social-explicada/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Ingeniería social explicada: tácticas y defensas</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

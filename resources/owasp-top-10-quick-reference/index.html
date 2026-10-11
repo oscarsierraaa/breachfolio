@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="resources">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OWASP Top 10 (2025): quick reference | Breachfolio</title>
+  <meta name="description" content="The OWASP Top 10:2025 web application security risks, in plain language – what changed from 2021, and what each category actually means for your codebase." />
+  <meta name="keywords" content="OWASP Top 10 2025, OWASP Top 10 explained, what changed in OWASP Top 10 2021 to 2025, broken access control explained, security misconfiguration owasp, software supply chain failures owasp, owasp top 10 vs llm top 10, mishandling of exceptional conditions owasp, owasp top 10 for web applications, how to use the owasp top 10 checklist, injection vulnerabilities owasp, cryptographic failures owasp, insecure design owasp" />
+  <link rel="canonical" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/owasp-top-10-referencia-rapida/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="OWASP Top 10 (2025): quick reference | Breachfolio" />
+  <meta property="og:description" content="The OWASP Top 10:2025 web application security risks, in plain language – what changed from 2021, and what each category actually means for your codebase." />
+  <meta property="og:url" content="https://breachfolio.com/resources/owasp-top-10-quick-reference/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-res-owasp.webp" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OWASP Top 10 (2025): quick reference | Breachfolio" />
+  <meta name="twitter:description" content="The OWASP Top 10:2025 web application security risks, in plain language – what changed from 2021, and what each category actually means for your codebase." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-res-owasp.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "OWASP Top 10 (2025): quick reference",
+      "description": "The OWASP Top 10:2025 web application security risks, in plain language – what changed from 2021, and what each category actually means for your codebase.",
+      "image": "https://breachfolio.com/assets/img/thumb-res-owasp.webp",
+      "datePublished": "2026-07-10",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/resources/owasp-top-10-quick-reference/"
+      },
+      "inLanguage": "en",
+      "keywords": "OWASP Top 10 2025, OWASP Top 10 explained, what changed in OWASP Top 10 2021 to 2025, broken access control explained, security misconfiguration owasp, software supply chain failures owasp, owasp top 10 vs llm top 10, mishandling of exceptional conditions owasp, owasp top 10 for web applications, how to use the owasp top 10 checklist, injection vulnerabilities owasp, cryptographic failures owasp, insecure design owasp"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://breachfolio.com/resources/" },
+        { "@type": "ListItem", "position": 3, "name": "OWASP Top 10 quick reference", "item": "https://breachfolio.com/resources/owasp-top-10-quick-reference/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/resources/owasp-top-10-quick-reference/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is new in the OWASP Top 10:2025 list?", "acceptedAnswer": { "@type": "Answer", "text": "A10 – Mishandling of Exceptional Conditions is a brand-new category covering improper error handling, logic errors, and systems that fail open. Server-Side Request Forgery (SSRF) was folded into Broken Access Control instead of standing alone, and 2021's Vulnerable and Outdated Components expanded into the broader Software Supply Chain Failures category." } },
+        { "@type": "Question", "name": "What is #1 on the OWASP Top 10:2025?", "acceptedAnswer": { "@type": "Answer", "text": "Broken Access Control is still #1, as it was in 2021. Roughly 1 in 27 tested applications has at least one of the 40 CWEs in this category." } },
+        { "@type": "Question", "name": "Is the OWASP Top 10 the same as the OWASP Top 10 for LLM Applications?", "acceptedAnswer": { "@type": "Answer", "text": "No. The web application Top 10 assumes a traditional client-server app with a database behind it, while the separate LLM Top 10 assumes a model that reads untrusted text and sometimes acts on it. They share a publisher and format, which is why they're often confused, but prompt injection – the LLM list's #1 entry – doesn't map cleanly onto any single web-app category, though it shares traits with both Injection and Insecure Design." } },
+        { "@type": "Question", "name": "How should the OWASP Top 10 actually be used?", "acceptedAnswer": { "@type": "Answer", "text": "As a prioritization tool, not a checklist ticked once. Map each category against your own application during a threat-modeling pass, test the ones most relevant to your stack, and revisit the mapping whenever you add a new dependency, auth flow, or integration." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../cybersecurity/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../../cybersecurity/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Resources</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">OWASP Top 10</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/thumb-res-owasp.webp" alt="OWASP Top 10 (2025): quick reference." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">RESOURCES · CHEAT SHEET</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">OWASP Top 10 (2025): quick reference.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">The current edition, in plain language – what changed from 2021, and what each category actually means for your codebase.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 10, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>If the list you're using still starts with "Broken Access Control, Cryptographic Failures, Injection..." in the 2021 order, it's out of date. <a href="https://owasp.org/Top10/2025/" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">OWASP Top 10:2025</a> is the current edition, and the reshuffle isn't cosmetic – categories moved, one was merged into another, and a brand-new category appeared for the first time. Here's the full list with what it means in practice, not just the name.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The 2025 list</h2>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-[14.5px]">
+          <thead>
+            <tr><th>Rank</th><th>Category</th><th>What it means</th><th>2025 note</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono text-accent">A01</td><td class="text-foreground font-medium">Broken Access Control</td><td>Roughly <strong class="text-foreground">1 in 27</strong> tested applications has at least one of the 40 CWEs in this category. Server-Side Request Forgery (SSRF) is now folded in here.</td><td>Still #1, same as 2021.</td></tr>
+            <tr><td class="font-mono text-accent">A02</td><td class="text-foreground font-medium">Security Misconfiguration</td><td>Default credentials, verbose error pages left on in production, unnecessary features enabled, missing security headers – the boring stuff that turns out to matter most.</td><td>Jumped from #5 (2021) to #2.</td></tr>
+            <tr><td class="font-mono text-accent">A03</td><td class="text-foreground font-medium">Software Supply Chain Failures</td><td>Compromised npm packages, poisoned build pipelines – not just an old library version.</td><td>An expansion of 2021's Vulnerable and Outdated Components.</td></tr>
+            <tr><td class="font-mono text-accent">A04</td><td class="text-foreground font-medium">Cryptographic Failures</td><td>Weak or missing encryption for data in transit and at rest, hardcoded keys, outdated algorithms still in production.</td><td>–</td></tr>
+            <tr><td class="font-mono text-accent">A05</td><td class="text-foreground font-medium">Injection</td><td>SQL, NoSQL, OS command, and template injection.</td><td>The classic category, now without SSRF sitting inside it.</td></tr>
+            <tr><td class="font-mono text-accent">A06</td><td class="text-foreground font-medium">Insecure Design</td><td>Missing threat modeling, no security requirements gathered up front. See our <a href="../../cybersecurity/threat-modeling-stride/" class="text-accent ul-link">STRIDE walkthrough</a> for how to catch this earlier.</td><td>Risk baked in before a line of code is written.</td></tr>
+            <tr><td class="font-mono text-accent">A07</td><td class="text-foreground font-medium">Authentication Failures</td><td>Weak password policies, missing multi-factor authentication, session tokens that don't expire when they should.</td><td>–</td></tr>
+            <tr><td class="font-mono text-accent">A08</td><td class="text-foreground font-medium">Software or Data Integrity Failures</td><td>Trusting updates, plugins, or CI/CD pipelines without verifying their integrity.</td><td>Behind several high-profile supply-chain compromises.</td></tr>
+            <tr><td class="font-mono text-accent">A09</td><td class="text-foreground font-medium">Security Logging and Alerting Failures</td><td>Breaches that go undetected for months because nothing was logged, or logs existed but nobody was watching.</td><td>–</td></tr>
+            <tr><td class="font-mono text-accent">A10</td><td class="text-foreground font-medium">Mishandling of Exceptional Conditions</td><td>24 CWEs covering improper error handling, logic errors, and systems that "fail open" – granting access or skipping a check when something goes wrong instead of denying by default.</td><td>Brand new for 2025, with <strong class="text-foreground">24 CWEs</strong>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="my-8">
+        <img src="../../assets/articles/art-inline-owasp-top-10.svg" alt="Horizontal bar chart ranking the ten OWASP Top 10:2025 categories from A01, the most critical with the widest bar, down to A10, the newest category, illustrating relative severity." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">The ten OWASP Top 10:2025 categories, ranked by severity – A01 remains the most critical, A10 is brand new.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">What actually changed from 2021</h2>
+      <p>Three things are worth internalizing if you learned the 2021 list: <strong>Security Misconfiguration</strong> got much more dangerous relative to everything else (#5 → #2), Vulnerable Components grew into the broader <strong>Supply Chain Failures</strong> category to reflect real incidents in build tooling and package registries, and <strong>Mishandling of Exceptional Conditions</strong> is genuinely new territory – it's about what your code does when something goes wrong, not what it does when everything goes right.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">This isn't the same list as the LLM Top 10</h2>
+      <p>OWASP maintains a separate <a href="../../ai/prompt-injection-explained/" class="text-accent ul-link">Top 10 for LLM Applications</a>, and the two get confused constantly because they share a publisher and a format. The web application list above assumes a traditional client-server app with a database behind it; the LLM list assumes a model that reads untrusted text and sometimes acts on it. <strong>Prompt injection:</strong> the LLM list's #1 entry – doesn't map cleanly onto any single category here, though it shares DNA with both A05 (Injection) and A06 (Insecure Design): it's an injection-shaped problem that ordinary input validation can't fully solve, which is exactly the kind of gap threat modeling is supposed to catch before it ships. If you're building a product that's a normal web app with an LLM feature bolted on – which describes most AI products in 2026 – you need both lists, not one instead of the other.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">How to actually use this list</h2>
+      <p>The Top 10 is <strong>a prioritization tool, not a checklist you tick once</strong>. Map each category against your own application during a threat-modeling pass, test the ones most relevant to your stack with tools like <a href="../../compare/burp-vs-zap/" class="text-accent ul-link">Burp Suite or OWASP ZAP</a>, and revisit the mapping whenever you add a new dependency, a new auth flow, or a new integration – that's usually where the next entry on this list quietly shows up.</p>
+      <p>A concrete way to start: pick the three categories most likely to bite your specific stack – for a typical SaaS product that's usually A01 (Access Control), A02 (Misconfiguration), and A03 (Supply Chain) – and spend a focused afternoon on each rather than trying to audit against all ten at once. <strong>Depth on the categories that actually apply to you beats a shallow pass</strong> across all ten.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">A note on scope.</strong> This is a defensive reference summary. For the authoritative full text, CWE mappings, and methodology, always check the <a href="https://owasp.org/Top10/2025/" target="_blank" rel="noopener noreferrer" class="text-accent ul-link">official OWASP Top 10:2025</a>: this page is a starting point, not a replacement for it.
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is new in the OWASP Top 10:2025 list?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A10 – Mishandling of Exceptional Conditions is a brand-new category covering improper error handling, logic errors, and systems that fail open. Server-Side Request Forgery (SSRF) was folded into Broken Access Control instead of standing alone, and 2021's Vulnerable and Outdated Components expanded into the broader Software Supply Chain Failures category.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is #1 on the OWASP Top 10:2025?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Broken Access Control is still #1, as it was in 2021. Roughly 1 in 27 tested applications has at least one of the 40 CWEs in this category.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is the OWASP Top 10 the same as the OWASP Top 10 for LLM Applications?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. The web application Top 10 assumes a traditional client-server app with a database behind it, while the separate LLM Top 10 assumes a model that reads untrusted text and sometimes acts on it. They share a publisher and format, which is why they're often confused, but prompt injection – the LLM list's #1 entry – doesn't map cleanly onto any single web-app category, though it shares traits with both Injection and Insecure Design.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How should the OWASP Top 10 actually be used?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          As a prioritization tool, not a checklist ticked once. Map each category against your own application during a threat-modeling pass, test the ones most relevant to your stack, and revisit the mapping whenever you add a new dependency, auth flow, or integration.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../../cybersecurity/threat-modeling-stride/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Threat modeling: STRIDE</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../compare/burp-vs-zap/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Burp Suite vs OWASP ZAP</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../ai/prompt-injection-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Prompt injection, explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../security-cheat-sheet/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Cybersecurity acronyms, decoded</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../cybersecurity/" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

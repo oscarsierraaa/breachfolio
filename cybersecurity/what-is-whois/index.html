@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What is WHOIS and how to read it | Breachfolio</title>
+  <meta name="description" content="WHOIS explained: what a domain lookup returns, how to read every field, why GDPR redacts it, RDAP, IP WHOIS via the RIRs, and tools to investigate a domain." />
+  <meta name="keywords" content="what is whois" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-whois/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-whois/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="What is WHOIS and how to read it | Breachfolio" />
+  <meta property="og:description" content="WHOIS explained: what a domain lookup returns, how to read every field, why GDPR redacts it, RDAP, IP WHOIS via the RIRs, and tools to investigate a domain." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/what-is-whois/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-whois.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What is WHOIS and how to read it | Breachfolio" />
+  <meta name="twitter:description" content="WHOIS explained: what a domain lookup returns, how to read every field, why GDPR redacts it, RDAP, IP WHOIS via the RIRs, and tools to investigate a domain." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-whois.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What is WHOIS and how to read it",
+      "description": "WHOIS explained: what a domain lookup returns, how to read every field, why GDPR redacts it, RDAP, IP WHOIS via the RIRs, and tools to investigate a domain.",
+      "image": "https://breachfolio.com/assets/img/hero-whois.webp",
+      "datePublished": "2026-07-18",
+      "dateModified": "2026-07-18",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/what-is-whois/" },
+      "inLanguage": "en",
+      "keywords": "what is whois"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "What is WHOIS and how to read it", "item": "https://breachfolio.com/cybersecurity/what-is-whois/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/what-is-whois/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is WHOIS still useful now that GDPR redacts most of it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, very. GDPR mostly removed the personal contact fields (registrant name, email, phone, address), but it left the fields investigators rely on most: creation, updated and expiry dates, the registrar, name servers, status codes, and usually the country. Those alone let you gauge a domain's age, spot throwaway infrastructure, and identify who to report abuse to. And historical WHOIS from before 2018 often still exposes the original owner, so redaction is a speed bump, not a wall." } },
+        { "@type": "Question", "name": "What is the difference between WHOIS and RDAP?", "acceptedAnswer": { "@type": "Answer", "text": "They answer the same question with different plumbing. WHOIS is the old protocol (TCP port 43) that returns unstructured, inconsistently formatted free text with no authentication. RDAP (Registration Data Access Protocol) is its modern replacement: a RESTful HTTPS service that returns standardized JSON, handles internationalized data cleanly, and supports differentiated access for authenticated requesters. Humans can still use WHOIS comfortably; automation increasingly uses RDAP because the output is machine-parseable. rdap.org is the easiest entry point." } },
+        { "@type": "Question", "name": "How do I find who owns a domain?", "acceptedAnswer": { "@type": "Answer", "text": "Start with a WHOIS or RDAP lookup: the whois command, ICANN Lookup, who.is, or rdap.org. If the registrant is redacted (the common case today), pivot: check historical WHOIS via WhoisFreaks or DomainTools for pre-redaction records, use reverse-WHOIS tools like Whoisology or ViewDNS to find other domains sharing the same email or name server, and cross-reference the TLS certificate and DNS records. For legally protected reasons (trademark disputes, law enforcement), the full contact data can be requested from the registrar through formal channels." } },
+        { "@type": "Question", "name": "What does clientTransferProhibited mean?", "acceptedAnswer": { "@type": "Answer", "text": "It is an EPP status code meaning the registrar has locked the domain so it cannot be transferred to another registrar until the lock is removed. It is set at the owner's request (the \"client\" side, as opposed to registry-set \"server\" codes) and is a normal, healthy anti-hijacking measure – most well-managed domains have it on. It is not a warning sign. Its siblings clientDeleteProhibited and clientUpdateProhibited similarly block deletion and changes." } },
+        { "@type": "Question", "name": "Can WHOIS data be faked or hidden?", "acceptedAnswer": { "@type": "Answer", "text": "Registry-maintained fields – creation and expiry dates, registrar, name servers, status codes – are authoritative and cannot be faked by the registrant. The contact fields, however, could historically be filled with false information, and today are usually hidden behind a legitimate privacy/proxy service or redacted by default under GDPR. So \"hidden\" is normal and expected; genuinely \"faked\" contact data is now rarer simply because there is little point falsifying a field that is already redacted. Treat the dated, registry-controlled fields as trustworthy and the contact block as unverified." } },
+        { "@type": "Question", "name": "Is running WHOIS lookups legal?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. WHOIS and RDAP are public query services designed to be queried, and looking up a domain or IP is a passive, non-intrusive act – you are reading a published record, not touching the target's systems. It is a core part of open-source intelligence and completely legal. The usual caveats are practical, not legal: respect rate limits so you are not blocked, and remember that the redacted personal data behind privacy services is protected for a reason and should be handled accordingly if you do obtain it through proper channels." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">What is WHOIS and how to read it</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-whois.webp" alt="What is WHOIS and how to read it." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">What is WHOIS and how to read it.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">WHOIS explained: what a domain lookup returns, how to read every field, why GDPR redacts it, RDAP, IP WHOIS via the RIRs, and tools to investigate a domain.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 18, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Every domain name and every block of IP addresses on the internet is registered to somebody, and the record of who registered it – when, through which company, and until when – is public infrastructure. <strong>WHOIS</strong> is the decades-old protocol and query system that lets you read those records. Type a domain into a WHOIS lookup and, in the best case, you get back the registrant, the company they registered through, the creation and expiry dates, the name servers the domain points at, and a set of status codes describing the domain's administrative state. For anyone doing <a href="../what-is-osint/" target="_blank" rel="noopener noreferrer">open-source intelligence</a>, incident response, or plain domain due diligence, WHOIS is usually the first stop.</p>
+
+<p>The catch – and it is a big one in 2026 – is that "the best case" is now the exception for most domains. Since GDPR landed in 2018, the majority of contact details in domain WHOIS come back redacted, and the underlying protocol is being replaced by a modern successor called RDAP. This article walks through what WHOIS returns, how to read a real record line by line, how domain WHOIS differs from IP WHOIS, what the redaction era changed, and which tools actually help when you are staring at a suspicious domain.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 292" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Registrant</text><rect x="12" y="62" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="62" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="91" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Registrar</text><rect x="12" y="122" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="122" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="151" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Creation / expiry dates</text><rect x="12" y="182" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="182" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="211" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Nameservers</text><rect x="12" y="242" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="242" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="271" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Status (EPP) codes</text></svg>
+        <figcaption>The fields a WHOIS / RDAP lookup returns for a domain.</figcaption>
+      </figure>
+      <h2>What WHOIS is, and what it is for</h2>
+
+<p>WHOIS started life in the 1980s as a simple directory of people responsible for network resources. Today it is a query/response service (the classic protocol runs on TCP port 43) layered over the databases held by two kinds of organizations: <strong>domain registries and registrars</strong> for domain names, and the <strong>Regional Internet Registries (RIRs)</strong> for IP addresses and autonomous system numbers. You send a query – a domain or an IP – and the server returns a text record.</p>
+
+<p>People reach for WHOIS to answer a handful of practical questions. Who owns this domain, and how do I contact them? How old is it – was it registered yesterday or a decade ago? Is it about to expire? Which registrar and name servers is it using, and does that match the brand it claims to be? For a security analyst chasing a phishing link, those answers are the difference between "this is a legitimate corporate site" and "this domain was created 36 hours ago through a bulletproof registrar and hides behind a privacy proxy." For a network defender, IP WHOIS tells you which provider owns the address that just hammered your firewall, and where to send an abuse report.</p>
+
+<h2>What information a WHOIS record returns</h2>
+
+<p>A domain WHOIS record is a flat list of key-value fields. The exact set varies by top-level domain and registrar, but the important categories are consistent:</p>
+
+<ul>
+  <li><strong>Registrant, admin and technical contacts:</strong> the person or organization that holds the domain, plus administrative and technical points of contact. Historically this included names, postal addresses, emails and phone numbers. Post-GDPR, this is where most of the redaction happens.</li>
+  <li><strong>Registrar:</strong> the accredited company through which the domain was registered (GoDaddy, Namecheap, Cloudflare, OVH, and so on), usually with an IANA registrar ID and an abuse contact.</li>
+  <li><strong>Registry:</strong> the operator of the TLD itself (Verisign runs <code>.com</code>, for example). WHOIS distinguishes the <em>registry</em> from the <em>registrar</em>; if that distinction is fuzzy, our <a href="../registry-registrar-isp-hosting/" target="_blank" rel="noopener noreferrer">registry vs registrar vs ISP vs hosting</a> guide untangles it.</li>
+  <li><strong>Dates:</strong> creation date, updated date, and expiry (registry expiry) date. These are among the most useful fields for an investigator and are almost never redacted.</li>
+  <li><strong>Name servers:</strong> the authoritative DNS servers the domain delegates to. These reveal the DNS or hosting provider and can cluster related domains together.</li>
+  <li><strong>Status codes (EPP):</strong> machine-readable states such as <code>clientTransferProhibited</code> that describe locks and pending operations on the domain.</li>
+  <li><strong>DNSSEC:</strong> whether the domain is signed.</li>
+</ul>
+
+<h2>Reading a real record, field by field</h2>
+
+<p>The clearest way to learn WHOIS is to read one. Here is a lightly trimmed lookup of <code>example.com</code>: a genuinely special domain reserved by IANA, which is why its contacts are visible rather than redacted:</p>
+
+<pre tabindex="0"><code>$ whois example.com
+
+Domain Name: EXAMPLE.COM
+Registry Domain ID: 2336799_DOMAIN_COM-VRSN
+Registrar WHOIS Server: whois.iana.org
+Registrar URL: http://res-dom.iana.org
+Updated Date: 2024-08-14T07:01:34Z          # last change to the record
+Creation Date: 1995-08-14T04:00:00Z          # first registered in 1995
+Registry Expiry Date: 2025-08-13T04:00:00Z   # when it must be renewed
+Registrar: RESERVED-Internet Assigned Numbers Authority
+Registrar IANA ID: 376
+Domain Status: clientDeleteProhibited   https://icann.org/epp#clientDeleteProhibited
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: clientUpdateProhibited   https://icann.org/epp#clientUpdateProhibited
+Name Server: A.IANA-SERVERS.NET
+Name Server: B.IANA-SERVERS.NET
+DNSSEC: signedDelegation
+>>> Last update of whois database: 2026-01-05T17:22:41Z &lt;&lt;&lt;</code></pre>
+
+<p>Read top to bottom, this tells a story. The domain has existed since <strong>1995</strong> (an immediate credibility signal – attackers rarely have decade-old domains), was last modified in 2024, and renews annually. It sits at the registrar reserved for IANA. Three <code>Prohibited</code> status codes lock it against deletion, transfer and update. It uses two IANA name servers and is DNSSEC-signed. Nothing here is redacted because this is a reserved demonstration domain.</p>
+
+<p>A normal commercial domain registered after 2018 looks different in exactly one respect: the contact block. Instead of a name and address you will typically see boilerplate like this:</p>
+
+<pre tabindex="0"><code>Registrant Name: REDACTED FOR PRIVACY
+Registrant Organization: Privacy service provided by Withheld for Privacy ehf
+Registrant Email: https://withheldforprivacy.com/contact/?domain=example.org
+Registrant Country: IS</code></pre>
+
+<p>The registrar has stripped the personal data and left you either a proxy contact form or a relay email. The <strong>Country</strong> field often survives even when the name does not, which is still a useful data point.</p>
+
+<h3>Field reference for investigators</h3>
+
+<table>
+  <thead>
+    <tr><th>WHOIS field</th><th>What it means</th><th>Why an investigator cares</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Domain Name</td><td>The registered domain, normalized to uppercase.</td><td>Confirms exactly what you queried; watch for lookalike/IDN spoofs.</td></tr>
+    <tr><td>Creation Date</td><td>When the domain was first registered.</td><td>A domain minted days ago is one of the strongest phishing signals there is.</td></tr>
+    <tr><td>Updated Date</td><td>Last modification to the record.</td><td>A recent change to name servers or registrar can indicate a takeover or repurposing.</td></tr>
+    <tr><td>Registry Expiry Date</td><td>When registration lapses unless renewed.</td><td>Short-lived registrations and imminent expiry hint at throwaway, disposable domains.</td></tr>
+    <tr><td>Registrar</td><td>The accredited seller of the domain.</td><td>Some registrars are repeatedly abused; the registrar's abuse contact is where you report.</td></tr>
+    <tr><td>Registrant / Org</td><td>Who holds the domain.</td><td>Ownership and pivot pin; usually redacted post-GDPR, but the organization sometimes survives.</td></tr>
+    <tr><td>Name Server</td><td>Authoritative DNS delegation.</td><td>Fingerprints the hosting/DNS provider and clusters domains run by the same actor.</td></tr>
+    <tr><td>Domain Status (EPP)</td><td>Administrative locks and pending actions.</td><td>Reveals whether a domain is locked, or flagged <code>pendingDelete</code>/<code>serverHold</code> by the registry.</td></tr>
+    <tr><td>DNSSEC</td><td>Whether the zone is cryptographically signed.</td><td>Signed zones are harder to spoof; absence is common but not itself suspicious.</td></tr>
+  </tbody>
+</table>
+
+<h3>What the EPP status codes actually mean</h3>
+
+<p>Those <code>Prohibited</code> lines are <strong>EPP status codes</strong> (Extensible Provisioning Protocol), the standard vocabulary registries use to describe a domain's state. They split into two families. <em>Client</em> codes are set by the registrar at the owner's request; <em>server</em> codes are set by the registry itself. The one you will see most is <code>clientTransferProhibited</code>, which means the registrar has locked the domain so it cannot be transferred to another registrar without first unlocking it: a routine, healthy anti-hijacking measure, not a red flag. Its siblings are just as literal: <code>clientDeleteProhibited</code> and <code>clientUpdateProhibited</code> block deletion and changes. On the registry side, <code>serverHold</code> means the domain has been pulled from the DNS (often after an abuse complaint), and <code>pendingDelete</code> means it is in the grace window before becoming available again. When you see none of these, the domain is in the default <code>ok</code> (or <code>active</code>) state – which, paradoxically, means it is <em>unlocked</em> and easier to move.</p>
+
+<h2>Why so much is redacted now: GDPR and the rise of RDAP</h2>
+
+<p>Before 2018, domain WHOIS was a genuine directory: query almost any <code>.com</code> and you got the registrant's real name, email, and address. The EU's <strong>GDPR</strong> made publishing that personal data by default a legal liability, and ICANN responded with a "Temporary Specification" that told registrars to redact registrant contact details for essentially everyone. The result is the redacted blocks you see today. The data still exists – registrars hold it, and law enforcement or trademark holders can request it through formal channels – but it is no longer sprayed into every anonymous query.</p>
+
+<p>Alongside redaction came a technical replacement. Port-43 WHOIS is unstructured free text with no standard format, no authentication, and no way to serve different data to different requesters. Its successor, <strong>RDAP</strong> (Registration Data Access Protocol), fixes those problems: it is a RESTful service that returns structured, predictable <strong>JSON</strong> over HTTPS, supports internationalized data cleanly, and provides a framework for differentiated access so that an authenticated requester could, in principle, receive more than an anonymous one. Registries and registrars for generic TLDs are now required to run RDAP, and it is the direction of travel for everything. The easiest front door is <a href="https://rdap.org/" target="_blank" rel="noopener noreferrer">rdap.org</a>, which redirects your query to the correct authoritative RDAP server. A lookup is as simple as an HTTPS request:</p>
+
+<pre tabindex="0"><code>$ curl -s https://rdap.org/domain/example.com | jq .
+
+{
+  "objectClassName": "domain",
+  "ldhName": "EXAMPLE.COM",
+  "status": ["client transfer prohibited", "client delete prohibited"],
+  "events": [
+    { "eventAction": "registration", "eventDate": "1995-08-14T04:00:00Z" },
+    { "eventAction": "expiration",   "eventDate": "2025-08-13T04:00:00Z" }
+  ],
+  "nameservers": [ { "ldhName": "A.IANA-SERVERS.NET" } ]
+}</code></pre>
+
+<p>Same information, but now it is machine-parseable, which is why every serious tooling pipeline is moving from scraping WHOIS text to consuming RDAP JSON. For a human, WHOIS is still fine; for automation, RDAP wins.</p>
+
+<h2>Domain WHOIS versus IP WHOIS</h2>
+
+<p>WHOIS answers two related but separate questions depending on what you feed it. Give it a <em>domain</em> and you query the registry/registrar system described above. Give it an <em>IP address</em> and you query a completely different set of databases run by the five <strong>Regional Internet Registries (RIRs)</strong>, each responsible for a part of the world:</p>
+
+<ul>
+  <li><a href="https://www.arin.net/" target="_blank" rel="noopener noreferrer">ARIN</a> – North America</li>
+  <li><a href="https://www.ripe.net/" target="_blank" rel="noopener noreferrer">RIPE NCC</a> – Europe, the Middle East and Central Asia</li>
+  <li><a href="https://www.apnic.net/" target="_blank" rel="noopener noreferrer">APNIC</a> – Asia-Pacific</li>
+  <li><a href="https://www.lacnic.net/" target="_blank" rel="noopener noreferrer">LACNIC</a> – Latin America and the Caribbean</li>
+  <li><a href="https://www.afrinic.net/" target="_blank" rel="noopener noreferrer">AFRINIC</a> – Africa</li>
+</ul>
+
+<p>An IP WHOIS record does not tell you who runs a website; it tells you which organization was <em>allocated</em> that address range, the network's name (netname), the CIDR block, the country, and – crucially – an <strong>abuse contact</strong>. This is the record you pull when an IP is attacking you and you want to know whether it belongs to AWS, a residential ISP, or a hosting provider in another jurisdiction, and where to file a complaint. IP WHOIS is far less affected by GDPR redaction because much of it describes organizations and network infrastructure rather than private individuals:</p>
+
+<pre tabindex="0"><code>$ whois 93.184.216.34
+
+NetRange:       93.184.216.0 - 93.184.216.255
+CIDR:           93.184.216.0/24
+NetName:        EDGECAST-NETBLK-03
+Organization:   MCI Communications Services (later Verizon/Edgecast)
+Country:        US
+OrgAbuseEmail:  abuse@example-provider.net   # where to report abuse</code></pre>
+
+<h2>Reading a suspicious domain</h2>
+
+<p>Put together, a WHOIS record gives you a fast triage read on a domain you do not trust. No single field is a verdict, but a few of them stacked together usually are. The signals worth internalizing:</p>
+
+<ul>
+  <li><strong>Age.</strong> Check the creation date first. A domain registered in the last few days or weeks that is already sending you a "your account is locked, click here" email is the single most reliable phishing tell. Legitimate brands do not run their login pages on 48-hour-old domains.</li>
+  <li><strong>Privacy proxy on a supposedly corporate domain.</strong> A privacy service is completely normal for a personal blog. It is out of place for something claiming to be a bank or a government portal, which would ordinarily show a real organization.</li>
+  <li><strong>Registrar reputation.</strong> A handful of registrars are disproportionately represented in abuse data because they are cheap, fast, and lax on verification. A brand-new domain at one of those, impersonating a well-known company, is a pattern.</li>
+  <li><strong>Mismatched name servers.</strong> If the domain claims to be a major enterprise but its name servers point at free dynamic-DNS infrastructure, the story does not hold together.</li>
+  <li><strong>Short registration window and imminent expiry.</strong> Attackers buy the minimum term. A one-year registration that is days from expiry, on a young domain, fits disposable infrastructure.</li>
+</ul>
+
+<p>For a full, repeatable checklist that combines WHOIS with DNS, TLS certificate, and reputation checks, see <a href="../../guides/check-suspicious-domain/" target="_blank" rel="noopener noreferrer">how to check if a domain is suspicious</a>. WHOIS is one input; it is strongest in combination.</p>
+
+<h2>Tools and websites</h2>
+
+<p>You can do everything by hand, but a small kit of tools covers almost every WHOIS task from quick lookups to historical pivots.</p>
+
+<ul>
+  <li><a href="https://linux.die.net/man/1/whois" target="_blank" rel="noopener noreferrer">The <code>whois</code> command</a>: the command-line client shipped with Linux, macOS and BSD (and installable on Windows). Fastest for a raw, unfiltered record and for scripting. Just run <code>whois domain.com</code> or <code>whois 8.8.8.8</code>.</li>
+  <li><a href="https://who.is/" target="_blank" rel="noopener noreferrer">who.is</a>: a clean, free web lookup that also shows DNS records and basic diagnostics. Good for a quick browser check when you are not at a terminal.</li>
+  <li><a href="https://whois.domaintools.com/" target="_blank" rel="noopener noreferrer">whois.domaintools.com</a> – DomainTools' front end, a long-standing reference lookup with additional context on many domains.</li>
+  <li><a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN Lookup</a> – the official registration data lookup run by ICANN itself, built on RDAP. The authoritative, no-marketing option when you want the canonical record.</li>
+  <li><a href="https://rdap.org/" target="_blank" rel="noopener noreferrer">rdap.org</a>: the RDAP redirector. Query it and it forwards you to the correct authoritative RDAP server, returning structured JSON. The modern, automation-friendly path.</li>
+  <li><a href="https://viewdns.info/" target="_blank" rel="noopener noreferrer">ViewDNS.info</a>: a Swiss-army toolbox: WHOIS, reverse WHOIS, reverse IP (other domains on the same host), DNS history and more, all in one page. Excellent for pivoting.</li>
+  <li><a href="https://www.whoisxmlapi.com/" target="_blank" rel="noopener noreferrer">WhoisXML API</a> – a commercial API for WHOIS, RDAP, DNS and reputation data at scale, when you need to enrich thousands of domains programmatically rather than one at a time.</li>
+  <li><a href="https://whoisology.com/" target="_blank" rel="noopener noreferrer">Whoisology</a> – a WHOIS database built for cross-referencing: search by email, name or other fields to find every other domain sharing that data point, even historically.</li>
+  <li><a href="https://whoisfreaks.com/" target="_blank" rel="noopener noreferrer">WhoisFreaks</a> and <a href="https://www.domaintools.com/products/" target="_blank" rel="noopener noreferrer">DomainTools Whois History</a> – historical WHOIS, which is often the real prize. GDPR redacts today's record, but archived snapshots from before 2018 (or before an owner switched on privacy) may still show the original registrant, letting you connect a redacted domain to a real identity.</li>
+</ul>
+
+<p>That historical angle is worth dwelling on. Current WHOIS may be a wall of "REDACTED FOR PRIVACY," but a domain registered in 2015 almost certainly has archived records from before the redaction era. History services turn a dead-end lookup into a lead, which is exactly why they are staples of investigative and threat-intelligence work.</p>
+
+<h2>The bottom line</h2>
+
+<p>WHOIS is still one of the highest-value, lowest-effort checks in an investigator's kit – you just have to read it with 2026 eyes. Contact details are mostly gone, so lean on the fields that survive: creation and expiry dates, registrar, name servers, status codes, and country. Use RDAP when you want structure, IP WHOIS when you are chasing infrastructure, and historical WHOIS when the current record is redacted. Combined with DNS and certificate data, a thirty-second lookup will tell you more about a strange domain than almost anything else you can do from a keyboard.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is WHOIS still useful now that GDPR redacts most of it?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes, very. GDPR mostly removed the personal contact fields (registrant name, email, phone, address), but it left the fields investigators rely on most: creation, updated and expiry dates, the registrar, name servers, status codes, and usually the country. Those alone let you gauge a domain's age, spot throwaway infrastructure, and identify who to report abuse to. And historical WHOIS from before 2018 often still exposes the original owner, so redaction is a speed bump, not a wall.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between WHOIS and RDAP?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          They answer the same question with different plumbing. WHOIS is the old protocol (TCP port 43) that returns unstructured, inconsistently formatted free text with no authentication. RDAP (Registration Data Access Protocol) is its modern replacement: a RESTful HTTPS service that returns standardized JSON, handles internationalized data cleanly, and supports differentiated access for authenticated requesters. Humans can still use WHOIS comfortably; automation increasingly uses RDAP because the output is machine-parseable. rdap.org is the easiest entry point.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do I find who owns a domain?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Start with a WHOIS or RDAP lookup: the whois command, ICANN Lookup, who.is, or rdap.org. If the registrant is redacted (the common case today), pivot: check historical WHOIS via WhoisFreaks or DomainTools for pre-redaction records, use reverse-WHOIS tools like Whoisology or ViewDNS to find other domains sharing the same email or name server, and cross-reference the TLS certificate and DNS records. For legally protected reasons (trademark disputes, law enforcement), the full contact data can be requested from the registrar through formal channels.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does clientTransferProhibited mean?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          It is an EPP status code meaning the registrar has locked the domain so it cannot be transferred to another registrar until the lock is removed. It is set at the owner's request (the "client" side, as opposed to registry-set "server" codes) and is a normal, healthy anti-hijacking measure – most well-managed domains have it on. It is not a warning sign. Its siblings clientDeleteProhibited and clientUpdateProhibited similarly block deletion and changes.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Can WHOIS data be faked or hidden?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Registry-maintained fields – creation and expiry dates, registrar, name servers, status codes – are authoritative and cannot be faked by the registrant. The contact fields, however, could historically be filled with false information, and today are usually hidden behind a legitimate privacy/proxy service or redacted by default under GDPR. So "hidden" is normal and expected; genuinely "faked" contact data is now rarer simply because there is little point falsifying a field that is already redacted. Treat the dated, registry-controlled fields as trustworthy and the contact block as unverified.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is running WHOIS lookups legal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes. WHOIS and RDAP are public query services designed to be queried, and looking up a domain or IP is a passive, non-intrusive act – you are reading a published record, not touching the target's systems. It is a core part of open-source intelligence and completely legal. The usual caveats are practical, not legal: respect rate limits so you are not blocked, and remember that the redacted personal data behind privacy services is protected for a reason and should be handled accordingly if you do obtain it through proper channels.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../what-is-osint/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is OSINT? Tools and workflow</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../domains-vs-subdomains/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Domains vs subdomains</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../registry-registrar-isp-hosting/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Registry vs registrar vs ISP vs hosting</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guides/check-suspicious-domain/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to check if a domain is suspicious</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, &#39;JetBrains Mono&#39;, SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"></path>
+  </pattern>
+  <radialGradient id="rad" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="hsl(188 86% 54%)" stop-opacity="0.4"></stop>
+    <stop offset="60%" stop-color="hsl(188 86% 54%)" stop-opacity="0.06"></stop>
+    <stop offset="100%" stop-color="hsl(188 86% 54%)" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="hsl(200 26% 8%)" stop-opacity="0"></stop>
+    <stop offset="100%" stop-color="hsl(200 26% 8%)" stop-opacity="0.92"></stop>
+  </linearGradient>
+  <linearGradient id="hue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="hsl(188 80% 65%)"></stop>
+    <stop offset="100%" stop-color="hsl(188 86% 54%)"></stop>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(200 30% 5%)"></rect>
+<rect width="1200" height="675" fill="hsl(200 26% 8%)" opacity="0.6"></rect>
+<rect width="1200" height="675" fill="url(#grid)"></rect>
+<path d="M600 340 L826.2741699796952 113.72583002030481 A320 320 0 0 1 920 340 Z" fill="url(#rad)"></path><circle cx="600" cy="340" r="60" fill="none" stroke="hsl(188 86% 54%)" stroke-opacity="0.5" stroke-width="1.4"></circle><circle cx="600" cy="340" r="110" fill="none" stroke="hsl(188 86% 54%)" stroke-opacity="0.41666666666666663" stroke-width="1.4"></circle><circle cx="600" cy="340" r="160" fill="none" stroke="hsl(188 86% 54%)" stroke-opacity="0.3333333333333333" stroke-width="1.4"></circle><circle cx="600" cy="340" r="210" fill="none" stroke="hsl(188 86% 54%)" stroke-opacity="0.25" stroke-width="1.4"></circle><circle cx="600" cy="340" r="260" fill="none" stroke="hsl(188 86% 54%)" stroke-opacity="0.16666666666666663" stroke-width="1.4"></circle>
+    <line x1="280" y1="340" x2="920" y2="340" stroke="hsl(188 86% 54%)" stroke-opacity="0.18" stroke-width="1"></line>
+    <line x1="600" y1="60" x2="600" y2="620" stroke="hsl(188 86% 54%)" stroke-opacity="0.18" stroke-width="1"></line>
+    <circle cx="600" cy="340" r="6" fill="hsl(188 86% 54%)"></circle>
+    <circle cx="600" cy="340" r="14" fill="none" stroke="hsl(188 86% 54%)" stroke-width="1.4" opacity="0.6"></circle><g>
+      <circle cx="460" cy="270" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="460" cy="270" r="5" fill="hsl(188 86% 54%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="470" y="274" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.28.12</text>
+    </g><g>
+      <circle cx="720" cy="420" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="720" cy="420" r="5" fill="hsl(200 26% 8%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="730" y="424" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.35.23</text>
+    </g><g>
+      <circle cx="840" cy="280" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="840" cy="280" r="5" fill="hsl(200 26% 8%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="850" y="284" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.42.34</text>
+    </g><g>
+      <circle cx="520" cy="470" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="520" cy="470" r="5" fill="hsl(188 86% 54%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="530" y="474" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.49.45</text>
+    </g><g>
+      <circle cx="800" cy="520" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="800" cy="520" r="5" fill="hsl(200 26% 8%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="810" y="524" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.56.56</text>
+    </g><g>
+      <circle cx="400" cy="440" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="400" cy="440" r="5" fill="hsl(200 26% 8%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="410" y="444" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.63.67</text>
+    </g><g>
+      <circle cx="680" cy="180" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="680" cy="180" r="5" fill="hsl(188 86% 54%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="690" y="184" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.70.78</text>
+    </g><g>
+      <circle cx="860" cy="140" r="14" fill="hsl(188 86% 54%)" opacity="0.12"></circle>
+      <circle cx="860" cy="140" r="5" fill="hsl(200 26% 8%)" stroke="hsl(188 86% 54%)" stroke-width="1.5"></circle>
+      <text x="870" y="144" font-size="10" fill="hsl(188 80% 65%)" opacity="0.7" letter-spacing="1">10.0.77.89</text>
+    </g>
+    <g transform="translate(40 150)" font-size="12" font-family="ui-monospace" letter-spacing="2">
+      <text fill="hsl(188 86% 54%)" opacity="0.9">$ NMAP --top-ports</text>
+      <text y="22" fill="hsl(240 5% 65%)">5/65535 SCANNED</text>
+      <text y="44" fill="hsl(240 5% 65%)">8 HOSTS UP</text>
+      <text y="76" fill="hsl(188 80% 65%)" opacity="0.9">SCAN  RATE  RTT</text>
+      <text y="96" fill="hsl(240 5% 65%)">poll  340pps  41ms</text>
+      <text y="116" fill="hsl(240 5% 65%)">tcp   65/100  open</text>
+    </g>
+<rect width="1200" height="675" fill="url(#vfade)"></rect>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(188 86% 54%)" opacity="0.95">TOOLS / 01</text>
+  <text x="40" y="615" fill="hsl(240 5% 65%)" opacity="0.55">NMAP  VS  MASSCAN</text>
+  <text x="1160" y="615" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO.COM</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(188 86% 54%)"></circle>
+<circle cx="1160" cy="50" r="9" fill="hsl(188 86% 54%)" opacity="0.25"></circle>
+</svg>

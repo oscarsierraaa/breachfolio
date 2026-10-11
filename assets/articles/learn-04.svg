@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, &#39;JetBrains Mono&#39;, SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"></path>
+  </pattern>
+  <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="hsl(36 92% 56%)" stop-opacity="0.4"></stop>
+    <stop offset="60%" stop-color="hsl(36 92% 56%)" stop-opacity="0.07"></stop>
+    <stop offset="100%" stop-color="hsl(36 92% 56%)" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="hsl(28 22% 8%)" stop-opacity="0"></stop>
+    <stop offset="100%" stop-color="hsl(28 22% 8%)" stop-opacity="0.9"></stop>
+  </linearGradient>
+  <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="hsl(36 92% 56%)"></stop>
+    <stop offset="100%" stop-color="hsl(66 70% 55%)"></stop>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(28 26% 5%)"></rect>
+<rect width="1200" height="675" fill="hsl(28 22% 8%)" opacity="0.6"></rect>
+<rect width="1200" height="675" fill="url(#grid)"></rect>
+<ellipse cx="700" cy="340" rx="540" ry="380" fill="url(#glow)"></ellipse>
+
+<g transform="translate(180 200)">
+  <text font-family="Sora, sans-serif" font-size="22" font-weight="600" fill="hsl(36 92% 56%)" letter-spacing="2">AES-256-GCM</text>
+  <g transform="translate(0 30)"><rect x="0" y="74" width="9" height="12" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="16" y="54.67346938286927" width="9" height="50.65306123426146" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="32" y="44.436508100346195" width="9" height="71.12698379930761" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="48" y="48.103719000533786" width="9" height="63.792561998932435" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="64" y="63.950355495322846" width="9" height="32.09928900935431" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="80" y="63.47650316931141" width="9" height="33.046993661377186" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="96" y="47.85272682759236" width="9" height="64.29454634481527" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="112" y="44.52642162127002" width="9" height="70.94715675745996" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="128" y="55.06200086383035" width="9" height="49.875998272339295" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="144" y="73.49558298546951" width="9" height="13.008834029060983" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="160" y="54.290402038436326" width="9" height="51.41919592312735" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="176" y="44.35495298368999" width="9" height="71.29009403262002" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="192" y="48.36203275735156" width="9" height="63.27593448529689" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="208" y="64.42704912951943" width="9" height="31.14590174096113" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="224" y="63.005626122442195" width="9" height="33.98874775511561" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="240" y="47.6091272008499" width="9" height="64.7817455983002" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="256" y="44.624668125460474" width="9" height="70.75066374907905" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="272" y="55.45588663288896" width="9" height="49.08822673422208" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="288" y="72.9913085833659" width="9" height="14.0173828332682" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="304" y="53.91290713410197" width="9" height="52.17418573179606" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="320" y="44.28177932915389" width="9" height="71.43644134169222" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="336" y="48.62759506571197" width="9" height="62.744809868576056" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="352" y="64.90644929762888" width="9" height="30.18710140474224" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="368" y="62.53785748447983" width="9" height="34.92428503104035" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="384" y="47.37298899255491" width="9" height="65.25402201489018" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="400" y="44.73121983595527" width="9" height="70.53756032808946" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="416" y="55.85501532781147" width="9" height="48.28996934437705" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="432" y="72.48731936579566" width="9" height="15.025361268408673" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="448" y="53.54109139795601" width="9" height="52.917817204087974" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="464" y="44.2170078249228" width="9" height="71.5659843501544" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="480" y="48.90033084391832" width="9" height="62.19933831216336" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="496" y="65.38842046016815" width="9" height="29.223159079663706" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="512" y="62.07332950635701" width="9" height="35.853340987285975" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="528" y="47.144378965409594" width="9" height="65.71124206918081" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="544" y="44.846046627684075" width="9" height="70.30790674463185" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="560" y="56.25927410404627" width="9" height="47.48145179190746" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="576" y="71.98375782423575" width="9" height="16.032484351528495" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="592" y="53.17505995243274" width="9" height="53.64988009513452" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="608" y="44.16065678366486" width="9" height="71.67868643267028" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="624" y="49.18016298213858" width="9" height="61.63967403572284" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="640" y="65.87282635076393" width="9" height="28.254347298472144" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="656" y="61.6121735227838" width="9" height="36.7756529544324" fill="hsl(36 92% 56%)" opacity="0.85"></rect><rect x="672" y="46.92336175369444" width="9" height="66.15327649261113" fill="hsl(36 92% 56%)" opacity="0.25"></rect><rect x="688" y="44.96911603598582" width="9" height="70.06176792802836" fill="hsl(36 92% 56%)" opacity="0.37"></rect><rect x="704" y="56.66854866662796" width="9" height="46.662902666744074" fill="hsl(36 92% 56%)" opacity="0.49"></rect><rect x="720" y="71.4807663292477" width="9" height="17.0384673415046" fill="hsl(36 92% 56%)" opacity="0.61"></rect><rect x="736" y="52.814916284590126" width="9" height="54.370167430819755" fill="hsl(36 92% 56%)" opacity="0.73"></rect><rect x="752" y="44.11274213735409" width="9" height="71.77451572529182" fill="hsl(36 92% 56%)" opacity="0.85"></rect></g>
+  <text y="170" font-size="13" font-family="ui-monospace" fill="hsl(240 5% 65%)" opacity="0.55" letter-spacing="2">NONCE 96b · TAG 128b · ENTROPY /dev/urandom</text>
+</g>
+<g transform="translate(800 380)" stroke="hsl(36 92% 56%)" fill="none" stroke-linecap="round">
+  <circle cx="0" cy="0" r="64" stroke-width="2.5"></circle>
+  <circle cx="0" cy="0" r="40" stroke-width="1.2" opacity="0.5"></circle>
+  <path d="M64 0 L240 0 L240 36 M200 0 L200 36 M170 0 L170 26" stroke-width="3.5"></path>
+  <circle cx="0" cy="0" r="7" fill="hsl(36 92% 56%)" stroke="none"></circle>
+</g>
+<g transform="translate(180 460)" font-size="14" font-family="ui-monospace" fill="hsl(36 92% 56%)" letter-spacing="3">
+  <text opacity="0.85">SHA-256 →</text>
+  <text x="120" opacity="0.65">e3b0c44298fc1c14</text>
+  <text x="120" y="22" opacity="0.4">9afbf4c8996fb924</text>
+</g>
+<rect width="1200" height="675" fill="url(#vfade)"></rect>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(36 92% 56%)" opacity="0.95">GUIDES / 04</text>
+  <text x="40" y="615" fill="hsl(240 5% 65%)" opacity="0.55">CRYPTOGRAPHY YOU CAN USE</text>
+  <text x="1160" y="615" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO.COM</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(36 92% 56%)"></circle>
+<circle cx="1160" cy="50" r="9" fill="hsl(36 92% 56%)" opacity="0.25"></circle>
+</svg>

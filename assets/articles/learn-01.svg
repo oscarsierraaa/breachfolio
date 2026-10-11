@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, &#39;JetBrains Mono&#39;, SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"></path>
+  </pattern>
+  <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="hsl(142 76% 48%)" stop-opacity="0.4"></stop>
+    <stop offset="60%" stop-color="hsl(142 76% 48%)" stop-opacity="0.07"></stop>
+    <stop offset="100%" stop-color="hsl(142 76% 48%)" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="hsl(165 18% 8%)" stop-opacity="0"></stop>
+    <stop offset="100%" stop-color="hsl(165 18% 8%)" stop-opacity="0.9"></stop>
+  </linearGradient>
+  <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="hsl(142 76% 48%)"></stop>
+    <stop offset="100%" stop-color="hsl(172 70% 55%)"></stop>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(165 22% 5%)"></rect>
+<rect width="1200" height="675" fill="hsl(165 18% 8%)" opacity="0.6"></rect>
+<rect width="1200" height="675" fill="url(#grid)"></rect>
+<ellipse cx="600" cy="320" rx="540" ry="380" fill="url(#glow)"></ellipse>
+<text x="180" y="250" font-family="Sora, sans-serif" font-size="64" font-weight="700" fill="hsl(142 76% 48%)" opacity="0.95" letter-spacing="-2">THREAT</text><text x="560" y="200" font-family="Sora, sans-serif" font-size="92" font-weight="700" fill="hsl(142 76% 48%)" opacity="1" letter-spacing="-2">VULN</text><text x="420" y="410" font-family="Sora, sans-serif" font-size="56" font-weight="700" fill="hsl(142 76% 48%)" opacity="0.55" letter-spacing="-2">EXPLOIT</text><text x="820" y="350" font-family="Sora, sans-serif" font-size="110" font-weight="700" fill="hsl(142 76% 48%)" opacity="1" letter-spacing="-2">RISK</text><g stroke="hsl(142 76% 48%)" stroke-opacity="0.25" stroke-width="1">
+    <line x1="280" y1="270" x2="580" y2="220"></line>
+    <line x1="600" y1="220" x2="820" y2="380"></line>
+    <line x1="450" y1="430" x2="820" y2="380"></line>
+    <line x1="280" y1="270" x2="450" y2="430"></line>
+  </g>
+<rect width="1200" height="675" fill="url(#vfade)"></rect>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(142 76% 48%)" opacity="0.95">GUIDES / 01</text>
+  <text x="40" y="615" fill="hsl(240 5% 65%)" opacity="0.55">INTRODUCTION TO CYBERSECURITY</text>
+  <text x="1160" y="615" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO.COM</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(142 76% 48%)"></circle>
+<circle cx="1160" cy="50" r="9" fill="hsl(142 76% 48%)" opacity="0.25"></circle>
+</svg>

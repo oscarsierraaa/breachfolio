@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="glow" cx="0.5" cy="0.45" r="0.55"><stop offset="0%" stop-color="hsl(142 70% 45%)" stop-opacity="0.34"/><stop offset="55%" stop-color="hsl(142 70% 45%)" stop-opacity="0.06"/><stop offset="100%" stop-color="hsl(142 70% 45%)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(240 10% 4%)" stop-opacity="0"/><stop offset="100%" stop-color="hsl(240 10% 4%)" stop-opacity="0.92"/></linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(240 10% 4%)"/>
+<rect width="1200" height="675" fill="hsl(240 9% 7%)" opacity="0.6"/>
+<rect width="1200" height="675" fill="url(#grid)"/>
+<ellipse cx="640" cy="300" rx="560" ry="380" fill="url(#glow)"/>
+<text x="230" y="150" font-family="Sora, sans-serif" font-size="22" font-weight="600" fill="hsl(142 70% 45%)" letter-spacing="2" opacity="0.95">LOG VOLUME = COST</text><rect x="230" y="374" width="26" height="96" rx="3" fill="hsl(142 70% 45%)" opacity="0.30"/><rect x="266" y="368" width="26" height="102" rx="3" fill="hsl(142 70% 45%)" opacity="0.45"/><rect x="302" y="342" width="26" height="128" rx="3" fill="hsl(142 70% 45%)" opacity="0.60"/><rect x="338" y="320" width="26" height="150" rx="3" fill="hsl(142 70% 45%)" opacity="0.75"/><text x="284" y="498" text-anchor="middle" font-size="14" fill="hsl(240 5% 65%)" letter-spacing="2" opacity="0.8">SPLUNK</text><rect x="470" y="367" width="26" height="103" rx="3" fill="hsl(142 70% 45%)" opacity="0.30"/><rect x="506" y="354" width="26" height="116" rx="3" fill="hsl(142 70% 45%)" opacity="0.45"/><rect x="542" y="308" width="26" height="162" rx="3" fill="hsl(142 70% 45%)" opacity="0.60"/><rect x="578" y="289" width="26" height="181" rx="3" fill="hsl(142 70% 45%)" opacity="0.75"/><text x="524" y="498" text-anchor="middle" font-size="14" fill="hsl(240 5% 65%)" letter-spacing="2" opacity="0.8">WAZUH</text><rect x="710" y="399" width="26" height="71" rx="3" fill="hsl(142 70% 45%)" opacity="0.30"/><rect x="746" y="348" width="26" height="122" rx="3" fill="hsl(142 70% 45%)" opacity="0.45"/><rect x="782" y="335" width="26" height="135" rx="3" fill="hsl(142 70% 45%)" opacity="0.60"/><rect x="818" y="283" width="26" height="187" rx="3" fill="hsl(142 70% 45%)" opacity="0.75"/><text x="764" y="498" text-anchor="middle" font-size="14" fill="hsl(240 5% 65%)" letter-spacing="2" opacity="0.8">ELK</text>
+<rect width="1200" height="675" fill="url(#vfade)"/>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(142 70% 45%)" opacity="0.95">COMPARE / SIEM</text>
+  <text x="40" y="620" fill="hsl(240 5% 65%)" opacity="0.6">SPLUNK vs WAZUH vs ELK</text>
+  <text x="1160" y="620" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(142 70% 45%)"/>
+<circle cx="1160" cy="50" r="9" fill="hsl(142 70% 45%)" opacity="0.25"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="glow" cx="0.5" cy="0.45" r="0.55"><stop offset="0%" stop-color="hsl(142 70% 45%)" stop-opacity="0.34"/><stop offset="55%" stop-color="hsl(142 70% 45%)" stop-opacity="0.06"/><stop offset="100%" stop-color="hsl(142 70% 45%)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="vfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(240 10% 4%)" stop-opacity="0"/><stop offset="100%" stop-color="hsl(240 10% 4%)" stop-opacity="0.92"/></linearGradient>
+</defs>
+<rect width="1200" height="675" fill="hsl(240 10% 4%)"/>
+<rect width="1200" height="675" fill="hsl(240 9% 7%)" opacity="0.6"/>
+<rect width="1200" height="675" fill="url(#grid)"/>
+<ellipse cx="640" cy="300" rx="560" ry="380" fill="url(#glow)"/>
+<text x="200" y="180" font-family="Sora, sans-serif" font-size="22" font-weight="600" fill="hsl(142 70% 45%)" letter-spacing="2" opacity="0.95">RULES OVER THE WIRE</text><path d="M200 360 L200 360 L208 368 L216 376 L224 384 L232 392 L240 398 L248 402 L256 405 L264 406 L272 405 L280 401 L288 396 L296 389 L304 380 L312 370 L320 359 L328 348 L336 337 L344 327 L352 317 L360 310 L368 304 L376 301 L384 301 L392 303 L400 308 L408 315 L416 325 L424 336 L432 349 L440 362 L448 376 L456 389 L464 401 L472 411 L480 419 L488 425 L496 428 L504 428 L512 424 L520 418 L528 409 L536 398 L544 385 L552 371 L560 357 L568 342 L576 328 L584 316 L592 306 L600 298 L608 293 L616 290 L624 291 L632 296 L640 302 L648 312 L656 323 L664 336 L672 350 L680 364 L688 378 L696 391 L704 402 L712 411 L720 418 L728 422 L736 423 L744 422 L752 417 L760 410 L768 402 L776 391 L784 380 L792 367 L800 355 L808 344 L816 333 L824 324 L832 317 L840 312 L848 309 L856 309 L864 311 L872 315 L880 321 L888 328 L896 337 L904 346 L912 355 L920 364 L928 373 L936 380 L944 387 L952 392 L960 395 L968 397 L976 396 L984 395 L992 391 L1000 387 L1008 382 L1016 376 " fill="none" stroke="hsl(142 70% 45%)" stroke-width="2.5" opacity="0.85"/><line x1="430" y1="250" x2="430" y2="470" stroke="hsl(142 70% 45%)" stroke-width="1" stroke-dasharray="3 6" opacity="0.45"/><rect x="400" y="230" width="60" height="22" rx="4" fill="hsl(240 9% 7%)" stroke="hsl(142 70% 45%)" stroke-width="1.2" opacity="0.85"/><text x="430" y="245" text-anchor="middle" font-size="11" fill="hsl(142 70% 45%)">alert</text><line x1="560" y1="250" x2="560" y2="470" stroke="hsl(142 70% 45%)" stroke-width="1" stroke-dasharray="3 6" opacity="0.45"/><rect x="530" y="230" width="60" height="22" rx="4" fill="hsl(240 9% 7%)" stroke="hsl(142 70% 45%)" stroke-width="1.2" opacity="0.85"/><text x="560" y="245" text-anchor="middle" font-size="11" fill="hsl(142 70% 45%)">alert</text><line x1="690" y1="250" x2="690" y2="470" stroke="hsl(142 70% 45%)" stroke-width="1" stroke-dasharray="3 6" opacity="0.45"/><rect x="660" y="230" width="60" height="22" rx="4" fill="hsl(240 9% 7%)" stroke="hsl(142 70% 45%)" stroke-width="1.2" opacity="0.85"/><text x="690" y="245" text-anchor="middle" font-size="11" fill="hsl(142 70% 45%)">alert</text>
+<rect width="1200" height="675" fill="url(#vfade)"/>
+<g font-size="14" letter-spacing="3" font-weight="500">
+  <text x="40" y="56" fill="hsl(142 70% 45%)" opacity="0.95">COMPARE / IDS</text>
+  <text x="40" y="620" fill="hsl(240 5% 65%)" opacity="0.6">SNORT vs SURICATA</text>
+  <text x="1160" y="620" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="1160" cy="50" r="4" fill="hsl(142 70% 45%)"/>
+<circle cx="1160" cy="50" r="9" fill="hsl(142 70% 45%)" opacity="0.25"/>
+</svg>

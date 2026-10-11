@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monta un laboratorio en un solo portátil | Breachfolio</title>
+  <meta name="description" content="Monta un laboratorio de ciberseguridad mínimo viable en un solo portátil con VirtualBox, Kali Linux y Metasploitable. Aislado, legal, 20 minutos." />
+  <meta name="keywords" content="laboratorio de ciberseguridad casero, montar un home lab de hacking ético, laboratorio de pentesting en un portátil, VirtualBox Kali Linux Metasploitable, red host-only aislada VirtualBox, laboratorio de hacking para principiantes, cómo crear un laboratorio de seguridad informática, VM vulnerable para practicar pentesting, OWASP Juice Shop laboratorio casero, snapshot VirtualBox laboratorio, laboratorio de ciberseguridad legal, requisitos mínimos para un laboratorio de hacking, Apple Silicon UTM laboratorio de seguridad, aislamiento de red laboratorio virtual, laboratorio de ciberseguridad en 20 minutos" />
+  <link rel="canonical" href="https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Monta un laboratorio de ciberseguridad en un solo portátil en 20 minutos | Breachfolio" />
+  <meta property="og:description" content="Monta un laboratorio de ciberseguridad mínimo viable en un solo portátil con VirtualBox, Kali Linux y Metasploitable. Aislado, legal, 20 minutos." />
+  <meta property="og:url" content="https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/lab2-homelab.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Monta un laboratorio de ciberseguridad en un solo portátil en 20 minutos | Breachfolio" />
+  <meta name="twitter:description" content="Monta un laboratorio de ciberseguridad mínimo viable en un solo portátil con VirtualBox, Kali Linux y Metasploitable. Aislado, legal, 20 minutos." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/lab2-homelab.webp" />
+
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/build-a-home-lab-on-one-laptop/" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Monta un laboratorio de ciberseguridad en un solo portátil, legalmente, en 20 minutos.",
+      "description": "Monta un laboratorio de ciberseguridad mínimo viable en un solo portátil con VirtualBox, Kali Linux y Metasploitable. Aislado, legal, 20 minutos.",
+      "image": "https://breachfolio.com/assets/img/lab2-homelab.webp",
+      "datePublished": "2026-07-15", "dateModified": "2026-07-15",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+      },
+      "inLanguage": "es",
+      "keywords": "laboratorio de ciberseguridad casero, montar un home lab de hacking ético, laboratorio de pentesting en un portátil, VirtualBox Kali Linux Metasploitable, red host-only aislada VirtualBox, laboratorio de hacking para principiantes, cómo crear un laboratorio de seguridad informática, VM vulnerable para practicar pentesting, OWASP Juice Shop laboratorio casero, snapshot VirtualBox laboratorio, laboratorio de ciberseguridad legal, requisitos mínimos para un laboratorio de hacking, Apple Silicon UTM laboratorio de seguridad, aislamiento de red laboratorio virtual, laboratorio de ciberseguridad en 20 minutos"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://breachfolio.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lab",
+          "item": "https://breachfolio.com/es/laboratorio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Monta un laboratorio de ciberseguridad en un solo portátil, legalmente, en 20 minutos.",
+          "item": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Monta un laboratorio de ciberseguridad en un solo portátil en 20 minutos",
+      "description": "Instrucciones paso a paso para montar un laboratorio de ciberseguridad aislado en un solo portátil con VirtualBox, Kali Linux y Metasploitable 2.",
+      "totalTime": "PT60M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "0"
+      },
+      "supply": [
+        { "@type": "HowToSupply", "name": "Portátil con 16 GB de RAM y SSD" },
+        { "@type": "HowToSupply", "name": "Conexión a internet estable (para las descargas iniciales)" }
+      ],
+      "tool": [
+        { "@type": "HowToTool", "name": "VirtualBox (gratis)" },
+        { "@type": "HowToTool", "name": "Appliance de Kali Linux para VirtualBox" },
+        { "@type": "HowToTool", "name": "Imagen de VM de Metasploitable 2" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Crea la red host-only aislada",
+          "text": "En VirtualBox, abre el Gestor de red y crea una red host-only llamada breachfolio-lab con el rango 192.168.56.0/24. Desactiva DHCP para asignar las IP manualmente.",
+          "url": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Importa la VM atacante de Kali Linux",
+          "text": "Descarga el appliance oficial de Kali para VirtualBox, impórtalo, conecta su adaptador de red a la red host-only breachfolio-lab, arráncalo, asígnale una IP estática y toma una snapshot limpia.",
+          "url": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Importa la VM objetivo de Metasploitable 2",
+          "text": "Descarga Metasploitable 2, crea una VM nueva a partir de su imagen de disco, conéctala a la misma red host-only, asígnale una IP estática y toma una snapshot limpia.",
+          "url": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Añade OWASP Juice Shop como objetivo web vulnerable",
+          "text": "Crea una pequeña VM con Ubuntu Server, instala Node.js, clona el repositorio de Juice Shop, ejecuta npm install y npm start. La aplicación web vulnerable estará disponible en el puerto 3000.",
+          "url": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Verifica el aislamiento de la red",
+          "text": "Desde Kali, haz ping a las otras VM del laboratorio (debe funcionar) y ping a 8.8.8.8 y a tu router doméstico (debe fallar). Si algo que debería fallar funciona, el laboratorio está mal configurado y hay que arreglarlo antes de continuar.",
+          "url": "https://breachfolio.com/es/laboratorio/laboratorio-de-ciberseguridad-en-un-portatil/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Es legal ejecutar Kali Linux y Metasploit en mi propio portátil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Tener y ejecutar herramientas de seguridad ofensiva en hardware de tu propiedad es legal en todas las jurisdicciones que conocemos. La ilegalidad solo empieza en el momento en que usas esas herramientas contra sistemas que no son tuyos y para los que no tienes autorización."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánta RAM necesito realmente para este laboratorio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "16 GB es el mínimo práctico y lo que asume esta guía. Kali usa 3-4 GB, Metasploitable 2 necesita 512 MB - 1 GB, y la VM anfitriona de Juice Shop necesita 1 GB. Con 32 GB el laboratorio va muy holgado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debería usar VirtualBox o VMware Workstation Player?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para un laboratorio casero de iniciación, VirtualBox. Es gratis, de código abierto, funciona en Linux/macOS/Windows, tiene soporte estable de snapshots y la mayoría de imágenes de laboratorio prefabricadas vienen con un perfil de VirtualBox ya integrado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y si tengo un Mac con Apple Silicon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En Apple Silicon, usa UTM con versiones ARM64 de Kali y Parrot, más OWASP Juice Shop como objetivo vulnerable. Puedes ejecutar imágenes x86 mediante emulación, pero el rendimiento es lento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puede mi laboratorio comprometer de verdad mi red doméstica si lo configuro mal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, si dejas una VM con red en modo bridge o NAT. Una VM de Metasploitable mal configurada con enrutamiento NAT es una máquina Linux rota a propósito que puede alcanzar tu red doméstica e internet. Verifica siempre el aislamiento antes de hacer cualquier otra cosa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo se tarda en montar todo el laboratorio de principio a fin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El montaje activo –crear la red, importar Kali y Metasploitable 2, levantar Juice Shop– lleva unos 20 minutos. Contando las descargas iniciales (el appliance de Kali de ~5 GB y la imagen de Metasploitable 2 de ~870 MB), el tiempo total ronda los 30-60 minutos según tu conexión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo ejecutar Juice Shop en Docker en lugar de en una VM aparte?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Esta guía lo monta en una pequeña VM de Ubuntu Server por coherencia con el resto del laboratorio, pero Juice Shop funciona igual de bien en un contenedor Docker dentro de la misma red host-only, y de hecho es la opción más ligera en recursos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si no tengo 16 GB de RAM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con 8 GB puedes ejecutar Kali y una sola VM objetivo a la vez, apagando la que no uses en cada momento. Por debajo de eso el rendimiento se degrada mucho; 16 GB es el mínimo práctico que asume esta guía para tener las tres VM disponibles simultáneamente."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Monta un laboratorio de ciberseguridad en un solo portátil, legalmente, en 20 minutos.</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../../assets/img/lab2-homelab.webp" alt="Ilustración principal para: Monta un laboratorio de ciberseguridad casero." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">PRIMEROS PASOS</span>
+          <span class="text-muted">LAB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">Monta un laboratorio de ciberseguridad en un solo portátil, legalmente, en 20 minutos.</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">No necesitas un servidor dedicado, un switch gestionable ni ESXi para empezar a practicar seguridad. 16 GB de RAM y un hipervisor gratuito cubren el 90% del camino.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-15">15 de julio de 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>8 min de lectura</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+
+<p>La mitología en torno a los laboratorios de ciberseguridad caseros intimida: servidor dedicado, tres NIC, un switch gestionable, licencias de ESXi, un subreddit de homelab entero lleno de siglas. La verdad es que para el primer 90% del aprendizaje práctico solo necesitas un portátil con <strong>16 GB de RAM y un SSD</strong>. Este artículo te guía de principio a fin por el laboratorio mínimo viable: qué es, qué hipervisor elegir, cómo montarlo, cómo verificar el aislamiento, qué hacer con él el primer día y cómo saber cuándo te has quedado pequeño.</p>
+
+<p>Al terminar tendrás tres máquinas virtuales en una red aislada: una <strong>máquina atacante</strong>, una <strong>máquina Linux vulnerable</strong> y una <strong>aplicación web vulnerable</strong>. Sabrás cómo romperlas a propósito, restaurarlas en segundos y capturar el tráfico de red entre ellas. Y harás todo esto en hardware que ya tienes, legalmente, sin tocar sistemas de nadie más.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">1. Qué significa realmente "laboratorio" (y qué no)</h2>
+
+<p>Un laboratorio casero es un <strong>entorno aislado</strong> donde puedes ejecutar software que no ejecutarías en tu máquina normal –VM vulnerables, herramientas de atacante, instrumentación a nivel de kernel, muestras de malware– sin poner en riesgo tu equipo del día a día ni las redes de otras personas. Dos propiedades son innegociables.</p>
+
+<p>El <strong>aislamiento</strong> significa que el laboratorio no puede alcanzar tu red doméstica, tus archivos de trabajo ni internet a menos que lo enrutes explícitamente. Un laboratorio mal configurado que puede entrar por SSH a tu router no es un laboratorio, es un riesgo. Verificaremos el aislamiento en la sección 4.</p>
+
+<p>El <strong>reseteo</strong> significa que puedes romper una VM a propósito y restaurarla a un estado limpio en segundos, no en horas. Las snapshots del hipervisor hacen esto trivial. Un laboratorio sin snapshots es un laboratorio en el que tendrás miedo de experimentar, lo cual anula el propósito.</p>
+
+<p>Todo lo demás (más VM, más RAM, redes con varios segmentos, un switch gestionable) es una comodidad. El laboratorio mínimo de abajo entrena las mismas habilidades fundamentales que un rack de 3.000 $: la diferencia es de comodidad, no de capacidad.</p>
+
+<figure class="my-8 md:my-10">
+  <div class="rounded-card bg-surface/40 border border-border p-4 md:p-6">
+    <img src="../../../assets/articles/lab-network-diagram.svg" alt="Arquitectura del laboratorio casero: un portátil que ejecuta un hipervisor que aloja una VM atacante con Kali y dos VM objetivo (Metasploitable 2, Juice Shop) en una red host-only aislada sin ruta a internet." loading="lazy" decoding="async"
+         class="w-full h-auto block" width="900" height="480" />
+  </div>
+  <figcaption class="mt-3 text-[13px] text-muted-foreground italic leading-relaxed">Todo el laboratorio en un diagrama. Tres VM se comunican entre sí en 192.168.56.0/24. Ninguna puede alcanzar tu red doméstica ni internet.</figcaption>
+</figure>
+
+<p>Esa es toda la arquitectura, sobre el papel: un portátil ejecutando VirtualBox, tres VM comunicándose entre sí en una red privada que no lleva a ninguna otra parte. Vamos a montar exactamente esto.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">2. Elige tu hipervisor en 30 segundos</h2>
+
+<p>El <strong>hipervisor</strong> es el software que ejecuta tus máquinas virtuales. Hay docenas. Para un laboratorio casero de iniciación, la elección está entre cuatro. Usa este árbol:</p>
+
+<figure class="my-8 md:my-10">
+  <div class="rounded-card bg-surface/40 border border-border p-4 md:p-6">
+    <img src="../../../assets/articles/lab-hypervisor-tree.svg" alt="Árbol de decisión para elegir un hipervisor: Mac con Apple Silicon → UTM; máquina dedicada 24/7 → Proxmox VE; laboratorios solo Windows → VMware Workstation; todo lo demás → VirtualBox (opción recomendada por defecto)." loading="lazy" decoding="async"
+         class="w-full h-auto block" width="900" height="480" />
+  </div>
+  <figcaption class="mt-3 text-[13px] text-muted-foreground italic leading-relaxed">Un árbol de decisión de 30 segundos. Elige una vez: cambiar de hipervisor más adelante implica reimportar todas las VM.</figcaption>
+</figure>
+
+<p>Para todo el que lea esto en un portátil normal, la respuesta es <strong>VirtualBox</strong>. Es gratis, es de código abierto, funciona en Linux/macOS/Windows, tiene soporte estable de snapshots y casi todas las imágenes de VM prefabricadas que descargarás en este artículo vienen con un perfil de VirtualBox ya integrado. El resto de esta guía asume VirtualBox; los principios se trasladan sin problema a cualquiera de los otros.</p>
+
+<table>
+  <thead><tr><th>Hipervisor</th><th>Coste</th><th>Punto fuerte</th><th>Elígelo cuando…</th></tr></thead>
+  <tbody>
+    <tr><td>VirtualBox</td><td>Gratis</td><td>Universal, apto para principiantes</td><td>Quieres que simplemente funcione en cualquier portátil</td></tr>
+    <tr><td>VMware Workstation Pro</td><td>Gratis (uso personal)</td><td>Invitados Windows más fluidos</td><td>Ejecutas sobre todo VM de Windows</td></tr>
+    <tr><td>UTM</td><td>Gratis</td><td>Nativo en Apple Silicon</td><td>Estás en un Mac de la serie M</td></tr>
+    <tr><td>Proxmox VE</td><td>Gratis</td><td>Bare-metal, interfaz web, clustering</td><td>Tienes hardware dedicado</td></tr>
+  </tbody>
+</table>
+
+<h3>Una nota sobre Apple Silicon</h3>
+<p>Si estás en un Mac M1/M2/M3/M4, la mayoría de imágenes de laboratorio prefabricadas "clásicas" (Metasploitable 2, appliances antiguos de Kali) son solo x86. Tienes tres opciones. La más limpia es usar <strong>UTM</strong> con versiones ARM64 de Kali y Parrot, y usar <strong>OWASP Juice Shop</strong> como objetivo vulnerable (es una app en Node, corre de forma nativa en ARM). Las otras dos son más lentas: ejecutar imágenes x86 mediante VirtualBox emulado por Rosetta (lento pero funciona), o hacerte con un mini-PC x86 barato y conectarte por SSH. Para esta guía asumimos que estás en un portátil x86 normal.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">3. El montaje de 20 minutos</h2>
+
+<p>Una vez instalado tu hipervisor, esta es la secuencia exacta. Tiempo total, incluidas las descargas: 30-60 minutos según tu conexión. Tiempo activo con las manos en la masa: 20 minutos.</p>
+
+<h3>Paso 3.1 – Crea la red aislada</h3>
+
+<p>En VirtualBox: <em>Archivo → Herramientas → Gestor de red → Redes host-only → Crear</em>. Llámala <code>breachfolio-lab</code>. Fija el rango de IP en <code>192.168.56.0/24</code> (el valor por defecto de VirtualBox, que nos vale). Desactiva DHCP por ahora (asignaremos las IP manualmente para que el diagrama de arriba siga siendo exacto). Deberías ver la nueva red <code>breachfolio-lab</code> en la lista con el rango <code>192.168.56.0/24</code> una vez creada.</p>
+
+<p>Esto crea un adaptador de red virtual en tu anfitrión que solo existe dentro de VirtualBox. Las VM conectadas a él pueden comunicarse entre sí y con el anfitrión en esta subred, pero no pueden alcanzar tu red física ni internet. Este es el perímetro del laboratorio.</p>
+
+<h3>Paso 3.2 – Descarga e importa Kali Linux</h3>
+
+<p><strong>Kali Linux</strong> es una distribución basada en Debian que empaqueta todas las herramientas de seguridad ofensiva que necesitarás durante los primeros seis meses: <code>nmap</code>, <code>metasploit</code>, <code>burp-suite</code>, <code>wireshark</code>, <code>hashcat</code>, <code>john</code>, <code>sqlmap</code> y unas trescientas más. Instalarlas a mano en una máquina Linux limpia es una distracción de varios días; el equipo de Kali ya lo ha hecho por ti.</p>
+
+<p>Ve a la página oficial de descargas de Kali, elige "Virtual Machines" y descarga el appliance prefabricado para VirtualBox (un archivo <code>.ova</code>, ~5 GB). En VirtualBox: <em>Archivo → Importar servicio virtualizado → elige tu .ova → Importar</em>. Tras la importación, antes de arrancar, edita la configuración de red de la VM: cambia el <em>Adaptador 1</em> de "NAT" (el valor por defecto) a "Adaptador solo-anfitrión" y selecciona tu red <code>breachfolio-lab</code>.</p>
+
+<p>Arráncala. Las credenciales por defecto son <code>kali / kali</code>. Cuando veas el escritorio, abre una terminal y fija una IP estática:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> sudo nano /etc/network/interfaces
+<span class="term-cmt"># añade:</span>
+auto eth0
+iface eth0 inet static
+    address 192.168.56.10
+    netmask 255.255.255.0
+
+<span class="term-cmt">$</span> sudo systemctl restart networking
+<span class="term-cmt">$</span> ip a   # verifica que eth0 tiene 192.168.56.10</code></pre>
+
+<p>Ahora apaga la VM (<code>sudo poweroff</code>) y toma una snapshot llamada <strong>clean-base</strong>. A partir de ahora, cualquier cosa que rompas –un paquete instalado por error, un <code>rm -rf</code> accidental, un servidor X inutilizado– está a un clic derecho de deshacerse.</p>
+
+<h3>Paso 3.3 – Descarga e importa Metasploitable 2</h3>
+
+<p><strong>Metasploitable 2</strong> es un sistema Ubuntu 8.04 roto a propósito. Es un museo de malas prácticas de seguridad: claves SSH débiles, credenciales por defecto en media docena de servicios, una puerta trasera en FTP, una pila de aplicación web vulnerable, un Samba mal configurado, un PostgreSQL explotable. Es una gozada para aprender y un peligro en la internet abierta, que es exactamente por lo que lo mantenemos en la red host-only.</p>
+
+<p>Descárgalo del archivo de Rapid7 (es un <code>.zip</code> que contiene un archivo de disco <code>.vmdk</code>, ~870 MB). En VirtualBox: <em>Nueva → Tipo: Linux → Versión: Ubuntu (32-bit) → 1024 MB de RAM → Usar un disco duro virtual existente → apunta al .vmdk</em>. Tras crearla, pon el <em>Adaptador 1</em> en la misma red host-only <code>breachfolio-lab</code>.</p>
+
+<p>Arráncala. El acceso es <code>msfadmin / msfadmin</code>. Fija una IP estática:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> sudo nano /etc/network/interfaces
+<span class="term-cmt"># añade:</span>
+auto eth0
+iface eth0 inet static
+    address 192.168.56.20
+    netmask 255.255.255.0
+
+<span class="term-cmt">$</span> sudo /etc/init.d/networking restart
+<span class="term-cmt">$</span> ifconfig   # confirma que eth0 tiene 192.168.56.20</code></pre>
+
+<p>Apaga. Snapshot. Llámala <strong>clean-base</strong>. (El mismo patrón de nombres en todas las VM facilita hacer scripting más adelante.)</p>
+
+<h3>Paso 3.4 – Levanta OWASP Juice Shop</h3>
+
+<p><strong>Juice Shop</strong> es una aplicación web deliberadamente vulnerable: una single-page app moderna en Node.js con decenas de fallos intencionados que cubren todas las categorías del <strong>OWASP Top 10</strong>. Es el mejor objetivo que encontrarás para practicar testing web. No necesitas una VM completa para ella; puedes ejecutarla en una pequeña VM con Ubuntu Server (o en un contenedor Docker, pero por coherencia aquí lo haremos en una VM).</p>
+
+<p>Crea una VM diminuta con Ubuntu Server 22.04 (512 MB de RAM sobran). La misma red host-only. Dentro de ella:</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># Instala Node y ejecuta Juice Shop</span>
+<span class="term-cmt">$</span> sudo apt update &amp;&amp; sudo apt install -y nodejs npm
+<span class="term-cmt">$</span> git clone https://github.com/juice-shop/juice-shop.git
+<span class="term-cmt">$</span> cd juice-shop
+<span class="term-cmt">$</span> npm install --omit=dev
+<span class="term-cmt">$</span> npm start
+<span class="term-cmt"># Juice Shop ya está escuchando en :3000</span></code></pre>
+
+<p>Ponle a esta la IP estática <code>192.168.56.30</code>. Desde Kali, apunta tu navegador a <code>http://192.168.56.30:3000</code> y deberías ver una colorida tienda online rota. Toma una snapshot (<strong>clean-base</strong> otra vez).</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">4. Verifica el aislamiento (no te saltes esto)</h2>
+
+<p>Este es el paso más importante de todos. Un "laboratorio" que puede alcanzar internet o tu red doméstica, por definición, no es un laboratorio. Desde Kali, ejecuta estas comprobaciones:</p>
+
+<pre tabindex="0"><code><span class="term-cmt"># Debería FUNCIONAR - puedes alcanzar tus otras VM del laboratorio</span>
+<span class="term-cmt">$</span> ping -c 2 192.168.56.20    # Metasploitable
+<span class="term-cmt">$</span> ping -c 2 192.168.56.30    # Juice Shop
+
+<span class="term-cmt"># Debería FALLAR - no puedes alcanzar internet</span>
+<span class="term-cmt">$</span> ping -c 2 8.8.8.8
+<span class="term-cmt">$</span> curl -m 5 https://example.com   # debería agotar el tiempo de espera
+
+<span class="term-cmt"># Debería FALLAR - no puedes alcanzar tu red doméstica</span>
+<span class="term-cmt"># (sustituye por la IP de TU router doméstico - normalmente 192.168.0.1 o 192.168.1.1)</span>
+<span class="term-cmt">$</span> ping -c 2 192.168.1.1</code></pre>
+
+<p>Si algo del bloque de "debería fallar" <em>funciona</em>, para y corrige la configuración antes de seguir. La causa más habitual es dejar el Adaptador 1 en NAT, o añadir un segundo adaptador "por comodidad" que hace de puente con tu red física. Revisa la configuración de red en todas las VM y confirma que hay exactamente un adaptador y que apunta a la red host-only.</p>
+
+<p>Una vez verificado, tienes un laboratorio funcionando. Todo lo que sigue es qué hacer <em>dentro</em> de él.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">5. Qué practicar el primer día</h2>
+
+<p>Aquí tienes una lista de reproducción inicial de ejercicios prácticos. Ninguno requiere nuevas descargas.</p>
+
+<h3>Reconocimiento con Nmap</h3>
+<p>En Kali, ejecuta:</p>
+<pre tabindex="0"><code><span class="term-cmt">$</span> nmap -sV -A 192.168.56.20</code></pre>
+<p>Esto hace un <strong>escaneo de servicios y versiones</strong> de Metasploitable. Obtendrás un muro de puertos abiertos: FTP (21), SSH (22), Telnet (23), SMTP (25), DNS (53), HTTP (80) y muchos más. Elige tres y lee las cadenas de versión. Muchos son lo bastante antiguos como para tener CVE bien conocidos. Búscalos. Ya estás pensando como un atacante, a los diez minutos.</p>
+
+<h3>Explotación con Metasploit</h3>
+<p><strong>Metasploit</strong> viene preinstalado en Kali. Lánzalo con <code>msfconsole</code>. Prueba el exploit clásico de manual –la <strong>puerta trasera de vsftpd 2.3.4</strong> en Metasploitable:</p>
+<pre tabindex="0"><code>msf6 &gt; use exploit/unix/ftp/vsftpd_234_backdoor
+msf6 exploit(...) &gt; set RHOSTS 192.168.56.20
+msf6 exploit(...) &gt; run</code></pre>
+<p>Si todo está bien cableado, obtendrás una shell de root en Metasploitable. Tómate un momento para entender lo que acaba de pasar: una vulnerabilidad en el servidor FTP permitió ejecución remota de código, disparaste el exploit y ahora eres dueño de la máquina. Restaura la snapshot cuando termines. (Sí, todo el sentido es que puedas hacerlo.)</p>
+
+<h3>Testing web con Burp Suite</h3>
+<p>Abre <strong>Burp Suite</strong> (preinstalado en Kali). Configura tu navegador para usar 127.0.0.1:8080 como proxy. Visita Juice Shop en <code>http://192.168.56.30:3000</code>. Cada petición pasa por Burp; puedes verla, editarla, reenviarla. Prueba el reto "Score Board": es un marcador integrado de vulnerabilidades que puedes ir encontrando. Resolverlas es la mejor introducción práctica a la seguridad web que conseguirás sin infringir la ley.</p>
+
+<h3>Captura de tráfico con Wireshark</h3>
+<p>En Kali: <code>sudo wireshark</code>. Captura en la interfaz <code>eth0</code>. Desde otra terminal, ejecuta cualquiera de los escaneos de Nmap de arriba contra Metasploitable mientras la captura está en marcha. Ahora estás viendo los ataques ocurrir en tiempo real a nivel de paquete. Filtra por <code>tcp.flags.syn == 1 and tcp.flags.ack == 0</code> para ver solo los paquetes SYN. Bienvenido al fondo de la pila.</p>
+
+<h3>Detección: lee tus propios ataques</h3>
+<p>Esta es la parte que la mayoría de laboratorios de iniciación se saltan y la que más necesitan los defensores. En Metasploitable, antes de atacarla, abre una shell y sigue el log de autenticación: <code>sudo tail -f /var/log/auth.log</code>. Ahora lanza un ataque de fuerza bruta con hydra desde Kali contra SSH: <code>hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt 192.168.56.20 ssh</code>. Observa cómo las líneas se derraman en el log. Eso es exactamente lo que ve un analista de blue team en una red real. Saber cómo <em>se ve un ataque desde el asiento del defensor</em> es la mitad del trabajo.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">6. Un flujo de trabajo que evita dolores</h2>
+
+<p>Tres hábitos que te ahorrarán horas durante los primeros meses.</p>
+
+<p><strong>Toma una snapshot antes de cada experimento.</strong> Incluso los que crees que van a funcionar. Sobre todo los que crees que van a funcionar. Las snapshots son gratis e instantáneas. Restaurar desde una es un solo clic. Perder dos horas porque rompiste una configuración es evitable.</p>
+
+<p><strong>Lleva notas por VM.</strong> Un simple archivo de texto por VM que liste la IP, las credenciales, las snapshots que has tomado y los cambios que has hecho desde la última snapshot. Cuando vuelvas la semana que viene, te lo agradecerás.</p>
+
+<p><strong>Apaga lo que no estés usando.</strong> Tres VM en reposo ocupan 1,5-2 GB de RAM y un 10-15% de un núcleo de CPU para nada. Suspende o apaga las que no estén en juego.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">7. Resolución de los cinco problemas que siempre fallan primero</h2>
+
+<h3>"Kali arranca con la pantalla en negro / la imagen con artefactos."</h3>
+<p>Es el controlador gráfico de VirtualBox. Apaga la VM, ve a <em>Configuración → Pantalla → Controlador gráfico</em>, cambia de "VMSVGA" a "VBoxSVGA" (o al revés) y sube la memoria de vídeo a 64 MB. Reinicia. Resuelve el 95% de los problemas de pantalla.</p>
+
+<h3>"Mi VM no tiene red en absoluto."</h3>
+<p>Tres cosas que revisar, en orden: (1) que el adaptador esté realmente conectado –<em>Configuración → Red → Adaptador 1 → Habilitar adaptador de red</em>; (2) que el tipo de conexión sea "Adaptador solo-anfitrión" y que esté seleccionada la red correcta; (3) dentro del invitado, que la interfaz esté levantada (<code>ip link set eth0 up</code>). Si las tres se ven bien, reinicia la VM con el adaptador de red recién apagado y encendido.</p>
+
+<h3>"La VM va extremadamente lenta."</h3>
+<p>Casi siempre es una de estas: (a) las extensiones de virtualización están desactivadas en la BIOS de tu portátil (VT-x en Intel, AMD-V en AMD – entra en la BIOS, actívalas, guarda y reinicia); (b) el anfitrión se está quedando sin RAM porque intentas ejecutar demasiadas VM a la vez (el Monitor de Actividad / Administrador de tareas te lo dirá); (c) la imagen de disco está en un disco externo lento – muévela a tu SSD interno.</p>
+
+<h3>"VirtualBox se cierra al importar."</h3>
+<p>El .ova probablemente esté corrupto – vuelve a descargarlo y verifica el hash SHA-256 contra la página del editor. La segunda causa más habitual es quedarse sin espacio en disco a mitad de la importación; VirtualBox necesita temporalmente unas 2 veces el tamaño del .ova.</p>
+
+<h3>"Puedo hacer ping a Metasploitable desde Kali pero no llego a su servidor web en el navegador."</h3>
+<p>La pila web de Metasploitable escucha en los puertos por defecto, pero el navegador dentro de Kali no sabe de tu laboratorio. Asegúrate de escribir la URL completa con el puerto: <code>http://192.168.56.20</code> para HTTP, <code>http://192.168.56.30:3000</code> para Juice Shop. Y confirma que el servicio se está ejecutando de verdad en el objetivo (<code>sudo service apache2 status</code> en Metasploitable, <code>npm start</code> en Juice Shop).</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">8. La línea legal, en un párrafo</h2>
+
+<p>Todo lo descrito en este artículo ocurre en máquinas de tu propiedad, en una red que no está conectada a nada más. Eso es legal en todas partes. En el momento en que escaneas, sondeas o intentas acceder a un sistema que no es tuyo y para el que no tienes permiso por escrito, estás infringiendo la ley. La Computer Misuse Act (Reino Unido), la Computer Fraud and Abuse Act (EE. UU.), los artículos 197 bis y siguientes del <em>Código Penal</em> español, los §202a-c del StGB alemán y sus equivalentes en otros lugares criminalizan todos el acceso no autorizado. No hay una exención de "pero era educativo". No hay una exención de "solo estaba mirando". Quédate dentro del laboratorio. Si algún día quieres probar contra algo más grande, usa entornos de práctica legales: Hack The Box, TryHackMe, PortSwigger Web Security Academy, los sitios de retos autorizados de OWASP. Existen precisamente para que no tengas que asumir el riesgo.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">9. Cuándo dar el salto</h2>
+
+<p>El laboratorio de portátil te lleva muy lejos. Sabrás que es hora de quedarte pequeño cuando una de estas cosas empiece a limitarte con regularidad:</p>
+
+<ul>
+  <li>Necesitas de forma constante cinco o más VM ejecutándose a la vez (laboratorios de Active Directory, redes multinivel, arquitecturas segmentadas).</li>
+  <li>Quieres practicar escenarios que requieren segmentación de red real –varias VLAN, un firewall en medio, una DMZ. Esto puede simularse con redes internas en VirtualBox, pero se vuelve engorroso más allá de dos segmentos.</li>
+  <li>Quieres el laboratorio funcionando 24/7 para experimentos de ingeniería de detección de larga duración –por ejemplo, observar cómo se ve un SIEM bajo una semana de tráfico de atacante simulado.</li>
+  <li>Estás estudiando para una certificación práctica (<strong>OSCP, CRTO, CRTP</strong>) cuyo entorno de examen tiene decenas de máquinas y quieres practicar a esa escala.</li>
+</ul>
+
+<p>El salto más barato es un mini-PC de segunda mano (Intel NUC, HP EliteDesk Mini, Lenovo ThinkCentre Tiny) con 32 GB de RAM y un NVMe de 1 TB. 200-400 € de segunda mano. Instálale Proxmox, déjalo bajo el escritorio, gestiónalo por la interfaz web. Notarás la diferencia de inmediato, pero hasta que de verdad te sientas limitado, el portátil gana en el eje más importante: puedes usarlo a cualquier hora, en cualquier sitio, sin fricción de montaje. Las horas de práctica ganan al hardware siempre.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">10. Qué leer a continuación</h2>
+
+<p>Una vez montado tu laboratorio, las progresiones naturales son: más práctica de ataque (PortSwigger Academy, TryHackMe), más práctica de defensa (despliega Wazuh, Security Onion o Suricata en una cuarta VM y observa cómo tus propios ataques la iluminan), o más profundidad de red (añade una VM de pfSense entre subredes y aprende reglas de firewall por inspección). Cada una de esas es su propia inmersión profunda, y cada una empieza con el laboratorio que acabas de montar.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Es legal ejecutar Kali Linux y Metasploit en mi propio portátil?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Sí. Tener y ejecutar herramientas de seguridad ofensiva en hardware de tu propiedad es legal en todas las jurisdicciones que conocemos. La ilegalidad solo empieza en el momento en que usas esas herramientas contra sistemas que no son tuyos y para los que no tienes autorización. La Computer Misuse Act (Reino Unido), la Computer Fraud and Abuse Act (EE. UU.), los artículos 197 bis y siguientes del Código Penal español y sus equivalentes en otros lugares criminalizan el acceso no autorizado, no la posesión de las herramientas.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Cuánta RAM necesito realmente para este laboratorio?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    16 GB es el mínimo práctico y lo que asume esta guía. Kali suele usar 3-4 GB, Metasploitable 2 necesita 512 MB - 1 GB, y la VM anfitriona de Juice Shop necesita 1 GB. Eso deja un margen cómodo para el sistema operativo anfitrión. Con 8 GB puedes ejecutar Kali y una VM objetivo a la vez, pero te sentirás limitado. Con 32 GB el laboratorio va muy holgado y puedes ejecutar varias VM extra sin pensártelo.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Debería usar VirtualBox o VMware Workstation Player?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Para un laboratorio casero de iniciación, VirtualBox. Es gratis, de código abierto, funciona en Linux/macOS/Windows, tiene soporte estable de snapshots y la mayoría de imágenes de laboratorio prefabricadas vienen con un perfil de VirtualBox ya integrado. VMware Workstation Player ofrece invitados Windows más fluidos, pero eso es una ventaja marginal salvo que tu laboratorio sea sobre todo VM de Windows. Los principios de esta guía se trasladan sin problema entre ambos.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Y si tengo un Mac con Apple Silicon (M1, M2, M3, M4)?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    La mayoría de imágenes de laboratorio prefabricadas clásicas son solo x86. La opción más limpia en Apple Silicon es UTM con versiones ARM64 de Kali y Parrot, más OWASP Juice Shop como objetivo vulnerable (Node.js, corre de forma nativa en ARM). Puedes ejecutar imágenes x86 mediante emulación, pero el rendimiento es lento. Como alternativa, un pequeño mini-PC x86 al que conectarte por SSH es una gran máquina de compañía por 200-400 € de segunda mano.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>¿Puede mi laboratorio comprometer de verdad mi red doméstica si lo configuro mal?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    Sí, si dejas una VM con red en modo bridge o NAT y la tratas como parte del laboratorio. Una VM de Metasploitable mal configurada con enrutamiento NAT es, en la práctica, una máquina Linux rota a propósito que puede alcanzar tu red doméstica e internet. Por eso la sección 4 de esta guía insiste en verificar el aislamiento antes de hacer cualquier otra cosa. Si la verificación falla, para y arréglalo antes de continuar.
+  </div>
+</details>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+
+            <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+
+            <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-border">
+        <a href="../" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors inline-flex flex-col">
+          <span class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Más de Lab</span>
+          <span class="mt-2 text-[15px] font-medium leading-snug">Volver a todos los artículos →</span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">En esta página</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Relacionado</div>
+        <ul class="space-y-3">
+          <li><a href="../../ciberseguridad/fundamentos-de-linux-para-seguridad/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Fundamentos de Linux para seguridad, el subconjunto que se usa</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">CYBERSECURITY · 6 de mayo de 2026</div>
+          </a></li>
+          <li><a href="../../comparativas/kali-vs-parrot/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Kali Linux vs Parrot OS: la distro de pentest en la que de verdad vives</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">COMPARE · 28 de marzo de 2026</div>
+          </a></li>
+          <li><a href="../que-es-metasploitable-2/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Qué es Metasploitable 2 y para qué sirve</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LAB</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

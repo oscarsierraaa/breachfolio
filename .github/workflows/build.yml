@@ -1,0 +1,88 @@
+name: Rebuild site artifacts
+
+# Hostinger deploys straight from a git checkout with no build step, so
+# assets/tw.css, _pagefind/, sitemap.xml and */page-*/ are committed
+# artifacts (see STATE.md "Notas de mantenimiento"). n8n (or anyone) can
+# push new article/guide HTML straight to main; this workflow regenerates
+# those artifacts automatically so nobody has to remember to run
+# `npm run build` by hand again (see the 2026-07-12 sessions in STATE.md
+# for what happens when that step gets skipped).
+#
+# Loop guard: the bot's own commits only ever touch the paths listed in
+# paths-ignore below, so they never re-trigger this workflow.
+#
+# The four homepage/news index files are committed too, because build:news
+# prerenders the wire into them from data/news.json (see
+# tools/prerender-news-wire.mjs). Without that, the served HTML would keep
+# whatever the wire looked like the last time someone ran the build by hand,
+# which is the stale-artifact problem this workflow exists to prevent. They are
+# deliberately NOT in paths-ignore: a real edit to those pages should still
+# trigger a rebuild, and the bot's own run is idempotent, so the second pass
+# finds nothing to commit and stops.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '_pagefind/**'
+      - 'sitemap.xml'
+      - 'llms.txt'
+      - 'rss.xml'
+      - 'es/rss.xml'
+      - 'assets/tw.css'
+      - '**/page-*/index.html'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-site-artifacts
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - run: npm run build
+
+
+      # Avisa a Bing/Yandex de las URLs nuevas (diff del sitemap vs commit
+      # anterior). Nunca falla el build: la indexación rápida es un extra.
+      # VA ANTES DE COMMITEAR LOS ARTEFACTOS, Y NO ES CASUAL. Estaba despues,
+      # y asi no aviso NUNCA: cuando el bot commitea, HEAD pasa a ser el commit
+      # del bot y HEAD~1 el commit publicado, que ya llevaba el sitemap con las
+      # URLs nuevas. El diff salia vacio y el paso imprimia "sin URLs nuevas"
+      # sin dar error, en todas las ejecuciones. Lo delato Bing Webmaster Tools
+      # el 2026-08-20. Aqui HEAD sigue siendo el commit publicado.
+      - name: IndexNow ping (new URLs)
+        run: node tools/indexnow-ping.mjs || true
+
+      - name: Commit regenerated artifacts (if any)
+        run: |
+          git config user.name "breachfolio-bot"
+          git config user.email "actions@users.noreply.github.com"
+          # Las seis secciones españolas paginadas (es/ciberseguridad, es/ia,
+          # es/laboratorio, es/comparativas, es/recursos, es/guias) faltaban en
+          # esta lista, así que el bot las regeneraba y no las podía commitear:
+          # producción se quedaba con la paginación española vieja si alguien
+          # subía un artículo sin correr `npm run build` entero. Comodines en
+          # vez de lista fija para que una sección nueva no repita el fallo.
+          git add assets/tw.css _pagefind sitemap.xml llms.txt rss.xml es/rss.xml \
+            */page-*/ es/*/page-*/ \
+            index.html es/index.html news/index.html es/noticias/index.html 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No artifact changes — nothing to commit."
+          else
+            git commit -m "chore(build): regenerate artifacts [bot]"
+            git push
+          fi

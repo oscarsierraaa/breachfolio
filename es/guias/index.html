@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="guides">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guías – Qué hacer ahora mismo | Breachfolio</title>
+  <meta name="description" content="Guías prácticas para cuando algo va mal: una web falsa se quedó tu tarjeta, un SMS sospechoso, una cuenta hackeada, un suplantador. Pasos claros, fuentes oficiales." />
+  <link rel="canonical" href="https://breachfolio.com/es/guias/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/guides/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/guias/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/guides/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Guías – Qué hacer ahora mismo | Breachfolio" />
+  <meta property="og:description" content="Guías prácticas para cuando algo va mal: una web falsa se quedó tu tarjeta, un SMS sospechoso, una cuenta hackeada, un suplantador. Pasos claros, fuentes oficiales." />
+  <meta property="og:url" content="https://breachfolio.com/es/guias/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-guides.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Guías – Qué hacer ahora mismo | Breachfolio" />
+  <meta name="twitter:description" content="Guías prácticas para cuando algo va mal: una web falsa se quedó tu tarjeta, un SMS sospechoso, una cuenta hackeada, un suplantador. Pasos claros, fuentes oficiales." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-guides.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+<script type="application/ld+json">{
+"@context": "https://schema.org",
+"@graph": [
+  {
+    "@type": "CollectionPage",
+    "@id": "https://breachfolio.com/es/guias/#collectionpage",
+    "url": "https://breachfolio.com/es/guias/",
+    "name": "Guías – Qué hacer ahora mismo",
+    "description": "Guías prácticas para cuando algo va mal: una web falsa se quedó tu tarjeta, un SMS sospechoso, una cuenta hackeada, un suplantador. Pasos claros, fuentes oficiales.",
+    "inLanguage": "es",
+    "isPartOf": {
+      "@id": "https://breachfolio.com/#website"
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://breachfolio.com/es/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guías",
+        "item": "https://breachfolio.com/es/guias/"
+      }
+    ]
+  }
+]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Guías de Breachfolio",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://breachfolio.com/es/guias/tarjeta-web-falsa/",
+      "name": "He metido mi tarjeta en una web falsa: qué hacer ahora."
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "url": "https://breachfolio.com/es/guias/sms-aeat-falso/",
+      "name": "Cómo saber si un SMS de la AEAT es falso."
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "url": "https://breachfolio.com/es/guias/denunciar-web-fraudulenta/",
+      "name": "Cómo denunciar una web fraudulenta paso a paso."
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "url": "https://breachfolio.com/es/guias/whatsapp-hackeado/",
+      "name": "Cómo recuperar WhatsApp hackeado y proteger tu cuenta."
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "url": "https://breachfolio.com/es/guias/dominio-falso/",
+      "name": "Cómo comprobar si un dominio es falso o sospechoso."
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "url": "https://breachfolio.com/es/guias/suplantacion-instagram/",
+      "name": "Qué hacer si me han suplantado en Instagram."
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "url": "https://breachfolio.com/es/guias/estafa-voz-clonada-ia/",
+      "name": "Estafa de voz clonada con IA: ¿es real la llamada de mi hijo?"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "url": "https://breachfolio.com/es/guias/sextorsion-chantaje/",
+      "name": "Te amenazan con difundir tus fotos: qué hacer ahora mismo."
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "url": "https://breachfolio.com/es/guias/falso-pedido-amazon/",
+      "name": "Falso pedido o reembolso de Amazon: cómo detectarlo."
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "url": "https://breachfolio.com/es/guias/phishing-paypal/",
+      "name": "Phishing de PayPal: pago recibido falso o cuenta limitada."
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "url": "https://breachfolio.com/es/guias/netflix-pago-fallido/",
+      "name": "Netflix: \"tu pago ha fallado\" – cómo detectar el phishing."
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "url": "https://breachfolio.com/es/guias/apple-id-bloqueado/",
+      "name": "Apple ID o iCloud bloqueado: cómo verificar el aviso."
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "url": "https://breachfolio.com/es/guias/falsa-renovacion-antivirus/",
+      "name": "Falsa renovación de Norton o McAfee: la factura de 499 €."
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "url": "https://breachfolio.com/es/guias/donacion-falsa-catastrofe/",
+      "name": "Donaciones falsas tras una catástrofe: cómo verificar una ONG."
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "url": "https://breachfolio.com/es/guias/pago-fuera-airbnb-booking/",
+      "name": "Airbnb o Booking pide pagar fuera de la plataforma: ¿estafa?"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "url": "https://breachfolio.com/es/guias/alerta-google-actividad-inusual/",
+      "name": "Falsa alerta de actividad inusual de Google: cómo verificarla."
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "url": "https://breachfolio.com/es/guias/pig-butchering-cripto/",
+      "name": "Pig butchering: falsa inversión cripto por WhatsApp."
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "url": "https://breachfolio.com/es/guias/estafa-bizum/",
+      "name": "Estafas por Bizum: qué es el Bizum inverso y cómo protegerte."
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "url": "https://breachfolio.com/es/guias/estafa-entrega-paquetes-proteccion/",
+      "name": "Estafa de entrega de paquetes: Cómo protegerte | Breachfolio"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "url": "https://breachfolio.com/es/guias/estafa-cuenta-segura-banco-proteccion/",
+      "name": "Estafa de la Cuenta Segura: Qué Hacer y Cómo Evitarla | Breachfolio"
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "url": "https://breachfolio.com/es/guias/estafa-oferta-empleo-falsa/",
+      "name": "¿Es real esa oferta de empleo? Reclutadores falsos y estafas de reenvío."
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "url": "https://breachfolio.com/es/guias/estafa-soporte-tecnico-falso/",
+      "name": "Estafa del soporte técnico falso: pop-ups, llamadas y acceso remoto."
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "url": "https://breachfolio.com/es/guias/suplantan-tu-web/",
+      "name": "Han copiado tu web. Este es el orden para cerrarla."
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "url": "https://breachfolio.com/es/guias/comprobar-datos-filtrados/",
+      "name": "Tus datos ya están filtrados. Esto es lo que sí puedes hacer."
+    },
+    {
+      "@type": "ListItem",
+      "position": 25,
+      "url": "https://breachfolio.com/es/guias/foto-dni-riesgos/",
+      "name": "Has mandado la foto de tu DNI. Esto es lo que pueden hacer de verdad."
+    },
+    {
+      "@type": "ListItem",
+      "position": 26,
+      "url": "https://breachfolio.com/es/guias/contrasenas-en-el-navegador/",
+      "name": "¿Es seguro guardar las contraseñas en el navegador?"
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
+      "url": "https://breachfolio.com/es/guias/clic-enlace-phishing/",
+      "name": "He hecho clic en un enlace de phishing. Esto es lo que pasa de verdad."
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+  <link rel="next" href="https://breachfolio.com/es/guias/page-2/" />
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="./" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent rounded-full" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="./" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Guías</span></li>
+  </ol>
+</nav><main id="main"><section class="sf-hero sf-hero-aura sf-hero-grid sf-hero-fx border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-14 md:pt-20 pb-14 md:pb-20">
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+        <div>
+          <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">Guías · Qué hacer ahora mismo</div>
+          <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-2xl">Algo va mal. <span class="sf-grad">Esto es lo que haces.</span></h1>
+          <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-xl">Una web falsa se quedó tu tarjeta. Un SMS dice ser de la AEAT. Alguien usa tu cuenta sin tu permiso. Estas guías son para ahora mismo – pasos claros, en orden, con las fuentes oficiales reales a las que reportar.</p>
+        </div>
+        <div class="relative mx-auto w-full max-w-[360px] aspect-square" aria-hidden="true">
+          <img src="../../assets/img/hero-guides.webp" alt="" width="800" height="800" fetchpriority="high" decoding="async" class="w-full h-full object-contain" onerror="this.style.display='none'" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="flex flex-wrap items-center gap-3 mb-8">
+      <div class="relative flex-1 min-w-[200px] max-w-xs">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="sf-list-search" type="text" placeholder="Buscar en Guías…" aria-label="Buscar en Guías" class="w-full h-9 rounded-full border border-border bg-surface/40 text-[13px] pl-9 pr-4 text-foreground placeholder:text-muted focus:outline-none focus:border-accent/50" />
+      </div>
+      <div id="sf-tag-filter" class="relative">
+        <button id="sf-tag-btn" type="button" class="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-full border border-border text-[12px] font-mono tracking-wider text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+          <span>TEMAS</span><span id="sf-tag-count" class="text-accent"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="sf-tag-panel" class="hidden absolute left-0 mt-2 sf-tag-panel">
+          <input id="sf-tag-search" type="text" placeholder="Buscar tema…" aria-label="Buscar tema" />
+          <div id="sf-tag-list"></div>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5" role="group" aria-label="Filtrar por rango de fechas">
+        <label class="sr-only" for="sf-date-from">Desde</label>
+        <input type="date" id="sf-date-from" aria-label="Desde" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+        <span class="text-muted text-[11px]" aria-hidden="true">→</span>
+        <label class="sr-only" for="sf-date-to">Hasta</label>
+        <input type="date" id="sf-date-to" aria-label="Hasta" class="h-8 rounded-full border border-border bg-surface/40 text-[12px] font-mono px-3 text-foreground focus:outline-none focus:border-accent/50" />
+      </div>
+      <button id="sf-list-sort" data-label-desc="Más recientes primero" data-label-asc="Más antiguos primero" type="button" class="ml-auto inline-flex items-center gap-1.5 px-3 h-8 rounded-full border border-border text-muted-foreground hover:text-foreground font-mono text-[11.5px] transition-colors">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="sf-sort-icon transition-transform" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        <span data-sort-label>Más recientes primero</span>
+      </button>
+    </div>
+    <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+      <a href="clic-enlace-phishing/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-08-29">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-phishing-link-clicked-640.webp 640w, ../../assets/img/hero-guide-phishing-link-clicked-960.webp 960w, ../../assets/img/hero-guide-phishing-link-clicked.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-phishing-link-clicked.webp" alt="Una mano cambiando una aguja de vía mientras se acerca un tren, con una sola ruta iluminada en rojo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>29 ago 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">He hecho clic en un enlace de phishing.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Si solo lo abriste y lo cerraste, casi seguro no ha pasado nada. Lo que decide es lo que hiciste después: si escribiste algo, descargaste o aprobaste un aviso.</p>
+        </div>
+      </a>
+      <a href="contrasenas-en-el-navegador/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="privacy" data-date="2026-08-29">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-browser-passwords-640.webp 640w, ../../assets/img/hero-guide-browser-passwords-960.webp 960w, ../../assets/img/hero-guide-browser-passwords.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-browser-passwords.webp" alt="Tres cámaras acorazadas con las puertas abiertas y su contenido fluyendo de una a otra hasta vaciarse" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SEGURIDAD DE CONTRASEÑAS</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>29 ago 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Es seguro guardarlas en el navegador?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Sí las cifra, y quien diga lo contrario va desfasado. Lo que decide el riesgo es otra cosa: si algo puede ejecutarse en tu ordenador con tu sesión.</p>
+        </div>
+      </a>
+      <a href="foto-dni-riesgos/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="privacy" data-date="2026-08-26">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-id-document-640.webp 640w, ../../assets/img/hero-guide-id-document-960.webp 960w, ../../assets/img/hero-guide-id-document.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-id-document.webp" alt="Un brazo robótico introduciendo la misma tarjeta en un muro interminable de lectores" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PROTECCIÓN DE IDENTIDAD</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>26 ago 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Has mandado la foto de tu DNI.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Con la foto sola casi nunca basta: lo que decide el riesgo es qué más tienen de ti, y la comprobación gratuita del Banco de España que casi nadie menciona.</p>
+        </div>
+      </a>
+      <a href="comprobar-datos-filtrados/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="privacy" data-date="2026-08-26">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-data-leak-640.webp 640w, ../../assets/img/hero-guide-data-leak-960.webp 960w, ../../assets/img/hero-guide-data-leak.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-data-leak.webp" alt="Una caja rota en una cinta transportadora derramando su contenido, que ya no se puede recoger" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PROTECCIÓN PREVENTIVA</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>26 ago 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Tus datos ya están filtrados.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Cómo comprobar si tu correo está en una filtración, qué significa de verdad salir en la lista, y el orden de actuación que sí reduce el riesgo.</p>
+        </div>
+      </a>
+      <a href="suplantan-tu-web/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="impersonation" data-date="2026-08-17">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-cloned-website-640.webp 640w, ../../assets/img/hero-guide-cloned-website-960.webp 960w, ../../assets/img/hero-guide-cloned-website.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-cloned-website.webp" alt="Una escultura escaneada y su copia digital idéntica al lado, ilustración de suplantación de web" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SUPLANTACIÓN DE MARCA</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>17 ago 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Han copiado tu web.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Cómo reunir las pruebas, a qué registrador y a qué alojamiento escribir, cómo marcarla en los navegadores y a quién acudir en España para que la cierren.</p>
+        </div>
+      </a>
+      <a href="correo-hackeado/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="account-recovery" data-date="2026-08-10">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/035-guide-closet-rearranged-by-stranger-640.webp 640w, ../../assets/img/035-guide-closet-rearranged-by-stranger-960.webp 960w, ../../assets/img/035-guide-closet-rearranged-by-stranger.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/035-guide-closet-rearranged-by-stranger.webp" alt="Alguien está en tu correo. Este es el orden para echarlo. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">RECUPERACIÓN DE CUENTAS</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>10 ago 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>11 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Alguien está en tu correo.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Échalo, deshaz la regla de reenvío que dejó puesta y asegura las cuentas que se recuperan por ahí. El orden importa más que la prisa.</p>
+        </div>
+      </a>
+
+      <a href="estafa-soporte-tecnico-falso/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="tech-support" data-date="2026-07-27">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-tech-support-640.webp 640w, ../../assets/img/hero-guide-tech-support-960.webp 960w, ../../assets/img/hero-guide-tech-support.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-tech-support.webp" alt="&quot;Tu ordenador está infectado, llama a este número&quot;: la estafa del soporte técnico falso – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SOPORTE TÉCNICO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>27 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Estafa del soporte técnico falso: pop-ups, llamadas y acceso remoto.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Un pop-up dice que tu ordenador está infectado. Alguien llama diciendo ser de Microsoft. Así funciona la estafa y así se para con seguridad.</p>
+        </div>
+      </a>
+      <a href="estafa-oferta-empleo-falsa/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="job-scams" data-date="2026-07-23">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-job-offer-640.webp 640w, ../../assets/img/hero-guide-job-offer-960.webp 960w, ../../assets/img/hero-guide-job-offer.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-job-offer.webp" alt="¿Es real esa oferta de empleo? Cómo detectar reclutadores falsos, cheques fraudulentos y estafas de reenvío de paquetes. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">ESTAFAS DE EMPLEO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>23 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>10 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Es real esa oferta de empleo? Reclutadores falsos y estafas de reenvío.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Un empleador real nunca pide cobrar un cheque y devolver la diferencia, ni hacer toda la entrevista por una app de chat.</p>
+        </div>
+      </a>
+      <a href="tarjeta-web-falsa/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="payment-fraud" data-date="2026-07-09">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-card-640.webp 640w, ../../assets/img/hero-guide-card-960.webp 960w, ../../assets/img/hero-guide-card.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-card.webp" alt="He metido mi tarjeta en una web falsa: qué hacer ahora. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">FRAUDE DE PAGO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">He metido mi tarjeta en una web falsa.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Los pasos urgentes: bloquea la tarjeta, revisa los movimientos pendientes y no confirmes ninguna llamada o código posterior.</p>
+        </div>
+      </a>
+      <a href="sms-aeat-falso/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-07-09">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-irs-640.webp 640w, ../../assets/img/hero-guide-irs-960.webp 960w, ../../assets/img/hero-guide-irs.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-irs.webp" alt="Cómo saber si un SMS de la AEAT es falso. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Es falso este SMS de la AEAT?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Urgencia, un supuesto reembolso y un enlace raro. Así son los SMS fraudulentos, y esto es lo que haces con uno.</p>
+        </div>
+      </a>
+      <a href="denunciar-web-fraudulenta/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-07-09">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-report-640.webp 640w, ../../assets/img/hero-guide-report-960.webp 960w, ../../assets/img/hero-guide-report.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-report.webp" alt="Cómo denunciar una web fraudulenta paso a paso. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Cómo denunciar una web fraudulenta.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Qué pruebas guardar y a dónde van exactamente: INCIBE, Google, Microsoft y la marca suplantada.</p>
+        </div>
+      </a>
+      <a href="whatsapp-hackeado/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="account-recovery" data-date="2026-07-09">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-whatsapp-640.webp 640w, ../../assets/img/hero-guide-whatsapp-960.webp 960w, ../../assets/img/hero-guide-whatsapp.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-whatsapp.webp" alt="Cómo recuperar WhatsApp hackeado. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">RECUPERACIÓN</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Te han hackeado WhatsApp.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Vuelve a entrar, revisa los dispositivos vinculados, avisa a tus contactos antes de que caigan también, y blíndalo para siempre.</p>
+        </div>
+      </a>
+      <a href="dominio-falso/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-07-09">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-domain-640.webp 640w, ../../assets/img/hero-guide-domain-960.webp 960w, ../../assets/img/hero-guide-domain.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-domain.webp" alt="Cómo comprobar si un dominio es falso o sospechoso. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Es falso este dominio?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">El candado HTTPS no demuestra nada por sí solo. Las señales reales: el dominio de verdad, su antigüedad y qué te pide la página.</p>
+        </div>
+      </a>
+      <a href="suplantacion-instagram/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="impersonation" data-date="2026-07-09">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-instagram-640.webp 640w, ../../assets/img/hero-guide-instagram-960.webp 960w, ../../assets/img/hero-guide-instagram.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-instagram.webp" alt="Qué hacer si me han suplantado en Instagram. – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SUPLANTACIÓN</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>9 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Alguien te suplanta en Instagram.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Confirma que es suplantación real, guarda pruebas antes de que cambie la cuenta, repórtala y avisa a tus contactos.</p>
+        </div>
+      </a>
+      <a href="estafa-voz-clonada-ia/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="impersonation" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-voice-clone-640.webp 640w, ../../assets/img/hero-guide-voice-clone-960.webp 960w, ../../assets/img/hero-guide-voice-clone.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-voice-clone.webp" alt="Estafa de voz clonada con IA – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">SUPLANTACIÓN</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Esa llamada pidiendo dinero puede ser una IA clonada.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Una voz reconocible ya no demuestra identidad. Cuelga, llama tú a un número conocido y verifica antes de enviar nada.</p>
+        </div>
+      </a>
+      <a href="sextorsion-chantaje/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="extortion" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-sextortion-640.webp 640w, ../../assets/img/hero-guide-sextortion-960.webp 960w, ../../assets/img/hero-guide-sextortion.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-sextortion.webp" alt="Sextorsión y chantaje – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">EXTORSIÓN</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Te amenazan con difundir tus fotos.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">No pagues y no entres en pánico. Esto es exactamente lo que hay que hacer, y dónde denunciarlo gratis.</p>
+        </div>
+      </a>
+      <a href="falso-pedido-amazon/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-amazon-640.webp 640w, ../../assets/img/hero-guide-amazon-960.webp 960w, ../../assets/img/hero-guide-amazon.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-amazon.webp" alt="Falso pedido o reembolso de Amazon – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Ese SMS de pedido de Amazon probablemente es falso.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Una entrega fallida o un reembolso son el cebo. Comprueba tu cuenta real antes de tocar nada.</p>
+        </div>
+      </a>
+      <a href="phishing-paypal/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-paypal-640.webp 640w, ../../assets/img/hero-guide-paypal-960.webp 960w, ../../assets/img/hero-guide-paypal.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-paypal.webp" alt="Phishing de PayPal – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Ese pago de PayPal puede no ser real.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Un pago que solo existe en un email no es un pago. Verifícalo dentro de PayPal antes de enviar nada.</p>
+        </div>
+      </a>
+      <a href="netflix-pago-fallido/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="phishing" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-netflix-640.webp 640w, ../../assets/img/hero-guide-netflix-960.webp 960w, ../../assets/img/hero-guide-netflix.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-netflix.webp" alt="Netflix pago fallado phishing – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Netflix dice que tu pago ha fallado?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Es una de las plantillas de phishing más copiadas que existen. Así se comprueba sin riesgo.</p>
+        </div>
+      </a>
+      <a href="apple-id-bloqueado/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="account-recovery" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-apple-id-640.webp 640w, ../../assets/img/hero-guide-apple-id-960.webp 960w, ../../assets/img/hero-guide-apple-id.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-apple-id.webp" alt="Apple ID o iCloud bloqueado – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">RECUPERACIÓN</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Tu Apple ID no está realmente bloqueado.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">El miedo a perder tus fotos es el gancho. Verifica desde Ajustes o account.apple.com, nunca desde el enlace del email.</p>
+        </div>
+      </a>
+      <a href="falsa-renovacion-antivirus/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="payment-fraud" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-antivirus-640.webp 640w, ../../assets/img/hero-guide-antivirus-960.webp 960w, ../../assets/img/hero-guide-antivirus.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-antivirus.webp" alt="Falsa renovación de Norton o McAfee – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">FRAUDE DE PAGO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Esa renovación de antivirus por 499 € es una estafa.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">La factura es falsa – la llamada es el ataque real. No llames, no instales nada, comprueba tu cuenta directamente.</p>
+        </div>
+      </a>
+      <a href="donacion-falsa-catastrofe/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="donation-scam" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-donation-640.webp 640w, ../../assets/img/hero-guide-donation-960.webp 960w, ../../assets/img/hero-guide-donation.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-donation.webp" alt="Donaciones falsas tras una catástrofe – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">DONACIÓN FALSA</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Verifica una ONG antes de donar tras una catástrofe.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Los estafadores se mueven tan rápido como las organizaciones reales. Así compruebas a dónde va tu dinero.</p>
+        </div>
+      </a>
+      <a href="pago-fuera-airbnb-booking/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="payment-fraud" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-airbnb-640.webp 640w, ../../assets/img/hero-guide-airbnb-960.webp 960w, ../../assets/img/hero-guide-airbnb.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-airbnb.webp" alt="Pago fuera de Airbnb o Booking – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">FRAUDE DE PAGO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Tu anfitrión quiere una transferencia fuera de Airbnb?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Salir de la plataforma significa perder tu protección. Verifica cualquier petición de pago con el soporte oficial primero.</p>
+        </div>
+      </a>
+      <a href="alerta-google-actividad-inusual/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="account-recovery" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-google-alert-640.webp 640w, ../../assets/img/hero-guide-google-alert-960.webp 960w, ../../assets/img/hero-guide-google-alert.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-google-alert.webp" alt="Falsa alerta de actividad inusual de Google – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">RECUPERACIÓN</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>7 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿Es real esa alerta de seguridad de Google?</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Comprueba la actividad real de tu cuenta directamente – nunca desde el enlace o botón del propio email.</p>
+        </div>
+      </a>
+      <a href="pig-butchering-cripto/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="investment-scam" data-date="2026-07-11">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/hero-guide-crypto-investment-640.webp 640w, ../../assets/img/hero-guide-crypto-investment-960.webp 960w, ../../assets/img/hero-guide-crypto-investment.webp 1280w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/hero-guide-crypto-investment.webp" alt="Estafa de inversión cripto tipo pig butchering – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">INVERSIÓN FALSA</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>11 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">¿La app cripto no te deja retirar? Esa es la señal.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Una primera retirada pequeña genera confianza antes de la trampa real. Así funciona el pig butchering.</p>
+        </div>
+      </a>
+      <a href="estafa-bizum/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tags="payment-fraud" data-date="2026-07-15">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/024-guide-clipboard-address-color-swap-transfer-640.webp 640w, ../../assets/img/024-guide-clipboard-address-color-swap-transfer-960.webp 960w, ../../assets/img/024-guide-clipboard-address-color-swap-transfer.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/024-guide-clipboard-address-color-swap-transfer.webp" alt="Estafas por Bizum – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">FRAUDE DE PAGO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>15 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">El Bizum inverso: la estafa de Wallapop y Vinted.</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Recibir dinero por Bizum nunca requiere autorizar nada. Si te piden que confirmes algo, vas a ser tú quien pague.</p>
+        </div>
+      </a>
+      <a href="estafa-entrega-paquetes-proteccion/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tag="PHISHING" data-date="2026-07-17">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/007-general-qr-code-scam-subway-pole-640.webp 640w, ../../assets/img/007-general-qr-code-scam-subway-pole-960.webp 960w, ../../assets/img/007-general-qr-code-scam-subway-pole.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/007-general-qr-code-scam-subway-pole.webp" alt="Estafa de entrega de paquetes: Qué hacer y cómo protegerse – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">PHISHING</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>17 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>6 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Estafa de entrega de paquetes: Qué hacer y cómo protegerse</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Un mensaje sobre un paquete no entregado suele ser una estafa. Aprende a identificar estos intentos de phishing y qué hacer si ya has hecho clic en el enlace.</p>
+        </div>
+      </a>
+      <a href="estafa-cuenta-segura-banco-proteccion/" class="card group bg-surface border border-border rounded-card overflow-hidden flex flex-col hover:-translate-y-0.5 hover:border-accent/50 transition-all duration-300" data-tag="PAYMENT FRAUD" data-date="2026-07-19">
+        <div class="sf-thumb relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img srcset="../../assets/img/009-guide-video-call-stranger-red-flags-check-640.webp 640w, ../../assets/img/009-guide-video-call-stranger-red-flags-check-960.webp 960w, ../../assets/img/009-guide-video-call-stranger-red-flags-check.webp 1200w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw" src="../../assets/img/009-guide-video-call-stranger-red-flags-check.webp" alt="Estafa de la cuenta segura del banco: Cómo actuar ahora – ilustración" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" width="800" height="450" />
+          <div class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-accent border border-accent/30 sf-chip-media px-2 py-1 rounded-full">FRAUDE DE PAGO</div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <div class="flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+          <span>19 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>6 min de lectura</span>
+        </div>
+          <h2 class="font-display mt-2.5 text-[20px] leading-snug font-semibold tracking-tight ul-link inline-block self-start">Estafa de la cuenta segura del banco: Cómo actuar ahora</h2>
+          <p class="mt-3 text-muted-foreground text-[14.5px] leading-[1.7] line-clamp-3">Aprende a identificar y evitar la estafa de la cuenta segura. Protege tus finanzas frente a llamadas fraudulentas que suplantan a tu banco.</p>
+        </div>
+      </a>
+<!-- n8n:card-insert -->
+    </div>
+    <div id="empty" class="hidden mt-10 text-center text-muted-foreground text-[14px]">Ningún artículo coincide con este filtro todavía. <button id="sf-list-clear" type="button" class="text-accent underline underline-offset-2">Limpiar filtros</button></div>
+    <nav id="sf-pagination" class="mt-10 flex items-center justify-between gap-4 border-t border-border pt-6" aria-label="Archive pagination">
+      <button id="sf-page-prev" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span class="hidden sm:inline">Anterior</span>
+      </button>
+      <div id="sf-page-numbers" class="flex items-center gap-1">
+<span class="sf-page" aria-current="page">1</span>
+<a class="sf-page" href="./page-2/">2</a>
+<a class="sf-page" href="./page-3/">3</a>
+<a class="sf-page" href="./page-4/">4</a>
+<a class="sf-page" href="./page-5/">5</a>
+</div>
+      <button id="sf-page-next" type="button" class="sf-page inline-flex items-center gap-1.5 px-3" disabled>
+        <span class="hidden sm:inline">Siguiente</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </nav>
+  </section>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="./" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+<script src="../../assets/hero-fx.js?v=43287f13" defer></script>
+</body>
+</html>
+

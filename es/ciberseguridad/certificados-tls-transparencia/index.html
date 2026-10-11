@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certificados TLS y Certificate Transparency, explicados</title>
+  <meta name="description" content="Qué prueba de verdad un certificado TLS, la cadena de confianza detrás del candado y cómo Certificate Transparency destapa uno mal emitido." />
+  <meta name="keywords" content="certificados TLS explicados, certificate transparency, registros CT, cadena de confianza, certificados DV OV EV, crt.sh" />
+  <link rel="canonical" href="https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/tls-certificate-transparency/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/tls-certificate-transparency/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Certificados TLS y Certificate Transparency, explicados | Breachfolio" />
+  <meta property="og:description" content="Qué prueba de verdad un certificado TLS, la cadena de confianza detrás del candado y cómo Certificate Transparency destapa uno mal emitido." />
+  <meta property="og:url" content="https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-tls-ct.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Certificados TLS y Certificate Transparency, explicados | Breachfolio" />
+  <meta name="twitter:description" content="Qué prueba de verdad un certificado TLS, la cadena de confianza detrás del candado y cómo Certificate Transparency destapa uno mal emitido." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-tls-ct.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 1966,
+        "height": 373
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Certificados TLS y Certificate Transparency, explicados",
+      "description": "Qué prueba realmente un certificado TLS, la cadena de confianza detrás del candado y cómo los registros de Certificate Transparency hacen imposible ocultar un certificado mal emitido.",
+      "image": "https://breachfolio.com/assets/img/hero-tls-ct.webp",
+      "datePublished": "2026-07-22",
+      "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" },
+      "inLanguage": "es",
+      "keywords": "certificados TLS explicados, certificate transparency, registros CT, cadena de confianza, certificados DV OV EV, crt.sh"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Ciberseguridad", "item": "https://breachfolio.com/es/ciberseguridad/" },
+        { "@type": "ListItem", "position": 3, "name": "Certificados TLS y Certificate Transparency", "item": "https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ciberseguridad/certificados-tls-transparencia/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿El icono del candado significa que un sitio web es seguro?", "acceptedAnswer": { "@type": "Answer", "text": "No. El candado significa que la conexión está cifrada y que una autoridad de certificación verificó que quien solicitó el certificado controlaba ese dominio en ese momento – nada más. No dice nada sobre quién registró el dominio, desde cuándo, ni si el sitio es una estafa. Cualquier dominio, incluido un dominio de phishing registrado hace cinco minutos, puede conseguir en segundos un certificado gratuito, válido y con su candado de Let's Encrypt. La antigüedad del dominio y su reputación, no el candado, son lo que de verdad indica confianza." } },
+        { "@type": "Question", "name": "¿Cuál es la diferencia entre los certificados DV, OV y EV?", "acceptedAnswer": { "@type": "Answer", "text": "Los certificados Domain Validated (DV) solo demuestran el control del dominio y se emiten automáticamente en minutos, a menudo gratis. Los certificados Organization Validated (OV) además verifican la existencia legal de la empresa que los solicita, mediante comprobaciones manuales contra registros mercantiles. Los certificados Extended Validation (EV) exigen la verificación más profunda: identidad legal, dirección física y existencia operativa. Los navegadores solían mostrar los certificados EV con una barra de direcciones verde y el nombre de la empresa, pero ese tratamiento visual especial se eliminó de Chrome y la mayoría de los grandes navegadores a partir de 2019 porque los estudios mostraron que los usuarios casi nunca se fijaban en él – hoy los tres tipos se muestran de forma idéntica, como un simple candado." } },
+        { "@type": "Question", "name": "¿Por qué existe Certificate Transparency?", "acceptedAnswer": { "@type": "Answer", "text": "Certificate Transparency se creó después de incidentes reales en los que autoridades de certificación emitieron certificados válidos para dominios sin el conocimiento ni el consentimiento del propietario – sobre todo la vulneración en 2011 de la CA holandesa DigiNotar, que emitió un certificado fraudulento para google.com usado después para interceptar tráfico en Irán. Antes de CT, un certificado mal emitido podía existir durante meses sin que el propietario real del dominio tuviera forma de descubrirlo. Los registros de CT convierten todo certificado de confianza pública en un registro público y a prueba de manipulación en el momento en que se emite, de modo que cualquiera puede vigilar sus propios dominios en busca de certificados que nunca solicitó." } },
+        { "@type": "Question", "name": "¿Puede un registro de Certificate Transparency mentir o eliminar una entrada?", "acceptedAnswer": { "@type": "Answer", "text": "No sin que lo descubran. Los registros de CT se construyen como árboles de Merkle de solo adición: cada entrada nueva queda encadenada criptográficamente a todo lo anterior, así que alterar o eliminar una entrada pasada cambiaría el hash raíz del árbol de una forma matemáticamente detectable. Auditores y monitores independientes cotejan continuamente los registros entre sí precisamente para detectar este tipo de manipulación, y un registro sorprendido comportándose mal pierde la confianza de los navegadores. Ninguna parte, incluido el propio operador del registro, puede reescribir la historia en silencio." } },
+        { "@type": "Question", "name": "¿Cómo vigilo los registros de Certificate Transparency de mi propio dominio?", "acceptedAnswer": { "@type": "Answer", "text": "La forma más simple es una comprobación manual periódica en crt.sh, buscando %.tudominio.com para ver todos los certificados jamás registrados para él. Para una vigilancia continua, servicios gratuitos como la herramienta de monitorización de CT de Facebook o watchers al estilo cert-manager pueden avisarte por correo o webhook en cuanto aparezca un certificado nuevo de tu dominio en cualquier registro público, así te enteras de un certificado mal emitido u olvidado en minutos en lugar de meses." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Ciberseguridad</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Certificados TLS y Certificate Transparency</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/hero-tls-ct.webp" alt="Una barrera translúcida y cifrada que separa el tráfico de red de confianza del que no lo es – certificados TLS y Certificate Transparency" data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CIBERSEGURIDAD · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Certificados TLS y Certificate Transparency, explicados.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Qué prueba realmente un certificado, la cadena de confianza detrás del candado y cómo los registros de Certificate Transparency hacen imposible ocultar un certificado mal emitido.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>22 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>El icono del candado en la barra de direcciones del navegador es uno de los símbolos peor interpretados de internet. La mayoría lo lee como «este sitio es seguro». Lo que en realidad significa es mucho más limitado: <strong>la conexión con este dominio está cifrada, y una autoridad de certificación confirmó que quien solicitó este certificado controlaba el dominio en el momento en que lo pidió.</strong> Eso es todo. Un dominio de phishing registrado hace noventa segundos puede tener un certificado perfectamente válido y con su candado –gratuito, automático y emitido en menos de un minuto por Let's Encrypt. Entender qué certifica realmente un certificado TLS, y cómo <strong>Certificate Transparency</strong> mantiene honesto a todo el sistema, es la diferencia entre confiar en un símbolo y confiar en un sistema que de verdad comprendes.</p>
+
+<h2>Qué es en realidad un certificado</h2>
+
+<p>Un certificado TLS es un pequeño archivo firmado criptográficamente que vincula una clave pública a un nombre de dominio. Cuando te conectas a un sitio por HTTPS, el servidor presenta su certificado; tu navegador comprueba que la firma se remonta a una <strong>autoridad de certificación raíz (CA)</strong> en la que ya confía, y que el nombre de dominio del certificado coincide con el que estás visitando. Si ambas comprobaciones se superan, tu navegador puede usar la clave pública del certificado para establecer un canal cifrado –cuya mecánica cubrimos en <a href="../como-funcionan-las-redes/">cómo funcionan las redes</a>, donde se recorre paso a paso un handshake TLS completo.</p>
+
+<p>Lo que el certificado <em>no</em> es es una verificación de antecedentes sobre el propietario del sitio, sus intenciones o su fiabilidad. Prueba el control del dominio en el momento de la emisión, y punto. Esa distinción importa más que casi cualquier otro dato de este artículo.</p>
+
+<h2>La cadena de confianza</h2>
+
+<p>Ningún navegador confía directamente en el certificado de un sitio web. En vez de eso, la confianza fluye por una cadena, donde cada eslabón firma al que tiene debajo:</p>
+
+<table>
+  <thead>
+    <tr><th>Eslabón</th><th>Función</th><th>Ejemplo</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>CA raíz</td><td>El ancla de confianza definitiva. Su certificado viene preinstalado en el almacén de confianza de tu sistema operativo y navegador. Se mantiene fuera de línea y se usa rara vez, precisamente porque comprometerla sería catastrófico.</td><td>ISRG Root X1 (Let's Encrypt), DigiCert Global Root</td></tr>
+    <tr><td>CA intermedia</td><td>Firmada por la raíz, se usa para la emisión de certificados del día a día. Si una intermedia se ve comprometida alguna vez, se puede revocar sin tocar la raíz.</td><td>R10/R11 (las intermedias emisoras de Let's Encrypt)</td></tr>
+    <tr><td>Certificado hoja / de entidad final</td><td>El certificado que un sitio web concreto presenta realmente a tu navegador. Firmado por una intermedia, válido para un dominio (o una lista corta de dominios/subdominios).</td><td>El propio certificado de breachfolio.com</td></tr>
+  </tbody>
+</table>
+
+<p>Tu navegador verifica esta cadena eslabón por eslabón, hasta llegar a una raíz en la que ya confía. Rompe cualquier eslabón –una intermedia caducada, una firma que no verifica, un dominio que no coincide– y obtienes el aviso de «la conexión no es privada» en vez de un candado.</p>
+
+<h2>DV, OV y EV: tres niveles de verificación, un candado idéntico</h2>
+
+<p>No todos los certificados implican la misma cantidad de comprobación, aunque el candado resultante se vea igual para casi todo el mundo:</p>
+
+<table>
+  <thead>
+    <tr><th>Tipo</th><th>Qué se verifica</th><th>Cuánto tarda</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>DV:</strong> Domain Validated (validado de dominio)</td><td>Solo que quien lo solicita controla el dominio (mediante un registro DNS o un archivo en el servidor web). Ninguna comprobación de identidad.</td><td>Segundos a minutos, a menudo automatizado y gratuito (Let's Encrypt)</td></tr>
+    <tr><td><strong>OV:</strong> Organization Validated (validado de organización)</td><td>Control del dominio, más la existencia legal de la organización solicitante, comprobada contra registros mercantiles.</td><td>Horas a unos pocos días, revisión manual, de pago</td></tr>
+    <tr><td><strong>EV:</strong> Extended Validation (validación extendida)</td><td>La comprobación más profunda: identidad legal, dirección física, existencia operativa, verificación telefónica.</td><td>Días, la revisión más manual, el más caro</td></tr>
+  </tbody>
+</table>
+
+<p>Durante años, los certificados EV obtenían una recompensa visible: una barra de direcciones verde que mostraba el nombre legal de la empresa. A partir de 2019, Chrome y la mayoría de los grandes navegadores retiraron discretamente ese trato especial, después de que estudios de usabilidad descubrieran que casi nadie se fijaba en ello ni lo entendía. Hoy los tres tipos de certificado se muestran como el mismo candado neutro –lo que significa que el candado por sí solo nunca te ha dicho tan poco sobre con quién estás hablando en realidad como te dice ahora mismo. <strong>Esta es también la razón exacta por la que el dominio y el historial de DNS importan más que el propio certificado</strong> a la hora de juzgar un sitio: consulta <a href="../investigar-un-dominio-sospechoso/">investigar un dominio sospechoso</a> para el flujo de trabajo completo.</p>
+
+<h2>Por qué existe Certificate Transparency</h2>
+
+<p>El modelo de cadena de confianza tiene una debilidad incómoda: depende por completo de que las autoridades de certificación se comporten correctamente, y durante la mayor parte de la historia de TLS no había forma fiable de comprobar que lo hicieran. Si una CA –por un compromiso, coacción o simple error– emitía un certificado de un dominio a alguien que en realidad no lo poseía, el propietario real del dominio no tenía forma de enterarse. El caso de estudio más claro es <strong>DigiNotar</strong>, una CA holandesa vulnerada en 2011. El atacante emitió un certificado fraudulento y totalmente válido para <code>*.google.com</code>, que después se observó siendo usado para interceptar tráfico HTTPS hacia Gmail en Irán. DigiNotar no tenía ni idea de que ese certificado existiera hasta que investigadores lo encontraron siendo usado activamente contra usuarios reales.</p>
+
+<p><strong>Certificate Transparency (CT)</strong>, propuesto poco después y hoy obligatorio para cualquier certificado que un navegador mayoritario vaya a confiar, cierra ese punto ciego. Todo certificado de confianza pública debe registrarse ahora en uno o más registros independientes, públicos y de solo adición (append-only) antes de que un navegador lo acepte –lo que significa que todo certificado jamás emitido para tu dominio es ahora un registro público y consultable, lo hayas solicitado tú o no.</p>
+
+<h2>Cómo funciona en realidad un registro de CT</h2>
+
+<p>Un registro de CT se construye como un <strong>árbol de Merkle</strong>: cada certificado nuevo enviado al registro se convierte en una hoja, y cada hoja se combina mediante hash con sus vecinas, capa tras capa, hasta un único hash raíz que representa todas las entradas que el registro ha contenido jamás. Cambia o elimina una sola entrada pasada y el hash raíz también cambia –un desajuste que cualquiera puede detectar comparando hashes. Esto es lo que «de solo adición» y «a prueba de manipulación» significan en la práctica: no es una promesa que hace el operador del registro, es una propiedad que impone la matemática.</p>
+
+<p>Cuando una CA envía un certificado a un registro, el registro devuelve un <strong>Signed Certificate Timestamp (SCT):</strong> un recibo criptográfico que demuestra que el certificado se registró en un momento concreto. Los navegadores comprueban que exista un SCT válido (o varios, de registros independientes) antes de confiar en un certificado siquiera. Sin SCT, no hay confianza, sin importar lo legítimo que parezca el certificado por lo demás. Varios registros gestionados por organizaciones distintas y sin relación entre sí (Google, Cloudflare, DigiCert, Sectigo y otras) se supervisan mutuamente precisamente para que ningún operador pueda falsificar la historia en silencio sin que los demás se den cuenta.</p>
+
+<h3>Leer registros de CT tú mismo, con crt.sh</h3>
+
+<p>No necesitas ningún acceso especial para consultar estos datos: son públicos por diseño. <a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a> es la interfaz más fácil, consultable desde el navegador o la línea de comandos:</p>
+
+<pre tabindex="0"><code># Todos los certificados jamás registrados para un dominio, incluidos subdominios
+$ curl -s "https://crt.sh/?q=%25.example.com&output=json" \
+    | jq -r '.[] | "\(.not_before)  \(.name_value)"' \
+    | sort -u
+2024-02-11T00:00:00  api.example.com
+2023-08-03T00:00:00  mail.example.com
+2026-01-14T00:00:00  vpn.example.com</code></pre>
+
+<p>Esa misma consulta es exactamente lo que impulsa la técnica de enumeración pasiva de subdominios descrita en <a href="../dominios-y-subdominios/">dominios vs subdominios</a>: los registros de CT filtran infraestructura que nadie pretendía publicar, porque cada certificado nombra todos los nombres de host que cubre. Para un solo dominio, una búsqueda en el navegador en <code>crt.sh/?q=example.com</code> funciona igual de bien y no necesita ninguna herramienta.</p>
+
+<h2>Vigilar tu propio dominio</h2>
+
+<p>La utilidad práctica de CT no es solo la investigación histórica: es un sistema de alerta temprana. Como todo certificado nuevo de tu dominio se registra públicamente a los pocos minutos de su emisión, puedes vigilar la aparición de certificados que nunca solicitaste, una de las señales más claras posibles de una zona DNS comprometida, un subdominio secuestrado o una CA a la que engañaron para que emitiera algo que no debía.</p>
+
+<ul>
+  <li><strong>Comprobación manual periódica:</strong> busca <code>crt.sh/?q=tudominio.com</code> de vez en cuando y revisa si hay nombres que no reconoces.</li>
+  <li><strong>Vigilancia automatizada:</strong> servicios gratuitos de monitorización de CT (la herramienta de monitorización de CT de Facebook, watchers al estilo cert-manager, o un script programado que consulte la API JSON de crt.sh) pueden avisarte en cuanto aparezca un certificado nuevo, convirtiendo un descubrimiento que antes tardaba meses en uno que tarda minutos.</li>
+</ul>
+
+<p>Esto cierra el círculo que DigiNotar dejó al descubierto: un certificado mal emitido todavía puede ocurrir, pero ya no puede ocurrir en silencio.</p>
+
+<h2>La conclusión</h2>
+
+<p>Un certificado TLS demuestra el control de un dominio en un momento dado –nada sobre intención, reputación o seguridad. La cadena de confianza que hay detrás depende de que las autoridades de certificación actúen con honestidad, que es precisamente la suposición que Certificate Transparency se construyó para dejar de dar por hecho: todo certificado, de toda CA, es ahora público, a prueba de manipulación y consultable a los pocos minutos de su emisión. Lee el candado por lo que realmente dice, no por lo que a menudo se asume que significa, y trata los registros de CT como una señal real más –junto con la antigüedad del dominio, el historial de WHOIS y los registros DNS– a la hora de decidir si un sitio es lo que dice ser.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿El icono del candado significa que un sitio web es seguro?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. El candado significa que la conexión está cifrada y que una autoridad de certificación verificó que quien solicitó el certificado controlaba ese dominio en ese momento – nada más. No dice nada sobre quién registró el dominio, desde cuándo, ni si el sitio es una estafa. Cualquier dominio, incluido un dominio de phishing registrado hace cinco minutos, puede conseguir en segundos un certificado gratuito, válido y con su candado de Let's Encrypt. La antigüedad del dominio y su reputación, no el candado, son lo que de verdad indica confianza.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cuál es la diferencia entre los certificados DV, OV y EV?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Los certificados Domain Validated (DV) solo demuestran el control del dominio y se emiten automáticamente en minutos, a menudo gratis. Los certificados Organization Validated (OV) además verifican la existencia legal de la empresa que los solicita, mediante comprobaciones manuales contra registros mercantiles. Los certificados Extended Validation (EV) exigen la verificación más profunda: identidad legal, dirección física y existencia operativa. Los navegadores solían mostrar los certificados EV con una barra de direcciones verde y el nombre de la empresa, pero ese tratamiento visual especial se eliminó de Chrome y la mayoría de los grandes navegadores a partir de 2019 porque los estudios mostraron que los usuarios casi nunca se fijaban en él – hoy los tres tipos se muestran de forma idéntica, como un simple candado.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué existe Certificate Transparency?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Certificate Transparency se creó después de incidentes reales en los que autoridades de certificación emitieron certificados válidos para dominios sin el conocimiento ni el consentimiento del propietario – sobre todo la vulneración en 2011 de la CA holandesa DigiNotar, que emitió un certificado fraudulento para google.com usado después para interceptar tráfico en Irán. Antes de CT, un certificado mal emitido podía existir durante meses sin que el propietario real del dominio tuviera forma de descubrirlo. Los registros de CT convierten todo certificado de confianza pública en un registro público y a prueba de manipulación en el momento en que se emite, de modo que cualquiera puede vigilar sus propios dominios en busca de certificados que nunca solicitó.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Puede un registro de Certificate Transparency mentir o eliminar una entrada?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No sin que lo descubran. Los registros de CT se construyen como árboles de Merkle de solo adición: cada entrada nueva queda encadenada criptográficamente a todo lo anterior, así que alterar o eliminar una entrada pasada cambiaría el hash raíz del árbol de una forma matemáticamente detectable. Auditores y monitores independientes cotejan continuamente los registros entre sí precisamente para detectar este tipo de manipulación, y un registro sorprendido comportándose mal pierde la confianza de los navegadores. Ninguna parte, incluido el propio operador del registro, puede reescribir la historia en silencio.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Cómo vigilo los registros de Certificate Transparency de mi propio dominio?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          La forma más simple es una comprobación manual periódica en crt.sh, buscando %.tudominio.com para ver todos los certificados jamás registrados para él. Para una vigilancia continua, servicios gratuitos como la herramienta de monitorización de CT de Facebook o watchers al estilo cert-manager pueden avisarte por correo o webhook en cuanto aparezca un certificado nuevo de tu dominio en cualquier registro público, así te enteras de un certificado mal emitido u olvidado en minutos en lugar de meses.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../dominios-y-subdominios/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Dominios vs subdominios: cómo enumerarlos</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../investigar-un-dominio-sospechoso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Investigar un dominio sospechoso: workflow</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../que-es-whois/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Qué es WHOIS y cómo leerlo</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Ciberseguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

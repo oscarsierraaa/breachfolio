@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace">
+<defs>
+  <pattern id="mcpgrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="hsl(0 0% 100% / 0.05)" stroke-width="1"/></pattern>
+  <radialGradient id="mcpglow" cx="0.5" cy="0.45" r="0.6"><stop offset="0%" stop-color="hsl(190 90% 52%)" stop-opacity="0.26"/><stop offset="55%" stop-color="hsl(190 90% 52%)" stop-opacity="0.05"/><stop offset="100%" stop-color="hsl(190 90% 52%)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="mcpserverglow" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="hsl(262 83% 68%)" stop-opacity="0.32"/><stop offset="60%" stop-color="hsl(262 83% 68%)" stop-opacity="0.06"/><stop offset="100%" stop-color="hsl(262 83% 68%)" stop-opacity="0"/></radialGradient>
+  <marker id="mcparrowc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="hsl(190 90% 52%)"/></marker>
+  <marker id="mcparrowp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="hsl(262 83% 68%)"/></marker>
+</defs>
+
+<rect width="800" height="400" fill="hsl(240 10% 4%)"/>
+<rect width="800" height="400" fill="url(#mcpgrid)"/>
+<ellipse cx="400" cy="210" rx="420" ry="240" fill="url(#mcpglow)"/>
+<ellipse cx="400" cy="205" rx="120" ry="120" fill="url(#mcpserverglow)"/>
+
+<!-- boxes -->
+<rect x="40" y="170" width="160" height="72" rx="10" fill="hsl(240 10% 4%)" stroke="hsl(190 90% 52%)" stroke-width="2.5"/>
+<text x="120" y="200" text-anchor="middle" font-size="13" fill="hsl(190 90% 52%)" letter-spacing="1">AGENT /</text>
+<text x="120" y="218" text-anchor="middle" font-size="13" fill="hsl(190 90% 52%)" letter-spacing="1">LLM CLIENT</text>
+
+<rect x="325" y="164" width="150" height="84" rx="10" fill="hsl(240 10% 4%)" stroke="hsl(262 83% 68%)" stroke-width="3"/>
+<text x="400" y="202" text-anchor="middle" font-size="14" fill="hsl(262 83% 68%)" letter-spacing="1">MCP</text>
+<text x="400" y="220" text-anchor="middle" font-size="14" fill="hsl(262 83% 68%)" letter-spacing="1">SERVER</text>
+
+<rect x="600" y="170" width="160" height="72" rx="10" fill="hsl(240 10% 4%)" stroke="hsl(190 90% 52%)" stroke-width="2.5"/>
+<text x="680" y="200" text-anchor="middle" font-size="13" fill="hsl(190 90% 52%)" letter-spacing="1">TOOL / DATA</text>
+<text x="680" y="218" text-anchor="middle" font-size="13" fill="hsl(190 90% 52%)" letter-spacing="1">SOURCE</text>
+
+<!-- protocol flow arrows -->
+<path d="M200 188 L323 188" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.2" opacity="0.85" marker-end="url(#mcparrowc)"/>
+<text x="261" y="180" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">tool call</text>
+
+<path d="M323 226 L200 226" fill="none" stroke="hsl(262 83% 68%)" stroke-width="2.2" opacity="0.9" marker-end="url(#mcparrowp)"/>
+<text x="261" y="244" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">tool result</text>
+
+<path d="M475 188 L598 188" fill="none" stroke="hsl(190 90% 52%)" stroke-width="2.2" opacity="0.85" marker-end="url(#mcparrowc)"/>
+<text x="536" y="180" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">invoke</text>
+
+<path d="M598 226 L475 226" fill="none" stroke="hsl(262 83% 68%)" stroke-width="2.2" opacity="0.9" marker-end="url(#mcparrowp)"/>
+<text x="536" y="244" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.8" letter-spacing="1">raw data</text>
+
+<!-- attack callouts -->
+<path d="M261 252 C 261 296, 240 300, 190 316" fill="none" stroke="hsl(262 83% 68%)" stroke-width="1.6" stroke-dasharray="2 5" opacity="0.75"/>
+<circle cx="261" cy="252" r="3.5" fill="hsl(262 83% 68%)"/>
+<rect x="70" y="308" width="220" height="34" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(262 83% 68%)" stroke-width="1.6"/>
+<text x="180" y="330" text-anchor="middle" font-size="11.5" fill="hsl(262 83% 68%)" letter-spacing="0.5">malicious tool description</text>
+
+<path d="M536 252 C 536 292, 560 298, 610 314" fill="none" stroke="hsl(262 83% 68%)" stroke-width="1.6" stroke-dasharray="2 5" opacity="0.75"/>
+<circle cx="536" cy="252" r="3.5" fill="hsl(262 83% 68%)"/>
+<rect x="510" y="306" width="200" height="34" rx="7" fill="hsl(240 9% 9%)" stroke="hsl(262 83% 68%)" stroke-width="1.6"/>
+<text x="610" y="328" text-anchor="middle" font-size="11.5" fill="hsl(262 83% 68%)" letter-spacing="0.5">poisoned tool output</text>
+
+<!-- trust boundary labels -->
+<text x="120" y="146" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="2">TRUSTED</text>
+<text x="400" y="140" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.85" letter-spacing="2">TRUST BOUNDARY</text>
+<text x="680" y="146" text-anchor="middle" font-size="10.5" fill="hsl(240 5% 65%)" opacity="0.7" letter-spacing="2">UNTRUSTED</text>
+
+<g font-size="12" letter-spacing="3" font-weight="500">
+  <text x="24" y="34" fill="hsl(190 90% 52%)" opacity="0.95">AI / MCP ATTACK SURFACE</text>
+  <text x="24" y="392" fill="hsl(240 5% 65%)" opacity="0.6">CLIENT -&gt; SERVER -&gt; TOOL, EVERY LINK A TRUST DECISION</text>
+  <text x="776" y="392" text-anchor="end" fill="hsl(240 5% 65%)" opacity="0.4">BREACHFOLIO</text>
+</g>
+<circle cx="776" cy="30" r="4" fill="hsl(190 90% 52%)"/>
+<circle cx="776" cy="30" r="9" fill="hsl(190 90% 52%)" opacity="0.25"/>
+</svg>

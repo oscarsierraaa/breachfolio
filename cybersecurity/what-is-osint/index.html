@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What is OSINT? Tools and workflow | Breachfolio</title>
+  <meta name="description" content="OSINT turns open, public sources into intelligence, not hacking. The intelligence cycle, -INT disciplines, legal limits, OPSEC, a workflow and real tools." />
+  <meta name="keywords" content="what is osint" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/que-es-osint/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/what-is-osint/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="What is OSINT? Tools and workflow | Breachfolio" />
+  <meta property="og:description" content="OSINT turns open, public sources into intelligence, not hacking. The intelligence cycle, -INT disciplines, legal limits, OPSEC, a workflow and real tools." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/what-is-osint/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-osint.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What is OSINT? Tools and workflow | Breachfolio" />
+  <meta name="twitter:description" content="OSINT turns open, public sources into intelligence, not hacking. The intelligence cycle, -INT disciplines, legal limits, OPSEC, a workflow and real tools." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-osint.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What is OSINT? Tools and workflow",
+      "description": "OSINT turns open, public sources into intelligence, not hacking. The intelligence cycle, -INT disciplines, legal limits, OPSEC, a workflow and real tools.",
+      "image": "https://breachfolio.com/assets/img/hero-osint.webp",
+      "datePublished": "2026-07-16",
+      "dateModified": "2026-07-16",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/what-is-osint/" },
+      "inLanguage": "en",
+      "keywords": "what is osint"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "What is OSINT", "item": "https://breachfolio.com/cybersecurity/what-is-osint/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/what-is-osint/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is OSINT legal?", "acceptedAnswer": { "@type": "Answer", "text": "Collecting information from genuinely open, public sources is legal in most places, and OSINT never involves breaking into systems. But \"public\" does not mean \"unrestricted\": scraping can breach a platform's terms of service, and privacy laws like the GDPR still apply to personal data even when you found it on a public page – you need a lawful purpose, and you should collect only what your question requires. The line you must never cross is intrusion: the moment you use a credential that is not yours, submit a form to probe for flaws, or touch anything behind authentication, you have left OSINT and likely broken computer-misuse law." } },
+        { "@type": "Question", "name": "What is the difference between OSINT and reconnaissance?", "acceptedAnswer": { "@type": "Answer", "text": "They overlap but are not the same. OSINT is passive by default – you read what third parties and the target have already published, without necessarily touching the target. Reconnaissance, in a pentest sense, is a phase of an authorised security engagement that starts passive (often using OSINT) and then goes active: resolving subdomains against the target, port-scanning, fingerprinting live services. OSINT is a technique; reconnaissance is a phase that uses OSINT and then goes further, only ever inside a signed scope." } },
+        { "@type": "Question", "name": "What are the best free OSINT tools to start with?", "acceptedAnswer": { "@type": "Answer", "text": "For infrastructure, learn crt.sh for subdomains, WHOIS for registration, and the Wayback Machine for history. For exposed devices, Shodan and Censys both have free tiers. For safe URL analysis, urlscan.io and web-check.xyz. For reputation, VirusTotal, the abuse.ch family, and GreyNoise. For people and usernames, Have I Been Pwned, Sherlock, and WhatsMyName. Use the OSINT Framework as a directory to find the right tool for any data type, and SpiderFoot to automate collection once you understand the pieces." } },
+        { "@type": "Question", "name": "What is SOCMINT?", "acceptedAnswer": { "@type": "Answer", "text": "SOCMINT – Social Media Intelligence – is the branch of OSINT focused specifically on social platforms: profiles, posts, connections, and the metadata around them. It is usually treated as part of OSINT because the data is public, but it gets its own name because it carries distinct privacy and ethical risks – you are handling real people's data – and demands extra care around lawful basis, data minimisation, and not deceiving people in ways that stray into other disciplines. We will cover the -INT disciplines, including SOCMINT, in a dedicated article." } },
+        { "@type": "Question", "name": "How do OSINT investigators stay anonymous?", "acceptedAnswer": { "@type": "Answer", "text": "Through OPSEC. They research from dedicated \"sock puppet\" accounts rather than their real profiles, work inside an isolated virtual machine or a separate browser profile so their real cookies and logins never leak, and route traffic through a VPN (or Tor for sensitive work) so their real IP never lands in a target's logs. Crucially, they avoid interacting with the target at all – no likes, follows, or logins – preferring passive third-party datasets, and they document evidence carefully while minimising the personal data they retain." } },
+        { "@type": "Question", "name": "Is OSINT the same as the OSINT Framework?", "acceptedAnswer": { "@type": "Answer", "text": "No. OSINT is the discipline: the whole practice of turning open sources into intelligence. The OSINT Framework (osintframework.com) is just one specific resource: a categorised directory that points you to tools and sites for different data types. It is a map of the landscape, not the landscape itself, and it does not collect anything on its own. Think of OSINT as the craft and the OSINT Framework as one reference you keep bookmarked while practising it." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">What is OSINT</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-osint.webp" alt="What is OSINT? Tools and workflow." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · OSINT</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">What is OSINT? Tools and workflow.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">OSINT turns open, public sources into intelligence, not hacking. The intelligence cycle, -INT disciplines, legal limits, OPSEC, a workflow and real tools.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 16, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>14 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>OSINT sounds like a hacking discipline and mostly is not. <strong>Open-Source Intelligence</strong> is the craft of turning information that is <em>already public</em> – a domain registration, a certificate transparency log, a job posting, the metadata baked into a photo – into an answer to a specific question. No exploits. No logins you were not given. No touching systems you have no right to touch. This article is the front door to a whole cluster of investigation guides, so we will keep it broad but concrete: what OSINT is, the process behind it, where the legal line sits, how to protect yourself while you work, and the real tools that do the collecting.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 356" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="31" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Direction</text><path d="M 192 53 L 192 72" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 68 L 192 73 L 196 68" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="78" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="78" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="107" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Collection</text><path d="M 192 129 L 192 148" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 144 L 192 149 L 196 144" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="154" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="154" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="183" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Processing</text><path d="M 192 205 L 192 224" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 220 L 192 225 L 196 220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="230" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="230" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="259" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Analysis</text><path d="M 192 281 L 192 300" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 296 L 192 301 L 196 296" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="306" width="360" height="48" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="306" width="4" height="48" rx="2" fill="hsl(var(--accent))"/><text x="36" y="335" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Dissemination</text></svg>
+        <figcaption>The intelligence cycle applied to OSINT – it loops back to Direction.</figcaption>
+      </figure>
+      <h2>What OSINT is – and what it is not</h2>
+
+<p>The word "intelligence" is doing the heavy lifting. OSINT is not "stuff you found on Google." It is the disciplined process of collecting open information, verifying it, connecting it, and producing an assessment someone can act on. A raw list of subdomains is data. "This organisation exposes a forgotten staging server on an outdated CMS, and here is the evidence" is intelligence.</p>
+
+<p>"Open source" here has nothing to do with open-source software. It means the source is <strong>openly available</strong> to anyone: public websites, DNS records, court filings, company registries, social media, image and video, leaked-and-now-public breach data, satellite imagery. If you need a password, an exploit, or a court order to see it, it is not open source, and collecting it is not OSINT.</p>
+
+<p>Just as important is what OSINT is <strong>not</strong>:</p>
+
+<ul>
+  <li><strong>It is not intrusion.</strong> Reading a public page is OSINT. Logging into an account that is not yours, brute-forcing a form, or probing for vulnerabilities is not: that crosses into unauthorised access, which is a crime in most jurisdictions.</li>
+  <li><strong>It is not "hacking."</strong> There is no exploitation of a flaw. You are reading what the target chose (or forgot) to publish.</li>
+  <li><strong>It is not automatically anonymous or consequence-free.</strong> Some collection touches the target's servers and can be logged. More on that below.</li>
+</ul>
+
+<h2>The intelligence cycle, applied to OSINT</h2>
+
+<p>Professional intelligence work follows a loop, and OSINT is no exception. Naming the stages keeps you honest: it stops "poke around until something turns up" from masquerading as an investigation.</p>
+
+<ol>
+  <li><strong>Direction.</strong> Define the question. "Is this domain impersonating our brand?" is answerable. "Tell me everything about this company" is not. A sharp question decides which sources matter and when you are done.</li>
+  <li><strong>Collection.</strong> Gather raw material from open sources – WHOIS records, certificates, archived pages, social profiles, images. This is where the tools live, and where most beginners spend all their time.</li>
+  <li><strong>Processing.</strong> Turn the pile into something workable: normalise formats, de-duplicate, translate, extract entities (names, domains, IPs, emails), timestamp everything. Screenshot and hash what you find, because pages change and get deleted.</li>
+  <li><strong>Analysis.</strong> Connect the dots, weigh source reliability, look for corroboration, and separate what you <em>know</em> from what you <em>infer</em>. One source is a lead; two independent sources is a finding.</li>
+  <li><strong>Dissemination.</strong> Report it to whoever needs to act – in a form they can use, with the evidence attached and the confidence level stated plainly.</li>
+</ol>
+
+<p>It is a cycle because dissemination usually raises new questions, which feed back into direction. Good investigators go around the loop many times on small, tight questions rather than once on a vague one.</p>
+
+<h2>Where OSINT sits among the -INT disciplines</h2>
+
+<p>Intelligence is traditionally split into "collection disciplines," each abbreviated with an <code>-INT</code> suffix. OSINT is one of several, and knowing the neighbours helps you see its edges:</p>
+
+<ul>
+  <li><strong>OSINT – Open-Source Intelligence.</strong> From publicly available sources. The subject of this article.</li>
+  <li><strong>HUMINT – Human Intelligence.</strong> From people, through conversation, interviews, or social engineering. Talking a receptionist into revealing a schedule is HUMINT, not OSINT.</li>
+  <li><strong>SIGINT – Signals Intelligence.</strong> From intercepted communications and electronic signals. The domain of intelligence agencies, not open investigators.</li>
+  <li><strong>GEOINT – Geospatial Intelligence.</strong> From imagery and geographic data – satellite photos, maps, the location clues inside a picture. OSINT and GEOINT overlap heavily when you geolocate a photo.</li>
+  <li><strong>SOCMINT – Social Media Intelligence.</strong> From social platforms specifically. Usually treated as a sub-branch of OSINT because the data is public, but distinct enough to have its own name and its own privacy pitfalls.</li>
+</ul>
+
+<p>OSINT is the broad, mostly-legal umbrella most defenders and researchers work under, borrowing GEOINT and SOCMINT techniques along the way. A dedicated article on the intelligence disciplines is coming; for now, remember OSINT is the one built entirely from what is already open.</p>
+
+<h2>The legal and ethical line</h2>
+
+<p>This is the part beginners skip and professionals obsess over. "Publicly accessible" and "legal to collect, store, and act on" are not the same statement, and getting this wrong turns research into liability.</p>
+
+<h3>Passive vs active collection</h3>
+
+<p><strong>Passive</strong> collection reads data from third parties without touching the target – querying WHOIS, browsing certificate transparency logs, reading an archived page from the Wayback Machine. The target has no way to know you looked. <strong>Active</strong> collection touches the target's own infrastructure – visiting its site, resolving its subdomains against it, port-scanning. It can be logged, and heavy active collection starts to look like reconnaissance for an attack. Know which mode you are in at every step. When in doubt, prefer the passive path and third-party datasets.</p>
+
+<h3>Terms of service, robots, and the law</h3>
+
+<ul>
+  <li><strong>Respect Terms of Service and robots directives.</strong> Automated scraping of a platform often breaches its ToS even when the data is public. That can get your accounts banned and, in some jurisdictions, carry legal weight.</li>
+  <li><strong>Privacy law applies to open data.</strong> Under the GDPR (and similar regimes), a person's name, email, IP, or photo is personal data even if you found it on a public page. Collecting and storing it needs a lawful basis, a purpose, and retention limits. "It was public" is not, by itself, a defence.</li>
+  <li><strong>Never cross into intrusion.</strong> The moment you try a credential, submit a form to see what breaks, or access something behind authentication, you have left OSINT and likely broken the law (for example the US Computer Fraud and Abuse Act, or the UK Computer Misuse Act).</li>
+</ul>
+
+<p>The rule of thumb: <strong>observe, do not interact; document, do not exploit; and only collect what your question actually needs.</strong> If you are doing this professionally, get authorisation in writing and stay inside its scope.</p>
+
+<h2>Investigator OPSEC</h2>
+
+<p>Operational security here means protecting <em>yourself</em> and not tipping off the subject. Investigations leak in both directions: a careless click can reveal who is looking, and it can pollute your own findings.</p>
+
+<ul>
+  <li><strong>Use dedicated "sock puppet" accounts.</strong> Never research from your real social profiles. Maintain separate, plausible research identities with their own email addresses, and keep them consistent so platforms do not lock them. Never use them to deceive in ways that cross into fraud or HUMINT you are not authorised for.</li>
+  <li><strong>Isolate the browser and machine.</strong> Work from a virtual machine or a separate browser profile so cookies, extensions, and logins from your real life never bleed into the investigation. A snapshot you can roll back is ideal if you might touch sketchy links.</li>
+  <li><strong>Route traffic through a VPN.</strong> Do not expose your home or corporate IP to a target's logs. A VPN (or, for sensitive work, Tor) keeps your origin out of the picture.</li>
+  <li><strong>Do not alert the target.</strong> Avoid liking, following, connecting, or logging in with a real account. Prefer passive datasets over hitting the target directly. Every direct interaction is a potential tripwire.</li>
+  <li><strong>Practise data hygiene.</strong> Timestamp, screenshot, and hash evidence as you collect it. Store it securely, minimise personal data, and delete what you no longer need. Your case file is itself sensitive data.</li>
+</ul>
+
+<h2>The OSINT workflow</h2>
+
+<p>Every solid investigation, whatever the target, walks roughly the same path:</p>
+
+<ol>
+  <li><strong>Scope and seed.</strong> Write the question. Note your starting "seed": a domain, an email, a username, an image, a company name.</li>
+  <li><strong>Pivot outward.</strong> Use each artefact to find the next. A domain reveals an IP and certificates; a certificate reveals more subdomains; a subdomain reveals a new server; an email reveals accounts. This <em>pivoting</em> is the heart of OSINT.</li>
+  <li><strong>Corroborate.</strong> Confirm each important fact from a second, independent source before you rely on it.</li>
+  <li><strong>Document as you go.</strong> Capture evidence at the moment you see it – URLs, timestamps, screenshots, hashes. Undocumented findings do not exist.</li>
+  <li><strong>Analyse and report.</strong> Assemble the picture, state your confidence, and hand it to whoever acts on it.</li>
+</ol>
+
+<h2>The toolbox, by category</h2>
+
+<p>OSINT tooling is enormous, so it helps to group it by <em>what job it does</em>. Everything below is free to start with unless noted; the paid tiers mostly buy you volume and history.</p>
+
+<h3>Frameworks and collection</h3>
+<ul>
+  <li><a href="https://osintframework.com" target="_blank" rel="noopener noreferrer">OSINT Framework</a>: a giant, categorised directory of OSINT resources. A map, not a scanner: use it to find the right tool for a data type.</li>
+  <li><a href="https://www.maltego.com" target="_blank" rel="noopener noreferrer">Maltego</a> – link-analysis and graphing. Pulls data from "transforms" and draws the relationships between entities. The industry standard for visual pivoting.</li>
+  <li><a href="https://www.spiderfoot.net" target="_blank" rel="noopener noreferrer">SpiderFoot</a> – automates collection across hundreds of sources from a single seed (domain, IP, email, name) and correlates the results.</li>
+  <li><a href="https://github.com/lanmaster53/recon-ng" target="_blank" rel="noopener noreferrer">Recon-ng</a> – a modular, command-line reconnaissance framework with a Metasploit-style workflow. Great for scripted, repeatable collection.</li>
+  <li><a href="https://start.me" target="_blank" rel="noopener noreferrer">start.me collections</a> – curated dashboards of OSINT links maintained by the community; an easy way to keep your bookmarks organised by investigation type.</li>
+  <li><a href="https://inteltechniques.com" target="_blank" rel="noopener noreferrer">IntelTechniques</a> – Michael Bazzell's hub of search tools, workflows, and reference material, long a staple of the OSINT community.</li>
+</ul>
+
+<h3>Domains, DNS and infrastructure</h3>
+<ul>
+  <li><a href="https://lookup.icann.org" target="_blank" rel="noopener noreferrer">WHOIS (ICANN lookup)</a> – who registered a domain, when, and through which registrar. Often privacy-masked now, but registration dates and registrars are still telling. (We cover reading it in <a href="../what-is-whois/">What is WHOIS and how to read it</a>.)</li>
+  <li><a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a> – searches Certificate Transparency logs. Because every TLS certificate is logged publicly, this quietly reveals subdomains an organisation never meant to expose.</li>
+  <li><a href="https://dnsdumpster.com" target="_blank" rel="noopener noreferrer">DNSDumpster</a> – free DNS recon that maps a domain's hosts, records, and network in one view.</li>
+  <li><a href="https://securitytrails.com" target="_blank" rel="noopener noreferrer">SecurityTrails</a> – historical DNS and WHOIS data. See what an IP or nameserver <em>used</em> to point to, which is gold for tracking infrastructure over time.</li>
+  <li><a href="https://viewdns.info" target="_blank" rel="noopener noreferrer">ViewDNS</a> – a grab-bag of DNS utilities, including reverse-IP lookup to find other domains sharing a server.</li>
+  <li><a href="https://github.com/elceef/dnstwist" target="_blank" rel="noopener noreferrer">dnstwist</a> – generates and checks look-alike (typosquat) domains. Essential for brand protection and spotting phishing infrastructure before it is used.</li>
+  <li><a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener noreferrer">Amass (OWASP)</a> – deep subdomain enumeration and network mapping, combining passive datasets with active resolution.</li>
+  <li><a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener noreferrer">subfinder</a> – fast, passive subdomain discovery from ProjectDiscovery. Pairs well with Amass.</li>
+</ul>
+
+<h3>Attack surface and exposed devices</h3>
+<ul>
+  <li><a href="https://www.shodan.io" target="_blank" rel="noopener noreferrer">Shodan</a> – the "search engine for devices." Indexes internet-facing services and their banners, so you can see what software and ports an IP exposes without touching it yourself.</li>
+  <li><a href="https://censys.io" target="_blank" rel="noopener noreferrer">Censys</a> – similar internet-wide scanning with strong certificate and host data. Shodan and Censys are the two you learn first (compared in <a href="../shodan-and-censys/">Shodan and Censys explained</a>).</li>
+  <li><a href="https://www.zoomeye.org" target="_blank" rel="noopener noreferrer">ZoomEye</a> – a device and service search engine, strong on assets in Asia.</li>
+  <li><a href="https://fofa.info" target="_blank" rel="noopener noreferrer">FOFA</a> – another internet asset search engine with powerful fingerprint queries.</li>
+  <li><a href="https://netlas.io" target="_blank" rel="noopener noreferrer">Netlas</a> – searchable internet scan data covering hosts, certificates, and DNS.</li>
+  <li><a href="https://www.greynoise.io" target="_blank" rel="noopener noreferrer">GreyNoise</a> – tells you whether an IP is mass-scanning "background noise" or something targeted. Cuts false positives when you are triaging an address.</li>
+</ul>
+
+<h3>Website and technology stack</h3>
+<ul>
+  <li><a href="https://urlscan.io" target="_blank" rel="noopener noreferrer">urlscan.io</a> – visits a URL in a sandbox and reports the screenshot, resources, redirects, and contacted domains – safely, without you loading it.</li>
+  <li><a href="https://web-check.xyz" target="_blank" rel="noopener noreferrer">web-check.xyz</a> – a one-page dashboard of a site's DNS, headers, certificates, tech, and more.</li>
+  <li><a href="https://web.archive.org" target="_blank" rel="noopener noreferrer">Wayback Machine</a> – the Internet Archive's history of a page. See what a site said before it was changed or taken down.</li>
+  <li><a href="https://builtwith.com" target="_blank" rel="noopener noreferrer">BuiltWith</a> – profiles the technologies a site runs: CMS, analytics, frameworks, hosting.</li>
+  <li><a href="https://www.wappalyzer.com" target="_blank" rel="noopener noreferrer">Wappalyzer</a> – fingerprints a site's tech stack, available as a browser extension for quick checks.</li>
+  <li><a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer">securityheaders.com</a> – grades a site's HTTP security headers; a fast read on how carefully it is configured.</li>
+</ul>
+
+<h3>Reputation and malware</h3>
+<ul>
+  <li><a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a> – checks files, URLs, domains, and IPs against dozens of engines and shows related indicators. A first stop for "is this malicious?"</li>
+  <li><a href="https://www.abuseipdb.com" target="_blank" rel="noopener noreferrer">AbuseIPDB</a> – a community database of IPs reported for abuse, with a confidence score.</li>
+  <li><a href="https://urlhaus.abuse.ch" target="_blank" rel="noopener noreferrer">URLhaus</a>, <a href="https://threatfox.abuse.ch" target="_blank" rel="noopener noreferrer">ThreatFox</a> and <a href="https://bazaar.abuse.ch" target="_blank" rel="noopener noreferrer">MalwareBazaar</a> – the <a href="https://abuse.ch" target="_blank" rel="noopener noreferrer">abuse.ch</a> family: malicious URLs, indicators of compromise, and malware samples respectively. Free, high-quality threat intelligence.</li>
+</ul>
+
+<h3>People and SOCMINT</h3>
+
+<p>This category needs the sharpest ethics – you are handling real people's data. Have a lawful purpose and collect the minimum.</p>
+
+<ul>
+  <li><a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener noreferrer">Sherlock</a> – hunts a username across hundreds of sites from the command line.</li>
+  <li><a href="https://whatsmyname.app" target="_blank" rel="noopener noreferrer">WhatsMyName</a> – a web-based username enumeration tool covering a large, curated site list.</li>
+  <li><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer">Have I Been Pwned</a> – tells you whether an email appears in known data breaches. Useful for defence and for understanding exposure.</li>
+  <li><a href="https://github.com/megadose/holehe" target="_blank" rel="noopener noreferrer">holehe</a> – checks whether an email is registered on various sites using their password-reset behaviour, without alerting the owner.</li>
+  <li>Reverse image search – <a href="https://lens.google.com" target="_blank" rel="noopener noreferrer">Google Lens</a>, <a href="https://tineye.com" target="_blank" rel="noopener noreferrer">TinEye</a>, and <a href="https://yandex.com/images" target="_blank" rel="noopener noreferrer">Yandex Images</a> find where a photo appears elsewhere. Yandex is often strongest on faces and places; run all three, as they index different corners of the web.</li>
+</ul>
+
+<h3>Email</h3>
+<ul>
+  <li><a href="https://hunter.io" target="_blank" rel="noopener noreferrer">Hunter.io</a> – finds and verifies email addresses associated with a domain and reveals the address pattern an organisation uses.</li>
+  <li><a href="https://emailrep.io" target="_blank" rel="noopener noreferrer">EmailRep</a> – a reputation summary for an email address, drawing on where it appears online.</li>
+</ul>
+
+<h3>Geolocation and GEOINT</h3>
+<ul>
+  <li><strong>EXIF metadata:</strong> photos can embed the camera, timestamp, and even GPS coordinates. A tool like <a href="https://exiftool.org" target="_blank" rel="noopener noreferrer">ExifTool</a> reads it. (Most social platforms strip EXIF on upload, so absence of data is normal.)</li>
+  <li><a href="https://www.suncalc.org" target="_blank" rel="noopener noreferrer">SunCalc</a> – shows the sun's position for any place and time. Combined with shadows in a photo, it helps confirm or estimate <em>when</em> and <em>where</em> it was taken.</li>
+  <li><a href="https://earth.google.com" target="_blank" rel="noopener noreferrer">Google Earth</a> – satellite and street imagery for verifying locations, matching landmarks, and reconstructing a scene.</li>
+</ul>
+
+<h2>A worked mini-example: one suspicious domain, end to end</h2>
+
+<p>Say a customer forwards you an email from <code>secure-login-yourbank.example</code> and you need to judge it – passively, without ever logging in or attacking anything. The high-level path:</p>
+
+<pre tabindex="0"><code>1) WHOIS       -> registrar + creation date
+2) crt.sh      -> certificates & sibling subdomains
+3) urlscan.io  -> safe render: screenshot, redirects, resources
+4) web-check   -> DNS, headers, hosting, tech stack
+5) VirusTotal  -> is the domain/URL flagged?
+6) GreyNoise   -> is the hosting IP just noise, or targeted?</code></pre>
+
+<p>Reading it in order: a domain <strong>registered three days ago</strong> through a bulk registrar is already suspicious. crt.sh shows a certificate minted the same day and sibling hostnames reusing the "yourbank" string: a pattern, not a coincidence. urlscan.io renders a pixel-perfect clone of the login page and shows the form posting to an unrelated host. web-check confirms cheap throwaway hosting and missing security headers. VirusTotal already flags the URL; AbuseIPDB and GreyNoise round out the IP's reputation. None of that touched the attacker's server beyond a sandbox, and you have a documented, evidence-backed verdict.</p>
+
+<p>That is the shape of it. We go deep on this exact process in <a href="../investigate-a-suspicious-domain/">How to investigate a suspicious domain</a>, and on the quick "is this fake?" version in <a href="../../guides/check-suspicious-domain/">How to check if a domain is fake or suspicious</a>.</p>
+
+<h2>Where OSINT gets used</h2>
+
+<ul>
+  <li><strong>Threat intelligence.</strong> Mapping attacker infrastructure, tracking campaigns, and enriching indicators of compromise.</li>
+  <li><strong>Brand protection.</strong> Catching typosquats, fake profiles, and phishing sites impersonating an organisation – often before customers are hit.</li>
+  <li><strong>Phishing investigation.</strong> Attributing a lure, unmasking the infrastructure behind it, and feeding takedowns.</li>
+  <li><strong>Penetration-test reconnaissance.</strong> The authorised, passive first phase of an engagement – mapping the target's public footprint before any active testing, inside a signed scope.</li>
+  <li><strong>Investigative journalism and research.</strong> Verifying images, geolocating events, and following public records to hold power to account.</li>
+</ul>
+
+<h2>Pick a tool by what you want</h2>
+
+<p>Beginners drown because they memorise tools instead of jobs. Start from the outcome you need and work back:</p>
+
+<table>
+  <thead>
+    <tr><th>What you want</th><th>Reach for</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Subdomains of a target</td><td>crt.sh, Amass, subfinder, DNSDumpster</td></tr>
+    <tr><td>Who registered a domain / when</td><td>WHOIS, SecurityTrails, ViewDNS</td></tr>
+    <tr><td>What software / ports an IP exposes</td><td>Shodan, Censys, Netlas, FOFA</td></tr>
+    <tr><td>What tech a website runs</td><td>BuiltWith, Wappalyzer, web-check.xyz</td></tr>
+    <tr><td>Safely see what a URL does</td><td>urlscan.io</td></tr>
+    <tr><td>A page's history / a deleted page</td><td>Wayback Machine</td></tr>
+    <tr><td>Is this file / URL / IP malicious</td><td>VirusTotal, abuse.ch, AbuseIPDB, GreyNoise</td></tr>
+    <tr><td>Look-alike / typosquat domains</td><td>dnstwist</td></tr>
+    <tr><td>Where a username appears</td><td>Sherlock, WhatsMyName</td></tr>
+    <tr><td>Is an email breached / registered somewhere</td><td>Have I Been Pwned, holehe, EmailRep</td></tr>
+    <tr><td>Emails for a domain</td><td>Hunter.io</td></tr>
+    <tr><td>Where a photo appears / where it was taken</td><td>TinEye, Yandex, Google Lens, ExifTool, SunCalc, Google Earth</td></tr>
+    <tr><td>Automate collection from one seed</td><td>SpiderFoot, Recon-ng, Maltego</td></tr>
+  </tbody>
+</table>
+
+<p>OSINT is less about any single site than about a habit of mind: ask a tight question, collect only from open sources, pivot from one artefact to the next, corroborate, document, and stay on the legal side of the line. Master that loop and the tools become interchangeable, which is what the rest of this cluster will help you do.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is OSINT legal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Collecting information from genuinely open, public sources is legal in most places, and OSINT never involves breaking into systems. But "public" does not mean "unrestricted": scraping can breach a platform's terms of service, and privacy laws like the GDPR still apply to personal data even when you found it on a public page – you need a lawful purpose, and you should collect only what your question requires. The line you must never cross is intrusion: the moment you use a credential that is not yours, submit a form to probe for flaws, or touch anything behind authentication, you have left OSINT and likely broken computer-misuse law.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between OSINT and reconnaissance?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          They overlap but are not the same. OSINT is passive by default – you read what third parties and the target have already published, without necessarily touching the target. Reconnaissance, in a pentest sense, is a phase of an authorised security engagement that starts passive (often using OSINT) and then goes active: resolving subdomains against the target, port-scanning, fingerprinting live services. OSINT is a technique; reconnaissance is a phase that uses OSINT and then goes further, only ever inside a signed scope.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What are the best free OSINT tools to start with?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          For infrastructure, learn crt.sh for subdomains, WHOIS for registration, and the Wayback Machine for history. For exposed devices, Shodan and Censys both have free tiers. For safe URL analysis, urlscan.io and web-check.xyz. For reputation, VirusTotal, the abuse.ch family, and GreyNoise. For people and usernames, Have I Been Pwned, Sherlock, and WhatsMyName. Use the OSINT Framework as a directory to find the right tool for any data type, and SpiderFoot to automate collection once you understand the pieces.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is SOCMINT?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          SOCMINT – Social Media Intelligence – is the branch of OSINT focused specifically on social platforms: profiles, posts, connections, and the metadata around them. It is usually treated as part of OSINT because the data is public, but it gets its own name because it carries distinct privacy and ethical risks – you are handling real people's data – and demands extra care around lawful basis, data minimisation, and not deceiving people in ways that stray into other disciplines. We will cover the -INT disciplines, including SOCMINT, in a dedicated article.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>How do OSINT investigators stay anonymous?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Through OPSEC. They research from dedicated "sock puppet" accounts rather than their real profiles, work inside an isolated virtual machine or a separate browser profile so their real cookies and logins never leak, and route traffic through a VPN (or Tor for sensitive work) so their real IP never lands in a target's logs. Crucially, they avoid interacting with the target at all – no likes, follows, or logins – preferring passive third-party datasets, and they document evidence carefully while minimising the personal data they retain.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is OSINT the same as the OSINT Framework?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. OSINT is the discipline: the whole practice of turning open sources into intelligence. The OSINT Framework (osintframework.com) is just one specific resource: a categorised directory that points you to tools and sites for different data types. It is a map of the landscape, not the landscape itself, and it does not collect anything on its own. Think of OSINT as the craft and the OSINT Framework as one reference you keep bookmarked while practising it.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../what-is-whois/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is WHOIS and how to read it</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../shodan-and-censys/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Shodan and Censys explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../investigate-a-suspicious-domain/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to investigate a suspicious domain</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../guides/check-suspicious-domain/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to check if a domain is fake or suspicious</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../intelligence-disciplines-explained/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The -INT disciplines: OSINT, SIGINT, HUMINT and more</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

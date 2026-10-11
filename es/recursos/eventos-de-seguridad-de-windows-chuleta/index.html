@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="resources">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eventos de seguridad de Windows: chuleta de triaje</title>
+  <meta name="description" content="Los eventos de Windows que conviene mirar primero cuando algo va mal: inicios de sesión, privilegios, servicios nuevos, tareas y registros borrados." />
+  <meta name="keywords" content="eventos de seguridad de windows, event id 4624, event id 4625, event id 4688, event id 1102, event id 7045, event id 4698, chuleta visor de eventos, tipo de inicio de sesion 3 y 10, triaje de logs windows, sysmon event id, powershell 4104 bloque de script, bloqueo de cuenta 4740, analisis de registros windows, registro de seguridad windows" />
+  <link rel="canonical" href="https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/resources/windows-security-event-ids-cheat-sheet/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Eventos de seguridad de Windows: chuleta de triaje | Breachfolio" />
+  <meta property="og:description" content="Los eventos de Windows que conviene mirar primero cuando algo va mal: inicios de sesión, privilegios, servicios nuevos, tareas y registros borrados." />
+  <meta property="og:url" content="https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/047-guide-forensic-table-envelope-layers-analysis.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eventos de seguridad de Windows: chuleta de triaje | Breachfolio" />
+  <meta name="twitter:description" content="Los eventos de Windows que conviene mirar primero cuando algo va mal: inicios de sesión, privilegios, servicios nuevos, tareas y registros borrados." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/047-guide-forensic-table-envelope-layers-analysis.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Eventos de seguridad de Windows: chuleta de triaje",
+      "description": "Los eventos de Windows que conviene mirar primero cuando algo va mal: inicios de sesión, privilegios, servicios nuevos, tareas y registros borrados.",
+      "image": "https://breachfolio.com/assets/img/047-guide-forensic-table-envelope-layers-analysis.webp",
+      "datePublished": "2026-08-03",
+      "dateModified": "2026-08-03",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/"
+      },
+      "inLanguage": "es",
+      "keywords": "eventos de seguridad de windows, event id 4624, event id 4625, event id 4688, event id 1102, event id 7045, event id 4698, chuleta visor de eventos, tipo de inicio de sesion 3 y 10, triaje de logs windows, sysmon event id, powershell 4104 bloque de script, bloqueo de cuenta 4740, analisis de registros windows, registro de seguridad windows"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Recursos", "item": "https://breachfolio.com/es/recursos/" },
+        { "@type": "ListItem", "position": 3, "name": "Eventos de seguridad de Windows", "item": "https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/recursos/eventos-de-seguridad-de-windows-chuleta/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué diferencia hay entre el tipo de inicio de sesión 3 y el 10 en el evento 4624?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El tipo 3 es un inicio de sesión de red, la forma normal en que una máquina llega a un recurso compartido o a un servicio de otra. El tipo 10 es RemoteInteractive, que en la práctica significa RDP: alguien tiene una sesión de escritorio en esa máquina. El tipo 2 es una persona delante del teclado y el 5 es un servicio arrancando. El tipo es el campo que convierte un inicio de sesión correcto y genérico en algo sobre lo que se puede razonar, y por eso leer un 4624 sin él no dice casi nada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el evento 4688 no me muestra la línea de comandos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque esa parte viene desactivada. El registro de creación de procesos te da el ejecutable, pero los argumentos no aparecen hasta que activas la directiva llamada Incluir línea de comandos en los eventos de creación de proceso. Sin ella ves que se ejecutó powershell.exe pero no qué ejecutó, que es la diferencia entre una entrada de log y una entrada útil."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito Sysmon si ya recojo el registro de Seguridad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para empezar no, pero cubre huecos reales. Sysmon añade creación de procesos con hashes y detalle del proceso padre, conexiones de red salientes atribuidas al proceso que las hizo, y escrituras en registro y en disco. El registro de Seguridad cubre bien la autenticación y los cambios de cuenta, y es mucho más pobre en qué hizo un proceso una vez arrancó."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sobre qué evento debería alertar primero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sobre el 1102, el borrado del registro de auditoría. Es raro en operación normal, es barato de alertar y casi no hay motivo benigno para que ocurra en un puesto de trabajo. Además tiene una propiedad que la mayoría de eventos no tiene: te dice que alguien quiso que el registro desapareciera, y eso es información incluso cuando todo lo demás se ha escapado."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Recursos</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Eventos de seguridad de Windows</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/047-guide-forensic-table-envelope-layers-analysis.webp" alt="Los eventos de Windows que de verdad miras." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1200" height="675" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">RECURSO · CHULETA</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Los eventos de Windows que de verdad miras.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Windows registra miles de tipos de evento y nunca vas a leer la mayoría. Estos son los que responden a una pregunta que probablemente te estés haciendo en ese momento.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <time datetime="2026-08-03">3 de agosto de 2026</time><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>Este sitio ya tenía una <a href="../comandos-linux-para-revision-de-seguridad/" class="text-accent ul-link">chuleta de triaje para Linux</a>, y faltaba la mitad de Windows, cosa que está del revés: Windows es donde viven los puestos y las cuentas de la mayoría de organizaciones, y de donde el SIEM del <a href="../../laboratorio/lab-03-wazuh-siem-en-casa/" class="text-accent ul-link">Lab 03</a> saca casi todo el material interesante. Lo que sigue es la lista corta, agrupada por la pregunta que sueles estar intentando responder.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cuatro registros, no uno</h2>
+
+      <p>Antes de los identificadores, conviene saber dónde vive cada uno, porque un ID no significa nada sin su registro. Los números se repiten entre registros y significan cosas distintas.</p>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Registro</th><th class="px-4 py-2.5 font-display font-semibold">Qué contiene</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Seguridad</strong></td><td class="px-4 py-2.5">Autenticación, cambios de cuenta y de directiva, creación de procesos. El principal.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Sistema</strong></td><td class="px-4 py-2.5">Instalación de servicios y carga de drivers. El evento 7045 vive aquí, no en Seguridad.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>PowerShell/Operational</strong></td><td class="px-4 py-2.5">Bloques de script y actividad de módulos. Canal aparte, interruptor aparte.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Sysmon/Operational</strong></td><td class="px-4 py-2.5">Solo si instalaste Sysmon. Numeración propia, empezando por el 1.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Inicios de sesión y cuentas</h2>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">ID</th><th class="px-4 py-2.5 font-display font-semibold">Qué significa, y qué leer al lado</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4624</strong></td><td class="px-4 py-2.5">Inicio de sesión correcto. Inútil sin el <strong>tipo de inicio</strong>: 2 es delante del teclado, 3 por red, 5 un servicio, 10 por RDP.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4625</strong></td><td class="px-4 py-2.5">Inicio fallido. El estado y el subestado distinguen una contraseña mal puesta de una cuenta deshabilitada o inexistente, que es la diferencia entre una errata y una enumeración.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4672</strong></td><td class="px-4 py-2.5">Privilegios especiales asignados al iniciar sesión. En la práctica: esta sesión equivale a administrador. Va pegado al 4624 anterior.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4740</strong></td><td class="px-4 py-2.5">Cuenta bloqueada. Te dice de dónde vino el bloqueo, que suele ser una credencial caducada en otra máquina y no un ataque.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4720</strong> / <strong>4726</strong></td><td class="px-4 py-2.5">Cuenta creada / eliminada. Una creación que no puedas atar a una petición merece una llamada.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4732</strong> / <strong>4728</strong></td><td class="px-4 py-2.5">Miembro añadido a un grupo de seguridad local / global. Así es como "un usuario" se convierte discretamente en "un administrador".</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4768</strong> / <strong>4769</strong></td><td class="px-4 py-2.5">Peticiones de tickets Kerberos, en los controladores de dominio. Donde la actividad de cuentas de todo el dominio se ve en un solo sitio.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>El patrón que conviene interiorizar es <strong>4625 repetido y después un 4624</strong>: una racha de fallos seguida de un acierto, misma cuenta, mismo origen. Esa secuencia es la que importa, y ninguna de las dos mitades dice gran cosa por separado.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Ejecución y persistencia</h2>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">ID</th><th class="px-4 py-2.5 font-display font-semibold">Qué significa</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4688</strong></td><td class="px-4 py-2.5">Arrancó un proceso. El evento más útil de la lista, <em>si</em> la auditoría de línea de comandos está activa. Ver la sección siguiente.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>7045</strong> <span class="text-muted-foreground text-[13px]">(Sistema)</span></td><td class="px-4 py-2.5">Se instaló un servicio. Raro en un puesto de trabajo, y un clásico para persistir y para ejecutar como SYSTEM.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4697</strong></td><td class="px-4 py-2.5">Servicio instalado, tal como lo registra Seguridad. Mismo hecho, otro canal y otra retención.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4698</strong> / <strong>4702</strong></td><td class="px-4 py-2.5">Tarea programada creada / modificada. El otro sitio clásico de persistencia, y el que ejercita <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">T1053.005</code>.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4104</strong> <span class="text-muted-foreground text-[13px]">(PowerShell)</span></td><td class="px-4 py-2.5">Registro de bloques de script: el código que se ejecutó de verdad, ya desofuscado. Viene desactivado y merece encenderlo.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>Sysmon 1, 3, 11, 13</strong></td><td class="px-4 py-2.5">Proceso creado con hashes y padre, conexión de red saliente, fichero creado, valor de registro escrito.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Alguien recogiendo el rastro</h2>
+
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">ID</th><th class="px-4 py-2.5 font-display font-semibold">Qué significa</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>1102</strong></td><td class="px-4 py-2.5">Se borró el registro de Seguridad. Casi nunca es legítimo en un puesto. Si vas a alertar de una sola cosa, que sea esta.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>104</strong> <span class="text-muted-foreground text-[13px]">(Sistema)</span></td><td class="px-4 py-2.5">Se borró otro registro. Mismo razonamiento, otro canal.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5"><strong>4719</strong></td><td class="px-4 py-2.5">Cambió la directiva de auditoría. Apagar el registro es más silencioso que borrarlo y deja un rastro mucho menor.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Los tres interruptores que vienen apagados</h2>
+
+      <p>Aquí es donde pierden en silencio la mayoría de laboratorios caseros y un número sorprendente de instalaciones en producción. Los eventos de arriba existen, pero tres de los campos más valiosos no aparecen hasta que los pides:</p>
+
+      <ol>
+        <li><strong>Línea de comandos en la creación de procesos.</strong> Sin ella, el 4688 te dice que se ejecutó <code class="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-surface border border-border">powershell.exe</code> y no qué ejecutó.</li>
+        <li><strong>Registro de bloques de script de PowerShell.</strong> Sin él, el evento 4104 sencillamente no está, y las líneas ofuscadas siguen siendo opacas.</li>
+        <li><strong>Directiva de auditoría de las categorías que te importan.</strong> Varios de los eventos de cuenta y de objeto no se auditan de fábrica en un puesto de trabajo.</li>
+      </ol>
+
+      <p>Nada de esto es configuración exótica, y todo ello es la diferencia entre un registro con el que se puede investigar y uno que simplemente existe. Si quieres averiguar cuáles te faltan a ti, el <a href="../../laboratorio/lab-06-probar-detecciones-atomic-red-team/" class="text-accent ul-link">Lab 06</a> es el ejercicio: ejecutar una técnica documentada a propósito y comprobar si llegó el evento, y después si algo alertó sobre él. Son dos fallos distintos y necesitan dos arreglos distintos.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Un orden de triaje que aguanta</h2>
+
+      <p>Cuando una máquina pinta mal y tienes el registro delante, esta secuencia responde a más preguntas por minuto invertido:</p>
+
+      <ol>
+        <li><strong>1102 y 4719 primero.</strong> Si saltó cualquiera de los dos, trata todo lo posterior como incompleto, no como limpio.</li>
+        <li><strong>4624 y 4672 alrededor de la hora en cuestión.</strong> Quién entró, desde dónde, por qué método, y si vino con permisos de administrador.</li>
+        <li><strong>4688 en esa ventana.</strong> Qué se ejecutó y desde qué padre. Una consola lanzada por un visor de documentos merece que te pares.</li>
+        <li><strong>7045 y 4698.</strong> Si algo se organizó para volver tras un reinicio.</li>
+        <li><strong>4720, 4732, 4728.</strong> Si cambió el mapa de cuentas.</li>
+      </ol>
+
+      <p>Apunta qué comprobaste y qué no estaba, no solo lo que encontraste. Un resultado vacío en el paso 3 porque los eventos nunca se recogieron es una conclusión completamente distinta de un resultado vacío porque no se ejecutó nada, y dentro de seis meses no vas a recordar cuál de las dos era.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground"><strong class="text-foreground font-display">Alcance.</strong> Esto es una referencia defensiva: leer los registros de máquinas que administras, o de un laboratorio que construiste tú. Los identificadores varían un poco según la versión de Windows y el rol del equipo, así que trata los números como punto de partida y confírmalos contra la documentación de Microsoft para la versión que tengas delante.</div>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué diferencia hay entre el tipo de inicio de sesión 3 y el 10 en el evento 4624?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          El tipo 3 es un inicio de sesión de red, la forma normal en que una máquina llega a un recurso compartido o a un servicio de otra. El tipo 10 es RemoteInteractive, que en la práctica significa RDP: alguien tiene una sesión de escritorio en esa máquina. El tipo 2 es una persona delante del teclado y el 5 es un servicio arrancando. El tipo es el campo que convierte un inicio de sesión correcto y genérico en algo sobre lo que se puede razonar, y por eso leer un 4624 sin él no dice casi nada.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué el evento 4688 no me muestra la línea de comandos?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque esa parte viene desactivada. El registro de creación de procesos te da el ejecutable, pero los argumentos no aparecen hasta que activas la directiva llamada Incluir línea de comandos en los eventos de creación de proceso. Sin ella ves que se ejecutó powershell.exe pero no qué ejecutó, que es la diferencia entre una entrada de log y una entrada útil.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Necesito Sysmon si ya recojo el registro de Seguridad?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Para empezar no, pero cubre huecos reales. Sysmon añade creación de procesos con hashes y detalle del proceso padre, conexiones de red salientes atribuidas al proceso que las hizo, y escrituras en registro y en disco. El registro de Seguridad cubre bien la autenticación y los cambios de cuenta, y es mucho más pobre en qué hizo un proceso una vez arrancó.
+        </div>
+      </details>
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Sobre qué evento debería alertar primero?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Sobre el 1102, el borrado del registro de auditoría. Es raro en operación normal, es barato de alertar y casi no hay motivo benigno para que ocurra en un puesto de trabajo. Además tiene una propiedad que la mayoría de eventos no tiene: te dice que alguien quiso que el registro desapareciera, y eso es información incluso cuando todo lo demás se ha escapado.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../comandos-linux-para-revision-de-seguridad/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Comandos de Linux para revisión de seguridad</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../primeras-24-horas-de-un-incidente/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Las primeras 24 horas de un incidente</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../laboratorio/lab-06-probar-detecciones-atomic-red-team/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Lab 06: prueba tus detecciones</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los recursos</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio independiente y pequeño sobre seguridad e IA. Este artículo se redactó con ayuda de IA y lo revisó una persona antes de publicarlo. Escribimos a partir de documentación, fuentes de fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Sobre nosotros</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

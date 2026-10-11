@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="ai">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCP: la nueva superficie de ataque para desarrolladores</title>
+  <meta name="description" content="El Model Context Protocol estandariza cómo la IA se conecta a herramientas externas. Cada conexión es un nuevo punto donde se decide en quién confiar." />
+  <meta name="keywords" content="seguridad del Model Context Protocol, superficie de ataque de MCP, qué es MCP en inteligencia artificial, riesgos de seguridad de los servidores MCP, inyección de prompts a través de servidores MCP, permisos excesivos en conexiones MCP, auditar un servidor MCP antes de instalarlo, riesgo de cadena de suministro en servidores MCP de terceros, aislamiento de servidores MCP, Model Context Protocol y agentes de IA, cómo proteger una integración MCP, privilegio mínimo en servidores MCP, MCP y superficie de ataque para desarrolladores, confianza en conexiones de herramientas de IA, seguridad agéntica y protocolos de conexión" />
+  <link rel="canonical" href="https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/ai/mcp-attack-surface-explained/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/ai/mcp-attack-surface-explained/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="MCP: la nueva superficie de ataque para desarrolladores | Breachfolio" />
+  <meta property="og:description" content="El Model Context Protocol estandariza cómo la IA se conecta a herramientas externas. Cada conexión es un nuevo punto donde se decide en quién confiar." />
+  <meta property="og:url" content="https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-ai-mcp.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MCP: la nueva superficie de ataque para desarrolladores | Breachfolio" />
+  <meta name="twitter:description" content="El Model Context Protocol estandariza cómo la IA se conecta a herramientas externas. Cada conexión es un nuevo punto donde se decide en quién confiar." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-ai-mcp.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.4rem 0; font-size:14.5px; border:1px solid hsl(var(--border)); border-radius:10px; }
+    .prose-content th, .prose-content td { border-bottom:1px solid hsl(var(--border)); padding:.7rem .9rem; text-align:left; vertical-align:top; }
+    .prose-content thead th { font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color: hsl(var(--foreground) / .7); background: hsl(var(--surface)); font-weight:500; }
+    .prose-content td { color: hsl(var(--foreground) / .85); }
+    .prose-content tr:last-child td { border-bottom:none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "MCP (Model Context Protocol): la nueva superficie de ataque para desarrolladores",
+      "description": "El Model Context Protocol estandariza cómo la IA se conecta a herramientas externas. Cada conexión es un nuevo punto donde se decide en quién confiar.",
+      "image": "https://breachfolio.com/assets/img/thumb-ai-mcp.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "keywords": "seguridad del Model Context Protocol, superficie de ataque de MCP, qué es MCP en inteligencia artificial, riesgos de seguridad de los servidores MCP, inyección de prompts a través de servidores MCP, permisos excesivos en conexiones MCP, auditar un servidor MCP antes de instalarlo, riesgo de cadena de suministro en servidores MCP de terceros, aislamiento de servidores MCP, Model Context Protocol y agentes de IA, cómo proteger una integración MCP, privilegio mínimo en servidores MCP, MCP y superficie de ataque para desarrolladores, confianza en conexiones de herramientas de IA, seguridad agéntica y protocolos de conexión",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/"
+      },
+      "inLanguage": "es"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "IA & Seguridad", "item": "https://breachfolio.com/es/ia/" },
+        { "@type": "ListItem", "position": 3, "name": "Superficie de ataque de MCP", "item": "https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/ia/mcp-superficie-de-ataque-explicada/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el Model Context Protocol (MCP)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es un protocolo abierto, originado en Anthropic y adoptado ampliamente en la industria, que estandariza cómo una aplicación de IA se conecta a herramientas, fuentes de datos y servicios externos, en lugar de que cada integración se construya a medida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué estandarizar las conexiones de un agente también estandariza el riesgo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque una técnica de ataque que explote una debilidad común en cómo los servidores MCP describen sus herramientas o devuelven resultados puede generalizarse a todos los servidores construidos de la misma manera, en vez de quedarse limitada a una integración a medida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué debería comprobar alguien antes de instalar un servidor MCP de terceros?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Revisar el código fuente si es abierto, preferir mantenedores de confianza, acotar los permisos concedidos al mínimo que la tarea necesite, ejecutar servidores no confiables en un entorno aislado y registrar qué herramientas se llaman realmente y con qué argumentos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es MCP inseguro por diseño?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No; el riesgo vive en las concesiones de confianza sin revisar en cada conexión, igual que con cualquier otro punto de integración extensible como extensiones de navegador o gestores de paquetes: el protocolo facilita conectar, pero no hace que evaluar aquello a lo que te conectas sea opcional."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../laboratorio/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">ES</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../../laboratorio/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">IA</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Superficie de ataque de MCP</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-ai-mcp.webp" alt="MCP (Model Context Protocol): la nueva superficie de ataque para desarrolladores." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">IA · SEGURIDAD</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">MCP (Model Context Protocol): la nueva superficie de ataque para desarrolladores.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">MCP hace que conectar un LLM a tu sistema de archivos, tus bases de datos o tus APIs sea trivial. Esa comodidad es exactamente la superficie de ataque: esto es lo que deberías comprobar de verdad antes de instalar un servidor.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>8 de julio, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>El <strong>Model Context Protocol</strong>, o MCP, es un protocolo abierto –originado en Anthropic y adoptado desde entonces de forma mucho más amplia en toda la industria– para estandarizar cómo una aplicación de IA se conecta con el mundo exterior. En concreto: en lugar de que un cliente de chat, un asistente de IDE o un agente autónomo envíen cada uno su propio código de integración a medida, hecho una sola vez para cada sistema de archivos, base de datos o API que necesiten tocar, MCP define una forma común de que un «cliente» (la aplicación que aloja el modelo) hable con un «servidor» (un pequeño programa que expone al modelo un conjunto concreto de herramientas, fuentes de datos u otro contexto).</p>
+
+      <p>Es fácil ver el atractivo, honestamente, porque resuelve un problema real. Antes de que existiera un estándar compartido como este, cada integración de herramientas era código pegamento a medida –autenticación distinta, formatos de datos distintos, modos de fallo distintos– reescrito para cada proveedor de modelos y cada aplicación que quería la misma capacidad. MCP convierte eso en algo más parecido a un patrón de plugins: escribe un servidor que exponga «leer archivos de este directorio» o «consultar esta base de datos», y cualquier cliente compatible con MCP puede conectarse a él. Eso es una victoria genuina de ingeniería. También es, estructuralmente, un nuevo lugar donde se negocia la confianza cada vez que se establece una conexión.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Por qué estandarizar la conexión es también estandarizar el riesgo</h2>
+      <p>Cuando cada integración era a medida, un atacante que quisiera abusar de una tenía que entender tu código pegamento específico –tu envoltorio de API concreto, tu forma concreta de trasladar datos al contexto del modelo–. Esa heterogeneidad era una seguridad accidental por oscuridad, y no algo en lo que nadie debiera haber confiado, pero sí significaba que una técnica de ataque rara vez se trasladaba limpiamente de un sistema al siguiente.</p>
+      <p>Una vez que las integraciones siguen un protocolo compartido, eso deja de ser cierto. Una técnica que explote una debilidad en la forma en que los servidores MCP manejan habitualmente las descripciones de herramientas, o en la forma en que los clientes muestran habitualmente la salida de las herramientas de vuelta al modelo, puede generalizarse a todos los servidores construidos de la misma manera, no solo a una integración a medida. Esto no es un defecto exclusivo de MCP; es el compromiso que hace todo esfuerzo de estandarización. Los formatos comunes y los protocolos comunes son lo que hace posible la interoperabilidad, y son exactamente lo que hace que una única técnica de ataque sea portable entre muchas implementaciones a la vez. TCP/IP, HTTP y USB hicieron todos este mismo compromiso antes que MCP. La lección no es «no estandarices», sino que el trabajo de seguridad tiene que ocurrir a nivel de protocolo y de implementación, y no dejarse a que cada integración lo reinvente.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Dónde reside el riesgo real</h2>
+      <p>Un servidor MCP entra dentro de la frontera de confianza en cuanto lo conectas: puede moldear lo que el modelo ve y lo que se le indica hacer a continuación. En la práctica aparecen sistemáticamente cuatro categorías de riesgo:</p>
+      <table>
+        <thead>
+          <tr><th>Vector de ataque</th><th>Qué aspecto tiene</th><th>Mitigación principal</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Servidores MCP maliciosos o comprometidos</strong></td>
+            <td>Un servidor puede describir sus propias herramientas al cliente y devolver datos arbitrarios como resultado de una llamada – ambas cosas pueden colar instrucciones dentro de lo que parece una salida corriente. Es una variante específica del protocolo de la <a href="../prompt-injection-explicado/" class="text-accent ul-link">inyección de prompts indirecta</a>: el atacante nunca habla directamente con el modelo, controla algo que este lee a través de un canal en el que se le dijo que confiara.</td>
+            <td>Revisar el código; monitorizar y registrar qué herramientas se llaman realmente.</td>
+          </tr>
+          <tr>
+            <td><strong>Concesiones de permisos demasiado amplias</strong></td>
+            <td>Un servidor conectado una vez para una tarea acotada –digamos, leer un archivo de configuración– acaba a menudo con acceso permanente a todo un sistema de archivos, base de datos o alcance de API, porque eso es lo que ofrecía la conexión por defecto y nadie volvió a acotarlo.</td>
+            <td>Acotar los permisos al mínimo que la tarea necesite.</td>
+          </tr>
+          <tr>
+            <td><strong>Riesgo de cadena de suministro</strong> por servidores de terceros sin auditar</td>
+            <td>Conectarte a un servidor que encontraste en internet y no escribiste tú es, en términos de seguridad, cercano a instalar un paquete npm sin revisar o una extensión de navegador: las intenciones y competencia de su autor pasan a formar parte de tu frontera de confianza.</td>
+            <td>Preferir mantenedores con trayectoria.</td>
+          </tr>
+          <tr>
+            <td><strong>Aislamiento (sandboxing) débil</strong> en servidores locales</td>
+            <td>Muchos servidores MCP se ejecutan como procesos locales corrientes, con los mismos privilegios que el usuario que los arrancó: acceso completo a archivos, credenciales y red, no un subconjunto reducido y aislado.</td>
+            <td>Ejecutar servidores no confiables en un entorno aislado o en contenedor.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="my-8">
+        <img src="../../../assets/articles/art-inline-mcp-attack-surface.svg" alt="Diagrama que muestra un cliente LLM/agente conectándose a través de un servidor MCP a una herramienta o fuente de datos externa, con indicaciones de los vectores de ataque de descripción de herramienta maliciosa y salida de herramienta envenenada." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">Cada salto en la cadena cliente → servidor MCP → herramienta es un lugar donde se negocia la confianza, y un lugar donde un atacante puede colar instrucciones.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Qué comprobar de verdad antes de conectar un servidor</h2>
+      <p>Nada de esto es exótico una vez que lo planteas correctamente: un servidor MCP es código de terceros al que estás concediendo acceso a tu máquina o a tus datos, y merece exactamente el mismo escrutinio que le darías a cualquier otro trozo de código de terceros en esa posición.</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li>Revisa el código fuente si es abierto. Si no puedes o no vas a leer el código, trátalo como un coste real de usar el servidor, no como un trámite que saltarse.</li>
+        <li>Prefiere servidores de mantenedores en los que realmente confíes –un proyecto u organización consolidados con trayectoria– antes que un script sin verificar de una fuente desconocida.</li>
+        <li>Acota sus permisos al mínimo que la tarea necesite en lugar de aceptar cualquier acceso por defecto que el servidor pida. Si solo necesita acceso de lectura a un directorio, no le concedas toda tu carpeta personal.</li>
+        <li>Ejecuta los servidores no confiables en un entorno aislado (sandbox) o en contenedor, de modo que un servidor comprometido o que se comporte mal no pueda llegar más lejos de lo previsto, aunque lo intente.</li>
+        <li>Monitoriza y registra qué herramientas se llaman en realidad y con qué argumentos, para tener algo que examinar después en lugar de limitarte a confiar en que se comportó bien.</li>
+      </ul>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Esto es seguridad agéntica, una capa más abajo</h2>
+      <p>Nada de esto es un problema separado del que se trata en los <a href="../seguridad-de-ia-agentica/" class="text-accent ul-link">fundamentos de seguridad de la IA agéntica</a>. Ese artículo habla en abstracto de lo que ocurre una vez que un agente obtiene acceso a herramientas y puede tomar acciones en el mundo: el riesgo de herramientas con permisos excesivos, la necesidad de aprobación humana en las acciones de consecuencia, la importancia de registrar lo que un agente hizo realmente. MCP es uno de los mecanismos concretos por los que un agente obtiene ese acceso a herramientas en primer lugar. Cada servidor MCP que conectas es una concesión de herramienta, y las mismas mitigaciones se aplican directamente, solo que acotadas a una pregunta concreta: ¿qué servidores MCP están conectados ahora mismo, y qué puede tocar realmente cada uno de ellos? Si ya piensas en los permisos de los agentes en términos de <strong>privilegio mínimo</strong> y de puertas de aprobación, conectar un servidor MCP es donde ese pensamiento tiene que aplicarse de verdad, no solo reconocerse.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">Una nota sobre el alcance.</strong> Esto es orientación para desarrolladores y revisores de seguridad que evalúan integraciones de MCP, no una afirmación de que MCP en sí sea inseguro por diseño. El riesgo vive en las concesiones de confianza sin revisar, igual que con cualquier otro punto de integración extensible: extensiones de navegador, gestores de paquetes, receptores de webhooks. El protocolo hace que conectar sea fácil; no hace que evaluar aquello a lo que te conectas sea opcional.
+      </div>
+
+      <p class="mt-10">Los protocolos que facilitan la integración siempre hacen que las fronteras de confianza sean más fáciles de difuminar; eso no es una crítica específica de MCP, es lo que ocurre siempre que «conectar cualquier cosa con cualquier cosa» se convierte en una acción de un clic en lugar de una decisión deliberada. Tratar cada conexión MCP como una decisión real de control de acceso, y no como una comodidad de un clic, es toda la mitigación en una sola frase.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué es el Model Context Protocol (MCP)?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Es un protocolo abierto, originado en Anthropic y adoptado ampliamente en la industria, que estandariza cómo una aplicación de IA se conecta a herramientas, fuentes de datos y servicios externos, en lugar de que cada integración se construya a medida.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Por qué estandarizar las conexiones de un agente también estandariza el riesgo?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Porque una técnica de ataque que explote una debilidad común en cómo los servidores MCP describen sus herramientas o devuelven resultados puede generalizarse a todos los servidores construidos de la misma manera, en vez de quedarse limitada a una integración a medida.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué debería comprobar alguien antes de instalar un servidor MCP de terceros?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Revisar el código fuente si es abierto, preferir mantenedores de confianza, acotar los permisos concedidos al mínimo que la tarea necesite, ejecutar servidores no confiables en un entorno aislado y registrar qué herramientas se llaman realmente y con qué argumentos.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es MCP inseguro por diseño?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No; el riesgo vive en las concesiones de confianza sin revisar en cada conexión, igual que con cualquier otro punto de integración extensible como extensiones de navegador o gestores de paquetes: el protocolo facilita conectar, pero no hace que evaluar aquello a lo que te conectas sea opcional.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../seguridad-de-ia-agentica/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Fundamentos de seguridad de la IA agéntica</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../prompt-injection-explicado/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">La inyección de prompts, explicada</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../ejecuta-un-llm-local/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Ejecuta un LLM en tu propia máquina</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de IA</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../laboratorio/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

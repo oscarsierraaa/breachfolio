@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cybersecurity">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOC team roles and tiers explained | Breachfolio</title>
+  <meta name="description" content="Inside a SOC: the tier model, every role from Tier 1 analyst to SOC manager, how alerts escalate, shift work, and the realistic path in and up." />
+  <meta name="keywords" content="soc team roles" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/roles-de-un-soc/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="SOC team roles and tiers explained | Breachfolio" />
+  <meta property="og:description" content="Inside a SOC: the tier model, every role from Tier 1 analyst to SOC manager, how alerts escalate, shift work, and the realistic path in and up." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/soc-team-roles/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/hero-soc-roles.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SOC team roles and tiers explained | Breachfolio" />
+  <meta name="twitter:description" content="Inside a SOC: the tier model, every role from Tier 1 analyst to SOC manager, how alerts escalate, shift work, and the realistic path in and up." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/hero-soc-roles.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .prose-content table { display:block; overflow-x:auto; width:100%; border-collapse:collapse; margin:1.5em 0; font-size:14.5px; }
+    .prose-content th, .prose-content td { border:1px solid hsl(var(--border)); padding:0.6em 0.9em; text-align:left; vertical-align:top; }
+    .prose-content th { font-family:'Sora', sans-serif; font-weight:600; background:hsl(var(--surface)); color:hsl(var(--foreground)); white-space:nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+    .prose-content h2 { font-family:'Sora',sans-serif; font-weight:600; font-size:clamp(1.4rem,3vw,1.75rem); letter-spacing:-0.02em; line-height:1.2; margin:2.75rem 0 1rem; color:hsl(var(--foreground)); }
+    .prose-content h3 { font-family:'Sora',sans-serif; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin:2rem 0 .6rem; color:hsl(var(--foreground)); }
+    .prose-content p { margin:1.15rem 0; }
+    .prose-content ul, .prose-content ol { padding-left:1.3rem; margin:1.1rem 0; }
+    .prose-content ul { list-style:disc; } .prose-content ol { list-style:decimal; }
+    .prose-content li { margin:.45rem 0; } .prose-content li::marker { color:hsl(var(--accent)); }
+    .prose-content a { color:hsl(var(--accent)); text-decoration:none; }
+    .prose-content a:hover { text-decoration:underline; text-underline-offset:3px; }
+    .prose-content strong { color:hsl(var(--foreground)); font-weight:600; }
+    .prose-content code { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em; background:hsl(var(--surface)); border:1px solid hsl(var(--border)); padding:1px 6px; border-radius:4px; color:hsl(var(--accent)); word-break:break-word; }
+    .prose-content pre { background:hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius:12px; padding:1rem 1.15rem; overflow-x:auto; margin:1.4rem 0; }
+    .prose-content pre code { background:none; border:none; padding:0; color:hsl(var(--foreground)); font-size:13.5px; line-height:1.6; white-space:pre; }
+    .prose-content > p:first-child { margin-top:0; }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "SOC team roles and tiers explained",
+      "description": "Inside a SOC: the tier model, every role from Tier 1 analyst to SOC manager, how alerts escalate, shift work, and the realistic path in and up.",
+      "image": "https://breachfolio.com/assets/img/hero-soc-roles.webp",
+      "datePublished": "2026-07-17",
+      "dateModified": "2026-07-17",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": { "@id": "https://breachfolio.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://breachfolio.com/cybersecurity/soc-team-roles/" },
+      "inLanguage": "en",
+      "keywords": "soc team roles"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://breachfolio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cybersecurity", "item": "https://breachfolio.com/cybersecurity/" },
+        { "@type": "ListItem", "position": 3, "name": "SOC team roles and tiers explained", "item": "https://breachfolio.com/cybersecurity/soc-team-roles/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/soc-team-roles/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between a SOC analyst Tier 1 and Tier 2?", "acceptedAnswer": { "@type": "Answer", "text": "Tier 1 triages: they work the alert queue against playbooks, decide what's a false positive, do first-pass enrichment, and escalate the real ones – fast, high-volume, front-line work. Tier 2 investigates what T1 escalates end to end, pivoting across data sources to confirm whether it's a genuine incident, and takes first containment actions like isolating a host or disabling an account. In short, T1 decides whether something is worth a closer look; T2 does the closer look and starts responding." } },
+        { "@type": "Question", "name": "Do you need a degree to work in a SOC?", "acceptedAnswer": { "@type": "Answer", "text": "No. A degree can help you get past some HR filters, but it is not a hard requirement, and plenty of SOC analysts come from IT support, self-study, or career changes. What consistently matters more is demonstrable ability: solid networking and Linux fundamentals, a documented home lab, hands-on practice on blue-team labs, familiarity with a SIEM query language and MITRE ATT&CK, and the ability to explain your reasoning clearly. Reason about a scenario well and you'll beat a degree with no applied skill." } },
+        { "@type": "Question", "name": "What's the difference between a SOC analyst and an incident responder?", "acceptedAnswer": { "@type": "Answer", "text": "A SOC analyst mostly works the ongoing flow – monitoring, triaging, and investigating alerts as they arrive, day in and day out. An incident responder is called in (or steps up) once something is confirmed to be a real incident, and their job is to take command of it: coordinate containment, eradication, and recovery, keep the timeline, and brief stakeholders. Analysts often escalate to responders. Many people become incident responders after time as a Tier 2 or Tier 3 analyst, so the roles overlap in skill but differ in focus and timing." } },
+        { "@type": "Question", "name": "What does a threat hunter actually do?", "acceptedAnswer": { "@type": "Answer", "text": "A threat hunter proactively looks for attackers that the automated detections missed, rather than waiting for alerts. They start from a hypothesis – often based on a MITRE ATT&CK technique – such as \"if someone were stealing credentials here, what would that look like in our telemetry?\", translate it into queries across the SOC's data, and sift the results. A hunt ends one of two useful ways: it surfaces a real intrusion to hand to incident response, or it produces a new detection idea for the engineering team. It's a senior, curiosity-driven role built on deep knowledge of both attacker tradecraft and the organization's own data." } },
+        { "@type": "Question", "name": "Is SOC analyst a good entry-level job?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, with eyes open. Tier 1 is one of the most accessible genuine entry points into security, it exposes you to real attacks and the whole defensive toolstack fast, and it opens clear paths into hunting, detection engineering, incident response, and more. The trade-offs are real too: it can be high-volume and repetitive, and 24x7 SOCs involve shift work and night rotations that drive burnout and turnover. The good ones automate the grind, rotate people off pure triage, and treat progression to Tier 2 as a real path – look for those." } },
+        { "@type": "Question", "name": "What's the difference between a detection engineer and a SOC analyst?", "acceptedAnswer": { "@type": "Answer", "text": "A SOC analyst consumes detections – they respond to the alerts the rules generate. A detection engineer builds and maintains those rules: they decide what should become an alert in the first place, write and tune the detection logic (increasingly as \"detection-as-code,\" version-controlled and tested like software), map coverage to MITRE ATT&CK, and retire rules that have turned into noise. Analysts live in the alert queue; detection engineers live in the rules and pipelines that create it. Many detection engineers started as analysts, which is exactly why they know which alerts were useful and which were just noise." } }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">SOC team roles and tiers explained</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../assets/img/hero-soc-roles.webp" alt="SOC team roles and tiers explained." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">CYBERSECURITY · SOC</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">SOC team roles and tiers explained.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Inside a SOC: the tier model, every role from Tier 1 analyst to SOC manager, how alerts escalate, shift work, and the realistic path in and up.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>July 17, 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>12 min read</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+<p>A Security Operations Center looks like one thing from the outside: a room full of screens and people watching alerts. From the inside it's a layered machine, and every layer is a different job with a different skill set, a different day, and a different next step. "SOC analyst" is not one role – it's the entrance to at least six or seven of them. This is a map of who does what, what escalates between them, and how a real career moves through the building.</p>
+
+<p>If you're still deciding whether the defensive side is your lane, our <a href="../red-blue-purple-team-explained/">red, blue and purple team breakdown</a> and the <a href="../cybersecurity-roadmap-and-careers/">cybersecurity roadmap and careers</a> guide cover the fork above this one. This article assumes you've already pointed at "blue team, SOC" and want to know what's inside.</p>
+
+
+      <figure class="sf-dia">
+        <svg viewBox="0 0 384 240" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Sora, system-ui, sans-serif"><rect x="12" y="2" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="2" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="26" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Tier 1 – Triage</text><text x="36" y="46" fill="hsl(var(--muted))" font-size="12">Monitor &amp; first response</text><path d="M 192 65 L 192 84" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 80 L 192 85 L 196 80" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="90" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="90" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="114" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Tier 2 – Investigation</text><text x="36" y="134" fill="hsl(var(--muted))" font-size="12">Deeper analysis &amp; IR</text><path d="M 192 153 L 192 172" stroke="hsl(var(--accent))" stroke-width="1.5"/><path d="M 188 168 L 192 173 L 196 168" fill="none" stroke="hsl(var(--accent))" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="178" width="360" height="60" rx="10" fill="hsl(var(--surface))" stroke="hsl(var(--border))"/><rect x="12" y="178" width="4" height="60" rx="2" fill="hsl(var(--accent))"/><text x="36" y="202" fill="hsl(var(--foreground))" font-size="15" font-weight="600">Tier 3 – Hunting</text><text x="36" y="222" fill="hsl(var(--muted))" font-size="12">Threat hunting &amp; advanced</text></svg>
+        <figcaption>How work escalates through the SOC tiers.</figcaption>
+      </figure>
+      <h2>The tier model: how a SOC is layered</h2>
+<p>Most SOCs organize analysts into tiers – usually three. Tiers exist to protect the two scarcest resources in the building: attention and expertise. You don't want your best incident responder reading login-failure alerts all day, or a first-week analyst deciding to pull a production server off the network. Tiers route each piece of work to the cheapest level that can safely handle it, and escalate only what needs a more expensive brain.</p>
+
+<h3>Tier 1 – triage and monitoring</h3>
+<p>The front door. Tier 1 works the alert queue: every detection the SIEM, EDR, and other tools throw off lands here first. The job is fast, disciplined triage – is this a false positive, a benign true positive, or something real? T1 follows playbooks, does first-pass enrichment (who is this user, is this IP known-bad, is this a normal login hour), and either closes the alert or escalates it with notes. Volume is high and the clock is always running.</p>
+
+<h3>Tier 2 – investigation and response</h3>
+<p>Tier 2 takes what T1 escalates and actually investigates it. That means pivoting across data sources, reconstructing what happened on a host, deciding whether an incident is real, and taking first containment actions – isolating a machine, disabling an account, blocking a domain. T2 is where "an alert" becomes "an incident with a timeline." They also feed the SOC's improvement loop, flagging noisy rules and gaps back to the engineers.</p>
+
+<h3>Tier 3 – threat hunting and advanced analysis</h3>
+<p>Tier 3 is the senior technical layer: threat hunting, deep analysis of the hard cases, reverse-engineering suspicious binaries, and handling the incidents T2 can't close alone. Crucially, T3 doesn't just wait for escalations: they go looking for what the alerts missed, forming hypotheses ("if an attacker were living off the land here, what would it look like?") and hunting through data to prove or kill them.</p>
+
+<h3>What escalates, and when</h3>
+<p>The rule of thumb: work moves up a tier when it exceeds the current tier's authority, knowledge, or time budget. T1 escalates when an alert can't be closed from the playbook, when enrichment points at a real threat, or when containment is needed that T1 isn't authorized to perform. T2 escalates to T3 or a dedicated responder when the scope is unknown, multiple hosts are involved, the attacker is still active, or the case needs forensics or malware analysis. Good SOCs also track what <em>doesn't</em> escalate – a rule generating 500 alerts a week that all close as false positives is a detection-engineering problem, not a staffing one.</p>
+
+<h2>The roles, one desk at a time</h2>
+
+<h3>SOC Analyst – Tier 1</h3>
+<p><strong>What they do:</strong> monitor and triage alerts against playbooks, escalate the real ones. <strong>A day:</strong> claim the next alert in the queue, check the process tree or login context, confirm it's a scheduled task everyone forgot about, close it, repeat – punctuated by the occasional one that makes the hair stand up and gets written up for T2. <strong>Key skills:</strong> networking and OS fundamentals, calm pattern recognition, clear written notes, resistance to alert fatigue. <strong>Tools:</strong> the SIEM, the EDR console, a ticketing system, threat-intel lookups like <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer">VirusTotal</a>. <strong>Progress:</strong> get fast and accurate, learn one query language deeply, then move to T2.</p>
+
+<h3>SOC Analyst – Tier 2</h3>
+<p><strong>What they do:</strong> investigate escalations end to end and run first-line response. <strong>A day:</strong> pick up a T1 escalation about suspicious PowerShell, pull the full process tree and network connections, correlate against other hosts, confirm a live beacon, isolate the endpoint, and open a proper incident. <strong>Key skills:</strong> log correlation across sources, attacker tradecraft (the <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> framework becomes a daily reference), scripting to speed up the boring parts. <strong>Tools:</strong> SIEM + EDR at depth, SOAR playbooks, packet and log analysis. <strong>Progress:</strong> specialize toward hunting, detection engineering, or dedicated incident response.</p>
+
+<h3>SOC Analyst – Tier 3 / Senior Analyst</h3>
+<p><strong>What they do:</strong> own the hardest investigations, mentor lower tiers, and hunt proactively. <strong>A day:</strong> half spent closing a nasty multi-host case, half spent running a hypothesis-driven hunt for credential theft that no rule currently catches. <strong>Key skills:</strong> deep systems internals, malware triage, the ability to work without a playbook. <strong>Tools:</strong> everything in the stack plus sandboxes and analysis tooling. <strong>Progress:</strong> into threat hunting, DFIR, detection engineering, or SOC leadership.</p>
+
+<h3>Incident Responder (IR)</h3>
+<p><strong>What they do:</strong> take command when something is confirmed bad and coordinate containment, eradication and recovery. <strong>A day:</strong> during an incident, run the response – assign tasks, keep the timeline, decide when to isolate versus watch, brief leadership; between incidents, write and rehearse playbooks. <strong>Key skills:</strong> cool head under pressure, structured methodology, communication with non-technical stakeholders. <strong>Tools:</strong> EDR for containment, forensic and IR frameworks; the <a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61</a> incident-handling guide is the standard reference. Our <a href="../../resources/incident-response-first-24h-checklist/">first 24 hours of an incident checklist</a> is this role in practice. <strong>Progress:</strong> IR lead, DFIR consultant, or SOC manager.</p>
+
+<h3>Threat Hunter</h3>
+<p><strong>What they do:</strong> assume a breach the tools missed and go find it. Hunting is proactive and hypothesis-driven, not alert-driven. <strong>A day:</strong> pick a technique from ATT&amp;CK, translate "what would this look like in our telemetry?" into queries, sift the results, and either hand a finding to IR or hand a new detection idea to the engineers. <strong>Key skills:</strong> attacker mindset, fluency in the SIEM query language, statistics and baselining. <strong>Tools:</strong> the data lake, EDR telemetry, notebooks, ATT&amp;CK. <strong>Progress:</strong> senior hunter, detection engineering, or research.</p>
+
+<h3>Detection / Content Engineer (detection-as-code)</h3>
+<p><strong>What they do:</strong> build and maintain the detections that make the whole SOC work: the rules that decide what becomes an alert. Modern teams treat these as <em>detection-as-code</em>: rules live in version control, get code-reviewed and tested like software, and ship through a pipeline. <strong>A day:</strong> write a new rule in a format like <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a>, test it against real and simulated data, measure its false-positive rate, and retire a rule that's become noise. <strong>Key skills:</strong> deep detection logic, ATT&amp;CK mapping, Git and CI, and enough software discipline to keep hundreds of rules maintainable. <strong>Tools:</strong> Sigma, the SIEM's rule engine, Git, adversary-emulation tools like <a href="https://github.com/redcanaryco/atomic-red-team" target="_blank" rel="noopener noreferrer">Atomic Red Team</a>. <strong>Progress:</strong> detection lead or security-engineering roles.</p>
+
+<h3>SIEM Engineer / SOC Platform Engineer</h3>
+<p><strong>What they do:</strong> keep the platform alive and fed. If the detection engineer writes the rules, the SIEM engineer makes sure the data those rules need is actually flowing, parsed, and normalized. <strong>A day:</strong> onboard a new log source, fix a broken parser that silently dropped a field, tune ingestion so the licensing bill doesn't explode, keep dashboards and integrations working. <strong>Key skills:</strong> the SIEM platform in depth, data pipelines, regex and parsing, infrastructure and automation. <strong>Tools:</strong> the SIEM, log shippers and collectors, SOAR, infrastructure-as-code. <strong>Progress:</strong> security architecture or platform/DevOps-leaning security engineering. See our <a href="../soc-tools-siem-soar-edr/">SIEM, SOAR and EDR toolstack guide</a> for how these pieces fit.</p>
+
+<h3>Threat Intelligence Analyst (CTI)</h3>
+<p><strong>What they do:</strong> answer "who might target us, how, and what should we do about it before they do." CTI turns raw reporting into decisions – feeding indicators to detections, prioritizing patching by what's actually being exploited, and briefing leadership. <strong>A day:</strong> track a threat group's shift in tooling, map their TTPs to ATT&amp;CK, push new indicators into the SIEM, and write a short assessment the SOC and executives can both use. <strong>Key skills:</strong> analytical writing, source evaluation, geopolitics-meets-malware breadth, avoiding indicator overload. <strong>Tools:</strong> threat-intel platforms, <a href="https://otx.alienvault.com/" target="_blank" rel="noopener noreferrer">open-source feeds</a>, ATT&amp;CK, structured frameworks. <strong>Progress:</strong> senior CTI, threat research, or advising strategy.</p>
+
+<h3>DFIR / Forensics Analyst</h3>
+<p><strong>What they do:</strong> the deep forensic side of response – acquire and analyze disk and memory images, reconstruct exactly what an attacker did, and produce findings that can stand up to scrutiny (sometimes in court). <strong>A day:</strong> image a compromised laptop, carve the memory dump for injected code, build a minute-by-minute timeline from artifacts, and document the chain of custody. <strong>Key skills:</strong> filesystem and OS internals, evidence handling, meticulous documentation. <strong>Tools:</strong> forensic suites, memory-analysis frameworks like <a href="https://www.volatilityfoundation.org/" target="_blank" rel="noopener noreferrer">Volatility</a>, disk imaging tools. <strong>Progress:</strong> senior DFIR, consulting, or expert-witness work.</p>
+
+<h3>SOC Manager / Lead</h3>
+<p><strong>What they do:</strong> run the operation – people, process, and metrics. They own staffing and shift coverage, the metrics that prove the SOC works (mean time to detect and respond), the escalation paths, and the relationship with the rest of the business. <strong>A day:</strong> less hands-on-keyboard, more shift planning, incident post-mortems, hiring, vendor calls, and defending the budget. <strong>Key skills:</strong> leadership, calm during major incidents, translating technical risk into business language, and protecting the team from burnout. <strong>Progress:</strong> head of security operations, then CISO-track roles.</p>
+
+<h2>Where the SOC meets the red team: purple teaming</h2>
+<p>The SOC is the blue team's home. Its counterpart is the red team, which simulates real attacks under signed authorization. The two only get better together when they close the loop, and that loop is what "purple team" names. In a purple-team exercise, the red team runs a specific technique and says so in real time; the SOC checks whether the detection fired, and if it didn't, the detection engineer writes one on the spot. It's the fastest way a SOC improves: instead of waiting weeks for a red-team report, defenders find out immediately which of their detections have holes. Purple team is usually a practice, not a permanent desk, but it's where detection engineers, hunters, and CTI earn their keep.</p>
+
+<h2>Shift work, on-call, and the human cost</h2>
+<p>Threats don't keep office hours, so most mature SOCs run 24x7. There are two common ways to cover the clock. The first is rotating shifts – analysts cycle through days, evenings, and nights, which means someone is always awake but also always working against their circadian rhythm. The second is <strong>follow-the-sun</strong>: teams in different time zones each work their own daytime and hand off at the boundaries, so nobody works nights, but it requires multiple regional teams and airtight handovers.</p>
+
+<p>Be honest about the cost. Tier 1 in particular carries real burnout risk: high volume, repetitive triage, night shifts, and the weight of "if I miss one, it's a breach." SOC turnover is notoriously high for exactly these reasons. The teams that keep people rotate them off pure triage, automate so humans handle judgment rather than volume, cap consecutive night shifts, and treat progression to T2 as a real, visible path. A posting that's all night shifts with no growth story is a signal.</p>
+
+<h2>Getting in, and a realistic path up</h2>
+<p>Tier 1 is one of the most accessible genuine entry points in security, which is exactly why it's competitive. What gets people hired mirrors the wider field: solid networking and Linux fundamentals, a documented home lab, hands-on practice on <a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe</a> or <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a> (especially blue-team labs), and the ability to explain your reasoning out loud. A first SIEM query language and familiarity with ATT&amp;CK put you ahead of most applicants. Our <a href="../how-to-learn-cybersecurity/">how to learn cybersecurity</a> guide covers the groundwork.</p>
+
+<p>A realistic trajectory: 6–18 months at Tier 1 to get fast and trustworthy, then Tier 2 as you start owning investigations, then a fork – hunting, detection engineering, IR, DFIR, CTI, or platform engineering – based on where you kept gravitating. Leadership is a separate branch, not the only "up." It's a sequence, not a fixed clock.</p>
+
+<p><strong>On salary, an honest note:</strong> compensation for these roles varies enormously by country, cost of living, sector, company size, and seniority: a Tier 1 salary in one market can exceed a Tier 3 salary in another. Anyone quoting a single global number is guessing. Check real, current sources for your region instead: public aggregators such as Glassdoor and Levels.fyi, recruiter salary guides like the Robert Half guide, and industry studies such as the annual <a href="https://www.isc2.org/research" target="_blank" rel="noopener noreferrer">ISC2 Cybersecurity Workforce Study</a>. Look at your city and your seniority, not a headline figure.</p>
+
+<h2>The roles at a glance</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Tier / layer</th>
+      <th>Focus</th>
+      <th>Typical tools</th>
+      <th>Common next step</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>SOC Analyst L1</strong></td>
+      <td>Tier 1</td>
+      <td>Alert triage and monitoring</td>
+      <td>SIEM, EDR console, ticketing, intel lookups</td>
+      <td>Tier 2 analyst</td>
+    </tr>
+    <tr>
+      <td><strong>SOC Analyst L2</strong></td>
+      <td>Tier 2</td>
+      <td>Investigation and first-line response</td>
+      <td>SIEM + EDR at depth, SOAR, ATT&amp;CK</td>
+      <td>Hunting / detection / IR</td>
+    </tr>
+    <tr>
+      <td><strong>SOC Analyst L3</strong></td>
+      <td>Tier 3</td>
+      <td>Hard cases, hunting, mentoring</td>
+      <td>Full stack, sandboxes, analysis tooling</td>
+      <td>DFIR / detection lead / leadership</td>
+    </tr>
+    <tr>
+      <td><strong>Incident Responder</strong></td>
+      <td>Response</td>
+      <td>Command, contain, eradicate, recover</td>
+      <td>EDR, IR frameworks, NIST 800-61</td>
+      <td>IR lead / SOC manager</td>
+    </tr>
+    <tr>
+      <td><strong>Threat Hunter</strong></td>
+      <td>Tier 3 / hunt</td>
+      <td>Proactive, hypothesis-driven search</td>
+      <td>Data lake, EDR telemetry, ATT&amp;CK</td>
+      <td>Senior hunter / research</td>
+    </tr>
+    <tr>
+      <td><strong>Detection Engineer</strong></td>
+      <td>Engineering</td>
+      <td>Detection-as-code: build/tune rules</td>
+      <td>Sigma, SIEM rules, Git/CI, emulation</td>
+      <td>Detection lead / security eng</td>
+    </tr>
+    <tr>
+      <td><strong>SIEM Engineer</strong></td>
+      <td>Platform</td>
+      <td>Data pipelines, parsing, uptime</td>
+      <td>SIEM, log shippers, SOAR, IaC</td>
+      <td>Security architect / platform</td>
+    </tr>
+    <tr>
+      <td><strong>CTI Analyst</strong></td>
+      <td>Intelligence</td>
+      <td>Who targets us, how, and what to do</td>
+      <td>TI platforms, feeds, ATT&amp;CK</td>
+      <td>Senior CTI / threat research</td>
+    </tr>
+    <tr>
+      <td><strong>DFIR / Forensics</strong></td>
+      <td>Response</td>
+      <td>Deep forensic reconstruction</td>
+      <td>Forensic suites, Volatility, imaging</td>
+      <td>Senior DFIR / consulting</td>
+    </tr>
+    <tr>
+      <td><strong>SOC Manager</strong></td>
+      <td>Leadership</td>
+      <td>People, process, metrics</td>
+      <td>Metrics dashboards, planning tools</td>
+      <td>Head of SecOps / CISO track</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>One alert, three desks: a worked example</h2>
+<p>Here's how a single detection travels through the building. At 02:14 the EDR fires: Microsoft Word spawned <code>powershell.exe</code> with an encoded command. It lands in the Tier 1 queue.</p>
+
+<pre tabindex="0"><code>[ALERT] EDR-1188  severity: medium  host: FIN-WKS-042  user: j.doe
+parent: WINWORD.EXE  ->  child: powershell.exe
+cmdline: powershell -nop -w hidden -enc SQBFAFgAKABOAGUAdwAt...
+</code></pre>
+
+<p><strong>Tier 1</strong> claims it. Office spawning hidden, encoded PowerShell is a classic macro-malware pattern, not a benign scheduled task. T1 does first-pass enrichment – the user is in Finance, it's the middle of the night, and this host has no history of scripting – decodes the command enough to see it's reaching out to a URL, and escalates within minutes with clean notes. T1 does <em>not</em> touch the machine; that's not their call.</p>
+
+<p><strong>Tier 2</strong> picks it up and investigates. They pull the full process tree, see PowerShell spawn a child process making a repeating outbound connection to an unfamiliar domain: a command-and-control beacon. This is a confirmed true positive. T2 has the authority to act: they isolate <code>FIN-WKS-042</code> through the EDR (network-contained but still reachable for analysis), disable the user's sessions, block the domain, and open a formal incident. Then they check whether any other host has talked to that domain, and two have. Scope is now unknown, an attacker may be live, so T2 escalates to Tier 3 / IR.</p>
+
+<p><strong>Tier 3, IR, and the specialists</strong> take it from here in parallel. The <strong>incident responder</strong> takes command and coordinates containment across all three hosts. A <strong>threat hunter</strong> sweeps the estate for the same TTPs to make sure they've found every affected machine, not just the ones that beaconed. <strong>DFIR</strong> images the first workstation's memory to recover exactly what the initial payload did and whether credentials were stolen. The <strong>CTI analyst</strong> matches the domain and tooling to a known phishing campaign and provides more indicators to search for. Finally, the <strong>detection engineer</strong> writes a new, tighter Sigma rule for this exact Office-to-encoded-PowerShell pattern, tests it, and ships it, so next time, it fires louder and earlier. One alert, and nearly every role in the SOC touched it.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What is the difference between a SOC analyst Tier 1 and Tier 2?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Tier 1 triages: they work the alert queue against playbooks, decide what's a false positive, do first-pass enrichment, and escalate the real ones – fast, high-volume, front-line work. Tier 2 investigates what T1 escalates end to end, pivoting across data sources to confirm whether it's a genuine incident, and takes first containment actions like isolating a host or disabling an account. In short, T1 decides whether something is worth a closer look; T2 does the closer look and starts responding.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Do you need a degree to work in a SOC?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. A degree can help you get past some HR filters, but it is not a hard requirement, and plenty of SOC analysts come from IT support, self-study, or career changes. What consistently matters more is demonstrable ability: solid networking and Linux fundamentals, a documented home lab, hands-on practice on blue-team labs, familiarity with a SIEM query language and MITRE ATT&amp;CK, and the ability to explain your reasoning clearly. Reason about a scenario well and you'll beat a degree with no applied skill.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What's the difference between a SOC analyst and an incident responder?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A SOC analyst mostly works the ongoing flow – monitoring, triaging, and investigating alerts as they arrive, day in and day out. An incident responder is called in (or steps up) once something is confirmed to be a real incident, and their job is to take command of it: coordinate containment, eradication, and recovery, keep the timeline, and brief stakeholders. Analysts often escalate to responders. Many people become incident responders after time as a Tier 2 or Tier 3 analyst, so the roles overlap in skill but differ in focus and timing.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What does a threat hunter actually do?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A threat hunter proactively looks for attackers that the automated detections missed, rather than waiting for alerts. They start from a hypothesis – often based on a MITRE ATT&amp;CK technique – such as "if someone were stealing credentials here, what would that look like in our telemetry?", translate it into queries across the SOC's data, and sift the results. A hunt ends one of two useful ways: it surfaces a real intrusion to hand to incident response, or it produces a new detection idea for the engineering team. It's a senior, curiosity-driven role built on deep knowledge of both attacker tradecraft and the organization's own data.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>Is SOC analyst a good entry-level job?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Yes, with eyes open. Tier 1 is one of the most accessible genuine entry points into security, it exposes you to real attacks and the whole defensive toolstack fast, and it opens clear paths into hunting, detection engineering, incident response, and more. The trade-offs are real too: it can be high-volume and repetitive, and 24x7 SOCs involve shift work and night rotations that drive burnout and turnover. The good ones automate the grind, rotate people off pure triage, and treat progression to Tier 2 as a real path – look for those.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>What's the difference between a detection engineer and a SOC analyst?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          A SOC analyst consumes detections: they respond to the alerts the rules generate. A detection engineer builds and maintains those rules: they decide what should become an alert in the first place, write and tune the detection logic (increasingly as "detection-as-code," version-controlled and tested like software), map coverage to MITRE ATT&amp;CK, and retire rules that have turned into noise. Analysts live in the alert queue; detection engineers live in the rules and pipelines that create it. Many detection engineers started as analysts, which is exactly why they know which alerts were useful and which were just noise.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Related reading</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../what-is-a-soc/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">What is a SOC (Security Operations Center)?</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../soc-tools-siem-soar-edr/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The SOC toolstack: SIEM, SOAR and EDR</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../cybersecurity-roadmap-and-careers/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">The cybersecurity roadmap and careers</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../how-to-learn-cybersecurity/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">How to learn cybersecurity</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">All Cybersecurity articles</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../digital-forensics-dfir/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Digital forensics and DFIR explained</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a></div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+          <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+          <a class="ul-link" href="../../legal/about/">About us</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-lang="EN" data-section="cyber">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How networks work – IP, TCP, DNS, TLS explained | Breachfolio</title>
+  <meta name="description" content="IP, TCP, DNS, TLS – traced through a single curl request. What each layer adds, and which ones an attacker can actually lie at." />
+  <meta name="keywords" content="how networks work, OSI model explained, TCP three-way handshake explained, DNS spoofing, how does TLS work, how does HTTPS work, what happens when you type a URL and press enter, network layers for security, ARP spoofing explained, SYN flood attack, certificate transparency logs, IP TCP DNS TLS explained, how does a curl request work" />
+  <link rel="canonical" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/ciberseguridad/como-funcionan-las-redes/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/cybersecurity/how-networks-work/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="How networks work – IP, TCP, DNS, TLS explained | Breachfolio" />
+  <meta property="og:description" content="IP, TCP, DNS, TLS – traced through a single curl request. What each layer adds, and which ones an attacker can actually lie at." />
+  <meta property="og:url" content="https://breachfolio.com/cybersecurity/how-networks-work/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-cyber-networks.webp" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How networks work – IP, TCP, DNS, TLS explained | Breachfolio" />
+  <meta name="twitter:description" content="IP, TCP, DNS, TLS – traced through a single curl request. What each layer adds, and which ones an attacker can actually lie at." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-cyber-networks.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .video-mask::after {
+      content: ''; position: absolute; right: 0; bottom: 0; width: 18%; height: 12%;
+      background: linear-gradient(135deg, transparent 0%, hsl(var(--background) / 0.85) 60%, hsl(var(--background)) 100%);
+      pointer-events: none;
+    }
+    html[data-theme="light"] video { filter: contrast(0.92) saturate(0.9); opacity: 0.85; }
+    html[data-theme="light"] [data-theme-section="dark"] video { filter: none; opacity: 1; }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .grid-pattern {
+      background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .prose-sec h2 { font-family:'Sora'; font-weight:600; font-size:1.6rem; letter-spacing:-0.02em; margin: 3rem 0 1rem; line-height:1.2; color: hsl(var(--foreground)); }
+    .prose-sec h3 { font-family:'Sora'; font-weight:600; font-size:1.2rem; letter-spacing:-0.01em; margin: 2.2rem 0 .8rem; color: hsl(var(--foreground)); }
+    .prose-sec p, .prose-sec li { font-size: 17px; line-height:1.75; color: hsl(var(--muted-foreground)); }
+    .prose-sec p { margin: 1rem 0; }
+    .prose-sec strong { color: hsl(var(--foreground)); font-weight:600; }
+    .prose-sec a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+    .prose-sec ul, .prose-sec ol { padding-left: 1.2rem; margin: 1rem 0; }
+    .prose-sec ul li { list-style: none; position:relative; padding-left: 1.1rem; margin:.4rem 0; }
+    .prose-sec ul li::before { content:''; position:absolute; left:0; top:.7em; width:.5rem; height:1px; background: hsl(var(--accent)); }
+    .prose-sec ol { list-style: decimal; }
+    .prose-sec blockquote { border-left: 2px solid hsl(var(--accent)); padding: .2rem 1.2rem; margin: 1.5rem 0; color: hsl(var(--foreground)); font-style: italic; background: hsl(var(--surface) / .5); }
+    .prose-sec pre { background: hsl(var(--surface-2)); border:1px solid hsl(var(--border)); border-radius: 12px; padding: 1.1rem 1.2rem; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size: 13.5px; line-height:1.65; margin: 1.4rem 0; color: hsl(var(--foreground)); }
+    .prose-sec code { font-family:'JetBrains Mono', monospace; background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; color: hsl(var(--accent)); }
+    .prose-sec pre code { background: none; border: none; padding: 0; color: inherit; }
+    .prose-sec table { display:block; overflow-x:auto; width:100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 14.5px; }
+    .prose-sec th, .prose-sec td { border-bottom: 1px solid hsl(var(--border)); padding: .7rem .8rem; text-align: left; }
+    .prose-sec th { font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .prose-sec td { color: hsl(var(--muted-foreground)); }
+    .prose-sec td:first-child { color: hsl(var(--foreground)); font-weight: 500; }
+    .prose-sec .callout { border:1px solid hsl(var(--border)); background: hsl(var(--surface)); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+    .prose-sec .callout .label { font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; color: hsl(var(--accent)); text-transform: uppercase; margin-bottom:.4rem; }
+    .term-out { color: hsl(var(--muted-foreground)); }
+    .term-ok  { color: hsl(var(--accent)); }
+    .term-warn{ color: hsl(38 90% 60%); }
+    .term-cmt { color: hsl(var(--muted)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "How networks actually work (without the OSI poster).",
+      "description": "IP, TCP, DNS, TLS – traced through a single curl request. What each layer adds, and which ones an attacker can actually lie at.",
+      "image": "https://breachfolio.com/assets/img/thumb-cyber-networks.webp",
+      "datePublished": "2026-07-10", "dateModified": "2026-07-22",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/cybersecurity/how-networks-work/"
+      },
+      "inLanguage": "en",
+      "keywords": "how networks work, OSI model explained, TCP three-way handshake explained, DNS spoofing, how does TLS work, how does HTTPS work, what happens when you type a URL and press enter, network layers for security, ARP spoofing explained, SYN flood attack, certificate transparency logs, IP TCP DNS TLS explained, how does a curl request work"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://breachfolio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cybersecurity",
+          "item": "https://breachfolio.com/cybersecurity/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How networks actually work (without the OSI poster).",
+          "item": "https://breachfolio.com/cybersecurity/how-networks-work/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/cybersecurity/how-networks-work/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happens when you type a URL and press enter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The request passes through five conversations: DNS resolves the domain name to an IP address, TCP opens a reliable connection via a three-way handshake (SYN, SYN-ACK, ACK), TLS negotiates authentication, key exchange, and cipher selection to make the pipe confidential, HTTP sends the actual request and headers inside that encrypted pipe, and the reply travels all the way back through the same layers in reverse."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the TCP three-way handshake?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's the three packets that open a TCP connection: your computer sends a SYN, the server replies with a SYN-ACK, and your computer replies with an ACK. Once complete, both sides have an established session and can stream bytes reliably, in order, exactly once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can an attacker exploit DNS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If an attacker sits between your computer and the DNS resolver, they can lie about the answer and send you to their own server instead of the real one: this is called DNS spoofing. DNS-over-HTTPS (DoH) and DNSSEC exist specifically to make this harder to pull off."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does TLS actually protect against?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TLS authenticates the server via a certificate signed by a trusted CA, negotiates a shared symmetric key through a public-key handshake an eavesdropper can't reverse, and then encrypts and authenticates traffic with a cipher like AES-GCM or ChaCha20-Poly1305. An attacker who hasn't compromised DNS or obtained a fraudulent certificate can do almost nothing against a correctly validated TLS connection."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Skip to content</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Cybersecurity</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ai/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">AI Security</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../lab/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../compare/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Compare</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../news/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">News</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../resources/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Resources</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guides/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guides</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Home</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a href="../../ai/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">AI Security</a></li>
+        <li><a href="../../lab/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../compare/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Compare</a></li>
+        <li><a href="../../news/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">News</a></li>
+        <li><a href="../../resources/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Resources</a></li><li><a href="../../guides/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guides</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Home</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Cybersecurity</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">How networks actually work (without the OSI poster).</span></li>
+  </ol>
+</nav>
+<main id="main">
+  <section class="relative w-full border-b border-border bg-surface" style="aspect-ratio: 16/6; max-height: 460px;">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="../../assets/img/thumb-cyber-networks.webp" alt="Hero illustration for: How networks actually work (without the OSI poster)." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1920" height="720" />
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 30%, hsl(240 10% 4% / .95))"></div>
+    </div>
+    <div class="relative h-full max-w-container mx-auto px-6 md:px-12 flex items-end pb-10">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+          <span class="border border-accent/30 bg-background/60 backdrop-blur px-2.5 py-1 rounded-full">LEVEL 1</span>
+          <span class="text-muted">CYBERSECURITY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20 grid lg:grid-cols-[1fr_280px] gap-14">
+    <div class="max-w-prose min-w-0">
+      <h1 class="font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.05] tracking-tight font-semibold text-balance">How networks actually work (without the OSI poster).</h1>
+      <p class="mt-5 text-muted-foreground text-[18px] leading-[1.7] text-balance">IP, TCP, DNS, TLS – traced through a single curl request. What each layer adds, and which ones an attacker can lie at.</p>
+      <div class="mt-7 flex items-center gap-4 font-mono text-[11px] text-muted tracking-wide pb-7 border-b border-border">
+        <time datetime="2026-07-10">July 10, 2026</time>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span>11 min read</span>
+        <span class="w-1 h-1 rounded-full bg-muted/60"></span>
+        <span class="text-accent">Daniel A. &amp; Óscar S.</span>
+      </div>
+
+      <div class="prose-sec mt-8">
+<p>The standard introduction to networking is a layered cake – seven of them, in the OSI model – followed by a poster on the wall and a quiz. We will skip the poster. The most useful way to learn what is going on is to trace a single <code>curl</code> request and stop to explain everything that happens to it.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The request</h2>
+
+<p>This is what you type:</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> curl -v https://example.com/</code></pre>
+
+<p>From the moment you press Enter to the moment you see HTML, the bytes pass through five conversations. Each one adds something, and at each one an attacker can do something hostile.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">1. DNS – turning a name into an address</h2>
+
+<p>Your computer does not know what <code>example.com</code> is. It asks a resolver (often your router; the router often asks your ISP). The resolver, in turn, asks one of the root servers, then the <code>.com</code> server, then example.com's own server. The answer is an <strong>IP address</strong>, typically 4 bytes for IPv4 or 16 bytes for IPv6.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">$</span> dig +short example.com
+<span class="term-out">93.184.216.34</span></code></pre>
+
+<p><strong>What an attacker can do here:</strong> if they sit between you and the resolver, they can lie and send you to <em>their</em> server instead. This is "DNS spoofing". DNS-over-HTTPS (DoH) and DNSSEC exist to make this harder.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">2. TCP – opening a reliable pipe</h2>
+
+<p>Now your computer has an IP. It opens a <strong>TCP</strong> connection to port 443 on that IP. TCP is the layer that turns the lossy, out-of-order chaos of the internet into something that feels like a phone line: bytes arrive, in order, exactly once.</p>
+
+<p>The handshake is three packets, often visualised as <em>SYN</em>, <em>SYN-ACK</em>, <em>ACK</em>.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">  you → them</span>  SYN     seq=x
+<span class="term-cmt">them → you </span>  SYN-ACK seq=y ack=x+1
+<span class="term-cmt">  you → them</span>  ACK     ack=y+1</code></pre>
+
+<p>Once that is done, both sides have a session and can stream bytes.</p>
+
+<p><strong>What an attacker can do here:</strong> the classic SYN flood is to send millions of SYNs and never reply, exhausting the server's connection table. On a LAN, ARP spoofing redirects the IP layer below so the TCP connection terminates on the wrong machine: a real "machine in the middle" attack.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">3. TLS – making the pipe confidential</h2>
+
+<p>You used <code>https://</code>, so TCP alone is not enough. TLS now layers on top, doing three things in roughly one round-trip:</p>
+
+<ol>
+  <li><strong>Authentication</strong>: the server proves it is example.com by presenting a certificate signed by a CA your computer already trusts.</li>
+  <li><strong>Key exchange</strong>: the two sides agree on a shared symmetric key, using a public-key handshake (ECDHE). Your computer never sends the key directly: it derives it from a public exchange that an eavesdropper cannot reverse.</li>
+  <li><strong>Cipher selection</strong>: they pick a symmetric cipher (AES-GCM or ChaCha20-Poly1305) and start encrypting and authenticating each record.</li>
+</ol>
+
+<div class="callout">
+  <div class="label">Pin the cert chain</div>
+  <p>If you want to see this happen, run <code>openssl s_client -connect example.com:443 -showcerts</code>. The chain you see is the trust path your browser is validating before it sends a single byte of HTTP.</p>
+</div>
+
+<p><strong>What an attacker can do here:</strong> mostly nothing: that is the point. But if they have tricked you at the DNS layer into resolving to <em>their</em> server, and they have somehow gotten a valid certificate for example.com (rare), they can read everything. This is why <a href="../tls-certificate-transparency/">certificate transparency logs</a> exist – every publicly trusted certificate gets published to an append-only log, so a mis-issued certificate for example.com becomes visible to the world, not just to whoever is using it. If you want the full mechanics of the trust chain behind that padlock – DV vs OV vs EV, how a CA gets trusted in the first place, how CT logs actually work – that's a deeper piece on its own.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">4. HTTP: the application speaks</h2>
+
+<p>Inside the encrypted pipe, your computer now sends an HTTP request. The whole thing is text:</p>
+
+<pre tabindex="0"><code>GET / HTTP/1.1
+Host: example.com
+User-Agent: curl/8.0
+Accept: */*
+</code></pre>
+
+<p>The server replies with a status line, headers, a blank line, and the body. HTTP/2 and HTTP/3 frame this differently for performance but the semantics are the same.</p>
+
+<p><strong>What an attacker can do here:</strong> almost everything interesting in web security is at this layer. Header injection, smuggling, session fixation, CSRF, the entire OWASP Top 10: they all live in the request and the response, not in TCP or TLS.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">5. The reply, all the way back</h2>
+
+<p>The response goes back through TLS (encrypted and authenticated), through TCP (split into segments, acknowledged, reassembled), through IP (routed hop by hop), and is finally handed to <code>curl</code>, which prints it.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The mental model</h2>
+
+<p>If you keep one diagram in your head, make it this one:</p>
+
+<table>
+  <thead><tr><th>Layer</th><th>Identifies who</th><th>What an attacker can lie at</th></tr></thead>
+  <tbody>
+    <tr><td>HTTP</td><td>By URL / cookie / header</td><td>Forge requests, steal tokens</td></tr>
+    <tr><td>TLS</td><td>By certificate</td><td>Almost nothing if certs are honest</td></tr>
+    <tr><td>TCP</td><td>By port</td><td>Exhaust state, hijack sessions</td></tr>
+    <tr><td>IP</td><td>By address</td><td>Spoof source, ARP-poison neighbours</td></tr>
+    <tr><td>DNS</td><td>By name</td><td>Send you to the wrong IP</td></tr>
+  </tbody>
+</table>
+
+<p>Every attack you will ever read about lives in one of these rows. Once you can place a new attack on the table, you already know half of how to defend against it.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">TCP vs UDP: the same dropped packet, two different endings</h2>
+
+<p>The whole walkthrough above used TCP, because HTTPS needs a reliable stream. But TCP is not the only way to move bytes across IP – <strong>UDP</strong> (User Datagram Protocol) is the other major transport, and it makes the opposite trade-off: no handshake, no acknowledgements, no retransmission, no ordering guarantee. It just sends the packet and moves on. The clearest way to understand why that matters is to drop the same packet in both.</p>
+
+<pre tabindex="0"><code><span class="term-cmt">Five packets sent, packet 3 lost in transit, in both cases:</span>
+
+<span class="term-cmt">TCP:</span>  1  2  [3 lost]  4  5
+       <span class="term-out">receiver sees 1, 2, then a gap - holds 4 and 5 back</span>
+       <span class="term-out">sender gets no ACK for 3, retransmits it after a timeout</span>
+       <span class="term-out">3 arrives late → app receives 1 2 3 4 5, in order, nothing missing</span>
+
+<span class="term-cmt">UDP:</span>  1  2  [3 lost]  4  5
+       <span class="term-out">receiver sees 1, 2, then just... 4, 5</span>
+       <span class="term-out">no ACK exists to notice the gap, nothing gets retransmitted</span>
+       <span class="term-out">app receives 1 2 4 5 - packet 3 is simply gone, forever</span></code></pre>
+
+<p>Neither behaviour is "better": they are optimised for different problems. TCP's retransmission is exactly right for a web page or a file: you would rather wait an extra 100ms than render a page with a missing chunk. UDP's indifference is exactly right for a voice call, a video stream, or a multiplayer game's position updates: a retransmitted packet for a video frame from two seconds ago is worse than useless, because by the time it arrives the moment has passed. This is also why DNS (the very first step of this whole request) defaults to UDP: a query and its answer are small enough to fit in a single packet, and it is faster to just ask again on failure than to pay for a handshake first. DNS only falls back to TCP for large responses, such as zone transfers or answers padded with DNSSEC signatures.</p>
+
+<p>Modern protocols increasingly build their own reliability <em>on top of</em> UDP instead of relying on TCP: <strong>QUIC</strong>, the transport underneath HTTP/3, does exactly this: it gets UDP's speed and avoids one specific TCP weakness called head-of-line blocking, where a single lost packet stalls every stream multiplexed on that connection, even ones that had nothing to do with the loss.</p>
+
+<p><strong>What an attacker can do with UDP specifically:</strong> because there is no handshake to establish first, UDP is the workhorse behind reflection and amplification DDoS attacks. An attacker sends a small query with a forged source IP to an open DNS or NTP server; the server dutifully sends its (much larger) reply not to the attacker, but to whatever address was forged into the source field: the victim. TCP's three-way handshake makes this specific trick far harder, because the SYN-ACK is sent to the address in the SYN and the connection cannot actually proceed until that address replies, leaving no third party to reflect off of in the same way.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">The OSI model, since you asked</h2>
+
+<p>We promised to skip the poster at the start of this article, and technically we still have – everything above was the four-layer model networking engineers actually build software around. But now that you have watched a real request cross DNS, TCP, TLS, and HTTP, the seven-layer <strong>OSI model</strong> stops being an abstract diagram and turns into an index of things you already saw happen. It is worth five minutes now, because "layer 3 problem" and "layer 7 firewall" are phrases you will hear used precisely for the rest of your career.</p>
+
+<table>
+  <thead><tr><th>OSI layer</th><th>TCP/IP layer</th><th>What you actually saw at this layer</th></tr></thead>
+  <tbody>
+    <tr><td>7. Application</td><td>Application</td><td>The HTTP request itself – <code>GET /</code>, headers, body</td></tr>
+    <tr><td>6. Presentation</td><td>Application</td><td>TLS record encryption, character encoding</td></tr>
+    <tr><td>5. Session</td><td>Application</td><td>The TLS session – handshake state, session resumption</td></tr>
+    <tr><td>4. Transport</td><td>Transport</td><td>TCP: the three-way handshake, sequencing, retransmission</td></tr>
+    <tr><td>3. Network</td><td>Internet</td><td>IP – addressing and routing the packet hop by hop</td></tr>
+    <tr><td>2. Data Link</td><td>Link</td><td>Ethernet or Wi-Fi framing, ARP resolving IPs to MAC addresses</td></tr>
+    <tr><td>1. Physical</td><td>Link</td><td>The actual electrical, radio, or optical signal on the wire</td></tr>
+  </tbody>
+</table>
+
+<p>The honest version: almost nothing in the real world implements seven distinct layers. TLS, sessions, and encoding all collapse into "the application" in practice, and Data Link and Physical are usually one network card and one driver. The four-layer TCP/IP model is what your operating system's network stack – and this entire article – actually followed. The seven-layer model earns its keep as shared vocabulary anyway: when a colleague says a problem is "layer 3," they mean routing, not code; "layer 7" means the application is misbehaving, not the network under it. That distinction alone saves entire meetings.</p>
+
+<h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Frequently asked questions</h2>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What happens when you type a URL and press enter?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    The request passes through five conversations: DNS resolves the domain name to an IP address, TCP opens a reliable connection via a three-way handshake (SYN, SYN-ACK, ACK), TLS negotiates authentication, key exchange, and cipher selection to make the pipe confidential, HTTP sends the actual request and headers inside that encrypted pipe, and the reply travels all the way back through the same layers in reverse.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What is the TCP three-way handshake?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    It's the three packets that open a TCP connection: your computer sends a SYN, the server replies with a SYN-ACK, and your computer replies with an ACK. Once complete, both sides have an established session and can stream bytes reliably, in order, exactly once.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>How can an attacker exploit DNS?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    If an attacker sits between your computer and the DNS resolver, they can lie about the answer and send you to their own server instead of the real one: this is called DNS spoofing. DNS-over-HTTPS (DoH) and DNSSEC exist specifically to make this harder to pull off.
+  </div>
+</details>
+
+<details class="group/faq border border-border rounded-card mb-3">
+  <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+    <span>What does TLS actually protect against?</span>
+    <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </summary>
+  <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+    TLS authenticates the server via a certificate signed by a trusted CA, negotiates a shared symmetric key through a public-key handshake an eavesdropper can't reverse, and then encrypts and authenticates traffic with a cipher like AES-GCM or ChaCha20-Poly1305. An attacker who hasn't compromised DNS or obtained a fraudulent certificate can do almost nothing against a correctly validated TLS connection.
+  </div>
+</details>
+
+
+        <div data-authorship class="mt-14 pt-7 border-t border-border">
+
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Who writes this</div>
+
+          <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+
+            <strong class="text-foreground font-semibold">Daniel A. and Óscar S.</strong> run Breachfolio, a small independent site about security and AI. This article was drafted with AI assistance and reviewed by a person before it went live. We write from documentation, vendor sources and published research rather than from original lab benchmarks, and we link a source in the sentence that relies on it.
+
+            <a class="ul-link" href="../../legal/methodology/">How we work</a> ·
+
+            <a class="ul-link" href="../../legal/about/">About us</a>
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Article footer / next-prev -->
+      <div class="mt-16 pt-8 border-t border-border grid sm:grid-cols-2 gap-4">
+        <a href="../cybersecurity-101/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Previous</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Cybersecurity 101: the words that mean what.</div>
+        </a>
+        <a href="../linux-fundamentals/" class="group bg-surface border border-border rounded-card p-5 hover:border-accent/40 transition-colors text-right">
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted">Next</div>
+          <div class="mt-2 text-[15px] font-medium leading-snug">Linux fundamentals for security, the working subset.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:sticky lg:top-24 self-start space-y-8">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">On this page</div>
+        <nav id="toc" class="text-[13.5px] text-muted-foreground space-y-2"></nav>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Related</div>
+        <ul class="space-y-3">
+          <li><a href="../cybersecurity-101/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Cybersecurity 101: the words that mean what.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 1 · 7</div>
+          </a></li>
+          <li><a href="../linux-fundamentals/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Linux fundamentals for security, the working subset.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 2 · 13</div>
+          </a></li>
+          <li><a href="../cryptography-basics/" class="block group">
+            <div class="text-[13.5px] font-medium ul-link inline">Cryptography you can actually use.</div>
+            <div class="text-[11.5px] text-muted mt-1 font-mono tracking-wide">LEVEL 2 · 9</div>
+          </a></li>
+        </ul>
+      </div>
+    </aside>
+  </article>
+</main>
+
+
+<footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Independent education on AI, cybersecurity, and the tools practitioners actually use.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Learn</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ai/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.cyber">Cybersecurity</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../lab/" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explore</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../compare/" data-i18n="nav.tools">Compare</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../news/" data-i18n="nav.news">News</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../resources/" data-i18n="nav.resources">Resources</a></li><li><a class="ul-link hover:text-foreground" href="../../guides/" data-i18n="foot.guides">Guides</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal & info</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">About</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Methodology</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Disclosures</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacy</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Terms</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contact</a></li><li><a class="ul-link hover:text-foreground" href="../../sitemap/" data-i18n="foot.sitemap">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independent. Transparent.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>

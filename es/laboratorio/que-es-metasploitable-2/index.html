@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="es" data-theme="dark" data-lang="ES" data-section="lab">
+<head>
+<!-- sf-consent-default: Consent Mode v2, default denied until consent is granted -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGX7M6BMBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EGX7M6BMBR');
+</script>
+<!-- End Google tag (gtag.js) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qué es Metasploitable 2 y para qué sirve | Breachfolio</title>
+  <meta name="description" content="Una máquina Linux deliberadamente vulnerable para practicar pentesting de forma segura y legal. Qué contiene, por qué existe y cómo encaja en tu laboratorio." />
+  <meta name="keywords" content="qué es Metasploitable 2, máquina virtual vulnerable para pentesting, Rapid7 Metasploitable objetivo de entrenamiento, vulnerabilidades de Metasploitable 2, puerta trasera vsftpd 2.3.4, UnrealIRCd puerta trasera, Samba mal configurado vulnerabilidad, distcc ejecución remota de código, Java RMI vulnerabilidad, credenciales por defecto Tomcat, laboratorio de pentesting legal, objetivo de práctica OSCP, máquina de entrenamiento ciberseguridad, VM deliberadamente vulnerable Linux, categorías de vulnerabilidad software con puertas traseras" />
+  <link rel="canonical" href="https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/" />
+  <link rel="alternate" type="application/rss+xml" title="Breachfolio" href="/es/rss.xml" />
+  <link rel="alternate" hreflang="en" href="https://breachfolio.com/lab/what-is-metasploitable-2/" />
+  <link rel="alternate" hreflang="es" href="https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/" />
+  <link rel="alternate" hreflang="x-default" href="https://breachfolio.com/lab/what-is-metasploitable-2/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Breachfolio" />
+  <meta property="og:title" content="Qué es Metasploitable 2 y para qué sirve | Breachfolio" />
+  <meta property="og:description" content="Una máquina Linux deliberadamente vulnerable para practicar pentesting de forma segura y legal. Qué contiene, por qué existe y cómo encaja en tu laboratorio." />
+  <meta property="og:url" content="https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/" />
+  <meta property="og:image" content="https://breachfolio.com/assets/img/thumb-lab-metasploitable.webp" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Qué es Metasploitable 2 y para qué sirve | Breachfolio" />
+  <meta name="twitter:description" content="Una máquina Linux deliberadamente vulnerable para practicar pentesting de forma segura y legal. Qué contiene, por qué existe y cómo encaja en tu laboratorio." />
+  <meta name="twitter:image" content="https://breachfolio.com/assets/img/thumb-lab-metasploitable.webp" />
+
+  <!-- Theme + lang persistence (inline, runs before paint to avoid FOUC) -->
+  <script src="../../../assets/theme-init.js?v=43287f13"></script>
+
+  <link rel="stylesheet" href="../../../assets/shared.css?v=43287f13" />
+  <link rel="stylesheet" href="../../../assets/tw.css?v=43287f13">
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/sora-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../../../assets/fonts/jetbrains-mono-latin.woff2" crossorigin />
+  <style>
+    body { font-family:'Sora', sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .font-display { font-family:'Sora', sans-serif; letter-spacing:-0.02em; }
+    .font-mono   { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .ul-link { position:relative; }
+    .ul-link::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+    .ul-link:hover::after,.ul-link:focus-visible::after { transform:scaleX(1); }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0ms !important; transition-duration:0ms !important; }
+    }
+  </style>
+  <script src="../../../assets/shared.js?v=43287f13" defer></script>
+<script src="../../../assets/analytics.js?v=43287f13" defer></script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://breachfolio.com/#organization",
+      "name": "Breachfolio",
+      "url": "https://breachfolio.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://breachfolio.com/assets/logo.png",
+        "width": 506,
+        "height": 96
+      },
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "founder": [{ "@type": "Person", "name": "Daniel A." }, { "@type": "Person", "name": "Óscar S." }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://breachfolio.com/#website",
+      "url": "https://breachfolio.com",
+      "name": "Breachfolio",
+      "description": "Independent education on cybersecurity, AI, and the tools practitioners actually use.",
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "es"
+      ]
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Qué es Metasploitable 2, y por qué todo laboratorio tiene uno",
+      "description": "Una máquina Linux deliberadamente vulnerable para practicar pentesting de forma segura y legal. Qué contiene, por qué existe y cómo encaja en tu laboratorio.",
+      "image": "https://breachfolio.com/assets/img/thumb-lab-metasploitable.webp",
+      "datePublished": "2026-07-08",
+      "dateModified": "2026-07-08",
+      "author": [ { "@type": "Person", "name": "Daniel A.", "url": "https://breachfolio.com/es/legal/about/" }, { "@type": "Person", "name": "Óscar S.", "url": "https://breachfolio.com/es/legal/about/" } ],
+      "publisher": {
+        "@id": "https://breachfolio.com/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/"
+      },
+      "inLanguage": "es",
+      "keywords": "qué es Metasploitable 2, máquina virtual vulnerable para pentesting, Rapid7 Metasploitable objetivo de entrenamiento, vulnerabilidades de Metasploitable 2, puerta trasera vsftpd 2.3.4, UnrealIRCd puerta trasera, Samba mal configurado vulnerabilidad, distcc ejecución remota de código, Java RMI vulnerabilidad, credenciales por defecto Tomcat, laboratorio de pentesting legal, objetivo de práctica OSCP, máquina de entrenamiento ciberseguridad, VM deliberadamente vulnerable Linux, categorías de vulnerabilidad software con puertas traseras"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://breachfolio.com/es/" },
+        { "@type": "ListItem", "position": 2, "name": "Lab", "item": "https://breachfolio.com/es/laboratorio/" },
+        { "@type": "ListItem", "position": 3, "name": "Qué es Metasploitable 2", "item": "https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://breachfolio.com/es/laboratorio/que-es-metasploitable-2/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Quién creó Metasploitable 2 y con qué propósito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rapid7, la misma empresa detrás de Metasploit Framework, la creó y distribuyó específicamente como un objetivo de entrenamiento seguro y legal, para que hubiera algo autorizado contra lo que practicar escaneo, enumeración y explotación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es una máquina de CTF con banderas ocultas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A diferencia de una máquina de CTF construida en torno a un acertijo, Metasploitable 2 es más simple y directa: cada servicio está roto de una forma concreta y con nombre propio, sin lore ni pistas falsas, pensada como implementación de referencia del fracaso, no como un juego."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué categorías de vulnerabilidad enseña realmente, más allá de los CVE concretos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cuatro: software con puertas traseras (vsftpd, UnrealIRCd), credenciales por defecto y débiles (Tomcat, MySQL, PostgreSQL), servicios desactualizados y sin parchear (Samba, distcc), y servicios de compartición de ficheros y RPC mal configurados (NFS, Java RMI). Son los mismos patrones que siguen apareciendo en brechas reales hoy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo ejecutar Metasploitable 2 en mi red doméstica normal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Debe estar siempre en una red virtual aislada, host-only o solo NAT, junto a la VM atacante, y nunca en modo puente con tu LAN real ni expuesta a internet, porque contiene puertas traseras y fallos de ejecución remota de código por diseño."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3561721281285694"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-background text-foreground antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-accent focus:text-accent-foreground focus:text-[13px] focus:font-medium" data-i18n="a11y.skip">Saltar al contenido</a>
+<header id="sf-header" class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border transition-shadow">
+  <div class="max-w-container mx-auto px-6 md:px-12 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="../../" class="flex items-center gap-2.5 group shrink-0" aria-label="Breachfolio home">
+      <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center">
+      <li><a href="../../ciberseguridad/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.cyber">Ciberseguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../ia/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.ai">IA & Seguridad</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.lab">Lab</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../comparativas/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.tools">Comparativas</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../noticias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.news">Noticias</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      <li><a href="../../recursos/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.resources">Recursos</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li><li><a href="../../guias/" class="relative inline-flex items-center h-[72px] px-3 text-[14px] hover:text-foreground transition-colors duration-200 text-muted-foreground"><span data-i18n="nav.guides">Guías</span><span class="absolute inset-x-3 -bottom-[1px] h-[2px] bg-accent/50 rounded-full origin-left scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-out" aria-hidden="true"></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Search placeholder -->
+
+      <!-- Lang selector -->
+      <div class="relative" id="sf-lang-wrap">
+        <button id="sf-lang-btn" aria-haspopup="listbox" aria-expanded="false"
+          class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full border border-border bg-surface/40 text-[12.5px] text-muted-foreground hover:text-foreground transition-colors font-mono tracking-wider">
+          <span id="sf-lang-code">EN</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul id="sf-lang-menu" role="listbox" class="hidden absolute right-0 mt-2 w-40 rounded-card border border-border bg-surface shadow-2xl overflow-hidden z-50">
+          <li><button data-lang="EN" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>English</span><span class="font-mono text-muted">EN</span></button></li>
+          <li><button data-lang="ES" class="w-full flex items-center justify-between px-3.5 py-2.5 text-[13px] hover:bg-surface-2 transition-colors text-muted-foreground"><span>Español</span><span class="font-mono text-muted">ES</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Theme toggle -->
+      <button id="sf-theme-toggle" aria-label="Toggle theme" class="h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="dark"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" data-theme-icon="light" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+
+      <!-- Mobile menu trigger -->
+      <button id="sf-menu-btn" aria-label="Open menu" aria-controls="sf-mobile-menu" aria-expanded="false"
+              class="lg:hidden h-9 w-9 grid place-items-center rounded-full border border-border bg-surface/40 text-muted-foreground hover:text-foreground transition-colors">
+        <svg id="sf-menu-icon-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="sf-menu-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="sf-mobile-menu" class="lg:hidden hidden border-t border-border bg-background" aria-label="Mobile primary">
+    <div class="max-w-container mx-auto px-6 py-4">
+      <ul class="divide-y divide-border">
+        <li><a href="../../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="../../ciberseguridad/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a href="../../ia/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.ai">IA & Seguridad</a></li>
+        <li><a href="../" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.lab">Lab</a></li>
+        <li><a href="../../comparativas/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a href="../../noticias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.news">Noticias</a></li>
+        <li><a href="../../recursos/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.resources">Recursos</a></li><li><a href="../../guias/" class="block py-2.5 text-[15px] text-foreground" data-i18n="nav.guides">Guías</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header><nav aria-label="Breadcrumb" class="max-w-container mx-auto px-6 md:px-12 pt-6">
+  <ol class="flex flex-wrap items-center gap-2 text-[12px] font-mono tracking-wide text-muted-foreground uppercase">
+    <li><a href="../../" class="hover:text-foreground ul-link">Inicio</a></li><li aria-hidden="true" class="text-muted">/</li><li><a href="../" class="hover:text-foreground ul-link">Lab</a></li><li aria-hidden="true" class="text-muted">/</li><li><span aria-current="page" class="text-foreground">Qué es Metasploitable 2</span></li>
+  </ol>
+</nav><main id="main"><section class="relative w-full border-b border-border overflow-hidden bg-surface" style="aspect-ratio:16/6;max-height:420px"><img src="../../../assets/img/thumb-lab-metasploitable.webp" alt="Qué es Metasploitable 2, y por qué todo laboratorio tiene uno." data-pagefind-meta="image[src]" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="eager" fetchpriority="high" width="1600" height="900" /><div class="absolute inset-0" style="background:linear-gradient(to top,hsl(var(--background)) 2%,transparent 62%)"></div></section>
+  <article>
+  <section class="border-b border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-14 md:pb-20">
+      <div class="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">LAB · OBJETIVOS</div>
+      <h1 class="font-display mt-5 text-[clamp(2.2rem,5.2vw,3.6rem)] leading-[1.05] tracking-tight font-semibold text-balance max-w-3xl">Qué es Metasploitable 2, y por qué todo laboratorio tiene uno.</h1>
+      <p class="mt-5 text-muted-foreground text-[17px] md:text-[18px] leading-[1.7] max-w-2xl">Una máquina Linux segura, legal y deliberadamente rota hacia la que, tarde o temprano, te dirige casi cualquier curso de pentesting. Esto es lo que lleva dentro en realidad, y por qué sigue importando.</p>
+      <div class="mt-6 flex items-center gap-3 font-mono text-[11px] text-muted tracking-wide">
+        <span>8 de julio de 2026</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span>8 min de lectura</span><span class="w-1 h-1 rounded-full bg-muted/60"></span><span class="text-accent">Daniel A. y Óscar S.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-container mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="max-w-prose mx-auto prose-content text-[16px] leading-[1.8] text-foreground">
+
+      <p>Metasploitable 2 (a menudo escrito como una sola palabra, «Metasploitable2») es una máquina virtual Linux basada en Ubuntu, deliberadamente vulnerable, creada y distribuida por Rapid7 –la misma empresa que está detrás de Metasploit Framework– específicamente como un objetivo de entrenamiento seguro y legal. No es un sistema de producción real, y tampoco es una máquina de CTF construida en torno a la filosofía de la bandera oculta, donde la gracia está en el acertijo. Es más simple y más directa que eso: una máquina plagada de vulnerabilidades reales, bien documentadas y públicamente conocidas, colocadas ahí a propósito, para que tengas algo contra lo que apuntar un escáner y un exploit sin hacer nada ilegal.</p>
+
+      <p>Si has pasado algo de tiempo alrededor de cursos de pentesting, guías de estudio afines al OSCP o writeups de laboratorios caseros, es casi seguro que la has visto mencionada. Aparece constantemente por una razón sencilla: es gratuita, es pequeña, arranca de forma fiable en VirtualBox o VMware, y sus vulnerabilidades son lo bastante antiguas y están lo bastante documentadas como para que prácticamente cualquier writeup, walkthrough o módulo de curso coincida con lo que verás en tu propia pantalla. Esa consistencia está infravalorada: cuando tres tutoriales distintos describen el mismo banner, el mismo puerto y la misma ruta de explotación, dedicas tu energía mental a aprender la técnica en lugar de a depurar por qué tu entorno no coincide con el de nadie más.</p>
+      <p>También es deliberadamente poco vistosa. No hay trasfondo elaborado, ni lore, ni un acertijo de varias fases que oculte la vulnerabilidad "de verdad" detrás de una pista falsa. Cada servicio de la máquina está roto de una forma concreta y con nombre propio, y ese es justo el objetivo: es una implementación de referencia del fracaso, no un juego.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Por qué existe un objetivo de entrenamiento como este</h2>
+      <p>Practicar técnicas de enumeración y explotación contra sistemas reales sin autorización es ilegal y poco ético, y punto: da igual lo curioso que seas o lo "inofensiva" que parezca la técnica. Escanear, explotar o incluso solo hurgar en infraestructura que no es tuya y para la que no tienes permiso escrito explícito para probarla es un delito en la mayoría de jurisdicciones, y "solo estaba aprendiendo" no es una defensa.</p>
+      <p>Metasploitable 2 resuelve ese problema de forma limpia. Es algo que está pensado explícitamente para que lo ataques, corriendo en tu propia red aislada, sin ninguna víctima al otro lado y sin ninguna ambigüedad sobre el consentimiento. Rapid7 la construyó y la publicó exactamente con ese propósito, lo que significa que toda técnica que practiques contra ella –escaneo de puertos, enumeración de servicios, desarrollo de exploits, post-explotación– tiene un objetivo legítimo y autorizado sobre el que aterrizar.</p>
+      <p>Esto importa más de lo que podría parecer a primera vista. La autorización es la única línea que separa a un pentester de un delincuente ejecutando exactamente los mismos comandos: las herramientas y la técnica son idénticas, y lo único que cambia es si el dueño del sistema dijo que sí. Crear memoria muscular en una máquina que tienes permiso para romper significa que, cuando finalmente firmes un documento de alcance de trabajo para un cliente, la mecánica ya es una segunda naturaleza y toda tu atención puede ir a la metodología, al informe y a los juicios de valor, en lugar de a averiguar qué hace cada flag en una herramienta que nunca has ejecutado.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Qué lleva dentro en realidad</h2>
+      <p>Esto no es una caja misteriosa: sus vulnerabilidades son información pública genuinamente bien documentada, catalogada en incontables writeups a lo largo de más de una década. A grandes rasgos, viene con:</p>
+      <div class="overflow-x-auto mt-4 mb-4">
+      <table class="w-full text-[14.5px] border border-border rounded-card overflow-hidden">
+        <thead><tr class="bg-surface-2 text-left"><th class="px-4 py-2.5 font-display font-semibold">Puerto</th><th class="px-4 py-2.5 font-display font-semibold">Componente</th><th class="px-4 py-2.5 font-display font-semibold">Problema</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>21/tcp</strong></td><td class="px-4 py-2.5"><strong>vsftpd 2.3.4</strong></td><td class="px-4 py-2.5">Puerta trasera conocida, plantada deliberadamente en una distribución de código fuente comprometida: uno de los bugs de "shell gratis" más famosos del mundo de las máquinas de entrenamiento.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>139/445/tcp</strong></td><td class="px-4 py-2.5"><strong>Configuraciones incorrectas de Samba</strong></td><td class="px-4 py-2.5">Exponen recursos compartidos de ficheros y, según la versión, permiten ejecución remota de código a través de fallos conocidos en versiones antiguas de Samba.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>3632/tcp</strong></td><td class="px-4 py-2.5"><strong>distcc</strong></td><td class="px-4 py-2.5">Corriendo con un fallo de ejecución remota de código en su demonio de red, un ejemplo clásico de una herramienta de aceleración de compilación dejada expuesta sin ninguna autenticación.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>1099/tcp</strong></td><td class="px-4 py-2.5"><strong>Java RMI</strong></td><td class="px-4 py-2.5">Mal configurado de una forma que permite la carga remota de clases y la ejecución de código sin autenticación.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>3306/5432/tcp</strong></td><td class="px-4 py-2.5"><strong>Instancias de MySQL y PostgreSQL</strong></td><td class="px-4 py-2.5">Accesibles sin autenticación o con credenciales trivialmente débiles.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>8180/tcp</strong></td><td class="px-4 py-2.5"><strong>Una instancia desactualizada de Apache Tomcat</strong></td><td class="px-4 py-2.5">Dejada con las credenciales administrativas por defecto.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>6667/tcp</strong></td><td class="px-4 py-2.5"><strong>UnrealIRCd</strong></td><td class="px-4 py-2.5">Distribuido en una versión con una descarga con puerta trasera muy conocida que le da al atacante una shell remota.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono"><strong>2049/tcp</strong></td><td class="px-4 py-2.5"><strong>Configuraciones incorrectas de exportaciones NFS</strong></td><td class="px-4 py-2.5">Reparten acceso al sistema de ficheros de forma más amplia de lo que deberían.</td></tr>
+          <tr class="border-t border-border"><td class="px-4 py-2.5 font-mono">–</td><td class="px-4 py-2.5"><strong>Credenciales por defecto y débiles</strong></td><td class="px-4 py-2.5">Repartidas por varios otros servicios, además de los bugs concretos anteriores.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Esto es intencionadamente una lista, no un walkthrough. La explotación real paso a paso de cada uno de estos –los comandos exactos, los módulos de Metasploit, las alternativas manuales– vive en un artículo complementario aparte, porque ese contenido merece espacio para hacerse bien en lugar de comprimirse en un párrafo aquí.</p>
+      <p>Lo que merece la pena señalar es lo deliberadamente escalonado que está todo esto. Algunos de estos servicios te dan una shell en uno o dos comandos casi sin necesidad de pensar: la puerta trasera de vsftpd y la de UnrealIRCd son casi victorias instantáneas una vez que sabes qué buscar. Otros, como los problemas de Samba y distcc, exigen que entiendas de verdad qué está haciendo el fallo subyacente antes de que un exploit aterrice limpiamente. Y los problemas basados en credenciales de MySQL, PostgreSQL y Tomcat enseñan una habilidad completamente distinta: reconocer que no todo punto de entrada requiere un exploit; a veces la puerta de delante está simplemente sin cerrar.</p>
+
+      <figure class="my-8">
+        <img src="../../../assets/articles/art-inline-what-is-metasploitable-2.svg" alt="Diagrama de la VM Metasploitable 2 con cuatro puertos abiertos etiquetados, cada uno asociado a una de las cuatro categorías de vulnerabilidad: puerto 21 vsftpd (software con puerta trasera), puerto 3632 distcc (RCE sin parchear), puerto 8180 Tomcat (credenciales por defecto) y puerto 445 Samba (recurso compartido mal configurado)." loading="lazy" class="w-full rounded-card border border-border" width="800" height="400" />
+        <figcaption class="mt-2 text-[12.5px] text-muted text-center">Cuatro de los puertos abiertos de Metasploitable 2, cada uno representando una de las cuatro categorías de fallo que enseña.</figcaption>
+      </figure>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Las categorías de vulnerabilidad que enseña en realidad</h2>
+      <p>Individualmente, esa lista se lee como un museo de CVEs viejos. Agrupada por la lección subyacente, en realidad enseña cuatro categorías de fallo que siguen muy vivas hoy:</p>
+      <ul class="mt-4 space-y-3 list-disc pl-5 marker:text-accent">
+        <li><strong class="text-foreground">Software con puertas traseras.</strong> vsftpd 2.3.4 y la versión comprometida de UnrealIRCd son ambos casos en los que el propio software fue manipulado antes siquiera de llegar a un usuario: un problema de cadena de suministro, no un bug de programación.</li>
+        <li><strong class="text-foreground">Credenciales por defecto y débiles.</strong> Tomcat, MySQL, PostgreSQL y otros fallan aquí de la manera más mundana posible: nadie cambió la contraseña, o no hacía falta ninguna de entrada.</li>
+        <li><strong class="text-foreground">Servicios desactualizados y sin parchear.</strong> Samba y distcc representan el modo de fallo del "nunca llegamos a actualizar esto": existían correcciones conocidas, solo que no se aplicaron.</li>
+        <li><strong class="text-foreground">Servicios de compartición de ficheros y RPC mal configurados.</strong> Las exportaciones NFS y Java RMI son ambos casos en los que el servicio funciona exactamente como fue diseñado, pero la configuración reparte mucha más confianza de la que debería.</li>
+      </ul>
+      <p>Estas cuatro categorías siguen apareciendo hoy en informes de brechas del mundo real: los compromisos de la cadena de suministro, el credential stuffing contra logins por defecto, los servicios sin parchear expuestos a internet y los recursos compartidos de ficheros excesivamente permisivos son titulares recurrentes, no notas al pie históricas. Esa es la razón real de que una máquina de entrenamiento construida hace bastante más de una década siga siendo relevante: los CVEs concretos son viejos, pero los patrones de fallo que representan no se han ido a ninguna parte.</p>
+      <p>Esa es también la razón por la que tantos cursos y certificaciones la mantienen en el temario en lugar de jubilarla en favor de algo más nuevo. El objetivo nunca fue memorizar una lista fija de números de CVE de mediados de los 2000: es construir el instinto de preguntarte "¿este software tiene puerta trasera, este login sigue siendo el de por defecto, a este servicio le toca ya un parche, este recurso compartido está repartiendo más de lo que debería?" cada vez que aterrizas en un objetivo nuevo, independientemente del año que sea o de lo que ese objetivo ejecute en realidad.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Cómo encaja en un laboratorio casero</h2>
+      <p>Metasploitable 2 no está pensada para correr aislada. Está pensada para estar en la misma red virtual aislada, host-only (o solo NAT –nunca en modo puente con tu LAN real)–, que una VM atacante, normalmente Kali Linux, de modo que puedas escanearla, enumerarla y explotarla enteramente dentro de tu propia máquina, sin que el tráfico llegue nunca a tocar tu red doméstica ni internet. Si aún no has montado esa topología de red, <a href="../laboratorio-de-ciberseguridad-en-un-portatil/" class="text-accent ul-link">montar un laboratorio casero en un solo portátil</a> repasa exactamente cómo poner en marcha una red aislada de atacante y objetivo en una única máquina.</p>
+
+      <div class="mt-10 rounded-card border border-accent/20 bg-accent/5 px-6 py-5 text-[14.5px] leading-[1.7] text-muted-foreground">
+        <strong class="text-foreground font-display">Un recordatorio de seguridad tajante.</strong> Nunca expongas esta VM a internet ni siquiera a tu LAN doméstica: solo red host-only, sin reenvíos de puertos, sin adaptadores en modo puente. Y nunca ejecutes ninguna de estas técnicas contra nada que no sea tuyo o para lo que no tengas autorización escrita explícita para probarlo. Metasploitable 2 está intencionadamente llena de agujeros; trátala en consecuencia.
+      </div>
+
+      <p class="mt-10">Una vez que tu VM atacante y Metasploitable 2 estén ambas en marcha y hablándose en una red aislada, el paso natural siguiente es el walkthrough de explotación propiamente dicho –<a href="../metasploitable-2-paso-a-paso/" class="text-accent ul-link">Metasploitable 2: walkthrough paso a paso</a>– que recorre servicio por servicio la enumeración y la explotación en detalle.</p>
+
+      <h2 class="font-display mt-12 text-[24px] md:text-[28px] font-semibold tracking-tight">Preguntas frecuentes</h2>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Quién creó Metasploitable 2 y con qué propósito?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Rapid7, la misma empresa detrás de Metasploit Framework, la creó y distribuyó específicamente como un objetivo de entrenamiento seguro y legal, para que hubiera algo autorizado contra lo que practicar escaneo, enumeración y explotación.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Es una máquina de CTF con banderas ocultas?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. A diferencia de una máquina de CTF construida en torno a un acertijo, Metasploitable 2 es más simple y directa: cada servicio está roto de una forma concreta y con nombre propio, sin lore ni pistas falsas, pensada como implementación de referencia del fracaso, no como un juego.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Qué categorías de vulnerabilidad enseña realmente, más allá de los CVE concretos?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          Cuatro: software con puertas traseras (vsftpd, UnrealIRCd), credenciales por defecto y débiles (Tomcat, MySQL, PostgreSQL), servicios desactualizados y sin parchear (Samba, distcc), y servicios de compartición de ficheros y RPC mal configurados (NFS, Java RMI). Son los mismos patrones que siguen apareciendo en brechas reales hoy.
+        </div>
+      </details>
+
+      <details class="group/faq border border-border rounded-card mb-3">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-medium text-[15px]">
+          <span>¿Puedo ejecutar Metasploitable 2 en mi red doméstica normal?</span>
+          <svg class="shrink-0 transition-transform group-open/faq:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-muted-foreground text-[15px] leading-[1.7]">
+          No. Debe estar siempre en una red virtual aislada, host-only o solo NAT, junto a la VM atacante, y nunca en modo puente con tu LAN real ni expuesta a internet, porque contiene puertas traseras y fallos de ejecución remota de código por diseño.
+        </div>
+      </details>
+
+      <div class="mt-12 pt-8 border-t border-border">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-muted mb-4">Lecturas relacionadas</div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="../metasploitable-2-paso-a-paso/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Metasploitable 2: walkthrough paso a paso</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../laboratorio-de-ciberseguridad-en-un-portatil/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Monta un laboratorio casero en un solo portátil</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../../comparativas/metasploit-vs-sliver/" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Metasploit vs Sliver</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+          <a href="../" class="group flex items-center justify-between px-5 py-4 rounded-card border border-border bg-surface hover:border-accent/50 transition-colors">
+            <span class="text-[14px] text-foreground">Todos los artículos de Lab</span>
+            <span class="text-accent" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div data-authorship class="mt-14 pt-7 border-t border-border">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-muted mb-3">Quién escribe esto</div>
+        <p class="text-[14.5px] leading-[1.75] text-muted-foreground">
+          <strong class="text-foreground font-semibold">Daniel A. y Óscar S.</strong> llevan Breachfolio, un sitio pequeño e independiente sobre seguridad e IA. Este artículo se redactó con asistencia de IA y una persona lo revisó antes de publicarlo. Escribimos a partir de documentación, fuentes de los fabricantes e investigación publicada, no de pruebas de laboratorio propias, y enlazamos la fuente en la propia frase que se apoya en ella.
+          <a class="ul-link" href="../../legal/methodology/">Cómo trabajamos</a> ·
+          <a class="ul-link" href="../../legal/about/">Quiénes somos</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  </article>
+</main><footer class="bg-surface-2 border-t border-border mt-20">
+  <div class="max-w-container mx-auto px-6 md:px-12 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-1">
+      <a href="../../" class="flex items-center gap-2.5 group" aria-label="Breachfolio home">
+        <img src="../../../assets/logo.png" alt="Breachfolio" width="169" height="32" class="shrink-0" style="height:32px;width:auto;object-fit:contain" />
+      </a>
+      <p class="mt-4 text-[13.5px] text-muted-foreground leading-relaxed max-w-xs" data-i18n="foot.tagline">Educación independiente sobre IA, ciberseguridad y las herramientas que de verdad usan los profesionales.</p>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.learn">Aprender</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../ia/" data-i18n="nav.ai">AI</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../ciberseguridad/" data-i18n="nav.cyber">Ciberseguridad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../" data-i18n="nav.lab">Lab</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.explore">Explorar</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../comparativas/" data-i18n="nav.tools">Comparativas</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../noticias/" data-i18n="nav.news">Noticias</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../recursos/" data-i18n="nav.resources">Recursos</a></li><li><a class="ul-link hover:text-foreground" href="../../guias/" data-i18n="foot.guides">Guías</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="font-display text-[13px] font-semibold uppercase tracking-wide" data-i18n="foot.legal">Legal e información</div>
+      <ul class="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
+        <li><a class="ul-link hover:text-foreground" href="../../legal/about/" data-i18n="foot.about">Sobre nosotros</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/methodology/" data-i18n="foot.method">Metodología</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/disclosures/" data-i18n="foot.disc">Divulgaciones</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/privacy/" data-i18n="foot.privacy">Privacidad</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/terms/" data-i18n="foot.terms">Términos</a></li>
+        <li><a class="ul-link hover:text-foreground" href="../../legal/cookies/" data-i18n="foot.cookies">Cookies</a></li><li><a class="ul-link hover:text-foreground" href="../../legal/contact/" data-i18n="foot.contact">Contacto</a></li><li><a class="ul-link hover:text-foreground" href="../../../sitemap/" data-i18n="foot.sitemap">Mapa del sitio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="max-w-container mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-[11px] font-mono tracking-wide text-muted" data-i18n="foot.copy">© 2026 Breachfolio. Independiente. Transparente.</div>
+      <div class="flex items-center gap-4 text-[11px] font-mono tracking-wide text-muted">
+        <a href="../../legal/privacy/" class="hover:text-foreground" data-i18n="foot.privacy">Privacidad</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/terms/" class="hover:text-foreground" data-i18n="foot.terms">Términos</a>
+        <span aria-hidden="true">·</span>
+        <a href="../../legal/cookies/" class="hover:text-foreground" data-i18n="foot.cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../../../assets/page.js?v=43287f13" defer></script>
+</body>
+</html>
+
